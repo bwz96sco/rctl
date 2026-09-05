@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "task_id": "retained-comparison",
+  "contract_revision": 1,
+  "checks": [
+    {
+      "criterion_id": "AC-02",
+      "verdict": "pass",
+      "reviewer": "agent",
+      "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+      "evidence_refs": ["result.md", "evidence/metrics.json", "evidence/derived.json"]
+    }
+  ]
+}

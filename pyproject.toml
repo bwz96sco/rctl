@@ -1,0 +1,39 @@
+[project]
+name = "rctl"
+version = "0.1.0a1"
+description = "Local research contracts and readable task state"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["PyYAML>=6.0.2,<7", "jsonschema>=4.23,<5"]
+
+[project.scripts]
+rctl = "rctl.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rctl"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"schemas" = "rctl/schemas"
+"templates" = "rctl/templates"
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/schemas", "/templates", "/tests", "/examples", "/README.md", "/pyproject.toml", "/uv.lock"]
+
+[tool.uv]
+cache-keys = [{ file = "pyproject.toml" }, { file = "src/**/*.py" }, { file = "schemas/*.json" }, { file = "templates/*.md" }]
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

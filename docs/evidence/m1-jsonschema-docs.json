@@ -1,0 +1,9 @@
+{
+  "ok": false,
+  "library_id": "/websites/python-jsonschema_readthedocs_io_en_stable",
+  "query": "Draft202012Validator iter_errors validation path",
+  "provider": "context7",
+  "error_type": "provider_error",
+  "error": "HTTP 404: {\"error\":\"library_not_found\",\"message\":\"Library \\\"/websites/python-jsonschema_readthedocs_io_en_stable\\\" not found. Please check the library ID or your access permissions.\"}",
+  "elapsed_ms": 2250.75
+}

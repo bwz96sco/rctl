@@ -1,0 +1,309 @@
+{
+  "ok": true,
+  "query": "jsonschema Python Draft202012Validator iter_errors",
+  "provider": "context7",
+  "results": [
+    {
+      "id": "/python-jsonschema/jsonschema",
+      "title": "Jsonschema",
+      "description": "An implementation of the JSON Schema specification for Python",
+      "trust_score": 6.8,
+      "benchmark_score": 89.69,
+      "total_snippets": 311,
+      "stars": 4759,
+      "provider": "context7"
+    },
+    {
+      "id": "/santhosh-tekuri/jsonschema",
+      "title": "jsonschema",
+      "description": "jsonschema is a Go library for validating JSON instances against JSON Schema with support for multiple draft versions and comprehensive validation features.",
+      "trust_score": 9.1,
+      "benchmark_score": 88.47,
+      "total_snippets": 317,
+      "stars": 1051,
+      "provider": "context7"
+    },
+    {
+      "id": "/stranger6667/jsonschema",
+      "title": "Jsonschema",
+      "description": "A high-performance JSON Schema validator for Rust, offering various features and supporting multiple JSON Schema drafts.",
+      "trust_score": 9.4,
+      "benchmark_score": 84.39,
+      "total_snippets": 690,
+      "stars": 637,
+      "provider": "context7"
+    },
+    {
+      "id": "/websites/rs_jsonschema_0_40_0",
+      "title": "jsonschema",
+      "description": "A high-performance JSON Schema validator for Rust with support for multiple draft versions, custom keywords and formats, structured output reports, and WebAssembly compatibility.",
+      "trust_score": 9.1,
+      "benchmark_score": 81.19,
+      "total_snippets": 8283,
+      "stars": -1,
+      "provider": "context7"
+    },
+    {
+      "id": "/api7/jsonschema",
+      "title": "jsonschema",
+      "description": "A pure Lua JSON Schema validator library that transforms schemas into optimized Lua functions for validating JSON, Lua tables, msgpack, and other key-value data formats.",
+      "trust_score": 10,
+      "benchmark_score": 82,
+      "total_snippets": 362,
+      "stars": 132,
+      "provider": "context7"
+    },
+    {
+      "id": "/supabase/pg_jsonschema",
+      "title": "pg_jsonschema",
+      "description": "pg_jsonschema is a PostgreSQL extension that adds support for JSON schema validation on `json` and `jsonb` data types, enabling constraint enforcement within the database.",
+      "trust_score": 9.5,
+      "benchmark_score": 78.2,
+      "total_snippets": 5,
+      "stars": 1116,
+      "provider": "context7"
+    },
+    {
+      "id": "/cockroachdb/errors",
+      "title": "CockroachDB Errors",
+      "description": "A Go error handling library providing network portability, PII-free details support, and Sentry.io integration as a drop-in replacement for standard error packages.",
+      "trust_score": 8.2,
+      "benchmark_score": 83.29,
+      "total_snippets": 551,
+      "stars": 2206,
+      "provider": "context7"
+    },
+    {
+      "id": "/muonsoft/errors",
+      "title": "Muonsoft Errors",
+      "description": "Muonsoft Errors is a Go error handling library for structured logging with native log/slog integration, idempotent stack trace capturing, and JSON marshaling.",
+      "trust_score": 5.3,
+      "benchmark_score": 0,
+      "total_snippets": 83,
+      "stars": 1,
+      "provider": "context7"
+    },
+    {
+      "id": "/asg017/sqlite-jsonschema",
+      "title": "sqlite-jsonschema",
+      "description": "sqlite-jsonschema is a SQLite extension for validating JSON objects using JSON Schema, built upon sqlite-loadable-rs and the jsonschema Rust crate.",
+      "trust_score": 10,
+      "benchmark_score": 0,
+      "total_snippets": 102,
+      "stars": 56,
+      "provider": "context7"
+    },
+    {
+      "id": "/hiprax/errors",
+      "title": "Hiprax Errors",
+      "description": "Hiprax Errors is a modular, typed error handling toolkit for Express.js applications, providing custom error classes, middleware, and common error mappers with zero runtime dependencies.",
+      "trust_score": 5.7,
+      "benchmark_score": 99.67,
+      "total_snippets": 285,
+      "stars": 2,
+      "provider": "context7"
+    },
+    {
+      "id": "/jshttp/http-errors",
+      "title": "Http Errors",
+      "description": "Create HTTP errors for Express, Koa, Connect, and other Node.js frameworks with ease.",
+      "trust_score": 7.3,
+      "benchmark_score": 0,
+      "total_snippets": 42,
+      "stars": 1552,
+      "provider": "context7"
+    },
+    {
+      "id": "/fractaledmind/solid_errors",
+      "title": "Solid Errors",
+      "description": "Solid Errors is a Ruby on Rails gem that provides a robust, database-backed error subscriber, allowing applications to efficiently capture, store, and manage exceptions within their existing database infrastructure.",
+      "trust_score": 10,
+      "benchmark_score": 0,
+      "total_snippets": 655,
+      "stars": 420,
+      "provider": "context7"
+    },
+    {
+      "id": "/ehmicky/modern-errors",
+      "title": "Modern Errors",
+      "description": "Modern Errors is a JavaScript library that provides a simple, stable, and consistent way to handle errors through features like creating error classes, setting properties, wrapping/aggregating errors, and normalizing invalid errors.",
+      "trust_score": 9.3,
+      "benchmark_score": 89.9,
+      "total_snippets": 580,
+      "stars": 1480,
+      "provider": "context7"
+    },
+    {
+      "id": "/ivklgn/conway-errors",
+      "title": "Conway Errors",
+      "description": "A library that simplifies the creation, structuring, and throwing of errors with a minimalist API, configurable messages, and the ability to add arbitrary attributes for detailed error information.",
+      "trust_score": 6,
+      "benchmark_score": 0,
+      "total_snippets": 41,
+      "stars": 8,
+      "provider": "context7"
+    },
+    {
+      "id": "/corvus-dotnet/corvus.jsonschema",
+      "title": "Corvus JsonSchema",
+      "description": "Build-time code generation for JSON Schema validation and serialization with support for all schema dialects from draft 4 to 2020-12 and OpenAPI 3.0/3.1.",
+      "trust_score": 6.8,
+      "benchmark_score": 81.47,
+      "total_snippets": 3945,
+      "stars": 140,
+      "provider": "context7"
+    },
+    {
+      "id": "/carsdotcom/laravel-json-schema",
+      "title": "Laravel JsonSchema",
+      "description": "Integrates JsonSchema validation into Laravel applications, providing a SchemaValidator facade, custom assertions, and tools for validating request and response bodies against JSON schemas.",
+      "trust_score": 7.1,
+      "benchmark_score": 0,
+      "total_snippets": 8,
+      "stars": 5,
+      "provider": "context7"
+    },
+    {
+      "id": "/x0k/svelte-jsonschema-form",
+      "title": "Svelte JSONSchema Form",
+      "description": "A Svelte 5 library for generating forms from JSON schemas, serving as an unofficial port of react-jsonschema-form.",
+      "trust_score": 6.4,
+      "benchmark_score": 59,
+      "total_snippets": 126,
+      "stars": 63,
+      "provider": "context7"
+    },
+    {
+      "id": "/rjsf-team/react-jsonschema-form",
+      "title": "React JSONSchema Form",
+      "description": "A React component for building Web forms from JSON Schema.",
+      "trust_score": 6.8,
+      "benchmark_score": 84.35,
+      "total_snippets": 1127,
+      "stars": 14790,
+      "provider": "context7"
+    },
+    {
+      "id": "/girilloid/nestjs-graphql-errors",
+      "title": "NestJS GraphQL Errors",
+      "description": "NestJS GraphQL Errors is a library providing utilities to build a code-first, type-safe GraphQL API with NestJS using an error-as-data approach.",
+      "trust_score": 3.7,
+      "benchmark_score": 0,
+      "total_snippets": 35,
+      "stars": 2,
+      "provider": "context7"
+    },
+    {
+      "id": "/feodor-ra/fastapi-typed-errors",
+      "title": "FastAPI Typed Errors",
+      "description": "FastAPI Typed Errors provides typed HTTP errors for FastAPI with exact Literal error codes in OpenAPI, discriminated oneOf unions on the code field, and a single source of truth.",
+      "trust_score": 7.5,
+      "benchmark_score": 98.5,
+      "total_snippets": 109,
+      "stars": 0,
+      "provider": "context7"
+    },
+    {
+      "id": "/python/cpython",
+      "title": "Python",
+      "description": "The Python programming language",
+      "trust_score": 8.9,
+      "benchmark_score": 81.46,
+      "total_snippets": 31944,
+      "stars": 66834,
+      "provider": "context7"
+    },
+    {
+      "id": "/websites/devdocs_io_python_3_14",
+      "title": "Python",
+      "description": "Python is a high-level, interpreted programming language known for its simple syntax and versatile applications in web development, data science, automation, and scientific computing.",
+      "trust_score": 10,
+      "benchmark_score": 72.75,
+      "total_snippets": 23262,
+      "stars": -1,
+      "provider": "context7"
+    },
+    {
+      "id": "/websites/python_3_10",
+      "title": "Python",
+      "description": "Python is a high-level, interpreted programming language that emphasizes readability and developer productivity, offering dynamic typing, a comprehensive standard library, and a broad ecosystem for web development, scripting, automation, and data science.",
+      "trust_score": 10,
+      "benchmark_score": 70.49,
+      "total_snippets": 29392,
+      "stars": -1,
+      "provider": "context7"
+    },
+    {
+      "id": "/websites/python_3_9",
+      "title": "Python",
+      "description": "Python is an interpreted, high-level, general-purpose programming language designed to help developers write clear, logical code for projects of all sizes.",
+      "trust_score": 10,
+      "benchmark_score": 56.3,
+      "total_snippets": 19196,
+      "stars": -1,
+      "provider": "context7"
+    },
+    {
+      "id": "/websites/python_dev",
+      "title": "Python",
+      "description": "Python is a high-level, interpreted programming language known for its simplicity and readability, widely used for web development, data science, automation, and scripting.",
+      "trust_score": 10,
+      "benchmark_score": 0,
+      "total_snippets": 21,
+      "stars": -1,
+      "provider": "context7"
+    },
+    {
+      "id": "/websites/python_3_16",
+      "title": "Python",
+      "description": "Python is a high-level, interpreted programming language widely used for web development, data analysis, artificial intelligence, and scientific computing.",
+      "trust_score": 10,
+      "benchmark_score": 62.06,
+      "total_snippets": 28483,
+      "stars": -1,
+      "provider": "context7"
+    },
+    {
+      "id": "/microsoft/vscode-python",
+      "title": "Python",
+      "description": "Python language support with extension access points for IntelliSense (Pylance), Debugging (Python Debugger), linting, formatting, refactoring, unit tests, and more.",
+      "trust_score": 9.9,
+      "benchmark_score": 51.41,
+      "total_snippets": 1252,
+      "stars": 4441,
+      "provider": "context7"
+    },
+    {
+      "id": "/websites/python_zh-cn_3_14",
+      "title": "Python",
+      "description": "Python is a high-level, interpreted programming language known for its simplicity, readability, and versatility across web development, data science, automation, and scientific computing.",
+      "trust_score": 10,
+      "benchmark_score": 62.87,
+      "total_snippets": 18589,
+      "stars": -1,
+      "provider": "context7"
+    },
+    {
+      "id": "/websites/python_es_3",
+      "title": "Python",
+      "description": "Python is a high-level, interpreted programming language known for its simple syntax, readability, and versatility across web development, data science, automation, and scientific computing.",
+      "trust_score": 10,
+      "benchmark_score": 5,
+      "total_snippets": 3618,
+      "stars": -1,
+      "provider": "context7"
+    },
+    {
+      "id": "/openai/openai-python",
+      "title": "OpenAI Python",
+      "description": "The OpenAI Python library provides convenient access to the OpenAI REST API from any Python 3.8+ application, offering both synchronous and asynchronous clients.",
+      "trust_score": 9.1,
+      "benchmark_score": 84.3,
+      "total_snippets": 594,
+      "stars": 26560,
+      "provider": "context7"
+    }
+  ],
+  "total": 30,
+  "elapsed_ms": 1831.49
+}

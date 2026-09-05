@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-05",
+  "route": "smart-search CLI",
+  "doctor": {"ok": false, "error_type": "network_error", "summary": "Configured minimum capabilities; xai-responses request timed out."},
+  "attempts": [
+    {"operation": "exa-search", "query": "Codex hooks SessionStart UserPromptSubmit", "domain": "developers.openai.com", "ok": false, "error_type": "timeout", "content_retrieved": false},
+    {"operation": "fetch", "url": "https://developers.openai.com/codex/hooks.md", "ok": false, "error_type": "timeout", "providers_attempted": ["tavily", "jina", "firecrawl"], "content_retrieved": false},
+    {"operation": "fetch", "url": "https://docs.astral.sh/uv/concepts/projects/init/", "ok": false, "error_type": "timeout", "providers_attempted": ["tavily", "jina", "firecrawl"], "content_retrieved": false}
+  ],
+  "consequence": "Use retained pilot evidence only for the observed host interface. Recheck source/protocol before the M3 compatibility claim. Core implementation is not blocked."
+}

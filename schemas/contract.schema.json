@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rctl contract frontmatter v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "task_id", "title", "kind", "criteria"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+    "title": {"$ref": "#/$defs/text"},
+    "kind": {"enum": ["exploration", "analysis"]},
+    "criteria": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/criterion"}}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "requirement", "evidence_refs", "failure_action", "method"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^AC-[0-9]{2,}$"},
+        "requirement": {"$ref": "#/$defs/text"},
+        "evidence_refs": {"$ref": "#/$defs/refs"},
+        "failure_action": {"$ref": "#/$defs/text"},
+        "method": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "argv", "timeout_seconds", "inputs"],
+              "properties": {
+                "type": {"const": "command"},
+                "argv": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+                "timeout_seconds": {"type": "integer", "minimum": 1},
+                "inputs": {"$ref": "#/$defs/refs"}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "reviewer"],
+              "properties": {
+                "type": {"const": "review"},
+                "reviewer": {"enum": ["either", "operator"]}
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

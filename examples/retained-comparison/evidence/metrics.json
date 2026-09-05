@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "metric": "error",
+  "direction": "lower_is_better",
+  "baseline": "0.20",
+  "candidate": "0.23",
+  "minimum_gain": "0.01"
+}
