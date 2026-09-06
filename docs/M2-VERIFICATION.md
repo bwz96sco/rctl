@@ -125,3 +125,9 @@ all 140 tests and lint in each of the four OS/Python jobs. Its documentation che
 then found workstation-only links in `SOURCES.md`. Those external local sources are
 now recorded as plain provenance paths, while repository links remain checked.
 No private source files were imported to satisfy the public documentation check.
+
+The [completed run](https://github.com/bwz96sco/rctl/actions/runs/34024998318) on
+commit `ab0d8b5` passed all four macOS/Linux × Python 3.11/3.13 jobs: 140 tests
+per job, full-script lint, document checks, build, and installed-wheel smoke. This
+establishes hosted Linux and macOS execution for the patch release. The two earlier
+failures above explain the setup-tag and source-reference corrections.
