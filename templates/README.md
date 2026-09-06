@@ -7,3 +7,10 @@ Use [state.md](state.md) only when work pauses or a handoff helps. Write [result
 A task needs contract and result records; the machine acceptance record is produced by rctl. Review-input JSON is needed only for review criteria. It records the judgment used by verification and does not own a second result. Hook receipts and host launch fixtures belong to integration testing, not every task.
 
 Scientific requirements come from the project and relevant research skills. For a comparison, add baseline, intervention, data/split, metric direction, aggregation/selection, budget, and stopping rules to the contract body before dependent work. Do not copy historical compute budgets as new execution authorization.
+
+## Project and vault scaffolding
+
+`rctl init` reads `project/research/`; optional `--vault PATH` reads `vault/` only when
+creating a new vault. Existing files are preserved. The five research files describe
+durable intent, resources, baselines, and routes; vault templates hold linked scientific
+notes. The packaged research-task skill explains workspace and migration boundaries.

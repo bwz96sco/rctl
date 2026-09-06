@@ -1,0 +1,3 @@
+FAIL research-synthesis: evidence-support contract missing 'Do not assign `retain`, `hold`, `reject`'
+FAIL research-synthesis: evidence-support contract missing 'paper ID and note anchor'
+FAILED 2 research-skill checks

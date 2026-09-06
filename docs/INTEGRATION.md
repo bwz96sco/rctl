@@ -6,14 +6,26 @@ Build the first adapter for Codex. Core commands remain host-neutral. The [new M
 
 The release packages one `research-task` skill with these responsibilities: read contract/result/handoff, establish scope within existing authorization, preserve amendments, execute using appropriate domain skills, inspect evidence, invoke verification, and close only after the recorded guard succeeds. It must explicitly separate a chat pause from task closure.
 
-Reuse scientific requirements from `research-experiment` and `research-computation`, and the static knowledge ownership from `research-project-setup`. Do not copy the Trellis-specific lifecycle commands or treat its result-schema validator as general scientific validation. No shared skill file is changed by this preparation or by exporting an integration bundle. The package's local instructions must explain the rctl task ownership when a framework-specific skill is consulted.
+Scientific methods and evidence requirements remain in the domain skills. As of v0.2,
+research-experiment uses native rctl contract/result files; model-training-workflow and
+experiment-adapter-builder retain runner authority, while research-review-case labels
+represent evidence coverage. None owns a competing task lifecycle. The shared setup skill
+is retired; its orientation/vault assets and workspace guidance now ship in rctl.
+The user-authorized M5 migration changes shared source skills; ordinary init/export commands
+never edit that repository or migrate live tasks.
+
+`init --codex` creates missing `.codex/hooks.json`, `.codex/config.toml`, and
+`.rctl/codex/README.md` plus the project-local skill. Existing host files are preserved for
+manual reconciliation. It does not grant project/hook trust, launch Codex, or claim delivery
+from file creation. The tested project-file loading route and its trust boundary remain as
+recorded in PROJECT-HOOKS-VERIFICATION.
 
 ## Bundle contract
 
 `integration codex export DIRECTORY` creates a new directory containing:
 
 - `hooks.json`: only rctl's hook definitions, using the actual installed rctl entrypoint and explicit project root.
-- `research-task/SKILL.md` and `research-task/agents/openai.yaml`: host-neutral instructions plus native invocation metadata.
+- `research-task/SKILL.md` and `research-task/agents/openai.yaml`: host-neutral instructions plus native invocation metadata; `research-task/references/` includes workspace and optional graph guidance.
 - `README.md`: the tested host version, loading procedure, task-selection environment, removal steps, and the exact scope of the delivery test.
 
 The exporter does not launch a host, alter global configuration, merge a live project config, grant trust, or install a shared skill. During the integration milestone, validate a disposable launch using the exported definitions. Normal persisted project loading requires separate delivery evidence. If project loading fails, retain the invocation-local path as the documented supported route; do not label export alone as installation success.

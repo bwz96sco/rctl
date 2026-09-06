@@ -96,7 +96,7 @@ def main() -> None:
     ]
     for path in json_files:
         read_json(path)
-    schemas = {name: read_json(ROOT / "schemas" / f"{name}.schema.json") for name in ("contract", "result", "reviews")}
+    schemas = {name: read_json(ROOT / "schemas" / f"{name}.schema.json") for name in ("contract", "result", "reviews", "project")}
     for schema in schemas.values():
         Draft202012Validator.check_schema(schema)
 
@@ -127,12 +127,12 @@ def main() -> None:
     requirements = re.findall(r"^\| (R-\d+) \|", (ROOT / "docs/PRD.md").read_text(), re.MULTILINE)
     acceptance = (ROOT / "docs/ACCEPTANCE.md").read_text()
     cases = re.findall(r"^\| (A-\d+) \| ([^|]+) \|", acceptance, re.MULTILINE)
-    assert len(requirements) == len(set(requirements)) == 12
-    assert len(cases) == len({case[0] for case in cases}) == 20
+    assert len(requirements) == len(set(requirements)) == 14
+    assert len(cases) == len({case[0] for case in cases}) == 24
     mapped = set(re.findall(r"R-\d+", " ".join(case[1] for case in cases)))
     assert mapped == set(requirements), f"Requirement coverage mismatch: {mapped ^ set(requirements)}"
     links = check_links()
-    print(f"PASS preparation documents: {links} local links; {len(json_files)} JSON files; 3 schemas and example inputs; 12 requirements mapped to 20 acceptance cases.")
+    print(f"PASS preparation documents: {links} local links; {len(json_files)} JSON files; 4 schemas and example inputs; 14 requirements mapped to 24 acceptance cases.")
 
 
 if __name__ == "__main__":

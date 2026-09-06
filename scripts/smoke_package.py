@@ -1,11 +1,13 @@
 """Run a built wheel in an isolated environment and non-Git project.
 
-Usage: uv run scripts/smoke_package.py dist/rctl-0.1.0-py3-none-any.whl
+Usage: uv run scripts/smoke_package.py dist/rctl-0.2.0-py3-none-any.whl [--skills-root PATH]
 """
 
+import argparse
 import json
 import os
 import platform
+import shlex
 import shutil
 import subprocess
 import sys
@@ -14,7 +16,11 @@ from pathlib import Path
 
 
 def main():
-    wheel = Path(sys.argv[1]).resolve()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("wheel", type=Path)
+    parser.add_argument("--skills-root", type=Path)
+    args = parser.parse_args()
+    wheel = args.wheel.resolve()
     repo = Path(__file__).resolve().parents[1]
     work = repo / ".work"
     work.mkdir(exist_ok=True)
@@ -58,6 +64,23 @@ def main():
             )
             return response
 
+        cli("init", "--vault", "note/main", "--codex")
+        assert (
+            project / ".agents/skills/research-task/references/workspace.md"
+        ).is_file()
+        assert (project / "note/main/_templates/experiment-note.md").is_file()
+        custom = project / "research/PROGRAM.md"
+        custom.write_text("Preserved installed-wheel customization.\n")
+        before = {p: p.read_bytes() for p in project.rglob("*") if p.is_file()}
+        assert cli("init", "--codex")["data"]["created"] == []
+        assert before == {p: p.read_bytes() for p in project.rglob("*") if p.is_file()}
+        shared_record = None
+        if args.skills_root:
+            from smoke_shared_skills import walkthrough
+
+            shared_record = walkthrough(
+                cli, project, repo, args.skills_root.resolve(), python
+            )
         cli(
             "task",
             "new",
@@ -80,6 +103,21 @@ def main():
         assert (task / ".rctl/record.json").read_bytes() == record
         reminder = cli("context", "tasks/retained-comparison")["data"]["context"]
         assert "Next action: inspect retained evidence." in reminder
+        hooks = json.loads((project / ".codex/hooks.json").read_text())
+        hook_responses = {}
+        for event, handlers in hooks["hooks"].items():
+            hook_result = subprocess.run(
+                shlex.split(handlers[0]["hooks"][0]["command"]),
+                input=json.dumps({"hook_event_name": event, "cwd": str(project)}),
+                cwd=project,
+                env={**environment, "RCTL_TASK_PATH": "tasks/retained-comparison"},
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            hook_response = json.loads(hook_result.stdout)
+            assert "active" in hook_response["hookSpecificOutput"]["additionalContext"]
+            hook_responses[event] = hook_response
         (task / "contract.md").write_bytes(contract + b"\nBudget clarification.\n")
         assert cli("status", "tasks/retained-comparison")["data"]["contract_drift"]
         cli(
@@ -150,7 +188,10 @@ def main():
         )
         record = json.loads((task / ".rctl/record.json").read_text())
         execution_logs = {}
-        for report in record["verifications"]:
+        reports = record["verifications"] + (
+            shared_record["verifications"] if shared_record else []
+        )
+        for report in reports:
             for check in report["checks"]:
                 if check.get("execution"):
                     for key in ("stdout_ref", "stderr_ref"):
@@ -165,6 +206,8 @@ def main():
                     "wheel": wheel.name,
                     "versions": json.loads(resource_check.stdout),
                     "checks": results,
+                    "shared_experiment_record": shared_record,
+                    "generated_hook_adapter_responses": hook_responses,
                     "execution_logs": execution_logs,
                 },
                 ensure_ascii=False,

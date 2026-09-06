@@ -1,6 +1,6 @@
-# rctl v0.1 CLI Contract
+# rctl CLI Contract
 
-All commands below are implemented in v0.1.0. See [release verification](RELEASE-VERIFICATION.md) for local execution and host delivery evidence.
+The v0.2 increment adds `init`; the remaining commands were implemented in v0.1.0. See [release verification](RELEASE-VERIFICATION.md) for local execution and host delivery evidence.
 
 ## Global arguments and output
 
@@ -20,7 +20,7 @@ rctl [--root PATH] [--format text|json] COMMAND ...
 }
 ```
 
-On success `error` is null. `data` is always an object and `warnings` is an array of strings. Mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome.
+On success `error` is null. `data` is always an object and `warnings` is an array of strings. Task mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome. Project `init` returns `root`, `vault`, `created`, and `preserved` paths, plus any configuration-review warnings.
 
 `--help` and `--version` also honor JSON mode, with informational text in `data.message`. In text mode they display ordinary help/version output. Context includes a bounded reminder and a compact verification summary; `status` exposes the latest full report.
 
@@ -40,6 +40,7 @@ Malformed contract/result/review input fails before report creation. A missing d
 
 | Command | Inputs and behavior | Writes |
 |---|---|---|
+| `init [--vault PATH] [--codex]` | Initialize the existing selected root; save an immutable vault binding, create missing research orientation and project-local task skill, and optionally scaffold a new vault and Codex files. Preserve existing text; reject path collisions or changed binding before writes. | Missing project files only |
 | `task new TASK --kind exploration|analysis --title TEXT` | Create a new directory and draft contract. The task ID is the directory basename. Refuse existing destination. | Contract template only |
 | `contract check TASK` | Parse frontmatter, unique criterion IDs, required headings, and declared method structure. This is a structural check. | None |
 | `begin TASK` | Require a valid completed draft, save contract revision 1, activate. | Machine record |

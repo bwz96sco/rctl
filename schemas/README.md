@@ -1,6 +1,6 @@
 # Record input schemas
 
-These Draft 2020-12 schemas define the parsed frontmatter of [contract.md](../templates/contract.md) and [result.md](../templates/result.md), plus review-input JSON. They are v0.1 input contracts, not schemas for a generic research workflow.
+These Draft 2020-12 schemas define the parsed frontmatter of [contract.md](../templates/contract.md) and [result.md](../templates/result.md), plus review-input JSON. These task inputs retain schema version 1. The v0.2 initializer adds `project.schema.json` for `.rctl/project.json` (schema version 1 and a nullable vault path); it carries no task state.
 
 - [contract.schema.json](contract.schema.json): criterion structure and command/review methods.
 - [result.schema.json](result.schema.json): result identity, governing revision, and scientific assessment.

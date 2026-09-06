@@ -1,0 +1,20 @@
+WARN playwright-cli: SKILL.md exceeds preferred 150 lines: 420
+FAIL generated environment or cache under skills/: skills/model-training-workflow/scripts/__pycache__
+FAIL generated environment or cache under skills/: skills/model-training-workflow/scripts/__pycache__/audit_ai_research_skills.cpython-313.pyc
+FAIL autocli: SKILL.md exceeds 500 lines: 836
+FAIL autocli: missing agents/openai.yaml
+FAIL autofigure-edit: native invocation projections disagree (Claude disable=False, OpenAI allow=False)
+FAIL experiment-adapter-builder: native invocation projections disagree (Claude disable=False, OpenAI allow=False)
+FAIL model-training-workflow: native invocation projections disagree (Claude disable=False, OpenAI allow=False)
+FAIL nlm-skill: native invocation projections disagree (Claude disable=False, OpenAI allow=False)
+FAIL obsidian-dev: native invocation projections disagree (Claude disable=False, OpenAI allow=False)
+FAIL oracle-cli: native invocation projections disagree (Claude disable=False, OpenAI allow=False)
+FAIL personal-slides: native invocation projections disagree (Claude disable=False, OpenAI allow=False)
+FAIL playwright-cli: missing agents/openai.yaml
+FAIL slurm-hpc-runner: native invocation projections disagree (Claude disable=False, OpenAI allow=False)
+FAIL repository structure
+OK manifest /Users/zhangbowen/Projects/agent-skills-private/registry/external-specialists.json
+FAIL smart-search-cli: upstream package digest mismatch: expected=9422c1ae70889c48e66ccb004bfbb6cc2d9bcd69404998b4129d830a0c4337d0, actual=1581b5bd06bf888e33df91bb6f4b9672c90561dd2810438e2c04ce5554add943
+FAILED upstream snapshots: errors=1
+FAIL upstream skill snapshots
+OK JavaScript syntax: 4 files

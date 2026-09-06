@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "library_id": "/astral-sh/uv",
+  "query": "uv tool install local wheel file persistent installation executable path",
+  "provider": "context7",
+  "code_snippets": [],
+  "info_snippets": [],
+  "results": [],
+  "total": 0,
+  "content": "{\"content\": \"### Install a tool using uv tool install\\n\\nSource: https://github.com/astral-sh/uv/blob/main/docs/guides/tools.md\\n\\nInstalls a specified tool, like Ruff, to a persistent environment, making its executables available in the system's PATH.\\n\\n```console\\n$ uv tool install ruff\\n```\\n\\n--------------------------------\\n\\n### Install command-line tools with uv tool\\n\\nSource: https://github.com/astral-sh/uv/blob/main/docs/guides/integration/docker.md\\n\\nEnsures the tool executable path is present in PATH and installs executable tools using uv tool.\\n\\n```dockerfile\\nENV PATH=/root/.local/bin:$PATH\\nRUN uv tool install cowsay\\n```\\n\\n--------------------------------\\n\\n### Install a package from a local disk path with uv pip\\n\\nSource: https://github.com/astral-sh/uv/blob/main/docs/pip/packages.md\\n\\nInstalls a Python package directly from a local directory or archive on the disk.\\n\\n```console\\n$ uv pip install \\\"ruff @ ./projects/ruff\\\"\\n```\\n\\n--------------------------------\\n\\n### Configure custom uv tool binary directory\\n\\nSource: https://github.com/astral-sh/uv/blob/main/docs/guides/integration/docker.md\\n\\nSets the UV_TOOL_BIN_DIR environment variable to override the default location where tool executables are placed.\\n\\n```dockerfile\\nENV UV_TOOL_BIN_DIR=/opt/uv-bin/\\n```\\n\\n### Installing tools\\n\\nSource: https://github.com/astral-sh/uv/blob/main/docs/guides/tools.md\\n\\nWhen a tool is installed, its executables are placed in a `bin` directory within the `PATH`, allowing the tool to be run directly without `uv`. If the tool is not on the `PATH`, a warning will be displayed, and `uv tool update-shell` can be used to add it.\", \"results\": []}",
+  "elapsed_ms": 2820.77
+}

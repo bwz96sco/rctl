@@ -25,6 +25,17 @@ All cases below are required for release. None is claimed to have passed merely 
 | A-19 | R-06, R-11 | Copy a quiescent entire task and required project-relative evidence to a second local project; inspect and rerun verification there. | Records cannot be recovered portably; fix root-relative paths and relocation behavior. |
 | A-20 | R-04, R-07 | Real-task review confirms scope/criteria were fixed before dependent work, amendments were explicit, and no unfavorable finding triggered unauthorized extra execution. | The software loop exists but research behavior violates its agreement; fix instructions or task wording using observed evidence. |
 
+## v0.2 initialization and skill migration
+
+The following cases extend the original 20-case v0.1 release matrix.
+
+| Case | Requirements | Scenario and observable result | Failure detected; response |
+|---|---|---|---|
+| A-21 | R-13, R-11 | Initialize a non-Git root, customize files, and rerun; only missing files are created, with unchanged task/config contents. Invalid manifest/path collisions reject before writes. | Overwritten work or inconsistent setup; fix initialization and preflight. |
+| A-22 | R-13, R-08 | New vault receives note scaffolding; existing vault is associated without edits; omitted binding is reused, conflicting/out-of-root binding rejects. | Duplicated or misplaced knowledge; fix binding and scaffold behavior. |
+| A-23 | R-13, R-12 | Installed wheel initialization includes workspace guidance, local skill, and optional working hook definitions; existing host files stay intact. | Checkout-only resources or destructive integration; fix packaging/preservation. |
+| A-24 | R-14, R-05, R-06 | Migrated experiment templates and validator work with native rctl contract/result; real verification executes declared domain checks, evidence review remains separate, and negative/unknown outcomes retain their meaning. | Renamed files lose scientific evidence or bypass closure; fix skill/template/check integration. |
+
 ## Test organization
 
 Pure tests cover parsing, lifecycle, verdict aggregation, and rendering. Integration tests use actual subprocess checks and real temporary files. Do not use only mocked execution for A-04/A-05/A-14/A-15. A-18/A-20 require a real host/task; they cannot be satisfied by scripted payload injection or the old pilot alone.

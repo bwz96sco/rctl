@@ -1,0 +1,51 @@
+# Git and local app state
+.git/
+.obsidian/
+.trash/
+
+# Graphify's own generated files
+graphify-out/
+
+# Zotero and binary/source artifacts managed outside the note graph
+references.bib
+literature/pdfs/
+*.pdf
+
+# OS/editor noise
+.DS_Store
+._*
+*.swp
+*.swo
+*~
+
+# Build a research-note graph, not a full filesystem graph.
+*
+!AGENTS.md
+!literature-index.md
+!_references/
+!_references/**
+!_templates/
+!_templates/**
+!literature/
+!literature/**
+*.pdf
+!experiments/
+!experiments/**
+!computation/
+!computation/**
+!figures/
+!figures/**
+!slides/
+!slides/**
+!intake/
+!intake/**
+!writing/
+!writing/**
+!theory/
+!theory/**
+!ideas/
+!ideas/**
+
+# Placeholder files are not useful graph content.
+.gitkeep
+**/.gitkeep

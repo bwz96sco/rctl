@@ -5,7 +5,7 @@ import shlex
 import sys
 from pathlib import Path
 
-from .documents import RctlError, local_path, resource_text
+from .documents import RctlError, local_path, resource_tree
 from .records import state_error
 
 
@@ -30,12 +30,7 @@ def inline_arguments(hooks):
     return arguments
 
 
-def export_codex(root, destination):
-    path = local_path(root, destination)
-    if path.exists():
-        raise state_error(
-            "Integration destination already exists; choose a new directory."
-        )
+def codex_hooks(root):
     entrypoint = Path(sys.executable).parent / "rctl"
     if not entrypoint.is_file():
         raise RctlError(
@@ -62,6 +57,14 @@ def export_codex(root, destination):
             for event, budget in (("SessionStart", 8000), ("UserPromptSubmit", 2000))
         }
     }
+    return hooks, entrypoint
+
+
+def export_codex(root, destination):
+    path = local_path(root, destination)
+    if path.exists():
+        raise state_error("Integration destination already exists; choose a new directory.")
+    hooks, entrypoint = codex_hooks(root)
     launch = shlex.join(
         ["codex", "--enable", "hooks", *inline_arguments(hooks), "--cd", str(root)]
     )
@@ -95,11 +98,11 @@ The release verification record in the rctl source repository contains the actua
         json.dumps(hooks, indent=2) + "\n", encoding="utf-8"
     )
     skill = path / "research-task"
-    (skill / "agents").mkdir(parents=True)
-    for name in ("SKILL.md", "agents/openai.yaml"):
-        (skill / name).write_text(
-            resource_text("skills", f"research-task/{name}"), encoding="utf-8"
-        )
+    skill_files = resource_tree("skills/research-task")
+    for name, content in skill_files.items():
+        target = skill / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content, encoding="utf-8")
     (path / "README.md").write_text(readme, encoding="utf-8")
     return {
         "directory": str(path),
@@ -107,8 +110,7 @@ The release verification record in the rctl source repository contains the actua
         "entrypoint": str(entrypoint),
         "files": [
             "hooks.json",
-            "research-task/SKILL.md",
-            "research-task/agents/openai.yaml",
+            *[f"research-task/{name}" for name in skill_files],
             "README.md",
         ],
     }

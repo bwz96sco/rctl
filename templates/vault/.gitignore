@@ -1,0 +1,16 @@
+# Local app state and generated files
+.obsidian/workspace*.json
+.obsidian/workspaces.json
+.obsidian/cache/
+.trash/
+.DS_Store
+._*
+*.swp
+*~
+exports/
+tmp/
+temp/
+# Follow project policy for durable PDF storage; temporary sources stay untracked.
+**/*.pdf
+# Optional graph outputs are regenerated from source notes.
+graphify-out/

@@ -1,0 +1,2168 @@
+{
+  "ok": true,
+  "python": "3.13.2",
+  "platform": "macOS-26.3-arm64-arm-64bit-Mach-O",
+  "wheel": "rctl-0.2.0-py3-none-any.whl",
+  "versions": {
+    "rctl": "0.2.0",
+    "PyYAML": "6.0.3",
+    "jsonschema": "4.26.0"
+  },
+  "checks": [
+    {
+      "argv": [
+        "init",
+        "--vault",
+        "note/main",
+        "--codex"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "root": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project",
+          "vault": "note/main",
+          "created": [
+            ".agents/",
+            ".codex/",
+            ".rctl/",
+            "note/",
+            "research/",
+            "tasks/",
+            ".agents/skills/",
+            ".rctl/codex/",
+            "note/main/",
+            ".agents/skills/research-task/",
+            "note/main/_references/",
+            "note/main/_templates/",
+            "note/main/computation/",
+            "note/main/experiments/",
+            "note/main/figures/",
+            "note/main/ideas/",
+            "note/main/intake/",
+            "note/main/literature/",
+            "note/main/slides/",
+            "note/main/theory/",
+            "note/main/writing/",
+            ".agents/skills/research-task/agents/",
+            ".agents/skills/research-task/references/",
+            "research/BASELINES.md",
+            "research/INVENTORY.md",
+            "research/PROGRAM.md",
+            "research/README.md",
+            "research/ROUTES.md",
+            ".agents/skills/research-task/SKILL.md",
+            ".agents/skills/research-task/agents/openai.yaml",
+            ".agents/skills/research-task/references/graphify.md",
+            ".agents/skills/research-task/references/workspace.md",
+            ".rctl/project.json",
+            "note/main/.gitignore",
+            "note/main/.graphifyignore",
+            "note/main/AGENTS.md",
+            "note/main/_references/citation-policy.md",
+            "note/main/_references/workflows.md",
+            "note/main/_templates/experiment-note.md",
+            "note/main/_templates/intake-audit.md",
+            "note/main/_templates/paper-note.md",
+            "note/main/computation/.gitkeep",
+            "note/main/experiments/.gitkeep",
+            "note/main/figures/.gitkeep",
+            "note/main/ideas/inbox.md",
+            "note/main/ideas/questions.md",
+            "note/main/intake/.gitkeep",
+            "note/main/literature/.gitkeep",
+            "note/main/literature-index.md",
+            "note/main/references.bib",
+            "note/main/slides/.gitkeep",
+            "note/main/theory/.gitkeep",
+            "note/main/writing/.gitkeep",
+            ".codex/hooks.json",
+            ".codex/config.toml",
+            ".rctl/codex/README.md"
+          ],
+          "preserved": []
+        },
+        "error": null,
+        "warnings": [
+          "Codex files do not grant project or hook trust; read .rctl/codex/README.md."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "init",
+        "--codex"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "root": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project",
+          "vault": "note/main",
+          "created": [],
+          "preserved": [
+            "research/BASELINES.md",
+            "research/INVENTORY.md",
+            "research/PROGRAM.md",
+            "research/README.md",
+            "research/ROUTES.md",
+            ".agents/skills/research-task/SKILL.md",
+            ".agents/skills/research-task/agents/openai.yaml",
+            ".agents/skills/research-task/references/graphify.md",
+            ".agents/skills/research-task/references/workspace.md",
+            ".rctl/project.json",
+            ".codex/hooks.json",
+            ".codex/config.toml",
+            ".rctl/codex/README.md"
+          ]
+        },
+        "error": null,
+        "warnings": [
+          "Existing vault associated without modifying its contents.",
+          "Codex files do not grant project or hook trust; read .rctl/codex/README.md.",
+          "Preserved .codex/hooks.json; review existing configuration before use.",
+          "Preserved .codex/config.toml; review existing configuration before use."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "task",
+        "new",
+        "tasks/native-experiment",
+        "--kind",
+        "analysis",
+        "--title",
+        "Native experiment smoke"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "draft",
+          "contract_path": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/native-experiment/contract.md"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "contract",
+        "check",
+        "tasks/native-experiment"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "native-experiment",
+          "check": "structure",
+          "valid": true,
+          "criterion_ids": [
+            "AC-01",
+            "AC-02",
+            "AC-03"
+          ]
+        },
+        "error": null,
+        "warnings": [
+          "Structural validity does not establish scientific adequacy or verification."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "begin",
+        "tasks/native-experiment"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "active",
+          "contract_revision": 1
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/native-experiment"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "active",
+          "verification_id": "V0001",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.132344Z",
+                "finished_at": "2026-09-06T08:38:49.170460Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Required review is missing.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": null
+            },
+            {
+              "criterion_id": "AC-03",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "result.md"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "validate-result.py",
+                  "."
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.171029Z",
+                "finished_at": "2026-09-06T08:38:49.247985Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stderr"
+              }
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Required review is missing.",
+          "next_action": "Correct interpretation or leave review unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/native-experiment"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "active",
+          "verification_id": "V0001",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.132344Z",
+                "finished_at": "2026-09-06T08:38:49.170460Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Required review is missing.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": null
+            },
+            {
+              "criterion_id": "AC-03",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "result.md"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "validate-result.py",
+                  "."
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.171029Z",
+                "finished_at": "2026-09-06T08:38:49.247985Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stderr"
+              }
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Required review is missing.",
+          "next_action": "Correct interpretation or leave review unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/native-experiment",
+        "--reviews",
+        "tasks/native-experiment/reviews.json"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "active",
+          "verification_id": "V0002",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.441150Z",
+                "finished_at": "2026-09-06T08:38:49.477858Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Synthetic negative test: review intentionally unresolved.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            },
+            {
+              "criterion_id": "AC-03",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "result.md"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "validate-result.py",
+                  "."
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.478584Z",
+                "finished_at": "2026-09-06T08:38:49.554133Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stderr"
+              }
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Synthetic negative test: review intentionally unresolved.",
+          "next_action": "Correct interpretation or leave review unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/native-experiment"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "active",
+          "verification_id": "V0002",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.441150Z",
+                "finished_at": "2026-09-06T08:38:49.477858Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Synthetic negative test: review intentionally unresolved.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            },
+            {
+              "criterion_id": "AC-03",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "result.md"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "validate-result.py",
+                  "."
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.478584Z",
+                "finished_at": "2026-09-06T08:38:49.554133Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stderr"
+              }
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Synthetic negative test: review intentionally unresolved.",
+          "next_action": "Correct interpretation or leave review unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/native-experiment",
+        "--reviews",
+        "tasks/native-experiment/reviews.json"
+      ],
+      "exit_code": 4,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "active",
+          "verification_id": "V0003",
+          "verdict": "fail",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "fail",
+              "rationale": "Declared command exited 1.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.739714Z",
+                "finished_at": "2026-09-06T08:38:49.780950Z",
+                "exit_code": 1,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "pass",
+              "rationale": "Fixture review: 0.20 - 0.23 = -0.03 is below the fixed +0.01 threshold; result declines promotion and limits its claim to invented aggregates without training or population inference.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            },
+            {
+              "criterion_id": "AC-03",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "result.md"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "validate-result.py",
+                  "."
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.781901Z",
+                "finished_at": "2026-09-06T08:38:49.859722Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stderr"
+              }
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_FAILED",
+          "message": "AC-01: Declared command exited 1.",
+          "next_action": "Correct arithmetic or leave the claim unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/native-experiment"
+      ],
+      "exit_code": 4,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "active",
+          "verification_id": "V0003",
+          "verdict": "fail",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "fail",
+              "rationale": "Declared command exited 1.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.739714Z",
+                "finished_at": "2026-09-06T08:38:49.780950Z",
+                "exit_code": 1,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "pass",
+              "rationale": "Fixture review: 0.20 - 0.23 = -0.03 is below the fixed +0.01 threshold; result declines promotion and limits its claim to invented aggregates without training or population inference.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            },
+            {
+              "criterion_id": "AC-03",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "result.md"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "validate-result.py",
+                  "."
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:49.781901Z",
+                "finished_at": "2026-09-06T08:38:49.859722Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stderr"
+              }
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_FAILED",
+          "message": "AC-01: Declared command exited 1.",
+          "next_action": "Correct arithmetic or leave the claim unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/native-experiment",
+        "--reviews",
+        "tasks/native-experiment/reviews.json"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "active",
+          "verification_id": "V0004",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:50.044737Z",
+                "finished_at": "2026-09-06T08:38:50.086002Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-01.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "pass",
+              "rationale": "Fixture review: 0.20 - 0.23 = -0.03 is below the fixed +0.01 threshold; result declines promotion and limits its claim to invented aggregates without training or population inference.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            },
+            {
+              "criterion_id": "AC-03",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "result.md"
+              ],
+              "execution": {
+                "argv": [
+                  "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                  "validate-result.py",
+                  "."
+                ],
+                "cwd": "tasks/native-experiment",
+                "started_at": "2026-09-06T08:38:50.086868Z",
+                "finished_at": "2026-09-06T08:38:50.161694Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-03.stdout",
+                "stderr_ref": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-03.stderr"
+              }
+            }
+          ],
+          "verdict": "pass"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/native-experiment"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "native-experiment",
+          "phase": "closed",
+          "closure": {
+            "verification_id": "V0004",
+            "contract_revision": 1,
+            "cycle": 1,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-06T08:38:50.253475Z"
+          },
+          "verification_id": "V0004"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "task",
+        "new",
+        "tasks/retained-comparison",
+        "--kind",
+        "analysis",
+        "--title",
+        "Installed wheel smoke"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "draft",
+          "contract_path": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/contract.md"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "begin",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 2,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {},
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/contract.md: replace the draft's <...> authoring placeholders before begin/amend.",
+          "next_action": "Correct the input and try again."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "contract",
+        "check",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "check": "structure",
+          "valid": true,
+          "criterion_ids": [
+            "AC-01",
+            "AC-02"
+          ]
+        },
+        "error": null,
+        "warnings": [
+          "Structural validity does not establish scientific adequacy or verification."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "begin",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "checkpoint",
+        "tasks/retained-comparison",
+        "--file",
+        "handoff.md"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "state_path": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/state.md"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "context",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1,
+          "contract_drift": false,
+          "verification": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Prepare the result and required evidence/reviews, then verify; checkpoint to pause.",
+          "available": true,
+          "context": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nNext action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\ncontract.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/contract.md\nstate.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/state.md\nresult.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/result.md\n.rctl/record.json: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/.rctl/record.json\nProject orientation: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/research/README.md\n\nGoverning contract (includes criteria):\n---\nschema_version: 1\ntask_id: retained-comparison\ntitle: Inspect a synthetic retained error comparison\nkind: analysis\ncriteria:\n  - id: AC-01\n    requirement: The recorded gain and promotion label follow the frozen arithmetic rule.\n    evidence_refs: [evidence/metrics.json, evidence/derived.json]\n    failure_action: Correct the derived arithmetic before closing the assessment.\n    method:\n      type: command\n      argv: [uv, run, --offline, --no-project, python, check_arithmetic.py]\n      timeout_seconds: 30\n      inputs: [check_arithmetic.py, evidence/metrics.json, evidence/derived.json]\n  - id: AC-02\n    requirement: The result applies the frozen rule and confines its claims to synthetic aggregate evidence.\n    evidence_refs: [result.md, evidence/metrics.json, evidence/derived.json]\n    failure_action: Revise the interpretation or leave the assessment unresolved.\n    method:\n      type: review\n      reviewer: either\n---\n\n# Synthetic comparison contract\n\n## Question\n\nDoes the supplied candidate meet the fixed improvement rule against the supplied baseline?\n\n## Scope\n\nInspect only the synthetic aggregate observations. Baseline B0 and candidate C1 use the same fictional evaluation set. This task recomputes one error difference; it does not reproduce predictions, training, or uncertainty estimates.\n\n## Constraints\n\nError is lower-is-better. Gain is B0 error minus C1 error. Promotion requires gain at least 0.01 absolute error units. Use the supplied aggregate directly, with no seed selection or alternative aggregation. Budget: local standard-library arithmetic only; no network, dependency download, or new experiment.\n\n## Stop conditions\n\nStop with a bounded answer when arithmetic and interpretation are checked. A negative result is a valid completion. Changing the threshold or collecting new observations requires a separate task. Inconsistent input prevents closure until corrected.\n\nHandoff (reported progress):\nNext action: inspect retained evidence.\n"
+        },
+        "error": null,
+        "warnings": [
+          "No verification has been recorded; structural checks and handoffs do not establish closure."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1,
+          "contract_drift": true,
+          "verification": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Amend the contract with a reason before dependent work."
+        },
+        "error": null,
+        "warnings": [
+          "AMENDMENT_REQUIRED: current contract differs from the governing revision.",
+          "No verification has been recorded; structural checks and handoffs do not establish closure."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "amend",
+        "tasks/retained-comparison",
+        "--reason",
+        "Clarify the existing budget"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 2
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 2,
+          "contract_drift": false,
+          "verification": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Prepare the result and required evidence/reviews, then verify; checkpoint to pause."
+        },
+        "error": null,
+        "warnings": [
+          "No verification has been recorded; structural checks and handoffs do not establish closure."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0001",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-06T08:38:51.250203Z",
+                "finished_at": "2026-09-06T08:38:51.288705Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0001-0x6lbxra/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0001-0x6lbxra/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Required review is missing.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": null
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Required review is missing.",
+          "next_action": "Revise the interpretation or leave the assessment unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0001",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-06T08:38:51.250203Z",
+                "finished_at": "2026-09-06T08:38:51.288705Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0001-0x6lbxra/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0001-0x6lbxra/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Required review is missing.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": null
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Required review is missing.",
+          "next_action": "Revise the interpretation or leave the assessment unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison",
+        "--reviews",
+        "tasks/retained-comparison/reviews.json"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0002",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-06T08:38:51.470157Z",
+                "finished_at": "2026-09-06T08:38:51.510296Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0002-1gbp83n8/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0002-1gbp83n8/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "pass",
+              "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            }
+          ],
+          "verdict": "pass"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "closure": {
+            "verification_id": "V0002",
+            "contract_revision": 2,
+            "cycle": 1,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-06T08:38:51.598788Z"
+          },
+          "verification_id": "V0002"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "contract_revision": 2,
+          "contract_drift": false,
+          "verification": {
+            "id": "V0002",
+            "contract_revision": 2,
+            "cycle": 1,
+            "created_at": "2026-09-06T08:38:51.511591Z",
+            "rctl_version": "0.2.0",
+            "result_text": "---\nschema_version: 1\ntask_id: retained-comparison\ncontract_revision: 2\nassessment: not_supported\n---\n\n# Synthetic comparison result\n\n## Outcome\n\nC1 does not meet the promotion rule. Its error is higher than B0, and the gain is −0.03 absolute error units, below the required +0.01.\n\n## Evidence\n\nThe supplied [metrics](evidence/metrics.json) are B0 = 0.20 and C1 = 0.23. [Derived evidence](evidence/derived.json) records 0.20 − 0.23 = −0.03 and no promotion. The example [arithmetic check](check_arithmetic.py) can reproduce this relation. This fixture does not claim a completed rctl verification run.\n\n## Deviations\n\nNone in the specified synthetic assessment; the threshold and inputs are unchanged.\n\n## Next action\n\nRetain B0 within this fictional comparison and close the assessment after both required checks pass. There is no authorized extra experiment.\n\n## Limitations\n\nAll observations are synthetic aggregates. They establish no real model performance, prediction quality, uncertainty, or general scientific conclusion.\n",
+            "observed_files": [
+              {
+                "path": "tasks/retained-comparison/evidence/metrics.json",
+                "observation": "present",
+                "size_bytes": 150,
+                "mtime_ns": 1788604070804813834
+              },
+              {
+                "path": "tasks/retained-comparison/evidence/derived.json",
+                "observation": "present",
+                "size_bytes": 63,
+                "mtime_ns": 1788604070805172669
+              },
+              {
+                "path": "tasks/retained-comparison/check_arithmetic.py",
+                "observation": "present",
+                "size_bytes": 878,
+                "mtime_ns": 1788604070805455337
+              },
+              {
+                "path": "tasks/retained-comparison/result.md",
+                "observation": "present",
+                "size_bytes": 1037,
+                "mtime_ns": 1788683931169268550
+              },
+              {
+                "path": "tasks/retained-comparison/.rctl/checks/V0002-1gbp83n8/AC-01.stdout",
+                "observation": "present",
+                "size_bytes": 53,
+                "mtime_ns": 1788683931502131156
+              },
+              {
+                "path": "tasks/retained-comparison/.rctl/checks/V0002-1gbp83n8/AC-01.stderr",
+                "observation": "present",
+                "size_bytes": 0,
+                "mtime_ns": 1788683931470480136
+              }
+            ],
+            "external_refs": [],
+            "subject_issues": [],
+            "checks": [
+              {
+                "criterion_id": "AC-01",
+                "method": "command",
+                "verdict": "pass",
+                "rationale": "Declared command exited 0.",
+                "evidence_refs": [
+                  "evidence/metrics.json",
+                  "evidence/derived.json"
+                ],
+                "execution": {
+                  "argv": [
+                    "uv",
+                    "run",
+                    "--offline",
+                    "--no-project",
+                    "python",
+                    "check_arithmetic.py"
+                  ],
+                  "cwd": "tasks/retained-comparison",
+                  "started_at": "2026-09-06T08:38:51.470157Z",
+                  "finished_at": "2026-09-06T08:38:51.510296Z",
+                  "exit_code": 0,
+                  "timed_out": false,
+                  "error": null,
+                  "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0002-1gbp83n8/AC-01.stdout",
+                  "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0002-1gbp83n8/AC-01.stderr"
+                }
+              },
+              {
+                "criterion_id": "AC-02",
+                "method": "review",
+                "verdict": "pass",
+                "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+                "evidence_refs": [
+                  "result.md",
+                  "evidence/metrics.json",
+                  "evidence/derived.json"
+                ],
+                "reviewer": "agent"
+              }
+            ],
+            "verdict": "pass",
+            "review_input_text": "{\"schema_version\": 1, \"task_id\": \"retained-comparison\", \"contract_revision\": 2, \"checks\": [{\"criterion_id\": \"AC-02\", \"verdict\": \"pass\", \"reviewer\": \"agent\", \"rationale\": \"Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.\", \"evidence_refs\": [\"result.md\", \"evidence/metrics.json\", \"evidence/derived.json\"]}]}"
+          },
+          "currentness": "current",
+          "historical_closure": {
+            "verification_id": "V0002",
+            "contract_revision": 2,
+            "cycle": 1,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-06T08:38:51.598788Z"
+          },
+          "next_action": "Reopen with a reason before revising accepted work."
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "reopen",
+        "tasks/retained-comparison",
+        "--reason",
+        "Recheck retained evidence"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "cycle": 2
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 4,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {},
+        "error": {
+          "code": "VERIFICATION_STALE",
+          "message": "Verification predates the current cycle; verify again.",
+          "next_action": "Restore/update the task materials and verify again."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison",
+        "--reviews",
+        "tasks/retained-comparison/reviews.json"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0003",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-06T08:38:51.947546Z",
+                "finished_at": "2026-09-06T08:38:51.988784Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0003-9t2nt39w/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0003-9t2nt39w/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "pass",
+              "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            }
+          ],
+          "verdict": "pass"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "closure": {
+            "verification_id": "V0003",
+            "contract_revision": 2,
+            "cycle": 2,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-06T08:38:52.077465Z"
+          },
+          "verification_id": "V0003"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "context",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "contract_revision": 2,
+          "contract_drift": false,
+          "verification": {
+            "id": "V0003",
+            "verdict": "pass",
+            "contract_revision": 2,
+            "cycle": 2
+          },
+          "currentness": "current",
+          "historical_closure": {
+            "verification_id": "V0003",
+            "contract_revision": 2,
+            "cycle": 2,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-06T08:38:52.077465Z"
+          },
+          "next_action": "Reopen with a reason before revising accepted work.",
+          "available": true,
+          "context": "Task: retained-comparison\nPhase: closed; governing revision: 2\nVerification: V0003: pass; applicability: current; historical closure: V0003 (cycle 2, not_supported)\nNext action: Reopen with a reason before revising accepted work.\ncontract.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/contract.md\nstate.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/state.md\nresult.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/result.md\n.rctl/record.json: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/.rctl/record.json\nProject orientation: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/research/README.md\n\nGoverning contract (includes criteria):\n---\nschema_version: 1\ntask_id: retained-comparison\ntitle: Inspect a synthetic retained error comparison\nkind: analysis\ncriteria:\n  - id: AC-01\n    requirement: The recorded gain and promotion label follow the frozen arithmetic rule.\n    evidence_refs: [evidence/metrics.json, evidence/derived.json]\n    failure_action: Correct the derived arithmetic before closing the assessment.\n    method:\n      type: command\n      argv: [uv, run, --offline, --no-project, python, check_arithmetic.py]\n      timeout_seconds: 30\n      inputs: [check_arithmetic.py, evidence/metrics.json, evidence/derived.json]\n  - id: AC-02\n    requirement: The result applies the frozen rule and confines its claims to synthetic aggregate evidence.\n    evidence_refs: [result.md, evidence/metrics.json, evidence/derived.json]\n    failure_action: Revise the interpretation or leave the assessment unresolved.\n    method:\n      type: review\n      reviewer: either\n---\n\n# Synthetic comparison contract\n\n## Question\n\nDoes the supplied candidate meet the fixed improvement rule against the supplied baseline?\n\n## Scope\n\nInspect only the synthetic aggregate observations. Baseline B0 and candidate C1 use the same fictional evaluation set. This task recomputes one error difference; it does not reproduce predictions, training, or uncertainty estimates.\n\n## Constraints\n\nError is lower-is-better. Gain is B0 error minus C1 error. Promotion requires gain at least 0.01 absolute error units. Use the supplied aggregate directly, with no seed selection or alternative aggregation. Budget: local standard-library arithmetic only; no network, dependency download, or new experiment.\n\n## Stop conditions\n\nStop with a bounded answer when arithmetic and interpretation are checked. A negative result is a valid completion. Changing the threshold or collecting new observations requires a separate task. Inconsistent input prevents closure until corrected.\n\nBudget clarification.\n\nHandoff (reported progress):\nNext action: inspect retained evidence.\n"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "integration",
+        "codex",
+        "export",
+        "host-bundle"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "directory": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/host-bundle",
+          "host": "codex",
+          "entrypoint": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/rctl",
+          "files": [
+            "hooks.json",
+            "research-task/SKILL.md",
+            "research-task/agents/openai.yaml",
+            "research-task/references/graphify.md",
+            "research-task/references/workspace.md",
+            "README.md"
+          ]
+        },
+        "error": null,
+        "warnings": []
+      }
+    }
+  ],
+  "shared_experiment_record": {
+    "schema_version": 1,
+    "task_id": "native-experiment",
+    "phase": "closed",
+    "cycle": 1,
+    "contracts": [
+      {
+        "revision": 1,
+        "text": "---\nschema_version: 1\ntask_id: native-experiment\ntitle: Check a retained synthetic negative comparison\nkind: analysis\ncriteria:\n- id: AC-01\n  requirement: Recompute the retained synthetic gain and promotion decision.\n  evidence_refs:\n  - evidence/metrics.json\n  - evidence/derived.json\n  failure_action: Correct arithmetic or leave the claim unresolved.\n  method:\n    type: command\n    argv:\n    - /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python\n    - check_arithmetic.py\n    timeout_seconds: 10\n    inputs:\n    - check_arithmetic.py\n    - evidence/metrics.json\n    - evidence/derived.json\n- id: AC-02\n  requirement: Inspect comparability and confine the negative claim to synthetic aggregates.\n  evidence_refs:\n  - result.md\n  - evidence/metrics.json\n  - evidence/derived.json\n  failure_action: Correct interpretation or leave review unresolved.\n  method:\n    type: review\n    reviewer: either\n- id: AC-03\n  requirement: The domain result has completed provenance and evidence fields.\n  evidence_refs:\n  - result.md\n  failure_action: Fill missing domain evidence fields.\n  method:\n    type: command\n    argv:\n    - /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python\n    - validate-result.py\n    - .\n    timeout_seconds: 10\n    inputs:\n    - validate-result.py\n    - contract.md\n    - result.md\n---\n\n# Experiment contract\n\n## Question\n\n- Question: Does the retained candidate meet the +0.01 gain rule?\n- Origin type: supplied\n- Origin ID: rctl-synthetic-fixture\n- Experiment role: method_comparison\n- Null or anti-win condition: Baseline minus candidate below +0.01 declines promotion.\n\n## Scope\n\n- Baseline and source: Invented error 0.20 from evidence/metrics.json.\n- Intervention: Compare invented candidate error 0.23.\n- Dataset and split: Retained synthetic aggregates; no dataset or split.\n- Metric and evaluator: Lower error is better; check_arithmetic.py uses decimal arithmetic.\n- Seeds and aggregation policy: No seeds or population aggregation; gain must be at least +0.01.\n- Expected evidence locations: evidence/metrics.json and evidence/derived.json\n\n## Constraints\n\n- Total budget: Local arithmetic and structure checks only; no training.\n- Authorization and data boundaries: Disposable local synthetic fixture, no external writes.\n\n## Stop conditions\n\nStop after the declared local checks; failures require correction before closure.\nA negative result closes when arithmetic and interpretation pass. Unknown review cannot close.\n\n## Run Matrix\n\n| Run | Role | Configuration | Seeds | Budget | Expected evidence | Contract revision |\n| --- | --- | --- | --- | --- | --- | --- |\n| retained-input | synthetic smoke | metrics.json | none | local only | evidence/derived.json | 1 |\n\n## Amendments\n\nUse rctl amend before dependent work; retain prior agreement in rctl's revision history.\nDescribe changed values, reason, and comparability impact here. None at initial revision.\n",
+        "reason": "Initial contract",
+        "recorded_at": "2026-09-06T08:38:49.034223Z"
+      }
+    ],
+    "verifications": [
+      {
+        "id": "V0001",
+        "contract_revision": 1,
+        "cycle": 1,
+        "created_at": "2026-09-06T08:38:49.249197Z",
+        "rctl_version": "0.2.0",
+        "result_text": "---\nschema_version: 1\ntask_id: native-experiment\ncontract_revision: 1\nassessment: not_supported\n---\n\n# Experiment result\n\n## Outcome\n\n- Supported claim: Synthetic gain is -0.03, below +0.01; decline promotion.\n- Mechanism tested: not_applicable\n\n## Evidence\n\n- Actual run IDs: retained-input; no newly trained model\n- Commands, configs, and code state: check_arithmetic.py and evidence/metrics.json copied from the rctl fixture\n- Evidence references: evidence/metrics.json and evidence/derived.json\n- Failed or null runs: No training runs; the synthetic comparison is negative.\n- Aggregation: Single retained synthetic aggregate; no population inference.\n- Baseline relation: 0.20 baseline versus 0.23 candidate error, lower is better.\n- Comparability: Same invented metric and threshold; this is a fixture, not research performance evidence.\n\n## Deviations\n\n- Material amendments: none; revision 1\n- Deviations: none\n\n## Next action\n\n- Next action: Stop after current checks and review pass.\n- Reopen condition: A changed fixture or a new scientific task.\n- Durable promotions: none\n\n## Limitations\n\n- Claims not made: No model superiority, training validity, dataset inference, or host-delivery claim.\n",
+        "observed_files": [
+          {
+            "path": "tasks/native-experiment/evidence/metrics.json",
+            "observation": "present",
+            "size_bytes": 150,
+            "mtime_ns": 1788604070804813834
+          },
+          {
+            "path": "tasks/native-experiment/evidence/derived.json",
+            "observation": "present",
+            "size_bytes": 63,
+            "mtime_ns": 1788604070805172669
+          },
+          {
+            "path": "tasks/native-experiment/check_arithmetic.py",
+            "observation": "present",
+            "size_bytes": 878,
+            "mtime_ns": 1788683928818703145
+          },
+          {
+            "path": "tasks/native-experiment/result.md",
+            "observation": "present",
+            "size_bytes": 1204,
+            "mtime_ns": 1788683929045764337
+          },
+          {
+            "path": "tasks/native-experiment/validate-result.py",
+            "observation": "present",
+            "size_bytes": 5259,
+            "mtime_ns": 1788683928819702563
+          },
+          {
+            "path": "tasks/native-experiment/contract.md",
+            "observation": "present",
+            "size_bytes": 2939,
+            "mtime_ns": 1788683928818366686
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stdout",
+            "observation": "present",
+            "size_bytes": 53,
+            "mtime_ns": 1788683929157195428
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1788683929132720923
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stdout",
+            "observation": "present",
+            "size_bytes": 100,
+            "mtime_ns": 1788683929208887321
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1788683929171200789
+          }
+        ],
+        "external_refs": [],
+        "subject_issues": [],
+        "checks": [
+          {
+            "criterion_id": "AC-01",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "execution": {
+              "argv": [
+                "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                "check_arithmetic.py"
+              ],
+              "cwd": "tasks/native-experiment",
+              "started_at": "2026-09-06T08:38:49.132344Z",
+              "finished_at": "2026-09-06T08:38:49.170460Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stdout",
+              "stderr_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stderr"
+            }
+          },
+          {
+            "criterion_id": "AC-02",
+            "method": "review",
+            "verdict": "unknown",
+            "rationale": "Required review is missing.",
+            "evidence_refs": [
+              "result.md",
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "reviewer": null
+          },
+          {
+            "criterion_id": "AC-03",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "result.md"
+            ],
+            "execution": {
+              "argv": [
+                "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                "validate-result.py",
+                "."
+              ],
+              "cwd": "tasks/native-experiment",
+              "started_at": "2026-09-06T08:38:49.171029Z",
+              "finished_at": "2026-09-06T08:38:49.247985Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stdout",
+              "stderr_ref": "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stderr"
+            }
+          }
+        ],
+        "verdict": "unknown"
+      },
+      {
+        "id": "V0002",
+        "contract_revision": 1,
+        "cycle": 1,
+        "created_at": "2026-09-06T08:38:49.555390Z",
+        "rctl_version": "0.2.0",
+        "result_text": "---\nschema_version: 1\ntask_id: native-experiment\ncontract_revision: 1\nassessment: not_supported\n---\n\n# Experiment result\n\n## Outcome\n\n- Supported claim: Synthetic gain is -0.03, below +0.01; decline promotion.\n- Mechanism tested: not_applicable\n\n## Evidence\n\n- Actual run IDs: retained-input; no newly trained model\n- Commands, configs, and code state: check_arithmetic.py and evidence/metrics.json copied from the rctl fixture\n- Evidence references: evidence/metrics.json and evidence/derived.json\n- Failed or null runs: No training runs; the synthetic comparison is negative.\n- Aggregation: Single retained synthetic aggregate; no population inference.\n- Baseline relation: 0.20 baseline versus 0.23 candidate error, lower is better.\n- Comparability: Same invented metric and threshold; this is a fixture, not research performance evidence.\n\n## Deviations\n\n- Material amendments: none; revision 1\n- Deviations: none\n\n## Next action\n\n- Next action: Stop after current checks and review pass.\n- Reopen condition: A changed fixture or a new scientific task.\n- Durable promotions: none\n\n## Limitations\n\n- Claims not made: No model superiority, training validity, dataset inference, or host-delivery claim.\n",
+        "observed_files": [
+          {
+            "path": "tasks/native-experiment/evidence/metrics.json",
+            "observation": "present",
+            "size_bytes": 150,
+            "mtime_ns": 1788604070804813834
+          },
+          {
+            "path": "tasks/native-experiment/evidence/derived.json",
+            "observation": "present",
+            "size_bytes": 63,
+            "mtime_ns": 1788604070805172669
+          },
+          {
+            "path": "tasks/native-experiment/check_arithmetic.py",
+            "observation": "present",
+            "size_bytes": 878,
+            "mtime_ns": 1788683928818703145
+          },
+          {
+            "path": "tasks/native-experiment/result.md",
+            "observation": "present",
+            "size_bytes": 1204,
+            "mtime_ns": 1788683929045764337
+          },
+          {
+            "path": "tasks/native-experiment/validate-result.py",
+            "observation": "present",
+            "size_bytes": 5259,
+            "mtime_ns": 1788683928819702563
+          },
+          {
+            "path": "tasks/native-experiment/contract.md",
+            "observation": "present",
+            "size_bytes": 2939,
+            "mtime_ns": 1788683928818366686
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stdout",
+            "observation": "present",
+            "size_bytes": 53,
+            "mtime_ns": 1788683929467177407
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1788683929441479648
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stdout",
+            "observation": "present",
+            "size_bytes": 100,
+            "mtime_ns": 1788683929514683249
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1788683929478736471
+          }
+        ],
+        "external_refs": [],
+        "subject_issues": [],
+        "checks": [
+          {
+            "criterion_id": "AC-01",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "execution": {
+              "argv": [
+                "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                "check_arithmetic.py"
+              ],
+              "cwd": "tasks/native-experiment",
+              "started_at": "2026-09-06T08:38:49.441150Z",
+              "finished_at": "2026-09-06T08:38:49.477858Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stdout",
+              "stderr_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stderr"
+            }
+          },
+          {
+            "criterion_id": "AC-02",
+            "method": "review",
+            "verdict": "unknown",
+            "rationale": "Synthetic negative test: review intentionally unresolved.",
+            "evidence_refs": [
+              "result.md",
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "reviewer": "agent"
+          },
+          {
+            "criterion_id": "AC-03",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "result.md"
+            ],
+            "execution": {
+              "argv": [
+                "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                "validate-result.py",
+                "."
+              ],
+              "cwd": "tasks/native-experiment",
+              "started_at": "2026-09-06T08:38:49.478584Z",
+              "finished_at": "2026-09-06T08:38:49.554133Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stdout",
+              "stderr_ref": "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stderr"
+            }
+          }
+        ],
+        "verdict": "unknown",
+        "review_input_text": "{\"schema_version\": 1, \"task_id\": \"native-experiment\", \"contract_revision\": 1, \"checks\": [{\"criterion_id\": \"AC-02\", \"reviewer\": \"agent\", \"verdict\": \"unknown\", \"rationale\": \"Synthetic negative test: review intentionally unresolved.\", \"evidence_refs\": [\"result.md\", \"evidence/metrics.json\", \"evidence/derived.json\"]}]}"
+      },
+      {
+        "id": "V0003",
+        "contract_revision": 1,
+        "cycle": 1,
+        "created_at": "2026-09-06T08:38:49.861062Z",
+        "rctl_version": "0.2.0",
+        "result_text": "---\nschema_version: 1\ntask_id: native-experiment\ncontract_revision: 1\nassessment: not_supported\n---\n\n# Experiment result\n\n## Outcome\n\n- Supported claim: Synthetic gain is -0.03, below +0.01; decline promotion.\n- Mechanism tested: not_applicable\n\n## Evidence\n\n- Actual run IDs: retained-input; no newly trained model\n- Commands, configs, and code state: check_arithmetic.py and evidence/metrics.json copied from the rctl fixture\n- Evidence references: evidence/metrics.json and evidence/derived.json\n- Failed or null runs: No training runs; the synthetic comparison is negative.\n- Aggregation: Single retained synthetic aggregate; no population inference.\n- Baseline relation: 0.20 baseline versus 0.23 candidate error, lower is better.\n- Comparability: Same invented metric and threshold; this is a fixture, not research performance evidence.\n\n## Deviations\n\n- Material amendments: none; revision 1\n- Deviations: none\n\n## Next action\n\n- Next action: Stop after current checks and review pass.\n- Reopen condition: A changed fixture or a new scientific task.\n- Durable promotions: none\n\n## Limitations\n\n- Claims not made: No model superiority, training validity, dataset inference, or host-delivery claim.\n",
+        "observed_files": [
+          {
+            "path": "tasks/native-experiment/evidence/metrics.json",
+            "observation": "present",
+            "size_bytes": 150,
+            "mtime_ns": 1788604070804813834
+          },
+          {
+            "path": "tasks/native-experiment/evidence/derived.json",
+            "observation": "present",
+            "size_bytes": 53,
+            "mtime_ns": 1788683929661667118
+          },
+          {
+            "path": "tasks/native-experiment/check_arithmetic.py",
+            "observation": "present",
+            "size_bytes": 878,
+            "mtime_ns": 1788683928818703145
+          },
+          {
+            "path": "tasks/native-experiment/result.md",
+            "observation": "present",
+            "size_bytes": 1204,
+            "mtime_ns": 1788683929045764337
+          },
+          {
+            "path": "tasks/native-experiment/validate-result.py",
+            "observation": "present",
+            "size_bytes": 5259,
+            "mtime_ns": 1788683928819702563
+          },
+          {
+            "path": "tasks/native-experiment/contract.md",
+            "observation": "present",
+            "size_bytes": 2939,
+            "mtime_ns": 1788683928818366686
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stdout",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1788683929740030062
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stderr",
+            "observation": "present",
+            "size_bytes": 594,
+            "mtime_ns": 1788683929773848252
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stdout",
+            "observation": "present",
+            "size_bytes": 100,
+            "mtime_ns": 1788683929818273006
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1788683929782060602
+          }
+        ],
+        "external_refs": [],
+        "subject_issues": [],
+        "checks": [
+          {
+            "criterion_id": "AC-01",
+            "method": "command",
+            "verdict": "fail",
+            "rationale": "Declared command exited 1.",
+            "evidence_refs": [
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "execution": {
+              "argv": [
+                "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                "check_arithmetic.py"
+              ],
+              "cwd": "tasks/native-experiment",
+              "started_at": "2026-09-06T08:38:49.739714Z",
+              "finished_at": "2026-09-06T08:38:49.780950Z",
+              "exit_code": 1,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stdout",
+              "stderr_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stderr"
+            }
+          },
+          {
+            "criterion_id": "AC-02",
+            "method": "review",
+            "verdict": "pass",
+            "rationale": "Fixture review: 0.20 - 0.23 = -0.03 is below the fixed +0.01 threshold; result declines promotion and limits its claim to invented aggregates without training or population inference.",
+            "evidence_refs": [
+              "result.md",
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "reviewer": "agent"
+          },
+          {
+            "criterion_id": "AC-03",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "result.md"
+            ],
+            "execution": {
+              "argv": [
+                "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                "validate-result.py",
+                "."
+              ],
+              "cwd": "tasks/native-experiment",
+              "started_at": "2026-09-06T08:38:49.781901Z",
+              "finished_at": "2026-09-06T08:38:49.859722Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stdout",
+              "stderr_ref": "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stderr"
+            }
+          }
+        ],
+        "verdict": "fail",
+        "review_input_text": "{\"schema_version\": 1, \"task_id\": \"native-experiment\", \"contract_revision\": 1, \"checks\": [{\"criterion_id\": \"AC-02\", \"reviewer\": \"agent\", \"verdict\": \"pass\", \"rationale\": \"Fixture review: 0.20 - 0.23 = -0.03 is below the fixed +0.01 threshold; result declines promotion and limits its claim to invented aggregates without training or population inference.\", \"evidence_refs\": [\"result.md\", \"evidence/metrics.json\", \"evidence/derived.json\"]}]}"
+      },
+      {
+        "id": "V0004",
+        "contract_revision": 1,
+        "cycle": 1,
+        "created_at": "2026-09-06T08:38:50.162895Z",
+        "rctl_version": "0.2.0",
+        "result_text": "---\nschema_version: 1\ntask_id: native-experiment\ncontract_revision: 1\nassessment: not_supported\n---\n\n# Experiment result\n\n## Outcome\n\n- Supported claim: Synthetic gain is -0.03, below +0.01; decline promotion.\n- Mechanism tested: not_applicable\n\n## Evidence\n\n- Actual run IDs: retained-input; no newly trained model\n- Commands, configs, and code state: check_arithmetic.py and evidence/metrics.json copied from the rctl fixture\n- Evidence references: evidence/metrics.json and evidence/derived.json\n- Failed or null runs: No training runs; the synthetic comparison is negative.\n- Aggregation: Single retained synthetic aggregate; no population inference.\n- Baseline relation: 0.20 baseline versus 0.23 candidate error, lower is better.\n- Comparability: Same invented metric and threshold; this is a fixture, not research performance evidence.\n\n## Deviations\n\n- Material amendments: none; revision 1\n- Deviations: none\n\n## Next action\n\n- Next action: Stop after current checks and review pass.\n- Reopen condition: A changed fixture or a new scientific task.\n- Durable promotions: none\n\n## Limitations\n\n- Claims not made: No model superiority, training validity, dataset inference, or host-delivery claim.\n",
+        "observed_files": [
+          {
+            "path": "tasks/native-experiment/evidence/metrics.json",
+            "observation": "present",
+            "size_bytes": 150,
+            "mtime_ns": 1788604070804813834
+          },
+          {
+            "path": "tasks/native-experiment/evidence/derived.json",
+            "observation": "present",
+            "size_bytes": 63,
+            "mtime_ns": 1788683929965952460
+          },
+          {
+            "path": "tasks/native-experiment/check_arithmetic.py",
+            "observation": "present",
+            "size_bytes": 878,
+            "mtime_ns": 1788683928818703145
+          },
+          {
+            "path": "tasks/native-experiment/result.md",
+            "observation": "present",
+            "size_bytes": 1204,
+            "mtime_ns": 1788683929045764337
+          },
+          {
+            "path": "tasks/native-experiment/validate-result.py",
+            "observation": "present",
+            "size_bytes": 5259,
+            "mtime_ns": 1788683928819702563
+          },
+          {
+            "path": "tasks/native-experiment/contract.md",
+            "observation": "present",
+            "size_bytes": 2939,
+            "mtime_ns": 1788683928818366686
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-01.stdout",
+            "observation": "present",
+            "size_bytes": 53,
+            "mtime_ns": 1788683930067919991
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-01.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1788683930045044363
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-03.stdout",
+            "observation": "present",
+            "size_bytes": 100,
+            "mtime_ns": 1788683930124472685
+          },
+          {
+            "path": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-03.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1788683930087036028
+          }
+        ],
+        "external_refs": [],
+        "subject_issues": [],
+        "checks": [
+          {
+            "criterion_id": "AC-01",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "execution": {
+              "argv": [
+                "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                "check_arithmetic.py"
+              ],
+              "cwd": "tasks/native-experiment",
+              "started_at": "2026-09-06T08:38:50.044737Z",
+              "finished_at": "2026-09-06T08:38:50.086002Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-01.stdout",
+              "stderr_ref": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-01.stderr"
+            }
+          },
+          {
+            "criterion_id": "AC-02",
+            "method": "review",
+            "verdict": "pass",
+            "rationale": "Fixture review: 0.20 - 0.23 = -0.03 is below the fixed +0.01 threshold; result declines promotion and limits its claim to invented aggregates without training or population inference.",
+            "evidence_refs": [
+              "result.md",
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "reviewer": "agent"
+          },
+          {
+            "criterion_id": "AC-03",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "result.md"
+            ],
+            "execution": {
+              "argv": [
+                "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/venv/bin/python",
+                "validate-result.py",
+                "."
+              ],
+              "cwd": "tasks/native-experiment",
+              "started_at": "2026-09-06T08:38:50.086868Z",
+              "finished_at": "2026-09-06T08:38:50.161694Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-03.stdout",
+              "stderr_ref": "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-03.stderr"
+            }
+          }
+        ],
+        "verdict": "pass",
+        "review_input_text": "{\"schema_version\": 1, \"task_id\": \"native-experiment\", \"contract_revision\": 1, \"checks\": [{\"criterion_id\": \"AC-02\", \"reviewer\": \"agent\", \"verdict\": \"pass\", \"rationale\": \"Fixture review: 0.20 - 0.23 = -0.03 is below the fixed +0.01 threshold; result declines promotion and limits its claim to invented aggregates without training or population inference.\", \"evidence_refs\": [\"result.md\", \"evidence/metrics.json\", \"evidence/derived.json\"]}]}"
+      }
+    ],
+    "closures": [
+      {
+        "verification_id": "V0004",
+        "contract_revision": 1,
+        "cycle": 1,
+        "assessment": "not_supported",
+        "closed_at": "2026-09-06T08:38:50.253475Z"
+      }
+    ],
+    "lifecycle": [
+      {
+        "action": "begin",
+        "reason": "Initial contract",
+        "recorded_at": "2026-09-06T08:38:49.034223Z"
+      },
+      {
+        "action": "close",
+        "reason": "Current verification passed",
+        "recorded_at": "2026-09-06T08:38:50.253475Z"
+      }
+    ]
+  },
+  "generated_hook_adapter_responses": {
+    "SessionStart": {
+      "hookSpecificOutput": {
+        "hookEventName": "SessionStart",
+        "additionalContext": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nNext action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\ncontract.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/contract.md\nstate.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/state.md\nresult.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/result.md\n.rctl/record.json: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/.rctl/record.json\nProject orientation: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/research/README.md\n\nGoverning contract (includes criteria):\n---\nschema_version: 1\ntask_id: retained-comparison\ntitle: Inspect a synthetic retained error comparison\nkind: analysis\ncriteria:\n  - id: AC-01\n    requirement: The recorded gain and promotion label follow the frozen arithmetic rule.\n    evidence_refs: [evidence/metrics.json, evidence/derived.json]\n    failure_action: Correct the derived arithmetic before closing the assessment.\n    method:\n      type: command\n      argv: [uv, run, --offline, --no-project, python, check_arithmetic.py]\n      timeout_seconds: 30\n      inputs: [check_arithmetic.py, evidence/metrics.json, evidence/derived.json]\n  - id: AC-02\n    requirement: The result applies the frozen rule and confines its claims to synthetic aggregate evidence.\n    evidence_refs: [result.md, evidence/metrics.json, evidence/derived.json]\n    failure_action: Revise the interpretation or leave the assessment unresolved.\n    method:\n      type: review\n      reviewer: either\n---\n\n# Synthetic comparison contract\n\n## Question\n\nDoes the supplied candidate meet the fixed improvement rule against the supplied baseline?\n\n## Scope\n\nInspect only the synthetic aggregate observations. Baseline B0 and candidate C1 use the same fictional evaluation set. This task recomputes one error difference; it does not reproduce predictions, training, or uncertainty estimates.\n\n## Constraints\n\nError is lower-is-better. Gain is B0 error minus C1 error. Promotion requires gain at least 0.01 absolute error units. Use the supplied aggregate directly, with no seed selection or alternative aggregation. Budget: local standard-library arithmetic only; no network, dependency download, or new experiment.\n\n## Stop conditions\n\nStop with a bounded answer when arithmetic and interpretation are checked. A negative result is a valid completion. Changing the threshold or collecting new observations requires a separate task. Inconsistent input prevents closure until corrected.\n\nHandoff (reported progress):\nNext action: inspect retained evidence.\n"
+      }
+    },
+    "UserPromptSubmit": {
+      "hookSpecificOutput": {
+        "hookEventName": "UserPromptSubmit",
+        "additionalContext": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nNext action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\ncontract.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/contract.md\nstate.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/state.md\nresult.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/result.md\n.rctl/record.json: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/retained-comparison/.rctl/record.json\nProject orientation: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/research/README.md\n\nHandoff (reported progress):\nNext action: inspect retained evidence.\n"
+      }
+    }
+  },
+  "execution_logs": {
+    "tasks/retained-comparison/.rctl/checks/V0001-0x6lbxra/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0001-0x6lbxra/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0002-1gbp83n8/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0002-1gbp83n8/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0003-9t2nt39w/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0003-9t2nt39w/AC-01.stderr": "",
+    "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-01.stderr": "",
+    "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stdout": "OK experiment structure and candidate lineage only; rctl verify and evidence review remain required\n",
+    "tasks/native-experiment/.rctl/checks/V0001-gg7wxhz3/AC-03.stderr": "",
+    "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-01.stderr": "",
+    "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stdout": "OK experiment structure and candidate lineage only; rctl verify and evidence review remain required\n",
+    "tasks/native-experiment/.rctl/checks/V0002-hsh5xs1t/AC-03.stderr": "",
+    "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stdout": "",
+    "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-01.stderr": "Traceback (most recent call last):\n  File \"/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/native-experiment/check_arithmetic.py\", line 21, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-l0b9ohtw/project/tasks/native-experiment/check_arithmetic.py\", line 16, in main\n    assert derived[\"promote\"] is (gain >= Decimal(metrics[\"minimum_gain\"])), \"Promotion contradicts the frozen threshold\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Promotion contradicts the frozen threshold\n",
+    "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stdout": "OK experiment structure and candidate lineage only; rctl verify and evidence review remain required\n",
+    "tasks/native-experiment/.rctl/checks/V0003-_5z9unjt/AC-03.stderr": "",
+    "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-01.stderr": "",
+    "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-03.stdout": "OK experiment structure and candidate lineage only; rctl verify and evidence review remain required\n",
+    "tasks/native-experiment/.rctl/checks/V0004-dk0xy2hl/AC-03.stderr": ""
+  }
+}

@@ -76,13 +76,30 @@ UniqueLoader.add_constructor(
 )
 
 
-def resource_text(directory, name):
-    resource = files("rctl").joinpath(directory, name)
-    # Editable installs import src/rctl; wheel installs carry these resources.
+def resource_directory(directory):
+    resource = files("rctl").joinpath(directory)
+    # Editable installs import src/rctl; wheels carry the same resources.
     source_root = Path(__file__).resolve().parents[2]
-    if not resource.is_file() and (source_root / "pyproject.toml").is_file():
-        resource = source_root / directory / name
-    return resource.read_text(encoding="utf-8")
+    if not resource.is_dir() and (source_root / "pyproject.toml").is_file():
+        resource = source_root / directory
+    return resource
+
+
+def resource_text(directory, name):
+    return resource_directory(directory).joinpath(name).read_text(encoding="utf-8")
+
+
+def resource_tree(directory):
+    """Return packaged UTF-8 scaffold files, including dotfiles."""
+    def walk(parent, prefix=""):
+        for item in sorted(parent.iterdir(), key=lambda item: item.name):
+            name = prefix + item.name
+            if item.is_dir():
+                yield from walk(item, name + "/")
+            else:
+                yield name, item.read_text(encoding="utf-8")
+
+    return dict(walk(resource_directory(directory)))
 
 
 def sections(body):

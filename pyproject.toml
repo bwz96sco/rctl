@@ -1,6 +1,6 @@
 [project]
 name = "rctl"
-version = "0.1.0"
+version = "0.2.0"
 description = "Local research contracts, evidence verification, and task closure"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -28,7 +28,7 @@ packages = ["src/rctl"]
 include = ["/src", "/schemas", "/templates", "/skills", "/tests", "/examples", "/README.md", "/pyproject.toml", "/uv.lock"]
 
 [tool.uv]
-cache-keys = [{ file = "pyproject.toml" }, { file = "src/**/*.py" }, { file = "schemas/*.json" }, { file = "templates/*.md" }, { file = "skills/**/*" }]
+cache-keys = [{ file = "pyproject.toml" }, { file = "src/**/*.py" }, { file = "schemas/*.json" }, { file = "templates/**/*" }, { file = "skills/**/*" }]
 
 [tool.ruff]
 target-version = "py311"

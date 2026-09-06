@@ -130,6 +130,16 @@ Keep context within 8,000 Unicode characters by default. Preserve task identity,
 
 ## 9. Error and preservation behavior
 
-Initialization creates only a new task directory and its contract draft; an existing destination is an error. Commands preserve unrelated files. Read and syntax failures name the file and corrective action without dumping its contents. Unknown schema versions reject writes. Root/path selection errors never fall back to another project.
+`task new` creates only a new task directory and its contract draft; an existing destination is an error. Commands preserve unrelated files. Read and syntax failures name the file and corrective action without dumping its contents. Unknown schema versions reject writes. Root/path selection errors never fall back to another project.
 
-No global configuration, scientific knowledge files, shared skill repository, or live Trellis task is changed by core commands. See [INTEGRATION](INTEGRATION.md) for separately invoked host setup and [READINESS](READINESS.md#limitations) for the guarantee boundary.
+Task lifecycle commands do not change global configuration, scientific knowledge files, the shared skill repository, or live Trellis tasks. Project init creates missing orientation and integration files as specified below. See [INTEGRATION](INTEGRATION.md) for separately invoked host setup and [READINESS](READINESS.md#limitations) for the guarantee boundary.
+
+## 10. Project initialization (v0.2)
+
+`init` operates on the existing explicitly selected project root. It creates `tasks/`, the five `research/` orientation templates, `.agents/skills/research-task/`, and `.rctl/project.json` with schema version 1 and a nullable project-relative `vault` path. This is static configuration, not a task record or implicit current-task selection. The CLI remains usable without initialization.
+
+`--vault PATH` selects an in-root directory outside control directories. A new vault receives packaged note templates and ownership instructions; an existing directory is associated without modifying its contents. Omitting the option preserves an existing binding; an explicitly different binding is rejected before writes, with manual reviewed migration required. Unknown manifest fields/versions reject initialization.
+
+All intended paths are checked before writing. Existing regular files are preserved and listed, including customized orientation or host files; file/directory collisions and paths outside the selected root reject the operation. Missing files use exclusive creation. A failed filesystem operation may leave an incomplete scaffold; rerunning fills missing project files without replacing earlier content. A partially created vault needs explicit repair because existing vault contents are never populated automatically. Existing files are not certified compatible merely because they are preserved.
+
+`--codex` creates missing `.codex/hooks.json`, `.codex/config.toml`, and project-local loading instructions using the installed entrypoint. Existing host files are preserved and named as needing review; initialization does not merge definitions, grant trust, change global config, start a host, or run a task. Repeated initialization must not change task records or file contents. The local task skill points to packaged workspace guidance for Git/data boundaries, legacy migration, and optional vault use.

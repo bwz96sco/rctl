@@ -26,6 +26,9 @@ def parser():
     result.add_argument("--format", choices=("text", "json"), default="text")
     result.add_argument("--version", action="version", version=f"rctl {__version__}")
     commands = result.add_subparsers(dest="command", required=True)
+    initialize = commands.add_parser("init", help="Create missing project scaffolding.")
+    initialize.add_argument("--vault")
+    initialize.add_argument("--codex", action="store_true")
     integration = commands.add_parser("integration").add_subparsers(
         dest="host", required=True
     )
@@ -73,6 +76,10 @@ def parser():
 
 def dispatch(args):
     root = project_root(args.root)
+    if args.command == "init":
+        from .initialize import initialize
+
+        return initialize(root, args.vault, args.codex)
     if args.command == "integration":
         from .integration import export_codex
 

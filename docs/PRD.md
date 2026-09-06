@@ -1,12 +1,12 @@
-# rctl v0.1 Product Requirements
+# rctl Product Requirements
 
-Baseline: 2026-09-05. This defines the first implementation, not a shipped release.
+Baseline: 2026-09-05. The v0.1 release is complete; the user-authorized v0.2 increment adds project initialization and research-skill migration.
 
 ## Problem and evidence
 
 A research agent can start without settling what would count as done, lose the current agreement across sessions, or report completion after checking document structure rather than the underlying evidence. The operator then has to reconstruct scope and repeat the verification request.
 
-The retained Pinyin-VSR pilot demonstrated a smaller useful loop: a contract, optional handoff, result, local task skill, and context hook supported two fresh sessions and a correct negative closeout. The existing `research-experiment` skill already contains open and close gates, but its task plumbing is Trellis-specific. Its result validator checks structure and lineage; substantive evidence review remains a separate responsibility. See [sources](SOURCES.md).
+The retained Pinyin-VSR pilot demonstrated a smaller useful loop: a contract, optional handoff, result, local task skill, and context hook supported two fresh sessions and a correct negative closeout. The pre-migration `research-experiment` skill contained open and close gates with Trellis-specific task plumbing; v0.2 moves that integration to native rctl tasks. Its result validator checks structure and lineage; substantive evidence review remains a separate responsibility. See [sources](SOURCES.md).
 
 ## Intended user and outcome
 
@@ -36,6 +36,8 @@ Ship a local Python CLI, readable task templates, small machine records, command
 | R-10 | Task selection is session-local and explicit; ambiguous or missing selection is visible. | A reminder does not silently route to another task. |
 | R-11 | Core commands work without a host, skill, framework, network, or LLM. | Research records remain useful from a normal terminal. |
 | R-12 | Host installation is reviewable, preserves unrelated configuration, and has real delivery evidence. | Copied configuration is not mistaken for working integration. |
+| R-13 | Repeatable project initialization creates missing orientation, task-skill, and optional vault/host files while preserving existing content and explicit vault selection. | A new project has one discoverable entry point without manual template copying. |
+| R-14 | Domain skills use native task contracts/results and retain domain-specific evidence checks without maintaining a competing task lifecycle. | Existing research workflows can use rctl without conflicting state files. |
 
 ## Typical use
 

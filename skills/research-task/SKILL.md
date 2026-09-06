@@ -1,11 +1,13 @@
 ---
 name: research-task
-description: Start, resume, verify, or close a bounded research task managed by rctl, preserving its contract, evidence, amendments, and cross-session handoff.
+description: Initialize a research workspace or start, resume, verify, or close a bounded research task managed by rctl, preserving its contract, evidence, amendments, and cross-session handoff.
 ---
 
 # Research task
 
 Use the selected rctl task as the owner of live work. Read its `contract.md`, optional `state.md`, existing `result.md`, and `rctl status TASK` before dependent work. A hook reminder is a bounded view; follow its source paths when details or warnings affect the next action. Root and task selection are explicit (`--root`/`RCTL_PROJECT_ROOT`, `TASK`/`RCTL_TASK_PATH` for context).
+
+For initialization, vault use, Git/data boundaries, or migration, first read [references/workspace.md](references/workspace.md). `rctl init [--vault PATH] [--codex]` creates missing scaffolding in the selected existing root. Inspect `.rctl/project.json` for the bound vault; no global current-task pointer is created. Advice and bounded mechanical edits may stay inline when no managed task is needed.
 
 ## Agreement and execution
 
@@ -13,7 +15,7 @@ For a new task, fill the draft contract's question, scope, constraints, stop con
 
 Choose tools and execution order within the agreement. Declare checker scripts, helper files, and preexisting data as command inputs. Use bounded local validation commands; analysis generation precedes verification. New remote jobs require separate authority. An unfavorable finding is a valid outcome, not a reason to expand the budget or weaken criteria.
 
-Before work governed by a material contract change, use `amend TASK --reason TEXT`; retain the earlier agreement. A different scientific question belongs in a new task. Appropriate scientific/domain skills may guide methods and validation, while rctl continues to own this task's lifecycle: keep contract/result/state paths and rctl commands even if a consulted skill assumes Trellis or another framework. Structural validators establish structure; actual execution and evidence inspection support the research claim.
+Before work governed by a material contract change, use `amend TASK --reason TEXT`; retain the earlier agreement. A different scientific question belongs in a new task. Appropriate scientific/domain skills may guide methods and validation, while rctl continues to own this task's lifecycle: use the domain skill for scientific methods and evidence, and research-task for contract/result/state paths and lifecycle commands. Structural validators establish structure; actual execution and evidence inspection support the research claim.
 
 ## Evidence and closure
 

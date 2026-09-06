@@ -1,8 +1,8 @@
 # Development Readiness
 
-Updated: 2026-09-06. Target: rctl v0.1.0 local release.
+Updated: 2026-09-06. Target: rctl v0.2.0 local release.
 
-**M1–M4 complete.** All release cases have observed evidence in [RELEASE-VERIFICATION](RELEASE-VERIFICATION.md). The original preparation record below remains historical; it is distinct from implementation and real-host acceptance.
+**M1–M5 complete.** Initialization and shared-skill migration are recorded in [M5-VERIFICATION](M5-VERIFICATION.md). All release cases have observed evidence in [RELEASE-VERIFICATION](RELEASE-VERIFICATION.md). The original preparation record below remains historical; it is distinct from implementation and real-host acceptance.
 
 ## Preparation completion criteria
 
@@ -42,7 +42,9 @@ Manual consistency review checked phase versus assessment, amendment/reopen inva
 - M3: packaged task skill, adapter/export, official protocol recheck, and actual delivery; [verification](M3-VERIFICATION.md).
 - M4: new real analysis across two fresh sessions, full suite, installed-package walkthrough, and release matrix; [verification](RELEASE-VERIFICATION.md).
 
-Shared-skill changes, live task migration, and remote publication were not part of this release.
+- M5: project init, packaged vault/workspace guidance, and shared-skill migration; [verification](M5-VERIFICATION.md).
+
+M5 includes authorized shared-source changes. Live research-task migration and remote publication remain outside this increment.
 
 ## Limitations
 
@@ -54,3 +56,15 @@ Shared-skill changes, live task migration, and remote publication were not part 
 6. Local source citations depend on this workstation's paths. Self-contained source summaries and synthetic fixtures permit implementation elsewhere, but the original historical evidence must be obtained separately for independent pilot auditing.
 7. v0.1.0 is tested on macOS arm64 with CPython 3.11.11 and 3.13.2. Linux and other runtimes remain untested targets. Local Git work was authorized during implementation; no remote repository or host/global configuration was created or changed.
 8. Version 0.1.0 implements M1–M4 and accepts the existing schema-1 records. The real release task analyzes retained host observations; it does not establish training, remote execution, or quantified research-performance benefit. Placeholder rejection detects the bundled contract template markers; scientific adequacy requires evidence-based judgment. Timeout tests establish termination of the launched local process group; interrupted-verification tests exercise SIGINT. Detached jobs are outside the checker contract, and SIGKILL/power-loss recovery is not established by those interruption tests.
+
+9. Init preserves existing files and does not merge host configuration or upgrade customized
+skills/templates. A bound vault cannot be silently changed; review its manifest explicitly.
+Filesystem failure can leave partial scaffolding; existing vaults always require explicit
+repair. No live research projects were migrated. Global research-task discovery is not
+installed; each initialized project gets its own skill.
+10. Shared-repository blanket validation has pre-existing failures in native invocation
+metadata, two oversized/incomplete third-party skills, and the smart-search snapshot digest.
+Existing synthesis edits also disagree with older text assertions. M5 preserves those
+changes and reports targeted migration checks separately; see its verification record.
+11. v0.2 accepts schema-1 task records. Historical closure remains readable, but a v0.1
+verification cannot newly close a task under v0.2 without fresh verification, per SPEC.

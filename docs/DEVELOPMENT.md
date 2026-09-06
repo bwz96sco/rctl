@@ -45,3 +45,7 @@ Shared-skill updates, moving a live project to rctl, renaming this checkout dire
 ## Changes during implementation
 
 Routine internal choices may be resolved locally. If a discovery changes scope, acceptance semantics, file ownership, or the CLI contract, update the owning document and affected examples/tests before dependent implementation. Preserve a failed host setup as evidence and document the supported replacement. Do not add a new framework, validation score loop, or service merely to satisfy an imagined future use.
+
+## M5 — Project initialization and shared-skill migration (v0.2)
+
+Authorized on 2026-09-06. Implement `rctl init`, move setup/vault assets and workspace guidance into the rctl distribution, retire the shared setup entrypoint, and migrate experiment/training/adapter/review references. Preserve the user's existing synthesis edits and all live research tasks. Exit evidence: A-21–A-24, relevant packaging/regression checks, shared-skill validators, and a migrated-task execution walkthrough. Commit rctl and the shared skills repository separately.
