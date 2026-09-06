@@ -14,7 +14,7 @@ def bounded(text, budget, source):
     return text[: budget - len(suffix)] + suffix
 
 
-def context(task, budget=DEFAULT_BUDGET):
+def context(task, budget=DEFAULT_BUDGET, compact=False):
     status, warnings = task.status()
     record = task.read_record()
     report = status["verification"]
@@ -59,7 +59,9 @@ def context(task, budget=DEFAULT_BUDGET):
         "\nHandoff (reported progress):\n",
     )
     remaining = budget - len(header) - sum(map(len, labels))
-    if remaining < 100:
+    if compact:
+        reminder = bounded(header + labels[1] + handoff, budget, paths["state.md"])
+    elif remaining < 100:
         reminder = bounded(header, budget, paths["contract.md"])
     else:
         contract_budget = min(len(contract_text), remaining // 2)

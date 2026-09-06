@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "task_id": "hook-loading-compatibility",
+  "contract_revision": 2,
+  "checks": [
+    {
+      "criterion_id": "AC-02",
+      "verdict": "pass",
+      "reviewer": "agent",
+      "rationale": "Second-session agent evidence review, after directly inspecting the revision-2 contract, result, derived analysis, analysis script, independent checker, and all three routes' launch arguments, event streams, receipts, finals, summaries, prompts, and stderr. Inline has one SessionStart and one UserPromptSubmit receipt, both bound to host session 01a07578-3f7e-7550-9472-8a0db586b725; its final reports retained-comparison, active, B0, and C1. Project and none have normalized empty receipt inputs, summary receipt_count 0, and NO_RCTL_REMINDER finals consistent with host agent-message events. All summaries report exit 0. Thus the baseline and disabled control satisfy the fixed rule while project lacks complete delivery: not_supported is correct. Launch metadata records Codex CLI 0.153.4 and the isolated flags stated in result.md, including ignore-user-config, ephemeral workspace-write execution, disabled plugins/apps, invocation-only hook trust for inline/project, and the explicit project trust override without inline hook definitions. Hook-trust warning events are not delivery evidence. The result attributes support only to tested inline delivery and absence to this project launch, explicitly leaves root cause unidentified, and does not generalize to reliability, other versions, persisted installation, resume/compaction, or model performance. Original project configuration is not retained for independent inspection; the result acknowledges this boundary. Synthetic B0/C1 markers are treated solely as delivery evidence. This pass is an evidence-based agent judgment, not an operator identity assertion or proof of broader compatibility; AC-01 execution remains the independent machine check.",
+      "evidence_refs": [
+        "contract.md",
+        "result.md",
+        "evidence/analysis.json",
+        "evidence/inline/launch.json",
+        "evidence/inline/events.jsonl",
+        "evidence/inline/receipts.jsonl",
+        "evidence/inline/final.txt",
+        "evidence/project/launch.json",
+        "evidence/project/events.jsonl",
+        "evidence/project/receipts.jsonl",
+        "evidence/project/final.txt",
+        "evidence/none/launch.json",
+        "evidence/none/events.jsonl",
+        "evidence/none/receipts.jsonl",
+        "evidence/none/final.txt",
+        "evidence/inline/summary.json",
+        "evidence/project/summary.json",
+        "evidence/none/summary.json",
+        "evidence/inline/prompt.txt",
+        "evidence/project/prompt.txt",
+        "evidence/none/prompt.txt",
+        "evidence/inline/stderr.txt",
+        "evidence/project/stderr.txt",
+        "evidence/none/stderr.txt",
+        "analyze.py",
+        "check_analysis.py"
+      ]
+    }
+  ]
+}

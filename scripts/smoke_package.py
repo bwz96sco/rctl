@@ -1,6 +1,6 @@
 """Run a built wheel in an isolated environment and non-Git project.
 
-Usage: uv run scripts/smoke_package.py dist/rctl-0.1.0a2-py3-none-any.whl
+Usage: uv run scripts/smoke_package.py dist/rctl-0.1.0-py3-none-any.whl
 """
 
 import json
@@ -126,6 +126,8 @@ def main():
         cli("close", "tasks/retained-comparison")
         assert cli("context", "tasks/retained-comparison")["data"]["phase"] == "closed"
         assert not (project / ".git").exists()
+        cli("integration", "codex", "export", "host-bundle")
+        assert (project / "host-bundle/research-task/SKILL.md").is_file()
         resource_check = subprocess.run(
             [
                 str(python),

@@ -1,6 +1,6 @@
 # rctl v0.1 CLI Contract
 
-All local task commands in the table are implemented through M2, including `verify`, `close`, `reopen`, and `cancel`. Only `integration codex export` remains an M3 target and is not exposed yet. See [M2 verification](M2-VERIFICATION.md) for observed behavior.
+All commands below are implemented in v0.1.0. See [release verification](RELEASE-VERIFICATION.md) for local execution and host delivery evidence.
 
 ## Global arguments and output
 
@@ -54,6 +54,10 @@ Malformed contract/result/review input fails before report creation. A missing d
 | `integration codex export DIRECTORY` | Write a new integration bundle for the selected project root. Refuse existing destination; do not modify live host configuration. | Bundle files only |
 
 All task arguments are required except the documented `context` case. `--reason` must contain non-whitespace text. There is no unrestricted status setter, force-close, approval command, project database initializer, or remote execution command.
+
+## Internal host command
+
+`rctl [--root PATH] hook codex` reads host JSON from stdin and returns raw Codex hook JSON, independently of `--format`. It does not use the ordinary CLI envelope. Supported events provide bounded additional context; unsupported or malformed input returns `{}`. Adapter failures exit 0, with diagnostics on stderr where applicable. See [INTEGRATION](INTEGRATION.md) for payloads, task selection, receipt logging, and budgets. Global options such as `--root` precede the subcommand.
 
 ## Terminal walkthrough
 

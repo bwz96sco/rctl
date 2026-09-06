@@ -1,0 +1,7 @@
+Saved the handoff via `rctl checkpoint` in [state.md](/Users/zhangbowen/Projects/rctl/.work/release-task/tasks/hook-loading-compatibility/state.md).
+
+Implemented `analyze.py` and generated `evidence/analysis.json`; the offline run exited 0. Assessment: **`not_supported`**—inline delivered both required reminders; project and disabled-control routes delivered none.
+
+The task remains **active**, revision 2, with no verification. The next fresh session must prepare `result.md`, complete the evidence review, verify, and perform guarded closeout. Raw evidence, contract, and independent checker remain unchanged.
+
+**Limitations:** The observations do not establish why project-file delivery was absent or generalize beyond the tested launches.

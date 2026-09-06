@@ -1,0 +1,6 @@
+{"type":"thread.started","thread_id":"01a07578-3f7e-7550-9472-8a0db586b725"}
+{"type":"item.completed","item":{"id":"item_0","type":"error","message":"`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."}}
+{"type":"item.completed","item":{"id":"item_1","type":"error","message":"`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."}}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_2","type":"agent_message","text":"Task: `retained-comparison`\nPhase: active\nNext action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\n\nHandoff next action: inspect retained baseline B0 and candidate C1 before interpretation."}}
+{"type":"turn.completed","usage":{"input_tokens":17678,"cached_input_tokens":10496,"cache_write_input_tokens":0,"output_tokens":52,"reasoning_output_tokens":0}}

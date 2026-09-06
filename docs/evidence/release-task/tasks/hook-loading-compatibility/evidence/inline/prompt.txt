@@ -1,0 +1,1 @@
+This is a bounded reminder-delivery probe. Before any tool use, report the task identity, phase, and next action supplied by an rctl hook reminder in your context. If none was delivered, reply NO_RCTL_REMINDER. Do not inspect files, use tools, or perform the research task.

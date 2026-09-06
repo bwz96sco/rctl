@@ -1,0 +1,6 @@
+{
+  "mode": "inline",
+  "exit_code": 0,
+  "receipt_count": 2,
+  "final": "Task: `retained-comparison`\nPhase: active\nNext action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\n\nHandoff next action: inspect retained baseline B0 and candidate C1 before interpretation."
+}

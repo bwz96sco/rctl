@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Task"
+  short_description: "Manage research contracts, evidence, and handoffs"
+  default_prompt: "Use $research-task to continue the selected rctl task from its contract and handoff."

@@ -1,0 +1,5 @@
+Closed revision 2 successfully with assessment **`not_supported`**: inline delivered the reminder with two receipts; project and disabled control had none.
+
+Verification `V0001` passed AC-01 (checker exit 0) and AC-02 (evidence review); the closure guard succeeded.
+
+The finding applies only to the retained Codex CLI 0.153.4 launches and recorded settings. Root cause remains undetermined.

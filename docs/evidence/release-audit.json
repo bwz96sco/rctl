@@ -1,0 +1,78 @@
+{
+  "package_version": "0.1.0",
+  "phase": "closed",
+  "contract_revision": 2,
+  "amendment_recorded_at": "2026-09-06T06:52:58.123419Z",
+  "verification": {
+    "id": "V0001",
+    "verdict": "pass",
+    "created_at": "2026-09-06T06:58:31.676093Z"
+  },
+  "closure": {
+    "verification_id": "V0001",
+    "contract_revision": 2,
+    "cycle": 1,
+    "assessment": "not_supported",
+    "closed_at": "2026-09-06T06:58:44.322759Z"
+  },
+  "sessions": {
+    "first": {
+      "session_id": "01a0757d-e5c1-7bb0-8d89-c98576255c79",
+      "receipts": [
+        {
+          "event": "SessionStart",
+          "timestamp": "2026-09-06T06:53:03.786122Z",
+          "session_id": "01a0757d-e5c1-7bb0-8d89-c98576255c79"
+        },
+        {
+          "event": "UserPromptSubmit",
+          "timestamp": "2026-09-06T06:53:03.883204Z",
+          "session_id": "01a0757d-e5c1-7bb0-8d89-c98576255c79"
+        }
+      ],
+      "first_message": "I\u2019m using the research-task skill to inspect the retained evidence, derive the comparison, and save a handoff. I\u2019ll leave the task active, with result writing, review, and verification for the next session.\n",
+      "exit_code": 0
+    },
+    "second": {
+      "session_id": "01a07580-c440-76a3-909f-93f6e97b5e19",
+      "receipts": [
+        {
+          "event": "SessionStart",
+          "timestamp": "2026-09-06T06:56:11.773988Z",
+          "session_id": "01a07580-c440-76a3-909f-93f6e97b5e19"
+        },
+        {
+          "event": "UserPromptSubmit",
+          "timestamp": "2026-09-06T06:56:11.866061Z",
+          "session_id": "01a07580-c440-76a3-909f-93f6e97b5e19"
+        }
+      ],
+      "first_message": "The rctl handoff reports that the initial analysis found complete delivery for inline hooks, no delivery for project-file hooks or the disabled control, and a derived `not_supported` assessment. Revision 2 remains active with no result, reviews, verification, or closure. I\u2019ll use the research-task skill to inspect the source evidence and analysis, write the result and review, then verify and close only if the guard succeeds.\n",
+      "exit_code": 0
+    }
+  },
+  "raw_inputs_byte_equal_to_original_probes": [
+    "inline/summary.json",
+    "inline/receipts.jsonl",
+    "inline/final.txt",
+    "inline/prompt.txt",
+    "inline/stderr.txt",
+    "inline/events.jsonl",
+    "inline/launch.json",
+    "project/summary.json",
+    "project/final.txt",
+    "project/prompt.txt",
+    "project/stderr.txt",
+    "project/events.jsonl",
+    "project/launch.json",
+    "none/summary.json",
+    "none/final.txt",
+    "none/prompt.txt",
+    "none/stderr.txt",
+    "none/events.jsonl",
+    "none/launch.json"
+  ],
+  "archive_status": "current; closed",
+  "evidence_judgment": "A18/A20 pass: event inspection shows one analysis run in session one and one declared verification in session two; no new probes, criteria changes, network execution, or global config writes. Negative result retained. Missing-file searches and corrected CLI syntax are preserved.",
+  "audit_corrections": "Removed assumptions that the first host item must be an agent message (host trust warnings precede it) and that handoff wording must include initial analysis. Corrected checks bind the actual derived assessment in context and require the first agent message before tool invocation."
+}

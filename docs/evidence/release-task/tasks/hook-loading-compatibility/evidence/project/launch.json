@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "codex",
+    "-a",
+    "never",
+    "exec",
+    "--ignore-user-config",
+    "--disable",
+    "plugins",
+    "--disable",
+    "apps",
+    "--skip-git-repo-check",
+    "--ephemeral",
+    "--sandbox",
+    "workspace-write",
+    "--cd",
+    "/Users/zhangbowen/Projects/rctl/.work/host-project",
+    "--json",
+    "--color",
+    "never",
+    "--output-last-message",
+    "/Users/zhangbowen/Projects/rctl/docs/evidence/host-probes/project/final.txt",
+    "--enable",
+    "hooks",
+    "--dangerously-bypass-hook-trust",
+    "-c",
+    "projects.\"/Users/zhangbowen/Projects/rctl/.work/host-project\".trust_level=\"trusted\"",
+    "-"
+  ],
+  "cwd": "/Users/zhangbowen/Projects/rctl/.work/host-project",
+  "host_version": "codex-cli 0.153.4",
+  "environment_overrides": {
+    "RCTL_PROJECT_ROOT": "/Users/zhangbowen/Projects/rctl/.work/host-project",
+    "RCTL_TASK_PATH": "tasks/retained-comparison",
+    "RCTL_HOOK_LOG": "hook-receipts.jsonl"
+  },
+  "trust_scope": "Reviewed generated hooks; invocation-only hook trust; no shared config modified."
+}

@@ -1,0 +1,40 @@
+{
+  "argv": [
+    "codex",
+    "-a",
+    "never",
+    "exec",
+    "--ignore-user-config",
+    "--disable",
+    "plugins",
+    "--disable",
+    "apps",
+    "--enable",
+    "hooks",
+    "--skip-git-repo-check",
+    "--ephemeral",
+    "--sandbox",
+    "workspace-write",
+    "--dangerously-bypass-hook-trust",
+    "-c",
+    "hooks.SessionStart=[{\"hooks\" = [{\"type\" = \"command\", \"command\" = \"/Users/zhangbowen/Projects/rctl/.work/release-venv/bin/rctl --root /Users/zhangbowen/Projects/rctl/.work/release-task hook codex\", \"timeout\" = 10, \"additionalContextLimit\" = 8000}]}]",
+    "-c",
+    "hooks.UserPromptSubmit=[{\"hooks\" = [{\"type\" = \"command\", \"command\" = \"/Users/zhangbowen/Projects/rctl/.work/release-venv/bin/rctl --root /Users/zhangbowen/Projects/rctl/.work/release-task hook codex\", \"timeout\" = 10, \"additionalContextLimit\" = 2000}]}]",
+    "--cd",
+    "/Users/zhangbowen/Projects/rctl/.work/release-task",
+    "--json",
+    "--color",
+    "never",
+    "--output-last-message",
+    "/Users/zhangbowen/Projects/rctl/docs/evidence/release-sessions/second/final.txt",
+    "-"
+  ],
+  "cwd": "/Users/zhangbowen/Projects/rctl/.work/release-task",
+  "host_version": "codex-cli 0.153.4",
+  "environment_overrides": {
+    "RCTL_PROJECT_ROOT": "/Users/zhangbowen/Projects/rctl/.work/release-task",
+    "RCTL_TASK_PATH": "tasks/hook-loading-compatibility",
+    "RCTL_HOOK_LOG": "receipts-second.jsonl"
+  },
+  "trust_scope": "Reviewed exported hooks; invocation-only trust; workspace-write; user config/apps/plugins disabled."
+}

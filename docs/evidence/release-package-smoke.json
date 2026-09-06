@@ -1,0 +1,749 @@
+{
+  "ok": true,
+  "python": "3.13.2",
+  "platform": "macOS-26.3-arm64-arm-64bit-Mach-O",
+  "wheel": "rctl-0.1.0-py3-none-any.whl",
+  "versions": {
+    "rctl": "0.1.0",
+    "PyYAML": "6.0.3",
+    "jsonschema": "4.26.0"
+  },
+  "checks": [
+    {
+      "argv": [
+        "task",
+        "new",
+        "tasks/retained-comparison",
+        "--kind",
+        "analysis",
+        "--title",
+        "Installed wheel smoke"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "draft",
+          "contract_path": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/contract.md"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "begin",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 2,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {},
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/contract.md: replace the draft's <...> authoring placeholders before begin/amend.",
+          "next_action": "Correct the input and try again."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "contract",
+        "check",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "check": "structure",
+          "valid": true,
+          "criterion_ids": [
+            "AC-01",
+            "AC-02"
+          ]
+        },
+        "error": null,
+        "warnings": [
+          "Structural validity does not establish scientific adequacy or verification."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "begin",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "checkpoint",
+        "tasks/retained-comparison",
+        "--file",
+        "handoff.md"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "state_path": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/state.md"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "context",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1,
+          "contract_drift": false,
+          "verification": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Prepare the result and required evidence/reviews, then verify; checkpoint to pause.",
+          "available": true,
+          "context": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nNext action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\ncontract.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/contract.md\nstate.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/state.md\nresult.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/result.md\n.rctl/record.json: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/.rctl/record.json\n\nGoverning contract (includes criteria):\n---\nschema_version: 1\ntask_id: retained-comparison\ntitle: Inspect a synthetic retained error comparison\nkind: analysis\ncriteria:\n  - id: AC-01\n    requirement: The recorded gain and promotion label follow the frozen arithmetic rule.\n    evidence_refs: [evidence/metrics.json, evidence/derived.json]\n    failure_action: Correct the derived arithmetic before closing the assessment.\n    method:\n      type: command\n      argv: [uv, run, --offline, --no-project, python, check_arithmetic.py]\n      timeout_seconds: 30\n      inputs: [check_arithmetic.py, evidence/metrics.json, evidence/derived.json]\n  - id: AC-02\n    requirement: The result applies the frozen rule and confines its claims to synthetic aggregate evidence.\n    evidence_refs: [result.md, evidence/metrics.json, evidence/derived.json]\n    failure_action: Revise the interpretation or leave the assessment unresolved.\n    method:\n      type: review\n      reviewer: either\n---\n\n# Synthetic comparison contract\n\n## Question\n\nDoes the supplied candidate meet the fixed improvement rule against the supplied baseline?\n\n## Scope\n\nInspect only the synthetic aggregate observations. Baseline B0 and candidate C1 use the same fictional evaluation set. This task recomputes one error difference; it does not reproduce predictions, training, or uncertainty estimates.\n\n## Constraints\n\nError is lower-is-better. Gain is B0 error minus C1 error. Promotion requires gain at least 0.01 absolute error units. Use the supplied aggregate directly, with no seed selection or alternative aggregation. Budget: local standard-library arithmetic only; no network, dependency download, or new experiment.\n\n## Stop conditions\n\nStop with a bounded answer when arithmetic and interpretation are checked. A negative result is a valid completion. Changing the threshold or collecting new observations requires a separate task. Inconsistent input prevents closure until corrected.\n\nHandoff (reported progress):\nNext action: inspect retained evidence.\n"
+        },
+        "error": null,
+        "warnings": [
+          "No verification has been recorded; structural checks and handoffs do not establish closure."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1,
+          "contract_drift": true,
+          "verification": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Amend the contract with a reason before dependent work."
+        },
+        "error": null,
+        "warnings": [
+          "AMENDMENT_REQUIRED: current contract differs from the governing revision.",
+          "No verification has been recorded; structural checks and handoffs do not establish closure."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "amend",
+        "tasks/retained-comparison",
+        "--reason",
+        "Clarify the existing budget"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 2
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 2,
+          "contract_drift": false,
+          "verification": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Prepare the result and required evidence/reviews, then verify; checkpoint to pause."
+        },
+        "error": null,
+        "warnings": [
+          "No verification has been recorded; structural checks and handoffs do not establish closure."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0001",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-06T06:53:39.848701Z",
+                "finished_at": "2026-09-06T06:53:39.890047Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0001-hil00kjb/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0001-hil00kjb/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Required review is missing.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": null
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Required review is missing.",
+          "next_action": "Revise the interpretation or leave the assessment unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0001",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-06T06:53:39.848701Z",
+                "finished_at": "2026-09-06T06:53:39.890047Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0001-hil00kjb/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0001-hil00kjb/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Required review is missing.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": null
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Required review is missing.",
+          "next_action": "Revise the interpretation or leave the assessment unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison",
+        "--reviews",
+        "tasks/retained-comparison/reviews.json"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0002",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-06T06:53:40.079961Z",
+                "finished_at": "2026-09-06T06:53:40.121178Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0002-qrgw9eui/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0002-qrgw9eui/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "pass",
+              "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            }
+          ],
+          "verdict": "pass"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "closure": {
+            "verification_id": "V0002",
+            "contract_revision": 2,
+            "cycle": 1,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-06T06:53:40.216350Z"
+          },
+          "verification_id": "V0002"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "contract_revision": 2,
+          "contract_drift": false,
+          "verification": {
+            "id": "V0002",
+            "contract_revision": 2,
+            "cycle": 1,
+            "created_at": "2026-09-06T06:53:40.122261Z",
+            "rctl_version": "0.1.0",
+            "result_text": "---\nschema_version: 1\ntask_id: retained-comparison\ncontract_revision: 2\nassessment: not_supported\n---\n\n# Synthetic comparison result\n\n## Outcome\n\nC1 does not meet the promotion rule. Its error is higher than B0, and the gain is −0.03 absolute error units, below the required +0.01.\n\n## Evidence\n\nThe supplied [metrics](evidence/metrics.json) are B0 = 0.20 and C1 = 0.23. [Derived evidence](evidence/derived.json) records 0.20 − 0.23 = −0.03 and no promotion. The example [arithmetic check](check_arithmetic.py) can reproduce this relation. This fixture does not claim a completed rctl verification run.\n\n## Deviations\n\nNone in the specified synthetic assessment; the threshold and inputs are unchanged.\n\n## Next action\n\nRetain B0 within this fictional comparison and close the assessment after both required checks pass. There is no authorized extra experiment.\n\n## Limitations\n\nAll observations are synthetic aggregates. They establish no real model performance, prediction quality, uncertainty, or general scientific conclusion.\n",
+            "observed_files": [
+              {
+                "path": "tasks/retained-comparison/evidence/metrics.json",
+                "observation": "present",
+                "size_bytes": 150,
+                "mtime_ns": 1788604070804813834
+              },
+              {
+                "path": "tasks/retained-comparison/evidence/derived.json",
+                "observation": "present",
+                "size_bytes": 63,
+                "mtime_ns": 1788604070805172669
+              },
+              {
+                "path": "tasks/retained-comparison/check_arithmetic.py",
+                "observation": "present",
+                "size_bytes": 878,
+                "mtime_ns": 1788604070805455337
+              },
+              {
+                "path": "tasks/retained-comparison/result.md",
+                "observation": "present",
+                "size_bytes": 1037,
+                "mtime_ns": 1788677619765059522
+              },
+              {
+                "path": "tasks/retained-comparison/.rctl/checks/V0002-qrgw9eui/AC-01.stdout",
+                "observation": "present",
+                "size_bytes": 53,
+                "mtime_ns": 1788677620113037021
+              },
+              {
+                "path": "tasks/retained-comparison/.rctl/checks/V0002-qrgw9eui/AC-01.stderr",
+                "observation": "present",
+                "size_bytes": 0,
+                "mtime_ns": 1788677620080325310
+              }
+            ],
+            "external_refs": [],
+            "subject_issues": [],
+            "checks": [
+              {
+                "criterion_id": "AC-01",
+                "method": "command",
+                "verdict": "pass",
+                "rationale": "Declared command exited 0.",
+                "evidence_refs": [
+                  "evidence/metrics.json",
+                  "evidence/derived.json"
+                ],
+                "execution": {
+                  "argv": [
+                    "uv",
+                    "run",
+                    "--offline",
+                    "--no-project",
+                    "python",
+                    "check_arithmetic.py"
+                  ],
+                  "cwd": "tasks/retained-comparison",
+                  "started_at": "2026-09-06T06:53:40.079961Z",
+                  "finished_at": "2026-09-06T06:53:40.121178Z",
+                  "exit_code": 0,
+                  "timed_out": false,
+                  "error": null,
+                  "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0002-qrgw9eui/AC-01.stdout",
+                  "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0002-qrgw9eui/AC-01.stderr"
+                }
+              },
+              {
+                "criterion_id": "AC-02",
+                "method": "review",
+                "verdict": "pass",
+                "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+                "evidence_refs": [
+                  "result.md",
+                  "evidence/metrics.json",
+                  "evidence/derived.json"
+                ],
+                "reviewer": "agent"
+              }
+            ],
+            "verdict": "pass",
+            "review_input_text": "{\"schema_version\": 1, \"task_id\": \"retained-comparison\", \"contract_revision\": 2, \"checks\": [{\"criterion_id\": \"AC-02\", \"verdict\": \"pass\", \"reviewer\": \"agent\", \"rationale\": \"Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.\", \"evidence_refs\": [\"result.md\", \"evidence/metrics.json\", \"evidence/derived.json\"]}]}"
+          },
+          "currentness": "current",
+          "historical_closure": {
+            "verification_id": "V0002",
+            "contract_revision": 2,
+            "cycle": 1,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-06T06:53:40.216350Z"
+          },
+          "next_action": "Reopen with a reason before revising accepted work."
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "reopen",
+        "tasks/retained-comparison",
+        "--reason",
+        "Recheck retained evidence"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "cycle": 2
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 4,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {},
+        "error": {
+          "code": "VERIFICATION_STALE",
+          "message": "Verification predates the current cycle; verify again.",
+          "next_action": "Restore/update the task materials and verify again."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison",
+        "--reviews",
+        "tasks/retained-comparison/reviews.json"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0003",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-06T06:53:40.593031Z",
+                "finished_at": "2026-09-06T06:53:40.634242Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0003-u6nb6l1g/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0003-u6nb6l1g/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "pass",
+              "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            }
+          ],
+          "verdict": "pass"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "closure": {
+            "verification_id": "V0003",
+            "contract_revision": 2,
+            "cycle": 2,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-06T06:53:40.731646Z"
+          },
+          "verification_id": "V0003"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "context",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "contract_revision": 2,
+          "contract_drift": false,
+          "verification": {
+            "id": "V0003",
+            "verdict": "pass",
+            "contract_revision": 2,
+            "cycle": 2
+          },
+          "currentness": "current",
+          "historical_closure": {
+            "verification_id": "V0003",
+            "contract_revision": 2,
+            "cycle": 2,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-06T06:53:40.731646Z"
+          },
+          "next_action": "Reopen with a reason before revising accepted work.",
+          "available": true,
+          "context": "Task: retained-comparison\nPhase: closed; governing revision: 2\nVerification: V0003: pass; applicability: current; historical closure: V0003 (cycle 2, not_supported)\nNext action: Reopen with a reason before revising accepted work.\ncontract.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/contract.md\nstate.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/state.md\nresult.md: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/result.md\n.rctl/record.json: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/tasks/retained-comparison/.rctl/record.json\n\nGoverning contract (includes criteria):\n---\nschema_version: 1\ntask_id: retained-comparison\ntitle: Inspect a synthetic retained error comparison\nkind: analysis\ncriteria:\n  - id: AC-01\n    requirement: The recorded gain and promotion label follow the frozen arithmetic rule.\n    evidence_refs: [evidence/metrics.json, evidence/derived.json]\n    failure_action: Correct the derived arithmetic before closing the assessment.\n    method:\n      type: command\n      argv: [uv, run, --offline, --no-project, python, check_arithmetic.py]\n      timeout_seconds: 30\n      inputs: [check_arithmetic.py, evidence/metrics.json, evidence/derived.json]\n  - id: AC-02\n    requirement: The result applies the frozen rule and confines its claims to synthetic aggregate evidence.\n    evidence_refs: [result.md, evidence/metrics.json, evidence/derived.json]\n    failure_action: Revise the interpretation or leave the assessment unresolved.\n    method:\n      type: review\n      reviewer: either\n---\n\n# Synthetic comparison contract\n\n## Question\n\nDoes the supplied candidate meet the fixed improvement rule against the supplied baseline?\n\n## Scope\n\nInspect only the synthetic aggregate observations. Baseline B0 and candidate C1 use the same fictional evaluation set. This task recomputes one error difference; it does not reproduce predictions, training, or uncertainty estimates.\n\n## Constraints\n\nError is lower-is-better. Gain is B0 error minus C1 error. Promotion requires gain at least 0.01 absolute error units. Use the supplied aggregate directly, with no seed selection or alternative aggregation. Budget: local standard-library arithmetic only; no network, dependency download, or new experiment.\n\n## Stop conditions\n\nStop with a bounded answer when arithmetic and interpretation are checked. A negative result is a valid completion. Changing the threshold or collecting new observations requires a separate task. Inconsistent input prevents closure until corrected.\n\nBudget clarification.\n\nHandoff (reported progress):\nNext action: inspect retained evidence.\n"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "integration",
+        "codex",
+        "export",
+        "host-bundle"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "directory": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/project/host-bundle",
+          "host": "codex",
+          "entrypoint": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-y07bc4fy/venv/bin/rctl",
+          "files": [
+            "hooks.json",
+            "research-task/SKILL.md",
+            "research-task/agents/openai.yaml",
+            "README.md"
+          ]
+        },
+        "error": null,
+        "warnings": []
+      }
+    }
+  ],
+  "execution_logs": {
+    "tasks/retained-comparison/.rctl/checks/V0001-hil00kjb/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0001-hil00kjb/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0002-qrgw9eui/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0002-qrgw9eui/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0003-u6nb6l1g/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0003-u6nb6l1g/AC-01.stderr": ""
+  }
+}

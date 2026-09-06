@@ -1,6 +1,6 @@
 [project]
 name = "rctl"
-version = "0.1.0a2"
+version = "0.1.0"
 description = "Local research contracts, evidence verification, and task closure"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -22,12 +22,13 @@ packages = ["src/rctl"]
 [tool.hatch.build.targets.wheel.force-include]
 "schemas" = "rctl/schemas"
 "templates" = "rctl/templates"
+"skills" = "rctl/skills"
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/schemas", "/templates", "/tests", "/examples", "/README.md", "/pyproject.toml", "/uv.lock"]
+include = ["/src", "/schemas", "/templates", "/skills", "/tests", "/examples", "/README.md", "/pyproject.toml", "/uv.lock"]
 
 [tool.uv]
-cache-keys = [{ file = "pyproject.toml" }, { file = "src/**/*.py" }, { file = "schemas/*.json" }, { file = "templates/*.md" }]
+cache-keys = [{ file = "pyproject.toml" }, { file = "src/**/*.py" }, { file = "schemas/*.json" }, { file = "templates/*.md" }, { file = "skills/**/*" }]
 
 [tool.ruff]
 target-version = "py311"

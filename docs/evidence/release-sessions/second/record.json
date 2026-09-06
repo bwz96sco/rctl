@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "task_id": "hook-loading-compatibility",
+  "phase": "closed",
+  "cycle": 1,
+  "contracts": [
+    {
+      "revision": 1,
+      "text": "---\nschema_version: 1\ntask_id: hook-loading-compatibility\ntitle: Assess retained Codex hook-loading compatibility observations\nkind: analysis\ncriteria:\n  - id: AC-01\n    requirement: Derived delivery counts and the assessment follow the fixed three-route comparison rule using actual retained receipts and host outputs.\n    evidence_refs: [evidence/analysis.json, result.md, evidence/inline/events.jsonl, evidence/inline/receipts.jsonl, evidence/inline/final.txt, evidence/project/events.jsonl, evidence/project/final.txt, evidence/none/events.jsonl, evidence/none/final.txt]\n    failure_action: Correct the derived analysis or retain an inconclusive finding if the supplied evidence cannot establish the rule.\n    method:\n      type: command\n      argv: [uv, run, --offline, --no-project, python, check_analysis.py]\n      timeout_seconds: 10\n      inputs: [check_analysis.py, analyze.py, evidence/analysis.json, result.md, evidence/inline/launch.json, evidence/inline/summary.json, evidence/inline/events.jsonl, evidence/inline/receipts.jsonl, evidence/inline/final.txt, evidence/project/launch.json, evidence/project/summary.json, evidence/project/events.jsonl, evidence/project/final.txt, evidence/none/launch.json, evidence/none/summary.json, evidence/none/events.jsonl, evidence/none/final.txt]\n  - id: AC-02\n    requirement: Evidence review establishes which loading route is supported by these launches, separates absent delivery from root cause, and bounds conclusions to the tested host and settings.\n    evidence_refs: [contract.md, result.md, evidence/analysis.json, evidence/inline/launch.json, evidence/inline/events.jsonl, evidence/inline/receipts.jsonl, evidence/inline/final.txt, evidence/project/launch.json, evidence/project/events.jsonl, evidence/project/final.txt, evidence/none/launch.json, evidence/none/events.jsonl, evidence/none/final.txt]\n    failure_action: Revise unsupported interpretation or leave the task active with the unresolved review stated.\n    method:\n      type: review\n      reviewer: either\n---\n\n## Question\n\nDo the retained real Codex CLI 0.153.4 launches establish that project-file hook configuration delivers the same selected-task reminder as invocation-local inline configuration under the tested isolated settings? This bounded analysis is part of the user's request to complete rctl's initial release.\n\n## Scope\n\nAnalyze the supplied real host observations for three routes: inline is the baseline; project-file loading with its recorded project-trust override is the intervention; hooks disabled is the control. Each uses a separate root with the same synthetic task materials and the same no-tool-use delivery prompt. The subject of this analysis is actual host delivery, not the invented metrics inside the smoke task. The results already exist as retained observations; this is not a blinded prospective experiment.\n\nThe evaluation set is exactly the three supplied launches, one per route, without selection or retries. Derive per-route `exit_code`, `receipts_total`, event-count map `events`, sorted host `session_ids`, boolean `model_reports_task`, and boolean `delivery_complete`. `model_reports_task` requires the model final text to contain `retained-comparison`, `active`, `B0`, and `C1`. `delivery_complete` requires host exit 0, both SessionStart and UserPromptSubmit receipts, each receipt bound to that launch's session ID, and model-reported task information. Larger delivery coverage is better. The controls and the deterministic checker define the evaluator; raw receipts and final text remain the evidence.\n\nWrite `evidence/analysis.json` with `routes` keyed by inline/project/none and `assessment`. The comparison is `supported` only if inline and project both have complete delivery and the none control exits 0, has no receipts, and reports NO_RCTL_REMINDER. It is `not_supported` if inline and the control satisfy those conditions while project exits 0 without complete delivery. Otherwise use `inconclusive`. This assessment concerns parity of the tested loading routes, not whether research metrics improved.\n\n## Constraints\n\nFreeze this contract before deriving the analysis. Budget: one local standard-library analysis of the retained artifacts and its declared verification, across two fresh rctl-enabled host sessions. The first session writes a handoff; the second receives it and completes evidence review and guarded closeout. No new host-route probes, network research, training, remote jobs, or global configuration changes are authorized within this analysis task. Keep scripts, derived data, result, and review in this task. Preserve raw observations.\n\nReview launch arguments, actual event streams, receipts, and model outputs before attributing delivery. A missing receipt plus NO_RCTL_REMINDER supports absent observed delivery under those flags; it does not establish why loading failed. One launch per route cannot establish reliability, other versions, ordinary persisted installation, resume/compaction, or comparative model performance. Use rctl for this task's lifecycle even if another skill assumes Trellis.\n\n## Stop conditions\n\nStop after the fixed comparison and review. Negative and bounded inconclusive outcomes may close when the criteria pass. Missing or contradictory evidence remains unresolved; changing the comparison rule or conducting new probes requires an amendment or a separate task. A chat pause leaves the task active; only a successful `rctl close` is managed closure.\n",
+      "reason": "Initial contract",
+      "recorded_at": "2026-09-06T06:51:43.190110Z"
+    },
+    {
+      "revision": 2,
+      "text": "---\nschema_version: 1\ntask_id: hook-loading-compatibility\ntitle: Assess retained Codex hook-loading compatibility observations\nkind: analysis\ncriteria:\n  - id: AC-01\n    requirement: Derived delivery counts and the assessment follow the fixed three-route comparison rule using actual retained receipts and host outputs.\n    evidence_refs: [evidence/analysis.json, result.md, evidence/inline/events.jsonl, evidence/inline/receipts.jsonl, evidence/inline/final.txt, evidence/project/events.jsonl, evidence/project/receipts.jsonl, evidence/project/final.txt, evidence/none/events.jsonl, evidence/none/receipts.jsonl, evidence/none/final.txt]\n    failure_action: Correct the derived analysis or retain an inconclusive finding if the supplied evidence cannot establish the rule.\n    method:\n      type: command\n      argv: [uv, run, --offline, --no-project, python, check_analysis.py]\n      timeout_seconds: 10\n      inputs: [check_analysis.py, analyze.py, evidence/analysis.json, result.md, evidence/inline/launch.json, evidence/inline/summary.json, evidence/inline/events.jsonl, evidence/inline/receipts.jsonl, evidence/inline/final.txt, evidence/project/launch.json, evidence/project/summary.json, evidence/project/events.jsonl, evidence/project/receipts.jsonl, evidence/project/final.txt, evidence/none/launch.json, evidence/none/summary.json, evidence/none/events.jsonl, evidence/none/receipts.jsonl, evidence/none/final.txt]\n  - id: AC-02\n    requirement: Evidence review establishes which loading route is supported by these launches, separates absent delivery from root cause, and bounds conclusions to the tested host and settings.\n    evidence_refs: [contract.md, result.md, evidence/analysis.json, evidence/inline/launch.json, evidence/inline/events.jsonl, evidence/inline/receipts.jsonl, evidence/inline/final.txt, evidence/project/launch.json, evidence/project/events.jsonl, evidence/project/receipts.jsonl, evidence/project/final.txt, evidence/none/launch.json, evidence/none/events.jsonl, evidence/none/receipts.jsonl, evidence/none/final.txt]\n    failure_action: Revise unsupported interpretation or leave the task active with the unresolved review stated.\n    method:\n      type: review\n      reviewer: either\n---\n\n## Question\n\nDo the retained real Codex CLI 0.153.4 launches establish that project-file hook configuration delivers the same selected-task reminder as invocation-local inline configuration under the tested isolated settings? This bounded analysis is part of the user's request to complete rctl's initial release.\n\n## Scope\n\nAnalyze the supplied real host observations for three routes: inline is the baseline; project-file loading with its recorded project-trust override is the intervention; hooks disabled is the control. Each uses a separate root with the same synthetic task materials and the same no-tool-use delivery prompt. The subject of this analysis is actual host delivery, not the invented metrics inside the smoke task. The results already exist as retained observations; this is not a blinded prospective experiment.\n\nFor routes that emitted no receipt file, the retained input contains an explicitly normalized empty `receipts.jsonl`; the original launch summary and model output document the absence. These empty files are analysis inputs, not fabricated hook receipts.\n\nThe evaluation set is exactly the three supplied launches, one per route, without selection or retries. Derive per-route `exit_code`, `receipts_total`, event-count map `events`, sorted host `session_ids`, boolean `model_reports_task`, and boolean `delivery_complete`. `model_reports_task` requires the model final text to contain `retained-comparison`, `active`, `B0`, and `C1`. `delivery_complete` requires host exit 0, both SessionStart and UserPromptSubmit receipts, each receipt bound to that launch's session ID, and model-reported task information. Larger delivery coverage is better. The controls and the deterministic checker define the evaluator; raw receipts and final text remain the evidence.\n\nWrite `evidence/analysis.json` with `routes` keyed by inline/project/none and `assessment`. The comparison is `supported` only if inline and project both have complete delivery and the none control exits 0, has no receipts, and reports NO_RCTL_REMINDER. It is `not_supported` if inline and the control satisfy those conditions while project exits 0 without complete delivery. Otherwise use `inconclusive`. This assessment concerns parity of the tested loading routes, not whether research metrics improved.\n\n## Constraints\n\nFreeze this contract before deriving the analysis. Budget: one local standard-library analysis of the retained artifacts and its declared verification, across two fresh rctl-enabled host sessions. The first session writes a handoff; the second receives it and completes evidence review and guarded closeout. No new host-route probes, network research, training, remote jobs, or global configuration changes are authorized within this analysis task. Keep scripts, derived data, result, and review in this task. Preserve raw observations.\n\nReview launch arguments, actual event streams, receipts, and model outputs before attributing delivery. A missing receipt plus NO_RCTL_REMINDER supports absent observed delivery under those flags; it does not establish why loading failed. One launch per route cannot establish reliability, other versions, ordinary persisted installation, resume/compaction, or comparative model performance. Use rctl for this task's lifecycle even if another skill assumes Trellis.\n\n## Stop conditions\n\nStop after the fixed comparison and review. Negative and bounded inconclusive outcomes may close when the criteria pass. Missing or contradictory evidence remains unresolved; changing the comparison rule or conducting new probes requires an amendment or a separate task. A chat pause leaves the task active; only a successful `rctl close` is managed closure.\n",
+      "reason": "Declare normalized empty receipt inputs for routes with no emitted receipt file, preserving the original absence evidence before analysis.",
+      "recorded_at": "2026-09-06T06:52:58.123419Z"
+    }
+  ],
+  "verifications": [
+    {
+      "id": "V0001",
+      "contract_revision": 2,
+      "cycle": 1,
+      "created_at": "2026-09-06T06:58:31.676093Z",
+      "rctl_version": "0.1.0",
+      "result_text": "---\nschema_version: 1\ntask_id: hook-loading-compatibility\ncontract_revision: 2\nassessment: not_supported\n---\n\n# Retained hook-loading comparison\n\n## Outcome\n\nThe retained launches do not establish project-file delivery parity with invocation-local inline hooks. Inline delivered the selected-task reminder; the project route, with its recorded project-trust override, had no observed delivery. The disabled control behaved as required. Under revision 2's fixed rule, the assessment is `not_supported`.\n\n## Evidence\n\nThe second session inspected `analyze.py`, `evidence/analysis.json`, the supplied independent `check_analysis.py`, and every route's `launch.json`, `summary.json`, `events.jsonl`, `receipts.jsonl`, `final.txt`, `prompt.txt`, and `stderr.txt`. The derived analysis agrees with the raw observations:\n\n| Route | Exit code | Receipts | Receipt event counts | Model reports task | Complete delivery |\n| --- | --- | --- | --- | --- | --- |\n| inline | 0 | 2 | SessionStart: 1; UserPromptSubmit: 1 | true | true |\n| project | 0 | 0 | empty | false | false |\n| none | 0 | 0 | empty | false | false |\n\n`evidence/inline/events.jsonl` identifies session `01a07578-3f7e-7550-9472-8a0db586b725`; both receipts in `evidence/inline/receipts.jsonl` bind to it and identify `tasks/retained-comparison`. `evidence/inline/final.txt` reports `retained-comparison`, `active`, `B0`, and `C1`. Thus all complete-delivery conditions hold for the baseline.\n\n`evidence/project/events.jsonl` identifies session `01a07578-4304-78f0-9367-e60133d2f5d7`; `evidence/none/events.jsonl` identifies session `01a07578-4054-70d0-81d3-68d323aa9054`. Both routes have empty normalized `receipts.jsonl` inputs, zero receipt counts in their `summary.json`, and `NO_RCTL_REMINDER` in their `final.txt`. The normalized inputs represent absence, not emitted receipts. Host agent-message events agree with all three final texts and summary final fields. All stderr files are empty; the event streams show no tool execution. Inline and project both emit hook-trust warnings, which do not establish delivery.\n\nThe three `launch.json` files record Codex CLI 0.153.4, approval `never`, `--ignore-user-config`, disabled plugins/apps, `--skip-git-repo-check`, `--ephemeral`, and `workspace-write`, with separate roots and the same task-path and receipt-log selections. The prompts are identical and prohibit tools. Inline enables hooks with invocation-local SessionStart and UserPromptSubmit definitions (timeout 10; context limits 8000 and 2000). Project enables hooks and supplies an explicit project `trust_level=\"trusted\"` override without inline hook definitions. Both use `--dangerously-bypass-hook-trust`; none disables hooks.\n\nComputed observations in `evidence/analysis.json` come from the first session's single standard-library run: `UV_CACHE_DIR=/Users/zhangbowen/Projects/rctl/.work/release-task/.uv-cache uv run --offline --no-project python analyze.py` (exit 0, recorded in `state.md`). This session inspected that derivation without rerunning it. With a complete inline baseline, a valid disabled control, and successful project exit without complete delivery, the frozen comparison yields `not_supported`.\n\nAC-01's declared command, `uv run --offline --no-project python check_analysis.py`, independently recomputes the retained counts and assessment and checks result agreement. AC-02 in `reviews.json` is an agent evidence judgment about interpretation and scope. Document parsing establishes structure; neither parsing nor a review label substitutes for command execution. Verification outcomes and closure belong to the rctl machine record.\n\n## Deviations\n\nNo changes to revision 2, raw observations, the analysis, or the independent checker. No additional analysis run, host probe, network work, delegation, or global configuration changes. The initial status invocation placed `--root` after the subcommand and was rejected; the corrected invocation succeeded without changing task state. This second session completes the existing handoff's review and verification scope.\n\n## Next action\n\nRun the declared verification with `reviews.json`, inspect both criteria and command logs, and close only if the current report passes and the rctl guard succeeds. Stop at this bounded finding; investigation of root cause or other host settings requires separate authorized work.\n\n## Limitations\n\nMissing receipts together with `NO_RCTL_REMINDER` establish absent observed delivery under these recorded flags, not its root cause. Launch metadata records the intended project-file route; the original project configuration outside this working root was not independently inspected. One retained launch per route cannot establish reliability, other versions, ordinary persisted installation, resume/compaction behavior, or comparative model performance. The observations were already available, not a blinded prospective experiment. Synthetic B0/C1 content serves as a delivery marker and provides no research-performance evidence. Project development documents and schemas are absent from this disposable root; the frozen contract governs this analysis, with the installed CLI's packaged schemas consulted for result/review format only.\n",
+      "observed_files": [
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/analysis.json",
+          "observation": "present",
+          "size_bytes": 832,
+          "mtime_ns": 1788677644407864036
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/result.md",
+          "observation": "present",
+          "size_bytes": 5213,
+          "mtime_ns": 1788677876345409161
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/inline/events.jsonl",
+          "observation": "present",
+          "size_bytes": 937,
+          "mtime_ns": 1788677502087584143
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/inline/receipts.jsonl",
+          "observation": "present",
+          "size_bytes": 4128,
+          "mtime_ns": 1788677502086031973
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/inline/final.txt",
+          "observation": "present",
+          "size_bytes": 229,
+          "mtime_ns": 1788677502086431890
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/project/events.jsonl",
+          "observation": "present",
+          "size_bytes": 715,
+          "mtime_ns": 1788677502090107567
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/project/receipts.jsonl",
+          "observation": "present",
+          "size_bytes": 0,
+          "mtime_ns": 1788677578000772997
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/project/final.txt",
+          "observation": "present",
+          "size_bytes": 16,
+          "mtime_ns": 1788677502089031689
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/none/events.jsonl",
+          "observation": "present",
+          "size_bytes": 361,
+          "mtime_ns": 1788677502092198031
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/none/receipts.jsonl",
+          "observation": "present",
+          "size_bytes": 0,
+          "mtime_ns": 1788677578001250998
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/none/final.txt",
+          "observation": "present",
+          "size_bytes": 16,
+          "mtime_ns": 1788677502091261445
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/check_analysis.py",
+          "observation": "present",
+          "size_bytes": 2434,
+          "mtime_ns": 1788677502119234977
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/analyze.py",
+          "observation": "present",
+          "size_bytes": 2366,
+          "mtime_ns": 1788677637313107242
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/inline/launch.json",
+          "observation": "present",
+          "size_bytes": 1486,
+          "mtime_ns": 1788677502087970436
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/inline/summary.json",
+          "observation": "present",
+          "size_bytes": 310,
+          "mtime_ns": 1788677502085566055
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/project/launch.json",
+          "observation": "present",
+          "size_bytes": 1059,
+          "mtime_ns": 1788677502090397942
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/project/summary.json",
+          "observation": "present",
+          "size_bytes": 94,
+          "mtime_ns": 1788677502088578729
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/none/launch.json",
+          "observation": "present",
+          "size_bytes": 904,
+          "mtime_ns": 1788677502092484531
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/none/summary.json",
+          "observation": "present",
+          "size_bytes": 91,
+          "mtime_ns": 1788677502090880360
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/contract.md",
+          "observation": "present",
+          "size_bytes": 5929,
+          "mtime_ns": 1788677578001776124
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/inline/prompt.txt",
+          "observation": "present",
+          "size_bytes": 273,
+          "mtime_ns": 1788677502086921558
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/project/prompt.txt",
+          "observation": "present",
+          "size_bytes": 273,
+          "mtime_ns": 1788677502089594774
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/none/prompt.txt",
+          "observation": "present",
+          "size_bytes": 273,
+          "mtime_ns": 1788677502091679321
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/inline/stderr.txt",
+          "observation": "present",
+          "size_bytes": 0,
+          "mtime_ns": 1788677502087097017
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/project/stderr.txt",
+          "observation": "present",
+          "size_bytes": 0,
+          "mtime_ns": 1788677502089762441
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/evidence/none/stderr.txt",
+          "observation": "present",
+          "size_bytes": 0,
+          "mtime_ns": 1788677502091854030
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/.rctl/checks/V0001-wek99u3z/AC-01.stdout",
+          "observation": "present",
+          "size_bytes": 97,
+          "mtime_ns": 1788677911633746420
+        },
+        {
+          "path": "tasks/hook-loading-compatibility/.rctl/checks/V0001-wek99u3z/AC-01.stderr",
+          "observation": "present",
+          "size_bytes": 0,
+          "mtime_ns": 1788677911595159110
+        }
+      ],
+      "external_refs": [],
+      "subject_issues": [],
+      "checks": [
+        {
+          "criterion_id": "AC-01",
+          "method": "command",
+          "verdict": "pass",
+          "rationale": "Declared command exited 0.",
+          "evidence_refs": [
+            "evidence/analysis.json",
+            "result.md",
+            "evidence/inline/events.jsonl",
+            "evidence/inline/receipts.jsonl",
+            "evidence/inline/final.txt",
+            "evidence/project/events.jsonl",
+            "evidence/project/receipts.jsonl",
+            "evidence/project/final.txt",
+            "evidence/none/events.jsonl",
+            "evidence/none/receipts.jsonl",
+            "evidence/none/final.txt"
+          ],
+          "execution": {
+            "argv": [
+              "uv",
+              "run",
+              "--offline",
+              "--no-project",
+              "python",
+              "check_analysis.py"
+            ],
+            "cwd": "tasks/hook-loading-compatibility",
+            "started_at": "2026-09-06T06:58:31.594948Z",
+            "finished_at": "2026-09-06T06:58:31.671715Z",
+            "exit_code": 0,
+            "timed_out": false,
+            "error": null,
+            "stdout_ref": "tasks/hook-loading-compatibility/.rctl/checks/V0001-wek99u3z/AC-01.stdout",
+            "stderr_ref": "tasks/hook-loading-compatibility/.rctl/checks/V0001-wek99u3z/AC-01.stderr"
+          }
+        },
+        {
+          "criterion_id": "AC-02",
+          "method": "review",
+          "verdict": "pass",
+          "rationale": "Second-session agent evidence review, after directly inspecting the revision-2 contract, result, derived analysis, analysis script, independent checker, and all three routes' launch arguments, event streams, receipts, finals, summaries, prompts, and stderr. Inline has one SessionStart and one UserPromptSubmit receipt, both bound to host session 01a07578-3f7e-7550-9472-8a0db586b725; its final reports retained-comparison, active, B0, and C1. Project and none have normalized empty receipt inputs, summary receipt_count 0, and NO_RCTL_REMINDER finals consistent with host agent-message events. All summaries report exit 0. Thus the baseline and disabled control satisfy the fixed rule while project lacks complete delivery: not_supported is correct. Launch metadata records Codex CLI 0.153.4 and the isolated flags stated in result.md, including ignore-user-config, ephemeral workspace-write execution, disabled plugins/apps, invocation-only hook trust for inline/project, and the explicit project trust override without inline hook definitions. Hook-trust warning events are not delivery evidence. The result attributes support only to tested inline delivery and absence to this project launch, explicitly leaves root cause unidentified, and does not generalize to reliability, other versions, persisted installation, resume/compaction, or model performance. Original project configuration is not retained for independent inspection; the result acknowledges this boundary. Synthetic B0/C1 markers are treated solely as delivery evidence. This pass is an evidence-based agent judgment, not an operator identity assertion or proof of broader compatibility; AC-01 execution remains the independent machine check.",
+          "evidence_refs": [
+            "contract.md",
+            "result.md",
+            "evidence/analysis.json",
+            "evidence/inline/launch.json",
+            "evidence/inline/events.jsonl",
+            "evidence/inline/receipts.jsonl",
+            "evidence/inline/final.txt",
+            "evidence/project/launch.json",
+            "evidence/project/events.jsonl",
+            "evidence/project/receipts.jsonl",
+            "evidence/project/final.txt",
+            "evidence/none/launch.json",
+            "evidence/none/events.jsonl",
+            "evidence/none/receipts.jsonl",
+            "evidence/none/final.txt",
+            "evidence/inline/summary.json",
+            "evidence/project/summary.json",
+            "evidence/none/summary.json",
+            "evidence/inline/prompt.txt",
+            "evidence/project/prompt.txt",
+            "evidence/none/prompt.txt",
+            "evidence/inline/stderr.txt",
+            "evidence/project/stderr.txt",
+            "evidence/none/stderr.txt",
+            "analyze.py",
+            "check_analysis.py"
+          ],
+          "reviewer": "agent"
+        }
+      ],
+      "verdict": "pass",
+      "review_input_text": "{\n  \"schema_version\": 1,\n  \"task_id\": \"hook-loading-compatibility\",\n  \"contract_revision\": 2,\n  \"checks\": [\n    {\n      \"criterion_id\": \"AC-02\",\n      \"verdict\": \"pass\",\n      \"reviewer\": \"agent\",\n      \"rationale\": \"Second-session agent evidence review, after directly inspecting the revision-2 contract, result, derived analysis, analysis script, independent checker, and all three routes' launch arguments, event streams, receipts, finals, summaries, prompts, and stderr. Inline has one SessionStart and one UserPromptSubmit receipt, both bound to host session 01a07578-3f7e-7550-9472-8a0db586b725; its final reports retained-comparison, active, B0, and C1. Project and none have normalized empty receipt inputs, summary receipt_count 0, and NO_RCTL_REMINDER finals consistent with host agent-message events. All summaries report exit 0. Thus the baseline and disabled control satisfy the fixed rule while project lacks complete delivery: not_supported is correct. Launch metadata records Codex CLI 0.153.4 and the isolated flags stated in result.md, including ignore-user-config, ephemeral workspace-write execution, disabled plugins/apps, invocation-only hook trust for inline/project, and the explicit project trust override without inline hook definitions. Hook-trust warning events are not delivery evidence. The result attributes support only to tested inline delivery and absence to this project launch, explicitly leaves root cause unidentified, and does not generalize to reliability, other versions, persisted installation, resume/compaction, or model performance. Original project configuration is not retained for independent inspection; the result acknowledges this boundary. Synthetic B0/C1 markers are treated solely as delivery evidence. This pass is an evidence-based agent judgment, not an operator identity assertion or proof of broader compatibility; AC-01 execution remains the independent machine check.\",\n      \"evidence_refs\": [\n        \"contract.md\",\n        \"result.md\",\n        \"evidence/analysis.json\",\n        \"evidence/inline/launch.json\",\n        \"evidence/inline/events.jsonl\",\n        \"evidence/inline/receipts.jsonl\",\n        \"evidence/inline/final.txt\",\n        \"evidence/project/launch.json\",\n        \"evidence/project/events.jsonl\",\n        \"evidence/project/receipts.jsonl\",\n        \"evidence/project/final.txt\",\n        \"evidence/none/launch.json\",\n        \"evidence/none/events.jsonl\",\n        \"evidence/none/receipts.jsonl\",\n        \"evidence/none/final.txt\",\n        \"evidence/inline/summary.json\",\n        \"evidence/project/summary.json\",\n        \"evidence/none/summary.json\",\n        \"evidence/inline/prompt.txt\",\n        \"evidence/project/prompt.txt\",\n        \"evidence/none/prompt.txt\",\n        \"evidence/inline/stderr.txt\",\n        \"evidence/project/stderr.txt\",\n        \"evidence/none/stderr.txt\",\n        \"analyze.py\",\n        \"check_analysis.py\"\n      ]\n    }\n  ]\n}\n"
+    }
+  ],
+  "closures": [
+    {
+      "verification_id": "V0001",
+      "contract_revision": 2,
+      "cycle": 1,
+      "assessment": "not_supported",
+      "closed_at": "2026-09-06T06:58:44.322759Z"
+    }
+  ],
+  "lifecycle": [
+    {
+      "action": "begin",
+      "reason": "Initial contract",
+      "recorded_at": "2026-09-06T06:51:43.190110Z"
+    },
+    {
+      "action": "amendment",
+      "reason": "Declare normalized empty receipt inputs for routes with no emitted receipt file, preserving the original absence evidence before analysis.",
+      "recorded_at": "2026-09-06T06:52:58.123419Z"
+    },
+    {
+      "action": "close",
+      "reason": "Current verification passed",
+      "recorded_at": "2026-09-06T06:58:44.322759Z"
+    }
+  ]
+}

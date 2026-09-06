@@ -1,0 +1,38 @@
+{
+  "routes": {
+    "inline": {
+      "exit_code": 0,
+      "receipts_total": 2,
+      "events": {
+        "SessionStart": 1,
+        "UserPromptSubmit": 1
+      },
+      "session_ids": [
+        "01a07578-3f7e-7550-9472-8a0db586b725"
+      ],
+      "model_reports_task": true,
+      "delivery_complete": true
+    },
+    "project": {
+      "exit_code": 0,
+      "receipts_total": 0,
+      "events": {},
+      "session_ids": [
+        "01a07578-4304-78f0-9367-e60133d2f5d7"
+      ],
+      "model_reports_task": false,
+      "delivery_complete": false
+    },
+    "none": {
+      "exit_code": 0,
+      "receipts_total": 0,
+      "events": {},
+      "session_ids": [
+        "01a07578-4054-70d0-81d3-68d323aa9054"
+      ],
+      "model_reports_task": false,
+      "delivery_complete": false
+    }
+  },
+  "assessment": "not_supported"
+}

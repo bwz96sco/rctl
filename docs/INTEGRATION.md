@@ -2,9 +2,9 @@
 
 ## Ownership and reuse
 
-Build the first adapter for Codex. Core commands remain host-neutral. The existing pilot is evidence for invocation-local configuration on Codex CLI 0.153.4; it is not evidence that copying project hooks alone installs a working integration. See [SOURCES](SOURCES.md) and [limitations](READINESS.md#limitations).
+Build the first adapter for Codex. Core commands remain host-neutral. The [new M3 probes](M3-VERIFICATION.md) and [two-session release task](RELEASE-VERIFICATION.md) establish invocation-local delivery on Codex CLI 0.153.4. Copying project hooks alone is not an established working installation. See [SOURCES](SOURCES.md) and [limitations](READINESS.md#limitations).
 
-The release should package one `research-task` skill with these responsibilities: read contract/result/handoff, establish scope within existing authorization, preserve amendments, execute using appropriate domain skills, inspect evidence, invoke verification, and close only after the recorded guard succeeds. It must explicitly separate a chat pause from task closure.
+The release packages one `research-task` skill with these responsibilities: read contract/result/handoff, establish scope within existing authorization, preserve amendments, execute using appropriate domain skills, inspect evidence, invoke verification, and close only after the recorded guard succeeds. It must explicitly separate a chat pause from task closure.
 
 Reuse scientific requirements from `research-experiment` and `research-computation`, and the static knowledge ownership from `research-project-setup`. Do not copy the Trellis-specific lifecycle commands or treat its result-schema validator as general scientific validation. No shared skill file is changed by this preparation or by exporting an integration bundle. The package's local instructions must explain the rctl task ownership when a framework-specific skill is consulted.
 
@@ -16,7 +16,7 @@ Reuse scientific requirements from `research-experiment` and `research-computati
 - `research-task/SKILL.md` and `research-task/agents/openai.yaml`: host-neutral instructions plus native invocation metadata.
 - `README.md`: the tested host version, loading procedure, task-selection environment, removal steps, and the exact scope of the delivery test.
 
-The exporter does not launch a host, alter global configuration, merge a live project config, grant trust, or install a shared skill. During the integration milestone, validate a disposable launch using the exported definitions. Normal persisted project loading is a separate acceptance case. If project loading fails, retain the invocation-local path as the documented supported route; do not label export alone as installation success.
+The exporter does not launch a host, alter global configuration, merge a live project config, grant trust, or install a shared skill. During the integration milestone, validate a disposable launch using the exported definitions. Normal persisted project loading requires separate delivery evidence. If project loading fails, retain the invocation-local path as the documented supported route; do not label export alone as installation success.
 
 ## Adapter interface
 
@@ -38,7 +38,7 @@ The same response shape uses `UserPromptSubmit` for that event. Unsupported even
 
 Cap rendered `SessionStart` context at 8,000 Unicode characters and `UserPromptSubmit` at 2,000, preserving warnings and source paths before excerpts. Configure a 10-second host timeout as the initial setting, not a promised latency. Adapter code delegates to the pure context renderer; no checks or state mutations occur.
 
-The [pilot launch record](SOURCES.md#local-evidence) is the concrete starting reference for invocation-local host configuration. Recheck official protocol documentation through smart-search before host-specific implementation, then record the actual version and working launch syntax in the generated bundle. Current online retrieval failed during preparation; the frozen pilot interface above makes the initial adapter target concrete without asserting universal compatibility.
+The [pilot launch record](SOURCES.md#local-evidence) is the concrete starting reference for invocation-local host configuration. Recheck official protocol documentation through smart-search before host-specific implementation, then record the actual version and working launch syntax in the generated bundle. Online retrieval failed during preparation and succeeded during M3. The [M3 record](M3-VERIFICATION.md#official-source-recheck) retains the official source and actual tested loading procedures.
 
 ## Events deliberately outside v0.1
 

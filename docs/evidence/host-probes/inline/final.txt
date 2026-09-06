@@ -1,0 +1,5 @@
+Task: `retained-comparison`
+Phase: active
+Next action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.
+
+Handoff next action: inspect retained baseline B0 and candidate C1 before interpretation.

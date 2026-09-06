@@ -26,6 +26,16 @@ def parser():
     result.add_argument("--format", choices=("text", "json"), default="text")
     result.add_argument("--version", action="version", version=f"rctl {__version__}")
     commands = result.add_subparsers(dest="command", required=True)
+    integration = commands.add_parser("integration").add_subparsers(
+        dest="host", required=True
+    )
+    export = integration.add_parser("codex").add_subparsers(
+        dest="integration_command", required=True
+    )
+    export.add_parser("export").add_argument("directory")
+    commands.add_parser("hook", help="Internal host reminder adapter.").add_subparsers(
+        dest="host", required=True
+    ).add_parser("codex")
     task = commands.add_parser("task").add_subparsers(
         dest="task_command", required=True
     )
@@ -63,6 +73,10 @@ def parser():
 
 def dispatch(args):
     root = project_root(args.root)
+    if args.command == "integration":
+        from .integration import export_codex
+
+        return export_codex(root, args.directory), []
     task = Task(root, select_task(root, args.task))
     if args.command == "task":
         return task.new(args.kind, args.title), []
@@ -114,6 +128,10 @@ def main(argv=None):
         with redirect_stdout(information):
             args = parser().parse_args(argv)
         json_mode = args.format == "json"
+        if args.command == "hook":
+            from .hooks.codex import main as hook_main
+
+            return hook_main(args.root)
         response["data"], response["warnings"] = dispatch(args)
     except SystemExit as result:
         if result.code:
