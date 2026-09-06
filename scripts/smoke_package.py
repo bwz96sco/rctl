@@ -1,11 +1,12 @@
 """Run a built wheel in an isolated environment and non-Git project.
 
-Usage: uv run scripts/smoke_package.py dist/rctl-0.1.0a1-py3-none-any.whl
+Usage: uv run scripts/smoke_package.py dist/rctl-0.1.0a2-py3-none-any.whl
 """
 
 import json
 import os
 import platform
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -69,6 +70,7 @@ def main():
         cli("begin", "tasks/retained-comparison", expected=2)
         task = project / "tasks/retained-comparison"
         contract = (repo / "examples/retained-comparison/contract.md").read_bytes()
+        shutil.copytree(repo / "examples/retained-comparison", task, dirs_exist_ok=True)
         (task / "contract.md").write_bytes(contract)
         cli("contract", "check", "tasks/retained-comparison")
         cli("begin", "tasks/retained-comparison")
@@ -89,6 +91,40 @@ def main():
         assert (
             cli("status", "tasks/retained-comparison")["data"]["contract_revision"] == 2
         )
+        (task / "result.md").write_text(
+            (task / "result.md")
+            .read_text()
+            .replace("contract_revision: 1", "contract_revision: 2")
+        )
+        reviews = json.loads((task / "reviews.json").read_text())
+        reviews["contract_revision"] = 2
+        (task / "reviews.json").write_text(json.dumps(reviews))
+        cli("verify", "tasks/retained-comparison", expected=5)
+        cli("close", "tasks/retained-comparison", expected=5)
+        cli(
+            "verify",
+            "tasks/retained-comparison",
+            "--reviews",
+            "tasks/retained-comparison/reviews.json",
+        )
+        closure = cli("close", "tasks/retained-comparison")["data"]["closure"]
+        assert closure["assessment"] == "not_supported"
+        assert cli("status", "tasks/retained-comparison")["data"]["phase"] == "closed"
+        cli(
+            "reopen",
+            "tasks/retained-comparison",
+            "--reason",
+            "Recheck retained evidence",
+        )
+        cli("close", "tasks/retained-comparison", expected=4)
+        cli(
+            "verify",
+            "tasks/retained-comparison",
+            "--reviews",
+            "tasks/retained-comparison/reviews.json",
+        )
+        cli("close", "tasks/retained-comparison")
+        assert cli("context", "tasks/retained-comparison")["data"]["phase"] == "closed"
         assert not (project / ".git").exists()
         resource_check = subprocess.run(
             [
@@ -110,6 +146,14 @@ def main():
             text=True,
             check=True,
         )
+        record = json.loads((task / ".rctl/record.json").read_text())
+        execution_logs = {}
+        for report in record["verifications"]:
+            for check in report["checks"]:
+                if check.get("execution"):
+                    for key in ("stdout_ref", "stderr_ref"):
+                        ref = check["execution"][key]
+                        execution_logs[ref] = (project / ref).read_text()
         print(
             json.dumps(
                 {
@@ -119,6 +163,7 @@ def main():
                     "wheel": wheel.name,
                     "versions": json.loads(resource_check.stdout),
                     "checks": results,
+                    "execution_logs": execution_logs,
                 },
                 ensure_ascii=False,
                 indent=2,

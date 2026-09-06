@@ -85,7 +85,7 @@ Paused work stays active, with an optional handoff. Finishing a chat response ne
 1. Parse the governing contract, result, and optional review input. Invalid structural input returns before executing commands or appending a report.
 2. Capture the starting record and contract text, exact result text, and observations of all declared local inputs and local evidence references. Automatically include task-local check scripts when named in `inputs`; the author is responsible for declaring scripts, helper files, and data actually needed by a check.
 3. Execute criteria in contract order. A criterion's command must be an independently runnable check, not a prerequisite-generating pipeline. Continue collecting criteria after a normal failure; do not launch repair/retry loops.
-4. Reobserve inputs and compare contract, result, and record. A material change during checks makes the report `unknown` if the record is unchanged; an intervening record mutation rejects publication to avoid overwriting it.
+4. Reobserve inputs and compare contract, result, and record. A material change during checks prevents a passing report: it is `unknown` unless a criterion failed, in which case the aggregation rule below retains `fail`. An intervening record mutation rejects publication to avoid overwriting it.
 5. Append the completed report atomically. A fail or unknown report is still a saved result and returns its ID. Verification never changes phase.
 
 ### Command checks

@@ -1,6 +1,6 @@
 # Synthetic retained comparison
 
-This is a documentation fixture, not a new scientific experiment or a claim about Pinyin-VSR. Every metric is invented for this example. No managed task record or successful rctl verification is supplied.
+This is a synthetic fixture, not a new scientific experiment or a claim about Pinyin-VSR. Every metric is invented for this example. This source folder contains no managed task record; the [M2 verification record](../../docs/M2-VERIFICATION.md) documents successful verification of disposable copies.
 
 The contract asks whether a candidate improves the baseline by at least 0.01 absolute error units. Baseline error is 0.20 and candidate error is 0.23. Gain is baseline minus candidate, or −0.03, so the correct bounded result is no promotion. The task can complete even though the candidate loses.
 
@@ -18,4 +18,4 @@ From this directory, run the example check with:
 uv run --offline --no-project python check_arithmetic.py
 ```
 
-It detects inconsistent metric direction, arithmetic, or promotion labeling in the synthetic evidence. A future rctl integration test copies this folder into a temporary project's `tasks/retained-comparison`, calls begin, verify with reviews, and close. A complementary test omits the review and expects unknown with phase active. The fixture's prewritten result exists to specify expected behavior; a real task writes its result after the governed work.
+It detects inconsistent metric direction, arithmetic, or promotion labeling in the synthetic evidence. M2 integration tests and the installed-package smoke copy this folder into a temporary project's `tasks/retained-comparison`, call begin, verify with reviews, and close. The smoke also omits the review and observes unknown with phase active before supplying it. The fixture's prewritten result specifies expected behavior; a real task writes its result after the governed work.

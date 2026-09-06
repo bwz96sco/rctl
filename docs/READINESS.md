@@ -2,7 +2,7 @@
 
 Date: 2026-09-05. Target: the rctl v0.1 preparation package.
 
-**M1 complete; ready to start M2.** The original preparation record below remains historical evidence. The implemented contract and readable-state increment has its own [verification record](M1-VERIFICATION.md). This is not v0.1 release readiness.
+**M2 complete; ready to start M3.** The original preparation record below remains historical evidence. [M1](M1-VERIFICATION.md) and [M2](M2-VERIFICATION.md) have separate implementation verification records. This is not v0.1 release readiness.
 
 ## Preparation completion criteria
 
@@ -38,7 +38,7 @@ Manual consistency review checked phase versus assessment, amendment/reopen inva
 ## Remaining development gates
 
 - M1: completed for the bounded command/state increment; see its verification record for partial release-case coverage.
-- M2: implement evidence verification, currentness, closure, reopen/cancel, and remaining CLI error codes.
+- M2: completed, including command/review verification, currentness, closure, reopen/cancel, and local CLI error outcomes. See its verification record for execution evidence.
 - M3: establish the supported Codex loading route with version-specific source inspection and real hook receipts.
 - M4: run a new bounded real task through two fresh sessions, plus the release acceptance matrix.
 
@@ -52,5 +52,5 @@ These are scheduled development outcomes, not unanswered questions about what to
 4. Contract/result text comparison is exact. Other declared local files use size/mtime observations, which do not detect changes preserving both metadata values; undeclared dependencies and remote references are outside automatic freshness observation. A current report does not certify full reproducibility or immutable artifacts.
 5. Command pass proves the declared check ran successfully. Review entries record attributed judgment without authenticating a person or proving arbitrary scientific prose. A checkpoint is also a report of progress, not newly verified evidence.
 6. Local source citations depend on this workstation's paths. Self-contained source summaries and synthetic fixtures permit implementation elsewhere, but the original historical evidence must be obtained separately for independent pilot auditing.
-7. M1 is tested on macOS arm64 with CPython 3.11.11 and 3.13.2. Linux and other runtimes remain untested targets. Local Git initialization was authorized during implementation; no remote repository or host/global configuration was created or changed.
-8. Version 0.1.0a1 implements M1 only. It reads and writes active cycle-1 records with empty verification/closure arrays, and rejects unsupported records as unavailable instead of resetting history. Evidence currentness, verify/close/reopen/cancel, integration, and real research-task acceptance require M2–M4. Placeholder rejection detects the bundled template markers; scientific adequacy still requires evidence-based judgment.
+7. M1/M2 are tested on macOS arm64 with CPython 3.11.11 and 3.13.2. Linux and other runtimes remain untested targets. Local Git work was authorized during implementation; no remote repository or host/global configuration was created or changed.
+8. Version 0.1.0a2 implements local M1/M2 behavior and accepts the existing schema-1 M1 records. Host integration and real research-task acceptance still require M3–M4. Placeholder rejection detects the bundled contract template markers; scientific adequacy requires evidence-based judgment. Timeout tests establish termination of the launched local process group; interrupted-verification tests exercise SIGINT. Detached jobs are outside the checker contract, and SIGKILL/power-loss recovery is not established by those interruption tests.

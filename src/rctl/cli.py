@@ -1,8 +1,10 @@
-"""The M1 command surface and a single JSON response envelope."""
+"""Local task commands and a single JSON response envelope."""
 
 import argparse
+import io
 import json
 import sys
+from contextlib import redirect_stdout
 
 from . import __version__
 from .context import context
@@ -18,7 +20,7 @@ class Parser(argparse.ArgumentParser):
 def parser():
     result = Parser(
         prog="rctl",
-        description="Research contracts and readable state (M1; structure only).",
+        description="Research contracts, evidence verification, and task closure.",
     )
     result.add_argument("--root")
     result.add_argument("--format", choices=("text", "json"), default="text")
@@ -37,13 +39,25 @@ def parser():
     contract.add_parser(
         "check", help="Validate structure, without executing criteria."
     ).add_argument("task")
-    for name in ("begin", "amend", "checkpoint", "status", "context"):
+    for name in (
+        "begin",
+        "amend",
+        "checkpoint",
+        "status",
+        "context",
+        "verify",
+        "close",
+        "reopen",
+        "cancel",
+    ):
         command = commands.add_parser(name)
         command.add_argument("task", **({"nargs": "?"} if name == "context" else {}))
-        if name == "amend":
+        if name in {"amend", "reopen", "cancel"}:
             command.add_argument("--reason", required=True)
         if name == "checkpoint":
             command.add_argument("--file", required=True)
+        if name == "verify":
+            command.add_argument("--reviews")
     return result
 
 
@@ -70,6 +84,12 @@ def dispatch(args):
         return task.checkpoint(args.file), []
     if args.command == "status":
         return task.status()
+    if args.command == "verify":
+        return task.verify(args.reviews), []
+    if args.command == "close":
+        return task.close(), []
+    if args.command in {"reopen", "cancel"}:
+        return task.transition(args.command, args.reason), []
     return context(task)
 
 
@@ -89,11 +109,19 @@ def main(argv=None):
     }
     exit_code = 0
     args = None
+    information = io.StringIO()
     try:
-        args = parser().parse_args(argv)
+        with redirect_stdout(information):
+            args = parser().parse_args(argv)
+        json_mode = args.format == "json"
         response["data"], response["warnings"] = dispatch(args)
+    except SystemExit as result:
+        if result.code:
+            raise
+        response["data"] = {"message": information.getvalue().rstrip()}
     except RctlError as error:
         response["ok"] = False
+        response["data"] = error.data
         response["error"] = {
             "code": error.code,
             "message": error.message,
@@ -125,6 +153,8 @@ def main(argv=None):
         print(json.dumps(response, ensure_ascii=False))
     elif "context" in response["data"]:
         print(response["data"]["context"])
+    elif "message" in response["data"]:
+        print(response["data"]["message"])
     else:
         for key, value in response["data"].items():
             print(f"{key}: {value}")

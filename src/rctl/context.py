@@ -17,6 +17,14 @@ def bounded(text, budget, source):
 def context(task, budget=DEFAULT_BUDGET):
     status, warnings = task.status()
     record = task.read_record()
+    report = status["verification"]
+    verification = f"{report['id']}: {report['verdict']}" if report else "none"
+    closure = status["historical_closure"]
+    historical = (
+        f"{closure['verification_id']} (cycle {closure['cycle']}, {closure['assessment']})"
+        if closure
+        else "none"
+    )
     paths = {
         name: task.file(name)
         for name in ("contract.md", "state.md", "result.md", ".rctl/record.json")
@@ -24,7 +32,7 @@ def context(task, budget=DEFAULT_BUDGET):
     lines = [
         f"Task: {status['task_id']}",
         f"Phase: {status['phase']}; governing revision: {status['contract_revision'] or 'none'}",
-        "Verification: none; applicability: not_checked; historical closure: none",
+        f"Verification: {verification}; applicability: {status['currentness']}; historical closure: {historical}",
         *[f"Warning: {warning}" for warning in warnings],
         f"Next action: {status['next_action']}",
     ]
@@ -63,4 +71,9 @@ def context(task, budget=DEFAULT_BUDGET):
             + bounded(contract_text, contract_budget, paths["contract.md"])
         )
         reminder += labels[1] + bounded(handoff, handoff_budget, paths["state.md"])
+    # Context's JSON surface must not smuggle the unbounded report/result into a reminder.
+    if report:
+        status["verification"] = {
+            key: report[key] for key in ("id", "verdict", "contract_revision", "cycle")
+        }
     return {**status, "available": True, "context": reminder}, warnings

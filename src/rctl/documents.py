@@ -11,12 +11,13 @@ from jsonschema import Draft202012Validator
 
 
 class RctlError(Exception):
-    def __init__(self, code, message, next_action, exit_code=2):
+    def __init__(self, code, message, next_action, exit_code=2, data=None):
         super().__init__(message)
         self.code = code
         self.message = message
         self.next_action = next_action
         self.exit_code = exit_code
+        self.data = data or {}
 
 
 def invalid(message):
@@ -117,7 +118,7 @@ def sections(body):
     return {key: "\n".join(value).strip() for key, value in found.items()}
 
 
-def parse_contract(text, source, task_id, root=None, task=None):
+def parse_document(text, source, task_id, kind):
     lines = text.splitlines(keepends=True)
     if not lines or lines[0].rstrip("\r\n") != "---":
         raise invalid(f"{source}: require leading YAML frontmatter delimited by ---.")
@@ -132,7 +133,23 @@ def parse_contract(text, source, task_id, root=None, task=None):
         raise invalid(f"{source}: invalid safe YAML frontmatter.") from None
     except RctlError as exc:
         raise invalid(f"{source}: {exc.message}") from None
-    schema = json.loads(resource_text("schemas", "contract.schema.json"))
+    validate_schema(data, source, kind)
+    if data["task_id"] != task_id:
+        raise invalid(f"{source}: task_id must match directory basename {task_id}.")
+    headings = sections("".join(lines[end + 1 :]))
+    required = (
+        ("Question", "Scope", "Constraints", "Stop conditions")
+        if kind == "contract"
+        else ("Outcome", "Evidence", "Deviations", "Next action", "Limitations")
+    )
+    for name in required:
+        if not headings.get(name):
+            raise invalid(f"{source}: require nonempty ## {name} section.")
+    return data
+
+
+def validate_schema(data, source, kind):
+    schema = json.loads(resource_text("schemas", f"{kind}.schema.json"))
     error = next(Draft202012Validator(schema).iter_errors(data), None)
     if error:
         field = ".".join(str(part) for part in error.absolute_path) or "frontmatter"
@@ -142,17 +159,15 @@ def parse_contract(text, source, task_id, root=None, task=None):
             if isinstance(criterion, dict):
                 field += f" (criterion {criterion.get('id', location[1])}; methods: command or review)"
         raise invalid(
-            f"{source}: invalid {field} ({error.validator}); follow contract.schema.json."
+            f"{source}: invalid {field} ({error.validator}); follow {kind}.schema.json."
         )
-    if data["task_id"] != task_id:
-        raise invalid(f"{source}: task_id must match directory basename {task_id}.")
+
+
+def parse_contract(text, source, task_id, root=None, task=None):
+    data = parse_document(text, source, task_id, "contract")
     ids = [criterion["id"] for criterion in data["criteria"]]
     if len(ids) != len(set(ids)):
         raise invalid(f"{source}: criterion IDs must be unique.")
-    headings = sections("".join(lines[end + 1 :]))
-    for name in ("Question", "Scope", "Constraints", "Stop conditions"):
-        if not headings.get(name):
-            raise invalid(f"{source}: require nonempty ## {name} section.")
     if root is not None:
         for criterion in data["criteria"]:
             for ref in criterion["evidence_refs"]:
@@ -163,6 +178,49 @@ def parse_contract(text, source, task_id, root=None, task=None):
                     raise invalid(f"{source}: command inputs must be local paths.")
                 local_path(root, ref, task)
     return data
+
+
+def parse_result(text, source, task_id, revision):
+    data = parse_document(text, source, task_id, "result")
+    if data["contract_revision"] != revision:
+        raise RctlError(
+            "INVALID_INPUT",
+            f"{source}: result revision {data['contract_revision']} does not match governing revision {revision}.",
+            "Update the result for the governing revision and verify again.",
+        )
+    return data
+
+
+def parse_reviews(text, source, task_id, revision, contract, root=None, task=None):
+    try:
+        data = json.loads(text)
+    except ValueError:
+        raise invalid(f"{source}: invalid review JSON.") from None
+    validate_schema(data, source, "reviews")
+    if data["task_id"] != task_id or data["contract_revision"] != revision:
+        raise invalid(
+            f"{source}: review task/revision must match {task_id}, revision {revision}."
+        )
+    criteria = {item["id"]: item for item in contract["criteria"]}
+    checks = {}
+    for check in data["checks"]:
+        key = check["criterion_id"]
+        if (
+            key in checks
+            or key not in criteria
+            or criteria[key]["method"]["type"] != "review"
+        ):
+            raise invalid(f"{source}: {key} must uniquely identify a review criterion.")
+        if not set(criteria[key]["evidence_refs"]) <= set(check["evidence_refs"]):
+            raise invalid(
+                f"{source}: {key} must include the contract's required evidence references."
+            )
+        if root is not None:
+            for ref in check["evidence_refs"]:
+                if not urlsplit(ref).scheme:
+                    local_path(root, ref, task)
+        checks[key] = check
+    return checks
 
 
 def require_completed(text, source):

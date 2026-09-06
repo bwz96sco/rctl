@@ -7,6 +7,8 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+from jsonschema import ValidationError
+
 from .documents import (
     RctlError,
     invalid,
@@ -16,6 +18,7 @@ from .documents import (
     require_completed,
     resource_text,
 )
+from .policy import validate_record
 
 
 def now():
@@ -91,7 +94,14 @@ class Task:
         try:
             record = json.loads(read_text(path))
             self.validate_record(record)
-        except (RctlError, ValueError, TypeError, KeyError):
+        except (
+            RctlError,
+            ValidationError,
+            ValueError,
+            TypeError,
+            KeyError,
+            IndexError,
+        ):
             raise RctlError(
                 "RECORD_UNAVAILABLE",
                 f"Malformed or unsupported record: {path}",
@@ -101,73 +111,16 @@ class Task:
         return record
 
     def validate_record(self, record):
-        required = {
-            "schema_version",
-            "task_id",
-            "phase",
-            "cycle",
-            "contracts",
-            "verifications",
-            "closures",
-            "lifecycle",
-        }
-        if not isinstance(record, dict) or set(record) != required:
-            raise ValueError
-        if type(record["schema_version"]) is not int or record["schema_version"] != 1:
-            raise ValueError
-        if record["task_id"] != self.task_id:
-            raise ValueError
-        # This increment only writes M1 records. M2 adds verification and closure.
-        if (
-            record["phase"] != "active"
-            or type(record["cycle"]) is not int
-            or record["cycle"] != 1
-        ):
-            raise ValueError
-        if record["verifications"] != [] or record["closures"] != []:
-            raise ValueError
-        contracts = record["contracts"]
-        if not isinstance(contracts, list) or not contracts:
-            raise ValueError
-        for revision, entry in enumerate(contracts, 1):
-            if not isinstance(entry, dict) or set(entry) != {
-                "revision",
-                "text",
-                "reason",
-                "recorded_at",
-            }:
-                raise ValueError
-            if type(entry["revision"]) is not int or entry["revision"] != revision:
-                raise ValueError
-            if not all(
-                isinstance(entry[key], str) and entry[key].strip()
-                for key in ("text", "reason", "recorded_at")
-            ):
-                raise ValueError
-            datetime.fromisoformat(entry["recorded_at"].replace("Z", "+00:00"))
-            parse_contract(entry["text"], self.file(".rctl/record.json"), self.task_id)
-        lifecycle = record["lifecycle"]
-        if not isinstance(lifecycle, list) or len(lifecycle) != len(contracts):
-            raise ValueError
-        for index, entry in enumerate(lifecycle):
-            if not isinstance(entry, dict) or set(entry) != {
-                "action",
-                "reason",
-                "recorded_at",
-            }:
-                raise ValueError
-            if entry["action"] != ("begin" if index == 0 else "amendment"):
-                raise ValueError
-            if (
-                entry["reason"] != contracts[index]["reason"]
-                or entry["recorded_at"] != contracts[index]["recorded_at"]
-            ):
-                raise ValueError
+        validate_record(record, self.task_id, self.file(".rctl/record.json"))
 
-    def managed(self):
+    def managed(self, phases=("active",)):
         record = self.read_record()
         if record is None:
             raise state_error("Task is an unmanaged draft; begin it first.")
+        if record["phase"] not in phases:
+            raise state_error(
+                f"Task phase {record['phase']} does not permit this operation."
+            )
         return record
 
     def save(self, record):
@@ -265,9 +218,108 @@ class Task:
             "state_path": str(self.file("state.md")),
         }
 
+    def governing(self, record):
+        text = read_text(self.file("contract.md"))
+        if text != record["contracts"][-1]["text"]:
+            raise RctlError(
+                "AMENDMENT_REQUIRED",
+                "Current contract differs from the governing revision.",
+                "Amend the contract with a reason before dependent work.",
+                4,
+            )
+        return text, parse_contract(
+            text, self.file("contract.md"), self.task_id, self.root, self.path
+        )
+
+    def verify(self, reviews=None):
+        from .verification import verify
+
+        return verify(self, reviews)
+
+    def close(self):
+        from .documents import parse_result
+        from .verification import currentness, verdict_error
+
+        record = self.managed()
+        self.governing(record)
+        if not record["verifications"]:
+            raise state_error(
+                "No verification report; write a result and verify before close."
+            )
+        report = record["verifications"][-1]
+        applicability, issues = currentness(self, record, readable=True)
+        if applicability != "current":
+            raise RctlError(
+                "VERIFICATION_UNKNOWN"
+                if applicability == "unknown"
+                else "VERIFICATION_STALE",
+                "; ".join(issues),
+                "Restore/update the task materials and verify again.",
+                5 if applicability == "unknown" else 4,
+            )
+        verdict_error(self, record, report)
+        result = parse_result(
+            read_text(self.file("result.md")),
+            self.file("result.md"),
+            self.task_id,
+            report["contract_revision"],
+        )
+        timestamp = now()
+        closure = {
+            "verification_id": report["id"],
+            "contract_revision": report["contract_revision"],
+            "cycle": record["cycle"],
+            "assessment": result["assessment"],
+            "closed_at": timestamp,
+        }
+        record["closures"].append(closure)
+        record["phase"] = "closed"
+        record["lifecycle"].append(
+            {
+                "action": "close",
+                "reason": "Current verification passed",
+                "recorded_at": timestamp,
+            }
+        )
+        self.save(record)
+        return {
+            "task_id": self.task_id,
+            "phase": "closed",
+            "closure": closure,
+            "verification_id": report["id"],
+        }
+
+    def reopen(self, reason):
+        return self.transition("reopen", reason)
+
+    def cancel(self, reason):
+        return self.transition("cancel", reason)
+
+    def transition(self, action, reason):
+        if not reason.strip():
+            raise invalid("Lifecycle reason must contain non-whitespace text.")
+        record = self.managed(
+            ("closed", "cancelled") if action == "reopen" else ("active",)
+        )
+        if action == "reopen":
+            record["cycle"] += 1
+        record["phase"] = "active" if action == "reopen" else "cancelled"
+        record["lifecycle"].append(
+            {"action": action, "reason": reason, "recorded_at": now()}
+        )
+        self.save(record)
+        return {
+            "task_id": self.task_id,
+            "phase": record["phase"],
+            "cycle": record["cycle"],
+        }
+
     def status(self):
+        from .verification import currentness
+
         record = self.read_record()
         warnings = []
+        report, closure, applicability = None, None, "not_checked"
         if record is None:
             self.contract()
             phase, revision, drift = "draft", None, False
@@ -288,22 +340,33 @@ class Task:
                 warnings.append(
                     "AMENDMENT_REQUIRED: current contract differs from the governing revision."
                 )
-        warnings.append(
-            "No verification has been recorded; structural checks and handoffs do not establish closure."
-        )
+            report = record["verifications"][-1] if record["verifications"] else None
+            closure = record["closures"][-1] if record["closures"] else None
+            applicability, issues = currentness(self, record)
+            warnings.extend(issues)
+        if report is None:
+            warnings.append(
+                "No verification has been recorded; structural checks and handoffs do not establish closure."
+            )
+        elif report["verdict"] != "pass":
+            warnings.append(f"Latest verification {report['id']}: {report['verdict']}.")
+        if record is None:
+            action = "Complete the draft and begin."
+        elif phase in {"closed", "cancelled"}:
+            action = "Reopen with a reason before revising accepted work."
+        elif drift:
+            action = "Amend the contract with a reason before dependent work."
+        elif report and report["verdict"] == "pass" and applicability == "current":
+            action = "Close using the current passing verification."
+        else:
+            action = "Prepare the result and required evidence/reviews, then verify; checkpoint to pause."
         return {
             "task_id": self.task_id,
             "phase": phase,
             "contract_revision": revision,
             "contract_drift": drift,
-            "verification": None,
-            "currentness": "not_checked",
-            "historical_closure": None,
-            "next_action": "Complete the draft and begin."
-            if record is None
-            else (
-                "Amend the contract with a reason before dependent work."
-                if drift
-                else "Continue within the contract; checkpoint to save a handoff. Verification and closure require M2."
-            ),
+            "verification": report,
+            "currentness": applicability,
+            "historical_closure": closure,
+            "next_action": action,
         }, warnings

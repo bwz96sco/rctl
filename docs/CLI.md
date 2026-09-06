@@ -1,6 +1,6 @@
 # rctl v0.1 CLI Contract
 
-The full table is the v0.1 implementation target. The M1 package implements `task new`, `contract check`, `begin`, `amend`, `checkpoint`, `status`, and `context`. Later commands are not exposed yet. See [M1 verification](M1-VERIFICATION.md) for observed behavior.
+All local task commands in the table are implemented through M2, including `verify`, `close`, `reopen`, and `cancel`. Only `integration codex export` remains an M3 target and is not exposed yet. See [M2 verification](M2-VERIFICATION.md) for observed behavior.
 
 ## Global arguments and output
 
@@ -21,6 +21,8 @@ rctl [--root PATH] [--format text|json] COMMAND ...
 ```
 
 On success `error` is null. `data` is always an object and `warnings` is an array of strings. Mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome.
+
+`--help` and `--version` also honor JSON mode, with informational text in `data.message`. In text mode they display ordinary help/version output. Context includes a bounded reminder and a compact verification summary; `status` exposes the latest full report.
 
 | Exit | Meaning | Representative error code |
 |---|---|---|
@@ -53,9 +55,9 @@ Malformed contract/result/review input fails before report creation. A missing d
 
 All task arguments are required except the documented `context` case. `--reason` must contain non-whitespace text. There is no unrestricted status setter, force-close, approval command, project database initializer, or remote execution command.
 
-## Future terminal walkthrough
+## Terminal walkthrough
 
-Run from a disposable example project root. Python commands use uv; rctl below denotes the eventual installed executable.
+Run from a disposable example project root. Python commands use uv; `rctl` below denotes the installed executable (`uv run rctl` when using this checkout).
 
 ```sh
 rctl task new tasks/comparison --kind analysis --title "Inspect retained comparison"

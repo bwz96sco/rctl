@@ -4,7 +4,7 @@
 
 Start from this documentation baseline. The first coding task is **M1: contract and readable state**, with the acceptance cases listed below. Implement a runnable increment with real temporary-file tests, not a scaffold for every later feature. No further product-choice meeting is required to start M1.
 
-M1 was implemented on 2026-09-05; its [verification record](M1-VERIFICATION.md) separates completed M1 checks from deferred portions of release cases. The next assignment is M2. The user separately authorized repository creation; this checkout now has a local Git repository on `main`.
+M1 was implemented on 2026-09-05; its [verification record](M1-VERIFICATION.md) separates completed M1 checks from the portions completed by [M2 on 2026-09-06](M2-VERIFICATION.md). The next assignment is M3: reminder integration, with an official protocol recheck and actual host delivery evidence. The user separately authorized repository creation; this checkout has a local Git repository on `main`.
 
 At implementation, set up the Python package with uv, an `rctl` console entrypoint, runtime dependencies PyYAML and jsonschema, and test dependencies pytest and Ruff. Commit a resolved `uv.lock` only when Git work is separately in scope. No Git repository was initialized during preparation. The initial implementation target is Python 3.11+ on macOS/Linux; record actual tested combinations before claiming support.
 
