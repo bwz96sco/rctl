@@ -111,3 +111,11 @@ specifies flushing Python buffers before file `fsync`, and atomic successful rep
 The [uv GitHub Actions guide](https://docs.astral.sh/uv/guides/integration/github/)
 provides the setup action and Python matrix configuration. Hosted CI, native Windows,
 WSL, and power-loss guarantees remain subject to [Limitations](READINESS.md#limitations).
+
+### First public CI launch
+
+The repository was published at [bwz96sco/rctl](https://github.com/bwz96sco/rctl)
+on 2026-09-06. The [first run](https://github.com/bwz96sco/rctl/actions/runs/34024835319)
+failed during job setup because `astral-sh/setup-uv@v8` does not exist; no tests ran.
+The workflow now names the published `v8.1.0` tag from the earlier documentation
+example, confirmed with `gh api repos/astral-sh/setup-uv/git/ref/tags/v8.1.0`.
