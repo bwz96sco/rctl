@@ -1,0 +1,37 @@
+{
+  "argv": [
+    "codex",
+    "-a",
+    "never",
+    "exec",
+    "--disable",
+    "plugins",
+    "--disable",
+    "apps",
+    "--disable",
+    "multi_agent",
+    "--enable",
+    "hooks",
+    "--ephemeral",
+    "--sandbox",
+    "read-only",
+    "--cd",
+    "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+    "--json",
+    "--color",
+    "never",
+    "--output-last-message",
+    "/Users/zhangbowen/Projects/rctl/docs/evidence/project-auto/updated/final.txt",
+    "--dangerously-bypass-hook-trust",
+    "-"
+  ],
+  "cwd": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+  "git_root": "/Users/zhangbowen/Projects/rctl",
+  "host_version": "codex-cli 0.153.4",
+  "environment_overrides": {
+    "RCTL_PROJECT_ROOT": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+    "RCTL_TASK_PATH": "tasks/retained-comparison",
+    "RCTL_HOOK_LOG": "receipts-updated.jsonl"
+  },
+  "trust_scope": "See argv for invocation-only trust bypass or attempted state overrides. hooks.state overrides did not change native trust/enabled state in this host version. Normal configuration may run existing user hooks. No hook definitions injected and no shared config writes."
+}

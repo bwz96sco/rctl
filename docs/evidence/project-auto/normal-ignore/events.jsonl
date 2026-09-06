@@ -1,0 +1,6 @@
+{"type":"thread.started","thread_id":"01a075b4-071a-71b2-b7c1-99958872ff9b"}
+{"type":"item.completed","item":{"id":"item_0","type":"error","message":"`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."}}
+{"type":"item.completed","item":{"id":"item_1","type":"error","message":"`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."}}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_2","type":"agent_message","text":"NO_RCTL_REMINDER"}}
+{"type":"turn.completed","usage":{"input_tokens":16575,"cached_input_tokens":10496,"cache_write_input_tokens":0,"output_tokens":21,"reasoning_output_tokens":10}}

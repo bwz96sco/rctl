@@ -1,0 +1,6 @@
+{"type":"thread.started","thread_id":"01a075b4-66c8-77c0-9768-c499ac965dcd"}
+{"type":"item.completed","item":{"id":"item_0","type":"error","message":"`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."}}
+{"type":"item.completed","item":{"id":"item_1","type":"error","message":"`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."}}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_2","type":"agent_message","text":"- Task: `retained-comparison`\n- Phase: active; governing revision 1\n- Delivery marker: `SILVER-MAPLE-29`\n- Handoff next action: compare the amended handoff with the receipt.\n- Hook next action: prepare the result and required evidence/reviews, then verify; checkpoint to pause."}}
+{"type":"turn.completed","usage":{"input_tokens":15741,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":523,"reasoning_output_tokens":448}}

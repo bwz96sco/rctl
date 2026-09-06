@@ -1,0 +1,94 @@
+{
+  "host": "codex-cli 0.153.4",
+  "cases": [
+    {
+      "stage": "config-layer",
+      "session_id": "01a075b1-edd7-7be1-89d0-154a8a5b5d36",
+      "exit_code": 0,
+      "receipt_count": 0,
+      "model_reports_expected_marker": false,
+      "tools_used": false
+    },
+    {
+      "stage": "disabled",
+      "session_id": "01a075b5-1fc8-7371-aedd-e2b6149ec76e",
+      "exit_code": 0,
+      "receipt_count": 0,
+      "model_reports_expected_marker": false,
+      "tools_used": false
+    },
+    {
+      "stage": "leaf-trust",
+      "session_id": "01a075af-98d0-7b40-b7df-3b37e94c79d8",
+      "exit_code": 0,
+      "receipt_count": 0,
+      "model_reports_expected_marker": false,
+      "tools_used": false
+    },
+    {
+      "stage": "normal-bypass",
+      "session_id": "01a075b2-9109-7091-9646-d36349e37b92",
+      "exit_code": 0,
+      "receipt_count": 2,
+      "model_reports_expected_marker": true,
+      "tools_used": false
+    },
+    {
+      "stage": "normal-ignore",
+      "session_id": "01a075b4-071a-71b2-b7c1-99958872ff9b",
+      "exit_code": 0,
+      "receipt_count": 0,
+      "model_reports_expected_marker": false,
+      "tools_used": false
+    },
+    {
+      "stage": "repo-bypass",
+      "session_id": "01a075b1-85f4-7962-ab30-ffdba9ac0f7b",
+      "exit_code": 0,
+      "receipt_count": 0,
+      "model_reports_expected_marker": false,
+      "tools_used": false
+    },
+    {
+      "stage": "repo-trust",
+      "session_id": "01a075af-f0f2-7642-be92-3a29ab485994",
+      "exit_code": 0,
+      "receipt_count": 0,
+      "model_reports_expected_marker": false,
+      "tools_used": false
+    },
+    {
+      "stage": "trusted",
+      "session_id": "01a075b0-5335-7c51-8326-8db8cf5cd2ad",
+      "exit_code": 0,
+      "receipt_count": 0,
+      "model_reports_expected_marker": false,
+      "tools_used": false
+    },
+    {
+      "stage": "untrusted",
+      "session_id": "01a075b4-d72f-71d1-a582-595fe898d458",
+      "exit_code": 0,
+      "receipt_count": 0,
+      "model_reports_expected_marker": false,
+      "tools_used": false
+    },
+    {
+      "stage": "updated",
+      "session_id": "01a075b4-66c8-77c0-9768-c499ac965dcd",
+      "exit_code": 0,
+      "receipt_count": 2,
+      "model_reports_expected_marker": true,
+      "tools_used": false
+    }
+  ],
+  "controlled_comparison": "normal-ignore argv differs from normal-bypass only by --ignore-user-config after excluding the output artifact path; receipt log destinations also differ by case.",
+  "observed_outcome": "Project-file delivery succeeds with ordinary config loading and invocation-only hook-trust bypass. Adding --ignore-user-config eliminates delivery in this environment.",
+  "correction": "Initial launch trust_scope text described intended hooks.state overrides; native hooks/list showed those overrides did not apply. They are not evidence of granted trust or disabled user hooks. Subsequent stages use explicit bypass or global --disable hooks.",
+  "limits": [
+    "Persisted hook trust was not installed or tested.",
+    "Updated handoff was tested in a fresh session, not as a second turn of the same session.",
+    "Normal config may execute existing user hooks; synthetic marker is unique to this fixture.",
+    "Underlying host implementation reason for ignore-user-config behavior remains undiagnosed."
+  ]
+}

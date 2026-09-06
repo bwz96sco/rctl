@@ -46,7 +46,7 @@ uv run rctl integration codex export .work/codex-bundle
 
 Use a new destination, review the generated files, then follow its README to select `RCTL_TASK_PATH` and launch Codex with the exported inline settings. The bundle includes a project-local `research-task` skill. Codex owns hook review and trust; exporting does not install configuration. Reminders read the selected task at session startup and prompt submission without running checks.
 
-The tested route is invocation-local Codex CLI 0.153.4 configuration. The isolated project-file attempt delivered no reminder; ordinary persisted installation remains unestablished. See [limitations](docs/READINESS.md#limitations).
+Codex CLI 0.153.4 is tested with inline configuration and, in a [follow-up](docs/PROJECT-HOOKS-VERIFICATION.md), project-file loading with normal configuration and invocation-only hook-trust bypass. The isolated `--ignore-user-config` project-file attempt delivered no reminder; persisted installation without bypass remains unestablished. See [limitations](docs/READINESS.md#limitations).
 
 ## Start here
 

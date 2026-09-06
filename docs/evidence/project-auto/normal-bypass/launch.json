@@ -1,0 +1,37 @@
+{
+  "argv": [
+    "codex",
+    "-a",
+    "never",
+    "exec",
+    "--disable",
+    "plugins",
+    "--disable",
+    "apps",
+    "--disable",
+    "multi_agent",
+    "--enable",
+    "hooks",
+    "--ephemeral",
+    "--sandbox",
+    "read-only",
+    "--cd",
+    "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+    "--json",
+    "--color",
+    "never",
+    "--output-last-message",
+    "/Users/zhangbowen/Projects/rctl/docs/evidence/project-auto/normal-bypass/final.txt",
+    "--dangerously-bypass-hook-trust",
+    "-"
+  ],
+  "cwd": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+  "git_root": "/Users/zhangbowen/Projects/rctl",
+  "host_version": "codex-cli 0.153.4",
+  "environment_overrides": {
+    "RCTL_PROJECT_ROOT": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+    "RCTL_TASK_PATH": "tasks/retained-comparison",
+    "RCTL_HOOK_LOG": "receipts-normal-bypass.jsonl"
+  },
+  "trust_scope": "Exact reviewed project-hook hashes supplied only for this invocation; unrelated hooks disabled when user config loads. No hook definitions injected and no shared config writes."
+}

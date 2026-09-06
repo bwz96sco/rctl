@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/zhangbowen/Projects/rctl/.venv/bin/rctl --root /Users/zhangbowen/Projects/rctl/.work/project-auto-probe hook codex",
+            "timeout": 10,
+            "additionalContextLimit": 8000
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/zhangbowen/Projects/rctl/.venv/bin/rctl --root /Users/zhangbowen/Projects/rctl/.work/project-auto-probe hook codex",
+            "timeout": 10,
+            "additionalContextLimit": 2000
+          }
+        ]
+      }
+    ]
+  }
+}

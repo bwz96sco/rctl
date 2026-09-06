@@ -1,0 +1,6 @@
+{"type":"thread.started","thread_id":"01a075b2-9109-7091-9646-d36349e37b92"}
+{"type":"item.completed","item":{"id":"item_0","type":"error","message":"`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."}}
+{"type":"item.completed","item":{"id":"item_1","type":"error","message":"`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."}}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_2","type":"agent_message","text":"- Task: `retained-comparison`\n- Phase: `active`\n- Delivery marker: `COPPER-ORCHID-73`\n- Hook next action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\n- Handoff next action: Inspect the retained delivery table."}}
+{"type":"turn.completed","usage":{"input_tokens":15737,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":347,"reasoning_output_tokens":279}}

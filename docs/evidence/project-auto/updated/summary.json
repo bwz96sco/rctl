@@ -1,0 +1,6 @@
+{
+  "stage": "updated",
+  "exit_code": 0,
+  "receipt_count": 2,
+  "final": "- Task: `retained-comparison`\n- Phase: active; governing revision 1\n- Delivery marker: `SILVER-MAPLE-29`\n- Handoff next action: compare the amended handoff with the receipt.\n- Hook next action: prepare the result and required evidence/reviews, then verify; checkpoint to pause."
+}

@@ -1,0 +1,6 @@
+{
+  "stage": "normal-bypass",
+  "exit_code": 0,
+  "receipt_count": 2,
+  "final": "- Task: `retained-comparison`\n- Phase: `active`\n- Delivery marker: `COPPER-ORCHID-73`\n- Hook next action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\n- Handoff next action: Inspect the retained delivery table."
+}

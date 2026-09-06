@@ -1,0 +1,43 @@
+{
+  "argv": [
+    "codex",
+    "-a",
+    "never",
+    "exec",
+    "--disable",
+    "plugins",
+    "--disable",
+    "apps",
+    "--disable",
+    "multi_agent",
+    "--enable",
+    "hooks",
+    "--ephemeral",
+    "--sandbox",
+    "read-only",
+    "--cd",
+    "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+    "--json",
+    "--color",
+    "never",
+    "--output-last-message",
+    "/Users/zhangbowen/Projects/rctl/docs/evidence/project-auto/leaf-trust/final.txt",
+    "--ignore-user-config",
+    "-c",
+    "projects.\"/Users/zhangbowen/Projects/rctl/.work/project-auto-probe\".trust_level=\"trusted\"",
+    "-c",
+    "hooks.state.\"/Users/zhangbowen/Projects/rctl/.work/project-auto-probe/.codex/hooks.json:session_start:0:0\".trusted_hash=\"sha256:985cd556b5fdf39c0b8f0eb0a6058e371ed3933af02c5e228971d2974c66805d\"",
+    "-c",
+    "hooks.state.\"/Users/zhangbowen/Projects/rctl/.work/project-auto-probe/.codex/hooks.json:user_prompt_submit:0:0\".trusted_hash=\"sha256:cc9a21a27945e686d21c1d654f7cd3463f2959a926cec47d86aa2ee893f74b83\"",
+    "-"
+  ],
+  "cwd": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+  "git_root": "/Users/zhangbowen/Projects/rctl",
+  "host_version": "codex-cli 0.153.4",
+  "environment_overrides": {
+    "RCTL_PROJECT_ROOT": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+    "RCTL_TASK_PATH": "tasks/retained-comparison",
+    "RCTL_HOOK_LOG": "receipts-leaf-trust.jsonl"
+  },
+  "trust_scope": "Exact reviewed project-hook hashes supplied only for this invocation; unrelated hooks disabled when user config loads. No hook definitions injected and no shared config writes."
+}

@@ -1,0 +1,1 @@
+This is a reminder-delivery test. Without calling any tools or inspecting files, report the task identity, phase, delivery marker, and next action supplied by an rctl hook in your current context. If no rctl reminder was delivered, reply NO_RCTL_REMINDER. Do not perform the task or start other agents.

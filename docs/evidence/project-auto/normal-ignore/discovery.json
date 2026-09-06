@@ -1,0 +1,46 @@
+{
+  "cwd": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe",
+  "hooks": [
+    {
+      "key": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe/.codex/hooks.json:session_start:0:0",
+      "eventName": "sessionStart",
+      "handlerType": "command",
+      "command": "/Users/zhangbowen/Projects/rctl/.venv/bin/rctl --root /Users/zhangbowen/Projects/rctl/.work/project-auto-probe hook codex",
+      "async": false,
+      "matcher": null,
+      "timeoutSec": 10,
+      "statusMessage": null,
+      "additionalContextLimit": 8000,
+      "sourcePath": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe/.codex/hooks.json",
+      "source": "project",
+      "pluginId": null,
+      "displayOrder": 8,
+      "enabled": true,
+      "isManaged": false,
+      "currentHash": "sha256:985cd556b5fdf39c0b8f0eb0a6058e371ed3933af02c5e228971d2974c66805d",
+      "trustStatus": "untrusted"
+    },
+    {
+      "key": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe/.codex/hooks.json:user_prompt_submit:0:0",
+      "eventName": "userPromptSubmit",
+      "handlerType": "command",
+      "command": "/Users/zhangbowen/Projects/rctl/.venv/bin/rctl --root /Users/zhangbowen/Projects/rctl/.work/project-auto-probe hook codex",
+      "async": false,
+      "matcher": null,
+      "timeoutSec": 10,
+      "statusMessage": null,
+      "additionalContextLimit": 2000,
+      "sourcePath": "/Users/zhangbowen/Projects/rctl/.work/project-auto-probe/.codex/hooks.json",
+      "source": "project",
+      "pluginId": null,
+      "displayOrder": 9,
+      "enabled": true,
+      "isManaged": false,
+      "currentHash": "sha256:cc9a21a27945e686d21c1d654f7cd3463f2959a926cec47d86aa2ee893f74b83",
+      "trustStatus": "untrusted"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "unrelated_hook_count": 8
+}
