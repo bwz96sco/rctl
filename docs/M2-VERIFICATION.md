@@ -119,3 +119,9 @@ on 2026-09-06. The [first run](https://github.com/bwz96sco/rctl/actions/runs/340
 failed during job setup because `astral-sh/setup-uv@v8` does not exist; no tests ran.
 The workflow now names the published `v8.1.0` tag from the earlier documentation
 example, confirmed with `gh api repos/astral-sh/setup-uv/git/ref/tags/v8.1.0`.
+
+The [second run](https://github.com/bwz96sco/rctl/actions/runs/34024925168) passed
+all 140 tests and lint in each of the four OS/Python jobs. Its documentation check
+then found workstation-only links in `SOURCES.md`. Those external local sources are
+now recorded as plain provenance paths, while repository links remain checked.
+No private source files were imported to satisfy the public documentation check.
