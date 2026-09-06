@@ -3,7 +3,9 @@
 import argparse
 import io
 import json
+import os
 import sys
+import traceback
 from contextlib import redirect_stdout
 
 from . import __version__
@@ -75,6 +77,12 @@ def parser():
 
 
 def dispatch(args):
+    if sys.platform not in {"darwin", "linux"}:
+        raise RctlError(
+            "UNSUPPORTED_PLATFORM",
+            f"rctl requires macOS or Linux (POSIX); current platform: {sys.platform}.",
+            "Run rctl on macOS or Linux; Windows users can use WSL.",
+        )
     root = project_root(args.root)
     if args.command == "init":
         from .initialize import initialize
@@ -110,7 +118,7 @@ def dispatch(args):
     if args.command == "close":
         return task.close(), []
     if args.command in {"reopen", "cancel"}:
-        return task.transition(args.command, args.reason), []
+        return getattr(task, args.command)(args.reason), []
     return context(task)
 
 
@@ -167,11 +175,16 @@ def main(argv=None):
         }
         exit_code = 3
     except Exception:
+        if os.environ.get("RCTL_DEBUG") == "1":
+            traceback.print_exc(file=sys.stderr)
         response["ok"] = False
         response["error"] = {
             "code": "INTERNAL_ERROR",
             "message": "Unexpected internal failure.",
-            "next_action": "Inspect task status and report the failing command.",
+            "next_action": (
+                "Inspect task status before retrying; set RCTL_DEBUG=1 to include "
+                "a traceback on stderr when reproducing the failure."
+            ),
         }
         exit_code = 70
     if json_mode:

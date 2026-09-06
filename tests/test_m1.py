@@ -272,7 +272,8 @@ def test_truncated_record_and_invalid_utf8(task, cli):
     cli("contract", "check", "tasks/retained-comparison", expected=2)
 
 
-def test_failed_atomic_publication_keeps_previous_record(task, monkeypatch):
+@pytest.mark.parametrize("failure", ["fsync", "replace"])
+def test_failed_atomic_publication_keeps_previous_record(task, monkeypatch, failure):
     task.begin()
     before = task.file(".rctl/record.json").read_bytes()
     rewrite(task, lambda t: t + "\nClarification.\n")
@@ -280,11 +281,33 @@ def test_failed_atomic_publication_keeps_previous_record(task, monkeypatch):
     def interrupted(*args):
         raise OSError("simulated interrupted publication")
 
-    monkeypatch.setattr("rctl.records.os.replace", interrupted)
+    monkeypatch.setattr(f"rctl.records.os.{failure}", interrupted)
     with pytest.raises(OSError):
         task.amend("Clarify scope")
     assert task.file(".rctl/record.json").read_bytes() == before
     assert len(task.read_record()["contracts"]) == 1
+    assert list(task.file(".rctl").iterdir()) == [task.file(".rctl/record.json")]
+
+
+@pytest.mark.parametrize(
+    ("change", "diagnosis"),
+    [
+        (lambda r: r.update(cycle=0), "Field $.cycle violates the minimum constraint"),
+        (lambda r: r.update(cycle=2), "Lifecycle does not match record"),
+        (
+            lambda r: r["contracts"][0].update(revision=3),
+            "Contract revisions must be consecutive",
+        ),
+    ],
+)
+def test_record_error_names_the_cause(task, cli, change, diagnosis):
+    task.begin()
+    record = task.read_record()
+    change(record)
+    task.file(".rctl/record.json").write_text(json.dumps(record))
+    response = cli("status", "tasks/retained-comparison", expected=3)
+    assert diagnosis in response["error"]["message"]
+    assert record["contracts"][0]["text"] not in response["error"]["message"]
 
 
 def test_missing_current_contract_uses_retained_context(task, cli):

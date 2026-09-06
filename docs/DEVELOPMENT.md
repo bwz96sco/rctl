@@ -49,3 +49,12 @@ Routine internal choices may be resolved locally. If a discovery changes scope, 
 ## M5 — Project initialization and shared-skill migration (v0.2)
 
 Authorized on 2026-09-06. Implement `rctl init`, move setup/vault assets and workspace guidance into the rctl distribution, retire the shared setup entrypoint, and migrate experiment/training/adapter/review references. Preserve the user's existing synthesis edits and all live research tasks. Exit evidence: A-21–A-24, relevant packaging/regression checks, shared-skill validators, and a migrated-task execution walkthrough. Commit rctl and the shared skills repository separately.
+
+## v0.2.1 — Review follow-up
+
+Authorized on 2026-09-06. Extend M2 diagnostics and publication handling using A-13
+(JSON/error protocol), A-14 (failed publication preservation), and A-15 (material
+changes during checks). Keep verdict and closure rules unchanged. Add explicit
+platform metadata/runtime errors, full-script lint, and macOS/Linux CI. Exercise
+actual subprocess evidence regeneration and fault-injected record/publication errors;
+run the full suite and installed wheel smoke before the local patch release.

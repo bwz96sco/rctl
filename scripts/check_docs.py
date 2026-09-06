@@ -14,7 +14,6 @@ from urllib.parse import unquote, urlsplit
 import yaml
 from jsonschema import Draft202012Validator
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 

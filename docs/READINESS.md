@@ -1,6 +1,6 @@
 # Development Readiness
 
-Updated: 2026-09-06. Target: rctl v0.2.0 local release.
+Updated: 2026-09-06. Target: rctl v0.2.1 local release.
 
 **M1–M5 complete.** Initialization and shared-skill migration are recorded in [M5-VERIFICATION](M5-VERIFICATION.md). All release cases have observed evidence in [RELEASE-VERIFICATION](RELEASE-VERIFICATION.md). The original preparation record below remains historical; it is distinct from implementation and real-host acceptance.
 
@@ -50,11 +50,11 @@ M5 includes authorized shared-source changes. Live research-task migration and r
 
 1. The old pilot reanalyzed retained aggregates. It did not establish fresh training, raw-prediction/bootstrap reproduction, independent health/contact audits, superiority over Trellis/Comet, or quantified hook benefit.
 2. The release host evidence covers invocation-local Codex CLI 0.153.4 configuration, SessionStart startup and UserPromptSubmit. The original isolated project-file probe delivered no reminder. A [follow-up](PROJECT-HOOKS-VERIFICATION.md) succeeded with normal config loading and invocation-only hook-trust bypass; adding `--ignore-user-config` eliminated delivery in a controlled pair. The internal reason remains undiagnosed. Official online retrieval succeeded during M3 after the historical preparation timeout. Real compact/native resume, subagent delivery, and ordinary persisted project installation are not established here.
-3. v0.1 assumes one cooperating writer per task. Atomic replacement protects one record against partial publication; the recheck is not a transactional multi-writer lock, a cross-filesystem durability guarantee, or a defense against direct record edits.
+3. v0.1 assumes one cooperating writer per task. Atomic replacement protects readers from partial publication during ordinary process interruption. v0.2.1 flushes and syncs the temporary file before replacement, but does not sync the parent directory or establish same-filesystem power-loss durability; the recheck is not a transactional multi-writer lock, a cross-filesystem durability guarantee, or a defense against direct record edits.
 4. Contract/result text comparison is exact. Other declared local files use size/mtime observations, which do not detect changes preserving both metadata values; undeclared dependencies and remote references are outside automatic freshness observation. A current report does not certify full reproducibility or immutable artifacts.
 5. Command pass proves the declared check ran successfully. Review entries record attributed judgment without authenticating a person or proving arbitrary scientific prose. A checkpoint is also a report of progress, not newly verified evidence.
 6. Local source citations depend on this workstation's paths. Self-contained source summaries and synthetic fixtures permit implementation elsewhere, but the original historical evidence must be obtained separately for independent pilot auditing.
-7. v0.1.0 is tested on macOS arm64 with CPython 3.11.11 and 3.13.2. Linux and other runtimes remain untested targets. Local Git work was authorized during implementation; no remote repository or host/global configuration was created or changed.
+7. v0.1.0 is tested on macOS arm64 with CPython 3.11.11 and 3.13.2. Linux remains a target covered by the new CI matrix, but no hosted CI run has been observed yet. Other native operating systems are rejected; WSL execution has not been tested. Local Git work was authorized during implementation; no remote repository or host/global configuration was created or changed.
 8. Version 0.1.0 implements M1–M4 and accepts the existing schema-1 records. The real release task analyzes retained host observations; it does not establish training, remote execution, or quantified research-performance benefit. Placeholder rejection detects the bundled contract template markers; scientific adequacy requires evidence-based judgment. Timeout tests establish termination of the launched local process group; interrupted-verification tests exercise SIGINT. Detached jobs are outside the checker contract, and SIGKILL/power-loss recovery is not established by those interruption tests.
 
 9. Init preserves existing files and does not merge host configuration or upgrade customized
@@ -66,5 +66,6 @@ installed; each initialized project gets its own skill.
 metadata, two oversized/incomplete third-party skills, and the smart-search snapshot digest.
 Existing synthesis edits also disagree with older text assertions. M5 preserves those
 changes and reports targeted migration checks separately; see its verification record.
-11. v0.2 accepts schema-1 task records. Historical closure remains readable, but a v0.1
-verification cannot newly close a task under v0.2 without fresh verification, per SPEC.
+11. v0.2 accepts schema-1 task records. Historical closure remains readable. Any rctl
+version change, including v0.2.0 to v0.2.1, requires fresh verification before a new
+closure, per SPEC.

@@ -4,7 +4,7 @@ This document defines implementation behavior for [R-01–R-12](PRD.md). See [CL
 
 ## 1. Architecture and ownership
 
-Use Python 3.11+, `argparse`, `pathlib`, `json`, and `subprocess`. Use PyYAML for safe frontmatter loading and `jsonschema` for Draft 2020-12 validation; pin resolved versions with `uv.lock` at implementation. Reject duplicate YAML mapping keys rather than silently choosing the last one. Ordinary Markdown bodies are preserved, not reserialized by a YAML writer.
+Target macOS and Linux; ordinary CLI commands reject other platforms before project access. Use Python 3.11+, `argparse`, `pathlib`, `json`, and `subprocess`. Use PyYAML for safe frontmatter loading and `jsonschema` for Draft 2020-12 validation; pin resolved versions with `uv.lock` at implementation. Reject duplicate YAML mapping keys rather than silently choosing the last one. Ordinary Markdown bodies are preserved, not reserialized by a YAML writer.
 
 Separate pure parsing/policy, local record storage, check execution, context generation, and the host adapter. CLI and host code call the same context function. Only CLI application services mutate the acceptance record. No LLM or network call is part of the core.
 
@@ -59,7 +59,7 @@ Use `.rctl/record.json`, created at `begin`. Absence means an unmanaged draft; t
 
 `text` is the exact decoded contract source, read without newline normalization. The last contract is governing. IDs for new reports are `V0001`, `V0002`, and so on, local to the task. Never rewrite old entries through a supported command. The latest verification is the only candidate for a new closure; an older pass cannot bypass a later failure.
 
-Write the entire record to a temporary sibling and publish with `os.replace`. Logs are written first; an interrupted check may leave unreferenced logs, which do not imply a saved verification. A malformed record rejects mutations and yields an unavailable context, without silently resetting it. Repeating a mutation after an uncertain response begins by reading the record; no automatic retry protocol is promised.
+Write the entire record to a temporary sibling, flush Python buffers, call `os.fsync` on that file, and publish with `os.replace`. A pre-publication sync failure leaves the previous record in place; temporary files are cleaned up. Logs are written first; an interrupted check may leave unreferenced logs, which do not imply a saved verification. A malformed record rejects mutations and yields an unavailable context, without silently resetting it. Repeating a mutation after an uncertain response begins by reading the record; no automatic retry protocol is promised.
 
 One writer per task is the v0.1 operating model. A verification process must reread the record and contract before publishing and reject a detected intervening change; this check detects ordinary accidental overlap, not atomic multi-writer coordination. See [limitations](READINESS.md#limitations).
 
@@ -94,7 +94,7 @@ Use the exact nonempty `argv` from the frozen contract, `shell=False`, task dire
 
 Exit 0 means this declared command passed; nonzero means fail. Missing executable, timeout, unreadable required input, or inability to establish a check result means unknown. Capture output directly to files rather than holding it in memory. On timeout, terminate the launched local process group and record unknown. Check commands must remain bounded local validation and must not submit or detach jobs. `verify` explicitly runs these commands; hooks never do so.
 
-Command inputs must already exist. Command output logs are evidence of this execution and are not contract inputs. A checker that must inspect an analysis artifact declares that preexisting artifact as an input; analysis generation happens before verify.
+Command inputs must already exist. Command output logs are evidence of this execution and are not contract inputs. A checker that must inspect an analysis artifact declares that preexisting artifact as an input; analysis generation happens before verify. When an observed path changes and is declared evidence for an executed command criterion, the diagnostic names the criterion and explains this ordering. This association does not prove which process changed the file. Subject issues remain visible even when another criterion fails.
 
 ### Review checks
 

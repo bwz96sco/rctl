@@ -67,3 +67,47 @@ smart-search context7-docs /python/cpython 'subprocess Popen start_new_session w
 [Retrieved evidence](evidence/m2-subprocess-docs.json) cites the [CPython subprocess documentation](https://github.com/python/cpython/blob/main/Doc/library/subprocess.rst) and [subprocess implementation](https://github.com/python/cpython/blob/main/Lib/subprocess.py). It confirms that `wait(timeout=...)` raises on timeout and waits only for the direct child, so group termination is explicit. M1's retained jsonschema and PyYAML API evidence remains applicable.
 
 The next assignment is M3: the local task skill, Codex adapter/export, official protocol recheck, and real host delivery evidence. The local CLI milestone does not establish host compatibility or real research-task acceptance. Operating and preparation boundaries remain centralized in [READINESS: Limitations](READINESS.md#limitations).
+
+## v0.2.1 review follow-up
+
+Completed on 2026-09-06 against A-13, A-14, and A-15. Record errors now retain the
+failed schema field/constraint or lifecycle diagnosis. CLI internal errors advertise
+`RCTL_DEBUG=1`; the traceback goes to stderr and JSON stdout remains one envelope.
+Changed evidence names executed command criteria that declared it and explains
+generation-before-verification, including when another criterion failed. Existing
+verdict and closure guards still apply. Temporary record/handoff writes flush and
+sync the file before replacement. The CLI now uses the reopen/cancel methods directly.
+
+Package metadata and runtime diagnostics identify the macOS/Linux target. The
+[CI workflow](../.github/workflows/ci.yml) specifies both OS targets with Python
+3.11/3.13 and includes all scripts in lint, document checks, build, and wheel smoke.
+
+| Command | Observed result |
+|---|---|
+| `uv run pytest -q` | 140 passed on macOS arm64, CPython 3.13.2. |
+| `UV_PROJECT_ENVIRONMENT=.work/venv311 uv run --locked --python 3.11 pytest -q` | 140 passed on CPython 3.11.11, including the final evidence-recovery assertion. |
+| `uv run --locked pytest -q tests/test_m2.py -k regenerated` | 2 passed on CPython 3.13.2 after adding the recovery assertion. |
+| `uv run ruff check src tests scripts` | Passed after correcting the previously omitted `check_docs.py` import formatting. |
+| `uv run scripts/check_docs.py` | Passed local links, retained JSON, four schemas, and the 14-requirement/24-case matrix. |
+| `uv build` | Built the v0.2.1 sdist and wheel. |
+| `uv run --locked scripts/smoke_package.py dist/rctl-0.2.1-py3-none-any.whl` | Passed the isolated installed-package walkthrough, including generated hook adapter calls. |
+
+The error tests inject malformed local records, an internal exception, an unsupported
+platform, and sync/replace failures. They verify diagnostics, JSON output, and
+preservation. The evidence test actually executes a checker that modifies a declared
+artifact: its command passes but the report cannot close. A check that only reads the
+prepared artifact then verifies and closes. This establishes execution and lifecycle
+behavior; it is not a scientific evidence judgment.
+
+API/configuration evidence was retrieved through smart-search:
+
+```sh
+smart-search context7-docs /python/cpython 'os.fsync flush os.replace atomic rename durability' --format json
+smart-search fetch https://docs.astral.sh/uv/guides/integration/github/ --format markdown
+```
+
+The retrieved [CPython os documentation](https://github.com/python/cpython/blob/main/Doc/library/os.rst)
+specifies flushing Python buffers before file `fsync`, and atomic successful replacement.
+The [uv GitHub Actions guide](https://docs.astral.sh/uv/guides/integration/github/)
+provides the setup action and Python matrix configuration. Hosted CI, native Windows,
+WSL, and power-loss guarantees remain subject to [Limitations](READINESS.md#limitations).

@@ -230,11 +230,16 @@ def verdict_error(task, record, report):
     }
     failed = [check for check in report["checks"] if check["verdict"] != "pass"]
     message = "; ".join(
-        f"{c['criterion_id']}: {c['rationale']}" for c in failed
-    ) or "; ".join(report["subject_issues"])
+        [f"{c['criterion_id']}: {c['rationale']}" for c in failed]
+        + report["subject_issues"]
+    )
     action = (
         " ".join(criteria[c["criterion_id"]]["failure_action"] for c in failed)
-        or "Restore stable, available evidence and verify again."
+        or (
+            "Prepare stable, available evidence before verify; check commands must "
+            "only validate it. Amend the contract with a reason if the command "
+            "must change, then verify again."
+        )
     )
     raise RctlError(
         "VERIFICATION_FAILED" if verdict == "fail" else "VERIFICATION_UNKNOWN",
@@ -300,7 +305,25 @@ def verify(task, reviews_file=None):
         if observation["observation"] != "present":
             issues.append(f"Evidence {observation['observation']}: {ref}.")
         if ref in starting and observation != starting[ref]:
-            issues.append(f"Evidence changed during verification: {ref}.")
+            issue = f"Evidence changed during verification: {ref}."
+            declared_by = [
+                check["criterion_id"]
+                for check in checks
+                if check["method"] == "command"
+                and check["execution"] is not None
+                and any(
+                    not urlsplit(evidence).scheme
+                    and project_ref(task, evidence) == ref
+                    for evidence in check["evidence_refs"]
+                )
+            ]
+            if declared_by:
+                issue += (
+                    f" Declared evidence for executed command criteria: {', '.join(declared_by)}."
+                    " If a check regenerates this file, run that generation before verify"
+                    " and use a check that only reads the prepared evidence."
+                )
+            issues.append(issue)
     for name, original in (("contract.md", contract_text), ("result.md", result_text)):
         try:
             if read_text(task.file(name)) != original:

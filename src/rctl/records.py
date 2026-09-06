@@ -61,6 +61,8 @@ def atomic_write(path, text):
         ) as stream:
             temporary = Path(stream.name)
             stream.write(text)
+            stream.flush()
+            os.fsync(stream.fileno())
         os.replace(temporary, path)
     finally:
         if temporary is not None:
@@ -101,10 +103,16 @@ class Task:
             TypeError,
             KeyError,
             IndexError,
-        ):
+        ) as error:
+            # jsonschema's full exception can dump the retained record and schema.
+            diagnosis = (
+                f"Field {error.json_path} violates the {error.validator} constraint"
+                if isinstance(error, ValidationError)
+                else str(error)
+            )
             raise RctlError(
                 "RECORD_UNAVAILABLE",
-                f"Malformed or unsupported record: {path}",
+                f"Malformed or unsupported record: {path}. {diagnosis}",
                 "Restore a valid record; do not reset task history.",
                 3,
             ) from None

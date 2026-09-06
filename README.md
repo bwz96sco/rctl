@@ -2,13 +2,16 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.2.0 — project initialization and native shared-skill integration.**
+**Status: v0.2.1 — actionable diagnostics and automated development checks.**
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, and Codex reminders. See the [v0.2 verification](docs/M5-VERIFICATION.md)
 for initialization and skill-migration evidence, and the [v0.1 release record](docs/RELEASE-VERIFICATION.md)
 for the original two-session host acceptance.
+The [v0.2.1 checks](docs/M2-VERIFICATION.md#v021-review-follow-up) cover the diagnostic and publication fixes.
 
 ## Run the local CLI
+
+Requires Python 3.11+ on macOS or Linux. Windows users can run inside WSL.
 
 ```sh
 uv sync --locked
@@ -36,16 +39,21 @@ For development and packaging:
 
 ```sh
 uv run pytest
-uv run ruff check src tests scripts/smoke_package.py
+uv run ruff check src tests scripts
+uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.2.0-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.2.1-py3-none-any.whl
 ```
+
+The GitHub Actions workflow is configured to run tests, lint, the document check,
+build, and wheel smoke on macOS and Linux with Python 3.11 and 3.13.
+See [the workflow](.github/workflows/ci.yml).
 
 The installed-package smoke uses a temporary project under `.work/`, an isolated environment, and offline dependency installation after `uv sync`. Schemas, templates, and the local task skill are included in the wheel; editable source execution reads their authoritative repository directories.
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.2.0-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.2.1-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh

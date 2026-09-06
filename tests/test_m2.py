@@ -539,17 +539,63 @@ def test_informational_options_use_json_envelope(cli, option):
     assert cli(option)["data"]["message"]
 
 
-def test_unexpected_internal_failure_uses_exit_70(monkeypatch, capsys):
+@pytest.mark.parametrize("debug", ["", "0", "1"])
+def test_unexpected_internal_failure_uses_exit_70(monkeypatch, capsys, debug):
     from rctl.cli import main
 
     def fail(*args):
         raise RuntimeError("injected internal failure")
 
     monkeypatch.setattr("rctl.cli.dispatch", fail)
+    monkeypatch.setenv("RCTL_DEBUG", debug)
     assert main(["--format", "json", "status", TASK]) == 70
     captured = capsys.readouterr()
     assert json.loads(captured.out)["error"]["code"] == "INTERNAL_ERROR"
     assert "INTERNAL_ERROR" in captured.err
+    assert ("Traceback (most recent call last)" in captured.err) == (debug == "1")
+    assert ("RuntimeError: injected internal failure" in captured.err) == (debug == "1")
+    assert "Traceback" not in captured.out
+
+
+def test_unsupported_platform_rejects_before_writes(project, monkeypatch, capsys):
+    from rctl.cli import main
+
+    monkeypatch.setattr("rctl.cli.sys.platform", "win32")
+    assert main(["--format", "json", "--root", str(project), "init"]) == 2
+    captured = capsys.readouterr()
+    error = json.loads(captured.out)["error"]
+    assert error["code"] == "UNSUPPORTED_PLATFORM"
+    assert "win32" in error["message"]
+    assert "WSL" in error["next_action"]
+    assert list(project.iterdir()) == []
+    assert main(["--format", "json", "--help"]) == 0
+
+
+@pytest.mark.parametrize("review_verdict", ["pass", "fail"])
+def test_regenerated_evidence_explains_prepare_then_verify(ready, cli, review_verdict):
+    ready.file("check.py").write_text(
+        "from pathlib import Path\n"
+        "p = Path('evidence/metrics.json')\n"
+        "p.write_bytes(p.read_bytes() + b'\\n')\n"
+    )
+    review_edit(ready, lambda d: d["checks"][0].update(verdict=review_verdict))
+    response = cli(
+        "verify", TASK, "--reviews", REVIEWS,
+        expected=5 if review_verdict == "pass" else 4,
+    )
+    assert report(ready)["checks"][0]["verdict"] == "pass"
+    message = response["error"]["message"]
+    assert "evidence/metrics.json" in message
+    assert "AC-01" in message
+    assert "run that generation before verify" in message
+    cli("close", TASK, expected=5 if review_verdict == "pass" else 4)
+    if review_verdict == "pass":
+        ready.file("check.py").write_text(
+            "from pathlib import Path\n"
+            "assert Path('evidence/metrics.json').read_text().strip()\n"
+        )
+        verify_pass(ready, cli)
+        cli("close", TASK)
 
 
 def test_text_output_preserves_verification_outcome(ready, capsys):

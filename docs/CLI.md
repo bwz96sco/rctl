@@ -8,6 +8,9 @@ The v0.2 increment adds `init`; the remaining commands were implemented in v0.1.
 rctl [--root PATH] [--format text|json] COMMAND ...
 ```
 
+Global arguments must precede the subcommand: use `rctl --format json status TASK`,
+not `rctl status TASK --format json`.
+
 `--format` defaults to `text`. JSON mode emits exactly one stdout object; command subprocess output goes to check log files. Errors go in the response, with concise diagnostics on stderr. Root and task selection follow [SPEC §2](SPEC.md#2-project-and-task-addressing).
 
 ```json
@@ -27,7 +30,7 @@ On success `error` is null. `data` is always an object and `warnings` is an arra
 | Exit | Meaning | Representative error code |
 |---|---|---|
 | 0 | Operation succeeded; a read may show an active, failed, or stale task. | None |
-| 2 | Invalid arguments, schema, or document structure. | `INVALID_INPUT` |
+| 2 | Invalid arguments, schema, or document structure; unsupported platform. | `INVALID_INPUT`, `UNSUPPORTED_PLATFORM` |
 | 3 | Missing task/root/input or unavailable record. | `NOT_FOUND`, `RECORD_UNAVAILABLE` |
 | 4 | Invalid phase or closure guard rejected; saved verification failed. | `STATE_REJECTED`, `VERIFICATION_FAILED`, `AMENDMENT_REQUIRED`, `VERIFICATION_STALE` |
 | 5 | Saved verification or required applicability is unknown. | `VERIFICATION_UNKNOWN` |
@@ -35,6 +38,13 @@ On success `error` is null. `data` is always an object and `warnings` is an arra
 | 70 | Unexpected internal failure. | `INTERNAL_ERROR` |
 
 Malformed contract/result/review input fails before report creation. A missing declared check input discovered during verification produces a saved unknown report. A nonzero verify exit can therefore refer to a durable report. Call `status` after an interrupted or uncertain write before taking the next action.
+
+Ordinary commands require macOS or Linux; other platforms return
+`UNSUPPORTED_PLATFORM` before project access or writes. Help/version remain available.
+For an unexpected internal error, `RCTL_DEBUG=1` adds the traceback to stderr while
+preserving the exit-70 JSON envelope. Inspect status before reproducing a mutation
+that might already have written files. This debug option does not change hook exception
+containment; it applies to the ordinary CLI error boundary.
 
 ## Commands
 
@@ -79,6 +89,8 @@ For interrupted work, write a short handoff and use `checkpoint`; no close is ne
 
 ## Contract errors to make actionable
 
+- Malformed record: name the failing field/constraint or lifecycle invariant; preserve the record and restore valid history.
+- Evidence changed during verification: name the path and any executed command criteria declaring it. If a checker generates evidence, run generation before verification and amend the frozen command to a read-only check when necessary.
 - Missing criterion method: identify the criterion and accepted method types.
 - Result names an older contract revision: state both revisions and request an updated result followed by verification.
 - Contract changed after begin: request amendment before dependent work.
