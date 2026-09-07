@@ -75,6 +75,8 @@ closure, per SPEC.
 12. v0.3 doctor inspects only project-local assets and cannot establish effective global
 host configuration, persisted trust, or actual delivery. Updates are exported candidates,
 not applied changes. Discovery is limited to immediate `tasks/` children; explicit paths
-remain supported elsewhere. The v0.3 checks ran locally on macOS/Python 3.13.2; its remote
-CI matrix has not run. Its two-session handoff test used Codex CLI 0.153.4 with reviewed
+remain supported elsewhere. The v0.3 checks ran locally on macOS/Python 3.13.2; the published code at
+`ffed00b` also passed all four macOS/Linux × Python 3.11/3.13
+[CI jobs](https://github.com/bwz96sco/rctl/actions/runs/34073127344), including tests, lint,
+document checks, build, and installed-wheel smoke. Its two-session handoff test used Codex CLI 0.153.4 with reviewed
 inline hooks and invocation-only trust bypass, without persistent trust changes.

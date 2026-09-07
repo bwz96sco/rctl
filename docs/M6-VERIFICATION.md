@@ -92,10 +92,19 @@ project-layer trust, exact-definition hook review, JSON/inline sources, and invo
 bypass. Its current default-enabled setting is why doctor labels an absent local feature
 setting inherited rather than automatically broken.
 
+## Publication follow-up
+
+Published on 2026-09-07 as commit `ffed00b1390d5e38e65316a6e747e480f8b107ea`.
+[GitHub CI](https://github.com/bwz96sco/rctl/actions/runs/34073127344) passed all four
+macOS/Linux × Python 3.11/3.13 jobs, including the full tests, Ruff, documentation
+check, build, and installed-wheel smoke. Results were inspected with
+`gh run view 34073127344 --repo bwz96sco/rctl --json status,conclusion,headSha,jobs,url`.
+
 ## Limitations
 
-See [READINESS](READINESS.md#limitations) for the maintained guarantee boundary. This
-increment's remote CI matrix has not run; local checks used macOS/Python 3.13.2. Static
+See [READINESS](READINESS.md#limitations) for the maintained guarantee boundary. Local
+host checks used macOS/Python 3.13.2; the published CLI/package matrix passed as recorded
+above. Static
 doctor findings do not prove effective global host configuration, trust, or model-visible
 delivery. The host experiment establishes this concrete long-handoff delivery case,
 not persistent trust, other host versions, or quantified research-performance gains.
