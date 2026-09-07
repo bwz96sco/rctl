@@ -146,7 +146,39 @@ the unchanged adapter protocol. This patch's adapter checks use synthetic payloa
 the earlier real-host delivery evidence remains separately identified above. No live
 research installation or shared configuration was changed.
 
+## Task-skill usage follow-up
+
+On 2026-09-07, the operator requested fewer repeated help lookups. The packaged
+`research-task` skill now supplies common lifecycle commands, global-option order,
+path bases, and targeted-help fallback. Its linked `references/task-files.md`
+contains a matching synthetic contract, checker, evidence, result, reviews, and
+handoff. This is an instruction-only follow-up to M6, using the A-23/A-29 resource
+packaging checks; CLI behavior and version remain 0.3.1.
+
+The skill creator's `quick_validate.py` passed through `uv run`. A disposable
+walkthrough extracted all six fenced file examples and ran 18 actual CLI calls:
+creation, structural validation, begin, checkpoint, status/context/list, verification,
+close, reopen, amendment, and cancellation. Missing reviews returned unknown/exit 5;
+inconsistent arithmetic returned fail/exit 4 and prevented close. The unchanged
+examples passed both criteria and closed; revision 2 also verified and closed.
+These checks establish example execution and failure handling, not scientific validity.
+Local call results are retained in `.work/skill-usage/walkthrough.json`.
+
+`uv build --out-dir .work/skill-usage/dist` succeeded. Every skill asset matched its
+wheel entry byte-for-byte. `uv run scripts/smoke_package.py
+.work/skill-usage/dist/rctl-0.3.1-py3-none-any.whl` returned `ok: true` from an isolated
+installation. The document gate, skill-relative link check, and `git diff --check`
+passed. The full code regression suite was not repeated for these instruction edits.
+
+Official skill documentation was rechecked through `smart-search fetch
+https://developers.openai.com/codex/skills --format markdown --output
+.work/skill-usage/codex-skills.md`; skill name, metadata, and discovery layout remain
+unchanged.
+
 ## Limitations
+
+The task-skill follow-up did not measure help-call frequency in fresh agent sessions;
+its execution checks establish that the documented commands and examples work.
 
 See [READINESS](READINESS.md#limitations) for the maintained guarantee boundary. Local
 host checks used macOS/Python 3.13.2; the published CLI/package matrix passed as recorded
