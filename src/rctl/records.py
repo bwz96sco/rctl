@@ -335,10 +335,8 @@ class Task:
         else:
             contract = parse_contract(
                 record["contracts"][-1]["text"],
-                self.file("contract.md"),
+                "governing contract",
                 self.task_id,
-                self.root,
-                self.path,
             )
             phase = record["phase"]
             revision = record["contracts"][-1]["revision"]

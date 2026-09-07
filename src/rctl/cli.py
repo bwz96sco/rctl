@@ -227,8 +227,11 @@ def main(argv=None):
         for row in rows:
             report = row["verification"]
             verdict = f"{report['id']} {report['verdict']}" if report else "none"
+            title = " ".join((row["title"] or "(unavailable)").split())
+            if len(title) > 160:
+                title = title[:157] + "..."
             print(
-                f"{row['path']} | {row['title'] or '(unavailable)'} | {row['phase'] or 'unavailable'} | verification: {verdict} | {row['currentness']}"
+                f"{row['path']} | {title} | {row['phase'] or 'unavailable'} | verification: {verdict} | {row['currentness']}"
             )
             for warning in row["warnings"]:
                 print(f"  Warning: {warning}")

@@ -152,10 +152,18 @@ run artifacts, selects a task, executes checks, or writes an index. Entries are 
 by project-relative path. Unavailable entries retain their error and null phase even
 when filtering a phase; they cannot silently disappear. Managed titles come from the
 retained governing contract, draft titles from the proposed contract.
+An existing non-directory `tasks/` is an invalid input. In-root task aliases are
+deduplicated by resolved task path and use the canonical path and task ID. Reading a
+managed title validates the retained contract structure without requiring its evidence
+paths to remain usable; existing verification applicability still reports unavailable
+evidence. Verification retains its project-root path constraints. Text list titles are
+collapsed to one line and limited to 160 characters; JSON retains the complete title.
 
 `status.handoff` contains nullable `next_action` and `blockers`, extracted from explicit
 `## Next action` / `## Blockers` sections or legacy optional-bullet `Next action:` /
-`Blockers:` fields. Fenced examples are ignored. Repeated, empty, or unrecognized
+`Blockers:` fields. Fenced content cannot define headings or fields, but code blocks
+inside an identified field are retained verbatim. Inline backtick spans do not open
+fences. Repeated, empty, or unrecognized
 fields are not inferred; missing/ambiguous next action is a read warning, not a mutation
 error. Checkpoint still preserves the supplied text. Lifecycle `next_action` remains
 separate. Closed/cancelled handoffs are historical. Context reserves bounded space for
@@ -170,6 +178,11 @@ needed, not proof of local modification or an outdated version. Unknown custom c
 are never executed. No global layers, hook trust, or actual delivery are inferred.
 Inspection findings return success with `review_needed`; failures preventing inspection
 use existing errors. Each finding names its source, observed status, and next action.
+Symlinked in-root skill directories use their logical installed paths in findings.
+Finder `.DS_Store` files are ignored and preserved; other local assets remain visible.
+A missing local console entrypoint adds an unavailable finding without discarding
+skill or host configuration diagnostics. Export with `--codex` still requires that
+entrypoint and rejects before writing when it is unavailable.
 
 `update export DIRECTORY [--codex]` writes current packaged skill candidates, scoped
 diffs, inspection findings, and merge instructions to a new project-local directory.

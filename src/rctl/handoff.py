@@ -2,7 +2,7 @@
 
 import re
 
-from .documents import RctlError, read_text
+from .documents import RctlError, markdown_lines, read_text
 
 FIELDS = {"Next action": "next_action", "Blockers": "blockers"}
 
@@ -11,17 +11,10 @@ def extract(text):
     entries = {key: [] for key in FIELDS.values()}
     current = None
     legacy = False
-    fence = None
-    for line in text.splitlines():
-        marker = re.match(r"^ {0,3}(`{3,}|~{3,})", line)
-        if marker:
-            token = marker[1]
-            if fence is None:
-                fence = token
-            elif token[0] == fence[0] and len(token) >= len(fence):
-                fence = None
-            continue
-        if fence:
+    for line, structural in markdown_lines(text):
+        if not structural:
+            if current:
+                entries[current][-1].append(line)
             continue
         heading = re.match(r"^#{1,6}\s+(.+?)\s*$", line)
         field = re.match(r"^(?:-\s+)?(Next action|Blockers):\s*(.*)$", line)

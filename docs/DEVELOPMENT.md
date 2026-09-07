@@ -70,3 +70,11 @@ installed-wheel checks, and two real host sessions recovering a long handoff.
 
 M6 completed on 2026-09-07; [verification](M6-VERIFICATION.md) records the 165-test
 suite, installed-wheel walkthrough, and actual long-handoff recovery across two sessions.
+
+## v0.3.1 — M6 review fixes
+
+Authorized on 2026-09-07. Extend A-25–A-29 with relocated evidence, fenced handoff
+commands, canonical task aliases, symlinked skills, missing console entrypoints,
+directory collisions, and bounded text titles. Preserve verification path constraints
+and machine schemas. Run focused regressions, the full suite, lint, documentation
+checks, and the installed-wheel smoke. This patch does not upgrade live installations.

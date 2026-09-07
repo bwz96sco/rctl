@@ -40,10 +40,10 @@ The following cases extend the original 20-case v0.1 release matrix.
 
 | Case | Requirements | Scenario and observable result | Failure detected; response |
 |---|---|---|---|
-| A-25 | R-15, R-10, R-11 | List mixed phases and filter them; empty roots succeed, damaged candidates remain visible, titles use governing contracts, JSON/text agree. | Hidden or wrongly selected tasks; fix discovery and projection. |
-| A-26 | R-16, R-08 | Extract explicit new/legacy handoffs including multiline Unicode; ignore fenced examples and diagnose ambiguous fields without rewriting files. | Invented or lost continuation; fix extraction. |
+| A-25 | R-15, R-10, R-11 | List mixed phases and filter them; empty roots succeed, damaged candidates remain visible, titles use governing contracts even with relocated evidence; aliases use one canonical identity; directory collisions are actionable; text titles stay on one bounded line while JSON stays complete. | Hidden or wrongly selected tasks; fix discovery and projection. |
+| A-26 | R-16, R-08 | Extract explicit new/legacy handoffs including multiline Unicode; ignore field definitions inside fences, preserve code blocks within recognized fields and inline backtick spans, and diagnose ambiguous fields without rewriting files. | Invented or lost continuation; fix extraction. |
 | A-27 | R-16, R-09 | Both reminder budgets preserve late next steps, warnings and sources; ended-task handoffs are historical; context is read-only and JSON fields bounded. | Truncated next step or accidental continuation; fix prioritization. |
-| A-28 | R-17, R-12, R-13 | Inspect matching/customized/missing skill assets, invalid config, relocated commands, both hook sources, disabled and duplicate handlers; unrelated settings stay outside diffs. | Misleading installation diagnosis; fix scoped inspection. |
+| A-28 | R-17, R-12, R-13 | Inspect matching/customized/missing skill assets, invalid config, relocated commands, both hook sources, disabled and duplicate handlers; unrelated settings stay outside diffs; in-root skill symlinks do not create duplicate findings, Finder metadata is ignored, and missing local entrypoints preserve other diagnostics. | Misleading installation diagnosis; fix scoped inspection. |
 | A-29 | R-17, R-11, R-13 | Export candidates from an installed wheel into a new directory; live assets and records remain identical; existing/out-of-root/owned-asset destinations reject. | Destructive or checkout-dependent update; fix exporter and packaging. |
 | A-30 | R-16, R-08, R-12 | One real Codex session checkpoints a long handoff; a distinct fresh session receives and identifies its concrete next step. | Scripted fixture mistaken for real delivery; fix supported host path and record evidence. |
 

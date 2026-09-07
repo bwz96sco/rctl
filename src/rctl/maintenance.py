@@ -39,6 +39,8 @@ def inspect_installation(root, codex=False):
         )
 
     def difference(name, actual, expected):
+        if actual == expected:
+            return
         diffs[name] = "".join(
             difflib.unified_diff(
                 actual.splitlines(keepends=True),
@@ -103,7 +105,11 @@ def inspect_installation(root, codex=False):
         skill = local_path(root, ".agents/skills/research-task")
         if skill.is_dir():
             for path in sorted(skill.rglob("*")):
-                name = path.relative_to(root).as_posix()
+                if path.name == ".DS_Store":
+                    continue
+                name = (
+                    ".agents/skills/research-task/" + path.relative_to(skill).as_posix()
+                )
                 if (path.is_symlink() or path.is_file()) and name not in candidates:
                     finding(
                         name,
@@ -120,12 +126,22 @@ def inspect_installation(root, codex=False):
         )
 
     if codex:
-        expected_hooks, _ = codex_hooks(root)
-        candidates[".codex/hooks.json"] = json_text(expected_hooks)
+        try:
+            expected_hooks, _ = codex_hooks(root)
+        except RctlError as error:
+            expected_hooks = None
+            finding(
+                "codex:entrypoint",
+                "unavailable",
+                error.message,
+                "Install rctl in this Python environment, then inspect and export again.",
+            )
+        else:
+            candidates[".codex/hooks.json"] = json_text(expected_hooks)
         candidates[".codex/config.toml"] = (
             "# Merge this feature into the existing configuration.\n[features]\nhooks = true\n"
         )
-        observed = {event: [] for event in expected_hooks["hooks"]}
+        observed = {event: [] for event in ("SessionStart", "UserPromptSubmit")}
         config = {}
         for name, parse in (
             (".codex/hooks.json", json.loads),
@@ -223,10 +239,12 @@ def inspect_installation(root, codex=False):
                 "Use a boolean hooks feature setting.",
             )
         expected_projection = {}
-        for event, groups in expected_hooks["hooks"].items():
-            expected_projection[event] = [
-                {"matcher": None, "handler": groups[0]["hooks"][0]}
-            ]
+        for event in observed:
+            if expected_hooks is not None:
+                groups = expected_hooks["hooks"][event]
+                expected_projection[event] = [
+                    {"matcher": None, "handler": groups[0]["hooks"][0]}
+                ]
             count = len(observed[event])
             if count != 1:
                 finding(
@@ -235,9 +253,12 @@ def inspect_installation(root, codex=False):
                     f"Found {count} rctl handlers across project hook sources; expected one.",
                     "Merge exactly one reviewed rctl handler for this event.",
                 )
-        difference(
-            "codex-handlers.json", json_text(observed), json_text(expected_projection)
-        )
+        if expected_hooks is not None:
+            difference(
+                "codex-handlers.json",
+                json_text(observed),
+                json_text(expected_projection),
+            )
         difference(
             "codex-feature.json",
             json_text({"hooks": enabled}),
@@ -325,6 +346,9 @@ def export_update(root, destination, codex=False):
     if path.exists() or (root / destination).is_symlink():
         raise state_error("Update destination already exists; choose a new directory.")
     inspection, candidates, diffs, binding = inspect_installation(root, codex)
+    if codex and ".codex/hooks.json" not in candidates:
+        # Diagnostics can finish without an entrypoint; usable host exports cannot.
+        codex_hooks(root)
     protected = {"tasks", "research", ".rctl", ".agents", ".codex", ".claude", ".git"}
     if binding is not None:
         if binding["vault"]:

@@ -1,8 +1,8 @@
 # Development Readiness
 
-Updated: 2026-09-06. Target: rctl v0.2.1 local release.
+Updated: 2026-09-07. Target: rctl v0.3.1 local patch.
 
-**M1–M5 complete.** Initialization and shared-skill migration are recorded in [M5-VERIFICATION](M5-VERIFICATION.md). All release cases have observed evidence in [RELEASE-VERIFICATION](RELEASE-VERIFICATION.md). The original preparation record below remains historical; it is distinct from implementation and real-host acceptance.
+**M1–M6 complete.** Initialization and shared-skill migration are recorded in [M5-VERIFICATION](M5-VERIFICATION.md). The original release cases have observed evidence in [RELEASE-VERIFICATION](RELEASE-VERIFICATION.md); discovery and maintenance are covered by [M6-VERIFICATION](M6-VERIFICATION.md), including the v0.3.1 review fixes. The preparation record below remains historical; it is distinct from implementation and real-host acceptance.
 
 ## Preparation completion criteria
 

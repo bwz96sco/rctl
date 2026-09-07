@@ -100,6 +100,52 @@ macOS/Linux × Python 3.11/3.13 jobs, including the full tests, Ruff, documentat
 check, build, and installed-wheel smoke. Results were inspected with
 `gh run view 34073127344 --repo bwz96sco/rctl --json status,conclusion,headSha,jobs,url`.
 
+## v0.3.1 review fixes
+
+Observed 2026-09-07 on macOS arm64, CPython 3.13.2. The patch repairs the managed
+title read regression, preserves commands inside explicit handoff fields, shares fence
+detection with document section parsing, and distinguishes inline backticks from fences.
+Discovery now uses canonical task identities, rejects a file at `tasks/` clearly, and
+bounds text titles while retaining full JSON titles. Doctor reports symlinked skills at
+logical installation paths, ignores Finder metadata, and retains diagnostics when its
+console entrypoint is missing. Host candidate export still refuses that missing entrypoint
+before writing. Equal files no longer require diff computation.
+
+`tests/test_m6_review.py` adds 11 regression cases extending A-25–A-29. The relocated
+evidence cases cover both unverified and previously passing tasks: status, listing,
+context and both adapter events remain readable, applicability becomes unknown for
+unavailable verified evidence, and verification still rejects out-of-root paths without
+changing record bytes. Fenced-command cases assert that the command survives both
+context budgets and the structured handoff fields. These are software structure and
+execution checks, not scientific judgments.
+
+Commands and observed results:
+
+```sh
+uv run pytest -q tests/test_m6_review.py tests/test_m6.py
+uv lock --offline
+uv run ruff check src tests scripts
+uv run pytest -q
+uv build
+uv run scripts/smoke_package.py dist/rctl-0.3.1-py3-none-any.whl
+uv run scripts/check_docs.py
+git diff --check
+```
+
+The focused selection passed 36 cases; the full suite passed 176 cases. Ruff and
+`git diff --check` passed. The document gate passed 212 local links, 88 JSON files,
+four schemas/example inputs, and 17 requirements mapped to 30 acceptance cases.
+The source distribution and wheel built successfully, and the isolated installed-wheel
+smoke returned `ok: true` for rctl 0.3.1, including synthetic verification, negative
+closeout, discovery, doctor, candidate export, and adapter payload checks.
+
+Official host documentation was rechecked with
+`smart-search fetch https://developers.openai.com/codex/hooks --format markdown --output .work/review-fixes/codex-hooks.md`.
+The documented SessionStart and UserPromptSubmit additional-context envelopes match
+the unchanged adapter protocol. This patch's adapter checks use synthetic payloads;
+the earlier real-host delivery evidence remains separately identified above. No live
+research installation or shared configuration was changed.
+
 ## Limitations
 
 See [READINESS](READINESS.md#limitations) for the maintained guarantee boundary. Local

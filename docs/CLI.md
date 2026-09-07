@@ -81,11 +81,16 @@ path, with `task_id`, `path`, nullable `title`/`phase`, verification summary,
 `currentness`, warnings, and nullable error. Unavailable entries remain visible through
 filters. Missing tasks directory is an empty successful list; custom task paths remain
 usable through explicit per-task commands. No current task is chosen.
+An existing file at `tasks/` returns `INVALID_INPUT` with `Expected directory: tasks`.
+In-root aliases appear once, with the resolved task path and matching ID. Text titles
+use one line of at most 160 characters; JSON titles remain complete.
 
 `status` and `context` add `handoff: {next_action, blockers}` (nullable strings).
 The existing `next_action` still describes lifecycle operations. Context bounds these
 fields and prominently labels reported work separately from acceptance. Ended-task
 handoffs are historical; missing or ambiguous fields point to `state.md`.
+Code blocks inside explicit handoff fields are preserved. Unavailable evidence paths
+do not prevent reading managed task titles or handoffs; verification path rules still apply.
 
 `doctor [--codex]` returns `root`, `rctl_version`, `codex_inspected`, `review_needed`,
 and `findings` with path, status, message, and next action. Inspection completion exits
@@ -93,6 +98,9 @@ and `findings` with path, status, message, and next action. Inspection completio
 existing errors. Without `--codex`, host configuration is explicitly not inspected.
 Only project-local configuration is covered; static validity does not prove delivery
 or trust. Differences are review candidates, not automatically diagnosed corruption.
+In-root skill symlinks are reported at their logical installation paths; `.DS_Store`
+files do not request review. A missing rctl entrypoint becomes an unavailable finding,
+and the remaining inspection still completes with exit 0.
 
 `update export DIRECTORY [--codex]` refuses an existing or live-asset destination.
 It returns the directory and written file names. The bundle has `candidates/`, `diffs/`,
@@ -100,6 +108,7 @@ It returns the directory and written file names. The bundle has `candidates/`, `
 are individual packaged files. Existing local extras are reported and retained. It
 never applies updates or modifies global installation/configuration. Inspect the bundle,
 then apply only reviewed changes within the separately selected project's scope.
+With `--codex`, an unavailable local entrypoint returns `NOT_FOUND` before any writes.
 
 ## Internal host command
 

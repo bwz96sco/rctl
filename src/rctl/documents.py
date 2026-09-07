@@ -102,23 +102,33 @@ def resource_tree(directory):
     return dict(walk(resource_directory(directory)))
 
 
+def markdown_lines(body):
+    """Yield each original line and whether it may define document structure."""
+    fence = None
+    for line in body.splitlines():
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if fence:
+            if (
+                marker
+                and marker[1][0] == fence[0]
+                and len(marker[1]) >= len(fence)
+                and not marker[2].strip()
+            ):
+                fence = None
+            yield line, False
+        elif marker and (marker[1][0] == "~" or "`" not in marker[2]):
+            fence = marker[1]
+            yield line, False
+        else:
+            yield line, True
+
+
 def sections(body):
     """Ignore fenced examples when identifying document headings."""
     found = {}
     current = None
-    fence = None
-    for line in body.splitlines():
-        marker = re.match(r"^ {0,3}(`{3,}|~{3,})", line)
-        if marker:
-            token = marker[1]
-            if fence is None:
-                fence = token
-            elif token[0] == fence[0] and len(token) >= len(fence):
-                fence = None
-            if current:
-                found[current].append(line)
-            continue
-        if fence:
+    for line, structural in markdown_lines(body):
+        if not structural:
             if current:
                 found[current].append(line)
             continue
