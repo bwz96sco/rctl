@@ -24,4 +24,4 @@ jobs:
       - run: uv run --locked ruff check src tests scripts
       - run: uv run scripts/check_docs.py
       - run: uv build
-      - run: uv run --locked scripts/smoke_package.py dist/rctl-0.2.1-py3-none-any.whl
+      - run: uv run --locked scripts/smoke_package.py dist/rctl-0.3.0-py3-none-any.whl

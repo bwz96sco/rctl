@@ -20,6 +20,21 @@ An interrupted filesystem write can leave partial scaffolding: inspect it and re
 missing project files; repair a partially created vault explicitly, since existing vaults
 are never populated automatically. Init does not upgrade customized templates or skills.
 
+## Inspect and review updates
+
+Use `rctl doctor` to compare the project-local task skill with the current installed
+package and inspect the vault binding. Add `--codex` for project-local hook/configuration
+inspection. Findings describe static configuration; host trust and actual delivery
+remain separate. Differences require review and do not establish who edited a file.
+
+Use `rctl update export .work/rctl-update --codex` with a new destination to generate
+candidate skill files, scoped host fragments, and diffs. Compare each needed change,
+preserve intentional local edits and extra files, and apply reviewed changes only within
+the authorized project. Host candidates are merge fragments, never entire replacement
+configurations. Keep one copy of each rctl handler across project JSON and inline TOML.
+The command never applies updates or changes the global installation; rerunning init
+continues to preserve existing files.
+
 ## Decide boundaries before restructuring
 
 Inspect existing Git roots, remotes, ignore rules, storage paths, note links, manuscript
@@ -42,8 +57,8 @@ interpretation, and drafting material. Scientific checklists and review coverage
 the relevant domain artifact. `tasks/TASK/contract.md` owns the bounded agreement;
 `result.md` owns its findings; `state.md` is an optional handoff; `.rctl/record.json` inside
 that task owns machine acceptance and phase. Link notes to these files instead of copying
-live status. rctl does not yet provide task discovery beyond explicit paths and directory
-inspection. Large raw evidence stays with the runner and is referenced explicitly.
+live status. `rctl task list [--phase active]` discovers immediate task directories under `tasks/`;
+other task locations still require explicit paths. Large raw evidence stays with the runner and is referenced explicitly.
 
 Project `research/` files contain slow-changing scientific intent, verified resources,
 audited baselines, and refuted/parked/unexecuted routes. Promote only established findings

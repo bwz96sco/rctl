@@ -1,0 +1,221 @@
+{
+  "ok": true,
+  "python": "3.13.2",
+  "platform": "macOS-26.3-arm64-arm-64bit-Mach-O",
+  "wheel": "rctl-0.3.0-py3-none-any.whl",
+  "versions": {
+    "rctl": "0.3.0",
+    "PyYAML": "6.0.3",
+    "jsonschema": "4.26.0"
+  },
+  "cli_operations": [
+    {
+      "argv": [
+        "init",
+        "--vault",
+        "note/main",
+        "--codex"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "init",
+        "--codex"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "doctor",
+        "--codex"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "update",
+        "export",
+        "update-candidates",
+        "--codex"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "task",
+        "new",
+        "tasks/retained-comparison",
+        "--kind",
+        "analysis",
+        "--title",
+        "Installed wheel smoke"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "begin",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 2
+    },
+    {
+      "argv": [
+        "contract",
+        "check",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "begin",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "task",
+        "list",
+        "--phase",
+        "active"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "checkpoint",
+        "tasks/retained-comparison",
+        "--file",
+        "handoff.md"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "context",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "amend",
+        "tasks/retained-comparison",
+        "--reason",
+        "Clarify the existing budget"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 5
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 5
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison",
+        "--reviews",
+        "tasks/retained-comparison/reviews.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "task",
+        "list",
+        "--phase",
+        "closed"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "reopen",
+        "tasks/retained-comparison",
+        "--reason",
+        "Recheck retained evidence"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 4
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison",
+        "--reviews",
+        "tasks/retained-comparison/reviews.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "context",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "integration",
+        "codex",
+        "export",
+        "host-bundle"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

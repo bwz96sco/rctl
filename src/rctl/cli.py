@@ -31,6 +31,17 @@ def parser():
     initialize = commands.add_parser("init", help="Create missing project scaffolding.")
     initialize.add_argument("--vault")
     initialize.add_argument("--codex", action="store_true")
+    commands.add_parser(
+        "doctor", help="Inspect project assets without changing them."
+    ).add_argument("--codex", action="store_true")
+    update = commands.add_parser("update").add_subparsers(
+        dest="update_command", required=True
+    )
+    candidates = update.add_parser(
+        "export", help="Write update candidates, never apply them."
+    )
+    candidates.add_argument("directory")
+    candidates.add_argument("--codex", action="store_true")
     integration = commands.add_parser("integration").add_subparsers(
         dest="host", required=True
     )
@@ -48,6 +59,10 @@ def parser():
     new.add_argument("task")
     new.add_argument("--kind", choices=("exploration", "analysis"), required=True)
     new.add_argument("--title", required=True)
+    listing = task.add_parser(
+        "list", help="List immediate tasks/ children without selection."
+    )
+    listing.add_argument("--phase", choices=("draft", "active", "closed", "cancelled"))
     contract = commands.add_parser("contract").add_subparsers(
         dest="contract_command", required=True
     )
@@ -92,6 +107,18 @@ def dispatch(args):
         from .integration import export_codex
 
         return export_codex(root, args.directory), []
+    if args.command == "doctor":
+        from .maintenance import doctor
+
+        return doctor(root, args.codex)
+    if args.command == "update":
+        from .maintenance import export_update
+
+        return export_update(root, args.directory, args.codex)
+    if args.command == "task" and args.task_command == "list":
+        from .discovery import list_tasks
+
+        return list_tasks(root, args.phase)
     task = Task(root, select_task(root, args.task))
     if args.command == "task":
         return task.new(args.kind, args.title), []
@@ -193,6 +220,32 @@ def main(argv=None):
         print(response["data"]["context"])
     elif "message" in response["data"]:
         print(response["data"]["message"])
+    elif "tasks" in response["data"]:
+        rows = response["data"]["tasks"]
+        if not rows:
+            print("No tasks found under tasks/.")
+        for row in rows:
+            report = row["verification"]
+            verdict = f"{report['id']} {report['verdict']}" if report else "none"
+            print(
+                f"{row['path']} | {row['title'] or '(unavailable)'} | {row['phase'] or 'unavailable'} | verification: {verdict} | {row['currentness']}"
+            )
+            for warning in row["warnings"]:
+                print(f"  Warning: {warning}")
+            if row["error"]:
+                error = row["error"]
+                print(f"  {error['code']}: {error['message']} {error['next_action']}")
+    elif "findings" in response["data"]:
+        data = response["data"]
+        print(f"Project: {data['root']}; rctl {data['rctl_version']}")
+        print(
+            f"Codex: {'project configuration inspected; trust/delivery not inspected' if data['codex_inspected'] else 'not inspected (use --codex)'}"
+        )
+        print(f"Review needed: {data['review_needed']}")
+        for item in data["findings"]:
+            print(
+                f"{item['status']}: {item['path']} — {item['message']} Next: {item['next_action']}"
+            )
     else:
         for key, value in response["data"].items():
             print(f"{key}: {value}")

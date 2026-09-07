@@ -1,4 +1,4 @@
-"""Read-only reminders shared by terminal and future host integration."""
+"""Read-only reminders shared by terminal and host integration."""
 
 from .documents import RctlError, read_text
 
@@ -29,18 +29,52 @@ def context(task, budget=DEFAULT_BUDGET, compact=False):
         name: task.file(name)
         for name in ("contract.md", "state.md", "result.md", ".rctl/record.json")
     }
-    lines = [
-        f"Task: {status['task_id']}",
-        f"Phase: {status['phase']}; governing revision: {status['contract_revision'] or 'none'}",
-        f"Verification: {verification}; applicability: {status['currentness']}; historical closure: {historical}",
-        *[f"Warning: {warning}" for warning in warnings],
-        f"Next action: {status['next_action']}",
-    ]
-    lines.extend(f"{name}: {path}" for name, path in paths.items())
+    identity = (
+        f"Task: {status['task_id']}\n"
+        f"Phase: {status['phase']}; governing revision: {status['contract_revision'] or 'none'}\n"
+        f"Verification: {verification}; applicability: {status['currentness']}; "
+        f"historical closure: {historical}\n"
+    )
+    sources = "\n".join(f"{name}: {path}" for name, path in paths.items()) + "\n"
     orientation = task.root / "research/README.md"
     if orientation.is_file():
-        lines.append(f"Project orientation: {orientation}")
-    # Prefer the retained agreement when a proposed edit is incomplete or invalid.
+        sources += f"Project orientation: {orientation}\n"
+    # Reserve paths before excerpting any prose. Smaller caller budgets get a compact map.
+    if len(identity + sources) > budget // 2:
+        sources = f"Task directory: {task.path}\nSources: " + ", ".join(paths) + "\n"
+    available = max(0, budget - len(identity + sources) - 5)
+    limits = {
+        "warnings": available // 4,
+        "next_action": available // 4,
+        "blockers": available // 8,
+        "lifecycle": available // 8,
+    }
+    ended = status["phase"] in {"closed", "cancelled"}
+    label = "Historical handoff" if ended else "Reported handoff"
+    reported = status["handoff"]
+    sections = [
+        bounded(
+            "\n".join(f"Warning: {w}" for w in warnings),
+            limits["warnings"],
+            "status TASK",
+        ),
+        bounded(
+            f"{label} — Next action: {reported['next_action'] or 'Not recorded; read state.md.'}",
+            limits["next_action"],
+            paths["state.md"],
+        ),
+        bounded(
+            f"{label} — Blockers: {reported['blockers'] or 'Not recorded.'}",
+            limits["blockers"],
+            paths["state.md"],
+        ),
+        bounded(
+            f"Lifecycle action: {status['next_action']}",
+            limits["lifecycle"],
+            "status TASK",
+        ),
+    ]
+    header = identity + "\n".join(sections) + "\n" + sources
     contract_text = (
         record["contracts"][-1]["text"] if record else read_text(paths["contract.md"])
     )
@@ -49,14 +83,10 @@ def context(task, budget=DEFAULT_BUDGET, compact=False):
         try:
             handoff = read_text(paths["state.md"])
         except RctlError:
-            warning = "Handoff unavailable; inspect state.md."
-            warnings.append(warning)
-            lines.insert(3, f"Warning: {warning}")
-            handoff = warning
-    header = "\n".join(lines) + "\n"
+            handoff = "Handoff unavailable; inspect state.md."
     labels = (
         "\nGoverning contract (includes criteria):\n",
-        "\nHandoff (reported progress):\n",
+        f"\n{label} (reported progress):\n",
     )
     remaining = budget - len(header) - sum(map(len, labels))
     if compact:
@@ -66,14 +96,18 @@ def context(task, budget=DEFAULT_BUDGET, compact=False):
     else:
         contract_budget = min(len(contract_text), remaining // 2)
         handoff_budget = min(len(handoff), remaining - contract_budget)
-        contract_budget = remaining - handoff_budget
         reminder = (
             header
             + labels[0]
-            + bounded(contract_text, contract_budget, paths["contract.md"])
+            + bounded(contract_text, remaining - handoff_budget, paths["contract.md"])
         )
         reminder += labels[1] + bounded(handoff, handoff_budget, paths["state.md"])
-    # Context's JSON surface must not smuggle the unbounded report/result into a reminder.
+    # Added JSON summaries must not bypass the reminder's bounds.
+    status["handoff"] = {
+        key: bounded(value, limits[key], paths["state.md"]) if value else None
+        for key, value in reported.items()
+    }
+    status["title"] = bounded(status["title"], min(200, budget), paths["contract.md"])
     if report:
         status["verification"] = {
             key: report[key] for key in ("id", "verdict", "contract_revision", "cycle")

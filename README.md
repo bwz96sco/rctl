@@ -2,7 +2,8 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.2.1 — actionable diagnostics and automated development checks.**
+**Status: v0.3.0 — task discovery, concrete handoff reminders, and reviewable updates.**
+The [v0.3 verification](docs/M6-VERIFICATION.md) records 165 passing tests, installed-wheel checks, and fresh-session recovery of a long handoff.
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, and Codex reminders. See the [v0.2 verification](docs/M5-VERIFICATION.md)
 for initialization and skill-migration evidence, and the [v0.1 release record](docs/RELEASE-VERIFICATION.md)
@@ -42,7 +43,7 @@ uv run pytest
 uv run ruff check src tests scripts
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.2.1-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.3.0-py3-none-any.whl
 ```
 
 The GitHub Actions workflow is configured to run tests, lint, the document check,
@@ -53,7 +54,7 @@ The installed-package smoke uses a temporary project under `.work/`, an isolated
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.2.1-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.3.0-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh
@@ -66,13 +67,35 @@ records the vault binding; it never selects an implicit current task. Existing f
 preserved and listed. Choose the vault at first init; changing a recorded binding requires
 an explicit reviewed edit. Existing vaults are associated without edits. New vaults receive
 note templates, ownership guidance, and local ignore rules. Init does not upgrade existing
-skills/templates; compare preserved files explicitly when updating a project.
+skills/templates; use `doctor` and candidate export to review updates.
 
 The vault holds reading notes, derivations, and interpretation linked to task and runner
 evidence. Task contract/result/state and machine acceptance remain under `tasks/`.
 `research-project-setup` is retired from the shared-skill repository; workspace and migration
 guidance now ships in [research-task](skills/research-task/references/workspace.md).
 No live project migration, Git setup, or host trust grant occurs during initialization.
+
+## Find work and review updates
+
+```sh
+rctl task list
+rctl task list --phase active
+rctl status tasks/my-analysis
+rctl doctor --codex
+rctl update export .work/rctl-update --codex
+```
+
+Listing reads immediate task directories under `tasks/`; it never selects a task or
+executes checks. Damaged entries stay visible. Status separates lifecycle advice from
+`handoff.next_action` and `handoff.blockers`. Put `## Next action` and `## Blockers` first
+in new handoffs; existing plain/bulleted `Next action:` fields remain supported. Reminders
+prioritize those fields even when they occur late in a long document.
+
+Doctor inspects the project binding and task skill; `--codex` adds project-local host
+configuration checks. Differences mean review needed, not proof that a customization is
+wrong. Update export writes packaged candidates and scoped diffs to a new directory;
+it never applies them. Merge host fragments without replacing unrelated settings.
+Configuration inspection does not establish trust or actual reminder delivery.
 
 ## Codex reminders
 

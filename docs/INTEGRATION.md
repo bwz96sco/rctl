@@ -61,3 +61,21 @@ Do not install Stop, PreToolUse, PreCompact, or SubagentStart handlers. Task com
 For disposable host tests, `RCTL_HOOK_LOG` may select a local receipt file. No receipts are written when it is unset. Each JSONL receipt records event, source, session ID, task path, timestamp, and delivered context. Keep it in local test output because context can include private material; do not send telemetry.
 
 Release evidence must include two distinct fresh host sessions, their launch arguments and host version, receipt records, the first session's saved handoff, and proof that the second received it. Also launch without hooks and show the core terminal loop still works. The no-hook run establishes core independence; it is not a comparative model-performance experiment.
+
+## v0.3 maintenance and handoff delivery
+
+`doctor --codex` inspects only project-local JSON/TOML configuration. It can identify
+missing/duplicate rctl handlers, stale executable/root addressing, customized options,
+and explicit disabling. An absent feature setting is inherited; the current official
+host documentation describes hooks as enabled by default. Effective global/managed
+settings, trust, and model-visible delivery remain outside static inspection.
+
+`update export DIRECTORY --codex` provides reviewed-update material, with host fragments
+and scoped diffs. It does not merge configuration or grant trust. Update the packaged
+skill and intended rctl handlers after reviewing local differences; retain other content.
+Changed definitions may need renewed host trust. The official protocol/trust source is
+https://developers.openai.com/codex/hooks (rechecked through smart-search 2026-09-07).
+
+Both reminder events now prioritize explicit next-action/blocker fields before long
+handoff prose. Ended tasks label those fields historical; they remain reported progress,
+not permission or acceptance. A-30 requires actual two-session delivery evidence.

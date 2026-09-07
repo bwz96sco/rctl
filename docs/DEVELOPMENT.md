@@ -58,3 +58,15 @@ changes during checks). Keep verdict and closure rules unchanged. Add explicit
 platform metadata/runtime errors, full-script lint, and macOS/Linux CI. Exercise
 actual subprocess evidence regeneration and fault-injected record/publication errors;
 run the full suite and installed wheel smoke before the local patch release.
+
+## M6 — Task discovery, handoff summaries, and installation maintenance (v0.3)
+
+Authorized on 2026-09-07. Implement task listing, explicit handoff extraction and
+prioritized reminders, read-only doctor, and candidate-only update export. Existing
+records and project bindings keep schema version 1. No live-project updates, global
+installation changes, configuration merge/apply operation, or scientific execution
+is part of this increment. Exit evidence: A-25–A-30, existing lifecycle regressions,
+installed-wheel checks, and two real host sessions recovering a long handoff.
+
+M6 completed on 2026-09-07; [verification](M6-VERIFICATION.md) records the 165-test
+suite, installed-wheel walkthrough, and actual long-handoff recovery across two sessions.

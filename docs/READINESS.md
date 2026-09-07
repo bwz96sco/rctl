@@ -44,6 +44,8 @@ Manual consistency review checked phase versus assessment, amendment/reopen inva
 
 - M5: project init, packaged vault/workspace guidance, and shared-skill migration; [verification](M5-VERIFICATION.md).
 
+- M6: task discovery, prioritized handoffs, installation diagnostics and candidate export; [verification](M6-VERIFICATION.md).
+
 M5 includes authorized shared-source changes. Live research-task migration and remote publication remain outside this increment.
 
 ## Limitations
@@ -66,6 +68,13 @@ installed; each initialized project gets its own skill.
 metadata, two oversized/incomplete third-party skills, and the smart-search snapshot digest.
 Existing synthesis edits also disagree with older text assertions. M5 preserves those
 changes and reports targeted migration checks separately; see its verification record.
-11. v0.2 accepts schema-1 task records. Historical closure remains readable. Any rctl
+11. v0.2 and v0.3 accept schema-1 task records. Historical closure remains readable. Any rctl
 version change, including v0.2.0 to v0.2.1, requires fresh verification before a new
 closure, per SPEC.
+
+12. v0.3 doctor inspects only project-local assets and cannot establish effective global
+host configuration, persisted trust, or actual delivery. Updates are exported candidates,
+not applied changes. Discovery is limited to immediate `tasks/` children; explicit paths
+remain supported elsewhere. The v0.3 checks ran locally on macOS/Python 3.13.2; its remote
+CI matrix has not run. Its two-session handoff test used Codex CLI 0.153.4 with reviewed
+inline hooks and invocation-only trust bypass, without persistent trust changes.

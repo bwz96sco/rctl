@@ -1,6 +1,6 @@
-# rctl v0.1 Specification
+# rctl Specification
 
-This document defines implementation behavior for [R-01–R-12](PRD.md). See [CLI](CLI.md) for syntax and [schemas](../schemas/README.md) for structural validation. All times are UTC ISO 8601 strings.
+This document defines core behavior and the v0.2/v0.3 extensions for [R-01–R-17](PRD.md). See [CLI](CLI.md) for syntax and [schemas](../schemas/README.md) for structural validation. All times are UTC ISO 8601 strings.
 
 ## 1. Architecture and ownership
 
@@ -143,3 +143,37 @@ Task lifecycle commands do not change global configuration, scientific knowledge
 All intended paths are checked before writing. Existing regular files are preserved and listed, including customized orientation or host files; file/directory collisions and paths outside the selected root reject the operation. Missing files use exclusive creation. A failed filesystem operation may leave an incomplete scaffold; rerunning fills missing project files without replacing earlier content. A partially created vault needs explicit repair because existing vault contents are never populated automatically. Existing files are not certified compatible merely because they are preserved.
 
 `--codex` creates missing `.codex/hooks.json`, `.codex/config.toml`, and project-local loading instructions using the installed entrypoint. Existing host files are preserved and named as needing review; initialization does not merge definitions, grant trust, change global config, start a host, or run a task. Repeated initialization must not change task records or file contents. The local task skill points to packaged workspace guidance for Git/data boundaries, legacy migration, and optional vault use.
+
+## 11. Discovery, handoff summaries, and installation inspection (v0.3)
+
+`task list` inspects immediate directories under `tasks/` containing `contract.md` or
+`.rctl/record.json`. Missing `tasks/` yields an empty list. It never recursively discovers
+run artifacts, selects a task, executes checks, or writes an index. Entries are sorted
+by project-relative path. Unavailable entries retain their error and null phase even
+when filtering a phase; they cannot silently disappear. Managed titles come from the
+retained governing contract, draft titles from the proposed contract.
+
+`status.handoff` contains nullable `next_action` and `blockers`, extracted from explicit
+`## Next action` / `## Blockers` sections or legacy optional-bullet `Next action:` /
+`Blockers:` fields. Fenced examples are ignored. Repeated, empty, or unrecognized
+fields are not inferred; missing/ambiguous next action is a read warning, not a mutation
+error. Checkpoint still preserves the supplied text. Lifecycle `next_action` remains
+separate. Closed/cancelled handoffs are historical. Context reserves bounded space for
+reported next action and blockers before long prose, retains warnings and source paths,
+and bounds its added handoff JSON fields too. Neither record nor project schema changes.
+
+`doctor` completes a read-only inspection of project binding, bound vault existence,
+and packaged task-skill differences. `--codex` additionally inspects project JSON and
+inline TOML hooks, executable/root addressing, duplicates, and explicit disabling.
+Absent feature settings are inherited, not proven broken. Differences mean review
+needed, not proof of local modification or an outdated version. Unknown custom commands
+are never executed. No global layers, hook trust, or actual delivery are inferred.
+Inspection findings return success with `review_needed`; failures preventing inspection
+use existing errors. Each finding names its source, observed status, and next action.
+
+`update export DIRECTORY [--codex]` writes current packaged skill candidates, scoped
+diffs, inspection findings, and merge instructions to a new project-local directory.
+Codex candidates are fragments, not replacements for unrelated configuration. Destinations
+inside live control/knowledge directories are rejected. No snapshot, installation-history
+schema, automatic application, or configuration merge is introduced. Init and existing
+integration export semantics are unchanged.

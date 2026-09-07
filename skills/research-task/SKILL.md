@@ -5,9 +5,9 @@ description: Initialize a research workspace or start, resume, verify, or close 
 
 # Research task
 
-Use the selected rctl task as the owner of live work. Read its `contract.md`, optional `state.md`, existing `result.md`, and `rctl status TASK` before dependent work. A hook reminder is a bounded view; follow its source paths when details or warnings affect the next action. Root and task selection are explicit (`--root`/`RCTL_PROJECT_ROOT`, `TASK`/`RCTL_TASK_PATH` for context).
+Use the selected rctl task as the owner of live work. Read its `contract.md`, optional `state.md`, existing `result.md`, and `rctl status TASK` before dependent work. A hook reminder is a bounded view; follow its source paths when details or warnings affect the next action. Use `rctl task list` when the task path is unknown; listing does not select a task. Root and task selection are explicit (`--root`/`RCTL_PROJECT_ROOT`, `TASK`/`RCTL_TASK_PATH` for context).
 
-For initialization, vault use, Git/data boundaries, or migration, first read [references/workspace.md](references/workspace.md). `rctl init [--vault PATH] [--codex]` creates missing scaffolding in the selected existing root. Inspect `.rctl/project.json` for the bound vault; no global current-task pointer is created. Advice and bounded mechanical edits may stay inline when no managed task is needed.
+For initialization, installation diagnostics/update candidates, vault use, Git/data boundaries, or migration, first read [references/workspace.md](references/workspace.md). `rctl init [--vault PATH] [--codex]` creates missing scaffolding in the selected existing root. Inspect `.rctl/project.json` for the bound vault; no global current-task pointer is created. Advice and bounded mechanical edits may stay inline when no managed task is needed.
 
 ## Agreement and execution
 
@@ -27,6 +27,6 @@ Use `close TASK` only when the latest report passes and remains applicable. Repo
 
 ## Handoff and durable knowledge
 
-To pause, save last verified progress, evidence locations, unresolved work, and one concrete next action with `checkpoint TASK --file FILE`. Ending a conversation does not close the task. Handoff prose describes progress; `.rctl/record.json` owns acceptance and phase, and supported CLI commands write it.
+To pause, write `## Next action` and `## Blockers` first in the handoff, followed by last verified progress, evidence locations, and unresolved work; save it with `checkpoint TASK --file FILE`. Use one concrete continuation step. `status.handoff` describes reported work; `status.next_action` describes lifecycle operations. Read the source when a reminder reports missing, ambiguous, or truncated handoff fields. Ending a conversation does not close the task. Handoff prose describes progress; `.rctl/record.json` owns acceptance and phase, and supported CLI commands write it.
 
 Keep slow-changing project knowledge in its existing research files. Promote only established findings at closeout; task progress and execution history stay with the task and its evidence. Use `rctl --help` for syntax. For Python setup or execution, use uv.

@@ -1,6 +1,6 @@
 """Run a built wheel in an isolated environment and non-Git project.
 
-Usage: uv run scripts/smoke_package.py dist/rctl-0.2.1-py3-none-any.whl [--skills-root PATH]
+Usage: uv run scripts/smoke_package.py dist/rctl-0.3.0-py3-none-any.whl [--skills-root PATH]
 """
 
 import argparse
@@ -74,6 +74,13 @@ def main():
         before = {p: p.read_bytes() for p in project.rglob("*") if p.is_file()}
         assert cli("init", "--codex")["data"]["created"] == []
         assert before == {p: p.read_bytes() for p in project.rglob("*") if p.is_file()}
+        assert not cli("doctor", "--codex")["data"]["review_needed"]
+        cli("update", "export", "update-candidates", "--codex")
+        assert (
+            project
+            / "update-candidates/candidates/.agents/skills/research-task/SKILL.md"
+        ).is_file()
+        assert all(p.read_bytes() == content for p, content in before.items())
         shared_record = None
         if args.skills_root:
             from smoke_shared_skills import walkthrough
@@ -97,6 +104,11 @@ def main():
         (task / "contract.md").write_bytes(contract)
         cli("contract", "check", "tasks/retained-comparison")
         cli("begin", "tasks/retained-comparison")
+        rows = cli("task", "list", "--phase", "active")["data"]["tasks"]
+        assert any(
+            row["task_id"] == "retained-comparison" and row["phase"] == "active"
+            for row in rows
+        )
         record = (task / ".rctl/record.json").read_bytes()
         (project / "handoff.md").write_text("Next action: inspect retained evidence.\n")
         cli("checkpoint", "tasks/retained-comparison", "--file", "handoff.md")
@@ -148,6 +160,11 @@ def main():
         closure = cli("close", "tasks/retained-comparison")["data"]["closure"]
         assert closure["assessment"] == "not_supported"
         assert cli("status", "tasks/retained-comparison")["data"]["phase"] == "closed"
+        rows = cli("task", "list", "--phase", "closed")["data"]["tasks"]
+        assert any(
+            row["task_id"] == "retained-comparison" and row["currentness"] == "current"
+            for row in rows
+        )
         cli(
             "reopen",
             "tasks/retained-comparison",

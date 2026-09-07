@@ -1,6 +1,6 @@
 # rctl CLI Contract
 
-The v0.2 increment adds `init`; the remaining commands were implemented in v0.1.0. See [release verification](RELEASE-VERIFICATION.md) for local execution and host delivery evidence.
+v0.3 adds `task list`, `doctor`, and `update export`, and extends handoff summaries. v0.2 added `init`; the original task lifecycle commands were implemented in v0.1.0. See [release verification](RELEASE-VERIFICATION.md) for local execution and host delivery evidence.
 
 ## Global arguments and output
 
@@ -65,6 +65,41 @@ containment; it applies to the ordinary CLI error boundary.
 | `integration codex export DIRECTORY` | Write a new integration bundle for the selected project root. Refuse existing destination; do not modify live host configuration. | Bundle files only |
 
 All task arguments are required except the documented `context` case. `--reason` must contain non-whitespace text. There is no unrestricted status setter, force-close, approval command, project database initializer, or remote execution command.
+
+## Discovery and installation maintenance (v0.3)
+
+```sh
+rctl task list
+rctl task list --phase active
+rctl --format json task list
+rctl doctor --codex
+rctl update export .work/rctl-update --codex
+```
+
+`task list [--phase draft|active|closed|cancelled]` returns `data.tasks` sorted by
+path, with `task_id`, `path`, nullable `title`/`phase`, verification summary,
+`currentness`, warnings, and nullable error. Unavailable entries remain visible through
+filters. Missing tasks directory is an empty successful list; custom task paths remain
+usable through explicit per-task commands. No current task is chosen.
+
+`status` and `context` add `handoff: {next_action, blockers}` (nullable strings).
+The existing `next_action` still describes lifecycle operations. Context bounds these
+fields and prominently labels reported work separately from acceptance. Ended-task
+handoffs are historical; missing or ambiguous fields point to `state.md`.
+
+`doctor [--codex]` returns `root`, `rctl_version`, `codex_inspected`, `review_needed`,
+and `findings` with path, status, message, and next action. Inspection completion exits
+0 even when findings need attention. Uninspectable roots/invalid CLI arguments use
+existing errors. Without `--codex`, host configuration is explicitly not inspected.
+Only project-local configuration is covered; static validity does not prove delivery
+or trust. Differences are review candidates, not automatically diagnosed corruption.
+
+`update export DIRECTORY [--codex]` refuses an existing or live-asset destination.
+It returns the directory and written file names. The bundle has `candidates/`, `diffs/`,
+`inspection.json`, and `README.md`. Host candidates are merge fragments; skill candidates
+are individual packaged files. Existing local extras are reported and retained. It
+never applies updates or modifies global installation/configuration. Inspect the bundle,
+then apply only reviewed changes within the separately selected project's scope.
 
 ## Internal host command
 

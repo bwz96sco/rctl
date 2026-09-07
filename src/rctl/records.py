@@ -323,15 +323,23 @@ class Task:
         }
 
     def status(self):
+        from .handoff import read_handoff
         from .verification import currentness
 
         record = self.read_record()
         warnings = []
         report, closure, applicability = None, None, "not_checked"
         if record is None:
-            self.contract()
+            _, contract = self.contract()
             phase, revision, drift = "draft", None, False
         else:
+            contract = parse_contract(
+                record["contracts"][-1]["text"],
+                self.file("contract.md"),
+                self.task_id,
+                self.root,
+                self.path,
+            )
             phase = record["phase"]
             revision = record["contracts"][-1]["revision"]
             try:
@@ -368,8 +376,11 @@ class Task:
             action = "Close using the current passing verification."
         else:
             action = "Prepare the result and required evidence/reviews, then verify; checkpoint to pause."
+        handoff, handoff_warnings = read_handoff(self)
+        warnings.extend(handoff_warnings)
         return {
             "task_id": self.task_id,
+            "title": contract["title"],
             "phase": phase,
             "contract_revision": revision,
             "contract_drift": drift,
@@ -377,4 +388,5 @@ class Task:
             "currentness": applicability,
             "historical_closure": closure,
             "next_action": action,
+            "handoff": handoff,
         }, warnings

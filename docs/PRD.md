@@ -1,6 +1,6 @@
 # rctl Product Requirements
 
-Baseline: 2026-09-05. The v0.1 release is complete; the user-authorized v0.2 increment adds project initialization and research-skill migration.
+Baseline: 2026-09-05. The v0.1 release is complete; the user-authorized v0.2 increment adds project initialization and research-skill migration. v0.3 adds task discovery, prioritized handoff summaries, and candidate-only installation maintenance.
 
 ## Problem and evidence
 
@@ -38,6 +38,9 @@ Ship a local Python CLI, readable task templates, small machine records, command
 | R-12 | Host installation is reviewable, preserves unrelated configuration, and has real delivery evidence. | Copied configuration is not mistaken for working integration. |
 | R-13 | Repeatable project initialization creates missing orientation, task-skill, and optional vault/host files while preserving existing content and explicit vault selection. | A new project has one discoverable entry point without manual template copying. |
 | R-14 | Domain skills use native task contracts/results and retain domain-specific evidence checks without maintaining a competing task lifecycle. | Existing research workflows can use rctl without conflicting state files. |
+| R-15 | Read-only task discovery lists conventional task paths, phases, and verification applicability, keeping damaged entries visible. | Find work without maintaining a second status index or selecting a task implicitly. |
+| R-16 | Explicit handoff next steps and blockers survive bounded reminders independently of lifecycle advice. | Resume concrete work even when a handoff is long. |
+| R-17 | Read-only installation diagnostics and candidate exports compare packaged project assets without replacing live content. | Review skill and hook updates without losing local changes. |
 
 ## Typical use
 

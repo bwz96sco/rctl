@@ -36,6 +36,17 @@ The following cases extend the original 20-case v0.1 release matrix.
 | A-23 | R-13, R-12 | Installed wheel initialization includes workspace guidance, local skill, and optional working hook definitions; existing host files stay intact. | Checkout-only resources or destructive integration; fix packaging/preservation. |
 | A-24 | R-14, R-05, R-06 | Migrated experiment templates and validator work with native rctl contract/result; real verification executes declared domain checks, evidence review remains separate, and negative/unknown outcomes retain their meaning. | Renamed files lose scientific evidence or bypass closure; fix skill/template/check integration. |
 
+## v0.3 discovery and maintenance
+
+| Case | Requirements | Scenario and observable result | Failure detected; response |
+|---|---|---|---|
+| A-25 | R-15, R-10, R-11 | List mixed phases and filter them; empty roots succeed, damaged candidates remain visible, titles use governing contracts, JSON/text agree. | Hidden or wrongly selected tasks; fix discovery and projection. |
+| A-26 | R-16, R-08 | Extract explicit new/legacy handoffs including multiline Unicode; ignore fenced examples and diagnose ambiguous fields without rewriting files. | Invented or lost continuation; fix extraction. |
+| A-27 | R-16, R-09 | Both reminder budgets preserve late next steps, warnings and sources; ended-task handoffs are historical; context is read-only and JSON fields bounded. | Truncated next step or accidental continuation; fix prioritization. |
+| A-28 | R-17, R-12, R-13 | Inspect matching/customized/missing skill assets, invalid config, relocated commands, both hook sources, disabled and duplicate handlers; unrelated settings stay outside diffs. | Misleading installation diagnosis; fix scoped inspection. |
+| A-29 | R-17, R-11, R-13 | Export candidates from an installed wheel into a new directory; live assets and records remain identical; existing/out-of-root/owned-asset destinations reject. | Destructive or checkout-dependent update; fix exporter and packaging. |
+| A-30 | R-16, R-08, R-12 | One real Codex session checkpoints a long handoff; a distinct fresh session receives and identifies its concrete next step. | Scripted fixture mistaken for real delivery; fix supported host path and record evidence. |
+
 ## Test organization
 
 Pure tests cover parsing, lifecycle, verdict aggregation, and rendering. Integration tests use actual subprocess checks and real temporary files. Do not use only mocked execution for A-04/A-05/A-14/A-15. A-18/A-20 require a real host/task; they cannot be satisfied by scripted payload injection or the old pilot alone.
