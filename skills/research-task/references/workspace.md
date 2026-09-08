@@ -78,3 +78,12 @@ For a requested move, prepare a concrete source-to-destination map, adjust refer
 check the affected links and commands, and report any authority or evidence gaps. Review
 shared instruction changes separately from live project migration. Automatic initialization
 does not perform this migration. Optional note graph guidance: [graphify.md](graphify.md).
+
+## Project reminders
+
+Reminders read PROGRAM.md's `## Goal` and optional `## Current guidance`, plus
+ROUTES.md's `## Reuse Rule`. Keep these sections concise and link detailed evidence.
+Existing projects may add Current guidance in place; no record or manifest migration
+is needed. Repeated sections, unfinished placeholders and unreadable files produce
+warnings. Missing research files leave task commands usable. Init preserves existing
+files, so reconcile new guidance sections with the actual project content.

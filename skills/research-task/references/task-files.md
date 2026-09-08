@@ -54,6 +54,12 @@ Stop after one inspection and verification. Report inconsistent counts honestly;
 do not regenerate evidence to manufacture a passing check.
 ```
 
+For an experimental proposal, expand Question/Scope with the history actually inspected.
+For example: a cited route tested an intervention only at one fixed budget; the proposed
+comparison would test a different objective against an equal-compute control, satisfying
+that route's stated reopen condition. Name the unresolved mechanism and the decision
+that each possible result changes. This arithmetic-only example needs no invented route.
+
 For command checks, `argv` is an argument array executed without a shell, with the
 task directory as cwd. Declare the checker, helper files, and preexisting data in
 `inputs`. A check validates available evidence; generate analysis outputs before

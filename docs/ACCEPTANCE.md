@@ -14,7 +14,7 @@ All cases below are required for release. None is claimed to have passed merely 
 | A-08 | R-06 | Close without result/report fails; a later failed report cannot be bypassed by an older pass; repeated close adds no entry. | Unverified/duplicate closure; fix transition guards. |
 | A-09 | R-03, R-06 | Reopen requires a reason and new verification; historical closure remains visible after current files change. | Old acceptance reused across cycles or history erased; fix lifecycle. |
 | A-10 | R-08 | Checkpoint saves only handoff; fresh process context finds it; an unfinished task can pause without close. | Session continuity tied to completion; fix handoff and read path. |
-| A-11 | R-09, R-10 | Session task selection is explicit; unset, out-of-root, and wrong-root paths give an unavailable reminder; no other task is picked. | Wrong-task context; fix path/selection logic. |
+| A-11 | R-09, R-10 | Session task selection is explicit; unset selection is explicit (project-only context since M7); out-of-root and wrong-root paths give an unavailable task reminder; no other task is picked. | Wrong-task context; fix path/selection logic. |
 | A-12 | R-09 | Context respects character budgets, prioritizes warnings, labels truncation, and does not run a checker or write a record. | Reminder performs work, hides critical state, or grows without bound; fix renderer/adapter boundary. |
 | A-13 | R-11 | CLI operates in a non-Git temporary directory with no host, framework, network, or LLM; JSON stdout and exit codes match CLI. | Hidden runtime dependency or unusable machine interface; fix packaging/output. |
 | A-14 | R-06 | Interrupted publication leaves previous record parseable; orphan logs do not become a pass; detected record change refuses overwrite. | Partial record or obvious overlapping write loses facts; fix publication/recheck. |
@@ -46,6 +46,17 @@ The following cases extend the original 20-case v0.1 release matrix.
 | A-28 | R-17, R-12, R-13 | Inspect matching/customized/missing skill assets, invalid config, relocated commands, both hook sources, disabled and duplicate handlers; unrelated settings stay outside diffs; in-root skill symlinks do not create duplicate findings, Finder metadata is ignored, and missing local entrypoints preserve other diagnostics. | Misleading installation diagnosis; fix scoped inspection. |
 | A-29 | R-17, R-11, R-13 | Export candidates from an installed wheel into a new directory; live assets and records remain identical; existing/out-of-root/owned-asset destinations reject. | Destructive or checkout-dependent update; fix exporter and packaging. |
 | A-30 | R-16, R-08, R-12 | One real Codex session checkpoints a long handoff; a distinct fresh session receives and identifies its concrete next step. | Scripted fixture mistaken for real delivery; fix supported host path and record evidence. |
+
+## v0.4 project reminders and history reuse
+
+| Case | Requirements | Scenario and observable result | Failure detected; response |
+|---|---|---|---|
+| A-31 | R-18, R-10 | No selection returns project-only context; invalid selection preserves project guidance and the CLI error; missing project files leave task context usable. | Task failures erase orientation; fix independent loading. |
+| A-32 | R-18, R-09 | Fresh reads reflect corrected guidance; fenced headings, duplicate sections, placeholders, unreadable and escaping files are not treated as valid guidance. | Stale or ambiguous claims injected; fix explicit section reading. |
+| A-33 | R-16, R-18 | Long paths and handoffs retain real guidance, warning, blocker and next-step content at 2000 characters; short reminders omit duplicate handoff prose; JSON summaries remain bounded. | Sources consume useful content; fix allocation. |
+| A-34 | R-19, R-14 | Packaged skill and native examples cover history before proposal/begin; a bounded fresh-host planning case cites related evidence and a distinct question/decision. | Instructions exist but planning still repeats a route; revise the trigger or content. |
+| A-35 | R-18, R-12 | Real startup and compact recovery deliver project guidance; a changed current section appears in subsequent context. | Payload fixtures mistaken for actual delivery; fix supported host integration. |
+| A-36 | R-18, R-13, R-17 | Installed wheel carries new assets; scoped Pinyin VSR and OR upgrades preserve task records and customized guidance while delivering current reminders. | Packaging or rollout drops content; repair before completing upgrade. |
 
 ## Test organization
 

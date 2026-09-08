@@ -9,7 +9,7 @@ import traceback
 from contextlib import redirect_stdout
 
 from . import __version__
-from .context import context
+from .context import load_context
 from .documents import RctlError, invalid
 from .records import Task, project_root, select_task
 
@@ -99,6 +99,8 @@ def dispatch(args):
             "Run rctl on macOS or Linux; Windows users can use WSL.",
         )
     root = project_root(args.root)
+    if args.command == "context":
+        return load_context(root, args.task)
     if args.command == "init":
         from .initialize import initialize
 
@@ -146,7 +148,6 @@ def dispatch(args):
         return task.close(), []
     if args.command in {"reopen", "cancel"}:
         return getattr(task, args.command)(args.reason), []
-    return context(task)
 
 
 def main(argv=None):
@@ -188,7 +189,9 @@ def main(argv=None):
             "next_action": error.next_action,
         }
         exit_code = error.exit_code
-        if args and args.command == "context":
+        if args and args.command == "context" and "context" in error.data:
+            response["warnings"] = response["data"].pop("context_warnings", [])
+        elif args and args.command == "context":
             response["data"] = {
                 "available": False,
                 "context": f"rctl context unavailable: {error.message}\n{error.next_action}",

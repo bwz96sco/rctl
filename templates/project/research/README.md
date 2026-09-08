@@ -14,6 +14,10 @@ records durable scientific context, not live experiment or task status.
 4. [`ROUTES.md`](ROUTES.md) — refuted, parked, and not-executed mechanisms plus
    the evidence required to reopen them.
 
+Run `rctl context` for project guidance even before selecting a task. Reminders read
+PROGRAM.md's Goal and optional Current guidance, plus ROUTES.md's Reuse Rule.
+Read the linked evidence before experimental planning; short reminders are excerpts.
+
 After these files, inspect current work in the project's task system:
 
 ```text

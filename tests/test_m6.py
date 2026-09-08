@@ -132,7 +132,10 @@ def test_late_handoff_survives_budgets_and_is_historical(task, cli, project):
         assert "Next action: Inspect the retained error table." in text
         assert "Await the operator decision." in text
         assert "state.md" in text and "No verification" in text
-        assert text.index("Inspect the retained") < text.index("Old work.")
+        if compact:
+            assert "Old work." not in text
+        else:
+            assert text.index("Inspect the retained") < text.index("Old work.")
     task.cancel("Pause route permanently")
     text = context(task, budget=2000, compact=True)[0]["context"]
     assert "Historical handoff — Next action:" in text

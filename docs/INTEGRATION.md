@@ -46,7 +46,7 @@ The pilot's retained event and response shape is:
 {"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"Task comparison: active; contract revision 1; verification not checked. Read tasks/comparison/contract.md and the saved handoff."}}
 ```
 
-The same response shape uses `UserPromptSubmit` for that event. Unsupported events return `{}`. Supported events with absent selection or unreadable state return a short unavailable/selection reminder and exit 0. Malformed JSON also returns `{}` with a concise diagnostic on stderr and exits 0. A broken reminder must not invent a successful task state or prevent ordinary conversation.
+The same response shape uses `UserPromptSubmit` for that event. Unsupported events return `{}`. Supported events with absent selection return project-only context; unreadable task state retains project guidance and an unavailable task diagnostic. Both exit 0. Malformed JSON also returns `{}` with a concise diagnostic on stderr and exits 0. A broken reminder must not invent a successful task state or prevent ordinary conversation.
 
 Cap rendered `SessionStart` context at 8,000 Unicode characters and `UserPromptSubmit` at 2,000, preserving warnings and source paths before excerpts. Configure a 10-second host timeout as the initial setting, not a promised latency. Adapter code delegates to the pure context renderer; no checks or state mutations occur.
 
@@ -79,3 +79,17 @@ https://developers.openai.com/codex/hooks (rechecked through smart-search 2026-0
 Both reminder events now prioritize explicit next-action/blocker fields before long
 handoff prose. Ended tasks label those fields historical; they remain reported progress,
 not permission or acceptance. A-30 requires actual two-session delivery evidence.
+
+## v0.4 project context
+
+Both events use the same independent project/task loader as the CLI. They read current
+Goal, Current guidance and Reuse Rule sections, retaining project guidance when task
+selection is absent or invalid. Short output reserves content space for task warnings,
+blockers and next action and does not repeat full handoff prose. No new events are installed.
+
+The official hooks documentation was fetched through smart-search on 2026-09-08:
+https://developers.openai.com/codex/hooks . SessionStart source `compact` runs before
+the continuation request after compaction. rctl budgets count Unicode characters;
+the host's `additionalContextLimit` is an approximate token spill threshold. These
+are separate limits, even though the configured numeric values currently match.
+Actual host delivery evidence belongs to the M7 verification record.

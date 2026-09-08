@@ -17,11 +17,11 @@ criteria:
 
 ## Question
 
-<The question to answer, including the origin of the request.>
+<The question to answer, including the origin of the request and, for new experiments, what related history leaves unanswered.>
 
 ## Scope
 
-<Included work, expected deliverable, starting evidence, and boundaries.>
+<Included work, expected deliverable, starting evidence, and boundaries. For experiments, cite related routes, the substantive difference or reopen condition, and the decision new evidence would change.>
 
 ## Constraints
 

@@ -5,9 +5,9 @@ import os
 import sys
 from pathlib import Path
 
-from ..context import bounded, context
+from ..context import bounded, load_context
 from ..documents import RctlError, invalid, local_path
-from ..records import Task, now, project_root, select_task
+from ..records import now, project_root
 
 BUDGETS = {"SessionStart": 8000, "UserPromptSubmit": 2000}
 
@@ -29,14 +29,14 @@ def handle(payload, root_argument=None):
                 "Hook cwd must be an absolute path inside the selected project."
             )
         local_path(root, cwd)
-        task = Task(root, select_task(root))
-        text = context(
-            task, budget=BUDGETS[event], compact=event == "UserPromptSubmit"
+        text = load_context(
+            root, budget=BUDGETS[event], compact=event == "UserPromptSubmit"
         )[0]["context"]
     except (RctlError, OSError, ValueError) as error:
         text = "rctl context unavailable: " + str(error)
         if isinstance(error, RctlError):
             text += "\n" + error.next_action
+            text = error.data.get("context", text)
     text = bounded(text, BUDGETS[event], "the selected task files")
     receipt = os.environ.get("RCTL_HOOK_LOG")
     if receipt and root is not None:

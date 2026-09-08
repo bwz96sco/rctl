@@ -1,6 +1,6 @@
 ---
 name: research-task
-description: Initialize a research workspace or start, resume, verify, or close a bounded research task managed by rctl, preserving its contract, evidence, amendments, and cross-session handoff.
+description: Initialize a research workspace or plan experiments or start, resume, verify, or close a bounded research task managed by rctl, preserving its contract, evidence, amendments, and cross-session handoff.
 ---
 
 # Research task
@@ -17,7 +17,7 @@ Use the commands below directly for the covered operations. `TASK` means the sel
 | --- | --- | --- |
 | Find work | `rctl task list --phase active` | Task path is unknown; omit the filter to include drafts and ended tasks. |
 | Resume | `rctl --format json status TASK` | Read phase, revision, verification, and handoff before dependent work. |
-| Read reminder | `rctl context TASK` | Obtain a bounded view and source paths. |
+| Read reminder | `rctl context [TASK]` | Obtain project guidance and optional selected-task context. |
 | Create draft | `rctl task new TASK --kind analysis --title "Bounded question"` | New task; use `exploration` for bounded exploration. |
 | Check structure | `rctl contract check TASK` | After filling the draft; does not execute criteria. |
 | Begin | `rctl begin TASK` | Retain the completed draft before governed execution. |
@@ -31,6 +31,12 @@ Use the commands below directly for the covered operations. `TASK` means the sel
 CLI task paths, `--file`, and `--reviews` resolve from the project root. Inside documents, `evidence_refs`, command `inputs`, and command execution resolve from the task directory. `RCTL_TASK_PATH` supplies an omitted task only for `context` and hooks; lifecycle commands still need `TASK`.
 
 For contract/result/review authoring, read [references/task-files.md](references/task-files.md) for matching minimal examples and command-check fields. Use the selected task's existing files when resuming. Consult targeted help (for example, `rctl checkpoint --help` or `rctl task new --help`) only for uncovered syntax, an argument error, or a version mismatch. Reuse syntax already established in the session; a new task alone does not require another help lookup.
+
+## History before experimental planning
+
+Before proposing an experiment, creating its contract, or materially changing direction, read `research/PROGRAM.md` and `research/ROUTES.md`, then inspect the evidence linked by related mechanisms. State what prior work answered, what remains unanswered, the substantive difference or satisfied reopen condition, and which decision the new result would change. Match mechanisms across names. If no related route is found, name the sources checked. Include this reasoning in the proposal and the contract's Question/Scope; use domain skills to judge its scientific adequacy.
+
+`rctl context` also works without a selected task and supplies project guidance. It is a bounded excerpt: read the source when a relevant field is absent, ambiguous, or truncated. Project guidance remains reported intent, distinct from task acceptance. Keep current corrections and their evidence/scope in PROGRAM.md's `## Current guidance`; link superseding route conclusions in ROUTES.md while preserving old evidence. Update corrections when established, independently of task closeout.
 
 ## Agreement and execution
 

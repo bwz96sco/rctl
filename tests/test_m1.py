@@ -160,7 +160,7 @@ def test_checkpoint_fresh_process_and_no_prose_closure(task, cli, project):
 
 def test_selection_is_explicit_without_fallback(task, cli, project):
     task.begin()
-    response = cli("context", expected=3)
+    response = cli("context")
     assert response["data"]["available"] is False
     for selected, code in [("missing", 3), ("../outside", 2), (str(project.parent), 2)]:
         response = cli("context", selected, expected=code)
@@ -224,8 +224,9 @@ def test_context_bounded_unicode_read_only_and_no_checker(task, cli, project):
     assert "[Truncated; read" in text
     assert "AC-01" in text
     assert "Next action: review the evidence." in text
-    assert str(task.file("contract.md")) in text
-    assert str(task.file("state.md")) in text
+    assert f"T: {task.path.relative_to(project)}" in text
+    assert "contract.md" in text and f"Root: {project}" in text
+    assert "T/state.md" in text
     for budget in (1000, 4000):
         assert len(context(task, budget=budget)[0]["context"]) <= budget
     after = {

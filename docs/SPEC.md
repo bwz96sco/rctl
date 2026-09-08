@@ -1,6 +1,6 @@
 # rctl Specification
 
-This document defines core behavior and the v0.2/v0.3 extensions for [R-01–R-17](PRD.md). See [CLI](CLI.md) for syntax and [schemas](../schemas/README.md) for structural validation. All times are UTC ISO 8601 strings.
+This document defines core behavior and the v0.2–v0.4 extensions for [R-01–R-19](PRD.md). See [CLI](CLI.md) for syntax and [schemas](../schemas/README.md) for structural validation. All times are UTC ISO 8601 strings.
 
 ## 1. Architecture and ownership
 
@@ -23,7 +23,7 @@ The retained contract text records an agreement, not proof that all earlier exec
 
 ## 2. Project and task addressing
 
-Resolve the project root from global `--root`, else `RCTL_PROJECT_ROOT`, else the current working directory. Resolve a supplied task argument relative to that root; an absolute task path is allowed only inside it. Only `context` and the host adapter may omit the task argument: they then use `RCTL_TASK_PATH`, interpreted relative to the root. No parent-directory discovery, global current-task pointer, most-recent-task fallback, or automatic selection is performed.
+Resolve the project root from global `--root`, else `RCTL_PROJECT_ROOT`, else the current working directory. Resolve a supplied task argument relative to that root; an absolute task path is allowed only inside it. Only `context` and the host adapter may omit the task argument: they then use `RCTL_TASK_PATH`, interpreted relative to the root, or return project-only context when it is unset. No parent-directory discovery, global current-task pointer, most-recent-task fallback, or automatic selection is performed.
 
 The task's `task_id` equals its directory basename, is immutable after begin, and is unique by the pair `(resolved project root, task path)`. Different projects can use the same short task ID. Paths to task inputs and review attachments resolve relative to the task directory and must remain within the project root; `../../runs/...` is valid when it stays inside that root. External evidence uses URI references and is never fetched by rctl.
 
@@ -122,9 +122,38 @@ Currentness values are `not_checked`, `current`, `stale`, or `unknown`; they are
 
 ## 8. Context and handoff
 
-`context` is read-only. Display task identity, phase or draft, governing contract revision, proposed contract drift, latest verification verdict/applicability, historical closure if any, contract criteria and source path, optional handoff, existing result path, and the next permitted control action. Include the project's `research/README.md` path when present.
+`context` is read-only and loads project guidance before attempting an optional task.
+Read only explicit level-two `Goal` and optional `Current guidance` sections from
+`research/PROGRAM.md`, and `Reuse Rule` from `research/ROUTES.md`. Fenced headings
+are content, not structure. Duplicate sections make that source unavailable; empty
+or placeholder-bearing sections supply no guidance. Missing/unreadable sources
+produce warnings, never task read failures. Resolve sources within the explicit
+root, without scanning the vault, reading transcripts, fetching URLs, or ranking
+routes. Read current bytes on every call. No separate summary store is created.
 
-Keep context within 8,000 Unicode characters by default. Preserve task identity, revision, state, drift/verification warnings, and file paths first; include bounded contract and handoff excerpts next. Mark truncated excerpts and direct the reader to their source. Count characters, not tokens. Read only the selected records and lightweight local metadata; never run tests, hash large artifacts, read a transcript, or fetch a URI.
+A selected task adds identity, phase, governing revision, verification/applicability,
+historical closure, warnings, reported blockers/next step and lifecycle action.
+Without selection, identify project-only context and select no task. A task error
+preserves project context while retaining its CLI error code; hooks still exit 0.
+Project content is reported guidance, not task authorization or machine acceptance.
+
+Default to 8000 Unicode characters; compact reminders use 2000. Show project goal,
+current guidance and reuse rule first, reserving content space for task warnings,
+blockers and next action. Use one root and a short relative source map. Allocate
+unused field space to remaining fields; bound values separately from labels and
+use short truncation references. Compact output does not append the whole handoff.
+Long output adds bounded contract/handoff excerpts after core fields. Bound added
+JSON summaries too; an insufficient budget yields null text fields rather than
+fragments of truncation markers. Extremely long fields still require source reads.
+
+Keep current corrections in `PROGRAM.md` with evidence links and explicit scope.
+When a route conclusion is superseded, link its replacement and retained evidence
+in the existing ledger. rctl neither chooses replacements by timestamp nor decides
+scientific truth. The task skill requires history reuse before experimental proposals,
+new contracts and material direction changes: cite related mechanisms/evidence,
+what is already answered, the new question/reopen condition, and the decision new
+evidence would change. Record this in Question/Scope, using existing review criteria
+where appropriate. Heading presence is not scientific adequacy.
 
 `checkpoint` replaces `state.md` with a user-supplied Markdown handoff. It does not edit the machine record or certify statements in the handoff. A result saying closed while the record is active must not be presented as managed closure.
 

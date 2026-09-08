@@ -57,7 +57,7 @@ containment; it applies to the ordinary CLI error boundary.
 | `amend TASK --reason TEXT` | Accept changed valid contract as the next revision. | Machine record |
 | `checkpoint TASK --file FILE` | Read UTF-8 handoff from FILE resolved relative to the project root, then atomically replace task `state.md`. Require an active task. | Handoff only |
 | `status TASK` | Show phase, contract revision/drift, latest report verdict/currentness, and historical closure. | None |
-| `context [TASK]` | Generate the bounded reminder described in SPEC; use session selection only when TASK is omitted. | None |
+| `context [TASK]` | Generate the bounded reminder described in SPEC; use session selection when TASK is omitted, or return project-only context if unset. | None |
 | `verify TASK [--reviews FILE]` | Execute frozen command criteria and record supplied review judgments. FILE is relative to project root. | Check logs and machine record |
 | `close TASK` | Check currentness and latest passing report; append managed closure. | Machine record |
 | `reopen TASK --reason TEXT` | Reopen a closed/cancelled task; require new verification. | Machine record |
@@ -141,3 +141,14 @@ For interrupted work, write a short handoff and use `checkpoint`; no close is ne
 - Review references an unknown criterion or wrong revision: reject the input; do not silently apply it to another criterion.
 - Current record changed during verification: retain logs, reject record publication, and request status inspection.
 - Latest check failed: name it and its recorded failure action; never automatically rerun or weaken its requirement.
+
+## v0.4 context availability
+
+`context` without a selected task succeeds with project-only context, including in
+roots without initialization. `data.available` means any usable project guidance or
+task context; `task_selected` and `task_available` distinguish selection and successful
+task reading. `project` contains `available`, nullable bounded `goal`, `current_guidance`,
+`reuse_rule`, and relative `sources`. These are reported guidance, not acceptance.
+Valid selected tasks retain their existing top-level status fields. A selected-task
+failure keeps the original nonzero exit/error, project data and reminder, plus warnings.
+No selection supplies no invented task status. Root/argument errors still fail normally.

@@ -6,6 +6,10 @@ This file owns slow-changing scientific intent. Keep active tasks, run status, a
 
 <State the scientific problem and intended contribution.>
 
+## Current guidance
+
+<Keep current corrections and decision constraints concise; link their evidence and scope. Update this section when guidance changes, retaining the detailed history in its existing source.>
+
 ## Success Definition
 
 <Describe what evidence would count as meaningful success without claiming a current winner.>

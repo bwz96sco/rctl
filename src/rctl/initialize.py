@@ -75,7 +75,7 @@ def initialize(root, vault=None, codex=False):
         files[".codex/config.toml"] = "[features]\nhooks = true\n"
         files[".rctl/codex/README.md"] = f"""# Project Codex reminders
 
-Inspect `.codex/hooks.json`, then launch Codex from this project with the selected task:
+Inspect `.codex/hooks.json`, then launch Codex from this project. Project guidance loads without a task; select one when task context is needed:
 
 ```sh
 export RCTL_TASK_PATH=tasks/your-task

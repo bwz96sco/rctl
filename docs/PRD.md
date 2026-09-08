@@ -1,6 +1,6 @@
 # rctl Product Requirements
 
-Baseline: 2026-09-05. The v0.1 release is complete; the user-authorized v0.2 increment adds project initialization and research-skill migration. v0.3 adds task discovery, prioritized handoff summaries, and candidate-only installation maintenance.
+Baseline: 2026-09-05. The v0.1 release is complete; the user-authorized v0.2 increment adds project initialization and research-skill migration. v0.3 adds task discovery, prioritized handoff summaries, and candidate-only installation maintenance. v0.4 adds independent project reminders and history reuse before experimental planning.
 
 ## Problem and evidence
 
@@ -41,6 +41,8 @@ Ship a local Python CLI, readable task templates, small machine records, command
 | R-15 | Read-only task discovery lists conventional task paths, phases, and verification applicability, keeping damaged entries visible. | Find work without maintaining a second status index or selecting a task implicitly. |
 | R-16 | Explicit handoff next steps and blockers survive bounded reminders independently of lifecycle advice. | Resume concrete work even when a handoff is long. |
 | R-17 | Read-only installation diagnostics and candidate exports compare packaged project assets without replacing live content. | Review skill and hook updates without losing local changes. |
+| R-18 | Project reminders survive missing task selection and task read failures, using explicit current research sections. | Planning retains project goals and corrections. |
+| R-19 | Experiment planning cites related history, the unanswered question, and the decision new evidence changes. | Repeated mechanisms require a substantive reason. |
 
 ## Typical use
 

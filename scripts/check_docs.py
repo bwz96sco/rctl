@@ -126,12 +126,12 @@ def main() -> None:
     requirements = re.findall(r"^\| (R-\d+) \|", (ROOT / "docs/PRD.md").read_text(), re.MULTILINE)
     acceptance = (ROOT / "docs/ACCEPTANCE.md").read_text()
     cases = re.findall(r"^\| (A-\d+) \| ([^|]+) \|", acceptance, re.MULTILINE)
-    assert len(requirements) == len(set(requirements)) == 17
-    assert len(cases) == len({case[0] for case in cases}) == 30
+    assert len(requirements) == len(set(requirements)) == 19
+    assert len(cases) == len({case[0] for case in cases}) == 36
     mapped = set(re.findall(r"R-\d+", " ".join(case[1] for case in cases)))
     assert mapped == set(requirements), f"Requirement coverage mismatch: {mapped ^ set(requirements)}"
     links = check_links()
-    print(f"PASS preparation documents: {links} local links; {len(json_files)} JSON files; 4 schemas and example inputs; 17 requirements mapped to 30 acceptance cases.")
+    print(f"PASS preparation documents: {links} local links; {len(json_files)} JSON files; 4 schemas and example inputs; 19 requirements mapped to 36 acceptance cases.")
 
 
 if __name__ == "__main__":

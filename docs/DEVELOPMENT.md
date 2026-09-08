@@ -46,6 +46,16 @@ Shared-skill updates, moving a live project to rctl, renaming this checkout dire
 
 Routine internal choices may be resolved locally. If a discovery changes scope, acceptance semantics, file ownership, or the CLI contract, update the owning document and affected examples/tests before dependent implementation. Preserve a failed host setup as evidence and document the supported replacement. Do not add a new framework, validation score loop, or service merely to satisfy an imagined future use.
 
+## Release and deployment order
+
+For authorized upgrades of actively used projects: complete local validation,
+commit and push the release, then wait for the CI run on that exact commit to
+succeed before installing or updating project assets. Build deployment artifacts
+from that clean committed source and verify the installed code/assets against it.
+After deployment, run scoped installation and reminder checks. If CI fails, fix
+and validate a new commit before deployment. Local tests alone do not satisfy this
+release gate; an explicit user request may authorize an experimental deployment.
+
 ## M5 — Project initialization and shared-skill migration (v0.2)
 
 Authorized on 2026-09-06. Implement `rctl init`, move setup/vault assets and workspace guidance into the rctl distribution, retire the shared setup entrypoint, and migrate experiment/training/adapter/review references. Preserve the user's existing synthesis edits and all live research tasks. Exit evidence: A-21–A-24, relevant packaging/regression checks, shared-skill validators, and a migrated-task execution walkthrough. Commit rctl and the shared skills repository separately.
@@ -78,3 +88,17 @@ commands, canonical task aliases, symlinked skills, missing console entrypoints,
 directory collisions, and bounded text titles. Preserve verification path constraints
 and machine schemas. Run focused regressions, the full suite, lint, documentation
 checks, and the installed-wheel smoke. This patch does not upgrade live installations.
+
+## M7 — Project reminders and history reuse (v0.4)
+
+Authorized on 2026-09-08. Load project guidance independently of task selection;
+reserve meaningful short-reminder content space; integrate history reuse into the
+planning skill. Use explicit sections in existing research files, with no machine
+schema migration or automatic scientific judgments. Exit checks: A-31–A-36,
+existing lifecycle regressions, wheel smoke, and actual host startup/compact delivery.
+The authorized rollout includes the local installation and scoped skill/guidance
+updates in Pinyin VSR and OR, preserving task records and unrelated work.
+
+M7 completed on 2026-09-08; [verification](M7-VERIFICATION.md) records the 191-test
+suite, installed-wheel smoke, fresh-host history-reuse case, actual automatic
+compaction delivery and scoped upgrades of Pinyin VSR and OR.

@@ -70,11 +70,11 @@ def export_codex(root, destination):
     )
     readme = f"""# rctl Codex reminder bundle
 
-Target and tested release route: Codex CLI 0.153.4, invocation-local inline hook configuration. Only SessionStart startup and UserPromptSubmit delivery are claimed by the release evidence. Other host versions, resume/compact delivery, and persisted project installation need their own delivery evidence.
+Target and tested release route: Codex CLI 0.153.4, invocation-local inline hook configuration. The M7 evidence covers SessionStart startup, UserPromptSubmit, and automatic-compaction SessionStart delivery. Other host versions and resume/manual-compaction routes need their own evidence; project-file loading is documented separately.
 
 ## Load and select a task
 
-Inspect `hooks.json` and the generated skill before use. Copy `research-task/` into this project's `.agents/skills/` only when that destination is unused. The skill also works through an explicit path in a prompt. Select the task for each launch:
+Inspect `hooks.json` and the generated skill before use. Copy `research-task/` into this project's `.agents/skills/` only when that destination is unused. The skill also works through an explicit path in a prompt. Project guidance loads even without task selection. Select a task when task context is needed:
 
 ```sh
 export RCTL_TASK_PATH=tasks/your-task
