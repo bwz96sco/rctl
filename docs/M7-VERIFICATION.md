@@ -131,6 +131,39 @@ under the existing version rule. This upgrade neither reopens them nor invalidat
 their historical scientific observations. Research projects also contained unrelated
 preexisting changes; no research repository commits were made.
 
+## v0.4.1 review fixes
+
+On 2026-09-08, the review reproductions became 11 regression cases in
+`tests/test_m7_review.py`: the original implementation failed 10 and passed the
+packaged-placeholder control. After the fix, all 11 passed, including inequalities,
+inline and standalone autolinks, individual warning markers at both budgets,
+conditional orientation, and relative missing/UTF-8/directory diagnostics.
+The broad angle-span search was the content-loss cause; whole-section placeholder
+matching now excludes URI/email autolinks. Warning separators retain their markers,
+and project errors retain their diagnosis without repeating the absolute root.
+
+Local release checks:
+
+- `uv run --locked pytest tests/test_m7_review.py tests/test_m7.py -q`: 26 passed.
+- `uv run --locked pytest -q`: 202 passed.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run scripts/check_docs.py`: passed, 215 links and 36 acceptance cases.
+  An initial invocation with `--locked` was rejected because this standalone script
+  has no script lockfile; the documented invocation above succeeded.
+- `uv build --out-dir .work/m7-review/dist`: built the 0.4.1 wheel and sdist.
+- `uv run --locked scripts/smoke_package.py .work/m7-review/dist/rctl-0.4.1-py3-none-any.whl`:
+  passed in an isolated installed environment; output is retained locally in
+  `.work/m7-review/wheel-smoke.json`.
+- `git diff --check`: passed.
+
+These are parser/renderer and execution checks, not scientific evidence judgments.
+Publication must precede deployment: the exact pushed commit requires successful CI,
+then a wheel rebuilt from clean committed source may replace the local installation.
+The scoped deployment checks inspect both research projects' installed reminders,
+doctor findings and unchanged task/configuration/skill/guidance bytes. This patch
+changes neither host event integration nor skills; actual startup/compaction host
+sessions are not rerun, and prior M7 host evidence retains its original scope.
+
 ## Limitations
 
 - The planning probe is one synthetic case, not a measured reduction in repeated

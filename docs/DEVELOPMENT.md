@@ -102,3 +102,13 @@ updates in Pinyin VSR and OR, preserving task records and unrelated work.
 M7 completed on 2026-09-08; [verification](M7-VERIFICATION.md) records the 191-test
 suite, installed-wheel smoke, fresh-host history-reuse case, actual automatic
 compaction delivery and scoped upgrades of Pinyin VSR and OR.
+
+## v0.4.1 — M7 reminder review fixes
+
+Authorized on 2026-09-08. Extend A-31–A-33 to retain inequalities and standalone
+Markdown autolinks, omit only whole-section authoring placeholders, label each
+warning, omit nonexistent orientation files, and retain relative source diagnostics.
+Keep lifecycle and host protocol unchanged. Run focused regressions, the full suite,
+lint, documentation checks and wheel smoke; commit and push, then require successful
+CI on that commit before upgrading the shared local installation used by Pinyin VSR
+and OR. Project skills and research files need no edits for this patch.

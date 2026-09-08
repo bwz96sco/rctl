@@ -17,11 +17,19 @@ def read_project(root):
         try:
             content = sections(read_text(local_path(root, source)))
         except (RctlError, OSError, ValueError) as error:
-            warnings.append(f"Project guidance unavailable: {source}: {error}")
+            reason = str(error).replace(f"{root}/", "")
+            warnings.append(f"Project guidance unavailable: {source}: {reason}")
             continue
         for heading, key in fields.items():
             value = content.get(heading, "").strip()
-            if value and not re.search(r"<[^>\n]+>", value):
+            # Authoring placeholders occupy the whole section. Markdown URI and
+            # email autolinks are useful guidance even when they stand alone.
+            autolink = re.fullmatch(
+                r"<(?:[A-Za-z][A-Za-z0-9+.-]*:[^<>\s]*|[^<>\s@]+@[^<>\s@]+)>",
+                value,
+            )
+            placeholder = re.fullmatch(r"<[^<>]+>", value) and not autolink
+            if value and not placeholder:
                 data[key] = value
             elif heading != "Current guidance" or value:
                 warnings.append(

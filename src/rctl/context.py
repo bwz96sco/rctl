@@ -36,7 +36,8 @@ def allocate(texts, budget):
 def render(root, project, task, status, warnings, error, selected, budget, compact):
     # Short aliases avoid repeating absolute paths in every truncation marker.
     sources = f"Root: {root}\nP: research/PROGRAM.md; R: research/ROUTES.md\n"
-    sources += "Orientation: research/README.md\n"
+    if (root / "research/README.md").is_file():
+        sources += "Orientation: research/README.md\n"
     if task is not None:
         sources += (
             f"T: {task.path.relative_to(root)}\n"
@@ -72,7 +73,9 @@ def render(root, project, task, status, warnings, error, selected, budget, compa
         if project[key]:
             fields.append((key, label, project[key], source))
     if warnings:
-        fields.append(("warnings", "Warning", "\n".join(warnings), "status TASK; P; R"))
+        fields.append(
+            ("warnings", "Warning", "\nWarning: ".join(warnings), "status TASK; P; R")
+        )
     if error:
         fields.append(
             (

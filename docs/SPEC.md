@@ -126,7 +126,9 @@ Currentness values are `not_checked`, `current`, `stale`, or `unknown`; they are
 Read only explicit level-two `Goal` and optional `Current guidance` sections from
 `research/PROGRAM.md`, and `Reuse Rule` from `research/ROUTES.md`. Fenced headings
 are content, not structure. Duplicate sections make that source unavailable; empty
-or placeholder-bearing sections supply no guidance. Missing/unreadable sources
+or sections consisting solely of an authoring placeholder supply no guidance.
+Inequalities and Markdown URI/email autolinks remain content, including standalone
+autolinks. Missing/unreadable sources
 produce warnings, never task read failures. Resolve sources within the explicit
 root, without scanning the vault, reading transcripts, fetching URLs, or ranking
 routes. Read current bytes on every call. No separate summary store is created.
@@ -139,7 +141,9 @@ Project content is reported guidance, not task authorization or machine acceptan
 
 Default to 8000 Unicode characters; compact reminders use 2000. Show project goal,
 current guidance and reuse rule first, reserving content space for task warnings,
-blockers and next action. Use one root and a short relative source map. Allocate
+blockers and next action. Prefix each warning with `Warning:`. Use one root and a
+short relative source map, including in project-source diagnostics while retaining
+the failure reason. List the research README only when it exists. Allocate
 unused field space to remaining fields; bound values separately from labels and
 use short truncation references. Compact output does not append the whole handoff.
 Long output adds bounded contract/handoff excerpts after core fields. Bound added
