@@ -25,7 +25,7 @@ recorded in PROJECT-HOOKS-VERIFICATION.
 `integration codex export DIRECTORY` creates a new directory containing:
 
 - `hooks.json`: only rctl's hook definitions, using the actual installed rctl entrypoint and explicit project root.
-- `research-task/SKILL.md` and `research-task/agents/openai.yaml`: host-neutral instructions plus native invocation metadata; `research-task/references/` includes workspace and optional graph guidance.
+- `research-task/SKILL.md` and `research-task/agents/openai.yaml`: host-neutral instructions plus native invocation metadata; `research-task/references/` includes task-file, planning, verification, workspace, and optional graph guidance.
 - `README.md`: the tested host version, loading procedure, task-selection environment, removal steps, and the exact scope of the delivery test.
 
 The exporter does not launch a host, alter global configuration, merge a live project config, grant trust, or install a shared skill. During the integration milestone, validate a disposable launch using the exported definitions. Normal persisted project loading requires separate delivery evidence. If project loading fails, retain the invocation-local path as the documented supported route; do not label export alone as installation success.
@@ -49,6 +49,18 @@ The pilot's retained event and response shape is:
 The same response shape uses `UserPromptSubmit` for that event. Unsupported events return `{}`. Supported events with absent selection return project-only context; unreadable task state retains project guidance and an unavailable task diagnostic. Both exit 0. Malformed JSON also returns `{}` with a concise diagnostic on stderr and exits 0. A broken reminder must not invent a successful task state or prevent ordinary conversation.
 
 Cap rendered `SessionStart` context at 8,000 Unicode characters and `UserPromptSubmit` at 2,000, preserving warnings and source paths before excerpts. Configure a 10-second host timeout as the initial setting, not a promised latency. Adapter code delegates to the pure context renderer; no checks or state mutations occur.
+
+The simplification follow-up retains both events and caps, using one concise layout
+without appended contract/handoff text. Each event loads fresh task/project state;
+the renderer consumes a snapshot and performs no further reads. The accepted source
+remains explicit when the working contract differs. Detailed skill guidance loads
+through operation-specific references, with common lifecycle syntax in the root.
+The official hooks and GPT-6-Astra guidance were rechecked through smart-search on
+2026-09-14. The response shape and invocation-only hook-trust contract are unchanged;
+new real-host evidence must record its actual host version independently of M7.
+The [simplification verification](SIMPLIFICATION-VERIFICATION.md#real-host-acceptance)
+records actual 0.154.0 inline-hook delivery and Astra continuation across long-handoff
+recovery, automatic compaction, and stale-verification correction.
 
 The [pilot launch record](SOURCES.md#local-evidence) is the concrete starting reference for invocation-local host configuration. Recheck official protocol documentation through smart-search before host-specific implementation, then record the actual version and working launch syntax in the generated bundle. Online retrieval failed during preparation and succeeded during M3. The [M3 record](M3-VERIFICATION.md#official-source-recheck) retains the official source and actual tested loading procedures.
 

@@ -174,7 +174,9 @@ and `does_not_decide`. `assessment` contains the result assessment retained by t
 latest verification plus its verification ID, contract revision, and currentness.
 It is null before verification. Text reminders label the assessment as task-scoped.
 
-Compact and extended reminders both show the governing task question. Declared
+Both reminder budgets use one concise layout without full contract/handoff excerpts
+and show the governing task question. Source alias C points to the accepted record
+text for managed tasks and the working contract for drafts. Declared
 alignment appears with it before mutable project guidance. Put the question in the
 template's `- Question:` field; legacy prose contracts project their first nonempty
 Question paragraph. Compact allocation first preserves bounded visibility for every

@@ -2,20 +2,13 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.5.0 — governing-question alignment implemented locally; release pending.**
-The [M8 verification](docs/M8-VERIFICATION.md) records strict optional alignment,
-accepted-question recovery, task-scoped assessment projection, and installed-wheel
-hook delivery. No live project or shared installation has been upgraded.
-The [M7 verification](docs/M7-VERIFICATION.md) records project-only and damaged-task
-reminders, meaningful short-context fields, packaged planning guidance, and actual
-Codex startup and automatic-compaction delivery.
-The [v0.3.1 checks](docs/M6-VERIFICATION.md#v031-review-fixes) cover the review regressions.
-The original [v0.3 verification](docs/M6-VERIFICATION.md) records 165 passing tests, installed-wheel checks, and fresh-session recovery of a long handoff.
+**Status: v0.5.0 baseline; simplification follow-up locally validated. Release pending.**
 The local package provides contracts, command/review verification, guarded closure,
-handoffs, and Codex reminders. See the [v0.2 verification](docs/M5-VERIFICATION.md)
-for initialization and skill-migration evidence, and the [v0.1 release record](docs/RELEASE-VERIFICATION.md)
-for the original two-session host acceptance.
-The [v0.2.1 checks](docs/M2-VERIFICATION.md#v021-review-follow-up) cover the diagnostic and publication fixes.
+handoffs, governing-question alignment, and Codex reminders. The
+[simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed
+task skill, immutable task snapshots, and one concise reminder layout. Historical
+milestone and host evidence is in the [release-evidence index](docs/RELEASE-EVIDENCE.md).
+No live project or shared installation has been upgraded by this follow-up.
 
 ## Run the local CLI
 
@@ -91,8 +84,9 @@ Keep current corrections with their evidence and scope in PROGRAM.md. Read relat
 route evidence before proposing experiments and explain the unanswered question,
 reopen condition or mechanism difference, and decision a new result would change.
 
-Short hook reminders reserve space for actual warnings, blockers and next steps,
-using relative source references and no duplicate full handoff. These remain bounded
+Both hook budgets use one concise layout, reserving space for actual warnings,
+blockers and next steps without appended contract/handoff prose. Source alias C
+identifies the accepted contract in the record, or the working draft. These remain bounded
 excerpts; follow sources when relevant details are truncated. Existing projects can
 add Current guidance in place; records and the vault binding need no migration.
 
@@ -139,6 +133,10 @@ Codex CLI 0.153.4 is tested with inline configuration and, in a [follow-up](docs
 5. [Host integration](docs/INTEGRATION.md): shared skill responsibilities and the first Codex adapter.
 6. [Acceptance plan](docs/ACCEPTANCE.md) and [development plan](docs/DEVELOPMENT.md): what to build and how to establish that it works.
 7. [Readiness record](docs/READINESS.md): milestone completion, preparation history, and limitations.
+
+The [simplification review and implementation plan](docs/SIMPLIFICATION-REVIEW.md)
+prioritizes the packaged skill and concise reminders for GPT-6-Astra. Its first
+increment is locally validated; installation and compatibility decisions remain deferred.
 
 The [source register](docs/SOURCES.md) records the original design, existing skills, and the Pinyin-VSR pilot. [ADR-0001](docs/adr/0001-file-based-task-boundaries.md) explains the narrower initial architecture.
 

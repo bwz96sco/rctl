@@ -2,7 +2,7 @@
 
 import os
 
-from .documents import RctlError, read_text
+from .documents import RctlError
 from .project_context import read_project
 from .records import Task, select_task
 
@@ -34,78 +34,36 @@ def allocate(texts, budget):
     return limits
 
 
-def render(root, project, task, status, warnings, error, selected, budget, compact):
+def render(
+    root,
+    project,
+    snapshot,
+    warnings,
+    error,
+    selected,
+    budget,
+    *,
+    task_path=None,
+    orientation=False,
+):
     # Short aliases avoid repeating absolute paths in every truncation marker.
     sources = f"Root: {root}\nP: research/PROGRAM.md; R: research/ROUTES.md\n"
-    if (root / "research/README.md").is_file():
+    if orientation:
         sources += "Orientation: research/README.md\n"
-    if task is not None:
-        sources += (
-            f"T: {task.path.relative_to(root)}\n"
-            "T files: contract.md, state.md, result.md, .rctl/record.json\n"
-        )
+    if task_path is not None:
+        sources += f"T: {task_path}\nT files: contract.md, state.md, result.md\n"
+    if snapshot is not None:
+        sources += f"C: {snapshot.contract_source}\n"
     sources = bounded(sources, min(500, budget // 4), "--root and selected task")
     identity = "No task selected. Supply TASK or set RCTL_TASK_PATH for task context.\n"
     if error:
         identity = "Task context unavailable.\n"
-    elif status is not None:
-        report = status["verification"]
-        verification = f"{report['id']}: {report['verdict']}" if report else "none"
-        closure = status["historical_closure"]
-        historical = (
-            f"{closure['verification_id']} (cycle {closure['cycle']}, {closure['assessment']})"
-            if closure
-            else "none"
-        )
-        identity = (
-            f"Task: {status['task_id']}\n"
-            f"Phase: {status['phase']}; governing revision: {status['contract_revision'] or 'none'}\n"
-            f"Verification: {verification}; applicability: {status['currentness']}; "
-            f"historical closure: {historical}\n"
-        )
+    elif snapshot is not None:
+        identity = snapshot.identity()
     identity = bounded(identity, min(400, budget // 4), "status TASK")
     # key, label, value, source; values are budgeted independently of labels.
-    fields = []
-    task_context_keys = set()
-    if status is not None:
-        task_fields = [
-            (
-                "question",
-                "Governing task question",
-                status["question"],
-                "T/contract.md / Question",
-            )
-        ]
-        alignment = status["question_alignment"]
-        if alignment is not None:
-            task_fields.extend(
-                (
-                    f"alignment_{key}",
-                    label,
-                    alignment[key],
-                    "T/contract.md / Question alignment",
-                )
-                for key, label in (
-                    ("source", "Governing question source (declared)"),
-                    ("mechanism", "Governing mechanism (declared)"),
-                    ("tests", "This task tests (declared)"),
-                    ("does_not_decide", "This task does not decide (declared)"),
-                )
-            )
-        assessment = status["assessment"]
-        if assessment is not None:
-            task_fields.append(
-                (
-                    "assessment",
-                    "Task assessment",
-                    f"{assessment['value']} (verification {assessment['verification_id']}; "
-                    f"revision {assessment['contract_revision']}; "
-                    f"{assessment['currentness']})",
-                    "latest verification result",
-                )
-            )
-        fields.extend(task_fields)
-        task_context_keys = {field[0] for field in task_fields}
+    fields = snapshot.task_fields() if snapshot is not None else []
+    task_context_keys = {field[0] for field in fields}
     for key, label, source in (
         ("goal", "Project goal (reported)", "P / Goal"),
         ("current_guidance", "Current guidance (reported)", "P / Current guidance"),
@@ -126,23 +84,10 @@ def render(root, project, task, status, warnings, error, selected, budget, compa
                 "selected task",
             )
         )
-    label = "Reported handoff"
-    if status is not None:
-        label = (
-            "Historical handoff"
-            if status["phase"] in {"closed", "cancelled"}
-            else label
-        )
-        for key, title in (("blockers", "Blockers"), ("next_action", "Next action")):
-            value = status["handoff"][key] or "Not recorded; read T/state.md."
-            fields.append((key, f"{label} — {title}", value, "T/state.md"))
-        fields.append(
-            ("lifecycle", "Lifecycle action", status["next_action"], "status TASK")
-        )
+    if snapshot is not None:
+        fields.extend(snapshot.handoff_fields())
     overhead = len(sources) + len(identity) + sum(len(f[1]) + 3 for f in fields) + 2
-    # Leave extended reminders room for governing contract and handoff excerpts.
-    core_budget = budget if compact else min(budget, 3200)
-    remaining = max(0, core_budget - overhead)
+    remaining = max(0, budget - overhead)
     visible = [min(FIELD_VISIBILITY, len(field[2])) for field in fields]
     if sum(visible) > remaining:
         limits = allocate([field[2] for field in fields], remaining)
@@ -187,55 +132,18 @@ def render(root, project, task, status, warnings, error, selected, budget, compa
         for part in (identity.rstrip(), task_context, guidance, other, sources)
         if part
     )
-    if not compact and status is not None:
-        record = task.read_record()
-        contract = (
-            record["contracts"][-1]["text"]
-            if record
-            else read_text(task.file("contract.md"))
+    data = (
+        snapshot.context_data(
+            values, bounded(snapshot.title, min(200, budget), "C") or None
         )
-        try:
-            handoff = read_text(task.file("state.md"))
-        except RctlError:
-            handoff = "Handoff unavailable; inspect T/state.md."
-        labels = (
-            "\nGoverning contract (includes criteria):\n",
-            f"\n{label} (reported progress):\n",
-        )
-        remaining = max(0, budget - len(reminder) - sum(map(len, labels)))
-        for text, heading, source, limit in zip(
-            (contract, handoff),
-            labels,
-            ("T/contract.md", "T/state.md"),
-            allocate([contract, handoff], remaining),
-        ):
-            if limit:
-                reminder += heading + bounded(text, limit, source)
-    data = dict(status or {})
-    if status is not None:
-        data["handoff"] = {
-            key: (values.get(key) or None) if value else None
-            for key, value in status["handoff"].items()
-        }
-        data["title"] = (
-            bounded(status["title"], min(200, budget), "T/contract.md") or None
-        )
-        data["question"] = values.get("question") or None
-        if status["question_alignment"] is not None:
-            data["question_alignment"] = {
-                key: values.get(f"alignment_{key}") or None
-                for key in ("source", "mechanism", "tests", "does_not_decide")
-            }
-        if status["verification"]:
-            data["verification"] = {
-                key: status["verification"][key]
-                for key in ("id", "verdict", "contract_revision", "cycle")
-            }
+        if snapshot is not None
+        else {}
+    )
     data.update(
         {
-            "available": project["available"] or status is not None,
+            "available": project["available"] or snapshot is not None,
             "task_selected": selected,
-            "task_available": status is not None,
+            "task_available": snapshot is not None,
             "project": {
                 **project,
                 **{
@@ -249,25 +157,24 @@ def render(root, project, task, status, warnings, error, selected, budget, compa
     return data
 
 
-def context(task, budget=DEFAULT_BUDGET, compact=False):
-    """Compatibility entry for callers that already hold a selected Task."""
-    return load_context(task.root, task=task, budget=budget, compact=compact)
+def context(task, budget=DEFAULT_BUDGET):
+    """Read one concise reminder from the selected task."""
+    return load_context(task.root, task=task, budget=budget)
 
 
-def load_context(
-    root, selection=None, *, task=None, budget=DEFAULT_BUDGET, compact=False
-):
+def load_context(root, selection=None, *, task=None, budget=DEFAULT_BUDGET):
     project, project_warnings = read_project(root)
     selected = (
         task is not None
         or selection is not None
         or bool(os.environ.get("RCTL_TASK_PATH"))
     )
-    status, warnings, error = None, [], None
+    snapshot, warnings, error = None, [], None
     if selected:
         try:
             task = task or Task(root, select_task(root, selection))
-            status, warnings = task.status()
+            snapshot = task.snapshot()
+            warnings = list(snapshot.warnings)
         except RctlError as caught:
             error = caught
         except (OSError, ValueError) as caught:
@@ -279,7 +186,15 @@ def load_context(
             )
     warnings = warnings + project_warnings
     data = render(
-        root, project, task, status, warnings, error, selected, budget, compact
+        root,
+        project,
+        snapshot,
+        warnings,
+        error,
+        selected,
+        budget,
+        task_path=task.path.relative_to(root).as_posix() if task is not None else None,
+        orientation=(root / "research/README.md").is_file(),
     )
     if error:
         error.data = {**data, "context_warnings": warnings}

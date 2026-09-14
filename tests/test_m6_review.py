@@ -66,8 +66,8 @@ def test_handoff_preserves_command_and_ignores_fenced_headings(task, fence):
     from rctl.context import context
 
     assert task.status()[0]["handoff"]["next_action"] == command
-    for compact, budget in ((True, 2000), (False, 8000)):
-        result = context(task, compact=compact, budget=budget)[0]
+    for budget in (2000, 8000):
+        result = context(task, budget=budget)[0]
         assert command in result["context"]
         assert result["handoff"]["next_action"] == command
 

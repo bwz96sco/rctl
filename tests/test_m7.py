@@ -121,8 +121,8 @@ def test_fenced_headings_are_content_and_not_guidance(project):
     assert not warnings
 
 
-@pytest.mark.parametrize("budget,compact", [(2000, True), (8000, False)])
-def test_long_reminder_keeps_real_content_and_is_readonly(task, budget, compact):
+@pytest.mark.parametrize("budget", [2000, 8000])
+def test_long_reminder_keeps_real_content_and_is_readonly(task, budget):
     guidance(
         task.root,
         "CORRECTION: preserve comparable error as the objective. " + "Detail. " * 100,
@@ -143,7 +143,7 @@ def test_long_reminder_keeps_real_content_and_is_readonly(task, budget, compact)
         + "Details. " * 500
     )
     before = {p: p.read_bytes() for p in task.root.rglob("*") if p.is_file()}
-    data, _ = context(task, budget, compact)
+    data, _ = context(task, budget)
     text = data["context"]
     assert len(text) <= budget
     for value in (
@@ -164,19 +164,15 @@ def test_long_reminder_keeps_real_content_and_is_readonly(task, budget, compact)
         )
         < budget
     )
-    assert (
-        ("OLD_PROGRESS" not in text)
-        if compact
-        else (text.index("BLOCKED:") < text.index("OLD_PROGRESS"))
-    )
+    assert "OLD_PROGRESS" not in text
     assert {p: p.read_bytes() for p in task.root.rglob("*") if p.is_file()} == before
 
 
 def test_short_fields_release_space_and_tiny_budget_is_nullable(project):
     guidance(project, "Review the revised source. " * 40)
-    data, _ = load_context(project, budget=2000, compact=True)
+    data, _ = load_context(project, budget=2000)
     assert "Truncated" not in data["project"]["current_guidance"]
-    data, _ = load_context(project, budget=10, compact=True)
+    data, _ = load_context(project, budget=10)
     assert len(data["context"]) <= 10
     assert data["project"]["current_guidance"] is None
 
@@ -184,7 +180,7 @@ def test_short_fields_release_space_and_tiny_budget_is_nullable(project):
 def test_unavailable_task_exception_retains_bounded_context(project):
     guidance(project)
     with pytest.raises(RctlError) as caught:
-        load_context(project, "missing", budget=2000, compact=True)
+        load_context(project, "missing", budget=2000)
     data = caught.value.data
     assert data["task_available"] is False
     assert len(data["context"]) <= 2000

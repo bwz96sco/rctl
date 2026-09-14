@@ -8,6 +8,11 @@ Target macOS and Linux; ordinary CLI commands reject other platforms before proj
 
 Separate pure parsing/policy, local record storage, check execution, context generation, and the host adapter. CLI and host code call the same context function. Only CLI application services mutate the acceptance record. No LLM or network call is part of the core.
 
+An internal immutable task snapshot owns each read's derived state and warnings.
+Status, discovery, and context use pure projections of that snapshot. Reading a new
+snapshot refreshes local state; projections neither reread files nor mutate it.
+Record storage, lifecycle mutations, and verification execution retain their owners.
+
 | Location | Authority | Writer |
 |---|---|---|
 | `contract.md` | Proposed/current human agreement | User or agent |
@@ -186,8 +191,10 @@ broader question. Prefix each warning with `Warning:`. Use one root and a
 short relative source map, including in project-source diagnostics while retaining
 the failure reason. List the research README only when it exists. Allocate
 unused field space to remaining fields; bound values separately from labels and
-use short truncation references. Compact output does not append the whole handoff.
-Long output adds bounded contract/handoff excerpts after core fields. Bound added
+use short truncation references. Both budgets use the same concise layout without
+appended contract/handoff excerpts. Source alias C identifies the accepted contract
+text in the record for managed tasks, or contract.md for drafts; source reads must
+preserve that distinction when the working contract has drifted. Bound added
 JSON summaries, including question/alignment fields, too; an insufficient budget yields null text fields rather than
 fragments of truncation markers. Extremely long fields still require source reads.
 

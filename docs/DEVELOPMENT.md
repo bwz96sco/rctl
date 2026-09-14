@@ -1,25 +1,52 @@
 # Development Plan
 
-## Entry condition and first assignment
+## Current increment
 
-Start from this documentation baseline. The first coding task is **M1: contract and readable state**, with the acceptance cases listed below. Implement a runnable increment with real temporary-file tests, not a scaffold for every later feature. No further product-choice meeting is required to start M1.
+The governing-question alignment baseline is v0.5.0 at `82a5ec8`. The user
+requested implementation of the [simplification plan](SIMPLIFICATION-REVIEW.md)
+on 2026-09-14. This unreleased follow-up keeps lifecycle, schemas, and public CLI
+syntax stable while shortening the packaged skill, sharing immutable task snapshots,
+and using one reminder layout with both existing hook events.
 
-M1 was implemented on 2026-09-05; its [verification record](M1-VERIFICATION.md) separates completed M1 checks from the portions completed by [M2 on 2026-09-06](M2-VERIFICATION.md). [M3](M3-VERIFICATION.md) and [M4 release acceptance](RELEASE-VERIFICATION.md) completed on 2026-09-06. All four milestones are complete; further integrations or live task migration need their own scope. The user separately authorized repository creation; this checkout has a local Git repository on `main`.
+Use M8/A-37–A-40 as the regression anchor, plus the affected discovery, context,
+packaging, history-reuse, and real-host cases identified in the plan. The
+[verification record](SIMPLIFICATION-VERIFICATION.md) separates automated behavior,
+installed-package execution, and observed GPT-6-Astra use. Remaining installation,
+review-input, and verification-protocol decisions stay outside this increment.
 
-At implementation, set up the Python package with uv, an `rctl` console entrypoint, runtime dependencies PyYAML and jsonschema, and test dependencies pytest and Ruff. Commit a resolved `uv.lock` only when Git work is separately in scope. No Git repository was initialized during preparation. The initial implementation target is Python 3.11+ on macOS/Linux; record actual tested combinations before claiming support.
+## Work by affected behavior
 
-Suggested initial files: `src/rctl/cli.py`, `records.py`, `policy.py`, `verification.py`, `context.py`, and `hooks/codex.py`. Start with fewer files when cohesive. Keep schemas inside the installed package at build time, sourced from this repository's `schemas/`; command behavior must not depend on the checkout being present.
+README defines document authority. Use PRD for scope, SPEC for behavior, CLI for
+syntax/output, schemas for structural inputs, and INTEGRATION for skills and hooks.
+Select the affected ACCEPTANCE cases before implementation. Update an owning
+document and its examples/tests before changing its contract; resolve routine
+internal choices within the authorized task.
 
-## Milestones
+Use uv and the locked project dependencies. Keep source and installed-package
+behavior consistent: schemas, templates, and skills ship in the wheel. Parsing,
+record publication, execution, currentness, and host delivery retain distinct owners.
+Tests cross the supported read/lifecycle interfaces, use real local files and
+subprocesses where those affect behavior, and preserve distinct regression coverage.
 
-| Milestone | Bounded deliverable | Exit evidence |
-|---|---|---|
-| M1 — Contract and state | Packaging; new/check/begin/amend/checkpoint/status/context; parsing and record preservation. | A-01, A-02, A-10, A-11, A-12 core portion, A-13 core portion. A new process can recover a begun task. |
-| M2 — Verification and closure | Command/review checks, currentness, close/reopen/cancel, JSON/error protocol. | A-03 through A-09, A-14, A-15, A-19, completed A-13. Synthetic negative task closes; missing evidence does not. |
-| M3 — Reminder integration | Packaged local task skill, Codex adapter, bundle export, tested loading instructions. | A-12 adapter portion, A-16, A-17; official protocol/source recheck; actual host smoke with receipts. |
-| M4 — Real-task release | A new bounded task through two fresh sessions; release documentation and example walkthrough. | A-18, A-20 and all remaining cases; full automated suite; installed-package walkthrough. |
+Run affected tests during development, then the full suite once before release,
+plus lint, documentation checks, build, and installed-wheel smoke. The commands
+are in [README](../README.md#run-the-local-cli). Record actual versions, commands,
+results, and untested behavior. A hook fixture proves the payload contract; actual
+host/model delivery and scientific adequacy need their respective evidence.
 
-M3 depends on the context interface from M1 and verification summaries from M2. A documentation fetch failure does not block M1/M2; it must be resolved or replaced by adequately inspected version-specific source evidence before publishing a host compatibility claim in M3.
+Shared installations, live research tasks, and host configuration are changed only
+when the current task includes those targets. The simplification acceptance probes
+use disposable local projects and invocation-local reviewed hook definitions.
+
+## Release and deployment order
+
+For authorized upgrades of actively used projects: complete local validation,
+commit and push the release, then wait for the CI run on that exact commit to
+succeed before installing or updating project assets. Build deployment artifacts
+from that clean committed source and verify the installed code/assets against it.
+After deployment, run scoped installation and reminder checks. If CI fails, fix
+and validate a new commit before deployment. Local tests alone do not satisfy this
+release gate; an explicit user request may authorize an experimental deployment.
 
 ## Changes from the original proposal
 
@@ -36,106 +63,9 @@ M3 depends on the context interface from M1 and verification summaries from M2. 
 
 Keep the original's useful semantics: closure needs evidence, successful execution is not scientific validity, negative findings may finish, historical acceptance has a scope, and a session can stop before the task closes.
 
-## Release contents
+## Historical milestones
 
-Deliver an installable package and lockfile, schemas, templates, synthetic example, CLI help/usage, one local skill, the Codex exporter/adapter, tests, and a release verification record. Update README's status only after actual implementation milestones pass. Package installation and source checkout execution both need a smoke test.
-
-Shared-skill updates, moving a live project to rctl, renaming this checkout directory, or retiring Trellis are subsequent tasks with their own concrete scope. They are not hidden steps in these milestones.
-
-## Changes during implementation
-
-Routine internal choices may be resolved locally. If a discovery changes scope, acceptance semantics, file ownership, or the CLI contract, update the owning document and affected examples/tests before dependent implementation. Preserve a failed host setup as evidence and document the supported replacement. Do not add a new framework, validation score loop, or service merely to satisfy an imagined future use.
-
-## Release and deployment order
-
-For authorized upgrades of actively used projects: complete local validation,
-commit and push the release, then wait for the CI run on that exact commit to
-succeed before installing or updating project assets. Build deployment artifacts
-from that clean committed source and verify the installed code/assets against it.
-After deployment, run scoped installation and reminder checks. If CI fails, fix
-and validate a new commit before deployment. Local tests alone do not satisfy this
-release gate; an explicit user request may authorize an experimental deployment.
-
-## M5 — Project initialization and shared-skill migration (v0.2)
-
-Authorized on 2026-09-06. Implement `rctl init`, move setup/vault assets and workspace guidance into the rctl distribution, retire the shared setup entrypoint, and migrate experiment/training/adapter/review references. Preserve the user's existing synthesis edits and all live research tasks. Exit evidence: A-21–A-24, relevant packaging/regression checks, shared-skill validators, and a migrated-task execution walkthrough. Commit rctl and the shared skills repository separately.
-
-## v0.2.1 — Review follow-up
-
-Authorized on 2026-09-06. Extend M2 diagnostics and publication handling using A-13
-(JSON/error protocol), A-14 (failed publication preservation), and A-15 (material
-changes during checks). Keep verdict and closure rules unchanged. Add explicit
-platform metadata/runtime errors, full-script lint, and macOS/Linux CI. Exercise
-actual subprocess evidence regeneration and fault-injected record/publication errors;
-run the full suite and installed wheel smoke before the local patch release.
-
-## M6 — Task discovery, handoff summaries, and installation maintenance (v0.3)
-
-Authorized on 2026-09-07. Implement task listing, explicit handoff extraction and
-prioritized reminders, read-only doctor, and candidate-only update export. Existing
-records and project bindings keep schema version 1. No live-project updates, global
-installation changes, configuration merge/apply operation, or scientific execution
-is part of this increment. Exit evidence: A-25–A-30, existing lifecycle regressions,
-installed-wheel checks, and two real host sessions recovering a long handoff.
-
-M6 completed on 2026-09-07; [verification](M6-VERIFICATION.md) records the 165-test
-suite, installed-wheel walkthrough, and actual long-handoff recovery across two sessions.
-
-## v0.3.1 — M6 review fixes
-
-Authorized on 2026-09-07. Extend A-25–A-29 with relocated evidence, fenced handoff
-commands, canonical task aliases, symlinked skills, missing console entrypoints,
-directory collisions, and bounded text titles. Preserve verification path constraints
-and machine schemas. Run focused regressions, the full suite, lint, documentation
-checks, and the installed-wheel smoke. This patch does not upgrade live installations.
-
-## M7 — Project reminders and history reuse (v0.4)
-
-Authorized on 2026-09-08. Load project guidance independently of task selection;
-reserve meaningful short-reminder content space; integrate history reuse into the
-planning skill. Use explicit sections in existing research files, with no machine
-schema migration or automatic scientific judgments. Exit checks: A-31–A-36,
-existing lifecycle regressions, wheel smoke, and actual host startup/compact delivery.
-The authorized rollout includes the local installation and scoped skill/guidance
-updates in Pinyin VSR and OR, preserving task records and unrelated work.
-
-M7 completed on 2026-09-08; [verification](M7-VERIFICATION.md) records the 191-test
-suite, installed-wheel smoke, fresh-host history-reuse case, actual automatic
-compaction delivery and scoped upgrades of Pinyin VSR and OR.
-
-## v0.4.1 — M7 reminder review fixes
-
-Authorized on 2026-09-08. Extend A-31–A-33 to retain inequalities and standalone
-Markdown autolinks, omit only whole-section authoring placeholders, label each
-warning, omit nonexistent orientation files, and retain relative source diagnostics.
-Keep lifecycle and host protocol unchanged. Run focused regressions, the full suite,
-lint, documentation checks and wheel smoke; commit and push, then require successful
-CI on that commit before upgrading the shared local installation used by Pinyin VSR
-and OR. Project skills and research files need no edits for this patch.
-
-## M8 — Governing-question alignment (v0.5)
-
-Authorized on 2026-09-14 after the C15 scope-drift review. Project the accepted
-task question in compact reminders, add an optional compatible Question alignment
-body section, and bind retained result assessments to the task question and declared
-non-claim boundary. Preserve record/frontmatter schema version 1, existing task
-lifecycle, explicit selection, and mutable project-guidance ownership. Do not add
-automatic scientific classification, a question database, rapid-note lifecycle,
-historical task migration, host-protocol changes, or shared-skill edits.
-
-Exit checks: A-37–A-40, the existing context/lifecycle regressions, full tests,
-lint, document checks, and installed-wheel smoke. The official Codex hook source
-must be rechecked because both existing reminder events consume the shared renderer;
-content-only fixture coverage is sufficient when the response shape and definitions
-remain unchanged. Release, installation, OR project updates, commits and pushes are
-separate actions.
-
-### M8 review follow-up
-
-Authorized on 2026-09-14. Keep strict alignment checks for proposed contracts while
-compatibly reading schema-1 history that predates the optional grammar; make the
-governing-question projection explicit in templates; and reserve realistic alignment
-text before remaining mutable guidance without displacing warnings, handoff, or all
-project context. Extend A-37–A-40 and the M8 verification record. Do not change the
-missing-source lifecycle rule, duplicate verification verdict inside assessment, bump
-the record schema, migrate live tasks, install, release, commit, or push implicitly.
+The [release-evidence index](RELEASE-EVIDENCE.md) maps completed increments and
+review follow-ups to their original verification records. M1–M7 and the v0.1 release
+remain completed historical work; M8 implementation is recorded with release pending.
+The older development proposal remains historical and does not override this plan.

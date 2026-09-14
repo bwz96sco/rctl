@@ -29,9 +29,7 @@ def handle(payload, root_argument=None):
                 "Hook cwd must be an absolute path inside the selected project."
             )
         local_path(root, cwd)
-        text = load_context(
-            root, budget=BUDGETS[event], compact=event == "UserPromptSubmit"
-        )[0]["context"]
+        text = load_context(root, budget=BUDGETS[event])[0]["context"]
     except (RctlError, OSError, ValueError) as error:
         text = "rctl context unavailable: " + str(error)
         if isinstance(error, RctlError):

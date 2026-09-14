@@ -125,19 +125,16 @@ def test_late_handoff_survives_budgets_and_is_historical(task, cli, project):
     cli("checkpoint", "tasks/retained-comparison", "--file", "checkpoint.md")
     assert task.file(".rctl/record.json").read_bytes() == record
     assert task.file("state.md").read_text() == state
-    for compact, budget in ((True, 2000), (False, 8000)):
-        response, _ = context(task, budget=budget, compact=compact)
+    for budget in (2000, 8000):
+        response, _ = context(task, budget=budget)
         text = response["context"]
         assert len(text) <= budget
         assert "Next action: Inspect the retained error table." in text
         assert "Await the operator decision." in text
         assert "state.md" in text and "No verification" in text
-        if compact:
-            assert "Old work." not in text
-        else:
-            assert text.index("Inspect the retained") < text.index("Old work.")
+        assert "Old work." not in text
     task.cancel("Pause route permanently")
-    text = context(task, budget=2000, compact=True)[0]["context"]
+    text = context(task, budget=2000)[0]["context"]
     assert "Historical handoff — Next action:" in text
     assert "Reported handoff — Next action:" not in text
     assert "Reopen" in text
@@ -148,7 +145,7 @@ def test_handoff_does_not_smuggle_unbounded_json(task):
     task.file("state.md").write_text(
         "## Next action\n" + "界" * 20000 + "\n## Blockers\n" + "文" * 20000
     )
-    data = context(task, budget=2000, compact=True)[0]
+    data = context(task, budget=2000)[0]
     assert sum(len(v or "") for v in data["handoff"].values()) < 2000
     assert len(data["context"]) <= 2000
     task.file("state.md").write_bytes(b"\xff")

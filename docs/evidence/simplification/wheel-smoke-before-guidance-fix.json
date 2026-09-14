@@ -1,0 +1,1184 @@
+{
+  "ok": true,
+  "python": "3.13.2",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "wheel": "rctl-0.5.0-py3-none-any.whl",
+  "versions": {
+    "rctl": "0.5.0",
+    "PyYAML": "6.0.3",
+    "jsonschema": "4.26.0"
+  },
+  "checks": [
+    {
+      "argv": [
+        "init",
+        "--vault",
+        "note/main",
+        "--codex"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "root": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project",
+          "vault": "note/main",
+          "created": [
+            ".agents/",
+            ".codex/",
+            ".rctl/",
+            "note/",
+            "research/",
+            "tasks/",
+            ".agents/skills/",
+            ".rctl/codex/",
+            "note/main/",
+            ".agents/skills/research-task/",
+            "note/main/_references/",
+            "note/main/_templates/",
+            "note/main/computation/",
+            "note/main/experiments/",
+            "note/main/figures/",
+            "note/main/ideas/",
+            "note/main/intake/",
+            "note/main/literature/",
+            "note/main/slides/",
+            "note/main/theory/",
+            "note/main/writing/",
+            ".agents/skills/research-task/agents/",
+            ".agents/skills/research-task/references/",
+            "research/BASELINES.md",
+            "research/INVENTORY.md",
+            "research/PROGRAM.md",
+            "research/README.md",
+            "research/ROUTES.md",
+            ".agents/skills/research-task/SKILL.md",
+            ".agents/skills/research-task/agents/openai.yaml",
+            ".agents/skills/research-task/references/graphify.md",
+            ".agents/skills/research-task/references/planning.md",
+            ".agents/skills/research-task/references/task-files.md",
+            ".agents/skills/research-task/references/verification.md",
+            ".agents/skills/research-task/references/workspace.md",
+            ".rctl/project.json",
+            "note/main/.gitignore",
+            "note/main/.graphifyignore",
+            "note/main/AGENTS.md",
+            "note/main/_references/citation-policy.md",
+            "note/main/_references/workflows.md",
+            "note/main/_templates/experiment-note.md",
+            "note/main/_templates/intake-audit.md",
+            "note/main/_templates/paper-note.md",
+            "note/main/computation/.gitkeep",
+            "note/main/experiments/.gitkeep",
+            "note/main/figures/.gitkeep",
+            "note/main/ideas/inbox.md",
+            "note/main/ideas/questions.md",
+            "note/main/intake/.gitkeep",
+            "note/main/literature/.gitkeep",
+            "note/main/literature-index.md",
+            "note/main/references.bib",
+            "note/main/slides/.gitkeep",
+            "note/main/theory/.gitkeep",
+            "note/main/writing/.gitkeep",
+            ".codex/hooks.json",
+            ".codex/config.toml",
+            ".rctl/codex/README.md"
+          ],
+          "preserved": []
+        },
+        "error": null,
+        "warnings": [
+          "Codex files do not grant project or hook trust; read .rctl/codex/README.md."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "init",
+        "--codex"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "root": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project",
+          "vault": "note/main",
+          "created": [],
+          "preserved": [
+            "research/BASELINES.md",
+            "research/INVENTORY.md",
+            "research/PROGRAM.md",
+            "research/README.md",
+            "research/ROUTES.md",
+            ".agents/skills/research-task/SKILL.md",
+            ".agents/skills/research-task/agents/openai.yaml",
+            ".agents/skills/research-task/references/graphify.md",
+            ".agents/skills/research-task/references/planning.md",
+            ".agents/skills/research-task/references/task-files.md",
+            ".agents/skills/research-task/references/verification.md",
+            ".agents/skills/research-task/references/workspace.md",
+            ".rctl/project.json",
+            ".codex/hooks.json",
+            ".codex/config.toml",
+            ".rctl/codex/README.md"
+          ]
+        },
+        "error": null,
+        "warnings": [
+          "Existing vault associated without modifying its contents.",
+          "Codex files do not grant project or hook trust; read .rctl/codex/README.md.",
+          "Preserved .codex/hooks.json; review existing configuration before use.",
+          "Preserved .codex/config.toml; review existing configuration before use."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "doctor",
+        "--codex"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "root": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project",
+          "rctl_version": "0.5.0",
+          "codex_inspected": true,
+          "review_needed": false,
+          "findings": [
+            {
+              "path": ".rctl/project.json",
+              "status": "current",
+              "message": "Project binding is structurally valid.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/SKILL.md",
+              "status": "current",
+              "message": "Matches the current package.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/agents/openai.yaml",
+              "status": "current",
+              "message": "Matches the current package.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/references/graphify.md",
+              "status": "current",
+              "message": "Matches the current package.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/references/planning.md",
+              "status": "current",
+              "message": "Matches the current package.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/references/task-files.md",
+              "status": "current",
+              "message": "Matches the current package.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/references/verification.md",
+              "status": "current",
+              "message": "Matches the current package.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/references/workspace.md",
+              "status": "current",
+              "message": "Matches the current package.",
+              "next_action": "None."
+            },
+            {
+              "path": ".codex/hooks.json:SessionStart",
+              "status": "current",
+              "message": "Command addressing matches this project; delivery and trust are not inspected.",
+              "next_action": "None."
+            },
+            {
+              "path": ".codex/hooks.json:UserPromptSubmit",
+              "status": "current",
+              "message": "Command addressing matches this project; delivery and trust are not inspected.",
+              "next_action": "None."
+            },
+            {
+              "path": ".codex/config.toml:features.hooks",
+              "status": "current",
+              "message": "Project setting enables hooks; delivery and trust are not inspected.",
+              "next_action": "None."
+            }
+          ]
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "update",
+        "export",
+        "update-candidates",
+        "--codex"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "directory": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project/update-candidates",
+          "files": [
+            "README.md",
+            "candidates/.agents/skills/research-task/SKILL.md",
+            "candidates/.agents/skills/research-task/agents/openai.yaml",
+            "candidates/.agents/skills/research-task/references/graphify.md",
+            "candidates/.agents/skills/research-task/references/planning.md",
+            "candidates/.agents/skills/research-task/references/task-files.md",
+            "candidates/.agents/skills/research-task/references/verification.md",
+            "candidates/.agents/skills/research-task/references/workspace.md",
+            "candidates/.codex/config.toml",
+            "candidates/.codex/hooks.json",
+            "inspection.json"
+          ],
+          "review_needed": false
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "task",
+        "new",
+        "tasks/retained-comparison",
+        "--kind",
+        "analysis",
+        "--title",
+        "Installed wheel smoke"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "draft",
+          "contract_path": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project/tasks/retained-comparison/contract.md"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "begin",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 2,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {},
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project/tasks/retained-comparison/contract.md: replace the draft's <...> authoring placeholders before begin/amend.",
+          "next_action": "Correct the input and try again."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "contract",
+        "check",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "check": "structure",
+          "valid": true,
+          "criterion_ids": [
+            "AC-01",
+            "AC-02"
+          ],
+          "question_alignment": {
+            "source": "research/questions/C15.md#mechanism",
+            "mechanism": "Combine complementary logical components across generated programs.",
+            "tests": "The organization increment after both arms receive the same records.",
+            "does_not_decide": "The broader cross-candidate mechanism is not decided."
+          }
+        },
+        "error": null,
+        "warnings": [
+          "Structural validity does not establish scientific adequacy or verification."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "begin",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "task",
+        "list",
+        "--phase",
+        "active"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "tasks": [
+            {
+              "task_id": "retained-comparison",
+              "path": "tasks/retained-comparison",
+              "title": "Inspect a synthetic retained error comparison",
+              "phase": "active",
+              "verification": null,
+              "currentness": "not_checked",
+              "warnings": [
+                "No verification has been recorded; structural checks and handoffs do not establish closure.",
+                "No handoff recorded; save a concrete next action to resume."
+              ],
+              "error": null
+            }
+          ]
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "checkpoint",
+        "tasks/retained-comparison",
+        "--file",
+        "handoff.md"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "state_path": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project/tasks/retained-comparison/state.md"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "context",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1,
+          "contract_drift": false,
+          "assessment": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Prepare the result and required evidence/reviews, then verify; checkpoint to pause.",
+          "title": "Inspect a synthetic retained error comparison",
+          "question": "Does the supplied candidate meet the fixed improvement rule against the supplied baseline?",
+          "question_alignment": {
+            "source": "research/questions/C15.md#mechanism",
+            "mechanism": "Combine complementary logical components across generated programs.",
+            "tests": "The organization increment after both arms receive the same records.",
+            "does_not_decide": "The broader cross-candidate mechanism is not decided."
+          },
+          "verification": null,
+          "handoff": {
+            "next_action": "inspect retained evidence.",
+            "blockers": null
+          },
+          "available": true,
+          "task_selected": true,
+          "task_available": true,
+          "project": {
+            "available": true,
+            "goal": null,
+            "current_guidance": null,
+            "reuse_rule": "A new candidate whose mechanism matches a listed route must cite the entry and argue its `Reopen if` condition explicitly. A candidate that cannot meet the condition is dropped before it consumes budget. Match on mechanism, not on name: read `Also called` and `Mechanism` before concluding a candidate is new.",
+            "sources": [
+              "research/PROGRAM.md",
+              "research/ROUTES.md"
+            ]
+          },
+          "context": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nGoverning task question: Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\nGoverning question source (declared): research/questions/C15.md#mechanism\nGoverning mechanism (declared): Combine complementary logical components across generated programs.\nThis task tests (declared): The organization increment after both arms receive the same records.\nThis task does not decide (declared): The broader cross-candidate mechanism is not decided.\nHistory reuse: A new candidate whose mechanism matches a listed route must cite the entry and argue its `Reopen if` condition explicitly. A candidate that cannot meet the condition is dropped before it consumes budget. Match on mechanism, not on name: read `Also called` and `Mechanism` before concluding a candidate is new.\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nWarning: Project guidance missing or unfinished: research/PROGRAM.md / Goal.\nReported handoff — Blockers: Not recorded; read T/state.md.\nReported handoff — Next action: inspect retained evidence.\nLifecycle action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\nRoot: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project\nP: research/PROGRAM.md; R: research/ROUTES.md\nOrientation: research/README.md\nT: tasks/retained-comparison\nT files: contract.md, state.md, result.md\nC: T/.rctl/record.json contracts[-1].text (accepted)\n"
+        },
+        "error": null,
+        "warnings": [
+          "No verification has been recorded; structural checks and handoffs do not establish closure.",
+          "Project guidance missing or unfinished: research/PROGRAM.md / Goal."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1,
+          "contract_drift": true,
+          "assessment": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Amend the contract with a reason before dependent work.",
+          "title": "Inspect a synthetic retained error comparison",
+          "question": "Does the supplied candidate meet the fixed improvement rule against the supplied baseline?",
+          "question_alignment": {
+            "source": "research/questions/C15.md#mechanism",
+            "mechanism": "Combine complementary logical components across generated programs.",
+            "tests": "The organization increment after both arms receive the same records.",
+            "does_not_decide": "The broader cross-candidate mechanism is not decided."
+          },
+          "verification": null,
+          "handoff": {
+            "next_action": "inspect retained evidence.",
+            "blockers": null
+          }
+        },
+        "error": null,
+        "warnings": [
+          "AMENDMENT_REQUIRED: current contract differs from the governing revision.",
+          "No verification has been recorded; structural checks and handoffs do not establish closure."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "amend",
+        "tasks/retained-comparison",
+        "--reason",
+        "Clarify the existing budget"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 2
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 2,
+          "contract_drift": false,
+          "assessment": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Prepare the result and required evidence/reviews, then verify; checkpoint to pause.",
+          "title": "Inspect a synthetic retained error comparison",
+          "question": "Does the supplied candidate meet the fixed improvement rule against the supplied baseline?",
+          "question_alignment": {
+            "source": "research/questions/C15.md#mechanism",
+            "mechanism": "Combine complementary logical components across generated programs.",
+            "tests": "The organization increment after both arms receive the same records.",
+            "does_not_decide": "The broader cross-candidate mechanism is not decided."
+          },
+          "verification": null,
+          "handoff": {
+            "next_action": "inspect retained evidence.",
+            "blockers": null
+          }
+        },
+        "error": null,
+        "warnings": [
+          "No verification has been recorded; structural checks and handoffs do not establish closure."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0001",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-14T10:07:16.769607Z",
+                "finished_at": "2026-09-14T10:07:16.807365Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0001-kfdrg29a/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0001-kfdrg29a/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Required review is missing.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": null
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Required review is missing.",
+          "next_action": "Revise the interpretation or leave the assessment unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 5,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0001",
+          "verdict": "unknown",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-14T10:07:16.769607Z",
+                "finished_at": "2026-09-14T10:07:16.807365Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0001-kfdrg29a/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0001-kfdrg29a/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "unknown",
+              "rationale": "Required review is missing.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": null
+            }
+          ]
+        },
+        "error": {
+          "code": "VERIFICATION_UNKNOWN",
+          "message": "AC-02: Required review is missing.",
+          "next_action": "Revise the interpretation or leave the assessment unresolved."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison",
+        "--reviews",
+        "tasks/retained-comparison/reviews.json"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0002",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-14T10:07:16.980537Z",
+                "finished_at": "2026-09-14T10:07:17.021085Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0002-51c1h5ro/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0002-51c1h5ro/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "pass",
+              "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            }
+          ],
+          "verdict": "pass"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "closure": {
+            "verification_id": "V0002",
+            "contract_revision": 2,
+            "cycle": 1,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-14T10:07:17.109483Z"
+          },
+          "verification_id": "V0002"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "contract_revision": 2,
+          "contract_drift": false,
+          "assessment": {
+            "value": "not_supported",
+            "verification_id": "V0002",
+            "contract_revision": 2,
+            "currentness": "current"
+          },
+          "currentness": "current",
+          "historical_closure": {
+            "verification_id": "V0002",
+            "contract_revision": 2,
+            "cycle": 1,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-14T10:07:17.109483Z"
+          },
+          "next_action": "Reopen with a reason before revising accepted work.",
+          "title": "Inspect a synthetic retained error comparison",
+          "question": "Does the supplied candidate meet the fixed improvement rule against the supplied baseline?",
+          "question_alignment": {
+            "source": "research/questions/C15.md#mechanism",
+            "mechanism": "Combine complementary logical components across generated programs.",
+            "tests": "The organization increment after both arms receive the same records.",
+            "does_not_decide": "The broader cross-candidate mechanism is not decided."
+          },
+          "verification": {
+            "id": "V0002",
+            "contract_revision": 2,
+            "cycle": 1,
+            "created_at": "2026-09-14T10:07:17.022006Z",
+            "rctl_version": "0.5.0",
+            "result_text": "---\nschema_version: 1\ntask_id: retained-comparison\ncontract_revision: 2\nassessment: not_supported\n---\n\n# Synthetic comparison result\n\n## Outcome\n\nC1 does not meet the promotion rule. Its error is higher than B0, and the gain is −0.03 absolute error units, below the required +0.01.\n\n## Evidence\n\nThe supplied [metrics](evidence/metrics.json) are B0 = 0.20 and C1 = 0.23. [Derived evidence](evidence/derived.json) records 0.20 − 0.23 = −0.03 and no promotion. The example [arithmetic check](check_arithmetic.py) can reproduce this relation. This fixture does not claim a completed rctl verification run.\n\n## Deviations\n\nNone in the specified synthetic assessment; the threshold and inputs are unchanged.\n\n## Next action\n\nRetain B0 within this fictional comparison and close the assessment after both required checks pass. There is no authorized extra experiment.\n\n## Limitations\n\nAll observations are synthetic aggregates. They establish no real model performance, prediction quality, uncertainty, or general scientific conclusion.\n",
+            "observed_files": [
+              {
+                "path": "tasks/retained-comparison/evidence/metrics.json",
+                "observation": "present",
+                "size_bytes": 150,
+                "mtime_ns": 1788604070804813834
+              },
+              {
+                "path": "tasks/retained-comparison/evidence/derived.json",
+                "observation": "present",
+                "size_bytes": 63,
+                "mtime_ns": 1788604070805172669
+              },
+              {
+                "path": "tasks/retained-comparison/check_arithmetic.py",
+                "observation": "present",
+                "size_bytes": 878,
+                "mtime_ns": 1788604070805455337
+              },
+              {
+                "path": "tasks/retained-comparison/result.md",
+                "observation": "present",
+                "size_bytes": 1037,
+                "mtime_ns": 1789380436691318244
+              },
+              {
+                "path": "tasks/retained-comparison/.rctl/checks/V0002-51c1h5ro/AC-01.stdout",
+                "observation": "present",
+                "size_bytes": 53,
+                "mtime_ns": 1789380437009728807
+              },
+              {
+                "path": "tasks/retained-comparison/.rctl/checks/V0002-51c1h5ro/AC-01.stderr",
+                "observation": "present",
+                "size_bytes": 0,
+                "mtime_ns": 1789380436980921677
+              }
+            ],
+            "external_refs": [],
+            "subject_issues": [],
+            "checks": [
+              {
+                "criterion_id": "AC-01",
+                "method": "command",
+                "verdict": "pass",
+                "rationale": "Declared command exited 0.",
+                "evidence_refs": [
+                  "evidence/metrics.json",
+                  "evidence/derived.json"
+                ],
+                "execution": {
+                  "argv": [
+                    "uv",
+                    "run",
+                    "--offline",
+                    "--no-project",
+                    "python",
+                    "check_arithmetic.py"
+                  ],
+                  "cwd": "tasks/retained-comparison",
+                  "started_at": "2026-09-14T10:07:16.980537Z",
+                  "finished_at": "2026-09-14T10:07:17.021085Z",
+                  "exit_code": 0,
+                  "timed_out": false,
+                  "error": null,
+                  "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0002-51c1h5ro/AC-01.stdout",
+                  "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0002-51c1h5ro/AC-01.stderr"
+                }
+              },
+              {
+                "criterion_id": "AC-02",
+                "method": "review",
+                "verdict": "pass",
+                "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+                "evidence_refs": [
+                  "result.md",
+                  "evidence/metrics.json",
+                  "evidence/derived.json"
+                ],
+                "reviewer": "agent"
+              }
+            ],
+            "verdict": "pass",
+            "review_input_text": "{\"schema_version\": 1, \"task_id\": \"retained-comparison\", \"contract_revision\": 2, \"checks\": [{\"criterion_id\": \"AC-02\", \"verdict\": \"pass\", \"reviewer\": \"agent\", \"rationale\": \"Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.\", \"evidence_refs\": [\"result.md\", \"evidence/metrics.json\", \"evidence/derived.json\"]}]}"
+          },
+          "handoff": {
+            "next_action": "inspect retained evidence.",
+            "blockers": null
+          }
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "task",
+        "list",
+        "--phase",
+        "closed"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "tasks": [
+            {
+              "task_id": "retained-comparison",
+              "path": "tasks/retained-comparison",
+              "title": "Inspect a synthetic retained error comparison",
+              "phase": "closed",
+              "verification": {
+                "id": "V0002",
+                "verdict": "pass"
+              },
+              "currentness": "current",
+              "warnings": [],
+              "error": null
+            }
+          ]
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "reopen",
+        "tasks/retained-comparison",
+        "--reason",
+        "Recheck retained evidence"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "cycle": 2
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 4,
+      "response": {
+        "schema_version": 1,
+        "ok": false,
+        "data": {},
+        "error": {
+          "code": "VERIFICATION_STALE",
+          "message": "Verification predates the current cycle; verify again.",
+          "next_action": "Restore/update the task materials and verify again."
+        },
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "verify",
+        "tasks/retained-comparison",
+        "--reviews",
+        "tasks/retained-comparison/reviews.json"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "verification_id": "V0003",
+          "checks": [
+            {
+              "criterion_id": "AC-01",
+              "method": "command",
+              "verdict": "pass",
+              "rationale": "Declared command exited 0.",
+              "evidence_refs": [
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "execution": {
+                "argv": [
+                  "uv",
+                  "run",
+                  "--offline",
+                  "--no-project",
+                  "python",
+                  "check_arithmetic.py"
+                ],
+                "cwd": "tasks/retained-comparison",
+                "started_at": "2026-09-14T10:07:17.538085Z",
+                "finished_at": "2026-09-14T10:07:17.578955Z",
+                "exit_code": 0,
+                "timed_out": false,
+                "error": null,
+                "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0003-9kfm3w89/AC-01.stdout",
+                "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0003-9kfm3w89/AC-01.stderr"
+              }
+            },
+            {
+              "criterion_id": "AC-02",
+              "method": "review",
+              "verdict": "pass",
+              "rationale": "Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.",
+              "evidence_refs": [
+                "result.md",
+                "evidence/metrics.json",
+                "evidence/derived.json"
+              ],
+              "reviewer": "agent"
+            }
+          ],
+          "verdict": "pass"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "close",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "closure": {
+            "verification_id": "V0003",
+            "contract_revision": 2,
+            "cycle": 2,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-14T10:07:17.667397Z"
+          },
+          "verification_id": "V0003"
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "context",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "closed",
+          "contract_revision": 2,
+          "contract_drift": false,
+          "assessment": {
+            "value": "not_supported",
+            "verification_id": "V0003",
+            "contract_revision": 2,
+            "currentness": "current"
+          },
+          "currentness": "current",
+          "historical_closure": {
+            "verification_id": "V0003",
+            "contract_revision": 2,
+            "cycle": 2,
+            "assessment": "not_supported",
+            "closed_at": "2026-09-14T10:07:17.667397Z"
+          },
+          "next_action": "Reopen with a reason before revising accepted work.",
+          "title": "Inspect a synthetic retained error comparison",
+          "question": "Does the supplied candidate meet the fixed improvement rule against the supplied baseline?",
+          "question_alignment": {
+            "source": "research/questions/C15.md#mechanism",
+            "mechanism": "Combine complementary logical components across generated programs.",
+            "tests": "The organization increment after both arms receive the same records.",
+            "does_not_decide": "The broader cross-candidate mechanism is not decided."
+          },
+          "verification": {
+            "id": "V0003",
+            "verdict": "pass",
+            "contract_revision": 2,
+            "cycle": 2
+          },
+          "handoff": {
+            "next_action": "inspect retained evidence.",
+            "blockers": null
+          },
+          "available": true,
+          "task_selected": true,
+          "task_available": true,
+          "project": {
+            "available": true,
+            "goal": null,
+            "current_guidance": null,
+            "reuse_rule": "A new candidate whose mechanism matches a listed route must cite the entry and argue its `Reopen if` condition explicitly. A candidate that cannot meet the condition is dropped before it consumes budget. Match on mechanism, not on name: read `Also called` and `Mechanism` before concluding a candidate is new.",
+            "sources": [
+              "research/PROGRAM.md",
+              "research/ROUTES.md"
+            ]
+          },
+          "context": "Task: retained-comparison\nPhase: closed; governing revision: 2\nVerification: V0003: pass; applicability: current; historical closure: V0003 (cycle 2, not_supported)\nGoverning task question: Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\nGoverning question source (declared): research/questions/C15.md#mechanism\nGoverning mechanism (declared): Combine complementary logical components across generated programs.\nThis task tests (declared): The organization increment after both arms receive the same records.\nThis task does not decide (declared): The broader cross-candidate mechanism is not decided.\nTask assessment: not_supported (verification V0003; revision 2; current)\nHistory reuse: A new candidate whose mechanism matches a listed route must cite the entry and argue its `Reopen if` condition explicitly. A candidate that cannot meet the condition is dropped before it consumes budget. Match on mechanism, not on name: read `Also called` and `Mechanism` before concluding a candidate is new.\nWarning: Project guidance missing or unfinished: research/PROGRAM.md / Goal.\nHistorical handoff — Blockers: Not recorded; read T/state.md.\nHistorical handoff — Next action: inspect retained evidence.\nLifecycle action: Reopen with a reason before revising accepted work.\nRoot: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project\nP: research/PROGRAM.md; R: research/ROUTES.md\nOrientation: research/README.md\nT: tasks/retained-comparison\nT files: contract.md, state.md, result.md\nC: T/.rctl/record.json contracts[-1].text (accepted)\n"
+        },
+        "error": null,
+        "warnings": [
+          "Project guidance missing or unfinished: research/PROGRAM.md / Goal."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "integration",
+        "codex",
+        "export",
+        "host-bundle"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "directory": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project/host-bundle",
+          "host": "codex",
+          "entrypoint": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/venv/bin/rctl",
+          "files": [
+            "hooks.json",
+            "research-task/SKILL.md",
+            "research-task/agents/openai.yaml",
+            "research-task/references/graphify.md",
+            "research-task/references/planning.md",
+            "research-task/references/task-files.md",
+            "research-task/references/verification.md",
+            "research-task/references/workspace.md",
+            "README.md"
+          ]
+        },
+        "error": null,
+        "warnings": []
+      }
+    }
+  ],
+  "shared_experiment_record": null,
+  "generated_hook_adapter_responses": {
+    "SessionStart": {
+      "hookSpecificOutput": {
+        "hookEventName": "SessionStart",
+        "additionalContext": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nGoverning task question: Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\nGoverning question source (declared): research/questions/C15.md#mechanism\nGoverning mechanism (declared): Combine complementary logical components across generated programs.\nThis task tests (declared): The organization increment after both arms receive the same records.\nThis task does not decide (declared): The broader cross-candidate mechanism is not decided.\nHistory reuse: A new candidate whose mechanism matches a listed route must cite the entry and argue its `Reopen if` condition explicitly. A candidate that cannot meet the condition is dropped before it consumes budget. Match on mechanism, not on name: read `Also called` and `Mechanism` before concluding a candidate is new.\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nWarning: Project guidance missing or unfinished: research/PROGRAM.md / Goal.\nReported handoff — Blockers: Not recorded; read T/state.md.\nReported handoff — Next action: inspect retained evidence.\nLifecycle action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\nRoot: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project\nP: research/PROGRAM.md; R: research/ROUTES.md\nOrientation: research/README.md\nT: tasks/retained-comparison\nT files: contract.md, state.md, result.md\nC: T/.rctl/record.json contracts[-1].text (accepted)\n"
+      }
+    },
+    "UserPromptSubmit": {
+      "hookSpecificOutput": {
+        "hookEventName": "UserPromptSubmit",
+        "additionalContext": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nGoverning task question: Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\nGoverning question source (declared): research/questions/C15.md#mechanism\nGoverning mechanism (declared): Combine complementary logical components across generated programs.\nThis task tests (declared): The organization increment after both arms receive the same records.\nThis task does not decide (declared): The broader cross-candidate mechanism is not decided.\nHistory reuse: A new candidate whose mechanism matches a listed route must cite the entry and argue its `Reopen if` condition explicitly. A candidate that cannot meet the condition is dropped before it consumes budget. Match on mechanism, not on name: read `Also called` and `Mechanism` before concluding a candidate is new.\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nWarning: Project guidance missing or unfinished: research/PROGRAM.md / Goal.\nReported handoff — Blockers: Not recorded; read T/state.md.\nReported handoff — Next action: inspect retained evidence.\nLifecycle action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\nRoot: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-8f6qodfd/project\nP: research/PROGRAM.md; R: research/ROUTES.md\nOrientation: research/README.md\nT: tasks/retained-comparison\nT files: contract.md, state.md, result.md\nC: T/.rctl/record.json contracts[-1].text (accepted)\n"
+      }
+    }
+  },
+  "execution_logs": {
+    "tasks/retained-comparison/.rctl/checks/V0001-kfdrg29a/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0001-kfdrg29a/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0002-51c1h5ro/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0002-51c1h5ro/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0003-9kfm3w89/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0003-9kfm3w89/AC-01.stderr": ""
+  }
+}

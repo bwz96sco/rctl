@@ -125,6 +125,15 @@ def test_workspace_reference_links_are_exported(project, cli):
     refs = project / "bundle/research-task/references"
     assert (refs / "workspace.md").is_file()
     assert (refs / "graphify.md").is_file()
+    assert (refs / "planning.md").is_file()
+    assert "only accepts active tasks" in (refs / "verification.md").read_text()
+    for source in (project / "bundle/research-task").rglob("*.md"):
+        for target in re.findall(r"\[[^\]]+\]\(([^)]+)\)", source.read_text()):
+            if "://" not in target:
+                assert (source.parent / target.split("#")[0]).is_file(), (
+                    source,
+                    target,
+                )
 
 
 def test_existing_vault_cannot_overlap_a_control_directory_alias(project, cli):

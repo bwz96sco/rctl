@@ -36,15 +36,10 @@ def list_tasks(root, phase=None):
                 for name in ("contract.md", ".rctl/record.json")
             ):
                 continue
-            status, warnings = task.status()
-            if phase is not None and status["phase"] != phase:
+            snapshot = task.snapshot()
+            if phase is not None and snapshot.phase != phase:
                 continue
-            row.update({key: status[key] for key in ("title", "phase", "currentness")})
-            report = status["verification"]
-            row["verification"] = (
-                {key: report[key] for key in ("id", "verdict")} if report else None
-            )
-            row["warnings"] = warnings
+            row.update(snapshot.discovery())
         except RctlError as error:
             row["error"] = {
                 "code": error.code,

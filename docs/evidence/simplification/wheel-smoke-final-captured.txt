@@ -1,0 +1,242 @@
+Command: uv run scripts/smoke_package.py .work/simplification-zsjIFu/dist-final/rctl-0.5.0-py3-none-any.whl
+Exit code: 0
+Capture note: tool output budget truncated the displayed stdout; the subprocess succeeded. Full pre-clarification smoke output is retained separately. Runtime code was unchanged by the active-only checkpoint guidance repair.
+
+Warning: truncated output (original token count: 11942)
+Total output lines: 1184
+
+{
+  "ok": true,
+  "python": "3.13.2",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "wheel": "rctl-0.5.0-py3-none-any.whl",
+  "versions": {
+    "rctl": "0.5.0",
+    "PyYAML": "6.0.3",
+    "jsonschema": "4.26.0"
+  },
+  "checks": [
+    {
+      "argv": [
+        "init",
+        "--vault",
+        "note/main",
+        "--codex"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "root": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-ze7dv_fj/project",
+          "vault": "note/main",
+          "created": [
+            ".agents/",
+            ".codex/",
+            ".rctl/",
+            "note/",
+            "research/",
+            "tasks/",
+            ".agents/skills/",
+            ".rctl/codex/",
+            "note/main/",
+            ".agents/skills/research-task/",
+            "note/main/_references/",
+            "note/main/_templates/",
+            "note/main/computation/",
+            "note/main/experiments/",
+            "note/main/figures/",
+            "note/main/ideas/",
+            "note/main/intake/",
+            "note/main/literature/",
+            "note/main/slides/",
+            "note/main/theory/",
+            "note/main/writing/",
+            ".agents/skills/research-task/agents/",
+            ".agents/skills/research-task/references/",
+            "research/BASELINES.md",
+            "research/INVENTORY.md",
+            "research/PROGRAM.md",
+            "research/README.md",
+            "research/ROUTES.md",
+            ".agents/skills/research-task/SKILL.md",
+            ".agents/skills/research-task/agents/openai.yaml",
+            ".agents/skills/research-task/references/graphify.md",
+            ".agents/skills/research-task/references/planning.md",
+            ".agents/skills/research-task/references/task-files.md",
+            ".agents/skills/research-task/references/verification.md",
+            ".agents/skills/research-task/references/workspace.md",
+            ".rctl/project.json",
+            "note/main/.gitignore",
+            "note/main/.graphifyignore",
+            "note/main/AGENTS.md",
+            "note/main/_references/citation-policy.md",
+            "note/main/_references/workflows.md",
+            "note/main/_templates/experiment-note.md",
+            "note/main/_templates/intake-audit.md",
+            "note/main/_templates/paper-note.md",
+            "note/main/computation/.gitkeep",
+            "note/main/experiments/.gitkeep",
+            "note/main/figures/.gitkeep",
+            "note/main/ideas/inbox.md",
+            "note/main/ideas/questions.md",
+            "note/main/intake/.gitkeep",
+            "note/main/literature/.gitkeep",
+            "note/main/literature-index.md",
+            "note/main/references.bib",
+            "note/main/slides/.gitkeep",
+            "note/main/theory/.gitkeep",
+            "note/main/writing/.gitkeep",
+            ".codex/hooks.json",
+            ".codex/config.toml",
+            ".rctl/codex/README.md"
+          ],
+          "preserved": []
+        },
+        "error": null,
+        "warnings": [
+          "Codex files do not grant project or hook trust; read .rctl/codex/README.md."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "init",
+        "--codex"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "root": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-ze7dv_fj/project",
+          "vault": "note/main",
+          "created": [],
+          "preserved": [
+            "research/BASELINES.md",
+            "research/INVENTORY.md",
+            "research/PROGRAM.md",
+            "research/README.md",
+            "research/ROUTES.md",
+            ".agents/skills/research-task/SKILL.md",
+            ".agents/skills/research-task/agents/openai.yaml",
+            ".agents/skills/research-task/references/graphify.md",
+            ".agents/skills/research-task/references/planning.md",
+            ".agents/skills/research-task/references/task-files.md",
+            ".agents/skills/research-task/references/verification.md",
+            ".agents/skills/research-task/references/workspace.md",
+            ".rctl/project.json",
+            ".codex/hooks.json",
+            ".codex/config.toml",
+            ".rctl/codex/README.md"
+          ]
+        },
+        "error": null,
+        "warnings": [
+          "Existing vault associated without modifying its contents.",
+          "Codex files do not grant project or hook trust; read .rctl/codex/README.md.",
+          "Preserved .codex/hooks.json; review existing configuration before use.",
+          "Preserved .codex/config.toml; review existing configuration before use."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "doctor",
+        "--codex"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "root": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-ze7dv_fj/project",
+          "rctl_version": "0.5.0",
+          "codex_inspected": true,
+          "review_needed": false,
+          "findings": [
+            {
+              "path": ".rctl/project.json",
+              "status": "current",
+              "message": "Project binding is structurally valid.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/SKILL.md",
+              "status": "current",
+              "message": "Matches the current package.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/agents/openai.yaml",
+              "status": "current",
+              "message": "Matches the current package.",
+              "next_action": "None."
+            },
+            {
+              "path": ".agents/skills/research-task/references/graphify.md",
+              "status": "current",
+              "message": "Matches the current package."…8942 tokens truncated…ate is new.\nWarning: Project guidance missing or unfinished: research/PROGRAM.md / Goal.\nHistorical handoff — Blockers: Not recorded; read T/state.md.\nHistorical handoff — Next action: inspect retained evidence.\nLifecycle action: Reopen with a reason before revising accepted work.\nRoot: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-ze7dv_fj/project\nP: research/PROGRAM.md; R: research/ROUTES.md\nOrientation: research/README.md\nT: tasks/retained-comparison\nT files: contract.md, state.md, result.md\nC: T/.rctl/record.json contracts[-1].text (accepted)\n"
+        },
+        "error": null,
+        "warnings": [
+          "Project guidance missing or unfinished: research/PROGRAM.md / Goal."
+        ]
+      }
+    },
+    {
+      "argv": [
+        "integration",
+        "codex",
+        "export",
+        "host-bundle"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "directory": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-ze7dv_fj/project/host-bundle",
+          "host": "codex",
+          "entrypoint": "/Users/zhangbowen/Projects/rctl/.work/wheel-smoke-ze7dv_fj/venv/bin/rctl",
+          "files": [
+            "hooks.json",
+            "research-task/SKILL.md",
+            "research-task/agents/openai.yaml",
+            "research-task/references/graphify.md",
+            "research-task/references/planning.md",
+            "research-task/references/task-files.md",
+            "research-task/references/verification.md",
+            "research-task/references/workspace.md",
+            "README.md"
+          ]
+        },
+        "error": null,
+        "warnings": []
+      }
+    }
+  ],
+  "shared_experiment_record": null,
+  "generated_hook_adapter_responses": {
+    "SessionStart": {
+      "hookSpecificOutput": {
+        "hookEventName": "SessionStart",
+        "additionalContext": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nGoverning task question: Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\nGoverning question source (declared): research/questions/C15.md#mechanism\nGoverning mechanism (declared): Combine complementary logical components across generated programs.\nThis task tests (declared): The organization increment after both arms receive the same records.\nThis task does not decide (declared): The broader cross-candidate mechanism is not decided.\nHistory reuse: A new candidate whose mechanism matches a listed route must cite the entry and argue its `Reopen if` condition explicitly. A candidate that cannot meet the condition is dropped before it consumes budget. Match on mechanism, not on name: read `Also called` and `Mechanism` before concluding a candidate is new.\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nWarning: Project guidance missing or unfinished: research/PROGRAM.md / Goal.\nReported handoff — Blockers: Not recorded; read T/state.md.\nReported handoff — Next action: inspect retained evidence.\nLifecycle action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\nRoot: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-ze7dv_fj/project\nP: research/PROGRAM.md; R: research/ROUTES.md\nOrientation: research/README.md\nT: tasks/retained-comparison\nT files: contract.md, state.md, result.md\nC: T/.rctl/record.json contracts[-1].text (accepted)\n"
+      }
+    },
+    "UserPromptSubmit": {
+      "hookSpecificOutput": {
+        "hookEventName": "UserPromptSubmit",
+        "additionalContext": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nGoverning task question: Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\nGoverning question source (declared): research/questions/C15.md#mechanism\nGoverning mechanism (declared): Combine complementary logical components across generated programs.\nThis task tests (declared): The organization increment after both arms receive the same records.\nThis task does not decide (declared): The broader cross-candidate mechanism is not decided.\nHistory reuse: A new candidate whose mechanism matches a listed route must cite the entry and argue its `Reopen if` condition explicitly. A candidate that cannot meet the condition is dropped before it consumes budget. Match on mechanism, not on name: read `Also called` and `Mechanism` before concluding a candidate is new.\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nWarning: Project guidance missing or unfinished: research/PROGRAM.md / Goal.\nReported handoff — Blockers: Not recorded; read T/state.md.\nReported handoff — Next action: inspect retained evidence.\nLifecycle action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\nRoot: /Users/zhangbowen/Projects/rctl/.work/wheel-smoke-ze7dv_fj/project\nP: research/PROGRAM.md; R: research/ROUTES.md\nOrientation: research/README.md\nT: tasks/retained-comparison\nT files: contract.md, state.md, result.md\nC: T/.rctl/record.json contracts[-1].text (accepted)\n"
+      }
+    }
+  },
+  "execution_logs": {
+    "tasks/retained-comparison/.rctl/checks/V0001-06rj_b4w/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0001-06rj_b4w/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0002-ho5eewuc/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0002-ho5eewuc/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0003-86lz47u8/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0003-86lz47u8/AC-01.stderr": ""
+  }
+}

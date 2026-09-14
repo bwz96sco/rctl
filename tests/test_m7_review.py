@@ -21,7 +21,7 @@ def test_valid_angle_brackets_survive_project_context(project, value):
     guidance(project, value)
     path = project / "research/PROGRAM.md"
     path.write_text(path.read_text().replace("Reduce comparable error.", value))
-    data, warnings = load_context(project, budget=2000, compact=True)
+    data, warnings = load_context(project, budget=2000)
     assert data["project"]["goal"] == value
     assert data["project"]["current_guidance"] == value
     assert value in data["context"]
@@ -38,13 +38,13 @@ def test_packaged_project_placeholders_are_omitted(project):
     assert len(warnings) == 2
 
 
-@pytest.mark.parametrize("budget,compact", [(2000, True), (8000, False)])
-def test_each_task_warning_has_a_marker(task, budget, compact):
+@pytest.mark.parametrize("budget", [2000, 8000])
+def test_each_task_warning_has_a_marker(task, budget):
     guidance(task.root)
     task.begin()
     contract = task.file("contract.md")
     contract.write_text(contract.read_text() + "\nChanged scope.\n")
-    data, warnings = load_context(task.root, task=task, budget=budget, compact=compact)
+    data, warnings = load_context(task.root, task=task, budget=budget)
     assert any("AMENDMENT_REQUIRED" in warning for warning in warnings)
     assert any("No verification" in warning for warning in warnings)
     for warning in warnings:
@@ -53,11 +53,11 @@ def test_each_task_warning_has_a_marker(task, budget, compact):
 
 
 def test_orientation_is_only_listed_when_it_exists(project):
-    data, _ = load_context(project, compact=True)
+    data, _ = load_context(project)
     assert "Orientation:" not in data["context"]
     guidance(project)
     (project / "research/README.md").write_text("# Research\n")
-    data, _ = load_context(project, compact=True)
+    data, _ = load_context(project)
     assert "Orientation: research/README.md" in data["context"]
 
 
@@ -73,7 +73,7 @@ def test_project_diagnostics_keep_reason_without_repeating_root(project, bad):
     elif bad == "directory":
         path.mkdir()
         reason = "Cannot read file"
-    data, warnings = load_context(root, budget=2000, compact=True)
+    data, warnings = load_context(root, budget=2000)
     assert any(
         reason in warning and "research/PROGRAM.md" in warning for warning in warnings
     )

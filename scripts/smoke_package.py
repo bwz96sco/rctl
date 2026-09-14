@@ -67,8 +67,12 @@ def main():
         cli("init", "--vault", "note/main", "--codex")
         skill = project / ".agents/skills/research-task/SKILL.md"
         assert skill.is_file()
-        assert "Governing question source" in skill.read_text()
+        assert "references/task-files.md" in skill.read_text()
         assert "This task does not decide" in skill.read_text()
+        refs = skill.parent / "references"
+        assert "Governing question source" in (refs / "task-files.md").read_text()
+        assert (refs / "planning.md").is_file()
+        assert "only accepts active tasks" in (refs / "verification.md").read_text()
         assert (
             project / ".agents/skills/research-task/references/workspace.md"
         ).is_file()

@@ -222,7 +222,9 @@ def test_context_bounded_unicode_read_only_and_no_checker(task, cli, project):
     assert len(text) <= 8000
     assert "AMENDMENT_REQUIRED" in text
     assert "[Truncated; read" in text
-    assert "AC-01" in text
+    assert "AC-01" not in text
+    assert "AC-01" in task.read_record()["contracts"][-1]["text"]
+    assert "C: T/.rctl/record.json contracts[-1].text" in text
     assert "Next action: review the evidence." in text
     assert f"T: {task.path.relative_to(project)}" in text
     assert "contract.md" in text and f"Root: {project}" in text

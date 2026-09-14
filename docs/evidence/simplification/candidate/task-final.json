@@ -1,0 +1,392 @@
+{
+  "record": {
+    "schema_version": 1,
+    "task_id": "retained-comparison",
+    "phase": "closed",
+    "cycle": 2,
+    "contracts": [
+      {
+        "revision": 1,
+        "text": "---\nschema_version: 1\ntask_id: retained-comparison\ntitle: Inspect a synthetic retained error comparison\nkind: analysis\ncriteria:\n- id: AC-01\n  requirement: The recorded gain and promotion label follow the frozen arithmetic\n    rule.\n  evidence_refs:\n  - evidence/metrics.json\n  - evidence/derived.json\n  failure_action: Correct the derived arithmetic before closing the assessment.\n  method:\n    type: command\n    argv:\n    - uv\n    - run\n    - --offline\n    - --no-project\n    - --no-cache\n    - --python\n    - /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/python\n    - --script\n    - check_arithmetic.py\n    timeout_seconds: 30\n    inputs:\n    - check_arithmetic.py\n    - evidence/metrics.json\n    - evidence/derived.json\n- id: AC-02\n  requirement: The result applies the frozen rule and confines its claims to synthetic\n    aggregate evidence. Its organization-only result does not decide the broader complementarity\n    mechanism.\n  evidence_refs:\n  - result.md\n  - evidence/metrics.json\n  - evidence/derived.json\n  - ../../research/questions/Q.md\n  failure_action: Revise the interpretation or leave the assessment unresolved.\n  method:\n    type: review\n    reviewer: either\n---\n\n# Synthetic comparison contract\n\n## Question\n\nDoes the supplied candidate meet the fixed improvement rule against the supplied baseline?\n\n## Question alignment\n\n- Governing question source: research/questions/Q.md#mechanism\n- Governing mechanism: Combining complementary logical components may improve generated programs.\n- This task tests: The organization increment after both arms receive the same records.\n- This task does not decide: Whether complementary components improve generated programs.\n\n## Scope\n\nInspect only the synthetic aggregate observations. Baseline B0 and candidate C1 use the same fictional evaluation set. This task recomputes one error difference; it does not reproduce predictions, training, or uncertainty estimates.\n\n## Constraints\n\nError is lower-is-better. Gain is B0 error minus C1 error. Promotion requires gain at least 0.01 absolute error units. Use the supplied aggregate directly, with no seed selection or alternative aggregation. Budget: local standard-library arithmetic only; no network, dependency download, or new experiment.\n\n## Stop conditions\n\nStop with a bounded answer when arithmetic and interpretation are checked. A negative result is a valid completion. Changing the threshold or collecting new observations requires a separate task. Inconsistent input prevents closure until corrected.\n",
+        "reason": "Initial contract",
+        "recorded_at": "2026-09-14T10:07:55.797207Z"
+      }
+    ],
+    "verifications": [
+      {
+        "id": "V0001",
+        "contract_revision": 1,
+        "cycle": 1,
+        "created_at": "2026-09-14T10:11:58.707806Z",
+        "rctl_version": "0.5.0",
+        "result_text": "---\nschema_version: 1\ntask_id: retained-comparison\ncontract_revision: 1\nassessment: not_supported\n---\n\n# Synthetic comparison result\n\n## Outcome\n\nC1 does not meet the promotion rule. Its error is higher than B0, and the gain is −0.03 absolute error units, below the required +0.01.\n\nThis finding assesses the organization increment after both arms receive the same records. Retain B0 within this fictional comparison.\n\n## Evidence\n\nThe supplied [metrics](evidence/metrics.json) mark the observations as synthetic and error as lower-is-better: B0 = 0.20, C1 = 0.23, minimum gain = 0.01. [Derived evidence](evidence/derived.json) correctly records 0.20 − 0.23 = −0.03 and promote = false. The accepted [arithmetic check](check_arithmetic.py) checks the gain and promotion label during managed verification.\n\nThe [governing question](../../research/questions/Q.md#mechanism) and related [organization-only route](../../research/ROUTES.md#organization-only-comparison) identify the same-records boundary. The evidence supports the decision to decline C1 promotion under the fixed rule; the broader component-complementarity question remains unanswered.\n\n## Deviations\n\nNone in the specified synthetic assessment; the threshold and inputs are unchanged.\n\n## Next action\n\nRetain B0 within this fictional comparison and close the assessment after both required checks pass. There is no authorized extra experiment.\n\n## Limitations\n\nAll observations are synthetic aggregates. They establish no real model performance, prediction quality, uncertainty, or general scientific conclusion. This organization-only comparison does not isolate complementary components and neither supports nor refutes whether combining complementary logical components improves generated programs.\n",
+        "observed_files": [
+          {
+            "path": "tasks/retained-comparison/evidence/metrics.json",
+            "observation": "present",
+            "size_bytes": 150,
+            "mtime_ns": 1788604070804813800
+          },
+          {
+            "path": "tasks/retained-comparison/evidence/derived.json",
+            "observation": "present",
+            "size_bytes": 63,
+            "mtime_ns": 1788604070805172700
+          },
+          {
+            "path": "tasks/retained-comparison/check_arithmetic.py",
+            "observation": "present",
+            "size_bytes": 878,
+            "mtime_ns": 1788604070805455400
+          },
+          {
+            "path": "tasks/retained-comparison/result.md",
+            "observation": "present",
+            "size_bytes": 1772,
+            "mtime_ns": 1789380718428394500
+          },
+          {
+            "path": "research/questions/Q.md",
+            "observation": "present",
+            "size_bytes": 262,
+            "mtime_ns": 1789380475722703600
+          },
+          {
+            "path": "tasks/retained-comparison/.rctl/checks/V0001-g1iiesv6/AC-01.stdout",
+            "observation": "present",
+            "size_bytes": 53,
+            "mtime_ns": 1789380718695205400
+          },
+          {
+            "path": "tasks/retained-comparison/.rctl/checks/V0001-g1iiesv6/AC-01.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1789380718630598700
+          }
+        ],
+        "external_refs": [],
+        "subject_issues": [],
+        "checks": [
+          {
+            "criterion_id": "AC-01",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "execution": {
+              "argv": [
+                "uv",
+                "run",
+                "--offline",
+                "--no-project",
+                "--no-cache",
+                "--python",
+                "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/python",
+                "--script",
+                "check_arithmetic.py"
+              ],
+              "cwd": "tasks/retained-comparison",
+              "started_at": "2026-09-14T10:11:58.630403Z",
+              "finished_at": "2026-09-14T10:11:58.706491Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0001-g1iiesv6/AC-01.stdout",
+              "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0001-g1iiesv6/AC-01.stderr"
+            }
+          },
+          {
+            "criterion_id": "AC-02",
+            "method": "review",
+            "verdict": "pass",
+            "rationale": "Inspected all four required references against accepted contract revision 1. evidence/metrics.json supplies synthetic lower-is-better errors B0=0.20 and C1=0.23 and minimum_gain=0.01. evidence/derived.json correctly records gain=-0.03 and promote=false. result.md applies baseline minus candidate and the unchanged threshold, declines C1 promotion, and confines the finding to supplied synthetic aggregates and the organization increment with identical records. ../../research/questions/Q.md explains that this comparison does not isolate component complementarity; the result explicitly leaves that mechanism unanswered and neither supports nor refutes it. AC-02 passes on this inspected content; this is an agent judgment.",
+            "evidence_refs": [
+              "result.md",
+              "evidence/metrics.json",
+              "evidence/derived.json",
+              "../../research/questions/Q.md"
+            ],
+            "reviewer": "agent"
+          }
+        ],
+        "verdict": "pass",
+        "review_input_text": "{\n  \"schema_version\": 1,\n  \"task_id\": \"retained-comparison\",\n  \"contract_revision\": 1,\n  \"checks\": [\n    {\n      \"criterion_id\": \"AC-02\",\n      \"verdict\": \"pass\",\n      \"reviewer\": \"agent\",\n      \"rationale\": \"Inspected all four required references against accepted contract revision 1. evidence/metrics.json supplies synthetic lower-is-better errors B0=0.20 and C1=0.23 and minimum_gain=0.01. evidence/derived.json correctly records gain=-0.03 and promote=false. result.md applies baseline minus candidate and the unchanged threshold, declines C1 promotion, and confines the finding to supplied synthetic aggregates and the organization increment with identical records. ../../research/questions/Q.md explains that this comparison does not isolate component complementarity; the result explicitly leaves that mechanism unanswered and neither supports nor refutes it. AC-02 passes on this inspected content; this is an agent judgment.\",\n      \"evidence_refs\": [\n        \"result.md\",\n        \"evidence/metrics.json\",\n        \"evidence/derived.json\",\n        \"../../research/questions/Q.md\"\n      ]\n    }\n  ]\n}\n"
+      },
+      {
+        "id": "V0002",
+        "contract_revision": 1,
+        "cycle": 2,
+        "created_at": "2026-09-14T10:20:29.581121Z",
+        "rctl_version": "0.5.0",
+        "result_text": "---\nschema_version: 1\ntask_id: retained-comparison\ncontract_revision: 1\nassessment: not_supported\n---\n\n# Synthetic comparison result\n\n## Outcome\n\nC1 does not meet the promotion rule. Its error is higher than B0, and the gain is −0.03 absolute error units, below the required +0.01.\n\nThis finding assesses the organization increment after both arms receive the same records. Retain B0 within this fictional comparison.\n\n## Evidence\n\nThe supplied [metrics](evidence/metrics.json) mark the observations as synthetic and error as lower-is-better: B0 = 0.20, C1 = 0.23, minimum gain = 0.01. [Derived evidence](evidence/derived.json) correctly records 0.20 − 0.23 = −0.03 and promote = false. The accepted [arithmetic check](check_arithmetic.py) checks the gain and promotion label during managed verification.\n\nThe [governing question](../../research/questions/Q.md#mechanism) and related [organization-only route](../../research/ROUTES.md#organization-only-comparison) identify the same-records boundary. The evidence supports the decision to decline C1 promotion under the fixed rule; the broader component-complementarity question remains unanswered.\n\n## Deviations\n\nNone in the specified synthetic assessment; the threshold and inputs are unchanged.\n\n## Next action\n\nRetain B0 within this fictional comparison and close the assessment after both required checks pass. There is no authorized extra experiment.\n\n## Limitations\n\nAll observations are synthetic aggregates. They establish no real model performance, prediction quality, uncertainty, or general scientific conclusion. This organization-only comparison does not isolate complementary components and neither supports nor refutes whether combining complementary logical components improves generated programs.\n",
+        "observed_files": [
+          {
+            "path": "tasks/retained-comparison/evidence/metrics.json",
+            "observation": "present",
+            "size_bytes": 150,
+            "mtime_ns": 1788604070804813800
+          },
+          {
+            "path": "tasks/retained-comparison/evidence/derived.json",
+            "observation": "present",
+            "size_bytes": 63,
+            "mtime_ns": 1788604070805172700
+          },
+          {
+            "path": "tasks/retained-comparison/check_arithmetic.py",
+            "observation": "present",
+            "size_bytes": 878,
+            "mtime_ns": 1788604070805455400
+          },
+          {
+            "path": "tasks/retained-comparison/result.md",
+            "observation": "present",
+            "size_bytes": 1772,
+            "mtime_ns": 1789380718428394500
+          },
+          {
+            "path": "research/questions/Q.md",
+            "observation": "present",
+            "size_bytes": 262,
+            "mtime_ns": 1789380475722703600
+          },
+          {
+            "path": "tasks/retained-comparison/.rctl/checks/V0002-1jz4x_jr/AC-01.stdout",
+            "observation": "present",
+            "size_bytes": 53,
+            "mtime_ns": 1789381229557522700
+          },
+          {
+            "path": "tasks/retained-comparison/.rctl/checks/V0002-1jz4x_jr/AC-01.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1789381229495547400
+          }
+        ],
+        "external_refs": [],
+        "subject_issues": [],
+        "checks": [
+          {
+            "criterion_id": "AC-01",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "execution": {
+              "argv": [
+                "uv",
+                "run",
+                "--offline",
+                "--no-project",
+                "--no-cache",
+                "--python",
+                "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/python",
+                "--script",
+                "check_arithmetic.py"
+              ],
+              "cwd": "tasks/retained-comparison",
+              "started_at": "2026-09-14T10:20:29.495225Z",
+              "finished_at": "2026-09-14T10:20:29.579924Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0002-1jz4x_jr/AC-01.stdout",
+              "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0002-1jz4x_jr/AC-01.stderr"
+            }
+          },
+          {
+            "criterion_id": "AC-02",
+            "method": "review",
+            "verdict": "pass",
+            "rationale": "Inspected all four required references against accepted contract revision 1. evidence/metrics.json supplies synthetic lower-is-better errors B0=0.20 and C1=0.23 and minimum_gain=0.01. evidence/derived.json correctly records gain=-0.03 and promote=false. result.md applies baseline minus candidate and the unchanged threshold, declines C1 promotion, and confines the finding to supplied synthetic aggregates and the organization increment with identical records. ../../research/questions/Q.md explains that this comparison does not isolate component complementarity; the result explicitly leaves that mechanism unanswered and neither supports nor refutes it. AC-02 passes on this inspected content; this is an agent judgment.",
+            "evidence_refs": [
+              "result.md",
+              "evidence/metrics.json",
+              "evidence/derived.json",
+              "../../research/questions/Q.md"
+            ],
+            "reviewer": "agent"
+          }
+        ],
+        "verdict": "pass",
+        "review_input_text": "{\n  \"schema_version\": 1,\n  \"task_id\": \"retained-comparison\",\n  \"contract_revision\": 1,\n  \"checks\": [\n    {\n      \"criterion_id\": \"AC-02\",\n      \"verdict\": \"pass\",\n      \"reviewer\": \"agent\",\n      \"rationale\": \"Inspected all four required references against accepted contract revision 1. evidence/metrics.json supplies synthetic lower-is-better errors B0=0.20 and C1=0.23 and minimum_gain=0.01. evidence/derived.json correctly records gain=-0.03 and promote=false. result.md applies baseline minus candidate and the unchanged threshold, declines C1 promotion, and confines the finding to supplied synthetic aggregates and the organization increment with identical records. ../../research/questions/Q.md explains that this comparison does not isolate component complementarity; the result explicitly leaves that mechanism unanswered and neither supports nor refutes it. AC-02 passes on this inspected content; this is an agent judgment.\",\n      \"evidence_refs\": [\n        \"result.md\",\n        \"evidence/metrics.json\",\n        \"evidence/derived.json\",\n        \"../../research/questions/Q.md\"\n      ]\n    }\n  ]\n}\n"
+      },
+      {
+        "id": "V0003",
+        "contract_revision": 1,
+        "cycle": 2,
+        "created_at": "2026-09-14T10:21:12.028677Z",
+        "rctl_version": "0.5.0",
+        "result_text": "---\nschema_version: 1\ntask_id: retained-comparison\ncontract_revision: 1\nassessment: not_supported\n---\n\n# Synthetic comparison result\n\n## Outcome\n\nC1 does not meet the promotion rule. Its error is higher than B0, and the gain is −0.03 absolute error units, below the required +0.01.\n\nThis finding assesses the organization increment after both arms receive the same records. Retain B0 within this fictional comparison.\n\n## Evidence\n\nThe supplied [metrics](evidence/metrics.json) mark the observations as synthetic and error as lower-is-better: B0 = 0.20, C1 = 0.23, minimum gain = 0.01. [Derived evidence](evidence/derived.json) correctly records 0.20 − 0.23 = −0.03 and promote = false. The accepted [arithmetic check](check_arithmetic.py) checks the gain and promotion label during managed verification.\n\nThe [governing question](../../research/questions/Q.md#mechanism) and related [organization-only route](../../research/ROUTES.md#organization-only-comparison) identify the same-records boundary. The evidence supports the decision to decline C1 promotion under the fixed rule; the broader component-complementarity question remains unanswered.\n\n## Deviations\n\nNone in the specified synthetic assessment; the threshold and inputs are unchanged.\n\n## Next action\n\nRetain B0 within this fictional comparison and close the assessment after both required checks pass. There is no authorized extra experiment.\n\n## Limitations\n\nAll observations are synthetic aggregates. They establish no real model performance, prediction quality, uncertainty, or general scientific conclusion. This organization-only comparison does not isolate complementary components and neither supports nor refutes whether combining complementary logical components improves generated programs.\n\nEditorial note: all observations remain synthetic.\n",
+        "observed_files": [
+          {
+            "path": "tasks/retained-comparison/evidence/metrics.json",
+            "observation": "present",
+            "size_bytes": 150,
+            "mtime_ns": 1788604070804813800
+          },
+          {
+            "path": "tasks/retained-comparison/evidence/derived.json",
+            "observation": "present",
+            "size_bytes": 63,
+            "mtime_ns": 1788604070805172700
+          },
+          {
+            "path": "tasks/retained-comparison/check_arithmetic.py",
+            "observation": "present",
+            "size_bytes": 878,
+            "mtime_ns": 1788604070805455400
+          },
+          {
+            "path": "tasks/retained-comparison/result.md",
+            "observation": "present",
+            "size_bytes": 1824,
+            "mtime_ns": 1789381229836539600
+          },
+          {
+            "path": "research/questions/Q.md",
+            "observation": "present",
+            "size_bytes": 262,
+            "mtime_ns": 1789380475722703600
+          },
+          {
+            "path": "tasks/retained-comparison/.rctl/checks/V0003-wrss45l6/AC-01.stdout",
+            "observation": "present",
+            "size_bytes": 53,
+            "mtime_ns": 1789381272017465300
+          },
+          {
+            "path": "tasks/retained-comparison/.rctl/checks/V0003-wrss45l6/AC-01.stderr",
+            "observation": "present",
+            "size_bytes": 0,
+            "mtime_ns": 1789381271953557800
+          }
+        ],
+        "external_refs": [],
+        "subject_issues": [],
+        "checks": [
+          {
+            "criterion_id": "AC-01",
+            "method": "command",
+            "verdict": "pass",
+            "rationale": "Declared command exited 0.",
+            "evidence_refs": [
+              "evidence/metrics.json",
+              "evidence/derived.json"
+            ],
+            "execution": {
+              "argv": [
+                "uv",
+                "run",
+                "--offline",
+                "--no-project",
+                "--no-cache",
+                "--python",
+                "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/python",
+                "--script",
+                "check_arithmetic.py"
+              ],
+              "cwd": "tasks/retained-comparison",
+              "started_at": "2026-09-14T10:21:11.953340Z",
+              "finished_at": "2026-09-14T10:21:12.027494Z",
+              "exit_code": 0,
+              "timed_out": false,
+              "error": null,
+              "stdout_ref": "tasks/retained-comparison/.rctl/checks/V0003-wrss45l6/AC-01.stdout",
+              "stderr_ref": "tasks/retained-comparison/.rctl/checks/V0003-wrss45l6/AC-01.stderr"
+            }
+          },
+          {
+            "criterion_id": "AC-02",
+            "method": "review",
+            "verdict": "pass",
+            "rationale": "Fresh agent review of all four required references against accepted contract revision 1 after the editorial annotation. evidence/metrics.json supplies synthetic lower-is-better errors B0=0.20 and C1=0.23 and minimum_gain=0.01. evidence/derived.json correctly records gain=-0.03 and promote=false. The current result.md declines C1 promotion under that unchanged rule and confines its conclusion to the organization increment with identical records. Its added sentence, 'Editorial note: all observations remain synthetic.', is consistent with both evidence files and does not alter the conclusion. ../../research/questions/Q.md states that the organization-only comparison does not isolate component complementarity; the result explicitly leaves that broader mechanism unanswered and neither supports nor refutes it. The annotation needs no correction. AC-02 passes on the currently inspected content, independently of the stale V0002 pass.",
+            "evidence_refs": [
+              "result.md",
+              "evidence/metrics.json",
+              "evidence/derived.json",
+              "../../research/questions/Q.md"
+            ],
+            "reviewer": "agent"
+          }
+        ],
+        "verdict": "pass",
+        "review_input_text": "{\n  \"schema_version\": 1,\n  \"task_id\": \"retained-comparison\",\n  \"contract_revision\": 1,\n  \"checks\": [\n    {\n      \"criterion_id\": \"AC-02\",\n      \"verdict\": \"pass\",\n      \"reviewer\": \"agent\",\n      \"rationale\": \"Fresh agent review of all four required references against accepted contract revision 1 after the editorial annotation. evidence/metrics.json supplies synthetic lower-is-better errors B0=0.20 and C1=0.23 and minimum_gain=0.01. evidence/derived.json correctly records gain=-0.03 and promote=false. The current result.md declines C1 promotion under that unchanged rule and confines its conclusion to the organization increment with identical records. Its added sentence, 'Editorial note: all observations remain synthetic.', is consistent with both evidence files and does not alter the conclusion. ../../research/questions/Q.md states that the organization-only comparison does not isolate component complementarity; the result explicitly leaves that broader mechanism unanswered and neither supports nor refutes it. The annotation needs no correction. AC-02 passes on the currently inspected content, independently of the stale V0002 pass.\",\n      \"evidence_refs\": [\n        \"result.md\",\n        \"evidence/metrics.json\",\n        \"evidence/derived.json\",\n        \"../../research/questions/Q.md\"\n      ]\n    }\n  ]\n}\n"
+      }
+    ],
+    "closures": [
+      {
+        "verification_id": "V0001",
+        "contract_revision": 1,
+        "cycle": 1,
+        "assessment": "not_supported",
+        "closed_at": "2026-09-14T10:12:04.862347Z"
+      },
+      {
+        "verification_id": "V0003",
+        "contract_revision": 1,
+        "cycle": 2,
+        "assessment": "not_supported",
+        "closed_at": "2026-09-14T10:21:26.737497Z"
+      }
+    ],
+    "lifecycle": [
+      {
+        "action": "begin",
+        "reason": "Initial contract",
+        "recorded_at": "2026-09-14T10:07:55.797207Z"
+      },
+      {
+        "action": "close",
+        "reason": "Current verification passed",
+        "recorded_at": "2026-09-14T10:12:04.862347Z"
+      },
+      {
+        "action": "reopen",
+        "reason": "Exercise the same evidence in a fresh acceptance cycle",
+        "recorded_at": "2026-09-14T10:20:29.407191Z"
+      },
+      {
+        "action": "close",
+        "reason": "Current verification passed",
+        "recorded_at": "2026-09-14T10:21:26.737497Z"
+      }
+    ]
+  },
+  "working_contract": "---\nschema_version: 1\ntask_id: retained-comparison\ntitle: Inspect a synthetic retained error comparison\nkind: analysis\ncriteria:\n- id: AC-01\n  requirement: The recorded gain and promotion label follow the frozen arithmetic\n    rule.\n  evidence_refs:\n  - evidence/metrics.json\n  - evidence/derived.json\n  failure_action: Correct the derived arithmetic before closing the assessment.\n  method:\n    type: command\n    argv:\n    - uv\n    - run\n    - --offline\n    - --no-project\n    - --no-cache\n    - --python\n    - /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/python\n    - --script\n    - check_arithmetic.py\n    timeout_seconds: 30\n    inputs:\n    - check_arithmetic.py\n    - evidence/metrics.json\n    - evidence/derived.json\n- id: AC-02\n  requirement: The result applies the frozen rule and confines its claims to synthetic\n    aggregate evidence. Its organization-only result does not decide the broader complementarity\n    mechanism.\n  evidence_refs:\n  - result.md\n  - evidence/metrics.json\n  - evidence/derived.json\n  - ../../research/questions/Q.md\n  failure_action: Revise the interpretation or leave the assessment unresolved.\n  method:\n    type: review\n    reviewer: either\n---\n\n# Synthetic comparison contract\n\n## Question\n\nDoes the supplied candidate meet the fixed improvement rule against the supplied baseline?\n\n## Question alignment\n\n- Governing question source: research/questions/Q.md#mechanism\n- Governing mechanism: Combining complementary logical components may improve generated programs.\n- This task tests: The organization increment after both arms receive the same records.\n- This task does not decide: Whether complementary components improve generated programs.\n\n## Scope\n\nInspect only the synthetic aggregate observations. Baseline B0 and candidate C1 use the same fictional evaluation set. This task recomputes one error difference; it does not reproduce predictions, training, or uncertainty estimates.\n\n## Constraints\n\nError is lower-is-better. Gain is B0 error minus C1 error. Promotion requires gain at least 0.01 absolute error units. Use the supplied aggregate directly, with no seed selection or alternative aggregation. Budget: local standard-library arithmetic only; no network, dependency download, or new experiment.\n\n## Stop conditions\n\nStop with a bounded answer when arithmetic and interpretation are checked. A negative result is a valid completion. Changing the threshold or collecting new observations requires a separate task. Inconsistent input prevents closure until corrected.\n",
+  "result": "---\nschema_version: 1\ntask_id: retained-comparison\ncontract_revision: 1\nassessment: not_supported\n---\n\n# Synthetic comparison result\n\n## Outcome\n\nC1 does not meet the promotion rule. Its error is higher than B0, and the gain is −0.03 absolute error units, below the required +0.01.\n\nThis finding assesses the organization increment after both arms receive the same records. Retain B0 within this fictional comparison.\n\n## Evidence\n\nThe supplied [metrics](evidence/metrics.json) mark the observations as synthetic and error as lower-is-better: B0 = 0.20, C1 = 0.23, minimum gain = 0.01. [Derived evidence](evidence/derived.json) correctly records 0.20 − 0.23 = −0.03 and promote = false. The accepted [arithmetic check](check_arithmetic.py) checks the gain and promotion label during managed verification.\n\nThe [governing question](../../research/questions/Q.md#mechanism) and related [organization-only route](../../research/ROUTES.md#organization-only-comparison) identify the same-records boundary. The evidence supports the decision to decline C1 promotion under the fixed rule; the broader component-complementarity question remains unanswered.\n\n## Deviations\n\nNone in the specified synthetic assessment; the threshold and inputs are unchanged.\n\n## Next action\n\nRetain B0 within this fictional comparison and close the assessment after both required checks pass. There is no authorized extra experiment.\n\n## Limitations\n\nAll observations are synthetic aggregates. They establish no real model performance, prediction quality, uncertainty, or general scientific conclusion. This organization-only comparison does not isolate complementary components and neither supports nor refutes whether combining complementary logical components improves generated programs.\n\nEditorial note: all observations remain synthetic.\n",
+  "reviews": {
+    "schema_version": 1,
+    "task_id": "retained-comparison",
+    "contract_revision": 1,
+    "checks": [
+      {
+        "criterion_id": "AC-02",
+        "verdict": "pass",
+        "reviewer": "agent",
+        "rationale": "Fresh agent review of all four required references against accepted contract revision 1 after the editorial annotation. evidence/metrics.json supplies synthetic lower-is-better errors B0=0.20 and C1=0.23 and minimum_gain=0.01. evidence/derived.json correctly records gain=-0.03 and promote=false. The current result.md declines C1 promotion under that unchanged rule and confines its conclusion to the organization increment with identical records. Its added sentence, 'Editorial note: all observations remain synthetic.', is consistent with both evidence files and does not alter the conclusion. ../../research/questions/Q.md states that the organization-only comparison does not isolate component complementarity; the result explicitly leaves that broader mechanism unanswered and neither supports nor refutes it. The annotation needs no correction. AC-02 passes on the currently inspected content, independently of the stale V0002 pass.",
+        "evidence_refs": [
+          "result.md",
+          "evidence/metrics.json",
+          "evidence/derived.json",
+          "../../research/questions/Q.md"
+        ]
+      }
+    ]
+  },
+  "handoff": "## Next action\n\nClose tasks/retained-comparison using current passing verification V0003. Retain B0 within the supplied synthetic comparison; no further experiment is authorized.\n\n## Blockers\n\nNone.\n\n## Progress\n\nInspected the accepted revision 1 contract, current result, both supplied evidence files, checker, governing question, and related organization-only route. The editorial annotation correctly reiterates that all observations are synthetic and was preserved. The question, inputs, budget, criteria, and result remain unchanged.\n\nFresh verification V0003 passed both AC-01 (the accepted arithmetic command run through uv, offline) and AC-02 (agent review of the current annotated result and all required references). Gain is -0.03, below +0.01; assessment remains not_supported. V0002 was stale and is not the basis for this closure.\n\nEvidence remains in tasks/retained-comparison/evidence/metrics.json and evidence/derived.json; interpretation and fresh review are in result.md and reviews.json. research/ROUTES.md already records the bounded finding and requires no update. The broader complementarity mechanism remains unanswered.\n",
+  "execution_logs": {
+    "tasks/retained-comparison/.rctl/checks/V0001-g1iiesv6/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0001-g1iiesv6/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0003-wrss45l6/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0003-wrss45l6/AC-01.stderr": "",
+    "tasks/retained-comparison/.rctl/checks/V0002-1jz4x_jr/AC-01.stdout": "PASS synthetic arithmetic: gain=-0.03; promote=False\n",
+    "tasks/retained-comparison/.rctl/checks/V0002-1jz4x_jr/AC-01.stderr": ""
+  }
+}

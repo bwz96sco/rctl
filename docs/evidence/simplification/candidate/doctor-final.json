@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "ok": true,
+  "data": {
+    "root": "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project",
+    "rctl_version": "0.5.0",
+    "codex_inspected": false,
+    "review_needed": false,
+    "findings": [
+      {
+        "path": ".rctl/project.json",
+        "status": "current",
+        "message": "Project binding is structurally valid.",
+        "next_action": "None."
+      },
+      {
+        "path": ".agents/skills/research-task/SKILL.md",
+        "status": "current",
+        "message": "Matches the current package.",
+        "next_action": "None."
+      },
+      {
+        "path": ".agents/skills/research-task/agents/openai.yaml",
+        "status": "current",
+        "message": "Matches the current package.",
+        "next_action": "None."
+      },
+      {
+        "path": ".agents/skills/research-task/references/graphify.md",
+        "status": "current",
+        "message": "Matches the current package.",
+        "next_action": "None."
+      },
+      {
+        "path": ".agents/skills/research-task/references/planning.md",
+        "status": "current",
+        "message": "Matches the current package.",
+        "next_action": "None."
+      },
+      {
+        "path": ".agents/skills/research-task/references/task-files.md",
+        "status": "current",
+        "message": "Matches the current package.",
+        "next_action": "None."
+      },
+      {
+        "path": ".agents/skills/research-task/references/verification.md",
+        "status": "current",
+        "message": "Matches the current package.",
+        "next_action": "None."
+      },
+      {
+        "path": ".agents/skills/research-task/references/workspace.md",
+        "status": "current",
+        "message": "Matches the current package.",
+        "next_action": "None."
+      }
+    ]
+  },
+  "error": null,
+  "warnings": []
+}

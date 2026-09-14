@@ -11,12 +11,10 @@ from jsonschema import ValidationError
 
 from .documents import (
     RctlError,
-    compatibility_alignment_warning,
     invalid,
     local_path,
     parse_contract,
     parse_result,
-    question_source_path,
     read_text,
     require_completed,
     resource_text,
@@ -336,103 +334,11 @@ class Task:
             "cycle": record["cycle"],
         }
 
-    def status(self):
-        from .handoff import read_handoff
-        from .verification import currentness
+    def snapshot(self):
+        from .snapshot import read_snapshot
 
-        record = self.read_record()
-        warnings = []
-        report, closure, applicability = None, None, "not_checked"
-        if record is None:
-            _, contract = self.contract()
-            phase, revision, drift = "draft", None, False
-        else:
-            contract = parse_contract(
-                record["contracts"][-1]["text"],
-                "governing contract",
-                self.task_id,
-                compatible_alignment=True,
-                alignment_warnings=warnings,
-            )
-            phase = record["phase"]
-            revision = record["contracts"][-1]["revision"]
-            try:
-                drift = (
-                    read_text(self.file("contract.md"))
-                    != record["contracts"][-1]["text"]
-                )
-            except RctlError:
-                drift = True
-                warnings.append(
-                    "Current contract is unavailable; restore it before dependent work."
-                )
-            if drift:
-                warnings.append(
-                    "AMENDMENT_REQUIRED: current contract differs from the governing revision."
-                )
-            report = record["verifications"][-1] if record["verifications"] else None
-            closure = record["closures"][-1] if record["closures"] else None
-            applicability, issues = currentness(self, record)
-            warnings.extend(issues)
-        if report is None:
-            warnings.append(
-                "No verification has been recorded; structural checks and handoffs do not establish closure."
-            )
-        elif report["verdict"] != "pass":
-            warnings.append(f"Latest verification {report['id']}: {report['verdict']}.")
-        if record is None:
-            action = "Complete the draft and begin."
-        elif phase in {"closed", "cancelled"}:
-            action = "Reopen with a reason before revising accepted work."
-        elif drift:
-            action = "Amend the contract with a reason before dependent work."
-        elif report and report["verdict"] == "pass" and applicability == "current":
-            action = "Close using the current passing verification."
-        else:
-            action = "Prepare the result and required evidence/reviews, then verify; checkpoint to pause."
-        handoff, handoff_warnings = read_handoff(self)
-        warnings.extend(handoff_warnings)
-        alignment = contract["question_alignment"]
-        if record is not None and alignment is not None:
-            try:
-                alignment_source = question_source_path(self.root, alignment["source"])
-            except RctlError as error:
-                warnings.append(compatibility_alignment_warning(error))
-                alignment = None
-            else:
-                try:
-                    read_text(alignment_source)
-                except RctlError as error:
-                    warnings.append(
-                        "Question alignment source unavailable: "
-                        f"{alignment['source']}. {error.message}"
-                    )
-        assessment = None
-        if report is not None:
-            value = parse_result(
-                report["result_text"],
-                "latest verification result",
-                self.task_id,
-                report["contract_revision"],
-            )["assessment"]
-            assessment = {
-                "value": value,
-                "verification_id": report["id"],
-                "contract_revision": report["contract_revision"],
-                "currentness": applicability,
-            }
-        return {
-            "task_id": self.task_id,
-            "title": contract["title"],
-            "question": contract["question"],
-            "question_alignment": alignment,
-            "assessment": assessment,
-            "phase": phase,
-            "contract_revision": revision,
-            "contract_drift": drift,
-            "verification": report,
-            "currentness": applicability,
-            "historical_closure": closure,
-            "next_action": action,
-            "handoff": handoff,
-        }, warnings
+        return read_snapshot(self)
+
+    def status(self):
+        snapshot = self.snapshot()
+        return snapshot.status(), list(snapshot.warnings)

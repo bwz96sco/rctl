@@ -238,9 +238,9 @@ def test_explicit_question_field_wins_over_origin_prose(task):
     )
 
 
-@pytest.mark.parametrize("budget,compact", [(2000, True), (8000, False)])
+@pytest.mark.parametrize("budget", [2000, 8000])
 def test_governing_question_precedes_mutable_guidance_and_survives_drift(
-    aligned, budget, compact
+    aligned, budget
 ):
     research = aligned.root / "research"
     (research / "PROGRAM.md").write_text(
@@ -259,7 +259,7 @@ def test_governing_question_precedes_mutable_guidance_and_survives_drift(
         lambda text: text.replace("Does the supplied candidate", "DRIFTED QUESTION"),
     )
 
-    data, warnings = context(aligned, budget=budget, compact=compact)
+    data, warnings = context(aligned, budget=budget)
     reminder = data["context"]
     assert QUESTION in reminder
     assert "DRIFTED QUESTION" not in reminder
@@ -323,7 +323,7 @@ def test_compact_reminder_reserves_realistic_alignment_before_guidance(aligned):
     )
     aligned.begin()
 
-    data, warnings = context(aligned, budget=2000, compact=True)
+    data, warnings = context(aligned, budget=2000)
     reminder = data["context"]
     for value in (question, mechanism, tests, non_claim):
         assert value in reminder
@@ -351,7 +351,7 @@ def test_verified_assessment_is_bound_to_task_question(aligned_ready, cli):
         "contract_revision": 1,
         "currentness": "current",
     }
-    reminder = context(aligned_ready, budget=2000, compact=True)[0]["context"]
+    reminder = context(aligned_ready, budget=2000)[0]["context"]
     assert "Task assessment: not_supported" in reminder
     assert "The broader cross-candidate mechanism is not decided" in reminder
 
@@ -424,7 +424,10 @@ def test_packaged_template_and_skill_explain_question_alignment():
     task_files = resource_text("skills", "research-task/references/task-files.md")
     assert "optional Question alignment" in contract
     assert "- Question:" in contract
-    for text in (template_guide, skill, task_files):
+    assert "references/task-files.md" in skill
+    assert "references/planning.md" in skill
+    assert "references/verification.md" in skill
+    for text in (template_guide, task_files):
         assert "Governing question source" in text
         assert "This task does not decide" in text
         assert "review criterion" in text

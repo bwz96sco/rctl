@@ -1,0 +1,394 @@
+{
+  "evidence_note": "Completed host events, exact launch, prompt, CLI responses and delivered hook context. Repeated delivery-only helper stdout is summarized; started-event duplicates are omitted. Original raw files remain in the disposable project named by launch.argv.",
+  "launch": {
+    "argv": [
+      "codex",
+      "-a",
+      "never",
+      "exec",
+      "--ignore-user-config",
+      "--disable",
+      "plugins",
+      "--disable",
+      "apps",
+      "--disable",
+      "multi_agent",
+      "--enable",
+      "hooks",
+      "--skip-git-repo-check",
+      "--ephemeral",
+      "--sandbox",
+      "workspace-write",
+      "--dangerously-bypass-hook-trust",
+      "--model",
+      "gpt-6-astra",
+      "-c",
+      "model_reasoning_effort=\"medium\"",
+      "-c",
+      "hooks.SessionStart=[{\"hooks\" = [{\"type\" = \"command\", \"command\" = \"/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl --root /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project hook codex\", \"timeout\" = 10, \"additionalContextLimit\" = 8000}]}]",
+      "-c",
+      "hooks.UserPromptSubmit=[{\"hooks\" = [{\"type\" = \"command\", \"command\" = \"/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl --root /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project hook codex\", \"timeout\" = 10, \"additionalContextLimit\" = 2000}]}]",
+      "--cd",
+      "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project",
+      "--json",
+      "--color",
+      "never",
+      "--output-last-message",
+      "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project/probe-evidence/first/final.txt",
+      "-"
+    ],
+    "host_version": "codex-cli 0.154.0",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "medium",
+    "rctl": "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl",
+    "trust_scope": "Reviewed generated rctl hooks only; invocation-only trust; workspace-write sandbox."
+  },
+  "prompt": "Use $research-task from .agents/skills/research-task/SKILL.md for the selected task. The installed CLI is /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl; use it for rctl operations. Work only in this disposable project using the supplied synthetic evidence. Keep its scientific question, inputs, budget, and criteria fixed. Use uv for Python runs. Do not start other agents or remote work.\nInspect the supplied evidence and draft result. Prepare a handoff for a fresh session to finish the assessment. Save it through checkpoint with a concrete next action and blockers first, then retain handoff-history.md as its earlier inspection notes. Pause with the task active; verification and closure belong to the next session.",
+  "summary": {
+    "stage": "first",
+    "exit_code": 0,
+    "phase": "active",
+    "currentness": "not_checked",
+    "verification": null,
+    "receipts": [
+      {
+        "event": "SessionStart",
+        "source": "startup",
+        "characters": 1565
+      },
+      {
+        "event": "UserPromptSubmit",
+        "source": null,
+        "characters": 1565
+      }
+    ],
+    "refreshed_compact": false,
+    "final": "Checkpointed the [handoff](/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project/tasks/retained-comparison/state.md) with next action and blockers first, followed by the retained inspection history.\n\nInspection supports no promotion: gain −0.03 falls below +0.01. Task remains **active**, with verification and closure deferred. Scientific question, inputs, budget, and criteria are unchanged."
+  },
+  "cli": [
+    {
+      "argv": [
+        "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl",
+        "--root",
+        "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project",
+        "--format",
+        "json",
+        "init"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "root": "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project",
+          "vault": null,
+          "created": [
+            ".agents/",
+            ".rctl/",
+            "research/",
+            "tasks/",
+            ".agents/skills/",
+            ".agents/skills/research-task/",
+            ".agents/skills/research-task/agents/",
+            ".agents/skills/research-task/references/",
+            "research/BASELINES.md",
+            "research/INVENTORY.md",
+            "research/PROGRAM.md",
+            "research/README.md",
+            "research/ROUTES.md",
+            ".agents/skills/research-task/SKILL.md",
+            ".agents/skills/research-task/agents/openai.yaml",
+            ".agents/skills/research-task/references/graphify.md",
+            ".agents/skills/research-task/references/planning.md",
+            ".agents/skills/research-task/references/task-files.md",
+            ".agents/skills/research-task/references/verification.md",
+            ".agents/skills/research-task/references/workspace.md",
+            ".rctl/project.json"
+          ],
+          "preserved": []
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl",
+        "--root",
+        "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project",
+        "--format",
+        "json",
+        "begin",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl",
+        "--root",
+        "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project",
+        "--format",
+        "json",
+        "integration",
+        "codex",
+        "export",
+        "bundle"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "directory": "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project/bundle",
+          "host": "codex",
+          "entrypoint": "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl",
+          "files": [
+            "hooks.json",
+            "research-task/SKILL.md",
+            "research-task/agents/openai.yaml",
+            "research-task/references/graphify.md",
+            "research-task/references/planning.md",
+            "research-task/references/task-files.md",
+            "research-task/references/verification.md",
+            "research-task/references/workspace.md",
+            "README.md"
+          ]
+        },
+        "error": null,
+        "warnings": []
+      }
+    },
+    {
+      "argv": [
+        "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl",
+        "--root",
+        "/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project",
+        "--format",
+        "json",
+        "status",
+        "tasks/retained-comparison"
+      ],
+      "exit_code": 0,
+      "response": {
+        "schema_version": 1,
+        "ok": true,
+        "data": {
+          "task_id": "retained-comparison",
+          "phase": "active",
+          "contract_revision": 1,
+          "contract_drift": false,
+          "assessment": null,
+          "currentness": "not_checked",
+          "historical_closure": null,
+          "next_action": "Prepare the result and required evidence/reviews, then verify; checkpoint to pause.",
+          "title": "Inspect a synthetic retained error comparison",
+          "question": "Does the supplied candidate meet the fixed improvement rule against the supplied baseline?",
+          "question_alignment": {
+            "source": "research/questions/Q.md#mechanism",
+            "mechanism": "Combining complementary logical components may improve generated programs.",
+            "tests": "The organization increment after both arms receive the same records.",
+            "does_not_decide": "Whether complementary components improve generated programs."
+          },
+          "verification": null,
+          "handoff": {
+            "next_action": "Read tasks/retained-comparison/result.md against the accepted revision 1 contract in tasks/retained-comparison/.rctl/record.json and research/questions/Q.md, make the organization-only/non-complementarity boundary explicit in the result, and replace the illustrative AC-02 entry in tasks/retained-comparison/reviews.json with a fresh evidence-based judgment covering all four required references. Then finish the assessment through the verification and closure steps below in the next session.",
+            "blockers": "No missing supplied inputs or external dependencies identified by inspection. Completion remains pending: AC-01 has not been executed in this session, AC-02 contains only an illustrative review, and no managed verification or closure is recorded. Verification and closure are deliberately deferred to the next session by user instruction."
+          }
+        },
+        "error": null,
+        "warnings": [
+          "No verification has been recorded; structural checks and handoffs do not establish closure."
+        ]
+      }
+    }
+  ],
+  "receipts": [
+    {
+      "event": "SessionStart",
+      "source": "startup",
+      "session_id": "01a09f63-3c20-7962-8caa-1197565838fd",
+      "task_path": "tasks/retained-comparison",
+      "timestamp": "2026-09-14T10:07:59.465096Z",
+      "context": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nGoverning task question: Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\nGoverning question source (declared): research/questions/Q.md#mechanism\nGoverning mechanism (declared): Combining complementary logical components may improve generated programs.\nThis task tests (declared): The organization increment after both arms receive the same records.\nThis task does not decide (declared): Whether complementary components improve generated programs.\nProject goal (reported): Determine whether combining complementary components can lower error.\nCurrent guidance (reported): Recover accepted evidence before choosing a follow-up.\nHistory reuse: Cite related mechanisms and the decision new evidence changes.\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nWarning: No handoff recorded; save a concrete next action to resume.\nReported handoff — Blockers: Not recorded; read T/state.md.\nReported handoff — Next action: Not recorded; read T/state.md.\nLifecycle action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\nRoot: /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project\nP: research/PROGRAM.md; R: research/ROUTES.md\nOrientation: research/README.md\nT: tasks/retained-comparison\nT files: contract.md, state.md, result.md\nC: T/.rctl/record.json contracts[-1].text (accepted)\n"
+    },
+    {
+      "event": "UserPromptSubmit",
+      "source": null,
+      "session_id": "01a09f63-3c20-7962-8caa-1197565838fd",
+      "task_path": "tasks/retained-comparison",
+      "timestamp": "2026-09-14T10:07:59.553643Z",
+      "context": "Task: retained-comparison\nPhase: active; governing revision: 1\nVerification: none; applicability: not_checked; historical closure: none\nGoverning task question: Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\nGoverning question source (declared): research/questions/Q.md#mechanism\nGoverning mechanism (declared): Combining complementary logical components may improve generated programs.\nThis task tests (declared): The organization increment after both arms receive the same records.\nThis task does not decide (declared): Whether complementary components improve generated programs.\nProject goal (reported): Determine whether combining complementary components can lower error.\nCurrent guidance (reported): Recover accepted evidence before choosing a follow-up.\nHistory reuse: Cite related mechanisms and the decision new evidence changes.\nWarning: No verification has been recorded; structural checks and handoffs do not establish closure.\nWarning: No handoff recorded; save a concrete next action to resume.\nReported handoff — Blockers: Not recorded; read T/state.md.\nReported handoff — Next action: Not recorded; read T/state.md.\nLifecycle action: Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\nRoot: /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project\nP: research/PROGRAM.md; R: research/ROUTES.md\nOrientation: research/README.md\nT: tasks/retained-comparison\nT files: contract.md, state.md, result.md\nC: T/.rctl/record.json contracts[-1].text (accepted)\n"
+    }
+  ],
+  "stderr": "",
+  "events": [
+    {
+      "type": "thread.started",
+      "thread_id": "01a09f63-3c20-7962-8caa-1197565838fd"
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_0",
+        "type": "error",
+        "message": "`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_1",
+        "type": "error",
+        "message": "`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."
+      }
+    },
+    {
+      "type": "turn.started"
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_2",
+        "type": "agent_message",
+        "text": "I’ll use the research-task skill to inspect the evidence and draft result, then checkpoint a handoff. I’ll leave the task active for the next session to verify and close.\n\n"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_3",
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'cat .agents/skills/research-task/SKILL.md .agents/skills/research-task/references/task-files.md .agents/skills/research-task/references/verification.md'",
+        "aggregated_output": "---\nname: research-task\ndescription: Manage bounded rctl research tasks, resume their handoffs, verify or close them, initialize research workspaces, and plan related experiments.\n---\n\n# Research task\n\nOrient selected work using a fresh `rctl status TASK` or delivered reminder. Follow\nits source paths for criteria, warnings, and missing or truncated details. The\nretained contract owns the accepted agreement; `state.md` reports progress and\n`result.md` interprets evidence. The machine record owns verification and phase.\n\nUse the relevant reference when entering an operation:\n\n| Operation | Reference |\n| --- | --- |\n| Initialize, inspect/update installation, use a vault, or migrate | [Workspace](references/workspace.md) |\n| Author contract, result, review input, or handoff | [Task files and examples](references/task-files.md) |\n| Propose an experiment, create its contract, or materially change scientific direction | [Planning and history reuse](references/planning.md) |\n| Evaluate evidence, verify, or close | [Verification and closeout](references/verification.md) |\n\nBefore experimental planning, cite related history, what remains unanswered, and\nwhich decision new evidence changes. For a task derived from a broader question,\nuse the optional Question alignment fields in the task-file reference and keep\nconclusions within `This task tests` and `This task does not decide`.\n\nFill the agreement and acceptance criteria before `begin`. Choose methods and order\nwithin existing authorization; preparing a contract does not require another approval.\nUse domain skills for scientific methods and evidence, and rctl for this task's\nlifecycle. Advice and bounded mechanical edits may stay inline without a managed task.\n\n## Commands and addressing\n\n`TASK` is an explicit project-relative path, such as `tasks/retained-check`.\nGlobal options precede the command: `rctl --root /absolute/project --format json status TASK`.\nJSON results are under `data`, beside `ok`, `error`, and `warnings`.\n\n| Intent | Command |\n| --- | --- |\n| Find work | `rctl task list --phase active` (omit the filter for all phases) |\n| Read state | `rctl --format json status TASK` |\n| Refresh reminder | `rctl context [TASK]` |\n| Create draft | `rctl task new TASK --kind analysis --title \"Bounded question\"` |\n| Check structure | `rctl contract check TASK` |\n| Retain agreement | `rctl begin TASK` |\n| Accept changed agreement | `rctl amend TASK --reason \"Why it changed\"` |\n| Save handoff | `rctl checkpoint TASK --file .work/handoff.md` |\n| Verify | `rctl verify TASK --reviews TASK/reviews.json` (omit reviews for command-only tasks) |\n| Close | `rctl close TASK` |\n| Resume an ended task | `rctl reopen TASK --reason \"Why work resumes\"` |\n| Stop without closure | `rctl cancel TASK --reason \"Why work stops\"` |\n\nRoot selection is `--root`, then `RCTL_PROJECT_ROOT`, then the working directory.\nListing never selects a task. `RCTL_TASK_PATH` supplies an omitted task only for\ncontext/hooks; lifecycle commands require `TASK`. CLI `--file` and `--reviews`\npaths resolve from the project root; document `evidence_refs`, command `inputs`,\nand command execution resolve from the task directory. Use targeted help for\nunfamiliar syntax or version differences; reuse established syntax otherwise.\n\n## Completion and handoff\n\nManaged completion requires successful `close` with a current passing verification.\nA negative or bounded inconclusive scientific result can satisfy that agreement.\nStructural checks establish structure; execution and inspected evidence support a\nclaim. A nonzero `verify` may still save a report; inspect status after an uncertain\nwrite before continuing.\n\nTo pause, checkpoint a handoff with `## Next action` and `## Blockers` first and one\nconcrete continuation step. Reported handoff progress is separate from lifecycle\nadvice. A chat ending does not close the task. Use uv for Python setup and execution.\n# Native task files\n\nUse these examples when authoring a contract, result, or review input. They form a\nsynthetic `tasks/retained-check` task, not evidence for a live research conclusion.\nReplace the question, criteria, evidence, and judgments with the actual agreement.\nKeep the task ID generated by `task new`; obtain the current contract revision from\n`rctl --format json status TASK` under `data.contract_revision`.\n\n## Contract: `contract.md`\n\n`task new` creates this file only. Fill its frontmatter and all four required\nsections before `contract check` and `begin`. Every criterion is required.\n\n```markdown\n---\nschema_version: 1\ntask_id: retained-check\ntitle: Inspect a retained count summary\nkind: analysis\ncriteria:\n  - id: AC-01\n    requirement: The retained counts sum to the reported total.\n    evidence_refs: [evidence/counts.json]\n    failure_action: Correct the summary against its source or leave the task unresolved.\n    method:\n      type: command\n      argv: [uv, run, --no-project, --script, check_counts.py]\n      timeout_seconds: 30\n      inputs: [check_counts.py, evidence/counts.json]\n  - id: AC-02\n    requirement: The result limits its claim to arithmetic consistency of supplied counts.\n    evidence_refs: [result.md, evidence/counts.json]\n    failure_action: Narrow the result to what the retained evidence supports.\n    method:\n      type: review\n      reviewer: either\n---\n\n## Question\n\n- Question: Is the supplied count summary internally consistent?\n- Origin and related history: Supplied arithmetic fixture; no related experiment history.\n\n## Scope\n\nInspect the retained summary and its arithmetic only.\n\n## Constraints\n\nUse existing local evidence. No new data collection, remote jobs, or source-data audit.\n\n## Stop conditions\n\nStop after one inspection and verification. Report inconsistent counts honestly;\ndo not regenerate evidence to manufacture a passing check.\n```\n\nFor an experimental proposal, expand Question/Scope with the history actually inspected.\nFor example: a cited route tested an intervention only at one fixed budget; the proposed\ncomparison would test a different objective against an equal-compute control, satisfying\nthat route's stated reopen condition. Name the unresolved mechanism and the decision\nthat each possible result changes. This arithmetic-only example needs no invented route.\n\nWhen the experiment isolates one relationship inside an existing project question,\nadd the optional section below after `## Question`:\n\n```markdown\n## Question alignment\n\n- Governing question source: research/questions/C15.md#mechanism\n- Governing mechanism: Complementary logical components may improve generated programs when combined.\n- This task tests: The organization increment after both arms receive the same records.\n- This task does not decide: Whether the broader cross-candidate mechanism is supported.\n```\n\nUse the actual readable project-relative Markdown source and an optional fragment;\nkeep each declared relationship field to one short sentence.\nIf present, all four fields must be nonempty and no extra prose or fields belong in\nthe section. `contract check` establishes structure and source availability only.\nWhen scientific adequacy of the relationship affects closure, add a review criterion\nwhose evidence includes that source file and `result.md`; `evidence_refs` still\nresolve from the task directory, so use the corresponding task-relative path without\nthe fragment (for example, `../../research/questions/C15.md` from `tasks/TASK`). The\nreview must decide whether the result stays within the declared test and non-claim\nboundary.\n\nFor command checks, `argv` is an argument array executed without a shell, with the\ntask directory as cwd. Declare the checker, helper files, and preexisting data in\n`inputs`. A check validates available evidence; generate analysis outputs before\n`verify`, since changing declared evidence during verification prevents a pass.\n\nFor this disposable example, supply `evidence/counts.json`:\n\n```json\n{\"counts\": [2, 3], \"total\": 5}\n```\n\nAnd task-local `check_counts.py`:\n\n```python\nimport json\nfrom pathlib import Path\n\nsummary = json.loads(Path(\"evidence/counts.json\").read_text())\nif sum(summary[\"counts\"]) != summary[\"total\"]:\n    raise SystemExit(\"Retained counts do not match the total.\")\nprint(\"Retained counts match the total.\")\n```\n\nCommand exit zero establishes this arithmetic check only. The second criterion\nrequires an evidence-based judgment of the result's claim.\n\n## Result: `result.md`\n\nCreate this file after inspecting evidence. Use the current revision and all five\nrequired sections. `assessment` is one of `supported`, `not_supported`,\n`inconclusive`, or `not_applicable`; it is separate from phase and check verdict.\n\n```markdown\n---\nschema_version: 1\ntask_id: retained-check\ncontract_revision: 1\nassessment: supported\n---\n\n## Outcome\n\nThe supplied counts are internally consistent: 2 + 3 = 5.\n\n## Evidence\n\nInspected evidence/counts.json, which contains counts [2, 3] and total 5.\ncheck_counts.py checks this arithmetic during verification.\n\n## Deviations\n\nNone.\n\n## Next action\n\nVerify the declared criteria, then close if the current report passes.\n\n## Limitations\n\nInternal consistency does not establish that the counts match the source data.\n```\n\n## Review input: `reviews.json`\n\nWrite entries after inspecting the cited content. Include only review criteria,\nusing their exact IDs and all their required evidence references. The top-level\narray is `checks`. Each `verdict` is `pass`, `fail`, or `unknown`; each `reviewer`\nis `agent` or `operator`. A contract's `reviewer: operator` needs an actual operator\njudgment; `either` permits either source. Record missing judgments as unresolved.\n\n```json\n{\n  \"schema_version\": 1,\n  \"task_id\": \"retained-check\",\n  \"contract_revision\": 1,\n  \"checks\": [\n    {\n      \"criterion_id\": \"AC-02\",\n      \"verdict\": \"pass\",\n      \"reviewer\": \"agent\",\n      \"rationale\": \"The result reports 2 + 3 = 5 from the supplied JSON and explicitly excludes source-data validity.\",\n      \"evidence_refs\": [\"result.md\", \"evidence/counts.json\"]\n    }\n  ]\n}\n```\n\nRun `rctl verify tasks/retained-check --reviews tasks/retained-check/reviews.json`\nfrom the project root. In JSON mode, inspect `data.verdict`, `data.checks`, and\n`error`; a nonzero exit can still save a report. Use `status` after an uncertain\nwrite. Address the named failure before another verification; a changed contract\nrequires `amend`, with result/review revision numbers updated accordingly.\n\n## Handoff: `state.md`\n\nPrepare a separate UTF-8 file, such as `.work/handoff.md`, then save it using\n`rctl checkpoint TASK --file .work/handoff.md`. Use the actual next step:\n\n```markdown\n## Next action\n\nInspect result.md against evidence/counts.json and write the AC-02 review.\n\n## Blockers\n\nNone.\n\n## Progress\n\nThe contract is active; the retained evidence and result are ready for review.\n```\n\nHandoff updates preserve verification applicability. Contract amendments, result\nor evidence changes, and reopened cycles require fresh verification before close.\n# Verification and closeout\n\nUse the current agreement's criteria and [Task files](task-files.md) when preparing\nthe result and reviews. Generate analysis artifacts before verification; declared\nlocal checks validate existing evidence. Include check scripts, helpers, and\npreexisting data in command inputs. New remote jobs need their own authority.\n\nWrite the current revision's result with outcome, evidence, deviations, next action,\nand limitations. Distinguish computed observations, parsed evidence, and hypotheses.\nFor an aligned task, assess only the declared test and honor its non-claim scope.\nInspect cited content before supplying a review verdict, reviewer source, rationale,\nand all required references. An operator-only criterion needs an operator judgment;\nreviewer labels are declared sources, not authenticated identities.\n\nRun `rctl verify TASK --reviews FILE`, omitting reviews for command-only criteria.\nInspect every criterion and its logs as needed. Nonzero verification can still save\na report; use status after an interruption or uncertain write. Correct the named\nfailure within the agreement or leave work unresolved, then explicitly verify again.\nChanged results/evidence, amendments, and reopened cycles require fresh verification.\nAn unfavorable finding does not justify expanding the budget or weakening criteria.\n\nClose only when the latest report passes and remains applicable. Scientific\n`not_supported` and bounded `inconclusive` results can close. A missing judgment or\nunknown check remains unresolved; an older pass cannot replace a later failed report.\n`reopen --reason TEXT` starts a new cycle; `cancel --reason TEXT` stops active work\nwithout verified completion.\n\nPromote established findings to existing project research files at closeout, keeping\ntheir scope and evidence links. Task progress and execution history remain with the\ntask. To pause instead, checkpoint a concrete next action, blockers, last verified\nprogress, evidence locations, and unresolved work. The source handoff preserves the\ndetail that a bounded reminder may omit.\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_4",
+        "type": "command_execution",
+        "command": "/bin/zsh -lc '/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl --format json status tasks/retained-comparison'",
+        "aggregated_output": "{\"schema_version\": 1, \"ok\": true, \"data\": {\"task_id\": \"retained-comparison\", \"phase\": \"active\", \"contract_revision\": 1, \"contract_drift\": false, \"assessment\": null, \"currentness\": \"not_checked\", \"historical_closure\": null, \"next_action\": \"Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\", \"title\": \"Inspect a synthetic retained error comparison\", \"question\": \"Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\", \"question_alignment\": {\"source\": \"research/questions/Q.md#mechanism\", \"mechanism\": \"Combining complementary logical components may improve generated programs.\", \"tests\": \"The organization increment after both arms receive the same records.\", \"does_not_decide\": \"Whether complementary components improve generated programs.\"}, \"verification\": null, \"handoff\": {\"next_action\": null, \"blockers\": null}}, \"error\": null, \"warnings\": [\"No verification has been recorded; structural checks and handoffs do not establish closure.\", \"No handoff recorded; save a concrete next action to resume.\"]}\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_5",
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"rg --files -g AGENTS.md -g 'research/**' -g 'tasks/retained-comparison/**' -g '\"'!**/.git/**'\"'\"",
+        "aggregated_output": "tasks/retained-comparison/.rctl/record.json\ntasks/retained-comparison/README.md\ntasks/retained-comparison/check_arithmetic.py\ntasks/retained-comparison/contract.md\ntasks/retained-comparison/evidence/derived.json\ntasks/retained-comparison/evidence/metrics.json\ntasks/retained-comparison/result.md\ntasks/retained-comparison/reviews.json\nresearch/questions/Q.md\nresearch/BASELINES.md\nresearch/README.md\nresearch/ROUTES.md\nresearch/INVENTORY.md\nresearch/PROGRAM.md\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_7",
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'cat research/README.md research/PROGRAM.md research/ROUTES.md research/BASELINES.md research/INVENTORY.md research/questions/Q.md'",
+        "aggregated_output": "# Research Overview\n\nThis directory is the static onboarding surface for the research project. It\nrecords durable scientific context, not live experiment or task status.\n\n## Reading Order\n\n1. [`PROGRAM.md`](PROGRAM.md) — scientific goal, success criteria, evaluation\n   surfaces, constraints, and open questions.\n2. [`INVENTORY.md`](INVENTORY.md) — verified datasets, checkpoints, code,\n   environments, and infrastructure.\n3. [`BASELINES.md`](BASELINES.md) — comparable evaluation contracts and audited\n   baseline evidence.\n4. [`ROUTES.md`](ROUTES.md) — refuted, parked, and not-executed mechanisms plus\n   the evidence required to reopen them.\n\nRun `rctl context` for project guidance even before selecting a task. Reminders read\nPROGRAM.md's Goal and optional Current guidance, plus ROUTES.md's Reuse Rule.\nRead the linked evidence before experimental planning; short reminders are excerpts.\n\nAfter these files, inspect current work in the project's task system:\n\n```text\nrctl status tasks/your-task\nrctl context tasks/your-task\n```\n\nRead the current task's question, frozen plan, evidence, outcome, and next\ndecision. A campaign note may explain the scientific sequence; each task retains its own acceptance.\n\n## Authority\n\n| Location | Authority |\n|---|---|\n| `research/README.md` | Static entry point and reading order; never live status |\n| `research/PROGRAM.md` | Slow-changing scientific intent |\n| `research/INVENTORY.md` | Verified resource availability |\n| `research/BASELINES.md` | Audited comparable contracts and baselines |\n| `research/ROUTES.md` | Refuted, parked, or not-executed mechanism-level directions |\n| `rctl tasks/` | Active plans, execution state, task-local outcomes, and next decisions |\n| `Existing project note location (no vault bound)` | Long-form interpretation and literature notes |\n| `Project runner storage` | Raw logs, predictions, metrics, and checkpoints |\n\nWhen sources disagree, use the source that owns that kind of truth.\n\n## Update Policy\n\nDo not copy process state, accelerator state, ETAs, or partial metrics into this\ndirectory. At task closeout, update only the control file whose durable truth\nchanged; otherwise keep the conclusion in the task outcome.\n# Synthetic research program\n\n## Goal\nDetermine whether combining complementary components can lower error.\n\n## Current guidance\nRecover accepted evidence before choosing a follow-up.\n# Routes\n\n## Reuse Rule\nCite related mechanisms and the decision new evidence changes.\n\n## Organization-only comparison\nBoth arms received the same candidate records. The synthetic organization change has error 0.23 versus 0.20. It does not isolate complementary components. See ../tasks/retained-comparison/evidence/metrics.json and questions/Q.md. Reopen that question only with an intervention that isolates component complementarity at a matched budget.\n# Baseline Registry\n\nThis file owns comparable baseline contracts. A remembered value or result without its full evaluation contract remains `pending_audit` or `legacy_unverified`, never `accepted`.\n\n## Status Vocabulary\n\n- `accepted`: evidence supports every required field and comparison on the named evaluation surface.\n- `pending_audit`: evidence may exist, but one or more contract fields remain unresolved.\n- `legacy_unverified`: historical value retained for provenance but not for comparison.\n- `rejected`: evidence was inspected and does not satisfy the named contract.\n\n## Evaluation Surfaces\n\n| Surface ID | Dataset or population | Split or protocol | Metric contract | Comparability notes |\n|---|---|---|---|---|\n| `<surface-id>` | `<dataset/population>` | `<split/protocol>` | `<metric, unit, aggregation, direction>` | `<required preprocessing or exclusions>` |\n\n## Baselines\n\n| Baseline ID | Surface ID | Training data | Initialization | Evaluation contract | Result | Evidence | Status |\n|---|---|---|---|---|---|---|---|\n| `<baseline-id>` | `<surface-id>` | `<named data or unresolved>` | `<named source or unresolved>` | `<protocol and metric contract>` | `not recorded` | `<artifact reference or pending audit>` | `pending_audit` |\n\n## Acceptance Rule\n\nAccept a baseline only when training data, initialization, evaluation surface, metric contract, result, and durable evidence are all named and mutually consistent. Preserve conflicting or incomplete historical values as non-comparable evidence.\n\n## Update Policy\n\nAdd or change rows only from durable evidence. Record active experiment execution and task-local outcomes in the project's task system, not here.\n# Research Inventory\n\nThis file records verified availability, not desired future state. Use `verified`, `unavailable`, or `audit_required`; cite concrete evidence for every `verified` entry.\n\n## Datasets\n\n| Resource ID | Location or owner | Availability | Verification evidence | Access or use constraints |\n|---|---|---|---|---|\n| `<dataset-id>` | `<path, system, or owner>` | `audit_required` | `<command, manifest, record, or pending audit>` | `<license, privacy, format, or none>` |\n\n## Checkpoints and Models\n\n| Resource ID | Location or owner | Availability | Verification evidence | Compatibility or provenance |\n|---|---|---|---|---|\n| `<checkpoint-id>` | `<path, system, or owner>` | `audit_required` | `<record or pending audit>` | `<training origin, code revision, or unknown>` |\n\n## Code and Environments\n\n| Resource ID | Repository or environment | Availability | Verification evidence | Constraints |\n|---|---|---|---|---|\n| `<code-or-env-id>` | `<Git root, revision, or environment>` | `audit_required` | `<inspection or pending audit>` | `<runtime, dependency, or access constraint>` |\n\n## Infrastructure\n\n| Resource ID | Location or owner | Availability | Verification evidence | Constraints |\n|---|---|---|---|---|\n| `<infrastructure-id>` | `<host, scheduler, service, or owner>` | `audit_required` | `<inspection or pending audit>` | `<quota, hardware, access, or schedule>` |\n\n## Update Policy\n\nUpdate entries when availability or verification evidence changes. Keep secrets, large artifacts, raw logs, and mutable run status out of this file.\n# Component complementarity\n\n## Mechanism\nCombining complementary logical components may improve generated programs. An organization-only comparison with the same supplied records does not isolate this mechanism. A matched component-removal control could do so.\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_6",
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'cat tasks/retained-comparison/README.md tasks/retained-comparison/contract.md tasks/retained-comparison/.rctl/record.json tasks/retained-comparison/result.md tasks/retained-comparison/reviews.json tasks/retained-comparison/check_arithmetic.py tasks/retained-comparison/evidence/metrics.json tasks/retained-comparison/evidence/derived.json'",
+        "aggregated_output": "# Synthetic retained comparison\n\nThis is a synthetic fixture, not a new scientific experiment or a claim about Pinyin-VSR. Every metric is invented for this example. This source folder contains no managed task record; the [M2 verification record](../../docs/M2-VERIFICATION.md) documents successful verification of disposable copies.\n\nThe contract asks whether a candidate improves the baseline by at least 0.01 absolute error units. Baseline error is 0.20 and candidate error is 0.23. Gain is baseline minus candidate, or −0.03, so the correct bounded result is no promotion. The task can complete even though the candidate loses.\n\nFiles demonstrate a command criterion and an evidence-review criterion:\n\n- [contract.md](contract.md): frozen-rule input example.\n- [result.md](result.md): a negative finding satisfying the task's purpose.\n- [reviews.json](reviews.json): an illustrative review input, not a record of independent review.\n- [metrics.json](evidence/metrics.json) and [derived.json](evidence/derived.json): synthetic inputs and arithmetic.\n- [check_arithmetic.py](check_arithmetic.py): a runnable example verifier, with no rctl dependency.\n\nFrom this directory, run the example check with:\n\n```sh\nuv run --offline --no-project python check_arithmetic.py\n```\n\nIt detects inconsistent metric direction, arithmetic, or promotion labeling in the synthetic evidence. M2 integration tests and the installed-package smoke copy this folder into a temporary project's `tasks/retained-comparison`, call begin, verify with reviews, and close. The smoke also omits the review and observes unknown with phase active before supplying it. The fixture's prewritten result specifies expected behavior; a real task writes its result after the governed work.\n---\nschema_version: 1\ntask_id: retained-comparison\ntitle: Inspect a synthetic retained error comparison\nkind: analysis\ncriteria:\n- id: AC-01\n  requirement: The recorded gain and promotion label follow the frozen arithmetic\n    rule.\n  evidence_refs:\n  - evidence/metrics.json\n  - evidence/derived.json\n  failure_action: Correct the derived arithmetic before closing the assessment.\n  method:\n    type: command\n    argv:\n    - uv\n    - run\n    - --offline\n    - --no-project\n    - --no-cache\n    - --python\n    - /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/python\n    - --script\n    - check_arithmetic.py\n    timeout_seconds: 30\n    inputs:\n    - check_arithmetic.py\n    - evidence/metrics.json\n    - evidence/derived.json\n- id: AC-02\n  requirement: The result applies the frozen rule and confines its claims to synthetic\n    aggregate evidence. Its organization-only result does not decide the broader complementarity\n    mechanism.\n  evidence_refs:\n  - result.md\n  - evidence/metrics.json\n  - evidence/derived.json\n  - ../../research/questions/Q.md\n  failure_action: Revise the interpretation or leave the assessment unresolved.\n  method:\n    type: review\n    reviewer: either\n---\n\n# Synthetic comparison contract\n\n## Question\n\nDoes the supplied candidate meet the fixed improvement rule against the supplied baseline?\n\n## Question alignment\n\n- Governing question source: research/questions/Q.md#mechanism\n- Governing mechanism: Combining complementary logical components may improve generated programs.\n- This task tests: The organization increment after both arms receive the same records.\n- This task does not decide: Whether complementary components improve generated programs.\n\n## Scope\n\nInspect only the synthetic aggregate observations. Baseline B0 and candidate C1 use the same fictional evaluation set. This task recomputes one error difference; it does not reproduce predictions, training, or uncertainty estimates.\n\n## Constraints\n\nError is lower-is-better. Gain is B0 error minus C1 error. Promotion requires gain at least 0.01 absolute error units. Use the supplied aggregate directly, with no seed selection or alternative aggregation. Budget: local standard-library arithmetic only; no network, dependency download, or new experiment.\n\n## Stop conditions\n\nStop with a bounded answer when arithmetic and interpretation are checked. A negative result is a valid completion. Changing the threshold or collecting new observations requires a separate task. Inconsistent input prevents closure until corrected.\n{\n  \"schema_version\": 1,\n  \"task_id\": \"retained-comparison\",\n  \"phase\": \"active\",\n  \"cycle\": 1,\n  \"contracts\": [\n    {\n      \"revision\": 1,\n      \"text\": \"---\\nschema_version: 1\\ntask_id: retained-comparison\\ntitle: Inspect a synthetic retained error comparison\\nkind: analysis\\ncriteria:\\n- id: AC-01\\n  requirement: The recorded gain and promotion label follow the frozen arithmetic\\n    rule.\\n  evidence_refs:\\n  - evidence/metrics.json\\n  - evidence/derived.json\\n  failure_action: Correct the derived arithmetic before closing the assessment.\\n  method:\\n    type: command\\n    argv:\\n    - uv\\n    - run\\n    - --offline\\n    - --no-project\\n    - --no-cache\\n    - --python\\n    - /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/python\\n    - --script\\n    - check_arithmetic.py\\n    timeout_seconds: 30\\n    inputs:\\n    - check_arithmetic.py\\n    - evidence/metrics.json\\n    - evidence/derived.json\\n- id: AC-02\\n  requirement: The result applies the frozen rule and confines its claims to synthetic\\n    aggregate evidence. Its organization-only result does not decide the broader complementarity\\n    mechanism.\\n  evidence_refs:\\n  - result.md\\n  - evidence/metrics.json\\n  - evidence/derived.json\\n  - ../../research/questions/Q.md\\n  failure_action: Revise the interpretation or leave the assessment unresolved.\\n  method:\\n    type: review\\n    reviewer: either\\n---\\n\\n# Synthetic comparison contract\\n\\n## Question\\n\\nDoes the supplied candidate meet the fixed improvement rule against the supplied baseline?\\n\\n## Question alignment\\n\\n- Governing question source: research/questions/Q.md#mechanism\\n- Governing mechanism: Combining complementary logical components may improve generated programs.\\n- This task tests: The organization increment after both arms receive the same records.\\n- This task does not decide: Whether complementary components improve generated programs.\\n\\n## Scope\\n\\nInspect only the synthetic aggregate observations. Baseline B0 and candidate C1 use the same fictional evaluation set. This task recomputes one error difference; it does not reproduce predictions, training, or uncertainty estimates.\\n\\n## Constraints\\n\\nError is lower-is-better. Gain is B0 error minus C1 error. Promotion requires gain at least 0.01 absolute error units. Use the supplied aggregate directly, with no seed selection or alternative aggregation. Budget: local standard-library arithmetic only; no network, dependency download, or new experiment.\\n\\n## Stop conditions\\n\\nStop with a bounded answer when arithmetic and interpretation are checked. A negative result is a valid completion. Changing the threshold or collecting new observations requires a separate task. Inconsistent input prevents closure until corrected.\\n\",\n      \"reason\": \"Initial contract\",\n      \"recorded_at\": \"2026-09-14T10:07:55.797207Z\"\n    }\n  ],\n  \"verifications\": [],\n  \"closures\": [],\n  \"lifecycle\": [\n    {\n      \"action\": \"begin\",\n      \"reason\": \"Initial contract\",\n      \"recorded_at\": \"2026-09-14T10:07:55.797207Z\"\n    }\n  ]\n}\n---\nschema_version: 1\ntask_id: retained-comparison\ncontract_revision: 1\nassessment: not_supported\n---\n\n# Synthetic comparison result\n\n## Outcome\n\nC1 does not meet the promotion rule. Its error is higher than B0, and the gain is −0.03 absolute error units, below the required +0.01.\n\n## Evidence\n\nThe supplied [metrics](evidence/metrics.json) are B0 = 0.20 and C1 = 0.23. [Derived evidence](evidence/derived.json) records 0.20 − 0.23 = −0.03 and no promotion. The example [arithmetic check](check_arithmetic.py) can reproduce this relation. This fixture does not claim a completed rctl verification run.\n\n## Deviations\n\nNone in the specified synthetic assessment; the threshold and inputs are unchanged.\n\n## Next action\n\nRetain B0 within this fictional comparison and close the assessment after both required checks pass. There is no authorized extra experiment.\n\n## Limitations\n\nAll observations are synthetic aggregates. They establish no real model performance, prediction quality, uncertainty, or general scientific conclusion.\n{\n  \"schema_version\": 1,\n  \"task_id\": \"retained-comparison\",\n  \"contract_revision\": 1,\n  \"checks\": [\n    {\n      \"criterion_id\": \"AC-02\",\n      \"verdict\": \"pass\",\n      \"reviewer\": \"agent\",\n      \"rationale\": \"Illustrative review: the result uses baseline minus candidate, applies the unchanged +0.01 threshold, declines promotion at -0.03, and explicitly confines the conclusion to invented aggregate inputs.\",\n      \"evidence_refs\": [\n        \"result.md\",\n        \"evidence/metrics.json\",\n        \"evidence/derived.json\",\n        \"../../research/questions/Q.md\"\n      ]\n    }\n  ]\n}\n\"\"\"Verify the synthetic example's declared arithmetic, without rctl.\"\"\"\n\nimport json\nfrom decimal import Decimal\nfrom pathlib import Path\n\n\ndef main() -> None:\n    root = Path(__file__).resolve().parent\n    metrics = json.loads((root / \"evidence/metrics.json\").read_text())\n    derived = json.loads((root / \"evidence/derived.json\").read_text())\n    assert metrics[\"synthetic\"] is True and derived[\"synthetic\"] is True\n    assert metrics[\"direction\"] == \"lower_is_better\"\n    gain = Decimal(metrics[\"baseline\"]) - Decimal(metrics[\"candidate\"])\n    assert Decimal(derived[\"gain\"]) == gain, \"Derived gain differs from input arithmetic\"\n    assert derived[\"promote\"] is (gain >= Decimal(metrics[\"minimum_gain\"])), \"Promotion contradicts the frozen threshold\"\n    print(f\"PASS synthetic arithmetic: gain={gain}; promote={derived['promote']}\")\n\n\nif __name__ == \"__main__\":\n    main()\n{\n  \"synthetic\": true,\n  \"metric\": \"error\",\n  \"direction\": \"lower_is_better\",\n  \"baseline\": \"0.20\",\n  \"candidate\": \"0.23\",\n  \"minimum_gain\": \"0.01\"\n}\n{\n  \"synthetic\": true,\n  \"gain\": \"-0.03\",\n  \"promote\": false\n}\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_8",
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"rg --files --hidden -g '*handoff*' -g AGENTS.md -g '\"'!**/.git/**'\"'\"",
+        "aggregated_output": "handoff-history.md\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_9",
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'cat handoff-history.md'",
+        "aggregated_output": "## Earlier inspection notes\n\nEntry 000: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 001: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 002: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 003: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 004: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 005: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 006: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 007: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 008: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 009: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 010: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 011: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 012: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 013: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 014: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 015: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 016: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 017: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 018: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 019: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 020: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 021: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 022: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 023: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 024: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 025: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 026: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 027: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 028: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 029: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 030: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 031: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 032: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 033: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 034: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 035: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 036: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 037: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 038: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 039: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 040: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 041: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 042: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 043: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 044: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 045: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 046: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 047: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 048: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 049: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 050: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 051: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 052: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 053: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 054: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 055: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 056: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 057: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 058: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 059: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 060: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 061: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 062: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 063: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 064: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 065: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 066: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 067: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 068: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 069: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 070: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 071: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 072: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 073: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 074: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 075: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 076: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 077: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 078: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 079: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 080: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 081: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 082: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 083: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 084: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 085: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 086: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 087: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 088: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 089: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 090: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 091: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 092: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 093: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 094: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 095: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 096: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 097: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 098: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 099: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 100: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 101: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 102: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 103: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 104: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 105: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 106: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 107: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 108: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 109: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 110: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 111: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 112: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 113: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 114: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 115: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 116: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 117: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 118: supplied aggregates retained; prediction-level evidence is outside this task.\nEntry 119: supplied aggregates retained; prediction-level evidence is outside this task.\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_10",
+        "type": "agent_message",
+        "text": "The supplied arithmetic supports no promotion: 0.20 − 0.23 = −0.03, below +0.01. The draft agrees. The next session still needs to review the organization-only scope and replace the illustrative review with an evidence-based judgment. I’ll put these steps before the retained inspection history in the handoff.\n\n"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_11",
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"mkdir -p .work\ncat > .work/retained-comparison-handoff.md <<'EOF'\n## Next action\n\nRead tasks/retained-comparison/result.md against the accepted revision 1 contract in tasks/retained-comparison/.rctl/record.json and research/questions/Q.md, make the organization-only/non-complementarity boundary explicit in the result, and replace the illustrative AC-02 entry in tasks/retained-comparison/reviews.json with a fresh evidence-based judgment covering all four required references. Then finish the assessment through the verification and closure steps below in the next session.\n\n## Blockers\n\nNo missing supplied inputs or external dependencies identified by inspection. Completion remains pending: AC-01 has not been executed in this session, AC-02 contains only an illustrative review, and no managed verification or closure is recorded. Verification and closure are deliberately deferred to the next session by user instruction.\n\n## Progress\n\nInspected the retained contract, draft result, illustrative review, checker source, both supplied evidence files, research orientation/program/routes/question, and the earlier inspection notes below. Fresh rctl status reports phase active, revision 1, no contract drift, verification null, currentness not_checked, and no historical closure. No arithmetic checker or verification was run; these are inspection findings only. The result, review, contract, inputs, budget, threshold, and scientific question were left unchanged.\n\n## Evidence and interpretation\n\n- tasks/retained-comparison/evidence/metrics.json: synthetic lower-is-better error; B0 0.20, C1 0.23, minimum gain 0.01.\n- tasks/retained-comparison/evidence/derived.json: synthetic gain -0.03 and promote false. Inspection confirms 0.20 - 0.23 = -0.03, below +0.01; the draft's no-promotion conclusion is correct for these aggregates.\n- tasks/retained-comparison/result.md: revision 1, assessment not_supported; already limits claims to synthetic aggregates. The next review should explicitly address the accepted organization-only/non-complementarity boundary rather than treating the generic limitation as a completed AC-02 judgment.\n- tasks/retained-comparison/reviews.json: prewritten illustrative pass, not evidence of a completed review or verification. Required AC-02 references, resolved from the task directory, are result.md, evidence/metrics.json, evidence/derived.json, and ../../research/questions/Q.md.\n- tasks/retained-comparison/check_arithmetic.py: inspected source checks synthetic labels, metric direction, Decimal gain, and promotion consistency. AC-01 execution will detect disagreement in derived arithmetic or labeling; correct derived evidence against the fixed inputs if it fails, without changing the rule.\n- research/ROUTES.md, Organization-only comparison, and research/questions/Q.md#mechanism: both arms receive the same records, so this comparison does not isolate complementary components. The decision supported here is no promotion of C1 relative to B0 in this fictional comparison; the broader complementarity question remains unanswered. No follow-up experiment is authorized.\n\n## Continuation commands\n\nWork only in /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project. Use the installed CLI /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl for all rctl operations.\n\n1. Refresh status with that CLI: \"'`rctl --format json status tasks/retained-comparison`, then complete the result/review inspection described above under accepted revision 1.\n2. In the next session only, run `rctl --format json verify tasks/retained-comparison --reviews tasks/retained-comparison/reviews.json`. The accepted AC-01 command already uses uv, offline mode, no project/cache, and the supplied Python interpreter; retain it unchanged. Verification executes that arithmetic check, so a separate duplicate run is unnecessary.\n3. Inspect the report and criterion failures. Close with `rctl close tasks/retained-comparison` only if the current verification passes and remains applicable; otherwise address the named issue within the fixed agreement or checkpoint unresolved work.\n\n## Limitations\n\nAll metrics are invented aggregate inputs. No prediction-level evidence, training, uncertainty, real performance, or broader complementarity conclusion is established. The fixture README'\"'s statement that its source folder has no managed record describes the original fixture; the current disposable copy has an active record, which governs lifecycle status. Earlier inspection notes are historical context, not verification evidence.\n\nEOF\ncat handoff-history.md >> .work/retained-comparison-handoff.md\n/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl checkpoint tasks/retained-comparison --file .work/retained-comparison-handoff.md\"",
+        "aggregated_output": "task_id: retained-comparison\nphase: active\nstate_path: /Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project/tasks/retained-comparison/state.md\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_12",
+        "type": "command_execution",
+        "command": "/bin/zsh -lc '/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-venv/bin/rctl --format json status tasks/retained-comparison'",
+        "aggregated_output": "{\"schema_version\": 1, \"ok\": true, \"data\": {\"task_id\": \"retained-comparison\", \"phase\": \"active\", \"contract_revision\": 1, \"contract_drift\": false, \"assessment\": null, \"currentness\": \"not_checked\", \"historical_closure\": null, \"next_action\": \"Prepare the result and required evidence/reviews, then verify; checkpoint to pause.\", \"title\": \"Inspect a synthetic retained error comparison\", \"question\": \"Does the supplied candidate meet the fixed improvement rule against the supplied baseline?\", \"question_alignment\": {\"source\": \"research/questions/Q.md#mechanism\", \"mechanism\": \"Combining complementary logical components may improve generated programs.\", \"tests\": \"The organization increment after both arms receive the same records.\", \"does_not_decide\": \"Whether complementary components improve generated programs.\"}, \"verification\": null, \"handoff\": {\"next_action\": \"Read tasks/retained-comparison/result.md against the accepted revision 1 contract in tasks/retained-comparison/.rctl/record.json and research/questions/Q.md, make the organization-only/non-complementarity boundary explicit in the result, and replace the illustrative AC-02 entry in tasks/retained-comparison/reviews.json with a fresh evidence-based judgment covering all four required references. Then finish the assessment through the verification and closure steps below in the next session.\", \"blockers\": \"No missing supplied inputs or external dependencies identified by inspection. Completion remains pending: AC-01 has not been executed in this session, AC-02 contains only an illustrative review, and no managed verification or closure is recorded. Verification and closure are deliberately deferred to the next session by user instruction.\"}}, \"error\": null, \"warnings\": [\"No verification has been recorded; structural checks and handoffs do not establish closure.\"]}\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_13",
+        "type": "agent_message",
+        "text": "Checkpointed the [handoff](/Users/zhangbowen/Projects/rctl/.work/simplification-zsjIFu/candidate-project/tasks/retained-comparison/state.md) with next action and blockers first, followed by the retained inspection history.\n\nInspection supports no promotion: gain −0.03 falls below +0.01. Task remains **active**, with verification and closure deferred. Scientific question, inputs, budget, and criteria are unchanged."
+      }
+    },
+    {
+      "type": "turn.completed",
+      "usage": {
+        "input_tokens": 125451,
+        "cached_input_tokens": 105088,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1772,
+        "reasoning_output_tokens": 40
+      }
+    }
+  ]
+}
