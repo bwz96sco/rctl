@@ -2,7 +2,10 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.4.1 — project reminders and history reuse before experimental planning.**
+**Status: v0.5.0 — governing-question alignment implemented locally; release pending.**
+The [M8 verification](docs/M8-VERIFICATION.md) records strict optional alignment,
+accepted-question recovery, task-scoped assessment projection, and installed-wheel
+hook delivery. No live project or shared installation has been upgraded.
 The [M7 verification](docs/M7-VERIFICATION.md) records project-only and damaged-task
 reminders, meaningful short-context fields, packaged planning guidance, and actual
 Codex startup and automatic-compaction delivery.
@@ -47,7 +50,7 @@ uv run pytest
 uv run ruff check src tests scripts
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.4.1-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.5.0-py3-none-any.whl
 ```
 
 The GitHub Actions workflow is configured to run tests, lint, the document check,
@@ -58,7 +61,7 @@ The installed-package smoke uses a temporary project under `.work/`, an isolated
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.4.1-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.5.0-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh

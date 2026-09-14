@@ -14,6 +14,8 @@ from .documents import (
     invalid,
     local_path,
     parse_contract,
+    parse_result,
+    question_source_path,
     read_text,
     require_completed,
     resource_text,
@@ -87,7 +89,14 @@ class Task:
     def contract(self):
         path = self.file("contract.md")
         text = read_text(path)
-        return text, parse_contract(text, path, self.task_id, self.root, self.path)
+        return text, parse_contract(
+            text,
+            path,
+            self.task_id,
+            self.root,
+            self.path,
+            require_alignment_source=True,
+        )
 
     def read_record(self):
         path = self.file(".rctl/record.json")
@@ -245,7 +254,6 @@ class Task:
         return verify(self, reviews)
 
     def close(self):
-        from .documents import parse_result
         from .verification import currentness, verdict_error
 
         record = self.managed()
@@ -376,9 +384,35 @@ class Task:
             action = "Prepare the result and required evidence/reviews, then verify; checkpoint to pause."
         handoff, handoff_warnings = read_handoff(self)
         warnings.extend(handoff_warnings)
+        alignment = contract["question_alignment"]
+        if record is not None and alignment is not None:
+            try:
+                read_text(question_source_path(self.root, alignment["source"]))
+            except RctlError as error:
+                warnings.append(
+                    "Question alignment source unavailable: "
+                    f"{alignment['source']}. {error.message}"
+                )
+        assessment = None
+        if report is not None:
+            value = parse_result(
+                report["result_text"],
+                "latest verification result",
+                self.task_id,
+                report["contract_revision"],
+            )["assessment"]
+            assessment = {
+                "value": value,
+                "verification_id": report["id"],
+                "contract_revision": report["contract_revision"],
+                "currentness": applicability,
+            }
         return {
             "task_id": self.task_id,
             "title": contract["title"],
+            "question": contract["question"],
+            "question_alignment": alignment,
+            "assessment": assessment,
             "phase": phase,
             "contract_revision": revision,
             "contract_drift": drift,

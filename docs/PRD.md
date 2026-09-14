@@ -1,6 +1,6 @@
 # rctl Product Requirements
 
-Baseline: 2026-09-05. The v0.1 release is complete; the user-authorized v0.2 increment adds project initialization and research-skill migration. v0.3 adds task discovery, prioritized handoff summaries, and candidate-only installation maintenance. v0.4 adds independent project reminders and history reuse before experimental planning.
+Baseline: 2026-09-05. The v0.1 release is complete; the user-authorized v0.2 increment adds project initialization and research-skill migration. v0.3 adds task discovery, prioritized handoff summaries, and candidate-only installation maintenance. v0.4 adds independent project reminders and history reuse before experimental planning. The user-authorized v0.5 increment keeps a selected task's governing question and declared relationship to a broader project question visible beside its scoped assessment.
 
 ## Problem and evidence
 
@@ -43,6 +43,7 @@ Ship a local Python CLI, readable task templates, small machine records, command
 | R-17 | Read-only installation diagnostics and candidate exports compare packaged project assets without replacing live content. | Review skill and hook updates without losing local changes. |
 | R-18 | Project reminders survive missing task selection and task read failures, using explicit current research sections. | Planning retains project goals and corrections. |
 | R-19 | Experiment planning cites related history, the unanswered question, and the decision new evidence changes. | Repeated mechanisms require a substantive reason. |
+| R-20 | Selected-task status and reminders expose the accepted governing question, optional declared question alignment, and the verified assessment's task scope independently of mutable project guidance. | A narrow negative result cannot silently become a verdict on a broader research idea during session recovery. |
 
 ## Typical use
 
@@ -58,6 +59,7 @@ Only ask for missing input when it changes scope, authority, or the acceptance d
 - Authentication, independent approval identities, automatic scientific verdicts, or mandatory multi-agent review.
 - Automatic migration of Trellis tasks, installation into shared skills, Git initialization, commits, pushes, or directory renaming.
 - Claude Code support, Stop-triggered repair loops, subagent delivery, or Web/MCP interfaces in the first release.
+- Automatic scientific classification of a task's relationship to a broader question, a global question database, or a second lifecycle for lightweight research notes.
 
 ## Release success
 

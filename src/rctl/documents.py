@@ -4,7 +4,7 @@ import json
 import re
 from importlib.resources import files
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 import yaml
 from jsonschema import Draft202012Validator
@@ -76,6 +76,14 @@ UniqueLoader.add_constructor(
 )
 
 
+QUESTION_ALIGNMENT_FIELDS = (
+    ("Governing question source", "source"),
+    ("Governing mechanism", "mechanism"),
+    ("This task tests", "tests"),
+    ("This task does not decide", "does_not_decide"),
+)
+
+
 def resource_directory(directory):
     resource = files("rctl").joinpath(directory)
     # Editable installs import src/rctl; wheels carry the same resources.
@@ -91,6 +99,7 @@ def resource_text(directory, name):
 
 def resource_tree(directory):
     """Return packaged UTF-8 scaffold files, including dotfiles."""
+
     def walk(parent, prefix=""):
         for item in sorted(parent.iterdir(), key=lambda item: item.name):
             name = prefix + item.name
@@ -172,7 +181,7 @@ def parse_document(text, source, task_id, kind):
     for name in required:
         if not headings.get(name):
             raise invalid(f"{source}: require nonempty ## {name} section.")
-    return data
+    return data, headings
 
 
 def validate_schema(data, source, kind):
@@ -190,8 +199,105 @@ def validate_schema(data, source, kind):
         )
 
 
-def parse_contract(text, source, task_id, root=None, task=None):
-    data = parse_document(text, source, task_id, "contract")
+def question_summary(text):
+    """Return the declared Question field or the first prose paragraph."""
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
+        match = re.match(r"^ {0,3}-[ \t]+Question:[ \t]*(.*)$", line)
+        if not match:
+            continue
+        value = [match[1].strip()]
+        for continuation in lines[index + 1 :]:
+            if re.match(r"^ {0,3}-[ \t]+[^:\n]+:", continuation):
+                break
+            if not continuation.strip():
+                break
+            if not continuation[:1].isspace():
+                break
+            value.append(continuation.strip())
+        summary = " ".join(part for part in value if part)
+        if summary:
+            return summary
+        break
+    paragraph = []
+    for line in lines:
+        if not line.strip():
+            if paragraph:
+                break
+            continue
+        paragraph.append(line.strip())
+    return " ".join(paragraph)
+
+
+def parse_question_alignment(text, source):
+    expected = dict(QUESTION_ALIGNMENT_FIELDS)
+    values = {}
+    current = None
+    for line, structural in markdown_lines(text):
+        if not line.strip():
+            current = None
+            continue
+        if not structural:
+            raise invalid(f"{source}: Question alignment contains fenced content.")
+        match = re.match(r"^ {0,3}-[ \t]+([^:\n]+):[ \t]*(.*)$", line)
+        if match:
+            label, value = match[1].strip(), match[2].strip()
+            if label not in expected:
+                raise invalid(f"{source}: unknown Question alignment field: {label}.")
+            key = expected[label]
+            if key in values:
+                raise invalid(f"{source}: duplicate Question alignment field: {label}.")
+            values[key] = [value]
+            current = key
+        elif current is not None and line[:1].isspace():
+            values[current].append(line.strip())
+        else:
+            raise invalid(
+                f"{source}: Question alignment accepts only the four declared bullet fields."
+            )
+    missing = [label for label, key in QUESTION_ALIGNMENT_FIELDS if key not in values]
+    if missing:
+        raise invalid(
+            f"{source}: missing Question alignment field(s): {', '.join(missing)}."
+        )
+    result = {
+        key: " ".join(values[key]).strip() for _, key in QUESTION_ALIGNMENT_FIELDS
+    }
+    empty = [label for label, key in QUESTION_ALIGNMENT_FIELDS if not result[key]]
+    if empty:
+        raise invalid(
+            f"{source}: empty Question alignment field(s): {', '.join(empty)}."
+        )
+    return result
+
+
+def question_source_path(root, value):
+    parts = urlsplit(value)
+    path_text = unquote(parts.path)
+    if (
+        parts.scheme
+        or parts.netloc
+        or parts.query
+        or not path_text
+        or Path(path_text).is_absolute()
+        or Path(path_text).suffix.lower() != ".md"
+    ):
+        raise invalid(
+            "Governing question source must be a project-relative Markdown path."
+        )
+    return local_path(root, path_text)
+
+
+def parse_contract(
+    text,
+    source,
+    task_id,
+    root=None,
+    task=None,
+    *,
+    require_alignment_source=False,
+):
+    data, headings = parse_document(text, source, task_id, "contract")
     ids = [criterion["id"] for criterion in data["criteria"]]
     if len(ids) != len(set(ids)):
         raise invalid(f"{source}: criterion IDs must be unique.")
@@ -204,11 +310,33 @@ def parse_contract(text, source, task_id, root=None, task=None):
                 if urlsplit(ref).scheme:
                     raise invalid(f"{source}: command inputs must be local paths.")
                 local_path(root, ref, task)
+    data["question"] = question_summary(headings["Question"])
+    data["question_alignment"] = None
+    misspelled = [
+        name
+        for name in headings
+        if name.casefold() == "question alignment" and name != "Question alignment"
+    ]
+    if misspelled:
+        raise invalid(f"{source}: use the exact heading ## Question alignment.")
+    if "Question alignment" in headings:
+        alignment = parse_question_alignment(headings["Question alignment"], source)
+        data["question_alignment"] = alignment
+        if root is not None:
+            path = question_source_path(root, alignment["source"])
+            if require_alignment_source:
+                try:
+                    read_text(path)
+                except RctlError as error:
+                    raise invalid(
+                        f"{source}: Question alignment source is not readable: "
+                        f"{alignment['source']}. {error.message}"
+                    ) from None
     return data
 
 
 def parse_result(text, source, task_id, revision):
-    data = parse_document(text, source, task_id, "result")
+    data, _ = parse_document(text, source, task_id, "result")
     if data["contract_revision"] != revision:
         raise RctlError(
             "INVALID_INPUT",

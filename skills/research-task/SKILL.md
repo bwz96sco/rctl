@@ -36,6 +36,8 @@ For contract/result/review authoring, read [references/task-files.md](references
 
 Before proposing an experiment, creating its contract, or materially changing direction, read `research/PROGRAM.md` and `research/ROUTES.md`, then inspect the evidence linked by related mechanisms. State what prior work answered, what remains unanswered, the substantive difference or satisfied reopen condition, and which decision the new result would change. Match mechanisms across names. If no related route is found, name the sources checked. Include this reasoning in the proposal and the contract's Question/Scope; use domain skills to judge its scientific adequacy.
 
+When the task tests only one part of an existing project question, add the optional four-field `## Question alignment` section described in [references/task-files.md](references/task-files.md). Point `Governing question source` to the readable project-relative Markdown source, snapshot the governing mechanism, state the increment this task tests, and state the broader conclusion it does not decide. If that relationship affects closure, add a review criterion citing the same source file without its fragment through the usual task-relative `evidence_refs`, plus the result. Do not infer the relationship from mutable project guidance or promote a task-local assessment into a project-level verdict.
+
 `rctl context` also works without a selected task and supplies project guidance. It is a bounded excerpt: read the source when a relevant field is absent, ambiguous, or truncated. Project guidance remains reported intent, distinct from task acceptance. Keep current corrections and their evidence/scope in PROGRAM.md's `## Current guidance`; link superseding route conclusions in ROUTES.md while preserving old evidence. Update corrections when established, independently of task closeout.
 
 ## Agreement and execution
@@ -48,7 +50,7 @@ Before work governed by a material contract change, use `amend TASK --reason TEX
 
 ## Evidence and closure
 
-Write `result.md` for the current revision with outcome, evidence, deviations, next action, and limitations. Distinguish computed observations, parsed evidence, and hypotheses. Inspect the cited content before writing review entries: record pass/fail/unknown, reviewer source, rationale, and all required references. An operator-only criterion requires an operator judgment; a review label is not authenticated identity.
+Write `result.md` for the current revision with outcome, evidence, deviations, next action, and limitations. Distinguish computed observations, parsed evidence, and hypotheses. For an aligned task, keep the assessment within `This task tests` and honor `This task does not decide`. Inspect the cited content before writing review entries: record pass/fail/unknown, reviewer source, rationale, and all required references, including the governing-question source when alignment adequacy is a criterion. An operator-only criterion requires an operator judgment; a review label is not authenticated identity.
 
 Run `verify TASK --reviews FILE` when reviews are required. Check every criterion and inspect command logs as needed. Nonzero verification may still save a report; use status after interruption or uncertain writes. Correct the named failure or leave work unresolved, then explicitly verify again. Changed result/evidence, amendments, and reopen cycles require fresh verification before closure.
 

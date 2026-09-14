@@ -8,6 +8,26 @@ A task needs contract and result records; the machine acceptance record is produ
 
 Scientific requirements come from the project and relevant research skills. For a comparison, add baseline, intervention, data/split, metric direction, aggregation/selection, budget, and stopping rules to the contract body before dependent work. Do not copy historical compute budgets as new execution authorization.
 
+When a task tests only one part of an existing project question, add this optional
+section after `## Question` and replace every value:
+
+```markdown
+## Question alignment
+
+- Governing question source: research/questions/example.md#mechanism
+- Governing mechanism: The broader mechanism whose evidence is being accumulated.
+- This task tests: The specific increment or relationship isolated by this task.
+- This task does not decide: The broader conclusion that this result cannot support or refute alone.
+```
+
+The source must be a readable project-relative Markdown path; a fragment may name
+the relevant section. All four fields are required when the section is present.
+Add a review criterion when closure depends on whether the declared relationship
+and non-claim boundary are scientifically adequate. `rctl` validates structure and
+source availability, not that scientific judgment. Criterion `evidence_refs` remain
+task-relative, so cite the same source file without its fragment using a path from
+the task directory, plus `result.md`.
+
 ## Project and vault scaffolding
 
 `rctl init` reads `project/research/`; optional `--vault PATH` reads `vault/` only when

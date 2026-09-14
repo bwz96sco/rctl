@@ -65,6 +65,46 @@ def render(root, project, task, status, warnings, error, selected, budget, compa
     identity = bounded(identity, min(400, budget // 4), "status TASK")
     # key, label, value, source; values are budgeted independently of labels.
     fields = []
+    task_context_keys = set()
+    if status is not None:
+        task_fields = [
+            (
+                "question",
+                "Governing task question",
+                status["question"],
+                "T/contract.md / Question",
+            )
+        ]
+        alignment = status["question_alignment"]
+        if alignment is not None:
+            task_fields.extend(
+                (
+                    f"alignment_{key}",
+                    label,
+                    alignment[key],
+                    "T/contract.md / Question alignment",
+                )
+                for key, label in (
+                    ("source", "Governing question source (declared)"),
+                    ("mechanism", "Governing mechanism (declared)"),
+                    ("tests", "This task tests (declared)"),
+                    ("does_not_decide", "This task does not decide (declared)"),
+                )
+            )
+        assessment = status["assessment"]
+        if assessment is not None:
+            task_fields.append(
+                (
+                    "assessment",
+                    "Task assessment",
+                    f"{assessment['value']} (verification {assessment['verification_id']}; "
+                    f"revision {assessment['contract_revision']}; "
+                    f"{assessment['currentness']})",
+                    "latest verification result",
+                )
+            )
+        fields.extend(task_fields)
+        task_context_keys = {field[0] for field in task_fields}
     for key, label, source in (
         ("goal", "Project goal (reported)", "P / Goal"),
         ("current_guidance", "Current guidance (reported)", "P / Current guidance"),
@@ -103,9 +143,24 @@ def render(root, project, task, status, warnings, error, selected, budget, compa
     core_budget = budget if compact else min(budget, 3200)
     limits = allocate([f[2] for f in fields], max(0, core_budget - overhead))
     values = {f[0]: bounded(f[2], limit, f[3]) for f, limit in zip(fields, limits)}
-    guidance = "\n".join(f"{f[1]}: {values[f[0]]}" for f in fields if f[0] in project)
-    other = "\n".join(f"{f[1]}: {values[f[0]]}" for f in fields if f[0] not in project)
-    reminder = guidance + "\n" + identity + other + "\n" + sources
+    task_context = "\n".join(
+        f"{field[1]}: {values[field[0]]}"
+        for field in fields
+        if field[0] in task_context_keys
+    )
+    guidance = "\n".join(
+        f"{field[1]}: {values[field[0]]}" for field in fields if field[0] in project
+    )
+    other = "\n".join(
+        f"{field[1]}: {values[field[0]]}"
+        for field in fields
+        if field[0] not in project and field[0] not in task_context_keys
+    )
+    reminder = "\n".join(
+        part
+        for part in (identity.rstrip(), task_context, guidance, other, sources)
+        if part
+    )
     if not compact and status is not None:
         record = task.read_record()
         contract = (
@@ -139,6 +194,12 @@ def render(root, project, task, status, warnings, error, selected, budget, compa
         data["title"] = (
             bounded(status["title"], min(200, budget), "T/contract.md") or None
         )
+        data["question"] = values.get("question") or None
+        if status["question_alignment"] is not None:
+            data["question_alignment"] = {
+                key: values.get(f"alignment_{key}") or None
+                for key in ("source", "mechanism", "tests", "does_not_decide")
+            }
         if status["verification"]:
             data["verification"] = {
                 key: status["verification"][key]

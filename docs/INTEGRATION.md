@@ -93,3 +93,18 @@ the continuation request after compaction. rctl budgets count Unicode characters
 the host's `additionalContextLimit` is an approximate token spill threshold. These
 are separate limits, even though the configured numeric values currently match.
 Actual host delivery evidence belongs to the M7 verification record.
+
+## v0.5 governing-question reminders
+
+The existing SessionStart and UserPromptSubmit handlers use the same response shape,
+events, limits and pure context renderer. For a selected task, their additional context
+now reserves space for the accepted governing question, optional declared alignment,
+and task-scoped verified assessment before mutable project guidance. No hook definition,
+trust boundary, timeout, selection rule or machine mutation changes.
+
+The official hooks documentation was rechecked through smart-search on 2026-09-14 at
+https://developers.openai.com/codex/hooks . It continues to specify that
+`hookSpecificOutput.additionalContext` for SessionStart and UserPromptSubmit is added
+to model context, including SessionStart with source `compact`. Fixture coverage is
+sufficient for this content-only change; the M7 real-host evidence retains its original
+protocol and delivery scope.

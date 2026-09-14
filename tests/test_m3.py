@@ -57,8 +57,7 @@ def test_real_adapter_is_bounded_readonly_and_receipts_optional(task, event, bud
     assert "Next action: inspect the retained evidence." in output["additionalContext"]
     assert "Truncated" in output["additionalContext"]
     assert {p: p.read_bytes() for p in task.path.rglob("*") if p.is_file()} == before
-    if event == "UserPromptSubmit":
-        assert "Does the supplied candidate" not in output["additionalContext"]
+    assert "Does the supplied candidate" in output["additionalContext"]
     response, stderr = hook(task, payload, logging="receipts.jsonl")
     receipt = json.loads((task.root / "receipts.jsonl").read_text())
     assert receipt["context"] == response["hookSpecificOutput"]["additionalContext"]

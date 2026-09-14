@@ -1,6 +1,6 @@
 # rctl Specification
 
-This document defines core behavior and the v0.2–v0.4 extensions for [R-01–R-19](PRD.md). See [CLI](CLI.md) for syntax and [schemas](../schemas/README.md) for structural validation. All times are UTC ISO 8601 strings.
+This document defines core behavior and the v0.2–v0.5 extensions for [R-01–R-20](PRD.md). See [CLI](CLI.md) for syntax and [schemas](../schemas/README.md) for structural validation. All times are UTC ISO 8601 strings.
 
 ## 1. Architecture and ownership
 
@@ -41,6 +41,26 @@ Contract frontmatter contains `schema_version`, `task_id`, `title`, `kind`, and 
 A comparison contract must state baseline, intervention, data/split, metric direction and evaluator, aggregation/selection rule, budget, and stop conditions in its body. A review must assess their adequacy; heading presence cannot establish scientific completeness. Existing user instructions can supply authority; `begin` is not a new permission request.
 
 Result frontmatter contains `schema_version`, `task_id`, `contract_revision`, and `assessment` (`supported`, `not_supported`, `inconclusive`, or `not_applicable`). These are interpretations, not task phases or check verdicts. A result may contain a scientific failure while its verification passes.
+
+The required `Question` section supplies the governing task question. For a task
+derived from an existing project question, an optional `Question alignment` section
+uses exactly these four nonempty bullet fields:
+
+- `Governing question source`: a project-relative readable Markdown source; an
+  optional fragment may identify a section.
+- `Governing mechanism`: a short accepted-contract snapshot of the broader question.
+- `This task tests`: the increment or relationship actually isolated by this task.
+- `This task does not decide`: the broader conclusion that must not be inferred.
+
+When the section exists, all four fields are required and no other fields or prose
+are accepted in it. Contract checking validates this structure and keeps the source
+inside the explicit project root; it does not judge whether the scientific relationship
+is correct. That judgment belongs in a declared review criterion when it affects
+closure. Criterion evidence paths still resolve from the task directory: include
+the corresponding task-relative source file path without its fragment, plus the
+result, when reviewing alignment adequacy. Existing contracts without the optional
+section remain valid. The exact contract text already retained in record schema 1
+owns the alignment, so no machine record or frontmatter schema migration is introduced.
 
 ## 4. Machine record
 
@@ -133,22 +153,33 @@ produce warnings, never task read failures. Resolve sources within the explicit
 root, without scanning the vault, reading transcripts, fetching URLs, or ranking
 routes. Read current bytes on every call. No separate summary store is created.
 
-A selected task adds identity, phase, governing revision, verification/applicability,
-historical closure, warnings, reported blockers/next step and lifecycle action.
+A selected task adds identity, phase, governing revision, the governing task question,
+optional declared question alignment, verification/applicability, a task-scoped
+assessment from the latest verification, historical closure, warnings, reported
+blockers/next step and lifecycle action.
 Without selection, identify project-only context and select no task. A task error
 preserves project context while retaining its CLI error code; hooks still exit 0.
 Project content is reported guidance, not task authorization or machine acceptance.
 
-Default to 8000 Unicode characters; compact reminders use 2000. Show project goal,
-current guidance and reuse rule first, reserving content space for task warnings,
-blockers and next action. Prefix each warning with `Warning:`. Use one root and a
+Default to 8000 Unicode characters; compact reminders use 2000. For a selected task,
+show the accepted governing question and declared alignment before mutable project
+guidance, while reserving content space for warnings, blockers and next action. The
+latest verified assessment is reported beside its verification ID and currentness;
+it remains an assessment of the task question, never an inferred verdict on the
+broader question. Prefix each warning with `Warning:`. Use one root and a
 short relative source map, including in project-source diagnostics while retaining
 the failure reason. List the research README only when it exists. Allocate
 unused field space to remaining fields; bound values separately from labels and
 use short truncation references. Compact output does not append the whole handoff.
 Long output adds bounded contract/handoff excerpts after core fields. Bound added
-JSON summaries too; an insufficient budget yields null text fields rather than
+JSON summaries, including question/alignment fields, too; an insufficient budget yields null text fields rather than
 fragments of truncation markers. Extremely long fields still require source reads.
+
+Managed status reads the question and alignment from the retained governing contract,
+even when the working contract has drifted. A missing alignment source after begin
+adds a warning but does not rewrite the contract, change phase, or invent a broader
+assessment. Draft contract checking still requires the source to be readable. Legacy
+managed tasks return a null alignment rather than an inferred one.
 
 Keep current corrections in `PROGRAM.md` with evidence links and explicit scope.
 When a route conclusion is superseded, link its replacement and retained evidence

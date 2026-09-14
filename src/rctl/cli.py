@@ -131,6 +131,7 @@ def dispatch(args):
             "check": "structure",
             "valid": True,
             "criterion_ids": [item["id"] for item in data["criteria"]],
+            "question_alignment": data["question_alignment"],
         }, [
             "Structural validity does not establish scientific adequacy or verification."
         ]

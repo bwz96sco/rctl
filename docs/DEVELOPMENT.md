@@ -112,3 +112,20 @@ Keep lifecycle and host protocol unchanged. Run focused regressions, the full su
 lint, documentation checks and wheel smoke; commit and push, then require successful
 CI on that commit before upgrading the shared local installation used by Pinyin VSR
 and OR. Project skills and research files need no edits for this patch.
+
+## M8 — Governing-question alignment (v0.5)
+
+Authorized on 2026-09-14 after the C15 scope-drift review. Project the accepted
+task question in compact reminders, add an optional compatible Question alignment
+body section, and bind verified assessments to the task question and declared
+non-claim boundary. Preserve record/frontmatter schema version 1, existing task
+lifecycle, explicit selection, and mutable project-guidance ownership. Do not add
+automatic scientific classification, a question database, rapid-note lifecycle,
+historical task migration, host-protocol changes, or shared-skill edits.
+
+Exit checks: A-37–A-40, the existing context/lifecycle regressions, full tests,
+lint, document checks, and installed-wheel smoke. The official Codex hook source
+must be rechecked because both existing reminder events consume the shared renderer;
+content-only fixture coverage is sufficient when the response shape and definitions
+remain unchanged. Release, installation, OR project updates, commits and pushes are
+separate actions.

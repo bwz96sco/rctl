@@ -87,3 +87,9 @@ Existing projects may add Current guidance in place; no record or manifest migra
 is needed. Repeated sections, unfinished placeholders and unreadable files produce
 warnings. Missing research files leave task commands usable. Init preserves existing
 files, so reconcile new guidance sections with the actual project content.
+
+For a selected task, reminders also project the accepted governing task question,
+optional declared question alignment, and latest task-scoped assessment ahead of
+mutable project guidance. These fields come from retained task records; follow the
+declared source when the relationship needs inspection. A missing source on an already
+accepted task warns without changing its lifecycle state.

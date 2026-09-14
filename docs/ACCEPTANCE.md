@@ -58,6 +58,15 @@ The following cases extend the original 20-case v0.1 release matrix.
 | A-35 | R-18, R-12 | Real startup and compact recovery deliver project guidance; a changed current section appears in subsequent context. | Payload fixtures mistaken for actual delivery; fix supported host integration. |
 | A-36 | R-18, R-13, R-17 | Installed wheel carries new assets; scoped Pinyin VSR and OR upgrades preserve task records and customized guidance while delivering current reminders. | Packaging or rollout drops content; repair before completing upgrade. |
 
+## v0.5 governing-question alignment
+
+| Case | Requirements | Scenario and observable result | Failure detected; response |
+|---|---|---|---|
+| A-37 | R-20, R-03, R-11 | A contract with a complete Question alignment section accepts a readable project-relative source and rejects duplicate/unknown/missing fields, absolute/external/escaping paths, and missing/unreadable sources before begin. A legacy contract remains valid. | Ambiguous or unavailable question lineage becomes accepted structure; fix the body parser/path check without judging scientific truth. |
+| A-38 | R-20, R-09, R-18 | Status and both reminder budgets read the governing question/alignment from the retained contract, keep them ahead of long mutable guidance, bound JSON fields, and retain warnings/blockers/next actions. A drifted working contract cannot replace the accepted question. | Mutable summaries or truncation displace the agreement; fix retained-source projection and allocation. |
+| A-39 | R-20, R-05, R-07 | A current verified negative exposes a task-scoped assessment with its verification/revision/currentness and explicit non-claim boundary. Legacy/no-report tasks return null alignment/assessment; a missing accepted source warns without changing phase or closure. | A local assessment is detached from its question or historical meaning changes; fix scoped status projection and compatibility. |
+| A-40 | R-20, R-12, R-14 | Packaged template/skill guidance describes alignment and evidence review; SessionStart and UserPromptSubmit fixtures deliver the same bounded content through the unchanged hook shape. | Source behavior works only in checkout or bypasses host delivery; fix packaging or shared renderer use. |
+
 ## Test organization
 
 Pure tests cover parsing, lifecycle, verdict aggregation, and rendering. Integration tests use actual subprocess checks and real temporary files. Do not use only mocked execution for A-04/A-05/A-14/A-15. A-18/A-20 require a real host/task; they cannot be satisfied by scripted payload injection or the old pilot alone.

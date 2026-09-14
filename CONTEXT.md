@@ -10,6 +10,16 @@ _Avoid_: Run, conversation, campaign when referring to the same unit.
 **Contract**: The task's question, scope, constraints, required evidence, acceptance criteria, and stopping conditions, fixed before dependent work.
 _Avoid_: Execution diary, mandatory step-by-step script.
 
+**Governing question**: The bounded question in the accepted contract revision that
+the current task result and assessment answer.
+_Avoid_: A mutable project summary or a broader parent idea silently substituted for
+the accepted task question.
+
+**Question alignment**: An optional declared relationship from a governing task
+question to an earlier project question: its source, mechanism, tested increment,
+and explicit non-claim boundary.
+_Avoid_: An automatically inferred scientific classification or a second lifecycle.
+
 **Acceptance criterion**: A condition that must be established to complete the task; its evidence and verification method are specified in the contract.
 _Avoid_: Aspirational goal, desired positive result.
 

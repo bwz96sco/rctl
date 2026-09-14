@@ -60,6 +60,28 @@ comparison would test a different objective against an equal-compute control, sa
 that route's stated reopen condition. Name the unresolved mechanism and the decision
 that each possible result changes. This arithmetic-only example needs no invented route.
 
+When the experiment isolates one relationship inside an existing project question,
+add the optional section below after `## Question`:
+
+```markdown
+## Question alignment
+
+- Governing question source: research/questions/C15.md#mechanism
+- Governing mechanism: Complementary logical components may improve generated programs when combined.
+- This task tests: The organization increment after both arms receive the same records.
+- This task does not decide: Whether the broader cross-candidate mechanism is supported.
+```
+
+Use the actual readable project-relative Markdown source and an optional fragment.
+If present, all four fields must be nonempty and no extra prose or fields belong in
+the section. `contract check` establishes structure and source availability only.
+When scientific adequacy of the relationship affects closure, add a review criterion
+whose evidence includes that source file and `result.md`; `evidence_refs` still
+resolve from the task directory, so use the corresponding task-relative path without
+the fragment (for example, `../../research/questions/C15.md` from `tasks/TASK`). The
+review must decide whether the result stays within the declared test and non-claim
+boundary.
+
 For command checks, `argv` is an argument array executed without a shell, with the
 task directory as cwd. Declare the checker, helper files, and preexisting data in
 `inputs`. A check validates available evidence; generate analysis outputs before

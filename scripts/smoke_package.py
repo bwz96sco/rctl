@@ -1,6 +1,6 @@
 """Run a built wheel in an isolated environment and non-Git project.
 
-Usage: uv run scripts/smoke_package.py dist/rctl-0.3.0-py3-none-any.whl [--skills-root PATH]
+Usage: uv run scripts/smoke_package.py dist/rctl-0.5.0-py3-none-any.whl [--skills-root PATH]
 """
 
 import argparse
@@ -65,6 +65,10 @@ def main():
             return response
 
         cli("init", "--vault", "note/main", "--codex")
+        skill = project / ".agents/skills/research-task/SKILL.md"
+        assert skill.is_file()
+        assert "Governing question source" in skill.read_text()
+        assert "This task does not decide" in skill.read_text()
         assert (
             project / ".agents/skills/research-task/references/workspace.md"
         ).is_file()
@@ -97,9 +101,27 @@ def main():
             "--title",
             "Installed wheel smoke",
         )
+        draft = project / "tasks/retained-comparison/contract.md"
+        assert "optional Question alignment" in draft.read_text()
         cli("begin", "tasks/retained-comparison", expected=2)
         task = project / "tasks/retained-comparison"
-        contract = (repo / "examples/retained-comparison/contract.md").read_bytes()
+        question = project / "research/questions/C15.md"
+        question.parent.mkdir(parents=True)
+        question.write_text("# C15\n\n## Mechanism\nCombine complementary logic.\n")
+        alignment = """## Question alignment
+
+- Governing question source: research/questions/C15.md#mechanism
+- Governing mechanism: Combine complementary logical components across generated programs.
+- This task tests: The organization increment after both arms receive the same records.
+- This task does not decide: The broader cross-candidate mechanism is not decided.
+
+"""
+        contract = (
+            (repo / "examples/retained-comparison/contract.md")
+            .read_text()
+            .replace("## Scope", alignment + "## Scope")
+            .encode()
+        )
         shutil.copytree(repo / "examples/retained-comparison", task, dirs_exist_ok=True)
         (task / "contract.md").write_bytes(contract)
         cli("contract", "check", "tasks/retained-comparison")
@@ -115,6 +137,7 @@ def main():
         assert (task / ".rctl/record.json").read_bytes() == record
         reminder = cli("context", "tasks/retained-comparison")["data"]["context"]
         assert "Next action: inspect retained evidence." in reminder
+        assert "The broader cross-candidate mechanism is not decided." in reminder
         hooks = json.loads((project / ".codex/hooks.json").read_text())
         hook_responses = {}
         for event, handlers in hooks["hooks"].items():
@@ -129,6 +152,10 @@ def main():
             )
             hook_response = json.loads(hook_result.stdout)
             assert "active" in hook_response["hookSpecificOutput"]["additionalContext"]
+            assert (
+                "The broader cross-candidate mechanism is not decided."
+                in hook_response["hookSpecificOutput"]["additionalContext"]
+            )
             hook_responses[event] = hook_response
         (task / "contract.md").write_bytes(contract + b"\nBudget clarification.\n")
         assert cli("status", "tasks/retained-comparison")["data"]["contract_drift"]

@@ -25,7 +25,7 @@ not `rctl status TASK --format json`.
 
 On success `error` is null. `data` is always an object and `warnings` is an array of strings. Task mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome. Project `init` returns `root`, `vault`, `created`, and `preserved` paths, plus any configuration-review warnings.
 
-`--help` and `--version` also honor JSON mode, with informational text in `data.message`. In text mode they display ordinary help/version output. Context includes a bounded reminder and a compact verification summary; `status` exposes the latest full report.
+`--help` and `--version` also honor JSON mode, with informational text in `data.message`. In text mode they display ordinary help/version output. Context includes a bounded reminder, governing question, optional question alignment, and compact verification/assessment summary; `status` exposes those projections plus the latest full report.
 
 | Exit | Meaning | Representative error code |
 |---|---|---|
@@ -152,3 +152,26 @@ task reading. `project` contains `available`, nullable bounded `goal`, `current_
 Valid selected tasks retain their existing top-level status fields. A selected-task
 failure keeps the original nonzero exit/error, project data and reminder, plus warnings.
 No selection supplies no invented task status. Root/argument errors still fail normally.
+
+## v0.5 governing-question alignment
+
+`contract check` validates an optional `## Question alignment` body section with
+the four fields defined in SPEC. Its source is project-relative and may include a
+Markdown fragment; absolute, external, escaping, missing, or unreadable sources reject
+the draft. This is a structural/path check, not a scientific judgment. Existing
+contracts without the section remain valid. If a review criterion judges alignment
+adequacy, its `evidence_refs` use the existing task-relative path convention: cite
+the same source file without the fragment using a path relative to the task directory,
+and cite `result.md`.
+
+Selected-task `status` and `context` add nullable `question`, `question_alignment`,
+and `assessment` fields. `question_alignment` contains `source`, `mechanism`, `tests`,
+and `does_not_decide`. `assessment` contains the result assessment retained by the
+latest verification plus its verification ID, contract revision, and currentness.
+It is null before verification. Text reminders label the assessment as task-scoped.
+
+Compact and extended reminders both show the governing task question. Declared
+alignment appears with it before mutable project guidance. Missing alignment sources
+on already accepted contracts produce warnings without hiding task state. Context
+remains read-only and does not fetch the source, classify the relationship, update
+project guidance, or alter lifecycle state.

@@ -17,7 +17,7 @@ criteria:
 
 ## Question
 
-<The question to answer, including the origin of the request and, for new experiments, what related history leaves unanswered.>
+<The governing task question, including the origin of the request and, for new experiments, what related history leaves unanswered. Add the optional Question alignment section after this one when a broader project question governs the task.>
 
 ## Scope
 
