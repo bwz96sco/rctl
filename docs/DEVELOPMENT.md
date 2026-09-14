@@ -117,7 +117,7 @@ and OR. Project skills and research files need no edits for this patch.
 
 Authorized on 2026-09-14 after the C15 scope-drift review. Project the accepted
 task question in compact reminders, add an optional compatible Question alignment
-body section, and bind verified assessments to the task question and declared
+body section, and bind retained result assessments to the task question and declared
 non-claim boundary. Preserve record/frontmatter schema version 1, existing task
 lifecycle, explicit selection, and mutable project-guidance ownership. Do not add
 automatic scientific classification, a question database, rapid-note lifecycle,
@@ -129,3 +129,13 @@ must be rechecked because both existing reminder events consume the shared rende
 content-only fixture coverage is sufficient when the response shape and definitions
 remain unchanged. Release, installation, OR project updates, commits and pushes are
 separate actions.
+
+### M8 review follow-up
+
+Authorized on 2026-09-14. Keep strict alignment checks for proposed contracts while
+compatibly reading schema-1 history that predates the optional grammar; make the
+governing-question projection explicit in templates; and reserve realistic alignment
+text before remaining mutable guidance without displacing warnings, handoff, or all
+project context. Extend A-37–A-40 and the M8 verification record. Do not change the
+missing-source lifecycle rule, duplicate verification verdict inside assessment, bump
+the record schema, migrate live tasks, install, release, commit, or push implicitly.

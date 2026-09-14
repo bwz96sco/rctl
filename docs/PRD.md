@@ -43,7 +43,7 @@ Ship a local Python CLI, readable task templates, small machine records, command
 | R-17 | Read-only installation diagnostics and candidate exports compare packaged project assets without replacing live content. | Review skill and hook updates without losing local changes. |
 | R-18 | Project reminders survive missing task selection and task read failures, using explicit current research sections. | Planning retains project goals and corrections. |
 | R-19 | Experiment planning cites related history, the unanswered question, and the decision new evidence changes. | Repeated mechanisms require a substantive reason. |
-| R-20 | Selected-task status and reminders expose the accepted governing question, optional declared question alignment, and the verified assessment's task scope independently of mutable project guidance. | A narrow negative result cannot silently become a verdict on a broader research idea during session recovery. |
+| R-20 | Selected-task status and reminders expose the accepted governing question, optional declared question alignment, and the latest verification's retained assessment scope independently of mutable project guidance. | A narrow negative result cannot silently become a verdict on a broader research idea during session recovery. |
 
 ## Typical use
 

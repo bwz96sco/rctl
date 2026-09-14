@@ -131,7 +131,9 @@ def validate_record(record, task_id, source):
         if entry["revision"] != revision:
             raise ValueError("Contract revisions must be consecutive")
         timestamp(entry["recorded_at"])
-        contracts.append(parse_contract(entry["text"], source, task_id))
+        contracts.append(
+            parse_contract(entry["text"], source, task_id, compatible_alignment=True)
+        )
     reports = {}
     for index, report in enumerate(record["verifications"], 1):
         if (

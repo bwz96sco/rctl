@@ -7,6 +7,7 @@ from .project_context import read_project
 from .records import Task, select_task
 
 DEFAULT_BUDGET = 8000
+FIELD_VISIBILITY = 96
 
 
 def bounded(text, budget, source):
@@ -141,7 +142,32 @@ def render(root, project, task, status, warnings, error, selected, budget, compa
     overhead = len(sources) + len(identity) + sum(len(f[1]) + 3 for f in fields) + 2
     # Leave extended reminders room for governing contract and handoff excerpts.
     core_budget = budget if compact else min(budget, 3200)
-    limits = allocate([f[2] for f in fields], max(0, core_budget - overhead))
+    remaining = max(0, core_budget - overhead)
+    visible = [min(FIELD_VISIBILITY, len(field[2])) for field in fields]
+    if sum(visible) > remaining:
+        limits = allocate([field[2] for field in fields], remaining)
+    else:
+        limits = visible
+        remaining -= sum(limits)
+        # Give the accepted task relationship its remaining space before mutable
+        # guidance, without displacing warnings, handoff, or guidance completely.
+        priority = [
+            i
+            for i, field in enumerate(fields)
+            if field[0] in task_context_keys and limits[i] < len(field[2])
+        ]
+        allocated = allocate([fields[i][2][limits[i] :] for i in priority], remaining)
+        for index, limit in zip(priority, allocated):
+            limits[index] += limit
+        remaining -= sum(allocated)
+        rest = [
+            i
+            for i, field in enumerate(fields)
+            if field[0] not in task_context_keys and limits[i] < len(field[2])
+        ]
+        allocated = allocate([fields[i][2][limits[i] :] for i in rest], remaining)
+        for index, limit in zip(rest, allocated):
+            limits[index] += limit
     values = {f[0]: bounded(f[2], limit, f[3]) for f, limit in zip(fields, limits)}
     task_context = "\n".join(
         f"{field[1]}: {values[field[0]]}"

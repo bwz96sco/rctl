@@ -38,7 +38,8 @@ criteria:
 
 ## Question
 
-Is the supplied count summary internally consistent?
+- Question: Is the supplied count summary internally consistent?
+- Origin and related history: Supplied arithmetic fixture; no related experiment history.
 
 ## Scope
 
@@ -72,7 +73,8 @@ add the optional section below after `## Question`:
 - This task does not decide: Whether the broader cross-candidate mechanism is supported.
 ```
 
-Use the actual readable project-relative Markdown source and an optional fragment.
+Use the actual readable project-relative Markdown source and an optional fragment;
+keep each declared relationship field to one short sentence.
 If present, all four fields must be nonempty and no extra prose or fields belong in
 the section. `contract check` establishes structure and source availability only.
 When scientific adequacy of the relationship affects closure, add a review criterion

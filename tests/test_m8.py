@@ -31,6 +31,15 @@ def add_alignment(task, source="research/questions/C15.md#mechanism", extra=""):
     rewrite(task, lambda text: text.replace("## Scope", block + "\n## Scope"))
 
 
+def retained_contract(task, transform):
+    record_path = task.file(".rctl/record.json")
+    record = json.loads(record_path.read_text())
+    text = transform(record["contracts"][-1]["text"])
+    record["contracts"][-1]["text"] = text
+    record_path.write_text(json.dumps(record))
+    task.file("contract.md").write_text(text)
+
+
 def question_source(task):
     path = task.root / "research/questions/C15.md"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -107,6 +116,28 @@ def test_alignment_is_structural_and_legacy_contracts_remain_valid(aligned, task
             None,
         ),
         (lambda text: text.replace("Question alignment", "Question Alignment"), None),
+        (
+            lambda text: text.replace(
+                "## Question alignment", "## Question alignment (optional)"
+            ),
+            None,
+        ),
+        (
+            lambda text: text.replace(
+                "## Question alignment", "## Question alignment:"
+            ),
+            None,
+        ),
+        (
+            lambda text: text.replace(
+                "## Question alignment", "### Question alignment"
+            ),
+            None,
+        ),
+        (
+            lambda text: text.replace("## Question alignment", "## Relationship notes"),
+            None,
+        ),
         (lambda text: text, "/tmp/C15.md"),
         (lambda text: text, "https://example.com/C15.md"),
         (lambda text: text, "../outside.md"),
@@ -127,6 +158,84 @@ def test_unreadable_alignment_source_rejects_draft(task, cli):
     path.mkdir(parents=True)
     add_alignment(task, source="research/questions/unreadable.md")
     cli("contract", "check", TASK, expected=2)
+
+
+def test_fenced_alignment_example_does_not_enable_or_reject_alignment(task):
+    rewrite(
+        task,
+        lambda text: text.replace(
+            "## Scope",
+            """## Scope
+
+```markdown
+## Question alignment
+- Governing question source: research/questions/example.md
+```
+
+""",
+        ),
+    )
+    assert task.contract()[1]["question_alignment"] is None
+
+
+@pytest.mark.parametrize(
+    "section",
+    [
+        "## Question alignment\n\nFree-form legacy notes.\n\n",
+        """## Question Alignment
+
+- Governing question source: research/questions/C15.md
+- Governing mechanism: Legacy mechanism.
+- This task tests: Legacy increment.
+- This task does not decide: Legacy boundary.
+
+""",
+        """## Question alignment
+
+- Governing question source: /tmp/legacy-C15.md
+- Governing mechanism: Legacy mechanism.
+- This task tests: Legacy increment.
+- This task does not decide: Legacy boundary.
+
+""",
+    ],
+)
+def test_legacy_alignment_sections_remain_readable_and_amendable(task, cli, section):
+    task.begin()
+    retained_contract(task, lambda text: text.replace("## Scope", section + "## Scope"))
+
+    status = cli("status", TASK)
+    assert status["data"]["question_alignment"] is None
+    assert any("Stored Question alignment" in warning for warning in status["warnings"])
+    assert cli("context", TASK)["data"]["task_available"] is True
+
+    rewrite(
+        task,
+        lambda text: text.replace(section, "").replace(
+            "## Scope", "Clarified governing question.\n\n## Scope"
+        ),
+    )
+    cli("amend", TASK, "--reason", "Replace legacy alignment notes")
+    record = task.read_record()
+    assert section in record["contracts"][0]["text"]
+    assert len(record["contracts"]) == 2
+
+
+def test_explicit_question_field_wins_over_origin_prose(task):
+    rewrite(
+        task,
+        lambda text: text.replace(
+            "Does the supplied candidate meet the fixed improvement rule against the supplied baseline?",
+            """Origin: inherited from the C15 investigation.
+
+- Question: Does this candidate isolate the governing mechanism?
+- Related history: The retained comparison leaves that increment unanswered.""",
+        ),
+    )
+    assert (
+        task.contract()[1]["question"]
+        == "Does this candidate isolate the governing mechanism?"
+    )
 
 
 @pytest.mark.parametrize("budget,compact", [(2000, True), (8000, False)])
@@ -163,6 +272,73 @@ def test_governing_question_precedes_mutable_guidance_and_survives_drift(
     assert data["question_alignment"]["does_not_decide"] == NON_CLAIM
     assert any("AMENDMENT_REQUIRED" in warning for warning in warnings)
     assert len(reminder) <= budget
+
+
+def test_compact_reminder_reserves_realistic_alignment_before_guidance(aligned):
+    question = (
+        "Does the bounded candidate isolate the accepted governing mechanism? "
+        "This fixes the comparison and decision boundary while leaving the broader "
+        "program conclusion outside scope."
+    )
+    mechanism = (
+        "The broader program combines complementary logical components. "
+        "The accepted mechanism concerns their interaction across candidates with "
+        "shared retained records."
+    )
+    tests = (
+        "This task isolates the organization increment after both arms receive "
+        "the same retained records and evaluator. It compares only that bounded "
+        "increment under the accepted metric."
+    )
+    non_claim = (
+        "It does not decide whether the broader mechanism works across candidate "
+        "families or datasets. It does not establish a project-level verdict or "
+        "authorize another experiment."
+    )
+    rewrite(
+        aligned,
+        lambda text: (
+            text.replace(
+                "Does the supplied candidate meet the fixed improvement rule against the supplied baseline?",
+                question,
+            )
+            .replace(MECHANISM, mechanism)
+            .replace(
+                "The organization increment after both arms receive the same records.",
+                tests,
+            )
+            .replace(NON_CLAIM, non_claim)
+        ),
+    )
+    research = aligned.root / "research"
+    (research / "PROGRAM.md").write_text(
+        "## Goal\nRetain the actual question.\n\n## Current guidance\n"
+        + "MUTABLE PROJECT GUIDANCE. " * 300
+    )
+    (research / "ROUTES.md").write_text(
+        "## Reuse Rule\n" + "Read retained history before proposing work. " * 100
+    )
+    aligned.file("state.md").write_text(
+        "## Next action\nInspect the scoped result.\n\n## Blockers\nNo blocker.\n"
+    )
+    aligned.begin()
+
+    data, warnings = context(aligned, budget=2000, compact=True)
+    reminder = data["context"]
+    for value in (question, mechanism, tests, non_claim):
+        assert value in reminder
+    assert data["question"] == question
+    assert data["question_alignment"] == {
+        "source": "research/questions/C15.md#mechanism",
+        "mechanism": mechanism,
+        "tests": tests,
+        "does_not_decide": non_claim,
+    }
+    assert "Inspect the scoped result" in reminder
+    assert "No blocker" in reminder
+    assert "Current guidance (reported): MUTABLE PROJECT GUIDANCE" in reminder
+    assert warnings
+    assert len(reminder) <= 2000
 
 
 def test_verified_assessment_is_bound_to_task_question(aligned_ready, cli):
@@ -247,6 +423,7 @@ def test_packaged_template_and_skill_explain_question_alignment():
     skill = resource_text("skills", "research-task/SKILL.md")
     task_files = resource_text("skills", "research-task/references/task-files.md")
     assert "optional Question alignment" in contract
+    assert "- Question:" in contract
     for text in (template_guide, skill, task_files):
         assert "Governing question source" in text
         assert "This task does not decide" in text

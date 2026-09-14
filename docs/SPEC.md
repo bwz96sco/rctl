@@ -42,7 +42,11 @@ A comparison contract must state baseline, intervention, data/split, metric dire
 
 Result frontmatter contains `schema_version`, `task_id`, `contract_revision`, and `assessment` (`supported`, `not_supported`, `inconclusive`, or `not_applicable`). These are interpretations, not task phases or check verdicts. A result may contain a scientific failure while its verification passes.
 
-The required `Question` section supplies the governing task question. For a task
+The required `Question` section supplies the governing task question. Prefer an
+explicit `- Question:` field, especially when the section also records origin or
+related history; otherwise the first nonempty paragraph is the reminder/status
+projection. Remaining Question content stays in the accepted contract but is not
+silently substituted for that projected question. For a task
 derived from an existing project question, an optional `Question alignment` section
 uses exactly these four nonempty bullet fields:
 
@@ -53,14 +57,22 @@ uses exactly these four nonempty bullet fields:
 - `This task does not decide`: the broader conclusion that must not be inferred.
 
 When the section exists, all four fields are required and no other fields or prose
-are accepted in it. Contract checking validates this structure and keeps the source
+are accepted in it. Likely alignment headings or these field labels outside the exact
+level-two section reject a proposed contract rather than silently disabling alignment.
+Contract checking validates this structure and keeps the source
 inside the explicit project root; it does not judge whether the scientific relationship
 is correct. That judgment belongs in a declared review criterion when it affects
 closure. Criterion evidence paths still resolve from the task directory: include
 the corresponding task-relative source file path without its fragment, plus the
 result, when reviewing alignment adequacy. Existing contracts without the optional
-section remain valid. The exact contract text already retained in record schema 1
-owns the alignment, so no machine record or frontmatter schema migration is introduced.
+section remain valid. Because schema-1 records predate this optional body grammar,
+retained revisions use compatibility parsing: an older same-name, near-name, or
+otherwise nonconforming alignment section remains readable, projects null alignment,
+and warns on status/context instead of rewriting history. New `begin` and `amend`
+acceptance remains strict. Schema 1 does not identify the accepting parser version,
+so this tolerance applies to any retained revision; supported v0.5 commands cannot
+create a nonconforming one. The exact contract text already retained in record schema 1
+owns valid alignment, so no machine record or frontmatter schema migration is introduced.
 
 ## 4. Machine record
 
@@ -163,8 +175,12 @@ Project content is reported guidance, not task authorization or machine acceptan
 
 Default to 8000 Unicode characters; compact reminders use 2000. For a selected task,
 show the accepted governing question and declared alignment before mutable project
-guidance, while reserving content space for warnings, blockers and next action. The
-latest verified assessment is reported beside its verification ID and currentness;
+guidance, while reserving initial visibility for all core fields and content space for
+warnings, blockers and next action. After that initial reservation, fill the accepted
+question/alignment before allocating remaining space to mutable project guidance. One
+short sentence per declared relationship field should normally survive compact output;
+extreme values may still carry an explicit truncation marker. The assessment retained
+with the latest verification is reported beside its verification ID and currentness;
 it remains an assessment of the task question, never an inferred verdict on the
 broader question. Prefix each warning with `Warning:`. Use one root and a
 short relative source map, including in project-source diagnostics while retaining
@@ -179,7 +195,9 @@ Managed status reads the question and alignment from the retained governing cont
 even when the working contract has drifted. A missing alignment source after begin
 adds a warning but does not rewrite the contract, change phase, or invent a broader
 assessment. Draft contract checking still requires the source to be readable. Legacy
-managed tasks return a null alignment rather than an inferred one.
+managed tasks without alignment return null rather than an inferred relationship;
+nonconforming pre-v0.5 alignment-like sections also return null with a compatibility
+warning and remain amendable.
 
 Keep current corrections in `PROGRAM.md` with evidence links and explicit scope.
 When a route conclusion is superseded, link its replacement and retained evidence

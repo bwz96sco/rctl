@@ -11,6 +11,7 @@ from jsonschema import ValidationError
 
 from .documents import (
     RctlError,
+    compatibility_alignment_warning,
     invalid,
     local_path,
     parse_contract,
@@ -245,7 +246,12 @@ class Task:
                 4,
             )
         return text, parse_contract(
-            text, self.file("contract.md"), self.task_id, self.root, self.path
+            text,
+            self.file("contract.md"),
+            self.task_id,
+            self.root,
+            self.path,
+            compatible_alignment=True,
         )
 
     def verify(self, reviews=None):
@@ -345,6 +351,8 @@ class Task:
                 record["contracts"][-1]["text"],
                 "governing contract",
                 self.task_id,
+                compatible_alignment=True,
+                alignment_warnings=warnings,
             )
             phase = record["phase"]
             revision = record["contracts"][-1]["revision"]
@@ -387,12 +395,18 @@ class Task:
         alignment = contract["question_alignment"]
         if record is not None and alignment is not None:
             try:
-                read_text(question_source_path(self.root, alignment["source"]))
+                alignment_source = question_source_path(self.root, alignment["source"])
             except RctlError as error:
-                warnings.append(
-                    "Question alignment source unavailable: "
-                    f"{alignment['source']}. {error.message}"
-                )
+                warnings.append(compatibility_alignment_warning(error))
+                alignment = None
+            else:
+                try:
+                    read_text(alignment_source)
+                except RctlError as error:
+                    warnings.append(
+                        "Question alignment source unavailable: "
+                        f"{alignment['source']}. {error.message}"
+                    )
         assessment = None
         if report is not None:
             value = parse_result(

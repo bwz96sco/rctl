@@ -224,9 +224,12 @@ def verdict_error(task, record, report):
 
     criteria = {
         c["id"]: c
-        for c in parse_contract(contract["text"], "governing contract", task.task_id)[
-            "criteria"
-        ]
+        for c in parse_contract(
+            contract["text"],
+            "governing contract",
+            task.task_id,
+            compatible_alignment=True,
+        )["criteria"]
     }
     failed = [check for check in report["checks"] if check["verdict"] != "pass"]
     message = "; ".join(

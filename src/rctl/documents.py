@@ -82,6 +82,7 @@ QUESTION_ALIGNMENT_FIELDS = (
     ("This task tests", "tests"),
     ("This task does not decide", "does_not_decide"),
 )
+QUESTION_ALIGNMENT_HEADING = "Question alignment"
 
 
 def resource_directory(directory):
@@ -200,7 +201,7 @@ def validate_schema(data, source, kind):
 
 
 def question_summary(text):
-    """Return the declared Question field or the first prose paragraph."""
+    """Return the declared Question field or the first nonempty paragraph."""
     lines = text.splitlines()
     for index, line in enumerate(lines):
         match = re.match(r"^ {0,3}-[ \t]+Question:[ \t]*(.*)$", line)
@@ -271,6 +272,42 @@ def parse_question_alignment(text, source):
     return result
 
 
+def question_alignment_location_error(headings, source):
+    """Reject likely alignment authoring outside the exact optional section."""
+    expected = dict(QUESTION_ALIGNMENT_FIELDS)
+    for name in headings:
+        if name != QUESTION_ALIGNMENT_HEADING and re.match(
+            r"^question alignment\b", name, re.IGNORECASE
+        ):
+            return invalid(f"{source}: use the exact heading ## Question alignment.")
+    for name, body in headings.items():
+        if name == QUESTION_ALIGNMENT_HEADING:
+            continue
+        for line, structural in markdown_lines(body):
+            if not structural:
+                continue
+            if re.match(
+                r"^ {0,3}#{3,6}[ \t]+question alignment\b", line, re.IGNORECASE
+            ):
+                return invalid(
+                    f"{source}: use the exact heading ## Question alignment."
+                )
+            field = re.match(r"^ {0,3}-[ \t]+([^:\n]+):", line)
+            if field and field[1].strip() in expected:
+                return invalid(
+                    f"{source}: Question alignment fields require the exact "
+                    "heading ## Question alignment."
+                )
+    return None
+
+
+def compatibility_alignment_warning(error):
+    return (
+        "Stored Question alignment is unavailable under current rules and was "
+        f"ignored for compatibility: {error.message}"
+    )
+
+
 def question_source_path(root, value):
     parts = urlsplit(value)
     path_text = unquote(parts.path)
@@ -296,6 +333,8 @@ def parse_contract(
     task=None,
     *,
     require_alignment_source=False,
+    compatible_alignment=False,
+    alignment_warnings=None,
 ):
     data, headings = parse_document(text, source, task_id, "contract")
     ids = [criterion["id"] for criterion in data["criteria"]]
@@ -312,26 +351,31 @@ def parse_contract(
                 local_path(root, ref, task)
     data["question"] = question_summary(headings["Question"])
     data["question_alignment"] = None
-    misspelled = [
-        name
-        for name in headings
-        if name.casefold() == "question alignment" and name != "Question alignment"
-    ]
-    if misspelled:
-        raise invalid(f"{source}: use the exact heading ## Question alignment.")
-    if "Question alignment" in headings:
-        alignment = parse_question_alignment(headings["Question alignment"], source)
-        data["question_alignment"] = alignment
-        if root is not None:
-            path = question_source_path(root, alignment["source"])
-            if require_alignment_source:
-                try:
-                    read_text(path)
-                except RctlError as error:
-                    raise invalid(
-                        f"{source}: Question alignment source is not readable: "
-                        f"{alignment['source']}. {error.message}"
-                    ) from None
+    try:
+        location_error = question_alignment_location_error(headings, source)
+        if location_error is not None:
+            raise location_error
+        if QUESTION_ALIGNMENT_HEADING in headings:
+            alignment = parse_question_alignment(
+                headings[QUESTION_ALIGNMENT_HEADING], source
+            )
+            data["question_alignment"] = alignment
+            if root is not None:
+                path = question_source_path(root, alignment["source"])
+                if require_alignment_source:
+                    try:
+                        read_text(path)
+                    except RctlError as error:
+                        raise invalid(
+                            f"{source}: Question alignment source is not readable: "
+                            f"{alignment['source']}. {error.message}"
+                        ) from None
+    except RctlError as error:
+        if not compatible_alignment:
+            raise
+        data["question_alignment"] = None
+        if alignment_warnings is not None:
+            alignment_warnings.append(compatibility_alignment_warning(error))
     return data
 
 

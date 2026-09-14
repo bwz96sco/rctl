@@ -158,8 +158,12 @@ No selection supplies no invented task status. Root/argument errors still fail n
 `contract check` validates an optional `## Question alignment` body section with
 the four fields defined in SPEC. Its source is project-relative and may include a
 Markdown fragment; absolute, external, escaping, missing, or unreadable sources reject
-the draft. This is a structural/path check, not a scientific judgment. Existing
-contracts without the section remain valid. If a review criterion judges alignment
+the draft. Likely near-miss headings and alignment fields outside that exact section
+also reject rather than silently producing null. This is a structural/path check, not
+a scientific judgment. Existing contracts without the section remain valid. Retained
+schema-1 contracts that used a same-name or near-name section before v0.5 remain
+readable: status/context warn and project null alignment, while a new amendment must
+use the strict form. If a review criterion judges alignment
 adequacy, its `evidence_refs` use the existing task-relative path convention: cite
 the same source file without the fragment using a path relative to the task directory,
 and cite `result.md`.
@@ -171,7 +175,11 @@ latest verification plus its verification ID, contract revision, and currentness
 It is null before verification. Text reminders label the assessment as task-scoped.
 
 Compact and extended reminders both show the governing task question. Declared
-alignment appears with it before mutable project guidance. Missing alignment sources
+alignment appears with it before mutable project guidance. Put the question in the
+template's `- Question:` field; legacy prose contracts project their first nonempty
+Question paragraph. Compact allocation first preserves bounded visibility for every
+core category, then fills realistic question/alignment fields before mutable guidance.
+Missing alignment sources
 on already accepted contracts produce warnings without hiding task state. Context
 remains read-only and does not fetch the source, classify the relationship, update
 project guidance, or alter lifecycle state.

@@ -8,6 +8,10 @@ A task needs contract and result records; the machine acceptance record is produ
 
 Scientific requirements come from the project and relevant research skills. For a comparison, add baseline, intervention, data/split, metric direction, aggregation/selection, budget, and stopping rules to the contract body before dependent work. Do not copy historical compute budgets as new execution authorization.
 
+Put the governing question in the `- Question:` field supplied by the template.
+For legacy prose contracts, rctl uses the first nonempty paragraph of `## Question`;
+later paragraphs remain contract context but are not part of the reminder projection.
+
 When a task tests only one part of an existing project question, add this optional
 section after `## Question` and replace every value:
 
@@ -21,7 +25,9 @@ section after `## Question` and replace every value:
 ```
 
 The source must be a readable project-relative Markdown path; a fragment may name
-the relevant section. All four fields are required when the section is present.
+the relevant section. Keep each relationship field to one short sentence so compact
+reminders can preserve the declared boundary. All four fields are required when the
+section is present.
 Add a review criterion when closure depends on whether the declared relationship
 and non-claim boundary are scientifically adequate. `rctl` validates structure and
 source availability, not that scientific judgment. Criterion `evidence_refs` remain

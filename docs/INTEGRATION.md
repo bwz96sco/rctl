@@ -99,7 +99,9 @@ Actual host delivery evidence belongs to the M7 verification record.
 The existing SessionStart and UserPromptSubmit handlers use the same response shape,
 events, limits and pure context renderer. For a selected task, their additional context
 now reserves space for the accepted governing question, optional declared alignment,
-and task-scoped verified assessment before mutable project guidance. No hook definition,
+and task-scoped assessment retained with the latest verification before mutable project
+guidance. Core categories retain bounded initial visibility; question/alignment fields
+then take priority over remaining mutable guidance space. No hook definition,
 trust boundary, timeout, selection rule or machine mutation changes.
 
 The official hooks documentation was rechecked through smart-search on 2026-09-14 at
