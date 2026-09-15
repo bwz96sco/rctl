@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Rapid Test"
+  short_description: "Test promising ideas quickly; promote or drop."
+  default_prompt: "Use $research-rapid-test to test the most promising empirical claim from this idea evaluation, get an early result, and promote or drop the direction within a small budget."

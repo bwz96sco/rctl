@@ -1,0 +1,7 @@
+interface:
+  display_name: "Research Opportunity Mining"
+  short_description: "Paper-extension seeds through six lenses"
+  default_prompt: "Use $research-opportunity-mining to write one compact set of anchored paper-extension seeds without judging novelty, readiness, or selection."
+
+policy:
+  allow_implicit_invocation: false

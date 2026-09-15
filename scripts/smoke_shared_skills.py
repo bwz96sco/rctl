@@ -1,4 +1,4 @@
-"""Cross-repository native experiment compatibility in the wheel smoke environment."""
+"""Native experiment compatibility using installed-wheel skill assets by default."""
 
 import json
 import re

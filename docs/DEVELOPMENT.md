@@ -2,6 +2,22 @@
 
 ## Current increment
 
+The current task repairs the two research-skill review rounds after source migration:
+pilot/formal handoffs, human selection sizes, vault and installed-resource paths,
+operation-specific completion, and computation/theory/writing evidence boundaries.
+Keep research-computation as an optional lightweight helper and preserve invocation
+policies, human selection, and native rctl acceptance. Use M5/A-23/A-24 as the main
+integration checks, plus A-22/A-29 for binding and packaged-asset regressions. The
+[follow-up record](RESEARCH-SKILLS-FOLLOWUP.md) records changes and their checks.
+
+The preceding migration consolidated 13 research workflows from agent-skills-private
+and the independently installed research-rapid-test, preserving their source content
+and existing installation identities. The
+[catalog](RESEARCH-SKILLS.md) defines ownership and the
+[migration record](RESEARCH-SKILLS-MIGRATION.md) records preservation and cutover.
+Auxiliary tools, live tasks, shared installation configuration, and CLI deployment stay
+outside this follow-up. The simplification increment below is committed at `87157e9`.
+
 The governing-question alignment baseline is v0.5.0 at `82a5ec8`. The user
 requested implementation of the [simplification plan](SIMPLIFICATION-REVIEW.md)
 on 2026-09-14. This unreleased follow-up keeps lifecycle, schemas, and public CLI

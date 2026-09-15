@@ -89,13 +89,43 @@ def main():
             / "update-candidates/candidates/.agents/skills/research-task/SKILL.md"
         ).is_file()
         assert all(p.read_bytes() == content for p, content in before.items())
-        shared_record = None
-        if args.skills_root:
-            from smoke_shared_skills import walkthrough
+        installed_skills = Path(
+            subprocess.check_output(
+                [
+                    str(python),
+                    "-c",
+                    "from rctl.documents import resource_directory; "
+                    "print(resource_directory('skills'))",
+                ],
+                cwd=project,
+                env=environment,
+                text=True,
+            ).strip()
+        )
+        assert installed_skills.is_relative_to(venv)
+        source_files = {
+            path.relative_to(repo / "skills"): path.read_bytes()
+            for path in (repo / "skills").rglob("*")
+            if path.is_file()
+        }
+        packaged_files = {
+            path.relative_to(installed_skills): path.read_bytes()
+            for path in installed_skills.rglob("*")
+            if path.is_file()
+        }
+        assert source_files == packaged_files
+        assert {path.name for path in skill.parent.parent.iterdir()} == {
+            "research-task"
+        }
+        from smoke_shared_skills import walkthrough
 
-            shared_record = walkthrough(
-                cli, project, repo, args.skills_root.resolve(), python
-            )
+        shared_record = walkthrough(
+            cli,
+            project,
+            repo,
+            args.skills_root.resolve() if args.skills_root else installed_skills.parent,
+            python,
+        )
         cli(
             "task",
             "new",

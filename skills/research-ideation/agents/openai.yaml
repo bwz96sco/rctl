@@ -1,0 +1,7 @@
+interface:
+  display_name: "Research Ideation"
+  short_description: "Broad unranked research idea expansion"
+  default_prompt: "Use $research-ideation to expand problems, methods, datasets, evidence, and human interests into 12-20 unranked falsifiable candidates, then hand the full portfolio to explicit evaluation."
+
+policy:
+  allow_implicit_invocation: true

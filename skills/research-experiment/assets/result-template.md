@@ -1,0 +1,38 @@
+---
+schema_version: 1
+task_id: replace-task-id
+contract_revision: 1
+assessment: inconclusive
+---
+
+# Experiment result
+
+## Outcome
+
+- Supported claim: <bounded finding or inconclusive result>
+- Mechanism tested: <yes|no|not_applicable>
+
+## Evidence
+
+- Actual run IDs: <all runs, including retries>
+- Commands, configs, and code state: <stable references>
+- Evidence references: <logs, inputs, outputs, environment, health and metrics>
+- Failed or null runs: <references and interpretation, or explicit none>
+- Aggregation: <frozen policy and actual calculation>
+- Baseline relation: <comparison to the frozen baseline>
+- Comparability: <evidence for comparability, or its limits>
+
+## Deviations
+
+- Material amendments: <governing revisions and affected runs, or explicit none>
+- Deviations: <missing work or divergence, or explicit none>
+
+## Next action
+
+- Next action: <completion, bounded follow-up, or stop>
+- Reopen condition: <decision-changing evidence>
+- Durable promotions: <updated research files and evidence, or none>
+
+## Limitations
+
+- Claims not made: <scope limits and unresolved interpretation>

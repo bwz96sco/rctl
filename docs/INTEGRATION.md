@@ -4,7 +4,12 @@
 
 Build the first adapter for Codex. Core commands remain host-neutral. The [new M3 probes](M3-VERIFICATION.md) and [two-session release task](RELEASE-VERIFICATION.md) establish invocation-local delivery on Codex CLI 0.153.4. A [follow-up](PROJECT-HOOKS-VERIFICATION.md) also establishes project-file delivery with normal configuration loading and invocation-only hook-trust bypass; copying files alone does not grant trust. See [SOURCES](SOURCES.md) and [limitations](READINESS.md#limitations).
 
-The release packages one `research-task` skill with these responsibilities: read contract/result/handoff, establish scope within existing authorization, preserve amendments, execute using appropriate domain skills, inspect evidence, invoke verification, and close only after the recorded guard succeeds. It must explicitly separate a chat pause from task closure.
+Project initialization and host export install one `research-task` skill with these responsibilities: read contract/result/handoff, establish scope within existing authorization, preserve amendments, execute using appropriate domain skills, inspect evidence, invoke verification, and close only after the recorded guard succeeds. It must explicitly separate a chat pause from task closure.
+
+The repository and distributions also contain the 14 domain workflows in the
+[research skill catalog](RESEARCH-SKILLS.md). They are maintained with rctl but are
+not automatically installed into projects by init/export or managed by project doctor.
+Their user-level source links are a separate, explicitly authorized installation boundary.
 
 Scientific methods and evidence requirements remain in the domain skills. As of v0.2,
 research-experiment uses native rctl contract/result files; model-training-workflow and

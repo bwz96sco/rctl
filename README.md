@@ -8,7 +8,11 @@ handoffs, governing-question alignment, and Codex reminders. The
 [simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed
 task skill, immutable task snapshots, and one concise reminder layout. Historical
 milestone and host evidence is in the [release-evidence index](docs/RELEASE-EVIDENCE.md).
-No live project or shared installation has been upgraded by this follow-up.
+No live project or installed rctl CLI has been upgraded by this follow-up.
+
+The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
+Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
+separate and preserves task-only project initialization.
 
 ## Run the local CLI
 

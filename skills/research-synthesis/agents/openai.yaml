@@ -1,0 +1,7 @@
+interface:
+  display_name: "Research Synthesis"
+  short_description: "Evidence-bounded cross-paper answers"
+  default_prompt: "Use $research-synthesis to produce synthesis.md as an evidence-bounded answer from an existing paper-discovery register and research-literature notes."
+
+policy:
+  allow_implicit_invocation: true

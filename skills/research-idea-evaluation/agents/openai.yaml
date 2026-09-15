@@ -1,0 +1,7 @@
+interface:
+  display_name: "Research Idea Evaluation"
+  short_description: "Screen all ideas, then deeply evaluate a shortlist"
+  default_prompt: "Use $research-idea-evaluation to screen every portfolio candidate, obtain an informed human shortlist, then deeply evaluate it and select at most two routes or close blocked."
+
+policy:
+  allow_implicit_invocation: false

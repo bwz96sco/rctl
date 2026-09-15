@@ -1,0 +1,7 @@
+interface:
+  display_name: "Research Experiment"
+  short_description: "Gate one task-backed experiment and claim"
+  default_prompt: "Use $research-experiment to freeze a native rctl experiment contract before execution, inspect runner evidence, and hand the native result to research-task for verification and closure."
+
+policy:
+  allow_implicit_invocation: true
