@@ -1,0 +1,6 @@
+interface:
+  display_name: Model Training Workflow
+  short_description: Set up, monitor, diagnose, and hand off model training evidence
+  default_prompt: Use $model-training-workflow for model training, fine-tuning, launch guards, route-validation gates, distributed/multimodal runs, collapse diagnosis, or source-informed setup using local research-experiment evidence contracts.
+policy:
+  allow_implicit_invocation: false

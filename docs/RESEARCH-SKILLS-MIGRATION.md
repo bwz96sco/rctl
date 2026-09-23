@@ -5,7 +5,8 @@ rctl baseline: `87157e9`; private source
 baseline: `3320099` plus its working-tree changes. The user explicitly selected
 the 12 active research-* workflows plus paper-discovery, excluding auxiliary tools.
 The user subsequently added the independent research-rapid-test skill. The
-[catalog](RESEARCH-SKILLS.md) now names all 15 managed workflows. The first-stage
+2026-09-21 follow-up below adds two training/adapter workflows; the
+[catalog](RESEARCH-SKILLS.md) now names all 17 managed workflows. The first-stage
 evidence below covers the original 13-package move; its counts remain historical.
 
 The later user-authorized [review follow-up](RESEARCH-SKILLS-FOLLOWUP.md) changes
@@ -121,6 +122,58 @@ Follow-up checks completed:
 - `uv build --out-dir .work/rapid-test-migration-VNHdPn/dist`, then `uv run scripts/smoke_package.py .work/rapid-test-migration-VNHdPn/dist/rctl-0.5.0-py3-none-any.whl`: passed, 37 expected CLI outcomes and all 49 files across 15 packages matched the installed wheel.
 - File-identity checks confirmed both package files at the existing Codex discovery path resolve to the rctl sources; byte comparisons confirmed preservation; no duplicate shared entry exists.
 
+## Training and adapter follow-up
+
+Date: 2026-09-21. The user identified experiment-adapter-builder and
+model-training-workflow as missing research workflows. The earlier catalog had
+explicitly excluded them as auxiliary tools; this follow-up corrects that ownership
+boundary. Other auxiliary packages remain outside scope.
+
+Source baselines: rctl `2416b47`, agent-skills-private `8d65985`. The private
+working tree also contained unrelated autocli deletions, which are preserved.
+All 44 source package files (18 adapter, 26 training) were copied and compared
+byte-for-byte before edits. The snapshot and original discovery-link targets are
+retained under `.work/training-skill-migration-11s899tb/`.
+
+The adapter fixture moves inside its package so installed helpers can use it.
+Training's three pinned Orchestra audit/review files are packaged under
+`references/source-audits/`; source routing now reaches those files and identifies
+them as historical evidence. Changes to the original package files are limited to
+these resource locations and historical-source clarification. Scientific gates,
+runner authority, rctl acceptance ownership, and native invocation policies remain
+unchanged. Both added packages retain Codex explicit-only invocation and their
+existing frontmatter default for other hosts.
+
+Use M5/A-23/A-24 and A-21/A-29 as the regression anchors. Validator fixtures check
+structure and executable packaging, not real training quality or scientific
+acceptance. Installed-wheel smoke runs both validators on the adapter fixture,
+the tiny-overfit fixture and the strict collapse-diagnostic fixture, and verifies
+all packaged files against source. Init/export still installs only research-task.
+
+Observed checks:
+
+- `uv run pytest tests/test_skill_assets.py tests/test_training_skill_assets.py tests/test_research_skill_contracts.py tests/test_research_handoffs.py -q`: 64 passed, 39 passing subtests. Includes three real validator subprocesses and rejection after removing a required evidence file from each fixture.
+- `uv run ruff check src tests scripts`: passed.
+- `uv run scripts/check_docs.py`: passed, 295 local links, 100 JSON files, 4 schemas, 20 requirements mapped to 40 acceptance cases.
+- `uv run /Users/zhangbowen/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/<name>` for each added package: both passed.
+- `uv build --out-dir .work/training-skill-migration-11s899tb/dist` and `uv run scripts/smoke_package.py .work/training-skill-migration-11s899tb/dist/rctl-0.5.0-py3-none-any.whl`: passed on Python 3.13.2 / macOS arm64; installed adapter, tiny-overfit and strict diagnostic validators all passed, every packaged skill file matched source, and task-only init/export was preserved.
+- `uv run pytest ../agent-skills-private/evals/research-skills/test_research_skill_contracts.py ../agent-skills-private/evals/research-skills/test_source_io_mapping.py -q`: 4 passed, 1 passing subtest, and the previously recorded source-I/O failure described under Limitations. The checker and its input were unchanged.
+
+After verification, the two shared discovery links and their existing Antigravity
+CLI targets were redirected to rctl; the IDE projections through the shared paths
+needed no edit. All six discovery paths resolve to the new sources. The original
+package directories and external adapter fixture are retained under the snapshot's
+`retired-source/`; the private registry no longer owns the two skills. The private
+README now points to rctl. The remaining private registry/directory difference is
+the pre-existing autocli deletion. Pinned audit copies in the private registry stay
+as historical records; the rctl package owns the active source-routing resources.
+
+The official [Codex skill documentation](https://developers.openai.com/codex/skills)
+was re-fetched with `smart-search fetch https://developers.openai.com/codex/skills
+--format markdown --output /tmp/rctl-skill-docs-20260921.md` on 2026-09-21. It
+confirms symlink discovery and Codex's explicit-only policy. A copy is retained in
+`.work/training-skill-migration-11s899tb/codex-skills.md`.
+
 ## Limitations
 
 - Both repositories contain uncommitted migration changes. No commit/push, CLI
@@ -128,12 +181,14 @@ Follow-up checks completed:
   performed. The archived private paid-run harness still binds candidate revisions
   to that repository; it is historical machinery, not a current rctl-suite runner.
   The rapid-test follow-up checked source, packaging and installed-path identity;
-  it did not run an empirical pilot or a fresh-host model invocation.
+  it did not run an empirical pilot or a fresh-host model invocation. The training/adapter
+  follow-up likewise checks packaging, structure and installed-path identity; it does
+  not establish live training behavior or fresh-host invocation.
 - The first-stage run of `uv run /Users/zhangbowen/.codex/skills/.system/skill-creator/scripts/quick_validate.py
   skills/<name>` on all 14 packages passed 12 and rejected the two explicit-only
   packages solely because it does not accept Claude's native `disable-model-invocation`
   key. Native policy-parity tests pass for all 14; those existing controls were retained.
-- The private `scripts/validate-skills.sh` remains red on untouched auxiliary assets:
+- The first-stage private `scripts/validate-skills.sh` run was red on then-untouched auxiliary assets:
   generated caches in personal-slides/model-training-workflow; autocli length and
   missing OpenAI metadata; missing playwright-cli OpenAI metadata; invocation-policy
   mismatches in autofigure-edit, experiment-adapter-builder, model-training-workflow,

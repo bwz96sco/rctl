@@ -114,6 +114,38 @@ def main():
             if path.is_file()
         }
         assert source_files == packaged_files
+        for name, validator, fixture, flags in (
+            (
+                "experiment-adapter-builder",
+                "validate_adapter_skill.py",
+                "demo-experiment-workflow",
+                [],
+            ),
+            (
+                "model-training-workflow",
+                "validate_model_training_pack.py",
+                "lora-wandb-tiny-overfit",
+                [],
+            ),
+            (
+                "model-training-workflow",
+                "validate_model_training_pack.py",
+                "training-collapse-diagnostic",
+                ["--strict-diagnostics"],
+            ),
+        ):
+            root = installed_skills / name
+            subprocess.run(
+                [
+                    str(python),
+                    str(root / "scripts" / validator),
+                    str(root / "fixtures" / fixture),
+                    *flags,
+                ],
+                cwd=project,
+                env=environment,
+                check=True,
+            )
         assert {path.name for path in skill.parent.parent.iterdir()} == {
             "research-task"
         }

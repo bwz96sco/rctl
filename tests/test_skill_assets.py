@@ -10,7 +10,10 @@ from test_research_skill_contracts import ACTIVE_RESEARCH_SKILLS
 
 from rctl.documents import resource_directory
 
-PACKAGED_SKILLS = ACTIVE_RESEARCH_SKILLS | {"paper-discovery", "research-task"}
+TRAINING_SKILLS = {"experiment-adapter-builder", "model-training-workflow"}
+PACKAGED_SKILLS = (
+    ACTIVE_RESEARCH_SKILLS | TRAINING_SKILLS | {"paper-discovery", "research-task"}
+)
 
 
 def test_exact_packaged_workflow_set():
@@ -30,7 +33,11 @@ def test_skill_metadata_resources_and_script_syntax(name):
     allow = projection.get("policy", {}).get("allow_implicit_invocation", True)
     disable = metadata.get("disable-model-invocation", False)
     assert isinstance(allow, bool) and isinstance(disable, bool)
-    assert allow is not disable
+    if name in TRAINING_SKILLS:
+        # Preserve the source packages' existing host-specific invocation policies.
+        assert allow is False and disable is False
+    else:
+        assert allow is not disable
 
     for target in re.findall(r"\[[^\]]+\]\(([^)]+)\)", text):
         parts = urlsplit(target)

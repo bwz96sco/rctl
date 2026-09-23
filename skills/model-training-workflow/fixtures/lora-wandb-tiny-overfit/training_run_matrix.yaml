@@ -1,0 +1,43 @@
+runs:
+  - run_id: lora_fixture_smoke
+    variant: smoke
+    dataset: fixture-jsonl-40
+    split: train32-val8
+    seed_policy: seed 13 fixed for fixture
+    model_config: lora_r16_alpha32_dropout005
+    training_command: "uv run python scripts/train_lora.py --config configs/lora_fixture.yaml --dry-run"
+    expected_outputs:
+      - artifacts/mock/lora/smoke.log
+      - artifacts/mock/lora/wandb/offline-run-smoke
+    primary_metric: validation_nll
+    gate_class: launch_guard
+    health_gates:
+      - one_batch_forward
+      - decode_sanity
+    success_criterion: smoke log contains train step and eval step
+    stop_go_gate: pass before tiny overfit
+    approval_policy: must pass before launch
+    priority: p0
+    claim_links:
+      - workflow_plumbing
+  - run_id: lora_fixture_tiny_overfit
+    variant: tiny_overfit
+    dataset: fixture-jsonl-2
+    split: train2-val0
+    seed_policy: seed 13 fixed for fixture
+    model_config: lora_r16_alpha32_dropout005
+    training_command: "uv run python scripts/train_lora.py --config configs/lora_fixture.yaml --limit-train 2 --max-steps 50"
+    expected_outputs:
+      - artifacts/mock/lora/tiny_overfit_metrics.json
+      - artifacts/mock/lora/checkpoints/adapter-step50
+    primary_metric: train_loss
+    gate_class: route_validation
+    health_gates:
+      - tiny_overfit
+      - grad_norm_logged
+    success_criterion: train_loss <= 0.05 and no NaN
+    stop_go_gate: pass before any main run
+    approval_policy: route validation; does not block approved full run unless named in contract
+    priority: p0
+    claim_links:
+      - training_plumbing

@@ -2,6 +2,14 @@
 
 ## Current increment
 
+The 2026-09-21 source-management follow-up adds experiment-adapter-builder and
+model-training-workflow, including their validators, fixtures and pinned source
+audit. Use M5/A-23/A-24 for packaged resources and A-21/A-29 for task-only
+init/export preservation. Preserve scientific instructions and native invocation
+policies; redirect existing discovery links after package verification. The
+[migration record](RESEARCH-SKILLS-MIGRATION.md#training-and-adapter-follow-up)
+records the source cutover. Other auxiliary tools and live tasks stay outside scope.
+
 The current task repairs the two research-skill review rounds after source migration:
 pilot/formal handoffs, human selection sizes, vault and installed-resource paths,
 operation-specific completion, and computation/theory/writing evidence boundaries.

@@ -1,0 +1,2 @@
+run_id,question,command_ref,output_ref,metric,value,baseline_ref,delta,status,evidence_status,claim_boundary,next_action
+demo-fixture-001,validate fixture,templates/run-manifest.md,runs/demo-fixture/metrics.json,demo_accuracy,fixture,runs/demo-baseline/metrics.json,fixture,completed,fixture_only,no research claim,validate fixture

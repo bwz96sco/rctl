@@ -1,0 +1,17 @@
+runs:
+  - run_id:
+    variant:
+    dataset:
+    split:
+    seed_policy:
+    model_config:
+    training_command:
+    expected_outputs:
+    primary_metric:
+    gate_class: launch_guard | route_validation | main_run_health
+    health_gates:
+    success_criterion:
+    stop_go_gate:
+    approval_policy:
+    priority:
+    claim_links:

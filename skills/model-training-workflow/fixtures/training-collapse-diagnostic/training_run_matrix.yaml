@@ -1,0 +1,44 @@
+runs:
+  - run_id: ctc_fixture_smoke
+    variant: smoke
+    dataset: mock-ctc-25
+    split: train20-val5
+    seed_policy: seed 21 fixed for fixture
+    model_config: mock_multimodal_ctc
+    training_command: "uv run python scripts/train_ctc.py --config configs/ctc_fixture.yaml --dry-run"
+    expected_outputs:
+      - artifacts/mock/ctc/smoke.log
+      - artifacts/mock/ctc/decode_samples.jsonl
+    primary_metric: val_cer
+    gate_class: launch_guard
+    health_gates:
+      - one_batch_forward
+      - decode_sanity
+    success_criterion: logits finite and decode samples non-empty
+    stop_go_gate: pass before debug retry
+    approval_policy: must pass before launch
+    priority: p0
+    claim_links:
+      - pipeline_sanity
+  - run_id: ctc_fixture_failed
+    variant: collapse_observed
+    dataset: mock-ctc-25
+    split: train20-val5
+    seed_policy: seed 21 fixed for fixture
+    model_config: mock_multimodal_ctc
+    training_command: "uv run python scripts/train_ctc.py --config configs/ctc_fixture.yaml --max-steps 200"
+    expected_outputs:
+      - artifacts/mock/ctc/failed_metrics.json
+      - artifacts/mock/ctc/failed_predictions.jsonl
+    primary_metric: val_cer
+    gate_class: main_run_health
+    health_gates:
+      - blank_rate_monitor
+      - grad_norm_logged
+      - prediction_samples_logged
+    success_criterion: failure classified with evidence, not retried blindly
+    stop_go_gate: strict diagnostic report required
+    approval_policy: classify failed run; do not add unrelated sanity loops without interpretable delta
+    priority: p0
+    claim_links:
+      - failure_classification

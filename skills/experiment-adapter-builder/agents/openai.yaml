@@ -1,0 +1,6 @@
+interface:
+  display_name: Experiment Adapter Builder
+  short_description: Generate project-local experiment workflow skills from stable repo-specific runner and monitoring rules
+  default_prompt: Use $experiment-adapter-builder to inspect a project and generate or update a project-local experiment workflow skill with exact commands, runners, queues, monitoring, profiling, health gates, output roots, evidence rules, and validation.
+policy:
+  allow_implicit_invocation: false

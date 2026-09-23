@@ -1,7 +1,7 @@
 # Research skills
 
-rctl owns 15 research workflow packages under `skills/`: the existing research-task
-skill, 13 workflows migrated from agent-skills-private, and the formerly independent
+rctl owns 17 research workflow packages under `skills/`: the existing research-task
+skill, 15 workflows migrated from agent-skills-private, and the formerly independent
 research-rapid-test skill. Edit these sources here.
 The [migration record](RESEARCH-SKILLS-MIGRATION.md) records the source snapshot,
 preserved uncommitted changes, checks, and installed-link cutover.
@@ -21,6 +21,8 @@ workflow fixes and distinguishes mechanical checks from independent skill-use tr
 | [research-idea-evaluation](../skills/research-idea-evaluation/SKILL.md) | Screening, human shortlisting and independent deep evaluation | Explicit only |
 | [research-rapid-test](../skills/research-rapid-test/SKILL.md) | Fast empirical pilots and bounded promote-or-drop decisions before formal experiments | Automatic or explicit |
 | [research-experiment](../skills/research-experiment/SKILL.md) | Bounded experiment contracts, runner evidence and scientific checks | Automatic or explicit |
+| [experiment-adapter-builder](../skills/experiment-adapter-builder/SKILL.md) | Stable project runner commands, queues, monitoring and evidence rules | Explicit only in Codex; native policy preserved |
+| [model-training-workflow](../skills/model-training-workflow/SKILL.md) | Training setup, launch guards, monitoring, diagnosis and experiment handoff | Explicit only in Codex; native policy preserved |
 | [research-computation](../skills/research-computation/SKILL.md) | Optional bounded computation and numerical-validity checks within existing work | Automatic or explicit |
 | [research-theory](../skills/research-theory/SKILL.md) | Formulation, derivation, proofs, counterexamples and proof audits | Automatic or explicit |
 | [research-figure](../skills/research-figure/SKILL.md) | Evidence-bearing figures, diagrams and caption audits | Automatic or explicit |
@@ -28,8 +30,10 @@ workflow fixes and distinguishes mechanical checks from independent skill-use tr
 | [research-writing](../skills/research-writing/SKILL.md) | Author-side manuscripts, revisions, rebuttals and submission checks | Automatic or explicit |
 | [research-review-case](../skills/research-review-case/SKILL.md) | Referee-side evidence audits without paper verdicts | Automatic or explicit |
 
-Names and invocation policies are preserved. The two explicit-only workflows remain
-explicit-only; their presence on disk does not imply automatic model selection.
+Names and invocation policies are preserved. The two research-* explicit-only
+workflows remain explicit-only. The two training/adapter packages also retain
+`allow_implicit_invocation: false` in their Codex metadata; their frontmatter retains
+its original automatic-discovery default for other hosts.
 
 ## Source, packaging and installation
 
@@ -38,7 +42,7 @@ The wheel and source distribution include all these skill packages. Project `ini
 `research-task`; they do not install or overwrite a global research suite. Domain
 skills remain separate from the CLI's lifecycle and acceptance authority.
 
-For this source relocation, the existing 13 shared links are redirected to this
+For these source relocations, the existing 15 shared links are redirected to this
 checkout's `skills/<name>/`. They retain their discovery paths under
 `~/.agents/skills/`; Antigravity projections through that shared directory continue
 to use the same sources. Editing the checkout updates these linked packages; a
@@ -54,7 +58,9 @@ This follow-up preserves its Codex-only installation; no duplicate is added unde
 The [official Codex skill documentation](https://developers.openai.com/codex/skills)
 states that user skills are discovered under `~/.agents/skills` and symlinked skill
 folders are followed. This was fetched through smart-search on 2026-09-14. The
-migration changes source ownership, not hook configuration or trust.
+migration changes source ownership, not hook configuration or trust. The same page
+was re-fetched on 2026-09-21 for the training/adapter follow-up, confirming symlink
+discovery and the meaning of `allow_implicit_invocation: false`.
 
 Invoke packaged helpers from the actual installed skill directory, not a fixed
 user-level path. For candidate-origin result validation, install research-experiment
@@ -66,11 +72,12 @@ smart-search on 2026-09-14 for this path-only integration follow-up.
 
 ## Related skills outside this migration
 
-The user selected the 13 private-repository workflows, then explicitly added
-research-rapid-test. Auxiliary skills remain in agent-skills-private:
-paper-search-cli, zotero-cli, model-training-workflow,
-experiment-adapter-builder, slurm-hpc-runner, autofigure-edit, personal-slides, and
-upscayl-paper. General helpers such as smart-search-cli, obsidian-cli, nlm-skill,
+The original selection covered 13 private-repository workflows, followed by
+research-rapid-test. The 2026-09-21 follow-up adds experiment-adapter-builder and
+model-training-workflow because they own research execution workflows. Ownership
+follows responsibility, not a research-* name prefix. Auxiliary skills remain in
+agent-skills-private: paper-search-cli, zotero-cli, slurm-hpc-runner, autofigure-edit,
+personal-slides, and upscayl-paper. General helpers such as smart-search-cli, obsidian-cli, nlm-skill,
 and oracle-cli also retain their existing ownership.
 
 Other relevant installed skills are not sourced from that repository:
@@ -99,12 +106,14 @@ agent-skills-private; their old pack paths are not runtime contracts.
 | `research-idea-evaluation` | `screening.md`, human-confirmed `shortlist.md`, `attacks/<candidate-id>.md`, `decision.md` | packaged `research-idea-evaluation/scripts/validate-handoff.py` (`screening`, `shortlist`, `decision`) |
 | `research-rapid-test` | one `rapid-test.md` beside the idea, plus minimal runnable code/commands and raw comparisons | observed intervention/control evidence and bounded PROMOTE / ITERATE ONCE / DROP judgment; no new machine-acceptance gate |
 | `research-experiment` | rctl `contract.md`, runner-owned execution evidence, and native `result.md` | domain structure/lineage validator plus rctl execution checks and evidence-based reviews before guarded closure |
+| `experiment-adapter-builder` | project-local experiment adapter with runner references and reusable run/campaign templates | packaged adapter validator and synthetic fixture; structure only |
+| `model-training-workflow` | training plan, source map, preflight, run matrix, execution log, optional diagnosis and handoff | packaged training validator and synthetic fixtures; structure only |
 | `research-computation`, `research-theory` | bounded computation or proof artifacts | execution/proof status in the skill |
 | `research-figure`, `research-slides`, `research-writing` | requested plan, notes, audit, asset, deck, or manuscript surface | render/build checks only for the applicable requested operation |
 | `research-review-case` | anchored case findings plus optional `cases.md` | finding and no-verdict rules in the skill |
 | `rctl init` and project-local `research-task` | missing project scaffold, optional vault association, workspace/migration guidance | rctl initializer tests and installed-wheel walkthrough in the rctl repository |
 
-Human-readable state is required, but no separate HTML report, provenance hash, manifest, numbered evidence pack, registry, queue, or campaign wrapper is required. Write only the surface requested by the user or needed for durable continuation.
+Human-readable state is required. There is no suite-wide requirement for a separate HTML report, provenance hash, manifest, numbered evidence pack, registry, queue, or campaign wrapper; selected runner/training workflows retain their own evidence requirements. Write only the surface requested by the user or needed for durable continuation.
 
 For new durable notes, use the project-relative `vault` binding in `.rctl/project.json`;
 when unbound, retain the existing note convention, then use the skill's artifact
@@ -133,7 +142,7 @@ actual rctl verification and negative closure. Structural checks do not establis
 scientific validity or prove that every workflow has been exercised by a model.
 
 ```sh
-uv run pytest tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_research_handoffs.py -q
+uv run pytest tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_research_handoffs.py tests/test_training_skill_assets.py -q
 uv run scripts/check_docs.py
 uv build
 uv run scripts/smoke_package.py dist/rctl-0.5.0-py3-none-any.whl

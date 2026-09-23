@@ -1,0 +1,1934 @@
+{
+  "source": "Orchestra AI Research Skills",
+  "source_url": "https://github.com/Orchestra-Research/AI-Research-SKILLs.git",
+  "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+  "checked_at": "2026-06-17",
+  "record_count": 98,
+  "classification_counts": {
+    "research-orchestration": 6,
+    "training-core": 55,
+    "training-adjacent": 15,
+    "tool-wrapper": 18,
+    "writing/figure": 4
+  },
+  "category_counts": {
+    "0-autoresearch-skill": 1,
+    "01-model-architecture": 5,
+    "02-tokenization": 2,
+    "03-fine-tuning": 4,
+    "04-mechanistic-interpretability": 4,
+    "05-data-processing": 2,
+    "06-post-training": 8,
+    "07-safety-alignment": 4,
+    "08-distributed-training": 6,
+    "09-infrastructure": 3,
+    "10-optimization": 7,
+    "11-evaluation": 3,
+    "12-inference-serving": 4,
+    "13-mlops": 4,
+    "14-agents": 5,
+    "15-rag": 5,
+    "16-prompt-engineering": 4,
+    "17-observability": 2,
+    "18-multimodal": 10,
+    "19-emerging-techniques": 6,
+    "20-ml-paper-writing": 4,
+    "21-research-ideation": 2,
+    "22-agent-native-research-artifact": 3
+  },
+  "records": [
+    {
+      "skill_id": "autoresearch",
+      "name": "autoresearch",
+      "source_path": "0-autoresearch-skill/SKILL.md",
+      "category": "0-autoresearch-skill",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "research-orchestration",
+      "training_relevance_score": 6,
+      "description": "Orchestrates end-to-end autonomous AI research projects using a two-loop architecture. The inner loop runs rapid experiment iterations with clear optimization targets. The outer loop synthesizes results, identifies patterns, and steers research direction. Routes to domain-specific skills for execution, supports continuous agent operation via Claude Code /loop and OpenClaw heartbeat, and produces research presentations and papers. Use when starting a research project, running autonomous experiments, or managing a multi-hypothesis research effort.",
+      "reference_paths": [
+        "references/agent-continuity.md",
+        "references/citation-workflow.md",
+        "references/progress-reporting.md",
+        "references/skill-routing.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "/data/",
+        "cron.add",
+        "data/",
+        "literature/",
+        "literature/survey.md",
+        "open",
+        "playwright pdf",
+        "src/",
+        "trajectory_H1_runs001-010.csv",
+        "weasyprint",
+        "wkhtmltopdf"
+      ],
+      "local_target": "existing research-ideation/research-experiment; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "implementing-llms-litgpt",
+      "name": "implementing-llms-litgpt",
+      "source_path": "01-model-architecture/litgpt/SKILL.md",
+      "category": "01-model-architecture",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 12,
+      "description": "Implements and trains LLMs using Lightning AI's LitGPT with 20+ pretrained architectures (Llama, Gemma, Phi, Qwen, Mistral). Use when need clean model implementations, educational understanding of architectures, or production fine-tuning with LoRA/QLoRA. Single-file implementations, no abstraction layers.",
+      "reference_paths": [
+        "references/custom-models.md",
+        "references/distributed-training.md",
+        "references/supported-models.md",
+        "references/training-recipes.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "mamba-architecture",
+      "name": "mamba-architecture",
+      "source_path": "01-model-architecture/mamba/SKILL.md",
+      "category": "01-model-architecture",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "State-space model with O(n) complexity vs Transformers' O(n\u00b2). 5\u00d7 faster inference, million-token sequences, no KV cache. Selective SSM with hardware-aware design. Mamba-1 (d_state=16) and Mamba-2 (d_state=128, multi-head). Models 130M-2.8B on HuggingFace.",
+      "reference_paths": [
+        "references/mamba2-details.md",
+        "references/performance.md",
+        "references/selective-ssm.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "nanogpt",
+      "name": "nanogpt",
+      "source_path": "01-model-architecture/nanogpt/SKILL.md",
+      "category": "01-model-architecture",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Educational GPT implementation in ~300 lines. Reproduces GPT-2 (124M) on OpenWebText. Clean, hackable code for learning transformers. By Andrej Karpathy. Perfect for understanding GPT architecture from scratch. Train on Shakespeare (CPU) or OpenWebText (multi-GPU).",
+      "reference_paths": [
+        "references/architecture.md",
+        "references/data.md",
+        "references/training.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "rwkv-architecture",
+      "name": "rwkv-architecture",
+      "source_path": "01-model-architecture/rwkv/SKILL.md",
+      "category": "01-model-architecture",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 11,
+      "description": "RNN+Transformer hybrid with O(n) inference. Linear time, infinite context, no KV cache. Train like GPT (parallel), infer like RNN (sequential). Linux Foundation AI project. Production at Windows, Office, NeMo. RWKV-7 (March 2025). Models up to 14B parameters.",
+      "reference_paths": [
+        "references/architecture-details.md",
+        "references/rwkv7.md",
+        "references/state-management.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "distributed-llm-pretraining-torchtitan",
+      "name": "distributed-llm-pretraining-torchtitan",
+      "source_path": "01-model-architecture/torchtitan/SKILL.md",
+      "category": "01-model-architecture",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Provides PyTorch-native distributed LLM pretraining using torchtitan with 4D parallelism (FSDP2, TP, PP, CP). Use when pretraining Llama 3.1, DeepSeek V3, or custom models at scale from 8 to 512+ GPUs with Float8, torch.compile, and distributed checkpointing.",
+      "reference_paths": [
+        "references/checkpoint.md",
+        "references/custom-models.md",
+        "references/float8.md",
+        "references/fsdp.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "./outputs/tb/"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "huggingface-tokenizers",
+      "name": "huggingface-tokenizers",
+      "source_path": "02-tokenization/huggingface-tokenizers/SKILL.md",
+      "category": "02-tokenization",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 8,
+      "description": "Fast tokenizers optimized for research and production. Rust-based implementation tokenizes 1GB in <20 seconds. Supports BPE, WordPiece, and Unigram algorithms. Train custom vocabularies, track alignments, handle padding/truncation. Integrates seamlessly with transformers. Use when you need high-performance tokenization or custom tokenizer training.",
+      "reference_paths": [
+        "references/algorithms.md",
+        "references/integration.md",
+        "references/pipeline.md",
+        "references/training.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "sentencepiece",
+      "name": "sentencepiece",
+      "source_path": "02-tokenization/sentencepiece/SKILL.md",
+      "category": "02-tokenization",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 8,
+      "description": "Language-independent tokenizer treating text as raw Unicode. Supports BPE and Unigram algorithms. Fast (50k sentences/sec), lightweight (6MB memory), deterministic vocabulary. Used by T5, ALBERT, XLNet, mBART. Train on raw text without pre-tokenization. Use when you need multilingual support, CJK languages, or reproducible tokenization.",
+      "reference_paths": [
+        "references/algorithms.md",
+        "references/training.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "axolotl",
+      "name": "axolotl",
+      "source_path": "03-fine-tuning/axolotl/SKILL.md",
+      "category": "03-fine-tuning",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 14,
+      "description": "Expert guidance for fine-tuning LLMs with Axolotl - YAML configs, 100+ models, LoRA/QLoRA, DPO/KTO/ORPO/GRPO, multimodal support",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "llama-factory",
+      "name": "llama-factory",
+      "source_path": "03-fine-tuning/llama-factory/SKILL.md",
+      "category": "03-fine-tuning",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "Expert guidance for fine-tuning LLMs with LLaMA-Factory - WebUI no-code, 100+ models, 2/3/4/5/6/8-bit QLoRA, multimodal support",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "peft-fine-tuning",
+      "name": "peft-fine-tuning",
+      "source_path": "03-fine-tuning/peft/SKILL.md",
+      "category": "03-fine-tuning",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 12,
+      "description": "Parameter-efficient fine-tuning for LLMs using LoRA, QLoRA, and 25+ methods. Use when fine-tuning large models (7B-70B) with limited GPU memory, when you need to train <1% of parameters with minimal accuracy loss, or for multi-adapter serving. HuggingFace's official library integrated with transformers ecosystem.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "unsloth",
+      "name": "unsloth",
+      "source_path": "03-fine-tuning/unsloth/SKILL.md",
+      "category": "03-fine-tuning",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Expert guidance for fast fine-tuning with Unsloth - 2-5x faster training, 50-80% less memory, LoRA/QLoRA optimization",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "nnsight-remote-interpretability",
+      "name": "nnsight-remote-interpretability",
+      "source_path": "04-mechanistic-interpretability/nnsight/SKILL.md",
+      "category": "04-mechanistic-interpretability",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 7,
+      "description": "Provides guidance for interpreting and manipulating neural network internals using nnsight with optional NDIF remote execution. Use when needing to run interpretability experiments on massive models (70B+) without local GPU resources, or when working with any PyTorch architecture.",
+      "reference_paths": [
+        "references/README.md",
+        "references/api.md",
+        "references/tutorials.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "model.generate(...)",
+        "model.output",
+        "remote=True"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "pyvene-interventions",
+      "name": "pyvene-interventions",
+      "source_path": "04-mechanistic-interpretability/pyvene/SKILL.md",
+      "category": "04-mechanistic-interpretability",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 7,
+      "description": "Provides guidance for performing causal interventions on PyTorch models using pyvene's declarative intervention framework. Use when conducting causal tracing, activation patching, interchange intervention training, or testing causal hypotheses about model behavior.",
+      "reference_paths": [
+        "references/README.md",
+        "references/api.md",
+        "references/tutorials.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "sparse-autoencoder-training",
+      "name": "sparse-autoencoder-training",
+      "source_path": "04-mechanistic-interpretability/saelens/SKILL.md",
+      "category": "04-mechanistic-interpretability",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 6,
+      "description": "Provides guidance for training and analyzing Sparse Autoencoders (SAEs) using SAELens to decompose neural network activations into interpretable features. Use when discovering interpretable features, analyzing superposition, or studying monosemantic representations in language models.",
+      "reference_paths": [
+        "references/README.md",
+        "references/api.md",
+        "references/tutorials.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "transformer-lens-interpretability",
+      "name": "transformer-lens-interpretability",
+      "source_path": "04-mechanistic-interpretability/transformer-lens/SKILL.md",
+      "category": "04-mechanistic-interpretability",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 6,
+      "description": "Provides guidance for mechanistic interpretability research using TransformerLens to inspect and manipulate transformer internals via HookPoints and activation caching. Use when reverse-engineering model algorithms, studying attention patterns, or performing activation patching experiments.",
+      "reference_paths": [
+        "references/README.md",
+        "references/api.md",
+        "references/tutorials.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "attn_out, layer",
+        "mlp_out, layer"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "nemo-curator",
+      "name": "nemo-curator",
+      "source_path": "05-data-processing/nemo-curator/SKILL.md",
+      "category": "05-data-processing",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 7,
+      "description": "GPU-accelerated data curation for LLM training. Supports text/image/video/audio. Features fuzzy deduplication (16\u00d7 faster), quality filtering (30+ heuristics), semantic deduplication, PII redaction, NSFW detection. Scales across GPUs with RAPIDS. Use for preparing high-quality training datasets, cleaning web data, or deduplicating large corpora.",
+      "reference_paths": [
+        "references/deduplication.md",
+        "references/filtering.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "ray-data",
+      "name": "ray-data",
+      "source_path": "05-data-processing/ray-data/SKILL.md",
+      "category": "05-data-processing",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 6,
+      "description": "Scalable data processing for ML workloads. Streaming execution across CPU/GPU, supports Parquet/CSV/JSON/images. Integrates with Ray Train, PyTorch, TensorFlow. Scales from single machine to 100s of nodes. Use for batch inference, data preprocessing, multi-modal data loading, or distributed ETL pipelines.",
+      "reference_paths": [
+        "references/integration.md",
+        "references/transformations.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "grpo-rl-training",
+      "name": "grpo-rl-training",
+      "source_path": "06-post-training/grpo-rl-training/SKILL.md",
+      "category": "06-post-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Expert guidance for GRPO/RL fine-tuning with TRL for reasoning and task-specific model training",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [
+        "max_completion_length"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "miles-rl-training",
+      "name": "miles-rl-training",
+      "source_path": "06-post-training/miles/SKILL.md",
+      "category": "06-post-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 12,
+      "description": "Provides guidance for enterprise-grade RL training using miles, a production-ready fork of slime. Use when training large MoE models with FP8/INT4, needing train-inference alignment, or requiring speculative RL for maximum throughput.",
+      "reference_paths": [
+        "../slime/references/api-reference.md"
+      ],
+      "input_hints": [
+        "--mtp-num-layers 1"
+      ],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "openrlhf-training",
+      "name": "openrlhf-training",
+      "source_path": "06-post-training/openrlhf/SKILL.md",
+      "category": "06-post-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 12,
+      "description": "High-performance RLHF framework with Ray+vLLM acceleration. Use for PPO, GRPO, RLOO, DPO training of large models (7B-70B+). Built on Ray, vLLM, ZeRO-3. 2\u00d7 faster than DeepSpeedChat with distributed architecture and GPU resource sharing.",
+      "reference_paths": [
+        "references/algorithm-comparison.md",
+        "references/custom-rewards.md",
+        "references/hybrid-engine.md",
+        "references/multi-node-training.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "simpo-training",
+      "name": "simpo-training",
+      "source_path": "06-post-training/simpo/SKILL.md",
+      "category": "06-post-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Simple Preference Optimization for LLM alignment. Reference-free alternative to DPO with better performance (+6.4 points on AlpacaEval 2.0). No reference model needed, more efficient than DPO. Use for preference alignment when want simpler, faster training than DPO/PPO.",
+      "reference_paths": [
+        "references/datasets.md",
+        "references/hyperparameters.md",
+        "references/loss-functions.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "slime-rl-training",
+      "name": "slime-rl-training",
+      "source_path": "06-post-training/slime/SKILL.md",
+      "category": "06-post-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Provides guidance for LLM post-training with RL using slime, a Megatron+SGLang framework. Use when training GLM models, implementing custom data generation workflows, or needing tight Megatron-LM integration for RL scaling.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [
+        "tensorboard --logdir outputs/"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "torchforge-rl-training",
+      "name": "torchforge-rl-training",
+      "source_path": "06-post-training/torchforge/SKILL.md",
+      "category": "06-post-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Provides guidance for PyTorch-native agentic RL using torchforge, Meta's library separating infra from algorithms. Use when you want clean RL abstractions, easy algorithm experimentation, or scalable training with Monarch and TorchTitan.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "fine-tuning-with-trl",
+      "name": "fine-tuning-with-trl",
+      "source_path": "06-post-training/trl-fine-tuning/SKILL.md",
+      "category": "06-post-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Fine-tune LLMs using reinforcement learning with TRL - SFT for instruction tuning, DPO for preference alignment, PPO/GRPO for reward optimization, and reward model training. Use when need RLHF, align model with preferences, or train from human feedback. Works with HuggingFace Transformers.",
+      "reference_paths": [
+        "references/dpo-variants.md",
+        "references/online-rl.md",
+        "references/reward-modeling.md",
+        "references/sft-training.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "verl-rl-training",
+      "name": "verl-rl-training",
+      "source_path": "06-post-training/verl/SKILL.md",
+      "category": "06-post-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 11,
+      "description": "Provides guidance for training LLMs with reinforcement learning using verl (Volcano Engine RL). Use when implementing RLHF, GRPO, PPO, or other RL algorithms for LLM post-training at scale with flexible infrastructure backends.",
+      "reference_paths": [
+        "references/multi-turn.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "constitutional-ai",
+      "name": "constitutional-ai",
+      "source_path": "07-safety-alignment/constitutional-ai/SKILL.md",
+      "category": "07-safety-alignment",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 5,
+      "description": "Anthropic's method for training harmless AI through self-improvement. Two-phase approach - supervised learning with self-critique/revision, then RLAIF (RL from AI Feedback). Use for safety alignment, reducing harmful outputs without human labels. Powers Claude's safety system.",
+      "reference_paths": [
+        "references/constitution-design.md",
+        "references/cot-critique.md",
+        "references/rlaif-comparison.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "llamaguard",
+      "name": "llamaguard",
+      "source_path": "07-safety-alignment/llamaguard/SKILL.md",
+      "category": "07-safety-alignment",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 4,
+      "description": "Meta's 7-8B specialized moderation model for LLM input/output filtering. 6 safety categories - violence/hate, sexual content, weapons, substances, self-harm, criminal planning. 94-95% accuracy. Deploy with vLLM, HuggingFace, Sagemaker. Integrates with NeMo Guardrails.",
+      "reference_paths": [
+        "references/benchmarks.md",
+        "references/custom-categories.md",
+        "references/deployment.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "nemo-guardrails",
+      "name": "nemo-guardrails",
+      "source_path": "07-safety-alignment/nemo-guardrails/SKILL.md",
+      "category": "07-safety-alignment",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 2,
+      "description": "NVIDIA's runtime safety framework for LLM applications. Features jailbreak detection, input/output validation, fact-checking, hallucination detection, PII filtering, toxicity detection. Uses Colang 2.0 DSL for programmable rails. Production-ready, runs on T4 GPU.",
+      "reference_paths": [
+        "references/colang-guide.md",
+        "references/integrations.md",
+        "references/performance.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "prompt-guard",
+      "name": "prompt-guard",
+      "source_path": "07-safety-alignment/prompt-guard/SKILL.md",
+      "category": "07-safety-alignment",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 4,
+      "description": "Meta's 86M prompt injection and jailbreak detector. Filters malicious prompts and third-party data for LLM apps. 99%+ TPR, <1% FPR. Fast (<2ms GPU). Multilingual (8 languages). Deploy with HuggingFace or batch processing for RAG security.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "huggingface-accelerate",
+      "name": "huggingface-accelerate",
+      "source_path": "08-distributed-training/accelerate/SKILL.md",
+      "category": "08-distributed-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 8,
+      "description": "Simplest distributed training API. 4 lines to add distributed support to any PyTorch script. Unified API for DeepSpeed/FSDP/Megatron/DDP. Automatic device placement, mixed precision (FP16/BF16/FP8). Interactive config, single launch command. HuggingFace ecosystem standard.",
+      "reference_paths": [
+        "references/custom-plugins.md",
+        "references/megatron-integration.md",
+        "references/performance.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "deepspeed",
+      "name": "deepspeed",
+      "source_path": "08-distributed-training/deepspeed/SKILL.md",
+      "category": "08-distributed-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "Expert guidance for distributed training with DeepSpeed - ZeRO optimization stages, pipeline parallelism, FP16/BF16/FP8, 1-bit Adam, sparse attention",
+      "reference_paths": [],
+      "input_hints": [
+        "h.wait()"
+      ],
+      "output_hints": [
+        "h.wait()"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "training-llms-megatron",
+      "name": "training-llms-megatron",
+      "source_path": "08-distributed-training/megatron-core/SKILL.md",
+      "category": "08-distributed-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "Trains large language models (2B-462B parameters) using NVIDIA Megatron-Core with advanced parallelism strategies. Use when training models >1B parameters, need maximum GPU efficiency (47% MFU on H100), or require tensor/pipeline/sequence/context/expert parallelism. Production-ready framework used for Nemotron, LLaMA, DeepSeek.",
+      "reference_paths": [
+        "references/benchmarks.md",
+        "references/parallelism-guide.md",
+        "references/production-examples.md",
+        "references/training-recipes.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "pytorch-fsdp2",
+      "name": "pytorch-fsdp2",
+      "source_path": "08-distributed-training/pytorch-fsdp2/SKILL.md",
+      "category": "08-distributed-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Adds PyTorch FSDP2 (fully_shard) to training scripts with correct init, sharding, mixed precision/offload config, and distributed checkpointing. Use when models exceed single-GPU memory or when you need DTensor-based sharding with DeviceMesh.",
+      "reference_paths": [
+        "references/pytorch_dcp_async_recipe.md",
+        "references/pytorch_dcp_overview.md",
+        "references/pytorch_dcp_recipe.md",
+        "references/pytorch_ddp_notes.md",
+        "references/pytorch_device_mesh_tutorial.md",
+        "references/pytorch_examples_fsdp2.md",
+        "references/pytorch_fsdp1_api.md",
+        "references/pytorch_fsdp2_tutorial.md",
+        "references/pytorch_fully_shard_api.md",
+        "references/pytorch_tp_tutorial.md",
+        "references/ray_train_fsdp2_example.md",
+        "references/torchtitan_fsdp_notes.md"
+      ],
+      "input_hints": [
+        "model(input)",
+        "model(inputs)",
+        "model.forward(...)",
+        "model.forward(input)",
+        "mp_policy=MixedPrecisionPolicy(param_dtype=..., reduce_dtype=..., output_dtype=..., cast_forward_inputs=...)",
+        "no_sync()",
+        "set_requires_gradient_sync",
+        "train_step()",
+        "unshard()"
+      ],
+      "output_hints": [
+        "DeviceMesh",
+        "LOCAL_RANK",
+        "build_optimizer()",
+        "fully_shard",
+        "mp_policy=MixedPrecisionPolicy(param_dtype=..., reduce_dtype=..., output_dtype=..., cast_forward_inputs=...)"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "pytorch-lightning",
+      "name": "pytorch-lightning",
+      "source_path": "08-distributed-training/pytorch-lightning/SKILL.md",
+      "category": "08-distributed-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "High-level PyTorch framework with Trainer class, automatic distributed training (DDP/FSDP/DeepSpeed), callbacks system, and minimal boilerplate. Scales from laptop to supercomputer with same code. Use when you want clean training loops with built-in best practices.",
+      "reference_paths": [
+        "references/callbacks.md",
+        "references/distributed.md",
+        "references/hyperparameter-tuning.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "ray-train",
+      "name": "ray-train",
+      "source_path": "08-distributed-training/ray-train/SKILL.md",
+      "category": "08-distributed-training",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Distributed training orchestration across clusters. Scales PyTorch/TensorFlow/HuggingFace from laptop to 1000s of nodes. Built-in hyperparameter tuning with Ray Tune, fault tolerance, elastic scaling. Use when training massive models across multiple machines or running distributed hyperparameter sweeps.",
+      "reference_paths": [
+        "references/custom-loops.md",
+        "references/hyperparameter-tuning.md",
+        "references/multi-node.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "lambda-labs-gpu-cloud",
+      "name": "lambda-labs-gpu-cloud",
+      "source_path": "09-infrastructure/lambda-labs/SKILL.md",
+      "category": "09-infrastructure",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 11,
+      "description": "Reserved and on-demand GPU cloud instances for ML training and inference. Use when you need dedicated GPU instances with simple SSH access, persistent filesystems, or high-performance multi-node clusters for large-scale training.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "modal-serverless-gpu",
+      "name": "modal-serverless-gpu",
+      "source_path": "09-infrastructure/modal/SKILL.md",
+      "category": "09-infrastructure",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 8,
+      "description": "Serverless GPU cloud platform for running ML workloads. Use when you need on-demand GPU access without infrastructure management, deploying ML models as APIs, or running batch jobs with automatic scaling.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "skypilot-multi-cloud-orchestration",
+      "name": "skypilot-multi-cloud-orchestration",
+      "source_path": "09-infrastructure/skypilot/SKILL.md",
+      "category": "09-infrastructure",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 9,
+      "description": "Multi-cloud orchestration for ML workloads with automatic cost optimization. Use when you need to run training or batch jobs across multiple clouds, leverage spot instances with auto-recovery, or optimize GPU costs across providers.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "MOUNT_CACHED",
+        "hello.yaml"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "awq-quantization",
+      "name": "awq-quantization",
+      "source_path": "10-optimization/awq/SKILL.md",
+      "category": "10-optimization",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 15,
+      "description": "Activation-aware weight quantization for 4-bit LLM compression with 3x speedup and minimal accuracy loss. Use when deploying large models (7B-70B) on limited GPU memory, when you need faster inference than GPTQ with better accuracy preservation, or for instruction-tuned and multimodal models. MLSys 2024 Best Paper Award winner.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "quantizing-models-bitsandbytes",
+      "name": "quantizing-models-bitsandbytes",
+      "source_path": "10-optimization/bitsandbytes/SKILL.md",
+      "category": "10-optimization",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 13,
+      "description": "Quantizes LLMs to 8-bit or 4-bit for 50-75% memory reduction with minimal accuracy loss. Use when GPU memory is limited, need to fit larger models, or want faster inference. Supports INT8, NF4, FP4 formats, QLoRA training, and 8-bit optimizers. Works with HuggingFace Transformers.",
+      "reference_paths": [
+        "references/memory-optimization.md",
+        "references/qlora-training.md",
+        "references/quantization-formats.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "optimizing-attention-flash",
+      "name": "optimizing-attention-flash",
+      "source_path": "10-optimization/flash-attention/SKILL.md",
+      "category": "10-optimization",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 11,
+      "description": "Optimizes transformer attention with Flash Attention for 2-4x speedup and 10-20x memory reduction. Use when training/running transformers with long sequences (>512 tokens), encountering GPU memory issues with attention, or need faster inference. Supports PyTorch native SDPA, flash-attn library, H100 FP8, and sliding window attention.",
+      "reference_paths": [
+        "references/advanced-features.md",
+        "references/algorithm.md",
+        "references/benchmarks.md",
+        "references/transformers-integration.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "gguf-quantization",
+      "name": "gguf-quantization",
+      "source_path": "10-optimization/gguf/SKILL.md",
+      "category": "10-optimization",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "GGUF format and llama.cpp quantization for efficient CPU/GPU inference. Use when deploying models on consumer hardware, Apple Silicon, or when needing flexible quantization from 2-8 bit without GPU requirements.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "gptq",
+      "name": "gptq",
+      "source_path": "10-optimization/gptq/SKILL.md",
+      "category": "10-optimization",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 14,
+      "description": "Post-training 4-bit quantization for LLMs with minimal accuracy loss. Use for deploying large models (70B, 405B) on consumer GPUs, when you need 4\u00d7 memory reduction with <2% perplexity degradation, or for faster inference (3-4\u00d7 speedup) vs FP16. Integrates with transformers and PEFT for QLoRA fine-tuning.",
+      "reference_paths": [
+        "references/calibration.md",
+        "references/integration.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "hqq-quantization",
+      "name": "hqq-quantization",
+      "source_path": "10-optimization/hqq/SKILL.md",
+      "category": "10-optimization",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 11,
+      "description": "Half-Quadratic Quantization for LLMs without calibration data. Use when quantizing models to 4/3/2-bit precision without needing calibration datasets, for fast quantization workflows, or when deploying with vLLM or HuggingFace Transformers.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "ml-training-recipes",
+      "name": "ml-training-recipes",
+      "source_path": "10-optimization/ml-training-recipes/SKILL.md",
+      "category": "10-optimization",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 15,
+      "description": "Battle-tested PyTorch training recipes for all domains \u2014 LLMs, vision, diffusion, medical imaging, protein/drug discovery, spatial omics, genomics. Covers training loops, optimizer selection (AdamW, Muon), LR scheduling, mixed precision, debugging, and systematic experimentation. Use when training or fine-tuning neural networks, debugging loss spikes or OOM, choosing architectures, or optimizing GPU throughput.",
+      "reference_paths": [
+        "references/architecture.md",
+        "references/biomedical.md",
+        "references/domain-specific.md",
+        "references/experiment-loop.md",
+        "references/optimizers.md",
+        "references/scaling-and-selection.md"
+      ],
+      "input_hints": [
+        "cudnn.benchmark = True"
+      ],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "evaluating-code-models",
+      "name": "evaluating-code-models",
+      "source_path": "11-evaluation/bigcode-evaluation-harness/SKILL.md",
+      "category": "11-evaluation",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 8,
+      "description": "Evaluates code generation models across HumanEval, MBPP, MultiPL-E, and 15+ benchmarks with pass@k metrics. Use when benchmarking code models, comparing coding abilities, testing multi-language support, or measuring code generation quality. Industry standard from BigCode Project used by HuggingFace leaderboards.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [
+        "--generation_only",
+        "--load_generations_path",
+        "--metric_output_path",
+        "--save_generations"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "evaluating-llms-harness",
+      "name": "evaluating-llms-harness",
+      "source_path": "11-evaluation/lm-evaluation-harness/SKILL.md",
+      "category": "11-evaluation",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Evaluates LLMs across 60+ academic benchmarks (MMLU, HumanEval, GSM8K, TruthfulQA, HellaSwag). Use when benchmarking model quality, comparing models, reporting academic results, or tracking training progress. Industry standard used by EleutherAI, HuggingFace, and major labs. Supports HuggingFace, vLLM, APIs.",
+      "reference_paths": [
+        "references/api-evaluation.md",
+        "references/benchmark-guide.md",
+        "references/custom-tasks.md",
+        "references/distributed-eval.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "nemo-evaluator-sdk",
+      "name": "nemo-evaluator-sdk",
+      "source_path": "11-evaluation/nemo-evaluator/SKILL.md",
+      "category": "11-evaluation",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Evaluates LLMs across 100+ benchmarks from 18+ harnesses (MMLU, HumanEval, GSM8K, safety, VLM) with multi-backend execution. Use when needing scalable evaluation on local Docker, Slurm HPC, or cloud platforms. NVIDIA's enterprise-grade platform with container-first architecture for reproducible benchmarking.",
+      "reference_paths": [
+        "references/adapter-system.md",
+        "references/configuration.md",
+        "references/custom-benchmarks.md",
+        "references/execution-backends.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "llama-cpp",
+      "name": "llama-cpp",
+      "source_path": "12-inference-serving/llama-cpp/SKILL.md",
+      "category": "12-inference-serving",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 7,
+      "description": "Runs LLM inference on CPU, Apple Silicon, and consumer GPUs without NVIDIA hardware. Use for edge deployment, M1/M2/M3 Macs, AMD/Intel GPUs, or when CUDA is unavailable. Supports GGUF quantization (1.5-8 bit) for reduced memory and 4-10\u00d7 speedup vs PyTorch on CPU.",
+      "reference_paths": [
+        "references/optimization.md",
+        "references/quantization.md",
+        "references/server.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "sglang",
+      "name": "sglang",
+      "source_path": "12-inference-serving/sglang/SKILL.md",
+      "category": "12-inference-serving",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 7,
+      "description": "Fast structured generation and serving for LLMs with RadixAttention prefix caching. Use for JSON/regex outputs, constrained decoding, agentic workflows with tool calls, or when you need 5\u00d7 faster inference than vLLM with prefix sharing. Powers 300,000+ GPUs at xAI, AMD, NVIDIA, and LinkedIn.",
+      "reference_paths": [
+        "references/deployment.md",
+        "references/radix-attention.md",
+        "references/structured-generation.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "tensorrt-llm",
+      "name": "tensorrt-llm",
+      "source_path": "12-inference-serving/tensorrt-llm/SKILL.md",
+      "category": "12-inference-serving",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 9,
+      "description": "Optimizes LLM inference with NVIDIA TensorRT for maximum throughput and lowest latency. Use for production deployment on NVIDIA GPUs (A100/H100), when you need 10-100x faster inference than PyTorch, or for serving models with quantization (FP8/INT4), in-flight batching, and multi-GPU scaling.",
+      "reference_paths": [
+        "references/multi-gpu.md",
+        "references/optimization.md",
+        "references/serving.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "serving-llms-vllm",
+      "name": "serving-llms-vllm",
+      "source_path": "12-inference-serving/vllm/SKILL.md",
+      "category": "12-inference-serving",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 7,
+      "description": "Serves LLMs with high throughput using vLLM's PagedAttention and continuous batching. Use when deploying production LLM APIs, optimizing inference latency/throughput, or serving models with limited GPU memory. Supports OpenAI-compatible endpoints, quantization (GPTQ/AWQ/FP8), and tensor parallelism.",
+      "reference_paths": [
+        "references/optimization.md",
+        "references/quantization.md",
+        "references/server-deployment.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "mlflow",
+      "name": "mlflow",
+      "source_path": "13-mlops/mlflow/SKILL.md",
+      "category": "13-mlops",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 7,
+      "description": "Track ML experiments, manage model registry with versioning, deploy models to production, and reproduce experiments with MLflow - framework-agnostic ML lifecycle platform",
+      "reference_paths": [
+        "references/deployment.md",
+        "references/model-registry.md",
+        "references/tracking.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "experiment-tracking-swanlab",
+      "name": "experiment-tracking-swanlab",
+      "source_path": "13-mlops/swanlab/SKILL.md",
+      "category": "13-mlops",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "Provides guidance for experiment tracking with SwanLab. Use when you need open-source run tracking, local or self-hosted dashboards, and lightweight media logging for ML workflows.",
+      "reference_paths": [
+        "references/integrations.md",
+        "references/visualization.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "tensorboard",
+      "name": "tensorboard",
+      "source_path": "13-mlops/tensorboard/SKILL.md",
+      "category": "13-mlops",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 7,
+      "description": "Visualize training metrics, debug models with histograms, compare experiments, visualize model graphs, and profile performance with TensorBoard - Google's ML visualization toolkit",
+      "reference_paths": [
+        "references/integrations.md",
+        "references/profiling.md",
+        "references/visualization.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "weights-and-biases",
+      "name": "weights-and-biases",
+      "source_path": "13-mlops/weights-and-biases/SKILL.md",
+      "category": "13-mlops",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 8,
+      "description": "Track ML experiments with automatic logging, visualize training in real-time, optimize hyperparameters with sweeps, and manage model registry with W&B - collaborative MLOps platform",
+      "reference_paths": [
+        "references/artifacts.md",
+        "references/integrations.md",
+        "references/sweeps.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "references/artifacts.md"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "evolving-ai-agents",
+      "name": "evolving-ai-agents",
+      "source_path": "14-agents/a-evolve/SKILL.md",
+      "category": "14-agents",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 3,
+      "description": "Provides guidance for automatically evolving and optimizing AI agents across any domain using LLM-driven evolution algorithms. Use when building self-improving agents, optimizing agent prompts and skills against benchmarks, or implementing automated agent evaluation loops.",
+      "reference_paths": [
+        "references/api.md",
+        "references/architecture.md",
+        "references/design-patterns.md",
+        "references/examples.md",
+        "references/issues.md",
+        "references/releases.md",
+        "references/tutorials.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "autogpt-agents",
+      "name": "autogpt-agents",
+      "source_path": "14-agents/autogpt/SKILL.md",
+      "category": "14-agents",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 1,
+      "description": "Autonomous AI agent platform for building and deploying continuous agents. Use when creating visual workflow agents, deploying persistent autonomous agents, or building complex multi-step AI automation systems.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [
+        "INPUT"
+      ],
+      "output_hints": [
+        "AITextGeneratorBlock",
+        "OUTPUT"
+      ],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "crewai-multi-agent",
+      "name": "crewai-multi-agent",
+      "source_path": "14-agents/crewai/SKILL.md",
+      "category": "14-agents",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 0,
+      "description": "Multi-agent orchestration framework for autonomous AI collaboration. Use when building teams of specialized agents working together on complex tasks, when you need role-based agent collaboration with memory, or for production workflows requiring sequential/hierarchical execution. Built without LangChain dependencies for lean, fast execution.",
+      "reference_paths": [
+        "references/flows.md",
+        "references/tools.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "langchain",
+      "name": "langchain",
+      "source_path": "14-agents/langchain/SKILL.md",
+      "category": "14-agents",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 1,
+      "description": "Framework for building LLM-powered applications with agents, chains, and RAG. Supports multiple providers (OpenAI, Anthropic, Google), 500+ integrations, ReAct agents, tool calling, memory management, and vector store retrieval. Use for building chatbots, question-answering systems, autonomous agents, or RAG applications. Best for rapid prototyping and production deployments.",
+      "reference_paths": [
+        "references/agents.md",
+        "references/integration.md",
+        "references/rag.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "create_agent()"
+      ],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "llamaindex",
+      "name": "llamaindex",
+      "source_path": "14-agents/llamaindex/SKILL.md",
+      "category": "14-agents",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 1,
+      "description": "Data framework for building LLM applications with RAG. Specializes in document ingestion (300+ connectors), indexing, and querying. Features vector indices, query engines, agents, and multi-modal support. Use for document Q&A, chatbots, knowledge retrieval, or building RAG pipelines. Best for data-centric LLM applications.",
+      "reference_paths": [
+        "references/agents.md",
+        "references/data_connectors.md",
+        "references/query_engines.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "chroma",
+      "name": "chroma",
+      "source_path": "15-rag/chroma/SKILL.md",
+      "category": "15-rag",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 1,
+      "description": "Open-source embedding database for AI applications. Store embeddings and metadata, perform vector and full-text search, filter by metadata. Simple 4-function API. Scales from notebooks to production clusters. Use for semantic search, RAG applications, or document retrieval. Best for local development and open-source projects.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "faiss",
+      "name": "faiss",
+      "source_path": "15-rag/faiss/SKILL.md",
+      "category": "15-rag",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 2,
+      "description": "Facebook's library for efficient similarity search and clustering of dense vectors. Supports billions of vectors, GPU acceleration, and various index types (Flat, IVF, HNSW). Use for fast k-NN search, large-scale vector retrieval, or when you need pure similarity search without metadata. Best for high-performance applications.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "pinecone",
+      "name": "pinecone",
+      "source_path": "15-rag/pinecone/SKILL.md",
+      "category": "15-rag",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 1,
+      "description": "Managed vector database for production AI applications. Fully managed, auto-scaling, with hybrid search (dense + sparse), metadata filtering, and namespaces. Low latency (<100ms p95). Use for production RAG, recommendation systems, or semantic search at scale. Best for serverless, managed infrastructure.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "qdrant-vector-search",
+      "name": "qdrant-vector-search",
+      "source_path": "15-rag/qdrant/SKILL.md",
+      "category": "15-rag",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 2,
+      "description": "High-performance vector similarity search engine for RAG and semantic search. Use when building production RAG systems requiring fast nearest neighbor search, hybrid search with filtering, or scalable vector storage with Rust-powered performance.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "sentence-transformers",
+      "name": "sentence-transformers",
+      "source_path": "15-rag/sentence-transformers/SKILL.md",
+      "category": "15-rag",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 4,
+      "description": "Framework for state-of-the-art sentence, text, and image embeddings. Provides 5000+ pre-trained models for semantic similarity, clustering, and retrieval. Supports multilingual, domain-specific, and multimodal models. Use for generating embeddings for RAG, semantic search, or similarity tasks. Best for production embedding generation.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "dspy",
+      "name": "dspy",
+      "source_path": "16-prompt-engineering/dspy/SKILL.md",
+      "category": "16-prompt-engineering",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 2,
+      "description": "Build complex AI systems with declarative programming, optimize prompts automatically, create modular RAG systems and agents with DSPy - Stanford NLP's framework for systematic LM programming",
+      "reference_paths": [
+        "references/examples.md",
+        "references/modules.md",
+        "references/optimizers.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "guidance",
+      "name": "guidance",
+      "source_path": "16-prompt-engineering/guidance/SKILL.md",
+      "category": "16-prompt-engineering",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 4,
+      "description": "Control LLM output with regex and grammars, guarantee valid JSON/XML/code generation, enforce structured formats, and build multi-step workflows with Guidance - Microsoft Research's constrained generation framework",
+      "reference_paths": [
+        "references/backends.md",
+        "references/constraints.md",
+        "references/examples.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "@guidance"
+      ],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "instructor",
+      "name": "instructor",
+      "source_path": "16-prompt-engineering/instructor/SKILL.md",
+      "category": "16-prompt-engineering",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 3,
+      "description": "Extract structured data from LLM responses with Pydantic validation, retry failed extractions automatically, parse complex JSON with type safety, and stream partial results with Instructor - battle-tested structured output library",
+      "reference_paths": [
+        "references/examples.md",
+        "references/providers.md",
+        "references/validation.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "outlines",
+      "name": "outlines",
+      "source_path": "16-prompt-engineering/outlines/SKILL.md",
+      "category": "16-prompt-engineering",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "tool-wrapper",
+      "training_relevance_score": 5,
+      "description": "Guarantee valid JSON/XML/code structure during generation, use Pydantic models for type-safe outputs, support local models (Transformers, vLLM), and maximize inference speed with Outlines - dottxt.ai's structured generation library",
+      "reference_paths": [
+        "references/backends.md",
+        "references/examples.md",
+        "references/json_generation.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "tool-specific skill or existing source catalog; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "langsmith-observability",
+      "name": "langsmith-observability",
+      "source_path": "17-observability/langsmith/SKILL.md",
+      "category": "17-observability",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 6,
+      "description": "LLM observability platform for tracing, evaluation, and monitoring. Use when debugging LLM applications, evaluating model outputs against datasets, monitoring production systems, or building systematic testing pipelines for AI applications.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "phoenix-observability",
+      "name": "phoenix-observability",
+      "source_path": "17-observability/phoenix/SKILL.md",
+      "category": "17-observability",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-adjacent",
+      "training_relevance_score": 6,
+      "description": "Open-source AI observability platform for LLM tracing, evaluation, and monitoring. Use when debugging LLM applications with detailed traces, running evaluations on datasets, or monitoring production AI systems with real-time insights.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing or experiment-adapter-builder",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "audiocraft-audio-generation",
+      "name": "audiocraft-audio-generation",
+      "source_path": "18-multimodal/audiocraft/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 8,
+      "description": "PyTorch library for audio generation including text-to-music (MusicGen) and text-to-sound (AudioGen). Use when you need to generate music from text descriptions, create sound effects, or perform melody-conditioned music generation.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "musicgen-stereo-*"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "blip-2-vision-language",
+      "name": "blip-2-vision-language",
+      "source_path": "18-multimodal/blip-2/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Vision-language pre-training framework bridging frozen image encoders and LLMs. Use when you need image captioning, visual question answering, image-text retrieval, or multimodal chat with state-of-the-art zero-shot performance.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "clip",
+      "name": "clip",
+      "source_path": "18-multimodal/clip/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "OpenAI's model connecting vision and language. Enables zero-shot image classification, image-text matching, and cross-modal retrieval. Trained on 400M image-text pairs. Use for image search, content moderation, or vision-language tasks without fine-tuning. Best for general-purpose image understanding.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "evaluating-cosmos-policy",
+      "name": "evaluating-cosmos-policy",
+      "source_path": "18-multimodal/cosmos-policy/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 12,
+      "description": "Evaluates NVIDIA Cosmos Policy on LIBERO and RoboCasa simulation environments. Use when setting up cosmos-policy for robot manipulation evaluation, running headless GPU evaluations with EGL rendering, or profiling inference latency on cluster or local GPU machines.",
+      "reference_paths": [
+        "references/libero-commands.md",
+        "references/robocasa-commands.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "LIBERO_CONFIG_PATH/config.yaml"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "llava",
+      "name": "llava",
+      "source_path": "18-multimodal/llava/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "Large Language and Vision Assistant. Enables visual instruction tuning and image-based conversations. Combines CLIP vision encoder with Vicuna/LLaMA language models. Supports multi-turn image chat, visual question answering, and instruction following. Use for vision-language chatbots or image understanding tasks. Best for conversational image analysis.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "fine-tuning-serving-openpi",
+      "name": "fine-tuning-serving-openpi",
+      "source_path": "18-multimodal/openpi/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 11,
+      "description": "Fine-tune and serve Physical Intelligence OpenPI models (pi0, pi0-fast, pi0.5) using JAX or PyTorch backends for robot policy inference across ALOHA, DROID, and LIBERO environments. Use when adapting pi0 models to custom datasets, converting JAX checkpoints to PyTorch, running policy inference servers, or debugging norm stats and GPU memory issues.",
+      "reference_paths": [
+        "references/checkpoints-and-env-map.md",
+        "references/config-recipes.md",
+        "references/pytorch-gotchas.md",
+        "references/remote-client-pattern.md",
+        "references/training-debugging.md"
+      ],
+      "input_hints": [
+        "transformers"
+      ],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "fine-tuning-openvla-oft",
+      "name": "fine-tuning-openvla-oft",
+      "source_path": "18-multimodal/openvla-oft/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 14,
+      "description": "Fine-tunes and evaluates OpenVLA-OFT and OpenVLA-OFT+ policies for robot action generation with continuous action heads, LoRA adaptation, and FiLM conditioning on LIBERO simulation and ALOHA real-world setups. Use when reproducing OpenVLA-OFT paper results, training custom VLA action heads (L1 or diffusion), deploying server-client inference for ALOHA, or debugging normalization, LoRA merge, and cross-GPU issues.",
+      "reference_paths": [
+        "references/aloha-workflow.md",
+        "references/config-troubleshooting.md",
+        "references/libero-workflow.md",
+        "references/paper-and-checkpoints.md"
+      ],
+      "input_hints": [
+        "num_images_in_input"
+      ],
+      "output_hints": [
+        "LIBERO_CONFIG_PATH"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "segment-anything-model",
+      "name": "segment-anything-model",
+      "source_path": "18-multimodal/segment-anything/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "Foundation model for image segmentation with zero-shot transfer. Use when you need to segment any object in images using points, boxes, or masks as prompts, or automatically generate all object masks in an image.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "stable-diffusion-image-generation",
+      "name": "stable-diffusion-image-generation",
+      "source_path": "18-multimodal/stable-diffusion/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 12,
+      "description": "State-of-the-art text-to-image generation with Stable Diffusion models via HuggingFace Diffusers. Use when generating images from text prompts, performing image-to-image translation, inpainting, or building custom diffusion pipelines.",
+      "reference_paths": [
+        "references/advanced-usage.md",
+        "references/troubleshooting.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "height",
+        "width"
+      ],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "whisper",
+      "name": "whisper",
+      "source_path": "18-multimodal/whisper/SKILL.md",
+      "category": "18-multimodal",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 7,
+      "description": "OpenAI's general-purpose speech recognition model. Supports 99 languages, transcription, translation to English, and language identification. Six model sizes from tiny (39M params) to large (1550M params). Use for speech-to-text, podcast transcription, or multilingual audio processing. Best for robust, multilingual ASR.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "knowledge-distillation",
+      "name": "knowledge-distillation",
+      "source_path": "19-emerging-techniques/knowledge-distillation/SKILL.md",
+      "category": "19-emerging-techniques",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 8,
+      "description": "Compress large language models using knowledge distillation from teacher to student models. Use when deploying smaller models with retained performance, transferring GPT-4 capabilities to open-source models, or reducing inference costs. Covers temperature scaling, soft targets, reverse KLD, logit distillation, and MiniLLM training strategies.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "long-context",
+      "name": "long-context",
+      "source_path": "19-emerging-techniques/long-context/SKILL.md",
+      "category": "19-emerging-techniques",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 8,
+      "description": "Extend context windows of transformer models using RoPE, YaRN, ALiBi, and position interpolation techniques. Use when processing long documents (32k-128k+ tokens), extending pre-trained models beyond original context limits, or implementing efficient positional encodings. Covers rotary embeddings, attention biases, interpolation methods, and extrapolation strategies for LLMs.",
+      "reference_paths": [
+        "references/extension_methods.md",
+        "references/fine_tuning.md",
+        "references/rope.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "model-merging",
+      "name": "model-merging",
+      "source_path": "19-emerging-techniques/model-merging/SKILL.md",
+      "category": "19-emerging-techniques",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 10,
+      "description": "Merge multiple fine-tuned models using mergekit to combine capabilities without retraining. Use when creating specialized models by blending domain-specific expertise (math + coding + chat), improving performance beyond single models, or experimenting rapidly with model variants. Covers SLERP, TIES-Merging, DARE, Task Arithmetic, linear merging, and production deployment strategies.",
+      "reference_paths": [
+        "references/coefficient-tuning.md",
+        "references/evaluation.md",
+        "references/examples.md",
+        "references/methods.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "model-pruning",
+      "name": "model-pruning",
+      "source_path": "19-emerging-techniques/model-pruning/SKILL.md",
+      "category": "19-emerging-techniques",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "Reduce LLM size and accelerate inference using pruning techniques like Wanda and SparseGPT. Use when compressing models without retraining, achieving 50% sparsity with minimal accuracy loss, or enabling faster inference on hardware accelerators. Covers unstructured pruning, structured pruning, N:M sparsity, magnitude pruning, and one-shot methods.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "moe-training",
+      "name": "moe-training",
+      "source_path": "19-emerging-techniques/moe-training/SKILL.md",
+      "category": "19-emerging-techniques",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "Train Mixture of Experts (MoE) models using DeepSpeed or HuggingFace. Use when training large-scale models with limited compute (5\u00d7 cost reduction vs dense models), implementing sparse architectures like Mixtral 8x7B or DeepSeek-V3, or scaling model capacity without proportional compute increase. Covers MoE architectures, routing mechanisms, load balancing, expert parallelism, and inference optimization.",
+      "reference_paths": [
+        "references/architectures.md",
+        "references/inference.md",
+        "references/training.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "speculative-decoding",
+      "name": "speculative-decoding",
+      "source_path": "19-emerging-techniques/speculative-decoding/SKILL.md",
+      "category": "19-emerging-techniques",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "training-core",
+      "training_relevance_score": 9,
+      "description": "Accelerate LLM inference using speculative decoding, Medusa multiple heads, and lookahead decoding techniques. Use when optimizing inference speed (1.5-3.6\u00d7 speedup), reducing latency for real-time applications, or deploying models with limited compute. Covers draft models, tree-based attention, Jacobi iteration, parallel token generation, and production deployment strategies.",
+      "reference_paths": [
+        "references/draft_model.md",
+        "references/lookahead.md",
+        "references/medusa.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "candidate: model-training-workflow source-routing/preflight/failure taxonomy/adapter handoff",
+      "integration_status": "pending_manual_review"
+    },
+    {
+      "skill_id": "academic-plotting",
+      "name": "academic-plotting",
+      "source_path": "20-ml-paper-writing/academic-plotting/SKILL.md",
+      "category": "20-ml-paper-writing",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "writing/figure",
+      "training_relevance_score": 2,
+      "description": "Generates publication-quality figures for ML papers from research context. Given a paper section or description, extracts system components and relationships to generate architecture diagrams via Gemini. Given experiment results or data, auto-selects chart type and generates data-driven figures via matplotlib/seaborn. Use when creating any figure for a conference paper.",
+      "reference_paths": [
+        "references/data-visualization.md",
+        "references/diagram-generation.md",
+        "references/style-guide.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "figures/gen_fig_<name>.py"
+      ],
+      "local_target": "existing research-writing/research-figure; no model-training import",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "ml-paper-writing",
+      "name": "ml-paper-writing",
+      "source_path": "20-ml-paper-writing/ml-paper-writing/SKILL.md",
+      "category": "20-ml-paper-writing",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "writing/figure",
+      "training_relevance_score": 2,
+      "description": "Write publication-ready ML/AI papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM. Use when drafting papers from research repos, structuring arguments, verifying citations, or preparing camera-ready submissions. For systems venues (OSDI, NSDI, ASPLOS, SOSP), use systems-paper-writing instead.",
+      "reference_paths": [
+        "references/checklists.md",
+        "references/citation-workflow.md",
+        "references/reviewer-guidelines.md",
+        "references/sources.md",
+        "references/writing-guide.md",
+        "templates/README.md",
+        "templates/icml2026/",
+        "templates/neurips2025/"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "experiments/",
+        "outputs/",
+        "results/"
+      ],
+      "local_target": "existing research-writing/research-figure; no model-training import",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "presenting-conference-talks",
+      "name": "presenting-conference-talks",
+      "source_path": "20-ml-paper-writing/presenting-conference-talks/SKILL.md",
+      "category": "20-ml-paper-writing",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "writing/figure",
+      "training_relevance_score": 1,
+      "description": "Generates conference presentation slides (Beamer LaTeX PDF and editable PPTX) from a compiled paper with speaker notes and talk script. Use when preparing oral talks, spotlight presentations, or invited talks for ML and systems conferences.",
+      "reference_paths": [
+        "references/slide-templates.md"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "existing research-writing/research-figure; no model-training import",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "systems-paper-writing",
+      "name": "systems-paper-writing",
+      "source_path": "20-ml-paper-writing/systems-paper-writing/SKILL.md",
+      "category": "20-ml-paper-writing",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "writing/figure",
+      "training_relevance_score": 3,
+      "description": "Comprehensive guide for writing systems papers targeting OSDI, SOSP, ASPLOS, NSDI, and EuroSys. Provides paragraph-level structural blueprints, writing patterns, venue-specific checklists, reviewer guidelines, LaTeX templates, and conference deadlines. Use this skill for all systems conference paper writing.",
+      "reference_paths": [
+        "references/checklist.md",
+        "references/reviewer-guidelines.md",
+        "references/section-blueprints.md",
+        "references/systems-conferences.md",
+        "references/writing-patterns.md",
+        "templates/asplos2027/",
+        "templates/nsdi2027/",
+        "templates/osdi2026/",
+        "templates/sosp2026/"
+      ],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "existing research-writing/research-figure; no model-training import",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "brainstorming-research-ideas",
+      "name": "brainstorming-research-ideas",
+      "source_path": "21-research-ideation/brainstorming-research-ideas/SKILL.md",
+      "category": "21-research-ideation",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "research-orchestration",
+      "training_relevance_score": 2,
+      "description": "Guides researchers through structured ideation frameworks to discover high-impact research directions. Use when exploring new problem spaces, pivoting between projects, or seeking novel angles on existing work.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "existing research-ideation/research-experiment; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "creative-thinking-for-research",
+      "name": "creative-thinking-for-research",
+      "source_path": "21-research-ideation/creative-thinking-for-research/SKILL.md",
+      "category": "21-research-ideation",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "research-orchestration",
+      "training_relevance_score": 4,
+      "description": "Applies cognitive science frameworks for creative thinking to CS and AI research ideation. Use when seeking genuinely novel research directions by leveraging combinatorial creativity, analogical reasoning, constraint manipulation, and other empirically grounded creative strategies.",
+      "reference_paths": [],
+      "input_hints": [],
+      "output_hints": [],
+      "local_target": "existing research-ideation/research-experiment; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "ara-compiler",
+      "name": "ara-compiler",
+      "source_path": "22-agent-native-research-artifact/compiler/SKILL.md",
+      "category": "22-agent-native-research-artifact",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "research-orchestration",
+      "training_relevance_score": 5,
+      "description": "Compiles any research input \u2014 PDF papers, GitHub repositories, experiment logs, code directories, or raw notes \u2014 into a complete Agent-Native Research Artifact (ARA) with cognitive layer (claims, concepts, heuristics), physical layer (configs, code stubs), exploration graph, and grounded evidence. Use when ingesting a paper or codebase into a structured, machine-executable knowledge package, building an ARA from scratch, or converting research outputs into a falsifiable, agent-traversable form.",
+      "reference_paths": [
+        "references/ara-schema.md",
+        "references/exploration-tree-spec.md",
+        "references/validation-checklist.md"
+      ],
+      "input_hints": [
+        "logic/solution/architecture.md"
+      ],
+      "output_hints": [
+        "--output <dir>",
+        "./ara-output/",
+        "/src/",
+        "logic/solution/architecture.md"
+      ],
+      "local_target": "existing research-ideation/research-experiment; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "ara-research-manager",
+      "name": "ara-research-manager",
+      "source_path": "22-agent-native-research-artifact/research-manager/SKILL.md",
+      "category": "22-agent-native-research-artifact",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "research-orchestration",
+      "training_relevance_score": 3,
+      "description": "Records research provenance as a post-task epilogue, scanning conversation history at the end of a coding or research session to extract decisions, experiments, dead ends, claims, heuristics, and pivots, and writing them into the ara/ directory with user-vs-AI provenance tags. Use as a session epilogue \u2014 never during execution \u2014 to maintain a faithful, auditable trace of how a research project actually evolved.",
+      "reference_paths": [
+        "references/event-taxonomy.md",
+        "references/provenance-tags.md",
+        "references/session-protocol.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "ara/",
+        "ara/trace/sessions/YYYY-MM-DD_NNN.yaml"
+      ],
+      "local_target": "existing research-ideation/research-experiment; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    },
+    {
+      "skill_id": "ara-rigor-reviewer",
+      "name": "ara-rigor-reviewer",
+      "source_path": "22-agent-native-research-artifact/rigor-reviewer/SKILL.md",
+      "category": "22-agent-native-research-artifact",
+      "source_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+      "classification": "research-orchestration",
+      "training_relevance_score": 3,
+      "description": "Performs ARA Seal Level 2 semantic epistemic review on Agent-Native Research Artifacts, scoring six dimensions (evidence relevance, falsifiability, scope calibration, argument coherence, exploration integrity, methodological rigor) and producing a constructive, severity-ranked report with a Strong Accept-to-Reject recommendation. Use after Level 1 structural validation passes, when an ARA needs an objective epistemic critique before publication or release.",
+      "reference_paths": [
+        "references/review-dimensions.md"
+      ],
+      "input_hints": [],
+      "output_hints": [
+        "level2_report.json",
+        "read_order"
+      ],
+      "local_target": "existing research-ideation/research-experiment; no model-training import by default",
+      "integration_status": "waived_or_existing_owner"
+    }
+  ]
+}
