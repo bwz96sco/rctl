@@ -20,6 +20,8 @@ assessment: inconclusive
 - Evidence references: <logs, inputs, outputs, environment, health and metrics>
 - Failed or null runs: <references and interpretation, or explicit none>
 - Aggregation: <frozen policy and actual calculation>
+- Actual scale and coverage: <completed/assigned original cases or clusters, arms, repeats and missing outcomes>
+- Scale adequacy: <uncertainty or coverage relative to the intended decision; distinguish scientific evidence from a spending stop>
 - Baseline relation: <comparison to the fixed baseline ID/version and any separately labeled enhanced control>
 - Information condition: <shared/generated records and actual diagnostic assistance>
 - Endpoint results: <primary result, paired gains/regressions and costs; secondary/diagnostic results separately>

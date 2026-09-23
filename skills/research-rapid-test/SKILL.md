@@ -49,7 +49,7 @@ and announce them before executing:
 | Preparation before launching the first meaningful test | At most 20 minutes |
 | First interpretable method-versus-control result | Aim for 2 hours or less |
 | Total time on one idea | 4 hours, including setup, retries, debugging and analysis |
-| Initial material | 1–3 favorable, informative cases |
+| Initial material | 1–3 favorable cases for a mechanism test; size an opportunity/performance screen for its decision |
 | Method revisions after the first result | One concrete rescue attempt |
 
 Carry consumed time and calls across resumptions. Choose a small call/compute
@@ -62,14 +62,15 @@ an unavailable measurement into a scientific refutation.
 
 ## State the bet, then run it
 
-Before coding, put these six short lines in the conversation and the trial note:
+Before coding, use the [scale rationale](#size-the-test-for-its-decision) to choose
+counts, then put these six short lines in the conversation and the trial note:
 
 1. **Bet:** The idea's actual additional processing step should cause this result.
-2. **Best opportunity:** The case/property where it has the strongest reason to help.
+2. **Best opportunity:** The case/property where it has the strongest reason to help, with case/structure and repeat counts.
 3. **Main comparison:** The fixed control version/source, what each arm does, and which generated information remains private to each arm.
 4. **Visible win:** The concrete output difference that would justify more work.
 5. **Implementation shortcut:** The smallest runnable version and reused assets.
-6. **Stop:** Time/call allowance and what would justify the single rescue attempt.
+6. **Stop:** Time/call allowance, planned batches, what would justify the single rescue attempt, and when evidence would remain inconclusive.
 
 A method needs an executable difference, not merely a new name or an action log.
 For pipeline benefit, compare complete methods from their raw inputs and keep
@@ -94,8 +95,8 @@ Run the intervention and a credible inexpensive control. Prefer an existing
 runnable control; a simple implementation or labeled approximation is enough to
 start. Full reproduction of several published baselines can wait. Give the arms
 comparable starting inputs, tools and total effort; record material differences.
-Controls may independently discover the same strategy. Exact token equalization or
-statistical power calculations must not consume the pilot. If the control saves
+Controls may independently discover the same strategy. Exact token equalization
+and publication-level power analysis must not consume the pilot. If the control saves
 an analysis call, let it use the allowance for its own review or improvement.
 
 Reuse available data, scripts, models and evaluators. Write disposable code in a
@@ -104,6 +105,35 @@ the observable difference; no general framework is needed. Add a preparatory
 check only if you can name the imminent failure it detects and the action it
 would change. If setup consumes its allowance, simplify, substitute an available
 component, or stop that direction for now.
+
+## Size the test for its decision
+
+Before fixing the run count, add a short scale rationale to the existing bet.
+Keep it within preparation; about 5–10 minutes is usually enough:
+
+- Name the decision: find an opportunity, demonstrate a mechanism on favorable
+  cases, or screen a final-performance gain. A few favorable cases support a
+  mechanism story; population claims need broader evidence.
+- Count independent cases/structures separately from repeats. Use repeats to
+  probe run variability and new cases for coverage. Keep controls and input
+  conditions comparable across batches so evidence can accumulate.
+- Estimate the opportunity rate and plausible repair/regression or effect size
+  from compatible evidence, or state a range of assumptions. Check whether the
+  proposed scale is likely to expose the signal: for independent cases, missing
+  all failures has probability `(1-f)^n`; expected gains/regressions or a simple
+  sensitivity range often suffice. Use direct coverage reasoning for constructed
+  or deterministic tests rather than inventing a population failure rate.
+- Check that cases × arms × repeats fit the call/time allowance, including
+  screening, fresh controls, retries and review. A control draw used to select a
+  failure is admission evidence; use fresh draws for the treatment comparison.
+- Declare which outcomes support benefit, a tested implementation failure,
+  no observed opportunity, or insufficient information. Plan any next batch
+  within the allowance before seeing results; a small first batch is an
+  observation point unless its stopping rule is justified for the decision.
+
+If the useful scale does not fit, narrow the question, target an evidenced
+opportunity or propose a larger allowance. Preserve a supplied budget. A noisy
+small tie or a pool without control failures cannot establish method failure.
 
 ## Inspect the result and decide
 
@@ -119,7 +149,10 @@ keep diagnostic metrics and secondary gains distinct. A single-control screen
 cannot establish method benefit. Bound a tie by its control version and assistance:
 a shared-information ablation does not test the production of that information.
 
-Make one of these decisions and act on it:
+Record the evidence conclusion separately from the spending decision. No observed
+opportunity leaves the intervention untested; inadequate precision is inconclusive.
+Both can justify stopping expenditure without rejecting the method scientifically.
+Make one of these spending decisions and act on it:
 
 - **PROMOTE:** A concrete useful effect is visible and has a plausible connection
   to the mechanism. If a cheap repeat or nearby case could expose a lucky result,

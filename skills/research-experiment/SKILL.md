@@ -28,11 +28,33 @@ untested complete-method claim. When choosing controls or interpreting results,
 read applicable project guidance such as `research/guidelines/comparison-design.md`
 where present for evaluation boundaries, baseline corrections and interpretation.
 
+## Scale and claim adequacy
+
+Before freezing counts, complete the contract's scale assessment. State the
+decision/population, independent case or cluster unit, repeats, worthwhile effect
+or required precision, supporting assumptions and executable budget. Use compatible
+pilot evidence or a sensitivity range for unknown error rates and variance.
+
+For statistical superiority, noninferiority or equivalence claims, justify scale
+with the relevant paired/clustered uncertainty or power calculation and planned
+interim rules. Separate sample-size planning data from untouched confirmation
+when outcomes informed the design. For a prescribed reproduction, retain its
+protocol and bound the inference; for a deterministic mechanism test, justify
+coverage instead of imposing a statistical power gate.
+
+If the budget cannot support the intended claim, narrow the claim or propose a
+revised allowance before execution. Predeclare what would remain inconclusive;
+no significant gain is not evidence of equivalence. A failure-selected control
+draw is admission evidence, not the failed comparator for estimating benefit.
+Report achieved scale, missing outcomes and uncertainty at closeout. A budget
+stop can complete the task with an inconclusive result; it does not refute the
+method. Count repeats and parameter variants separately from independent problems.
+
 ## Workflow
 
 1. **Establish authority.** Use `supplied` for a user-specified experiment, protocol, reproduction, or existing method. Use `problem` for an independently supplied failure or mechanism test; no ideation artifact is required. Use `candidate` only when the experiment actually follows idea evaluation; require the selected `C#` brief in `decision.md` without changing it. If a rapid test intervened, retain that original selection and link its preliminary result; it does not replace the formal contract or verification.
 2. **Open or resume the rctl task.** Read the project's `.agents/skills/research-task/SKILL.md`; initialize a missing project scaffold with `rctl init` within the authorized project root. Inspect `rctl status TASK` and the existing contract before dependent work. For a new experiment use `rctl task new tasks/SLUG --kind analysis --title TITLE`, then adapt `assets/experiment-contract.md` while preserving the generated task ID. Advice, inspection, and fixed-wording mechanical transformations may stay inline.
-3. **Freeze the comparison before execution.** Fill one bounded claim contract: question, null or anti-win condition, origin, baseline and source, intervention, dataset and split, metric and evaluator, seed and aggregation policy, total budget, stop conditions, expected evidence, and one compact run matrix. Preserve a supplied total budget; unresolved allocation stays unresolved. Use no more than six stop/kill/relaunch/fallback rules and separate smoke checks from claim-carrying runs. Fill native frontmatter criteria with actual command inputs and evidence-based reviews, run `rctl contract check TASK` for structure, then `rctl begin TASK` before claim-carrying execution.
+3. **Freeze the comparison before execution.** Fill one bounded claim contract: question, null or anti-win condition, origin, baseline and source, intervention, dataset and split, metric and evaluator, seed and aggregation policy, scale assessment, total budget, stop conditions, expected evidence, and one compact run matrix. Preserve a supplied total budget; unresolved allocation stays unresolved. Use no more than six stop/kill/relaunch/fallback rules and separate smoke checks from claim-carrying runs. Fill native frontmatter criteria with actual command inputs and evidence-based reviews, run `rctl contract check TASK` for structure, then `rctl begin TASK` before claim-carrying execution.
 4. **Execute through the project runner.** Preserve actual run IDs, commands, configs, code state, environment, inputs, outputs, health evidence, retries, failures, and null results in runner-owned artifacts. Keep run-by-run history out of the frozen contract. A launch is healthy only when evidence shows real workload progress. Consult research-computation only for a concrete numerical or scientific-software validity question, reusing checks already performed; it adds no mandatory phase or separate report. Use research-task for handoff and phase.
 5. **Amend explicitly.** Before dependent execution, apply research-task's `rctl amend TASK --reason TEXT` workflow for material baseline, intervention, data/split, evaluator, seed/aggregation, budget, or claim changes. Preserve prior values and the reason; mark affected run-matrix rows with their governing revision. If the scientific question changes, end the current task honestly and create a new one; do not claim successful closure merely to move on.
 6. **Build the result.** Use `assets/result-template.md` for the task-local `result.md`, retaining native schema fields and the current contract revision. Record every actual run, governing revisions, evidence references, aggregation, baseline relation, comparability, deviations, supported claim, claims not made, and next action. Multiple seeds without a frozen aggregation or claim rule support seed-level observations only; the aggregate claim remains inconclusive. Use `not_supported` for a bounded negative result; unresolved work remains inconclusive or open according to the criteria.

@@ -30,7 +30,7 @@ criteria:
 - Origin type: <supplied|problem|candidate>
 - Origin ID: <stable-id-or-C#>
 - Experiment role: <bounded-role; problem_validation for a problem origin>
-- Null or anti-win condition: <operationalized negative result>
+- Null or anti-win condition: <operationalized negative result; distinguish insufficient coverage or precision>
 
 ## Scope
 
@@ -42,6 +42,15 @@ criteria:
 - Metric and evaluator: <primary endpoint, separate secondary/diagnostic metrics, direction and evaluator>
 - Seeds and aggregation policy: <seeds, aggregation, selection and claim rule>
 - Expected evidence locations: <runner and task-relative evidence paths>
+
+## Scale assessment
+
+- Decision and population: <opportunity, mechanism, performance or publication claim; target population>
+- Independent units and repeats: <original cases/clusters, coverage, arms and repeats; distinguish variants>
+- Worthwhile effect or precision: <decision-changing difference or uncertainty; for deterministic tests, required coverage>
+- Scale rationale: <compatible pilot evidence or assumption range; miss risk, expected signal, paired/clustered power or supplied reproduction protocol, as applicable>
+- Execution capacity: <cases × arms × repeats and likely calls/runtime, including screening, fresh controls, retries and review>
+- Decision limits: <positive, negative and inconclusive outcomes; planned batches/analyses and budget stop; no automatic sample growth>
 
 ## Constraints
 
