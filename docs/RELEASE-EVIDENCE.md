@@ -20,6 +20,7 @@ Historical passes do not certify a later implementation or host version.
 | M8 / v0.5, 2026-09-14; release pending | Governing-question alignment, scoped assessments and record compatibility | [M8 verification](M8-VERIFICATION.md) |
 | Simplification follow-up, 2026-09-14; locally validated, unreleased | Routed skill, immutable snapshots, concise reminders and Astra use | [Simplification verification](SIMPLIFICATION-VERIFICATION.md) |
 | v0.5.1 preparation, 2026-09-23; unreleased | Comparison guidance review, evidence ownership, shared skill simplification and version distinction | [Comparison review follow-up](COMPARISON-REVIEW-FOLLOWUP.md) |
+| v0.5.1 deployment, 2026-09-23; source `84c4779` | Four CI jobs, clean-source wheel installation and scoped OR reconciliation | [Deployment record](V0.5.1-DEPLOYMENT.md) |
 
 Current work and release/deployment order belong in [DEVELOPMENT](DEVELOPMENT.md).
 Preparation-stage and cross-cutting limitations remain in [READINESS](READINESS.md#limitations).

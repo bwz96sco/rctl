@@ -1,8 +1,15 @@
 # Development Plan
 
-## Current increment
+## Latest deployment
 
-Prepare v0.5.1 from the locally committed training migration (`1c098df`) and
+v0.5.1 source `84c4779` is pushed, passed all four CI jobs, and is installed in the
+global tool environment. The authorized OR task-skill and guidance merge is also
+complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
+currentness and additional reminder coverage remain separate runtime work.
+
+## Completed release preparation
+
+Prepared v0.5.1 from the training migration (`1c098df`) and
 comparison-template follow-up (`0140b19`). Restore route-entry granularity,
 separate open-question ownership, explain evidence for living guidance, and
 shorten shared comparison instructions using generic terminology. Read short
@@ -12,8 +19,8 @@ markers and existing invocation policies.
 Use A-01/A-02 for draft compatibility and A-21/A-22/A-23/A-24/A-29 for resource
 delivery and preservation, plus the full release checks. The version bump leaves
 currentness behavior unchanged: closed tasks may show a version-only stale report
-without losing historical closure. Runtime display changes, reminder coverage and
-live OR reconciliation are separate follow-ups. The
+without losing historical closure. Runtime display changes and reminder coverage
+are separate follow-ups. The
 [review record](COMPARISON-REVIEW-FOLLOWUP.md) records decisions and validation.
 
 ## Included source increments
