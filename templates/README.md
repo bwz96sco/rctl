@@ -6,7 +6,15 @@ Use [state.md](state.md) only when work pauses or a handoff helps. Its explicit 
 
 A task needs contract and result records; the machine acceptance record is produced by rctl. Review-input JSON is needed only for review criteria. It records the judgment used by verification and does not own a second result. Hook receipts and host launch fixtures belong to integration testing, not every task.
 
-Scientific requirements come from the project and relevant research skills. For a comparison, add baseline, intervention, data/split, metric direction, aggregation/selection, budget, and stopping rules to the contract body before dependent work. Do not copy historical compute budgets as new execution authorization.
+Scientific requirements come from the project and relevant research skills. For a
+comparison, identify its purpose, fixed baseline versions, intervention, shared raw
+inputs/private generated information, assistance, development/test split, primary
+metric, aggregation/selection, budget and stopping rules in the existing contract
+body. Use the [comparison guidance](project/research/guidelines/comparison-design.md).
+Enhanced controls and shared-information ablations retain separate identities and
+do not replace the main comparison. These are authoring/review responsibilities,
+not additional mandatory schema fields for every task. Do not copy historical
+compute budgets as new execution authorization.
 
 Put the governing question in the `- Question:` field supplied by the template.
 For legacy prose contracts, rctl uses the first nonempty paragraph of `## Question`;
@@ -37,6 +45,7 @@ the task directory, plus `result.md`.
 ## Project and vault scaffolding
 
 `rctl init` reads `project/research/`; optional `--vault PATH` reads `vault/` only when
-creating a new vault. Existing files are preserved. The five research files describe
-durable intent, resources, baselines, and routes; vault templates hold linked scientific
+creating a new vault. Existing files are preserved. The research files describe
+durable intent, open problems/methods, resources, baseline identities, scoped routes
+and comparison guidance; vault templates hold linked scientific
 notes. The packaged research-task skill explains workspace and migration boundaries.

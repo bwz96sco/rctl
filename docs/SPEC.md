@@ -43,7 +43,14 @@ Both are UTF-8 Markdown with one leading YAML frontmatter block delimited by `--
 
 Contract frontmatter contains `schema_version`, `task_id`, `title`, `kind`, and `criteria`. Criterion IDs are unique within a contract and stable when the underlying requirement is unchanged. Every criterion is required. Each has a requirement, evidence references, a named failure action, and either a command or review method. Local command inputs must be explicit. The body carries the scientific question and boundaries, not a second copy of the criteria.
 
-A comparison contract must state baseline, intervention, data/split, metric direction and evaluator, aggregation/selection rule, budget, and stop conditions in its body. A review must assess their adequacy; heading presence cannot establish scientific completeness. Existing user instructions can supply authority; `begin` is not a new permission request.
+A comparison contract must state its purpose, fixed baseline versions, intervention,
+shared inputs/private generated information and assistance, development/test split,
+primary metric and evaluator, aggregation/selection rule, budget and stop conditions
+in its body. Enhanced controls and shared-information ablations retain their own
+identities and bounded interpretations. A review must assess adequacy; heading
+presence cannot establish scientific completeness. These are scientific authoring
+requirements, not new schema fields or automatic scientific verdicts. Existing user
+instructions can supply authority; `begin` is not a new permission request.
 
 Result frontmatter contains `schema_version`, `task_id`, `contract_revision`, and `assessment` (`supported`, `not_supported`, `inconclusive`, or `not_applicable`). These are interpretations, not task phases or check verdicts. A result may contain a scientific failure while its verification passes.
 
@@ -225,7 +232,13 @@ Task lifecycle commands do not change global configuration, scientific knowledge
 
 ## 10. Project initialization (v0.2)
 
-`init` operates on the existing explicitly selected project root. It creates `tasks/`, the five `research/` orientation templates, `.agents/skills/research-task/`, and `.rctl/project.json` with schema version 1 and a nullable project-relative `vault` path. This is static configuration, not a task record or implicit current-task selection. The CLI remains usable without initialization.
+`init` operates on the existing explicitly selected project root. It creates
+`tasks/`, the packaged `research/` orientation and comparison-guidance templates,
+`.agents/skills/research-task/`, and `.rctl/project.json` with schema version 1 and a
+nullable project-relative `vault` path. The research scaffold includes the
+problem/method overview as well as program, inventory, baselines and routes.
+This is static configuration, not a task record or implicit current-task selection.
+The CLI remains usable without initialization.
 
 `--vault PATH` selects an in-root directory outside control directories. A new vault receives packaged note templates and ownership instructions; an existing directory is associated without modifying its contents. Omitting the option preserves an existing binding; an explicitly different binding is rejected before writes, with manual reviewed migration required. Unknown manifest fields/versions reject initialization.
 

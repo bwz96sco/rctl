@@ -2,6 +2,14 @@
 
 ## Current increment
 
+The September23 comparison-template follow-up adds project problem/method and
+comparison-guidance scaffolds, scopes route decisions and control versions, and
+updates native task authoring plus research-task references. Use A-21/A-22/A-24
+for affected initialization/preservation/template checks. CLI, schemas, task
+phases and host integration are unchanged. Source validation is distinct from
+installed-wheel delivery and release; see
+[COMPARISON-TEMPLATE-FOLLOWUP.md](COMPARISON-TEMPLATE-FOLLOWUP.md).
+
 The 2026-09-21 source-management follow-up adds experiment-adapter-builder and
 model-training-workflow, including their validators, fixtures and pinned source
 audit. Use M5/A-23/A-24 for packaged resources and A-21/A-29 for task-only

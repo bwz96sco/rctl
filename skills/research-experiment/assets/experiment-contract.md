@@ -34,16 +34,18 @@ criteria:
 
 ## Scope
 
-- Baseline and source: <baseline and provenance>
+- Comparison purpose: <complete-method benefit, conditional ablation, diagnosis/problem validation, or control screen>
+- Baseline and source: <fixed ID/version, provenance and settings; distinguish main, published and enhanced controls>
 - Intervention: <one bounded change>
-- Dataset and split: <fixed data and split>
-- Metric and evaluator: <definition, direction, evaluator>
+- Information boundary: <shared raw inputs/tools, private generated records, permitted feedback and any diagnostic assistance>
+- Dataset and split: <fixed data, development exposure and held-out split>
+- Metric and evaluator: <primary endpoint, separate secondary/diagnostic metrics, direction and evaluator>
 - Seeds and aggregation policy: <seeds, aggregation, selection and claim rule>
 - Expected evidence locations: <runner and task-relative evidence paths>
 
 ## Constraints
 
-- Total budget: <supplied total and allocation; mark unresolved allocation>
+- Total budget: <supplied total and comparable per-arm generation/execution allowances; mark unresolved allocation>
 - Authorization and data boundaries: <existing authorization and storage policy>
 
 ## Stop conditions
@@ -60,4 +62,5 @@ criteria:
 ## Amendments
 
 Use rctl amend before dependent work; retain prior agreement in rctl's revision history.
-Describe changed values, reason, and comparability impact here. None at initial revision.
+Describe changed values, reason, and comparability impact here. Added enhanced controls
+retain distinct versions and the original main comparison. None at initial revision.

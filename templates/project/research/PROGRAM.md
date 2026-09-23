@@ -8,7 +8,7 @@ This file owns slow-changing scientific intent. Keep active tasks, run status, a
 
 ## Current guidance
 
-<Keep current corrections and decision constraints concise; link their evidence and scope. Update this section when guidance changes, retaining the detailed history in its existing source.>
+<Keep the current research decision and comparison corrections concise; link their evidence and scope. Use PROBLEM_METHODS.md for unresolved opportunities and guidelines/comparison-design.md for baseline/information boundaries. Retain detailed history outside this section.>
 
 ## Success Definition
 

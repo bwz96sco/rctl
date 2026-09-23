@@ -7,12 +7,16 @@ records durable scientific context, not live experiment or task status.
 
 1. [`PROGRAM.md`](PROGRAM.md) — scientific goal, success criteria, evaluation
    surfaces, constraints, and open questions.
-2. [`INVENTORY.md`](INVENTORY.md) — verified datasets, checkpoints, code,
+2. [`PROBLEM_METHODS.md`](PROBLEM_METHODS.md) — problems, candidate mechanisms,
+   actual coverage and unresolved questions.
+3. [`INVENTORY.md`](INVENTORY.md) — verified datasets, checkpoints, code,
    environments, and infrastructure.
-3. [`BASELINES.md`](BASELINES.md) — comparable evaluation contracts and audited
+4. [`BASELINES.md`](BASELINES.md) — fixed comparison identities and audited
    baseline evidence.
-4. [`ROUTES.md`](ROUTES.md) — refuted, parked, and not-executed mechanisms plus
-   the evidence required to reopen them.
+5. [`ROUTES.md`](ROUTES.md) — opportunities and scoped implementation decisions,
+   including the evidence needed for further work.
+6. [`comparison-design.md`](guidelines/comparison-design.md) — complete methods,
+   fixed controls, information boundaries and conditional ablations.
 
 Run `rctl context` for project guidance even before selecting a task. Reminders read
 PROGRAM.md's Goal and optional Current guidance, plus ROUTES.md's Reuse Rule.
@@ -34,9 +38,11 @@ decision. A campaign note may explain the scientific sequence; each task retains
 |---|---|
 | `research/README.md` | Static entry point and reading order; never live status |
 | `research/PROGRAM.md` | Slow-changing scientific intent |
+| `research/PROBLEM_METHODS.md` | Open problems, method coverage and unresolved opportunities |
 | `research/INVENTORY.md` | Verified resource availability |
-| `research/BASELINES.md` | Audited comparable contracts and baselines |
-| `research/ROUTES.md` | Refuted, parked, or not-executed mechanism-level directions |
+| `research/BASELINES.md` | Versioned comparison contracts and baseline evidence |
+| `research/ROUTES.md` | Scoped opportunities and investment decisions; not task lifecycle |
+| `research/guidelines/comparison-design.md` | Comparison and interpretation guidance |
 | `rctl tasks/` | Active plans, execution state, task-local outcomes, and next decisions |
 | `__VAULT_LOCATION__` | Long-form interpretation and literature notes |
 | `Project runner storage` | Raw logs, predictions, metrics, and checkpoints |
@@ -46,5 +52,5 @@ When sources disagree, use the source that owns that kind of truth.
 ## Update Policy
 
 Do not copy process state, accelerator state, ETAs, or partial metrics into this
-directory. At task closeout, update only the control file whose durable truth
-changed; otherwise keep the conclusion in the task outcome.
+directory. Update the owner whose durable truth changed when established, with
+evidence and scope; keep per-run results in the task outcome and linked notes.

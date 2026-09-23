@@ -24,9 +24,16 @@ criteria:
 
 <Included work, expected deliverable, starting evidence, and boundaries. For experiments, cite related routes, the substantive difference or reopen condition, and the decision new evidence would change.>
 
+For comparisons, distinguish complete-method benefit from conditional ablation or
+diagnosis; name fixed control versions, generated/shared information and the primary
+endpoint.
+
 ## Constraints
 
 <Existing authorization, resources/budget, data boundaries, and any fixed comparison rules.>
+
+For comparisons, distinguish development exposure, test-time feedback and final
+evaluation; preserve total per-arm effort and control versions.
 
 ## Stop conditions
 

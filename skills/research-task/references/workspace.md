@@ -10,7 +10,8 @@ Choose the vault on first initialization. `.rctl/project.json` records only that
 binding; changing it later requires an explicit reviewed edit and any necessary note moves.
 The CLI remains usable without initialization.
 
-Initialization creates missing `tasks/`, five `research/` orientation files, and this
+Initialization creates missing `tasks/`, packaged `research/` orientation and
+comparison-guidance files, and this
 project-local skill. It preserves existing files and reports them. An existing vault is
 associated without editing its contents; a new vault receives note templates and guidance.
 All generated files and vault paths stay inside the selected root. No Git repositories,
@@ -60,9 +61,12 @@ that task owns machine acceptance and phase. Link notes to these files instead o
 live status. `rctl task list [--phase active]` discovers immediate task directories under `tasks/`;
 other task locations still require explicit paths. Large raw evidence stays with the runner and is referenced explicitly.
 
-Project `research/` files contain slow-changing scientific intent, verified resources,
-audited baselines, and refuted/parked/unexecuted routes. Promote only established findings
-at closeout. A vault index is navigation, not an acceptance ledger.
+Project `research/` files contain slow-changing scientific intent, open problems
+and method opportunities, verified resources, versioned baselines, comparison
+guidance and scoped route decisions. Keep candidate opportunities distinct from
+authorized task execution and stopped implementations distinct from closed problem
+classes. Update established corrections with evidence and scope when learned.
+A vault index is navigation, not an acceptance ledger.
 
 ## Existing-project migration
 

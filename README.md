@@ -79,6 +79,13 @@ evidence. Task contract/result/state and machine acceptance remain under `tasks/
 guidance now ships in [research-task](skills/research-task/references/workspace.md).
 No live project migration, Git setup, or host trust grant occurs during initialization.
 
+The source scaffold includes a problem/method overview and comparison guidance.
+ROUTES separates open opportunities from scoped implementation stops; BASELINES
+identifies fixed and enhanced control versions. Task templates prompt the actual
+information conditions and endpoint without adding scientific schema fields.
+Installed CLI assets change only with a package upgrade; source edits and skill
+symlinks do not upgrade an existing wheel installation.
+
 ## Project guidance before task selection
 
 `rctl context` without a selected task reads `research/PROGRAM.md` (Goal and optional

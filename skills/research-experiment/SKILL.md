@@ -13,6 +13,29 @@ long-form interpretation. `research/` receives durable facts promoted at closeou
 For an early feasibility or promote-or-drop request, use `research-rapid-test` before
 this formal workflow. A pilot is not a prerequisite for a supplied formal experiment.
 
+## Comparison scope
+
+For method-benefit studies, keep a named main baseline version fixed across the
+comparison and identify the closest published baseline separately from a local
+free-repair control. Record each arm's public inputs, tools, generated evidence,
+feedback and total budget. The intervention produces its own intermediate records;
+giving those records to the control tests downstream use, not the complete pipeline.
+Controls may independently discover the same strategy within their allowance.
+
+Added lessons, case-specific diagnoses or new output-selection policies create
+separate enhanced controls. Preserve the original comparison; scope each tie to
+its actual information condition. Generic lessons fixed on development data can
+be a legitimate held-out baseline. Test-time manual diagnostic assistance is
+different, even when no reference answer appears in a prompt. Explicit baseline
+bug fixes retain prior results and identify which pairs need rerunning.
+
+Separate development, test-time observations and final evaluation. Retain the
+declared primary endpoint, regressions and compute alongside secondary/diagnostic
+metrics. Cases used to tune either arm cannot substantiate unseen transfer; repeated
+runs are not independent original cases. A shared-information ablation or a
+single-control screen cannot close an untested complete mechanism. Use applicable
+project comparison guidance when choosing controls or interpreting such results.
+
 ## Workflow
 
 1. **Establish authority.** Use `supplied` for a user-specified experiment, protocol, reproduction, or existing method. Use `problem` for an independently supplied failure or mechanism test; no ideation artifact is required. Use `candidate` only when the experiment actually follows idea evaluation; require the selected `C#` brief in `decision.md` without changing it. If a rapid test intervened, retain that original selection and link its preliminary result; it does not replace the formal contract or verification.
@@ -22,7 +45,7 @@ this formal workflow. A pilot is not a prerequisite for a supplied formal experi
 5. **Amend explicitly.** Before dependent execution, apply research-task's `rctl amend TASK --reason TEXT` workflow for material baseline, intervention, data/split, evaluator, seed/aggregation, budget, or claim changes. Preserve prior values and the reason; mark affected run-matrix rows with their governing revision. If the scientific question changes, end the current task honestly and create a new one; do not claim successful closure merely to move on.
 6. **Build the result.** Use `assets/result-template.md` for the task-local `result.md`, retaining native schema fields and the current contract revision. Record every actual run, governing revisions, evidence references, aggregation, baseline relation, comparability, deviations, supported claim, claims not made, and next action. Multiple seeds without a frozen aggregation or claim rule support seed-level observations only; the aggregate claim remains inconclusive. Use `not_supported` for a bounded negative result; unresolved work remains inconclusive or open according to the criteria.
 7. **Validate and close through research-task.** Use this skill's actual installed directory as `<experiment-skill>` and run `uv run --no-project --script "<experiment-skill>/scripts/validate-result.py" TASK`; add `--decision PATH/decision.md` only for candidate provenance. Candidate validation requires the `research-idea-evaluation` package beside this package under the same skills root; supplied/problem origins need no such dependency. This checks domain structure and candidate lineage only. Inspect actual evidence, run the contract's execution checks and attributed reviews with `rctl verify`, and use `rctl close` only after current machine acceptance passes. A domain validator passing is insufficient for closure. Return minimum trust-bearing evidence with the result.
-8. **Promote durable truth.** Update only the changed owner: `research/PROGRAM.md`, `INVENTORY.md`, `BASELINES.md`, or `ROUTES.md`. Never copy live task status, partial metrics, or execution history into these files. Vault interpretation notes link to the task and runner artifacts.
+8. **Promote durable truth.** Update the project's named owners for intent, open problems/methods, resources, baseline identities and route decisions (for example `research/PROGRAM.md`, `PROBLEM_METHODS.md` where present, `INVENTORY.md`, `BASELINES.md`, or `ROUTES.md`). Keep unresolved opportunities distinct from stopped implementations. Never copy live task status, partial metrics, or execution history into these files. Vault interpretation notes link to the task and runner artifacts.
 
 Complete when the current rctl contract governed execution, actual evidence supports the bounded result, current verification passes, and rctl close succeeds. Unresolved criteria keep the task open.
 

@@ -17,13 +17,29 @@ This file owns comparable baseline contracts. A remembered value or result witho
 
 ## Baselines
 
-| Baseline ID | Surface ID | Training data | Initialization | Evaluation contract | Result | Evidence | Status |
-|---|---|---|---|---|---|---|---|
-| `<baseline-id>` | `<surface-id>` | `<named data or unresolved>` | `<named source or unresolved>` | `<protocol and metric contract>` | `not recorded` | `<artifact reference or pending audit>` | `pending_audit` |
+| Baseline ID/version | Role | Surface ID | Settings contract | Result | Evidence | Status |
+|---|---|---|---|---|---|---|
+| `<baseline-id/version>` | `<fixed main, published, enhanced or shared-information ablation>` | `<surface-id>` | `<source/configuration and information contract>` | `not recorded` | `<artifact reference or pending audit>` | `pending_audit` |
+
+The settings contract identifies training/development exposure, initialization or
+model configuration, prompt/policy, input packet, tools, permitted feedback,
+generated/shared evidence, total budget, output selection and evaluator. Use
+existing files by link and mark irrelevant fields explicitly rather than inventing
+training or initialization work for a method that has none.
+
+Keep the main control fixed across its comparison. Additional lessons, diagnostic
+guidance or a changed output-selection policy create a separately named version;
+retain the original comparison. A necessary bug fix identifies affected evidence
+and corrected pairs. Different versions cannot be pooled under one informal name.
+Use [comparison-design.md](guidelines/comparison-design.md) to interpret scope.
 
 ## Acceptance Rule
 
-Accept a baseline only when training data, initialization, evaluation surface, metric contract, result, and durable evidence are all named and mutually consistent. Preserve conflicting or incomplete historical values as non-comparable evidence.
+Accept a baseline on a named surface only when its identity, applicable settings,
+information conditions, metric contract, result and durable evidence are mutually
+consistent. Preserve conflicting or incomplete historical values as non-comparable
+evidence. Shared diagnostics support a conditional comparison, not complete-method
+benefit; absence of reference answers alone does not establish equal assistance.
 
 ## Update Policy
 

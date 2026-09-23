@@ -14,8 +14,10 @@ before dependent managed work. Use the project-local research-task skill for lif
   to that evidence and distinguish computed observations, supplied claims, and hypotheses.
 - Code and final manuscript sources keep their established repositories. Do not move them
   into the vault or upload private artifacts without task authority.
-- `research/PROGRAM.md`, `INVENTORY.md`, `BASELINES.md`, and `ROUTES.md` outside this vault
-  receive only established, slow-changing facts promoted at task closeout.
+- `research/PROGRAM.md`, `PROBLEM_METHODS.md`, `INVENTORY.md`, `BASELINES.md`, and
+  `ROUTES.md` outside this vault own durable intent, open questions/method coverage,
+  resources, comparison identities and scoped decisions. Update established
+  corrections with evidence and scope; live progress remains in task/runner records.
 
 ## Note locations
 

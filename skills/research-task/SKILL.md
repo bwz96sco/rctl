@@ -15,6 +15,7 @@ Use the relevant reference when entering an operation:
 | Operation | Reference |
 | --- | --- |
 | Initialize, inspect/update installation, use a vault, or migrate | [Workspace](references/workspace.md) |
+| Track a rapid trial, recover it, or connect an already running pilot | [Lightweight rapid trials](references/rapid-trials.md) |
 | Author contract, result, review input, or handoff | [Task files and examples](references/task-files.md) |
 | Propose an experiment, create its contract, or materially change scientific direction | [Planning and history reuse](references/planning.md) |
 | Evaluate evidence, verify, or close | [Verification and closeout](references/verification.md) |
@@ -56,6 +57,12 @@ context/hooks; lifecycle commands require `TASK`. CLI `--file` and `--reviews`
 paths resolve from the project root; document `evidence_refs`, command `inputs`,
 and command execution resolve from the task directory. Use targeted help for
 unfamiliar syntax or version differences; reuse established syntax otherwise.
+
+Creating a task or calling `context TASK` does not persist a session selection.
+When reminders say no task is selected, read `rctl context TASK` explicitly for
+the work at hand. For future host reminders, pass `RCTL_TASK_PATH` when launching
+the host; exporting it in a child shell cannot change an already running host.
+Do not infer a global current task from the most recently listed or active entry.
 
 ## Completion and handoff
 

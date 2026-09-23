@@ -16,17 +16,28 @@ def test_init_repeat_preserves_customized_files_and_links(project, cli):
     assert {p.name for p in research.iterdir()} == {
         "README.md",
         "PROGRAM.md",
+        "PROBLEM_METHODS.md",
         "INVENTORY.md",
         "BASELINES.md",
         "ROUTES.md",
+        "guidelines",
     }
     links = re.findall(
         r"\[[^]]+\]\(([^)]+\.md)\)", (research / "README.md").read_text()
     )
-    assert links == ["PROGRAM.md", "INVENTORY.md", "BASELINES.md", "ROUTES.md"]
+    assert links == [
+        "PROGRAM.md",
+        "PROBLEM_METHODS.md",
+        "INVENTORY.md",
+        "BASELINES.md",
+        "ROUTES.md",
+        "guidelines/comparison-design.md",
+    ]
     assert all((research / path).is_file() for path in links)
     for name in (
         "research/PROGRAM.md",
+        "research/PROBLEM_METHODS.md",
+        "research/guidelines/comparison-design.md",
         ".agents/skills/research-task/SKILL.md",
         "note/main/AGENTS.md",
         ".codex/hooks.json",

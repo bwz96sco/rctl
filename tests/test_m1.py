@@ -1,4 +1,5 @@
 import json
+import re
 import sys
 
 import pytest
@@ -111,6 +112,52 @@ def test_new_draft_preserves_other_files_and_refuses_overwrite(project, cli):
     )
     assert draft.file("contract.md").read_bytes() == before
     assert sentinel.read_text() == "existing"
+
+
+@pytest.mark.parametrize("operation", ["begin", "amend"])
+@pytest.mark.parametrize(
+    "section,placeholder",
+    [
+        (
+            "Scope",
+            "<Included work, expected deliverable, starting evidence, and boundaries. For experiments, cite related routes, the substantive difference or reopen condition, and the decision new evidence would change.>",
+        ),
+        (
+            "Constraints",
+            "<Existing authorization, resources/budget, data boundaries, and any fixed comparison rules.>",
+        ),
+    ],
+    ids=["scope", "constraints"],
+)
+def test_v050_scaffold_placeholders_still_reject_acceptance(
+    task, cli, operation, section, placeholder
+):
+    """An upgrade must still reject unfinished drafts from the installed 0.5.0."""
+    task_name = "tasks/retained-comparison"
+    record = task.file(".rctl/record.json")
+    before = None
+    if operation == "amend":
+        cli("begin", task_name)
+        before = record.read_bytes()
+    rewrite(
+        task,
+        lambda text: re.sub(
+            rf"(## {section}\n\n).*?(?=\n## )",
+            lambda match: match[1] + placeholder + "\n",
+            text,
+            count=1,
+            flags=re.S,
+        ),
+    )
+    args = [operation, task_name]
+    if operation == "amend":
+        args += ["--reason", "Revise the task scope"]
+    response = cli(*args, expected=2)
+    assert "authoring placeholders" in response["error"]["message"]
+    if before is None:
+        assert not record.exists()
+    else:
+        assert record.read_bytes() == before
 
 
 def test_exact_contract_revision_and_amendment(task, cli):

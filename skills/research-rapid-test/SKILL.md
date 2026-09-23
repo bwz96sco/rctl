@@ -9,6 +9,19 @@ Optimize for useful experimental signal per hour. Give the idea its strongest
 plausible inexpensive test, look at the actual result, and decide whether to
 invest further. Preparation is a cost, never the deliverable.
 
+## Keep the trial connected to its task
+
+In an rctl-managed project (an existing `.rctl/project.json`), use `research-task`'s
+lightweight rapid-trial workflow before launching an experiment, unless the user
+explicitly chooses note-only tracking. Reuse the six-line bet below to register
+one bounded question; link the trial note and output directory rather than write
+a second experiment plan. Read explicit task context when no selected-task
+reminder is delivered. Quick screening still uses the preparation/time allowance
+below; registration does not introduce formal reproduction or freeze gates.
+
+Outside a managed project, keep the one-note workflow; do not install rctl merely
+to run a pilot. Discussion and read-only inspection do not require a new task.
+
 ## Enter from the idea, not from an infrastructure plan
 
 Read the supplied candidate/evaluation brief and any directly relevant prior
@@ -55,7 +68,7 @@ Before coding, put these six short lines in the conversation and the trial note:
 
 1. **Bet:** The idea's actual additional processing step should cause this result.
 2. **Best opportunity:** The case/property where it has the strongest reason to help.
-3. **Main comparison:** What the control does and what the intervention does.
+3. **Main comparison:** The fixed control version/source, what each arm does, and which generated information remains private to each arm.
 4. **Visible win:** The concrete output difference that would justify more work.
 5. **Implementation shortcut:** The smallest runnable version and reused assets.
 6. **Stop:** Time/call allowance and what would justify the single rescue attempt.
@@ -65,6 +78,20 @@ For a pipeline-benefit question, compare raw-input ordinary processing with the
 pipeline. Keep the pipeline's generated intermediate records inside its arm.
 Giving those records to both arms tests a downstream organizational ablation;
 run that only when it is the question, usually after a main-effect signal exists.
+
+Keep one named main control fixed across the intended comparison. Adding lessons,
+case-specific guidance, shared diagnostics or a new selection policy creates an
+enhanced control version; retain the original comparison and label the new
+information condition. A targeted-control tie does not erase a prior gain or test
+the automatic production of its supplied guidance. A necessary baseline bug fix
+is explicit, with only affected comparisons rerun and prior outcomes retained.
+
+Match public starting inputs, common tools and total effort. Let free controls
+use saved analysis budget for their own improvement, including independently
+discovering the proposed strategy. Keep final reference/evaluator feedback outside
+test-time repair. Fixed lessons from declared development cases can be a legitimate
+baseline; per-case diagnostic assistance is a different condition. Cases used to
+tune either arm remain development cases when testing transfer.
 
 Use cases chosen for a real opportunity: known control failures, cases matching
 the proposed mechanism, or a small constructed example that exposes it. Favorable
@@ -95,6 +122,14 @@ quantity, or merely change a proxy? Check an apparent win for an obvious broken
 control, changed problem, or extra answer information. Save all tried outcomes,
 including failures and any manual assistance. A model's success claim is not
 an observation.
+
+Report the declared primary endpoint, paired gains/regressions and material costs;
+keep intermediate diagnosis/checker metrics and secondary gains distinct. A
+single-control screen is not a method comparison. Interpret ties within the
+actual control version and assistance condition. If sharing generated analysis
+lets free repair match, its production may be the useful mechanism; the ablation
+alone cannot reject the complete pipeline. Do not replace a final-performance
+question with an intermediate-quality claim after seeing the outcomes.
 
 Make one of these decisions and act on it:
 
@@ -136,7 +171,16 @@ Consult `research-computation` only when a concrete numerical-validity question
 needs it. Reuse the trial's existing evidence and allowance; this is not another
 preparation phase or a required separate computation report.
 
-Follow any required workspace bookkeeping in its smallest permitted form. Do not
-silently relax an existing frozen task or consume its old allowance: keep rapid
-trials separate and retain their preliminary status. A project's explicitly
-authorized rapid-screening exception can use this one-note workflow directly.
+For a managed trial, checkpoint the actual progress, cumulative time/calls,
+evidence paths and next action when handing off or leaving a run in the background.
+Keep the existing task for same-question recovery; record material agreement
+changes before dependent execution. A different question needs a linked task,
+with prior costs and conclusions preserved. When registering an already running
+trial, record the late registration and original limits; do not restart it.
+
+At the decision, link the inspected trial evidence from the native result and
+complete the declared verification/closure through `research-task`. A negative
+finding can complete the task; a PROMOTE decision does not authorize another run.
+Update established project guidance with the scoped result so future reminders
+do not keep repeating a superseded conclusion. Preserve frozen studies and spent
+allowances; preliminary tracking never upgrades the scientific claim.

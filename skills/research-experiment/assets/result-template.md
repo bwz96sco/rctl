@@ -11,6 +11,7 @@ assessment: inconclusive
 
 - Supported claim: <bounded finding or inconclusive result>
 - Mechanism tested: <yes|no|not_applicable>
+- Comparison scope: <complete-method benefit, conditional ablation, diagnosis/problem validation, or control screen>
 
 ## Evidence
 
@@ -19,7 +20,9 @@ assessment: inconclusive
 - Evidence references: <logs, inputs, outputs, environment, health and metrics>
 - Failed or null runs: <references and interpretation, or explicit none>
 - Aggregation: <frozen policy and actual calculation>
-- Baseline relation: <comparison to the frozen baseline>
+- Baseline relation: <comparison to the fixed baseline ID/version and any separately labeled enhanced control>
+- Information condition: <shared/generated records and actual diagnostic assistance>
+- Endpoint results: <primary result, paired gains/regressions and costs; secondary/diagnostic results separately>
 - Comparability: <evidence for comparability, or its limits>
 
 ## Deviations

@@ -85,13 +85,15 @@ def walkthrough(cli, project, repo, skills_root, python):
         "<stable-id-or-C#>": "rctl-synthetic-fixture",
         "<bounded-role; problem_validation for a problem origin>": "method_comparison",
         "<operationalized negative result>": "Baseline minus candidate below +0.01 declines promotion.",
-        "<baseline and provenance>": "Invented error 0.20 from evidence/metrics.json.",
+        "<complete-method benefit, conditional ablation, diagnosis/problem validation, or control screen>": "Retained synthetic comparison; no complete-method performance claim.",
+        "<fixed ID/version, provenance and settings; distinguish main, published and enhanced controls>": "synthetic-control-v1: invented error 0.20 from evidence/metrics.json; no published or enhanced control.",
         "<one bounded change>": "Compare invented candidate error 0.23.",
-        "<fixed data and split>": "Retained synthetic aggregates; no dataset or split.",
-        "<definition, direction, evaluator>": "Lower error is better; check_arithmetic.py uses decimal arithmetic.",
+        "<shared raw inputs/tools, private generated records, permitted feedback and any diagnostic assistance>": "Both values come from the same retained fixture; no private records, feedback or diagnostic assistance.",
+        "<fixed data, development exposure and held-out split>": "Retained synthetic aggregates; no dataset, development exposure or held-out claim.",
+        "<primary endpoint, separate secondary/diagnostic metrics, direction and evaluator>": "Primary endpoint is error reduction; lower error is better. check_arithmetic.py uses decimal arithmetic; no secondary metrics.",
         "<seeds, aggregation, selection and claim rule>": "No seeds or population aggregation; gain must be at least +0.01.",
         "<runner and task-relative evidence paths>": "evidence/metrics.json and evidence/derived.json",
-        "<supplied total and allocation; mark unresolved allocation>": "Local arithmetic and structure checks only; no training.",
+        "<supplied total and comparable per-arm generation/execution allowances; mark unresolved allocation>": "Both arms use retained invented values; local arithmetic and structure checks only, no generation or training.",
         "<existing authorization and storage policy>": "Disposable local synthetic fixture, no external writes.",
         "<Up to six bounded stop, kill, relaunch, or fallback rules; distinguish smoke from scientific runs.>": "Stop after the declared local checks; failures require correction before closure.",
         "<State whether bounded negative or inconclusive results satisfy the criteria.>": "A negative result closes when arithmetic and interpretation pass. Unknown review cannot close.",
@@ -104,7 +106,8 @@ def walkthrough(cli, project, repo, skills_root, python):
     }
     for before, after in replacements.items():
         body = body.replace(before, after)
-    assert not re.search(r"<[^>]+>", body)
+    remaining = re.findall(r"<[^>]+>", body)
+    assert not remaining, remaining
     (task / "contract.md").write_text(
         "---\n" + yaml.safe_dump(contract, sort_keys=False) + "---\n" + body
     )
@@ -122,12 +125,15 @@ def walkthrough(cli, project, repo, skills_root, python):
     fields = {
         "Supported claim": "Synthetic gain is -0.03, below +0.01; decline promotion.",
         "Mechanism tested": "not_applicable",
+        "Comparison scope": "Retained synthetic comparison; no complete-method performance claim.",
         "Actual run IDs": "retained-input; no newly trained model",
         "Commands, configs, and code state": "check_arithmetic.py and evidence/metrics.json copied from the rctl fixture",
         "Evidence references": "evidence/metrics.json and evidence/derived.json",
         "Failed or null runs": "No training runs; the synthetic comparison is negative.",
         "Aggregation": "Single retained synthetic aggregate; no population inference.",
-        "Baseline relation": "0.20 baseline versus 0.23 candidate error, lower is better.",
+        "Baseline relation": "synthetic-control-v1 error 0.20 versus candidate error 0.23; no enhanced control.",
+        "Information condition": "Both values use the same invented metric fixture; no private records, feedback or diagnostic assistance.",
+        "Endpoint results": "Primary error reduction is -0.03; the single synthetic pair regresses. Local checks only; no training costs or secondary metrics.",
         "Comparability": "Same invented metric and threshold; this is a fixture, not research performance evidence.",
         "Material amendments": "none; revision 1",
         "Deviations": "none",
@@ -140,7 +146,8 @@ def walkthrough(cli, project, repo, skills_root, python):
         result = re.sub(
             rf"(?m)^- {re.escape(label)}:.*$", f"- {label}: {value}", result
         )
-    assert not re.search(r"<[^>]+>", result)
+    remaining = re.findall(r"<[^>]+>", result)
+    assert not remaining, remaining
     (task / "result.md").write_text(result)
     cli("verify", task_name, expected=5)
     cli("close", task_name, expected=5)
