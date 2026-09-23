@@ -6,15 +6,11 @@ Use [state.md](state.md) only when work pauses or a handoff helps. Its explicit 
 
 A task needs contract and result records; the machine acceptance record is produced by rctl. Review-input JSON is needed only for review criteria. It records the judgment used by verification and does not own a second result. Hook receipts and host launch fixtures belong to integration testing, not every task.
 
-Scientific requirements come from the project and relevant research skills. For a
-comparison, identify its purpose, fixed baseline versions, intervention, shared raw
-inputs/private generated information, assistance, development/test split, primary
-metric, aggregation/selection, budget and stopping rules in the existing contract
-body. Use the [comparison guidance](project/research/guidelines/comparison-design.md).
-Enhanced controls and shared-information ablations retain separate identities and
-do not replace the main comparison. These are authoring/review responsibilities,
-not additional mandatory schema fields for every task. Do not copy historical
-compute budgets as new execution authorization.
+Scientific requirements come from the project and relevant research skills. For
+comparisons, use the [comparison guidance](project/research/guidelines/comparison-design.md)
+to fill the existing contract body and bound the result. These are authoring/review
+responsibilities, not additional schema fields. Historical compute budgets do not
+supply new execution authorization.
 
 Put the governing question in the `- Question:` field supplied by the template.
 For legacy prose contracts, rctl uses the first nonempty paragraph of `## Question`;

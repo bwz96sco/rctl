@@ -11,13 +11,11 @@ invest further. Preparation is a cost, never the deliverable.
 
 ## Keep the trial connected to its task
 
-In an rctl-managed project (an existing `.rctl/project.json`), use `research-task`'s
-lightweight rapid-trial workflow before launching an experiment, unless the user
-explicitly chooses note-only tracking. Reuse the six-line bet below to register
-one bounded question; link the trial note and output directory rather than write
-a second experiment plan. Read explicit task context when no selected-task
-reminder is delivered. Quick screening still uses the preparation/time allowance
-below; registration does not introduce formal reproduction or freeze gates.
+In an rctl-managed project (an existing `.rctl/project.json`), read `research-task`'s
+`references/rapid-trials.md` before launch unless the user chooses note-only
+tracking. Register the six-line bet below with links to the trial note and outputs;
+use explicit task context when selected reminders are absent. Registration stays
+within the pilot's preparation allowance and adds no formal reproduction gate.
 
 Outside a managed project, keep the one-note workflow; do not install rctl merely
 to run a pilot. Discussion and read-only inspection do not require a new task.
@@ -74,24 +72,16 @@ Before coding, put these six short lines in the conversation and the trial note:
 6. **Stop:** Time/call allowance and what would justify the single rescue attempt.
 
 A method needs an executable difference, not merely a new name or an action log.
-For a pipeline-benefit question, compare raw-input ordinary processing with the
-pipeline. Keep the pipeline's generated intermediate records inside its arm.
-Giving those records to both arms tests a downstream organizational ablation;
-run that only when it is the question, usually after a main-effect signal exists.
+For pipeline benefit, compare complete methods from their raw inputs and keep
+generated intermediate records inside each arm. Sharing them tests a conditional
+ablation. Give assisted or otherwise enhanced controls separate versions and
+retain the original comparison. Baseline bug fixes identify affected pairs and
+preserve earlier outcomes.
 
-Keep one named main control fixed across the intended comparison. Adding lessons,
-case-specific guidance, shared diagnostics or a new selection policy creates an
-enhanced control version; retain the original comparison and label the new
-information condition. A targeted-control tie does not erase a prior gain or test
-the automatic production of its supplied guidance. A necessary baseline bug fix
-is explicit, with only affected comparisons rerun and prior outcomes retained.
-
-Match public starting inputs, common tools and total effort. Let free controls
-use saved analysis budget for their own improvement, including independently
-discovering the proposed strategy. Keep final reference/evaluator feedback outside
-test-time repair. Fixed lessons from declared development cases can be a legitimate
-baseline; per-case diagnostic assistance is a different condition. Cases used to
-tune either arm remain development cases when testing transfer.
+Separate development feedback from final evaluation; cases used to tune either
+arm remain development cases. When choosing controls or interpreting results,
+use applicable project guidance such as `research/guidelines/comparison-design.md`
+where present. The pilot remains usable without that file or an rctl installation.
 
 Use cases chosen for a real opportunity: known control failures, cases matching
 the proposed mechanism, or a small constructed example that exposes it. Favorable
@@ -103,7 +93,8 @@ stands in for an unbuilt step, state exactly which part was tested.
 Run the intervention and a credible inexpensive control. Prefer an existing
 runnable control; a simple implementation or labeled approximation is enough to
 start. Full reproduction of several published baselines can wait. Give the arms
-comparable effort and record material differences; exact token equalization or
+comparable starting inputs, tools and total effort; record material differences.
+Controls may independently discover the same strategy. Exact token equalization or
 statistical power calculations must not consume the pilot. If the control saves
 an analysis call, let it use the allowance for its own review or improvement.
 
@@ -124,12 +115,9 @@ including failures and any manual assistance. A model's success claim is not
 an observation.
 
 Report the declared primary endpoint, paired gains/regressions and material costs;
-keep intermediate diagnosis/checker metrics and secondary gains distinct. A
-single-control screen is not a method comparison. Interpret ties within the
-actual control version and assistance condition. If sharing generated analysis
-lets free repair match, its production may be the useful mechanism; the ablation
-alone cannot reject the complete pipeline. Do not replace a final-performance
-question with an intermediate-quality claim after seeing the outcomes.
+keep diagnostic metrics and secondary gains distinct. A single-control screen
+cannot establish method benefit. Bound a tie by its control version and assistance:
+a shared-information ablation does not test the production of that information.
 
 Make one of these decisions and act on it:
 
@@ -171,16 +159,9 @@ Consult `research-computation` only when a concrete numerical-validity question
 needs it. Reuse the trial's existing evidence and allowance; this is not another
 preparation phase or a required separate computation report.
 
-For a managed trial, checkpoint the actual progress, cumulative time/calls,
-evidence paths and next action when handing off or leaving a run in the background.
-Keep the existing task for same-question recovery; record material agreement
-changes before dependent execution. A different question needs a linked task,
-with prior costs and conclusions preserved. When registering an already running
-trial, record the late registration and original limits; do not restart it.
-
-At the decision, link the inspected trial evidence from the native result and
-complete the declared verification/closure through `research-task`. A negative
-finding can complete the task; a PROMOTE decision does not authorize another run.
-Update established project guidance with the scoped result so future reminders
-do not keep repeating a superseded conclusion. Preserve frozen studies and spent
-allowances; preliminary tracking never upgrades the scientific claim.
+For a managed trial, use `research-task`'s rapid-trial reference for checkpoints,
+amendments, late registration and verification/closure. Link the inspected note
+and raw evidence from the native result, preserving costs and conclusions across
+recovery. Update established project guidance with the scoped result and its
+evidence. A negative finding can complete the task; preliminary tracking never
+upgrades the scientific claim or authorizes another run.

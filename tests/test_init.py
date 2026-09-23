@@ -26,12 +26,12 @@ def test_init_repeat_preserves_customized_files_and_links(project, cli):
         r"\[[^]]+\]\(([^)]+\.md)\)", (research / "README.md").read_text()
     )
     assert links == [
-        "PROGRAM.md",
         "PROBLEM_METHODS.md",
-        "INVENTORY.md",
-        "BASELINES.md",
+        "PROGRAM.md",
         "ROUTES.md",
         "guidelines/comparison-design.md",
+        "BASELINES.md",
+        "INVENTORY.md",
     ]
     assert all((research / path).is_file() for path in links)
     for name in (

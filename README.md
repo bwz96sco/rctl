@@ -2,7 +2,9 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.5.0 baseline; simplification follow-up locally validated. Release pending.**
+**Status: v0.5.1 release preparation; comparison guidance review follow-up.**
+
+See the [review and verification record](docs/COMPARISON-REVIEW-FOLLOWUP.md).
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, governing-question alignment, and Codex reminders. The
 [simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed
@@ -47,7 +49,7 @@ uv run pytest
 uv run ruff check src tests scripts
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.5.0-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.5.1-py3-none-any.whl
 ```
 
 The GitHub Actions workflow is configured to run tests, lint, the document check,
@@ -58,7 +60,7 @@ The installed-package smoke uses a temporary project under `.work/`, an isolated
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.5.0-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.5.1-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh
@@ -80,11 +82,17 @@ guidance now ships in [research-task](skills/research-task/references/workspace.
 No live project migration, Git setup, or host trust grant occurs during initialization.
 
 The source scaffold includes a problem/method overview and comparison guidance.
-ROUTES separates open opportunities from scoped implementation stops; BASELINES
-identifies fixed and enhanced control versions. Task templates prompt the actual
+PROBLEM_METHODS owns open questions and candidate methods; ROUTES records scoped
+investment decisions; BASELINES identifies fixed and enhanced control versions.
+Task templates prompt the actual
 information conditions and endpoint without adding scientific schema fields.
 Installed CLI assets change only with a package upgrade; source edits and skill
 symlinks do not upgrade an existing wheel installation.
+
+Upgrading changes the version recorded by verification. Under the current policy,
+older reports show `stale` even when their materials are unchanged; the explanation
+identifies the version mismatch. Historical closures remain intact. An active task
+needs verification by the installed version before it can close.
 
 ## Project guidance before task selection
 

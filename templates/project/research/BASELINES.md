@@ -38,8 +38,7 @@ Use [comparison-design.md](guidelines/comparison-design.md) to interpret scope.
 Accept a baseline on a named surface only when its identity, applicable settings,
 information conditions, metric contract, result and durable evidence are mutually
 consistent. Preserve conflicting or incomplete historical values as non-comparable
-evidence. Shared diagnostics support a conditional comparison, not complete-method
-benefit; absence of reference answers alone does not establish equal assistance.
+evidence; use the comparison guidance above for interpretation.
 
 ## Update Policy
 

@@ -15,26 +15,18 @@ this formal workflow. A pilot is not a prerequisite for a supplied formal experi
 
 ## Comparison scope
 
-For method-benefit studies, keep a named main baseline version fixed across the
-comparison and identify the closest published baseline separately from a local
-free-repair control. Record each arm's public inputs, tools, generated evidence,
-feedback and total budget. The intervention produces its own intermediate records;
-giving those records to the control tests downstream use, not the complete pipeline.
-Controls may independently discover the same strategy within their allowance.
+Fix a named main control and distinguish published baselines from local controls.
+Compare declared starting inputs, tools and total effort. Keep method-generated
+records in the producing arm: sharing them tests a conditional ablation. Controls
+may independently discover the same strategy within their allowance. Give assisted
+or otherwise enhanced controls separate versions and retain the original results.
 
-Added lessons, case-specific diagnoses or new output-selection policies create
-separate enhanced controls. Preserve the original comparison; scope each tie to
-its actual information condition. Generic lessons fixed on development data can
-be a legitimate held-out baseline. Test-time manual diagnostic assistance is
-different, even when no reference answer appears in a prompt. Explicit baseline
-bug fixes retain prior results and identify which pairs need rerunning.
-
-Separate development, test-time observations and final evaluation. Retain the
-declared primary endpoint, regressions and compute alongside secondary/diagnostic
-metrics. Cases used to tune either arm cannot substantiate unseen transfer; repeated
-runs are not independent original cases. A shared-information ablation or a
-single-control screen cannot close an untested complete mechanism. Use applicable
-project comparison guidance when choosing controls or interpreting such results.
+Separate development feedback from final evaluation. Report the primary endpoint,
+regressions and costs, keeping diagnostic gains distinct. Bound conclusions by the
+actual comparison; a single-control screen or conditional tie cannot settle an
+untested complete-method claim. When choosing controls or interpreting results,
+read applicable project guidance such as `research/guidelines/comparison-design.md`
+where present for evaluation boundaries, baseline corrections and interpretation.
 
 ## Workflow
 

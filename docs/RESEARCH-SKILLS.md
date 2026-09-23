@@ -145,7 +145,7 @@ scientific validity or prove that every workflow has been exercised by a model.
 uv run pytest tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_research_handoffs.py tests/test_training_skill_assets.py -q
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.5.0-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.5.1-py3-none-any.whl
 ```
 
 Historical distillation and model-evaluation campaigns remain in agent-skills-private.

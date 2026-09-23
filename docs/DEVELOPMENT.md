@@ -2,6 +2,22 @@
 
 ## Current increment
 
+Prepare v0.5.1 from the locally committed training migration (`1c098df`) and
+comparison-template follow-up (`0140b19`). Restore route-entry granularity,
+separate open-question ownership, explain evidence for living guidance, and
+shorten shared comparison instructions using generic terminology. Read short
+project guidance first and related history on demand. Preserve native scaffold
+markers and existing invocation policies.
+
+Use A-01/A-02 for draft compatibility and A-21/A-22/A-23/A-24/A-29 for resource
+delivery and preservation, plus the full release checks. The version bump leaves
+currentness behavior unchanged: closed tasks may show a version-only stale report
+without losing historical closure. Runtime display changes, reminder coverage and
+live OR reconciliation are separate follow-ups. The
+[review record](COMPARISON-REVIEW-FOLLOWUP.md) records decisions and validation.
+
+## Included source increments
+
 The September23 comparison-template follow-up adds project problem/method and
 comparison-guidance scaffolds, scopes route decisions and control versions, and
 updates native task authoring plus research-task references. Use A-21/A-22/A-24

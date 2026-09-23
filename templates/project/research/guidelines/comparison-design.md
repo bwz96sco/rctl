@@ -50,8 +50,9 @@ missing outputs, scientific failures and ambiguous reference judgments.
 ## Interpretation and task ownership
 
 Compare complete methods first when pipeline benefit is the question; use
-ablations to explain a signal. If shared analysis lets free processing match,
-the analysis may be the useful product. A small null or conditional tie supports
+ablations to explain a signal. If a control matches only after receiving the
+method's generated analysis, producing that analysis may be the useful contribution.
+A small null or conditional tie supports
 a bounded investment decision, not rejection of every mechanism for a problem.
 
 Task contracts retain the declared scope and acceptance criteria. Material

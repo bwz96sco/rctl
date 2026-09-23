@@ -162,6 +162,9 @@ Compare current contract and result text exactly against the governing contract 
 
 This is an ordinary-change detector in a cooperating workspace, not content-integrity certification. Store `external_refs` as the URI and reviewer-supplied version/observation description; rctl makes no current remote availability claim. Evidence freshness and reproducibility beyond these observations must be covered by the criterion's check. A report from a different `rctl_version` cannot close a task until verification is rerun.
 
+The same version comparison applies when displaying closed tasks: a version-only
+mismatch makes currentness stale while leaving the historical closure intact.
+
 Currentness values are `not_checked`, `current`, `stale`, or `unknown`; they are derived views, not writable phase fields. Even a current report may have a fail verdict. A report's cycle must equal the task's current cycle. All referenced local files in review entries join `observed_files`, including references added by the reviewer.
 
 ## 8. Context and handoff

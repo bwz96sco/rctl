@@ -21,16 +21,16 @@ Create the task with `task new` and use the native format in
 - **Question:** mechanism, related result, remaining uncertainty and the decision
   this comparison changes. For a derived question, use Question alignment to
   identify its governing source, actual test and non-claim boundary.
-- **Scope:** fixed control version/intervention, complete-method versus conditional
-  comparison, cases, primary endpoint and decision rule; state shared raw inputs,
-  private generated information and any diagnostic assistance;
-  link the `rapid-test.md` and fresh output root for implementation detail.
+- **Scope:** control version/intervention, information conditions, cases, primary
+  endpoint and decision rule from the bet; link `rapid-test.md` and the fresh
+  output root for implementation detail. Use the project's comparison guidance
+  where present when deciding the scientific scope.
 - **Constraints / Stop conditions:** feedback boundaries, actual authorized
   time/call limits, retry allowance and stopping rule, including previous spend.
 - **Criteria:** a small evidence-based review of the actual control and information
   conditions, consumed budget, gains/regressions, failures and scoped decision.
-  Keep secondary diagnosis metrics separate from the primary endpoint. Use agent review where sufficient; add a
-  command check only for a concrete failure that would change the next action.
+  Use agent review where sufficient; add a command check only for a concrete
+  failure that would change the next action.
 
 Criteria should establish an honestly reported result, not require the method to
 win. Do not add an operator approval, independent review campaign, clean commit,

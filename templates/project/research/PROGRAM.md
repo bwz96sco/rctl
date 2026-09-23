@@ -26,7 +26,7 @@ This file owns slow-changing scientific intent. Keep active tasks, run status, a
 
 ## Open Questions
 
-- `<Unresolved question whose answer could change the program>`
+See [PROBLEM_METHODS.md](PROBLEM_METHODS.md) for open questions and candidate methods.
 
 ## Update Policy
 

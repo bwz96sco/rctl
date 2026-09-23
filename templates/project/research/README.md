@@ -5,24 +5,26 @@ records durable scientific context, not live experiment or task status.
 
 ## Reading Order
 
-1. [`PROGRAM.md`](PROGRAM.md) — scientific goal, success criteria, evaluation
-   surfaces, constraints, and open questions.
-2. [`PROBLEM_METHODS.md`](PROBLEM_METHODS.md) — problems, candidate mechanisms,
+1. [`PROBLEM_METHODS.md`](PROBLEM_METHODS.md) — problems, candidate mechanisms,
    actual coverage and unresolved questions.
-3. [`INVENTORY.md`](INVENTORY.md) — verified datasets, checkpoints, code,
-   environments, and infrastructure.
-4. [`BASELINES.md`](BASELINES.md) — fixed comparison identities and audited
-   baseline evidence.
-5. [`ROUTES.md`](ROUTES.md) — opportunities and scoped implementation decisions,
-   including the evidence needed for further work.
-6. [`comparison-design.md`](guidelines/comparison-design.md) — complete methods,
-   fixed controls, information boundaries and conditional ablations.
+2. [`PROGRAM.md`](PROGRAM.md)'s Goal and Current guidance — scientific intent and
+   established corrections.
+
+Then follow the question at hand:
+
+- Before proposing work, inspect related entries and evidence in
+  [`ROUTES.md`](ROUTES.md), including the scope of earlier investment decisions.
+- When choosing controls or interpreting comparisons, read
+  [`comparison-design.md`](guidelines/comparison-design.md) and the actual versions
+  in [`BASELINES.md`](BASELINES.md).
+- For resources, consult [`INVENTORY.md`](INVENTORY.md); for success criteria,
+  evaluation surfaces or constraints, consult the relevant PROGRAM sections.
 
 Run `rctl context` for project guidance even before selecting a task. Reminders read
 PROGRAM.md's Goal and optional Current guidance, plus ROUTES.md's Reuse Rule.
 Read the linked evidence before experimental planning; short reminders are excerpts.
 
-After these files, inspect current work in the project's task system:
+For current work, inspect the selected task:
 
 ```text
 rctl status tasks/your-task
@@ -41,7 +43,7 @@ decision. A campaign note may explain the scientific sequence; each task retains
 | `research/PROBLEM_METHODS.md` | Open problems, method coverage and unresolved opportunities |
 | `research/INVENTORY.md` | Verified resource availability |
 | `research/BASELINES.md` | Versioned comparison contracts and baseline evidence |
-| `research/ROUTES.md` | Scoped opportunities and investment decisions; not task lifecycle |
+| `research/ROUTES.md` | Scoped investment decisions; not an open-question list or task lifecycle |
 | `research/guidelines/comparison-design.md` | Comparison and interpretation guidance |
 | `rctl tasks/` | Active plans, execution state, task-local outcomes, and next decisions |
 | `__VAULT_LOCATION__` | Long-form interpretation and literature notes |

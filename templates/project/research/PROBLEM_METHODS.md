@@ -27,7 +27,7 @@ Use stable IDs where useful; link detailed literature/source notes. A related
 operation is not a full reproduction. Methods learned from development labels
 need an explicit held-out evaluation boundary.
 
-## Current Decision
+## Next Question
 
 <Name the unresolved choice and the specific comparison or evidence that would
 change it. Keep candidates under consideration separate from authorized runs.>

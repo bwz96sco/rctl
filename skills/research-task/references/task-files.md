@@ -84,6 +84,13 @@ the fragment (for example, `../../research/questions/C15.md` from `tasks/TASK`).
 review must decide whether the result stays within the declared test and non-claim
 boundary.
 
+For a task that updates living project guidance, declare a task-local change
+record as evidence: retain the relevant excerpts, changes and their basis, and
+link the research files in the body. This preserves evidence of that update when
+the project guidance changes again. If a criterion depends on a live file's
+current content, still declare that file in its evidence or inputs, including
+review evidence; removing a real dependency only to avoid staleness is incorrect.
+
 For command checks, `argv` is an argument array executed without a shell, with the
 task directory as cwd. Declare the checker, helper files, and preexisting data in
 `inputs`. A check validates available evidence; generate analysis outputs before
