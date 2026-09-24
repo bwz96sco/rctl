@@ -59,13 +59,17 @@ Validation on 2026-09-24:
 - `uv build --wheel --out-dir .work/literature-ideation-simplification-20260924/dist`: passed. A ZIP resource inspection matched all 15 entrypoints to source, checked all nine files in the three affected packages and their local links, and confirmed both retired packages absent. The result is in `.work/literature-ideation-simplification-20260924/wheel-resource-check.txt`.
 
 These are structural, handoff-execution, and distribution checks. Research quality
-and agent adherence remain untested; no global installation or live-project merge
-was performed for this increment.
+and agent adherence remain untested. This source validation preceded the
+[local shared installation](RESEARCH-SKILLS.md#local-shared-installation); no
+live-project merge was performed for this increment.
 
 Before the user-requested local skill installation on 2026-09-24,
 `uv run --locked pytest -q` passed all 301 tests and 35 subtests in 41.12 seconds.
 Full lint (`uv run --locked ruff check src tests scripts`), documentation checks,
 and structural validation of the remaining modified skill entrypoints also passed.
+The subsequent shared-skill installation completed from source commit `452ed0e`;
+all 14 user-level skills resolve to it and the two retired workflows' discovery
+links were removed. The installed rctl CLI remains at the released 0.5.1 build.
 
 ## Included source increments
 

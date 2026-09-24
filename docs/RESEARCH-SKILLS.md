@@ -81,9 +81,9 @@ second global research-task copy alongside the project-local one.
 
 The shared computation reference is packaged with research-theory. Copy-based
 installations using that reference need research-theory beside the consuming
-package under the same skills root. Remove obsolete research-computation and
-research-opportunity-mining discovery links during a shared-installation update;
-source retirement alone does not remove those links.
+package under the same skills root. The local installation below removes the
+obsolete research-computation and research-opportunity-mining discovery links;
+source retirement alone does not remove installed links.
 
 Research-rapid-test retains its existing Codex discovery path at
 `~/.codex/skills/research-rapid-test`, now a symlink to this checkout's package.
@@ -108,6 +108,32 @@ former's validator calls the latter's handoff validator. Supplied/problem-origin
 experiments do not need that peer package. An absent peer produces an actionable
 error, not an automatic installation. The official skill page was re-fetched through
 smart-search on 2026-09-14 for this path-only integration follow-up.
+
+### Local shared installation
+
+On 2026-09-24, the user authorized committing and installing the accumulated skill
+changes. Source commit `452ed0e2fa0f5f9f477b8e6871f71e815988e946` contains the
+writing references, figure ownership changes, shared computation checks, and
+reading/ideation simplification. The installation retains the existing local
+source-link arrangement: 13 workflows under `~/.agents/skills/` and
+research-rapid-test under `~/.codex/skills/`.
+
+Removed the computation and opportunity-mining links from `~/.agents/skills/`
+and `~/.gemini/config/skills/`, four physical links in total. The existing
+`~/.gemini/antigravity/skills/` and `~/.gemini/antigravity-cli/skills/` root aliases
+follow the shared directory, so their retired entries disappear with it.
+
+Installation checks confirmed all 14 user-level skills resolve to the committed
+sources, all 103 installed files match source, and all 14 entrypoint resource
+links resolve. The 13 shared workflows also resolve through all three existing
+Antigravity paths. Both retired names are absent from all five checked discovery
+roots, and no global research-task copy was introduced. Removed link targets and
+the verification output are retained in `.work/skills-installation-20260924/`.
+
+This updates shared skill discovery and resources. The installed rctl CLI remains
+the previously released 0.5.1 wheel; live-project copies and task records were not
+changed. Source, package, and installation checks do not establish research quality
+or fresh-host agent adherence.
 
 ## Related skills outside this migration
 
