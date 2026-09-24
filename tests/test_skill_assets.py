@@ -2,6 +2,9 @@
 
 import ast
 import re
+import runpy
+import sys
+from pathlib import Path
 from urllib.parse import urlsplit
 
 import pytest
@@ -58,3 +61,14 @@ def test_project_init_and_exports_remain_task_only(project, cli):
     cli("update", "export", "update-candidates")
     candidates = project / "update-candidates/candidates/.agents/skills"
     assert {path.name for path in candidates.iterdir()} == {"research-task"}
+
+
+def test_experiment_templates_complete_native_smoke(project, cli):
+    repo = Path(__file__).resolve().parents[1]
+    walkthrough = runpy.run_path(str(repo / "scripts/smoke_shared_skills.py"))[
+        "walkthrough"
+    ]
+    cli("init")
+    record = walkthrough(cli, project, repo, repo, sys.executable)
+    assert record["phase"] == "closed"
+    assert record["closures"][-1]["assessment"] == "not_supported"

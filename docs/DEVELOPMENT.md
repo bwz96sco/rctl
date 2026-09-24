@@ -71,6 +71,37 @@ The subsequent shared-skill installation completed from source commit `452ed0e`;
 all 14 user-level skills resolve to it and the two retired workflows' discovery
 links were removed. The installed rctl CLI remains at the released 0.5.1 build.
 
+## CI smoke repair
+
+The pushes of `3130531` and `e43442e` failed installed-wheel smoke on all four CI
+jobs; pytest, lint, documentation checks, and build passed. The scale-control
+template change in `3130531` modified one contract placeholder and added six
+contract fields plus two result fields. `scripts/smoke_shared_skills.py` still
+filled the older templates. The first seven unfilled placeholders stopped the
+walkthrough before result authoring. The source checks above did not run the full
+wheel smoke and therefore missed this failure.
+
+The repair completes those fields with bounded synthetic-fixture values and
+retains both unfilled-placeholder assertions. M5/A-23/A-24 cover this change.
+The regular pytest suite now runs the same native experiment walkthrough,
+including rejected unresolved/failed verification and successful negative closure.
+The source distribution includes the helper required by this regression test.
+Templates, runtime behavior, and shared installations are unchanged.
+
+Validation on 2026-09-24:
+
+- `uv run --locked pytest -q tests/test_skill_assets.py::test_experiment_templates_complete_native_smoke --tb=short`: reproduced the seven-placeholder failure before the fix, then passed.
+- `uv run --locked pytest -q`: 302 passed, 35 subtests passed on Python 3.13.2.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv build --out-dir .work/ci-smoke-fix-20260924/dist`: built the source distribution and its wheel. Archive inspection confirmed the regression test and smoke helper match source.
+- `uv run --locked scripts/smoke_package.py .work/ci-smoke-fix-20260924/dist/rctl-0.5.1-py3-none-any.whl`: passed on Python 3.13.2; 37 CLI invocations, with the native experiment closed as `not_supported`.
+- `UV_PROJECT_ENVIRONMENT=.work/ci-smoke-fix-20260924/py311 uv run --locked --python 3.11 scripts/smoke_package.py .work/ci-smoke-fix-20260924/dist/rctl-0.5.1-py3-none-any.whl`: passed on Python 3.11.11 with the same 37 invocations. The first attempt stopped at offline dependency installation; installing the wheel into a disposable environment populated the missing cache before retry.
+
+Smoke output is retained under `.work/ci-smoke-fix-20260924/` in
+`wheel-smoke-py313.txt` and `wheel-smoke-py311-retry.txt`; the initial Python 3.11
+failure is in `wheel-smoke-py311.stderr`. These are local macOS execution checks.
+The repair still needs a pushed-commit CI run to establish the full platform matrix.
+
 ## Included source increments
 
 The September23 comparison-template follow-up adds project problem/method and

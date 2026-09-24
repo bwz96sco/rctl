@@ -34,7 +34,7 @@ packages = ["src/rctl"]
 "skills" = "rctl/skills"
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/schemas", "/templates", "/skills", "/tests", "/examples", "/README.md", "/pyproject.toml", "/uv.lock"]
+include = ["/src", "/schemas", "/templates", "/skills", "/tests", "/scripts/smoke_shared_skills.py", "/examples", "/README.md", "/pyproject.toml", "/uv.lock"]
 
 [tool.uv]
 cache-keys = [{ file = "pyproject.toml" }, { file = "src/**/*.py" }, { file = "schemas/*.json" }, { file = "templates/**/*" }, { file = "skills/**/*" }]
