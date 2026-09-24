@@ -1,7 +1,7 @@
 interface:
   display_name: "Research Literature"
-  short_description: "Full-paper reading and anchored evidence notes"
-  default_prompt: "Use $research-literature to read the decisive papers in this existing corpus and build anchored evidence notes for later synthesis or ideation."
+  short_description: "Paper reading, evidence notes, and reflection"
+  default_prompt: "Use $research-literature to read the decisive papers in this existing corpus, build anchored evidence notes, and reflect on their problems, methods, and possible alternatives."
 
 policy:
   allow_implicit_invocation: true

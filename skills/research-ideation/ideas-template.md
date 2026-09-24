@@ -14,32 +14,30 @@ next_owner: research-idea-evaluation
 - Constraints:
 - Non-goals:
 - Human interests:
-- Lens coverage: <count per lens>
 
 ## Source inventory
 
 | Source type | Artifact or supplied input | Used by candidates |
 | --- | --- | --- |
-| problem / paper opportunity / method / dataset / observation / human suggestion | <path or short description> | C1, C4 / none |
+| paper / reading note / method / dataset / experiment / human suggestion | <source anchor or supplied idea; mark interpretation or unchecked premise> | C1, C4 |
 
 ## C1: <candidate title>
 
-- Lens: transfer / contradiction / untested-assumption / scaling-regime / diagnostic / dataset / residual-attack
 - Research hook: <why researchers should care>
-- Source combination: <inputs combined>
-- Mechanism: <what changes and why>
-- Expected claim: <bounded claim if it works>
-- Cheapest falsification test: <decisive minimum test>
+- Source combination: <anchored observations or supplied ideas; distinguish facts from interpretations>
+- Mechanism: <concrete operation, why it could address the problem, and how it obtains the needed information>
+- Expected claim: <bounded added capability if it works>
+- Cheapest falsification test: <test that capability from the declared starting inputs>
 - Closest prior arm: <known prior as an arm in the test above, or unknown with the missing comparison> - runnable / reimplemented / blocked / unknown
-- Kill condition: <result that rejects the mechanism>
-- Major uncertainty: <largest unknown>
+- Kill condition: <result that rejects the tested mechanism; distinguish unsuitable cases or missing inputs that leave it untested>
+- Major uncertainty: <most consequential unverified assumption or capability still to be developed>
 
 ## Evaluation handoff
 
 Invoke `$research-idea-evaluation` to screen every candidate before any human shortlist. No ranking or winner has been assigned.
 ```
 
-Enter one source-inventory row per distinct source item, not one row per file. A
-multi-part source such as a synthesis contributes one row per contradiction, gap,
-or finding; a part that produced no candidate is recorded as
-`declined: <reason>` in the candidate column.
+Include sources used by the candidates, with specific passages or observations
+where they matter. Match candidate breadth to the request and material; the
+template imposes no count or lens quota. Record a consequential premise correction
+alongside the affected candidate rather than creating another review document.

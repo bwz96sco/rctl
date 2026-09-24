@@ -72,7 +72,7 @@ Load only needed references.
 
 - `research-experiment`: one task-system experiment contract, linked run evidence, explicit amendments, and validated closeout.
 - `experiment-adapter-builder`: stable project commands, queues, remote GPUs, monitoring, health gates, profiling.
-- `research-computation`: standalone package/HPC/data analysis evidence.
+- Read the shared [computation checks](../research-theory/references/computation-checks.md) when numerical validity or local software usability remains unresolved after the existing training checks. Reuse the current run evidence.
 - `paper-discovery`: project-scoped baseline, dataset, and benchmark paper pools with Zotero deduplication.
 - `research-literature`: anchored full-paper evidence for baseline, dataset, and benchmark claims.
 - `smart-search-cli`: AI-Research-SKILLs repo evidence, library/API docs, setup/config/code examples, and current web/source facts.

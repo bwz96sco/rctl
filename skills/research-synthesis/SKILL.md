@@ -1,6 +1,6 @@
 ---
 name: research-synthesis
-description: Produce an evidence-bounded cross-paper answer in synthesis.md from a paper-discovery register and research-literature notes. Use when comparing findings, explaining contradictions, identifying closest prior work, mapping a field, or answering a question across a corpus; new research questions and methods belong to downstream opportunity mining or ideation.
+description: Produce an evidence-bounded cross-paper answer in synthesis.md from a paper-discovery register and research-literature notes. Use when comparing findings, explaining contradictions, identifying closest prior work, mapping a field, or answering a question across a corpus. Systematic research proposal generation belongs to research-ideation.
 ---
 
 # Research Synthesis
@@ -10,7 +10,7 @@ Turn a `$paper-discovery` register and its `$research-literature` notes into one
 ## Contract
 
 - **Inputs:** `register.md`, including the target question and corpus scope, plus `notes/<paper-id>.md` for in-scope register rows with `status=read`.
-- **Output:** one `synthesis.md` beside `register.md`. It answers the existing target question; it does not generate or select new research questions or methods.
+- **Output:** one `synthesis.md` beside `register.md`. It answers the existing target question; useful exploratory implications stay separate from evidence-backed conclusions. Complete candidate development and selection belong to their downstream workflows.
 - **Always include:** the target question and scope, a direct answer, evidence coverage, issue-based cross-paper reasoning, and unresolved evidence or limitations.
 - **Include when relevant or requested:** a field map, contradiction analysis, closest-prior comparison, or `Evidence-backed open problems`.
 
@@ -33,5 +33,5 @@ Complete when the target question has a direct evidence-bounded answer; every in
 - Treat an open-problem item as a corpus finding, not a novelty verdict, priority, readiness decision, or human selection.
 - Leave `retain`, `hold`, `reject`, selection caps, and smallest-pilot gates to explicit evaluation.
 - A thin corpus stays explicitly thin.
-- Route method substitution, module modification, new input, transfer, stress, and metric transformations to the explicitly invoked `$research-opportunity-mining`.
+- Keep useful exploratory connections in a separate reflection within the same document, with their source basis and unverified assumptions. Use `$research-ideation` when the user asks to develop research candidates.
 - Ideation may consume `synthesis.md`, but it can also start without synthesis.

@@ -23,6 +23,50 @@ without losing historical closure. Runtime display changes and reminder coverage
 are separate follow-ups. The
 [review record](COMPARISON-REVIEW-FOLLOWUP.md) records decisions and validation.
 
+## Current skill-source work
+
+The writing follow-up separates paper-wide figure planning from individual figure
+production and adds section references. The Method reference distills its source's
+structure, equation, component, pseudocode, and novelty guidance into concise
+writing essentials. [Distilled Sources](DISTILLED-SOURCES.md) records the source material
+and adaptations.
+
+The standalone research-computation entrypoint is retired. Shared numerical checks
+now live in research-theory's references and are read directly by the relevant
+workflows; they add no required stage. The [catalog](RESEARCH-SKILLS.md#shared-computation-checks)
+defines the new ownership and installation boundary. Use M5/A-23/A-24 for affected
+resource and packaging checks, including removal of the retired entrypoint and
+delivery of the shared reference. CLI behavior, schemas, and native acceptance
+remain unchanged; release and global installation updates are separate work.
+
+The 2026-09-24 reading/ideation simplification retires research-opportunity-mining.
+Reading and synthesis retain useful exploratory thinking alongside their evidence;
+ideation consumes the source material directly, checks decisive factual premises,
+and identifies unresolved capabilities without a default candidate count or lens
+quota. The reading reference distills the supplied seven-step guidance, and the
+existing candidate template carries the causal explanation and uncertainty.
+Historical seed files remain available without becoming a required intermediate.
+Use M5/A-23/A-24 for resource, package, and handoff checks: verify removal of the
+retired package, delivery of the reading reference, remaining invocation policies,
+and compatibility with the existing evaluation validator. Native task records,
+evaluation selection rules, and experiment execution remain unchanged.
+
+Validation on 2026-09-24:
+
+- `uv run --locked pytest -q tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_research_handoffs.py`: 59 passed, 35 subtests passed.
+- `uv run --locked python /Users/zhangbowen/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/<name>`: passed for research-literature, research-ideation, and research-synthesis.
+- `uv run --locked python scripts/check_docs.py`: passed; `uv run --locked ruff check tests/test_research_skill_contracts.py` and `git diff --check` also passed.
+- `uv build --wheel --out-dir .work/literature-ideation-simplification-20260924/dist`: passed. A ZIP resource inspection matched all 15 entrypoints to source, checked all nine files in the three affected packages and their local links, and confirmed both retired packages absent. The result is in `.work/literature-ideation-simplification-20260924/wheel-resource-check.txt`.
+
+These are structural, handoff-execution, and distribution checks. Research quality
+and agent adherence remain untested; no global installation or live-project merge
+was performed for this increment.
+
+Before the user-requested local skill installation on 2026-09-24,
+`uv run --locked pytest -q` passed all 301 tests and 35 subtests in 41.12 seconds.
+Full lint (`uv run --locked ruff check src tests scripts`), documentation checks,
+and structural validation of the remaining modified skill entrypoints also passed.
+
 ## Included source increments
 
 The September23 comparison-template follow-up adds project problem/method and
@@ -41,11 +85,12 @@ policies; redirect existing discovery links after package verification. The
 [migration record](RESEARCH-SKILLS-MIGRATION.md#training-and-adapter-follow-up)
 records the source cutover. Other auxiliary tools and live tasks stay outside scope.
 
-The current task repairs the two research-skill review rounds after source migration:
+The completed research-skill review follow-up repaired two rounds after source migration:
 pilot/formal handoffs, human selection sizes, vault and installed-resource paths,
 operation-specific completion, and computation/theory/writing evidence boundaries.
-Keep research-computation as an optional lightweight helper and preserve invocation
-policies, human selection, and native rctl acceptance. Use M5/A-23/A-24 as the main
+That increment kept research-computation as an optional lightweight helper and
+preserved invocation policies, human selection, and native rctl acceptance. Its
+standalone entrypoint is retired by the current source work above. Use M5/A-23/A-24 as the main
 integration checks, plus A-22/A-29 for binding and packaged-asset regressions. The
 [follow-up record](RESEARCH-SKILLS-FOLLOWUP.md) records changes and their checks.
 

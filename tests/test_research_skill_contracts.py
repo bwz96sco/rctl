@@ -12,13 +12,11 @@ import yaml
 REPO = Path(__file__).resolve().parents[1]
 SKILLS = REPO / "skills"
 ACTIVE_RESEARCH_SKILLS = {
-    "research-computation",
     "research-experiment",
     "research-figure",
     "research-idea-evaluation",
     "research-ideation",
     "research-literature",
-    "research-opportunity-mining",
     "research-rapid-test",
     "research-review-case",
     "research-slides",
@@ -62,7 +60,7 @@ class ResearchSkillContractTest(unittest.TestCase):
         for marker in ("candidate", "falsification", "closest prior", "method flaw"):
             self.assertIn(marker, evaluation)
 
-    def test_discovery_literature_opportunity_ideation_boundaries(self) -> None:
+    def test_discovery_literature_ideation_boundaries(self) -> None:
         discovery = (SKILLS / "paper-discovery/SKILL.md").read_text(encoding="utf-8")
         literature = (SKILLS / "research-literature/SKILL.md").read_text(
             encoding="utf-8"
@@ -70,12 +68,6 @@ class ResearchSkillContractTest(unittest.TestCase):
         note_template = (SKILLS / "research-literature/note-template.md").read_text(
             encoding="utf-8"
         )
-        opportunity = (SKILLS / "research-opportunity-mining/SKILL.md").read_text(
-            encoding="utf-8"
-        )
-        opportunity_template = (
-            SKILLS / "research-opportunity-mining/opportunity-template.md"
-        ).read_text(encoding="utf-8")
         synthesis = (SKILLS / "research-synthesis/SKILL.md").read_text(encoding="utf-8")
         ideation = (SKILLS / "research-ideation/SKILL.md").read_text(encoding="utf-8")
         ideas_template = (SKILLS / "research-ideation/ideas-template.md").read_text(
@@ -146,16 +138,6 @@ class ResearchSkillContractTest(unittest.TestCase):
             "$research-literature",
         ):
             self.assertIn(marker, synthesis)
-        self.assertIn("$research-opportunity-mining", literature)
-        for marker in ("SUB", "MOD", "INP", "XFR", "ENV", "MET"):
-            self.assertIn(marker, opportunity)
-            self.assertIn(marker, opportunity_template)
-        self.assertIn("never force a seed", opportunity.lower())
-        self.assertIn("stage: expansion_input", opportunity_template)
-        self.assertIn(
-            "Novelty, ranking, readiness, and selection: not assessed",
-            opportunity_template,
-        )
         self.assertIn("Evidence-backed open problems", synthesis)
         self.assertIn("not a novelty verdict", synthesis)
         self.assertIn("start without synthesis", synthesis)
@@ -199,7 +181,7 @@ class ResearchSkillContractTest(unittest.TestCase):
                         self.assertIsNone(retired_pattern.search(text))
 
     def test_exact_research_invocation_policy_split(self) -> None:
-        explicit = {"research-idea-evaluation", "research-opportunity-mining"}
+        explicit = {"research-idea-evaluation"}
         roots = sorted(
             path.parent
             for path in SKILLS.glob("research-*/SKILL.md")

@@ -188,9 +188,9 @@ misleading. Escalate promising evidence to a scoped formal experiment when that
 investment is requested or already authorized; freeze the method and establish
 stronger comparability there.
 
-Consult `research-computation` only when a concrete numerical-validity question
-needs it. Reuse the trial's existing evidence and allowance; this is not another
-preparation phase or a required separate computation report.
+Read the shared [computation checks](../research-theory/references/computation-checks.md)
+only when a numerical-validity question is unresolved. Reuse the trial's evidence
+and allowance; the checks stay within this trial and need no separate report.
 
 For a managed trial, use `research-task`'s rapid-trial reference for checkpoints,
 amendments, late registration and verification/closure. Link the inspected note

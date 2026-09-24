@@ -4,6 +4,7 @@
 - Route reading by the change: `docs/PRD.md` for scope, `docs/SPEC.md` for behavior, `docs/CLI.md` for commands, and `docs/DEVELOPMENT.md` for current work and release order. Select the affected milestone/checks from `docs/ACCEPTANCE.md` before implementation.
 - Use `uv` for Python setup and runs. Use smart-search for library/API documentation, setup, configuration, and current source-backed claims.
 - Keep generated project documents in English unless the user requests another language.
+- Record sources and adaptations for distilled workflow guidance in `docs/DISTILLED-SOURCES.md`; keep skill references focused on operational instructions.
 - For records or verification, read the relevant `schemas/`. For hooks or skill integration, read `docs/INTEGRATION.md` and recheck the relevant official host documentation.
 - Keep contract, result, handoff, and machine acceptance authority distinct. State whether a check verifies structure, execution, or an evidence-based judgment.
 - Run a check only when its failure would change an in-scope action. Report actual commands, results, and untested behavior; use `docs/READINESS.md#limitations` for preparation-stage caveats.

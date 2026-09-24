@@ -5,8 +5,9 @@ rctl baseline: `87157e9`; private source
 baseline: `3320099` plus its working-tree changes. The user explicitly selected
 the 12 active research-* workflows plus paper-discovery, excluding auxiliary tools.
 The user subsequently added the independent research-rapid-test skill. The
-2026-09-21 follow-up below adds two training/adapter workflows; the
-[catalog](RESEARCH-SKILLS.md) now names all 17 managed workflows. The first-stage
+2026-09-21 follow-up below adds two training/adapter workflows, bringing that
+migration to 17 managed workflows. The [catalog](RESEARCH-SKILLS.md) records the
+current set, including subsequent retirements. The first-stage
 evidence below covers the original 13-package move; its counts remain historical.
 
 The later user-authorized [review follow-up](RESEARCH-SKILLS-FOLLOWUP.md) changes

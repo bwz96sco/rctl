@@ -1,8 +1,8 @@
 # Paper note template
 
-You are reading one paper for one target question. Read skeleton-first, then inspect the evidence needed for the target question. Fill every section. Anchor material claims and numbers to a section, page, figure, table, or equation and record their evidence basis and confidence or caveat. With partial text or an abstract, fill only what the available source supports and mark deeper sections `not assessable from available access`.
+You are reading one paper for one target question. Follow the [reading method](references/reading-method.md), then record the evidence needed for the target question. Fill the evidence sections; add analyst reflection when useful. Anchor material claims and numbers to a section, page, figure, table, or equation and record their evidence basis and confidence or caveat. With partial text or an abstract, fill only what the available source supports and mark deeper sections `not assessable from available access`.
 
-The scientific factual sections report only what the paper says. Metadata inherits the supplied provenance; preserve unresolved claims and source dates. Your own judgment lives only in the two `Analyst` sections. Keep author-stated limitations, observed failures, and analyst inferences distinct.
+The scientific factual sections report only what the paper says. Metadata inherits the supplied provenance; preserve unresolved claims and source dates. Your own judgments and exploratory ideas belong in the `Analyst` sections. Keep author-stated limitations, observed failures, analyst inferences, and proposed mechanisms distinct.
 
 ```markdown
 # <short-name>
@@ -78,8 +78,8 @@ Inspect unsupported conclusions, weak or missing baselines, missing ablations,
 unrealistic assumptions, narrow datasets, leakage, metrics that hide failure,
 and discrepancies between claims and results. Do not manufacture a fixed number
 of defects. Report `no material defect established from this paper` when evidence
-does not support one. Diagnose only this paper's evidence; do not propose fixes
-or claim that a defect remains globally open.
+does not support one. Diagnose this paper's evidence without claiming that a defect
+remains globally open. Keep possible improvements in the reflection below.
 
 ## Analyst: relation to target question
 Your judgment: supports / limits / contradicts / direct overlap /
@@ -95,6 +95,15 @@ versus checked resource availability. Distinguish access to released materials
 from successful reproduction; runtime qualification belongs to later experiments.
 Ground this judgment in the paper's evidence rather than venue or team reputation.
 With insufficient access, state `not assessable from available access`.
+
+## Analyst: reflection (when useful)
+Briefly record your own approach to the problem and how it compares with the
+authors' method, what the paper changed in your understanding, and questions or
+alternatives worth pursuing. Link the observation behind an idea and distinguish
+the proposed operation and expected effect from established findings. Name the
+key assumption or capability still missing, including how any required information
+would be obtained. A useful reflection may simply clarify a question; no improvement
+idea or separate seed file is required.
 ```
 
 Return the completed note as your final output — no commentary around it.

@@ -1,6 +1,6 @@
 # Academic Phrasebank
 
-Constructive phrasing resource for drafting, polish, and synthesis prose. This is NOT a detection wordlist: local AI-style auditing stays cluster-level and zero-verdict per `ai-style-impressions.md`. Chinese equivalents are kept because this bank also serves Chinese-to-English rewriting.
+Constructive phrasing resource for drafting, polish, and synthesis prose. Use it to calibrate wording; style impressions do not establish authorship or integrity. Chinese equivalents support Chinese-to-English rewriting.
 
 ## Core Law
 

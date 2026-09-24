@@ -6,7 +6,7 @@ Build the first adapter for Codex. Core commands remain host-neutral. The [new M
 
 Project initialization and host export install one `research-task` skill with these responsibilities: read contract/result/handoff, establish scope within existing authorization, preserve amendments, execute using appropriate domain skills, inspect evidence, invoke verification, and close only after the recorded guard succeeds. It must explicitly separate a chat pause from task closure.
 
-The repository and distributions also contain the 16 domain workflows in the
+The repository and distributions also contain the 14 domain workflows in the
 [research skill catalog](RESEARCH-SKILLS.md). They are maintained with rctl but are
 not automatically installed into projects by init/export or managed by project doctor.
 Their user-level source links are a separate, explicitly authorized installation boundary.
