@@ -11,9 +11,11 @@ next_owner: research-idea-evaluation
 
 ## Frame
 
+- Active user question and requested perspective; inherited assumptions to reconsider:
 - Constraints:
 - Non-goals:
-- Human interests:
+- Intended readers and human interests:
+- Substantive alternatives considered and reason for any narrowing:
 
 ## Source inventory
 
@@ -23,18 +25,18 @@ next_owner: research-idea-evaluation
 
 ## C1: <candidate title>
 
-- Research hook: <why researchers should care>
-- Source combination: <anchored observations or supplied ideas; distinguish facts from interpretations>
-- Mechanism: <concrete operation, why it could address the problem, and how it obtains the needed information>
-- Expected claim: <bounded added capability if it works>
-- Cheapest falsification test: <test that capability from the declared starting inputs>
-- Closest prior arm: <known prior as an arm in the test above, or unknown with the missing comparison> - runnable / reimplemented / blocked / unknown
-- Kill condition: <result that rejects the tested mechanism; distinguish unsuitable cases or missing inputs that leave it untested>
-- Major uncertainty: <most consequential unverified assumption or capability still to be developed>
+- Research question: <what remains unresolved; include competing explanations where useful>
+- Potential contribution and reader consequence: <finding, measurement, formulation, or capability; what would be learned beyond the closest prior and what belief or practice could change>
+- Evidence and premise: <anchored observations; separate interpretations and unverified assumptions>
+- Proposed investigation: <how to resolve the question; for a method, specify the operation and source of needed information>
+- Closest prior or rival: <what it already explains or achieves; unknowns and executable readiness when relevant>
+- First discriminating observation: <smallest observation that could separate the possibilities and change investment>
+- Outcome implications: <what supports continuation or refutes the claim; distinguish absent opportunity and insufficient information>
+- Major uncertainty: <the premise or capability whose resolution most changes the next decision>
 
 ## Evaluation handoff
 
-Invoke `$research-idea-evaluation` to screen every candidate before any human shortlist. No ranking or winner has been assigned.
+Continue to explicit `$research-idea-evaluation` within the user's requested scope. These are unranked candidates, not approved investments or experiment launches.
 ```
 
 Include sources used by the candidates, with specific passages or observations

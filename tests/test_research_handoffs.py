@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Behavioral tests for expand -> screen -> shortlist -> converge handoffs."""
+"""Behavioral tests for compact and historical research handoffs."""
 
 from __future__ import annotations
 
@@ -131,6 +131,61 @@ next_owner: {next_owner}
 """
 
 
+def compact_decision(
+    *,
+    selected: tuple[str, ...] = ("C1",),
+    reviewed: tuple[str, ...] = ("C1",),
+    owner: str = "research-rapid-test",
+) -> str:
+    rows = "\n".join(
+        f"| {item} | {'selected' if item in selected else 'rejected'} | supplied evidence |"
+        for item in ("C1", "C2", "C3", "C4")
+    )
+    reviews = "\n".join(
+        f"## Independent Review: {item}\n\nSeparate reviewer: test invariance first.\n"
+        for item in reviewed
+    )
+    cases = "\n".join(
+        f"""## Investment Case: {item}
+
+An observed disagreement motivates examining measurement validity.
+
+## Investigation Brief: {item}
+
+Compare meaningful changes and equivalent variants against a simple metric;
+independent judgments distinguish useful sensitivity from representation effects.
+This bounds the property, not natural prevalence. Use the existing allowance.
+"""
+        for item in selected
+    )
+    return f"""---
+stage: converge_complete
+decision_format: compact
+portfolio: ideas.md
+selection_basis: agent_recommendation
+decision_status: {"selected" if selected else "blocked"}
+selected_candidate_ids: [{", ".join(selected)}]
+reviewed_candidate_ids: [{", ".join(reviewed)}]
+next_owner: {owner}
+---
+
+# Research investment decision
+
+## Selection basis
+
+The user delegated prioritization; no execution budget added.
+
+## Candidate Dispositions
+
+| Candidate ID | Disposition | Reason |
+| --- | --- | --- |
+{rows}
+
+{reviews}
+{cases}
+"""
+
+
 def write_experiment(
     root: Path,
     *,
@@ -227,6 +282,112 @@ class ResearchHandoffTest(unittest.TestCase):
         attack_root.mkdir(exist_ok=True)
         for item in ids:
             (attack_root / f"{item}.md").write_text(f"# {item}\n", encoding="utf-8")
+
+    def write_compact(self, text: str | None = None) -> Path:
+        for name in ("screening.md", "shortlist.md"):
+            (self.root / name).unlink(missing_ok=True)
+        path = self.root / "decision.md"
+        path.write_text(compact_decision() if text is None else text, encoding="utf-8")
+        return path
+
+    def test_compact_measurement_decision_needs_no_staged_artifacts(self) -> None:
+        for owner in ("research-rapid-test", "research-experiment", "research-theory"):
+            with self.subTest(owner=owner):
+                self.write_compact(compact_decision(owner=owner))
+                result = self.run_validator("decision")
+                self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+                self.assertFalse((self.root / "screening.md").exists())
+                self.assertFalse((self.root / "shortlist.md").exists())
+                self.assertFalse((self.root / "attacks").exists())
+
+    def test_compact_no_investment_needs_no_manufactured_review(self) -> None:
+        self.write_compact(compact_decision(selected=(), reviewed=(), owner="none"))
+        result = self.run_validator("decision")
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
+    def test_compact_human_choice_and_reviewed_rejection_are_supported(self) -> None:
+        self.write_compact(
+            compact_decision(reviewed=("C1", "C2")).replace(
+                "selection_basis: agent_recommendation", "selection_basis: human"
+            )
+        )
+        result = self.run_validator("decision")
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
+    def test_compact_selected_candidate_requires_review_and_investment_case(
+        self,
+    ) -> None:
+        for text, message in (
+            (compact_decision(reviewed=()), "require independent review"),
+            (
+                compact_decision().replace("## Investment Case: C1", "## Other: C1"),
+                "Investment Case coverage mismatch",
+            ),
+            (
+                compact_decision().replace("## Independent Review: C1", "## Other: C1"),
+                "Independent Review coverage mismatch",
+            ),
+        ):
+            with self.subTest(message=message):
+                self.write_compact(text)
+                result = self.run_validator("decision")
+                self.assertNotEqual(0, result.returncode)
+                self.assertIn(message, result.stdout)
+
+    def test_compact_empty_or_placeholder_basis_and_case_do_not_pass(self) -> None:
+        for original in (
+            "The user delegated prioritization; no execution budget added.",
+            "An observed disagreement motivates examining measurement validity.",
+        ):
+            for replacement in ("", "<complete this>"):
+                with self.subTest(original=original, replacement=replacement):
+                    self.write_compact(
+                        compact_decision().replace(original, replacement)
+                    )
+                    result = self.run_validator("decision")
+                    self.assertNotEqual(0, result.returncode)
+                    self.assertIn("completed content", result.stdout)
+
+    def test_compact_requires_whole_portfolio_dispositions(self) -> None:
+        self.write_compact(
+            compact_decision().replace("| C4 | rejected | supplied evidence |", "")
+        )
+        result = self.run_validator("decision")
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("dispositions mismatch portfolio", result.stdout)
+
+    def test_compact_review_ids_must_belong_to_portfolio(self) -> None:
+        self.write_compact(compact_decision(reviewed=("C1", "C99")))
+        result = self.run_validator("decision")
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("reviewed IDs must belong", result.stdout)
+
+    def test_missing_legacy_files_do_not_silently_select_compact_format(self) -> None:
+        self.write_compact(compact_decision().replace("decision_format: compact\n", ""))
+        result = self.run_validator("decision")
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("missing screening.md", result.stdout)
+
+    def test_compact_lineage_reaches_experiment_without_rewriting_decision(
+        self,
+    ) -> None:
+        original = compact_decision()
+        path = self.write_compact(original)
+        experiment = self.root / "measurement-followup"
+        for candidate_id, valid in (("C1", True), ("C2", False)):
+            with self.subTest(candidate_id=candidate_id):
+                write_experiment(
+                    experiment, origin_type="candidate", origin_id=candidate_id
+                )
+                result = self.run_experiment_validator(
+                    experiment, "--decision", str(path)
+                )
+                self.assertEqual(
+                    valid, result.returncode == 0, result.stdout + result.stderr
+                )
+                if not valid:
+                    self.assertIn("was not selected", result.stdout)
+                self.assertEqual(original, path.read_text(encoding="utf-8"))
 
     def test_problem_method_dataset_and_mixed_candidates_need_no_checkpoint(
         self,

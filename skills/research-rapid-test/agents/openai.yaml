@@ -1,4 +1,4 @@
 interface:
   display_name: "Research Rapid Test"
-  short_description: "Test promising ideas quickly; promote or drop."
-  default_prompt: "Use $research-rapid-test to test the most promising empirical claim from this idea evaluation, get an early result, and promote or drop the direction within a small budget."
+  short_description: "Resolve a research bet with a bounded first observation"
+  default_prompt: "Use $research-rapid-test to resolve the key investment uncertainty with a claim-appropriate observation, then decide whether further work is justified within the declared budget."

@@ -1,11 +1,11 @@
 ---
 name: research-ideation
-description: Develop mechanism-distinct, falsifiable research candidates from questions, paper evidence, methods, datasets, experimental observations, or human ideas. Use when asked to develop research directions or candidate methods, with breadth matched to the request. Hands the unranked candidates to explicit evaluation.
+description: Develop research questions and candidate contributions from evidence, anomalies, methods, resources, or human ideas. Use when exploring research directions, including methods, measurements, and explanations. Hands unranked candidates to explicit investment evaluation.
 ---
 
 # Research Ideation
 
-Own candidate development. Match breadth to the question, available material, and user request; there is no default candidate count or lens quota. Hand the resulting unranked portfolio to the explicit `$research-idea-evaluation` skill. Screening, human shortlisting, deep attacks, and winner selection belong to evaluation. Ordinary reading and exploratory reflection stay with the work that prompted them.
+Own candidate development. Match breadth to the question, available material, and user request; there is no default candidate count or contribution-type quota. Develop questions worth answering and ways to answer them. Hand the unranked portfolio to explicit `$research-idea-evaluation`; comparative investment judgment belongs there. Ordinary reading and exploratory reflection stay with the work that prompted them.
 
 ## Workspace
 
@@ -13,32 +13,32 @@ Read the project-relative `vault` binding in `.rctl/project.json`; when unbound,
 
 ## Workflow
 
-1. **Freeze the frame.** Record the target question verbatim, constraints, non-goals, and supplied interests.
+1. **Frame the inquiry.** Record the active user question verbatim and its requested perspective, including corrections to an earlier goal. Distinguish that request from the project's inherited default metric or method. When the user asks to expand research objects or measures, develop those objects and what existing measures conflate before proposing interventions. A past failure can motivate this inquiry; it does not determine its scope.
 2. **Use the available material directly.** Accept papers and anchored reading notes, imported methods, datasets, experimental observations, prior results, and human suggestions. No source type is mandatory or privileged. Reuse historical idea or seed files as suggestions; return to their underlying sources before treating a premise as factual evidence.
-3. **Expand independently.** Generate initial routes before inspecting closest-prior evidence in detail. Use problem-first, method-first, dataset-first, and mixed combinations supported by the supplied inputs.
-4. **Check premises and revise.** Separate reported facts, interpretations, and proposed mechanisms. Check a decisive source passage when its meaning affects the candidate; an unchecked premise stays uncertain. Ask whether the proposed operation could affect the cited problem and where its required information comes from. Revise routes using the evidence. Route needed paper searches to `$paper-discovery` and full-paper checks to `$research-literature`, without making a literature campaign a prerequisite for rough generation.
-5. **Build the portfolio.** Write stable `C1..Cn` cards for the requested breadth. Each needs a research hook, source combination, mechanism, expected claim, cheapest falsification test, kill condition, and major uncertainty. Merge only true duplicates. Keep distinct mechanisms separate and unranked.
-6. **Hand off the full portfolio.** Set `stage: expand_complete` and `next_owner: research-idea-evaluation`. Do not ask the human to choose among unevaluated candidates.
-7. **Validate the handoff.** Locate the installed `research-idea-evaluation` directory from the host's skill path; `<evaluation-skill>` below means that actual directory, not a fixed user-level location. Run `uv run --no-project python "<evaluation-skill>/scripts/validate-handoff.py" portfolio <idea-root>`. Running this structural helper does not invoke evaluation. After it passes, name the exact explicit invocation `$research-idea-evaluation` for portfolio-wide screening and stop.
+3. **Expand questions and explanations.** Use problem-first, method-first, dataset-first, or mixed entry points. An unexplained contrast, a missing observable, a theoretical boundary, or an operational difficulty can motivate a candidate. Sketch competing explanations before committing to machinery. A candidate may contribute a method, measurement, finding, or formulation; these are examples, not slots to fill.
+4. **Check premises and revise.** Separate reported facts, interpretations, and proposed contributions. Check a decisive source passage when its meaning affects the candidate; an unchecked premise stays uncertain. For a method, explain its operation and where the needed information comes from. For a measurement or explanation, explain the relevant distinction and how it could be independently observed. Route needed searches to `$paper-discovery` and full-paper checks to `$research-literature`; rough generation needs no prerequisite literature campaign.
+5. **Build the portfolio.** Write stable `C1..Cn` cards using the template: question, potential contribution and reader consequence, evidence, proposed investigation, closest prior or rival, first discriminating observation, and major uncertainty. Keep distinct questions, hypotheses, observables, and mechanisms separate; merge cosmetic variants. Before handoff, compare the portfolio with the requested perspective: briefly explain the substantive alternatives considered and any narrowing. A shortlist limit governs developed cards, not which research objects may be considered. Known methods may be useful instruments without making their combination novel.
+6. **Hand off the full portfolio.** Set `stage: expand_complete` and `next_owner: research-idea-evaluation`. Run `uv run --no-project python "<evaluation-skill>/scripts/validate-handoff.py" portfolio <idea-root>` using the actual installed evaluation-skill directory. This checks structure, not scientific merit. For an ideation-only request, name the explicit evaluation invocation and stop. If the user already explicitly included evaluation in the work, continue within that scope without another selection ceremony; the handoff grants no experiment budget.
 
-Complete when `ideas.md` contains the unranked candidates developed within the requested scope, their source basis is visible, and the validated portfolio is waiting for explicit evaluation. If no candidate can yet be formulated, report the unresolved problem or premise in the existing work and stop without creating an empty evaluation handoff.
+Complete when the unranked portfolio addresses the requested scope and exposes what could be learned beyond existing knowledge, why it could matter, and which premise remains uncertain. Available artifacts and a runnable contrast establish feasibility, not this completion criterion. If no candidate can be formulated, report the unresolved question in the existing work rather than creating an empty portfolio. A validated portfolio is still unevaluated until substantive evaluation occurs.
 
 ## Expansion prompts
 
-When useful, consider replacing a method at an observed bottleneck, changing a
-component, adding information available in use, transferring to a different
-scientific difficulty, stressing a reachable condition, or changing a metric
-that affects the conclusion. Apply only prompts that help the question; they
-require no per-paper coverage table. Preserve distinct mechanisms rather than
-cosmetic variants.
+Ask what current observations conflate, which competing explanations predict
+different outcomes, what changes over a process or resource budget, or which
+important condition existing evidence does not cover. A method change is useful
+when it follows from such a question. A new metric needs a defined construct,
+independent validity evidence, and a consequential use. Apply only prompts that
+help the inquiry; no per-paper coverage table is needed.
 
 ## Rules
 
 - Unknown novelty stays unknown until evaluation.
-- Distinguish the source observation from the candidate's causal hypothesis. A paper citation supports only what the cited passage establishes.
+- Distinguish the source observation from the candidate's hypothesis. A paper citation supports only what the cited passage establishes.
 - Do not require checkpoints, readiness pilots, synthesis, or literature files before generation.
 - Reject hidden compute, information leakage, unfair baselines, and cosmetic renaming during construction; leave comparative scientific judgment to evaluation.
 - Do not invent exact performance targets without a prior result, operational requirement, or pilot basis.
-- Name the key unestablished capability in the major uncertainty. If the method needs a reliable target, correct component, or diagnosis, explain how it would obtain one; assuming it is supplied bounds the claim to using that information.
-- When known, name the closest prior as an arm in the candidate's falsification test and state `runnable`, `reimplemented`, or `blocked`. Otherwise record `unknown` and the missing comparison; evaluation owns verification of the closest prior and its feasibility. A test the closest prior would also pass does not isolate the candidate. Do not invent a prior to complete a card.
+- Name the key unestablished premise or capability in the major uncertainty. If several capabilities are uncertain, identify the one whose resolution most changes investment. Supplying a correct target, component, or diagnosis tests conditional use, not its automatic production.
+- Match falsification and continuation conditions to the claim. A tie on final performance does not reject an independently declared measurement question; a favorable secondary measure does not replace a failed primary claim. Distinguish a scientific kill condition from absent opportunity or insufficient information.
+- Name the closest prior or strongest rival when known, and the observation that could distinguish it. For an executable comparison, state `runnable`, `reimplemented`, `blocked`, or `unknown`. Otherwise identify the prior claim or alternative explanation. Evaluation owns verification; unknown novelty stays unknown.
 - Link the sources actually used by candidates. Explain a discarded premise when its correction changes the proposal; unused material needs no coverage ledger.

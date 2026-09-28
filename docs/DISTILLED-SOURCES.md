@@ -107,6 +107,51 @@ and omit sentence templates. The outline is a useful default, adapted to the
 method. Figure planning and placeholders link to the existing reference; the main
 writing skill supplies the evidence boundary for expected and observed effects.
 
+## Experiments writing
+
+- **Source:** the user-supplied `/Users/zhangbowen/Downloads/如何写论文-Experiments.md` (Chinese).
+- **Read:** 2026-09-24, in full from the local file.
+- **Applied to:** [Experiments reference](../skills/research-writing/references/experiments.md).
+
+**Retained:** choose a contribution-driven structure from setup, main results,
+ablation, analysis, cases or visualization, robustness or generalization, and cost.
+Describe datasets, baselines, metrics, implementation, training and inference,
+repetition, statistics, and fairness. Main results explain the central comparison
+and its uneven gains; ablations connect design choices to their measured
+contribution; analysis explains behavior across conditions; cases make output
+quality, task difficulty, and failures understandable. Direct readers to displays,
+select consequential observations, interpret their meaning, and report anomalies.
+
+**Adapted:** use the source's structure as a menu, preserving its warning against
+adding experiments merely for volume. Expand the robustness and cost headings only
+enough to explain their purpose. Treat ablations as bounded evidence about design
+choices rather than automatic proof of a mechanism. Interpret the source's advice
+to soften abnormal findings as calibrated uncertainty with explicit consequences,
+not minimization of unfavorable results. Existing figure planning owns captions
+and placeholders; writing uses retained evidence and does not authorize new runs.
+
+## Bibliography preparation
+
+- **Source:** the user-supplied `/Users/zhangbowen/Downloads/如何写论文-Reference.md` (Chinese).
+- **Technical check:** [Overleaf's BibTeX guide](https://www.overleaf.com/learn/latex/Bibliography_management_with_bibtex), retrieved through smart-search; confirms standard entry types and style-dependent field handling.
+- **Read:** 2026-09-24, including the full local source.
+- **Applied to:** [References guide](../skills/research-writing/references/bibliography.md).
+
+**Retained:** review each imported entry; use a consistent author/year/keyword key
+convention; select the correct publication type; check core fields; protect title
+acronyms and names; preserve correct author metadata; normalize venue names and
+capitalization; verify edition ordinals, volume, issue, and pages; and remove
+duplicate works before submission.
+
+**Adapted:** correct the source's `@arcticle` typo to `@article`. Keep working
+citation keys unless cleanup calls for renaming. Let the venue style govern field
+retention and author-list truncation instead of universally deleting URL or
+publisher fields or manually replacing known authors with “et al.” Preserve
+proceedings volume information in its appropriate field and use article identifiers
+or absent pagination where applicable. Protect necessary title terms while allowing
+ordinary style capitalization. Rendered-list checks complement metadata review;
+the guide does not assert a single proceedings-name pattern for every conference.
+
 ## Computation checks
 
 - **Source:** the former `skills/research-computation/SKILL.md` at rctl commit `3130531`; its earlier role is recorded in the [source register](SOURCES.md).
@@ -150,11 +195,58 @@ are suggestions whose factual premises need their original sources, not another
 evidence layer. The OR retrospective motivates these changes without making its
 project-specific terminology part of the shared guidance.
 
+## Research questions and investment evaluation
+
+- **Sources:** the user's OR retrospective and requested plan on 2026-09-27; the retained [Pro consultation](../../OR/note/OR-research/ideas/research-ideation-validation-pro-2026-09-27/consultation.md), its exact prompt/response, and the [EoH/BehaveSim interpretation](../../OR/note/OR-research/literature/eoh-behavesim-research-questions-2026-09-27/synthesis.md).
+- **Read:** 2026-09-27. These local source links are provenance, not runtime dependencies.
+- **Applied to:** ideation, idea evaluation, rapid-test, and their handoff templates/validator.
+
+**Retained:** source checks, honest novelty uncertainty, independent criticism,
+fixed comparison identities, private generated evidence for complete methods,
+scale reasoning, cumulative allowances, and distinctions between stopping
+investment and refuting a scientific claim.
+
+**Adapted:** develop research questions and contributions beyond mandatory method
+modifications. Require an affirmative reason for the next expenditure after review,
+and match the first observation to the uncertainty and claim. Measurement and
+explanatory contributions need independent validity and usefulness, not an
+automatic final-performance gate. Keep a compact decision with actual selection
+basis rather than repeated human-ID ceremonies. Retain legacy artifact validation
+and explicit invocation policy. Pro's advice motivates these changes; it does not
+establish that the skill wording caused historical failures or that a proposed
+direction is publishable.
+
+**September27 application correction:** the subsequent OR portfolio selected a
+conditional diagnosis/repair probe after the user had requested EoH/BehaveSim-like
+expansion of research objects and measures. The installed packages already pointed
+to the revised source; this was not a stale-installation incident. The original
+workflow permitted the desired framing but the generated portfolio narrowed it,
+and its independent review ranked only those supplied candidates. Sources are the
+[retained decision](../../OR/note/OR-research/ideas/or-paper-claims-2026-09-27/decision.md)
+and the user's [scope correction](../../OR/research/plans/2026-09-27-ideation-validation-workflow.md#scope-correction-restore-research-object-and-measurement-expansion).
+Sharpen the existing framing/handoff and evaluation steps: preserve the active
+request, inspect portfolio scope before ranking, explain what a favorable result
+would teach beyond prior work, and connect an affordable prerequisite to a
+worthwhile parent question. Give independent reviewers that active request and
+permission to return the portfolio for further development. Rapid-test reductions
+preserve the selected research object. These are focused instruction changes;
+no new schema, lifecycle stage, coverage quota or approval ceremony is introduced.
+
+**Application check:** 69 focused skill/contract/handoff tests and 47 subtests pass;
+these validate structure, not research judgment. One clean-context SWE-2 High
+[forward-use response](../.work/ideation-scope-forward-20260927/review.md) returned
+the narrowed portfolio to development and identified the lost perspective. It
+still suggested an optional cheap probe and redundant clarification; these were
+not adopted. The [assessment](../.work/ideation-scope-forward-20260927/audit.json)
+records the residual problems and inference limit. This single clarified-context
+example does not establish a causal improvement or reliable compliance. No new
+scientific trial was launched.
+
 ## Limitations
 
 The linked web texts were read through smart-search and the browser; the supplied
-reading guide was read locally. Example images were not individually audited, and
-the example papers' reported results were not independently verified. The OR
+reading and writing guides were read locally. Example images were not individually
+audited, and the example papers' reported results were not independently verified. The OR
 retrospective is user-supplied evidence; its underlying project files and experiments
 were not independently re-audited for this change. These entries record guidance
 provenance and adaptation; they do not establish how reliably an agent will follow

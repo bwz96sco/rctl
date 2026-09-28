@@ -41,10 +41,10 @@ Use these responsibilities to organize the outline. Adapt headings, order, and c
 | Introduction | Establish importance, situate prior knowledge, expose the gap, and state the paper's answer and contributions. Read [introduction.md](references/introduction.md) when drafting, revising, or auditing an introduction. |
 | Related Work | Explain the closest approaches and findings, their relation to the present question, and the supported distinctions from D. Read [related-work.md](references/related-work.md) when drafting, reorganizing, or auditing related work. |
 | Contribution — Method, Observation, Benchmark, Analysis, etc. | Explain what D is, its central idea, and the definitions, assumptions, or construction needed to understand it. Choose descriptive section headings for the actual contribution. Read [method.md](references/method.md) when drafting, revising, or auditing a method description. |
-| Support — Theoretical or Experimental | Present the proof or evaluation that answers the paper's claims, with assumptions, relevant comparisons, results, and uncertainty. Separate observed results from their interpretation. |
+| Support — Theoretical or Experimental | Present the proof or evaluation that answers the paper's claims, with assumptions, relevant comparisons, results, and uncertainty. Separate observed results from their interpretation. Read [experiments.md](references/experiments.md) when planning, drafting, revising, or auditing an experimental section. |
 | Discussion | Interpret the findings in relation to the question and prior work; examine strengths, weaknesses, implications, and evidence-grounded future work. |
 | Conclusion | Answer the original question with the supported contribution and its scope; introduce no new evidence or stronger claims. |
-| References | Provide accurate, traceable bibliographic records for the sources cited in the manuscript. |
+| References | Provide accurate, traceable bibliographic records for the sources cited in the manuscript. Read [bibliography.md](references/bibliography.md) when adding or cleaning bibliographic entries, normalizing citation metadata, or checking the reference list before submission. |
 
 Keep detailed section guidance in `references/`, linked from its module row with a clear read condition. The shared wording resource remains separate from section-specific guidance.
 

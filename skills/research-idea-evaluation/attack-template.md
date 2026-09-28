@@ -1,30 +1,31 @@
-# Candidate attack template
+# Independent candidate review
 
-You are evaluating one research idea candidate against one parent question. You did not write this candidate; your job is to try to kill it. Verify closest priors through `paper-search-cli` and the supplied literature notes before trusting any novelty claim; treat unknown novelty as unknown. Do not soften objections and do not manufacture them — report `no material objection found` when an honest attack fails.
+Assess the proposed next investment independently. Use the supplied card,
+question, and evidence; verify decisive closest-prior claims through
+`paper-search-cli` or the supplied full-text notes. Report the strongest material
+objection and the evidence for it, or `no material objection found`. An honest
+attack need not manufacture a flaw. Passing this review is not an investment
+decision. Match depth to the next expenditure. First compare the supplied frame
+with the active user request: a misframed portfolio may need to return to candidate
+development. Then ask what a favorable observation would teach beyond existing
+knowledge. A bounded probe need not establish a whole paper, but its affordability
+does not supply a scientific reason to pursue its parent question.
 
 ```markdown
-# <candidate-id>
+## Independent Review: <candidate-id>
 
-## Closest prior
-Nearest existing work (verified IDs), what it already does, and the
-candidate's surviving delta. `no surviving delta` is a valid finding.
-
-## Method attack
-Strongest independent objections: leakage, circularity, confounding,
-evaluator dependence, hidden compute or information, missing controls,
-unrealistic assumptions. Evidence per objection.
-
-## Matched controls
-Baselines a fair test requires (information- and compute-matched), plus
-the naive-combination control when the candidate combines capabilities.
-
-## Falsification
-Cheapest decisive test, anti-win condition, and the result that kills
-the mechanism.
-
-## Verdict
-`survives` | `fatal: <reason>` | `blocked: <missing evidence>` — one
-line of justification.
+- Reviewer and scope: <identity/source, materials inspected, limits>
+- Fit to the active request: <preserved research perspective or consequential narrowing; return to candidate development if needed>
+- Closest prior and surviving question: <verified overlap, unknowns, and what remains worth learning>
+- Decisive assumption or rival: <strongest method flaw, measurement-validity issue, or competing explanation, with evidence>
+- Positive case and uncertainty: <why the next observation could matter; what is still conjectural>
+- Discriminating observation: <contrast/falsification that could change investment; appropriate control, scale, and information boundary>
+- Assessment: <investigate / reframe / park, with a scoped reason; no execution authorization>
 ```
 
-Return the completed note as your final output — no commentary around it.
+Check whether the first observation isolates a pivotal unknown rather than
+requiring several undeveloped capabilities at once. For a measurement or
+explanatory claim, examine independent validity and substantive use; terminal
+performance gain is required only when claimed. For method combinations, consider
+a simple combination or existing-method rival. Return the review itself so it can
+be embedded in the decision note without another mandatory artifact.

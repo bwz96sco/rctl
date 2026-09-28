@@ -28,8 +28,10 @@ are separate follow-ups. The
 The writing follow-up separates paper-wide figure planning from individual figure
 production and adds section references. The Method reference distills its source's
 structure, equation, component, pseudocode, and novelty guidance into concise
-writing essentials. [Distilled Sources](DISTILLED-SOURCES.md) records the source material
-and adaptations.
+writing essentials. The Experiments and References guides added on 2026-09-24
+cover contribution-driven experimental reporting and bibliography preparation,
+with conditional links from the writing skill. [Distilled Sources](DISTILLED-SOURCES.md)
+records the source material and adaptations.
 
 The standalone research-computation entrypoint is retired. Shared numerical checks
 now live in research-theory's references and are read directly by the relevant

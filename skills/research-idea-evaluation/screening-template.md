@@ -20,7 +20,11 @@ next_owner: human_shortlist
 
 ## Human selection request
 
-Select the screened candidate IDs you want evaluated and give your rationale. For a broad portfolio, 3–5 is a useful default; selecting only one or another explicit number is valid. You may override any signal. Invoke `$research-idea-evaluation` again with that choice to continue.
+<Present the recommended next investigation, its positive investment rationale,
+and the consequential choice the human reserved. If selection was delegated,
+continue the authorized evaluation and record the basis in decision.md.>
 ```
 
-Cover every `ideas.md` candidate exactly once. Screening signals are advisory triage, not novelty verdicts or final selection.
+Use this separate record for screening-only requests or a reserved human choice.
+Cover every `ideas.md` candidate exactly once. Signals are advisory, not novelty
+verdicts or final selection. New full evaluations keep triage in compact decision.md.

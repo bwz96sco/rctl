@@ -19,9 +19,9 @@ instructions needed to perform their tasks.
 | [paper-discovery](../skills/paper-discovery/SKILL.md) | Question-scoped paper pools and project Zotero collection curation | Automatic or explicit |
 | [research-literature](../skills/research-literature/SKILL.md) | Full-paper reading, anchored notes, criticism and exploratory reflection | Automatic or explicit |
 | [research-synthesis](../skills/research-synthesis/SKILL.md) | Evidence-bounded answers and comparisons across papers | Automatic or explicit |
-| [research-ideation](../skills/research-ideation/SKILL.md) | Unranked, falsifiable research candidates at the requested scope | Automatic or explicit |
-| [research-idea-evaluation](../skills/research-idea-evaluation/SKILL.md) | Screening, human shortlisting and independent deep evaluation | Explicit only |
-| [research-rapid-test](../skills/research-rapid-test/SKILL.md) | Fast empirical pilots and bounded promote-or-drop decisions before formal experiments | Automatic or explicit |
+| [research-ideation](../skills/research-ideation/SKILL.md) | Unranked research questions and candidate contributions at the requested scope | Automatic or explicit |
+| [research-idea-evaluation](../skills/research-idea-evaluation/SKILL.md) | Evidence-based investment recommendations with independent criticism | Explicit only |
+| [research-rapid-test](../skills/research-rapid-test/SKILL.md) | Bounded observations resolving an empirical investment uncertainty | Automatic or explicit |
 | [research-experiment](../skills/research-experiment/SKILL.md) | Bounded experiment contracts, runner evidence and scientific checks | Automatic or explicit |
 | [experiment-adapter-builder](../skills/experiment-adapter-builder/SKILL.md) | Stable project runner commands, queues, monitoring and evidence rules | Explicit only in Codex; native policy preserved |
 | [model-training-workflow](../skills/model-training-workflow/SKILL.md) | Training setup, launch guards, monitoring, diagnosis and experiment handoff | Explicit only in Codex; native policy preserved |
@@ -167,8 +167,8 @@ agent-skills-private; their old pack paths are not runtime contracts.
 | `research-literature` | reading-state updates in `register.md`, plus `notes/<paper-id>.md` tied to the version read and source provenance, with evidence-quality assessment and useful analyst reflection | workflow contract tests |
 | `research-synthesis` | `synthesis.md`, with optional evidence-backed open problems and separately labelled exploratory reflection | workflow contract tests |
 | `research-ideation` | one full unranked `ideas.md` portfolio | packaged `research-idea-evaluation/scripts/validate-handoff.py` (`portfolio`) |
-| `research-idea-evaluation` | `screening.md`, human-confirmed `shortlist.md`, `attacks/<candidate-id>.md`, `decision.md` | packaged `research-idea-evaluation/scripts/validate-handoff.py` (`screening`, `shortlist`, `decision`) |
-| `research-rapid-test` | one `rapid-test.md`, minimal runnable code/commands and raw comparisons; in an rctl-managed project, a linked lightweight native task unless the user chooses note-only tracking | observed intervention/control evidence and bounded PROMOTE / ITERATE ONCE / DROP judgment; managed tasks use existing rctl verification/closure with small declared criteria, without formal experiment prerequisites |
+| `research-idea-evaluation` | one compact `decision.md` with triage, selection basis, independent reviews, investment cases, and investigation briefs; historical staged records remain supported | packaged `research-idea-evaluation/scripts/validate-handoff.py` (`decision`; historical `screening` and `shortlist` stages retained) |
+| `research-rapid-test` | one `rapid-test.md`, minimal runnable code/commands and raw observations; in an rctl-managed project, a linked lightweight native task unless the user chooses note-only tracking | claim-appropriate evidence and bounded PROMOTE / ITERATE ONCE / DROP judgment; managed tasks use existing rctl verification/closure with small declared criteria, without formal experiment prerequisites |
 | `research-experiment` | rctl `contract.md`, runner-owned execution evidence, and native `result.md` | domain structure/lineage validator plus rctl execution checks and evidence-based reviews before guarded closure |
 | `experiment-adapter-builder` | project-local experiment adapter with runner references and reusable run/campaign templates | packaged adapter validator and synthetic fixture; structure only |
 | `model-training-workflow` | training plan, source map, preflight, run matrix, execution log, optional diagnosis and handoff | packaged training validator and synthetic fixtures; structure only |
@@ -185,16 +185,30 @@ fallback if none exists. Continue existing topic artifacts instead of moving or
 duplicating them to fit a directory example. Computation checks normally remain in
 their calling task or trial rather than creating a separate note.
 
-Ideation develops `C#` candidates from the supplied material, distinguishing factual premises from hypotheses and naming missing capabilities. Evaluation first screens every candidate with bounded evidence, then preserves the human's informed selection verbatim in `shortlist.md`. Independent deep evaluation attacks exactly that shortlist and selects no more than two candidates or closes blocked. The packaged validator enforces portfolio and screening coverage, shortlist lineage, attack scope, dispositions, selection bounds, and method-experiment provenance.
+Ideation develops `C#` questions and contributions from supplied material, separating
+observations from hypotheses and identifying the next consequential uncertainty.
+Methods, measurements, and explanations are examples, not mandatory portfolio slots.
+Evaluation triages the whole portfolio, records actual human choice or an agent
+recommendation, obtains independent criticism for potential investments, and makes
+the affirmative case for at most two next investigations or closes blocked.
 
 Candidate breadth follows the question, material, and user request. If no candidate
 can yet be formulated, record the unresolved premise in the existing work without
 creating an empty evaluation handoff. An unknown closest prior remains explicit
-until evaluation. The human shortlist may contain any nonempty explicit selection; 3–5 is
-advice, not a validation limit. Selected evaluation results route to research-rapid-test
-for early feasibility or research-experiment for formal validation. A later formal
-experiment retains the original candidate selection even when a pilot intervened.
-Human selection and evaluation's explicit-only invocation policy are unchanged.
+until evaluation. New evaluations use `decision_format: compact`; selection and
+review provenance live in the decision rather than requiring repeated invocation
+and shortlist documents. Screening-only requests can still use `screening.md`.
+Historical decisions without the format marker retain their staged contract and
+are not silently migrated. The validator checks coverage, nonempty required
+sections, review/selection IDs, and downstream lineage, not scientific quality or
+execution authority.
+
+Selected decisions route to research-rapid-test for a bounded empirical observation,
+research-experiment for formal validation, or research-theory for a derivation/proof.
+Both `Investigation Brief` and historical `Experiment Brief` headings are supported.
+A later formal experiment retains the original candidate selection even when a
+pilot intervened. Evaluation's explicit-only invocation policy is preserved;
+continuing an explicitly delegated workflow needs no repeated ID-selection ceremony.
 
 Existing numbered packs, campaign roots, and HTML reports remain readable historical inputs. Deleted pack validators and report commands are not current interfaces and must not be recommended for new work.
 

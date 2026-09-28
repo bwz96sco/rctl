@@ -11,7 +11,9 @@ from pathlib import Path
 CANDIDATE_ID = re.compile(r"C[1-9][0-9]*")
 CANDIDATE_HEADING = re.compile(r"(?m)^##\s+(C[1-9][0-9]*)\s*:")
 SCREENING_SIGNALS = {"advance", "hold", "reject"}
-BRIEF_HEADING = re.compile(r"(?m)^##\s+Experiment Brief:\s*(C[1-9][0-9]*)\s*$")
+BRIEF_HEADING = re.compile(
+    r"(?m)^##\s+(?:Experiment|Investigation) Brief:\s*(C[1-9][0-9]*)\s*$"
+)
 
 
 def frontmatter(path: Path) -> dict[str, str | list[str]]:
@@ -190,15 +192,48 @@ def validate_shortlist(root: Path) -> None:
     shortlist_ids(root, portfolio)
 
 
+def completed_content(content: str) -> bool:
+    value = content.strip()
+    return bool(value) and re.fullmatch(r"<[^>]+>", value) is None
+
+
+def validate_compact_sections(text: str, label: str, expected: set[str]) -> None:
+    sections = re.findall(
+        rf"(?ms)^##[ \t]+{label}:[ \t]*(C[1-9][0-9]*)[ \t]*\n"
+        r"(.*?)(?=^##[ \t]|\Z)",
+        text,
+    )
+    ids = [candidate_id for candidate_id, _ in sections]
+    if len(ids) != len(set(ids)):
+        raise ValueError(f"decision.md: duplicate {label} IDs")
+    if set(ids) != expected:
+        raise ValueError(
+            f"decision.md: {label} coverage mismatch; "
+            f"missing={sorted(expected - set(ids))} extra={sorted(set(ids) - expected)}"
+        )
+    for candidate_id, content in sections:
+        if not completed_content(content):
+            raise ValueError(
+                f"decision.md: {label} for {candidate_id} needs completed content"
+            )
+
+
 def validate_decision(root: Path) -> None:
     portfolio = set(portfolio_ids(root))
-    screening_ids(root, portfolio)
-    shortlisted = shortlist_ids(root, portfolio)
-    shortlist = set(shortlisted)
     path = root / "decision.md"
     if not path.is_file():
         raise ValueError("missing decision.md")
     fields = frontmatter(path)
+    decision_format = fields.get("decision_format", "legacy")
+    if decision_format == "legacy":
+        screening_ids(root, portfolio)
+        scope = set(shortlist_ids(root, portfolio))
+        scope_label = "shortlist"
+    elif decision_format == "compact":
+        scope = portfolio
+        scope_label = "portfolio"
+    else:
+        raise ValueError("decision.md: decision_format must be compact or legacy")
     if scalar(fields, "stage", path) != "converge_complete":
         raise ValueError("decision.md: stage must be converge_complete")
     status = scalar(fields, "decision_status", path)
@@ -207,22 +242,27 @@ def validate_decision(root: Path) -> None:
     selected = id_list(fields, "selected_candidate_ids", path)
     if len(selected) > 2:
         raise ValueError("decision.md: at most two candidates may be selected")
-    outside = sorted(set(selected) - shortlist)
+    outside = sorted(set(selected) - scope)
     if outside:
-        raise ValueError(f"decision.md: selected IDs outside shortlist {outside}")
+        raise ValueError(f"decision.md: selected IDs outside {scope_label} {outside}")
     if status == "selected" and not selected:
         raise ValueError("decision.md: selected status requires one or two IDs")
     if status == "blocked" and selected:
         raise ValueError("decision.md: blocked status requires no selected IDs")
     if scalar(fields, "portfolio", path) != "ideas.md":
         raise ValueError("decision.md: portfolio must be ideas.md")
-    if scalar(fields, "shortlist", path) != "shortlist.md":
+    if (
+        decision_format == "legacy"
+        and scalar(fields, "shortlist", path) != "shortlist.md"
+    ):
         raise ValueError("decision.md: shortlist must be shortlist.md")
     owners = (
         {"research-rapid-test", "research-experiment"}
         if status == "selected"
         else {"none"}
     )
+    if decision_format == "compact" and status == "selected":
+        owners.add("research-theory")
     if scalar(fields, "next_owner", path) not in owners:
         raise ValueError(f"decision.md: next_owner must be one of {sorted(owners)}")
 
@@ -231,11 +271,12 @@ def validate_decision(root: Path) -> None:
     disposition_ids = [candidate_id for candidate_id, _ in disposition_rows]
     if len(disposition_ids) != len(set(disposition_ids)):
         raise ValueError("decision.md: duplicate candidate dispositions")
-    missing = sorted(shortlist - set(disposition_ids))
-    extra = sorted(set(disposition_ids) - shortlist)
+    missing = sorted(scope - set(disposition_ids))
+    extra = sorted(set(disposition_ids) - scope)
     if missing or extra:
         raise ValueError(
-            f"decision.md: dispositions mismatch shortlist; missing={missing} extra={extra}"
+            f"decision.md: dispositions mismatch {scope_label}; "
+            f"missing={missing} extra={extra}"
         )
     disposition_by_id = dict(disposition_rows)
     invalid_dispositions = sorted(
@@ -250,7 +291,7 @@ def validate_decision(root: Path) -> None:
         )
     mismatched_selected = sorted(
         candidate_id
-        for candidate_id in shortlist
+        for candidate_id in scope
         if (candidate_id in selected) != (disposition_by_id[candidate_id] == "selected")
     )
     if mismatched_selected:
@@ -259,16 +300,40 @@ def validate_decision(root: Path) -> None:
             f"for {mismatched_selected}"
         )
 
-    attack_root = root / "attacks"
-    attacks = (
-        {item.stem for item in attack_root.glob("*.md")}
-        if attack_root.is_dir()
-        else set()
-    )
-    if attacks != shortlist:
-        raise ValueError(
-            "attacks/: files must cover exactly the shortlist; "
-            f"missing={sorted(shortlist - attacks)} extra={sorted(attacks - shortlist)}"
+    if decision_format == "legacy":
+        attack_root = root / "attacks"
+        attacks = (
+            {item.stem for item in attack_root.glob("*.md")}
+            if attack_root.is_dir()
+            else set()
+        )
+        if attacks != scope:
+            raise ValueError(
+                "attacks/: files must cover exactly the shortlist; "
+                f"missing={sorted(scope - attacks)} extra={sorted(attacks - scope)}"
+            )
+    else:
+        if scalar(fields, "selection_basis", path) not in {
+            "human",
+            "agent_recommendation",
+        }:
+            raise ValueError(
+                "decision.md: selection_basis must be human or agent_recommendation"
+            )
+        basis = re.findall(
+            r"(?ms)^## Selection basis[ \t]*\n(.*?)(?=^##[ \t]|\Z)", text
+        )
+        if len(basis) != 1 or not completed_content(basis[0]):
+            raise ValueError("decision.md: Selection basis needs completed content")
+        reviewed = set(id_list(fields, "reviewed_candidate_ids", path))
+        if not reviewed <= portfolio:
+            raise ValueError("decision.md: reviewed IDs must belong to the portfolio")
+        if not set(selected) <= reviewed:
+            raise ValueError("decision.md: selected IDs require independent review")
+        validate_compact_sections(text, "Independent Review", reviewed)
+        validate_compact_sections(text, "Investment Case", set(selected))
+        validate_compact_sections(
+            text, "(?:Experiment|Investigation) Brief", set(selected)
         )
 
     briefs = BRIEF_HEADING.findall(text)
