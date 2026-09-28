@@ -17,6 +17,7 @@ ACTIVE_RESEARCH_SKILLS = {
     "research-idea-evaluation",
     "research-ideation",
     "research-literature",
+    "research-question",
     "research-rapid-test",
     "research-review-case",
     "research-slides",
@@ -141,8 +142,6 @@ class ResearchSkillContractTest(unittest.TestCase):
         self.assertIn("Evidence-backed open problems", synthesis)
         self.assertIn("not a novelty verdict", synthesis)
         self.assertIn("start without synthesis", synthesis)
-        for input_mode in ("problem-first", "method-first", "dataset-first"):
-            self.assertIn(input_mode, ideation)
         self.assertIn("stage: expand_complete", ideas_template)
         self.assertIn("next_owner: research-idea-evaluation", ideas_template)
         self.assertFalse((SKILLS / "research-ideation/shortlist-template.md").exists())

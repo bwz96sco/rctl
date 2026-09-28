@@ -1,5 +1,11 @@
 # Independent candidate review
 
+For a question-only review, assess why the question matters, what remains unresolved
+and whether evidence could answer it. Use the supplied question reference in the
+review; a `C#`, completed method or experimental brief is unnecessary. Record the
+assessment in the question record. The candidate template below serves proposed
+investigations, where a concrete first observation is part of the investment case.
+
 Assess the proposed next investment independently. Use the supplied card,
 question, and evidence; verify decisive closest-prior claims through
 `paper-search-cli` or the supplied full-text notes. Report the strongest material

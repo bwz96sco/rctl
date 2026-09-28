@@ -1,7 +1,7 @@
 interface:
   display_name: "Research Ideation"
-  short_description: "Research questions, contributions, and investigations"
-  default_prompt: "Use $research-ideation to develop unranked research questions and candidate contributions from the available evidence, explain their reader value and key unknown, and hand them to explicit evaluation."
+  short_description: "Develop approaches to a clear research question"
+  default_prompt: "Use $research-ideation to develop alternative approaches to this research question, explain how each could answer it and its key uncertainty, and hand the unranked candidates to explicit evaluation."
 
 policy:
   allow_implicit_invocation: true

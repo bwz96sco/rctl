@@ -1,7 +1,7 @@
 interface:
   display_name: "Research Idea Evaluation"
-  short_description: "Judge research value and the next investment"
-  default_prompt: "Use $research-idea-evaluation to assess this portfolio, challenge the decisive assumptions independently, and explain which next investigation, if any, deserves investment."
+  short_description: "Assess research questions and proposed investigations"
+  default_prompt: "Use $research-idea-evaluation to assess the value of these research questions or proposed investigations, check the decisive assumptions, and explain what development or investment is justified."
 
 policy:
   allow_implicit_invocation: false

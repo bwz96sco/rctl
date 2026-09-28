@@ -1,0 +1,7 @@
+interface:
+  display_name: "Research Question"
+  short_description: "Develop worthwhile, answerable research questions"
+  default_prompt: "Use $research-question to develop research questions from these materials, explain why their answers matter, and keep evidence, possible explanations, and open assumptions distinct."
+
+policy:
+  allow_implicit_invocation: true

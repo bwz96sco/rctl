@@ -12,6 +12,7 @@ next_owner: research-idea-evaluation
 ## Frame
 
 - Active user question and requested perspective; inherited assumptions to reconsider:
+- Parent research question: <inline statement, or existing question-record link and Q#; no prerequisite question file>
 - Constraints:
 - Non-goals:
 - Intended readers and human interests:
@@ -25,10 +26,10 @@ next_owner: research-idea-evaluation
 
 ## C1: <candidate title>
 
-- Research question: <what remains unresolved; include competing explanations where useful>
+- Research question: <which supplied question this approach answers; preserve its scope and any relevant Q#>
 - Potential contribution and reader consequence: <finding, measurement, formulation, or capability; what would be learned beyond the closest prior and what belief or practice could change>
 - Evidence and premise: <anchored observations; separate interpretations and unverified assumptions>
-- Proposed investigation: <how to resolve the question; for a method, specify the operation and source of needed information>
+- Proposed investigation: <how this approach could answer the question and how it differs from the alternatives; specify operations and information sources when applicable>
 - Closest prior or rival: <what it already explains or achieves; unknowns and executable readiness when relevant>
 - First discriminating observation: <smallest observation that could separate the possibilities and change investment>
 - Outcome implications: <what supports continuation or refutes the claim; distinguish absent opportunity and insufficient information>

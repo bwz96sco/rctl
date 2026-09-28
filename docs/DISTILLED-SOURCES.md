@@ -242,6 +242,44 @@ records the residual problems and inference limit. This single clarified-context
 example does not establish a causal improvement or reliable compliance. No new
 scientific trial was launched.
 
+## Research-question formation and investigation design
+
+- **Sources:** the user's `/Users/zhangbowen/Downloads/问题.md` and September28
+  discussion; the [recorded split plan](../../OR/research/plans/2026-09-28-research-question-skill-split.md);
+  [Superpowers brainstorming](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md),
+  [Scientific Brainstorming routes](https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/skills/scientific-brainstorming/references/brainstorming_methods.md),
+  and the [Design Council Double Diamond](https://www.designcouncil.org.uk/resources/the-double-diamond/),
+  fetched through smart-search on September28 with [commands and extracts](../../OR/.work/brainstorm-framing-20260928/retrieval.md).
+- **Applied to:** research-question, ideation, literature/synthesis routing,
+  evaluation's question branch, and direct question entry to rapid-test.
+
+**Retained:** reading and thinking together; failure analysis, explanation of
+success and contradictions; problem/goal-led and method-led entry; assumption
+changes, cross-domain analogy and distinct periods of generation and comparative
+judgment. These are useful thinking operations, not creativity guarantees.
+
+**Adapted:** give question formation an independent completion point. Optional
+routes share a concise statement of object, motivation, unknown, reader consequence,
+prior relation and answerability. Ideation develops ways to answer clear questions;
+evaluation distinguishes a question's value from a particular approach's promise.
+Ordinary reading keeps reflection, and direct problem-origin studies remain valid.
+Do not restore the retired mining ledger, impose a six-route quota, import numerical
+ranking or approval rituals, or require a new algorithm for explanatory work.
+Existing solution validators and native lifecycle/schema authority remain unchanged.
+
+**Use checks and one correction:** four initial synthetic, text-only SWE-2 High
+uses exposed overattribution of empirical contrasts, inflated capability claims,
+and substitution of cheap prerequisite order for question value. The focused
+revision clarifies compared versus shared operations, measured affordance versus
+inferred need, and scientific value versus sequencing. Three affected cases were
+repeated, for seven calls total; all completed. The
+[observations](../.work/question-skill-split-20260928/review.md) support the intended
+routing and old handoff compatibility, but still contain these reasoning errors.
+The 70 passing tests and 49 subtests establish structural compatibility only.
+The new skill and five edited existing packages resolve to their source paths;
+evaluation remains explicit-only. No scientific experiment or historical decision
+was changed by the split.
+
 ## Limitations
 
 The linked web texts were read through smart-search and the browser; the supplied

@@ -20,15 +20,15 @@ within the pilot's preparation allowance and adds no formal reproduction gate.
 Outside a managed project, keep the one-note workflow; do not install rctl merely
 to run a pilot. Discussion and read-only inspection do not require a new task.
 
-## Enter from the idea, not from an infrastructure plan
+## Enter from the question and proposed observation
 
-Read the supplied idea/evaluation and directly relevant prior result. Identify the
+Read the supplied question, idea/evaluation and directly relevant prior result. Identify the
 question, possible contribution, intended reader, strongest prior or rival, and
 the uncertainty most likely to change investment. Reuse an existing affirmative
 investment case. At direct entry, explain why resolving this uncertainty matters,
 what evidence makes the investigation credible, and what observation distinguishes
 the possibilities. Put this in the existing bet; evaluation files are not a
-prerequisite for a user-supplied idea. A clear user request to test a weak bet can
+prerequisite for a user-supplied question or idea. A clear user request to test a weak bet can
 still be honored: state the concern and scope rather than inventing an endorsement.
 
 Carry the active user goal and selected research object into that bet. A smaller
@@ -38,9 +38,13 @@ of a measurement study; replacing it with a repair-accuracy comparison changes
 the question. If the proposed reduction loses the scientific point, return to
 selection instead of launching on the strength of available cases or low cost.
 
-When entering from an evaluated selection, retain the original `C#`, `decision.md`
-path, and selected brief in the trial note. A later formal experiment keeps that
-lineage even when the decision's first next owner was `research-rapid-test`.
+For a question-origin trial, retain its statement or existing question reference
+and specify the actual observation and allowance here; no solution portfolio or
+invented `C#` is needed. Question formation belongs to `$research-question` if that
+is still the requested work, rather than forcing an experiment to complete it.
+For an evaluated investigation candidate, retain the original `C#`, `decision.md`
+path and selected brief. A later formal experiment keeps that lineage even when
+the decision's first next owner was `research-rapid-test`.
 
 Respect a specified candidate. If selection is delegated, choose a worthwhile
 question with a discriminating observation and available evidence. Explain the

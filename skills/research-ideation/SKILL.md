@@ -1,11 +1,21 @@
 ---
 name: research-ideation
-description: Develop research questions and candidate contributions from evidence, anomalies, methods, resources, or human ideas. Use when exploring research directions, including methods, measurements, and explanations. Hands unranked candidates to explicit investment evaluation.
+description: Develop alternative ways to answer a clear research question, including methods, measurements, empirical designs and theoretical approaches. Use when the user wants candidate solutions or investigations. Forming or reframing the question belongs to research-question; investment judgment belongs to explicit evaluation.
 ---
 
 # Research Ideation
 
-Own candidate development. Match breadth to the question, available material, and user request; there is no default candidate count or contribution-type quota. Develop questions worth answering and ways to answer them. Hand the unranked portfolio to explicit `$research-idea-evaluation`; comparative investment judgment belongs there. Ordinary reading and exploratory reflection stay with the work that prompted them.
+Own investigation design. Develop substantively different ways to answer a supplied
+or referenced research question. A method may be an algorithm, measurement procedure,
+empirical contrast or theoretical approach; a new algorithm is not compulsory. Match
+breadth to the request and available material, without a candidate-count or contribution
+quota. Hand the unranked portfolio to explicit `$research-idea-evaluation`.
+
+Use a clear user-supplied question directly. A question record, synthesis or earlier
+evaluation is not a prerequisite. When the work instead concerns what is worth
+studying, use `$research-question`. Ordinary reading reflections stay with their
+paper notes. A material reframing during design returns to question formation;
+preserve what changed rather than silently substituting a more convenient question.
 
 ## Workspace
 
@@ -13,23 +23,19 @@ Read the project-relative `vault` binding in `.rctl/project.json`; when unbound,
 
 ## Workflow
 
-1. **Frame the inquiry.** Record the active user question verbatim and its requested perspective, including corrections to an earlier goal. Distinguish that request from the project's inherited default metric or method. When the user asks to expand research objects or measures, develop those objects and what existing measures conflate before proposing interventions. A past failure can motivate this inquiry; it does not determine its scope.
+1. **Establish the question being answered.** Record the active user request and the supplied question, with a source link or `Q#` when available. Preserve its object, scope and requested perspective, including corrections to inherited metrics or methods. State a reasonable bounded interpretation when sufficient; use `$research-question` if the question itself needs development. Do not make a clear question repeat upstream stages.
 2. **Use the available material directly.** Accept papers and anchored reading notes, imported methods, datasets, experimental observations, prior results, and human suggestions. No source type is mandatory or privileged. Reuse historical idea or seed files as suggestions; return to their underlying sources before treating a premise as factual evidence.
-3. **Expand questions and explanations.** Use problem-first, method-first, dataset-first, or mixed entry points. An unexplained contrast, a missing observable, a theoretical boundary, or an operational difficulty can motivate a candidate. Sketch competing explanations before committing to machinery. A candidate may contribute a method, measurement, finding, or formulation; these are examples, not slots to fill.
+3. **Develop alternative approaches.** Vary the causal operation, information source, representation, comparison or proof strategy where this changes what can be learned. For explanatory work, turn rival accounts into distinguishable predictions; for measurement, develop ways to observe the relevant distinction; for performance, specify why an operation could address the bottleneck. Existing methods may be sufficient instruments. Compare materially different approaches before committing to machinery; merge cosmetic variants.
 4. **Check premises and revise.** Separate reported facts, interpretations, and proposed contributions. Check a decisive source passage when its meaning affects the candidate; an unchecked premise stays uncertain. For a method, explain its operation and where the needed information comes from. For a measurement or explanation, explain the relevant distinction and how it could be independently observed. Route needed searches to `$paper-discovery` and full-paper checks to `$research-literature`; rough generation needs no prerequisite literature campaign.
-5. **Build the portfolio.** Write stable `C1..Cn` cards using the template: question, potential contribution and reader consequence, evidence, proposed investigation, closest prior or rival, first discriminating observation, and major uncertainty. Keep distinct questions, hypotheses, observables, and mechanisms separate; merge cosmetic variants. Before handoff, compare the portfolio with the requested perspective: briefly explain the substantive alternatives considered and any narrowing. A shortlist limit governs developed cards, not which research objects may be considered. Known methods may be useful instruments without making their combination novel.
+5. **Build the portfolio.** Write stable `C1..Cn` cards using the template: parent question, potential contribution and reader consequence, evidence, proposed investigation, closest prior or rival, first discriminating observation, and major uncertainty. Several approaches can answer one question. If the user supplied several questions, preserve those associations. Before handoff, explain the substantive alternatives considered and any narrowing from the request. A shortlist limit governs developed cards, not the alternatives considered. Known instruments do not make their combination novel.
 6. **Hand off the full portfolio.** Set `stage: expand_complete` and `next_owner: research-idea-evaluation`. Run `uv run --no-project python "<evaluation-skill>/scripts/validate-handoff.py" portfolio <idea-root>` using the actual installed evaluation-skill directory. This checks structure, not scientific merit. For an ideation-only request, name the explicit evaluation invocation and stop. If the user already explicitly included evaluation in the work, continue within that scope without another selection ceremony; the handoff grants no experiment budget.
 
-Complete when the unranked portfolio addresses the requested scope and exposes what could be learned beyond existing knowledge, why it could matter, and which premise remains uncertain. Available artifacts and a runnable contrast establish feasibility, not this completion criterion. If no candidate can be formulated, report the unresolved question in the existing work rather than creating an empty portfolio. A validated portfolio is still unevaluated until substantive evaluation occurs.
-
-## Expansion prompts
-
-Ask what current observations conflate, which competing explanations predict
-different outcomes, what changes over a process or resource budget, or which
-important condition existing evidence does not cover. A method change is useful
-when it follows from such a question. A new metric needs a defined construct,
-independent validity evidence, and a consequential use. Apply only prompts that
-help the inquiry; no per-paper coverage table is needed.
+Complete when the unranked portfolio preserves the question and explains how the
+proposed approaches could answer it, their differences from relevant alternatives,
+and their decisive uncertainties. Available artifacts and a runnable contrast establish
+feasibility, not scientific value. If no approach can be formulated, report the missing
+capability in the existing work. This does not itself refute the question's value.
+A validated portfolio is still unevaluated until substantive evaluation occurs.
 
 ## Rules
 

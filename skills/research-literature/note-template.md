@@ -1,6 +1,6 @@
 # Paper note template
 
-You are reading one paper for one target question. Follow the [reading method](references/reading-method.md), then record the evidence needed for the target question. Fill the evidence sections; add analyst reflection when useful. Anchor material claims and numbers to a section, page, figure, table, or equation and record their evidence basis and confidence or caveat. With partial text or an abstract, fill only what the available source supports and mark deeper sections `not assessable from available access`.
+You are reading one paper for a target question or exploratory reading purpose. Follow the [reading method](references/reading-method.md), then record the relevant evidence. A precise new research question need not already exist. Fill the evidence sections; add analyst reflection when useful. Anchor material claims and numbers to a section, page, figure, table, or equation and record their evidence basis and confidence or caveat. With partial text or an abstract, fill only what the available source supports and mark deeper sections `not assessable from available access`.
 
 The scientific factual sections report only what the paper says. Metadata inherits the supplied provenance; preserve unresolved claims and source dates. Your own judgments and exploratory ideas belong in the `Analyst` sections. Keep author-stated limitations, observed failures, analyst inferences, and proposed mechanisms distinct.
 

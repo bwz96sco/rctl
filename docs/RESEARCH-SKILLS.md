@@ -1,6 +1,6 @@
 # Research skills
 
-rctl owns the 15 research workflow packages listed below under `skills/`, including
+rctl owns the 16 research workflow packages listed below under `skills/`, including
 research-task, the migrated domain workflows, and research-rapid-test. Edit these
 sources here.
 The [migration record](RESEARCH-SKILLS-MIGRATION.md) records the source snapshot,
@@ -19,8 +19,9 @@ instructions needed to perform their tasks.
 | [paper-discovery](../skills/paper-discovery/SKILL.md) | Question-scoped paper pools and project Zotero collection curation | Automatic or explicit |
 | [research-literature](../skills/research-literature/SKILL.md) | Full-paper reading, anchored notes, criticism and exploratory reflection | Automatic or explicit |
 | [research-synthesis](../skills/research-synthesis/SKILL.md) | Evidence-bounded answers and comparisons across papers | Automatic or explicit |
-| [research-ideation](../skills/research-ideation/SKILL.md) | Unranked research questions and candidate contributions at the requested scope | Automatic or explicit |
-| [research-idea-evaluation](../skills/research-idea-evaluation/SKILL.md) | Evidence-based investment recommendations with independent criticism | Explicit only |
+| [research-question](../skills/research-question/SKILL.md) | Research-question formation from observations, goals, contradictions and technical capabilities | Automatic or explicit |
+| [research-ideation](../skills/research-ideation/SKILL.md) | Alternative methods and investigations answering a clear research question | Automatic or explicit |
+| [research-idea-evaluation](../skills/research-idea-evaluation/SKILL.md) | Question-value assessment and investigation investment judgment | Explicit only |
 | [research-rapid-test](../skills/research-rapid-test/SKILL.md) | Bounded observations resolving an empirical investment uncertainty | Automatic or explicit |
 | [research-experiment](../skills/research-experiment/SKILL.md) | Bounded experiment contracts, runner evidence and scientific checks | Automatic or explicit |
 | [experiment-adapter-builder](../skills/experiment-adapter-builder/SKILL.md) | Stable project runner commands, queues, monitoring and evidence rules | Explicit only in Codex; native policy preserved |
@@ -42,14 +43,26 @@ The standalone `research-opportunity-mining` skill was retired on 2026-09-24.
 Reading now includes independent thinking and exploratory reflection in the same
 paper note, guided by the [reading method](../skills/research-literature/references/reading-method.md).
 Synthesis can retain tentative connections separately from its evidence-backed
-answer. Developing complete research candidates belongs to research-ideation.
+answer. Reading can serve an exploratory purpose without requiring an already
+precise new research question.
 
-Ideation uses papers, anchored notes, experimental observations, and human ideas
-directly. It has no default candidate count, lens quota, or per-paper coverage
-table. The former mining lenses survive as optional thinking prompts. Historical
-seed files remain usable as suggestions; premises used as evidence must be checked
-against their underlying sources. No separate seed artifact is required, and live
-research notes are not migrated by this source change.
+Research-question develops worthwhile, scoped questions through optional routes
+for failures, successes, contradictions, scenario/assumption changes, measurement
+ambiguity and technical capabilities. It can finish with question statements before
+methods or experiment counts exist. It uses an existing record or `questions.md`
+when durable development is requested; ordinary reflections stay in their notes.
+
+Ideation develops ways to answer a clear supplied or referenced question, including
+algorithms, measurements, empirical designs and theoretical approaches. Direct entry
+does not require an upstream question file, synthesis or evaluation. Evaluation can
+assess a question in its existing record without requiring a solution portfolio;
+investigation decisions retain their existing `C#` format and validator. These are
+separate responsibilities, not mandatory consecutive stages.
+
+There is no default candidate count, lens quota or per-paper coverage table. The
+former mining lenses remain optional prompts; the retired gap/seed-collection
+workflow is not restored. Historical seed files remain suggestions whose factual
+premises need their underlying sources. Live research notes are not migrated.
 
 ## Shared computation checks
 
@@ -100,6 +113,11 @@ It was re-fetched through smart-search on 2026-09-23 for the computation retirem
 and on 2026-09-24 for the reading/ideation change:
 a skill requires `SKILL.md`; references are supporting files, and symlink targets
 are followed during discovery.
+The September28 question-skill split rechecked the same official page through
+smart-search: shared user skills, symlink following and explicit-only invocation
+remain supported. The new `~/.agents/skills/research-question` link points to this
+checkout's `skills/research-question/`; the five edited existing packages retain
+their source links and invocation policies.
 
 Invoke packaged helpers from the actual installed skill directory, not a fixed
 user-level path. For candidate-origin result validation, install research-experiment
@@ -135,6 +153,22 @@ the previously released 0.5.1 wheel; live-project copies and task records were n
 changed. Source, package, and installation checks do not establish research quality
 or fresh-host agent adherence.
 
+### September28 question-skill split
+
+The new question package is installed through the shared source link described
+above. Six relevant installed paths, resource links and invocation policies were
+checked. The focused suite passes 70 tests and 49 subtests, and a returned ideation
+portfolio passes the unchanged handoff validator.
+
+The [bounded use-check record](../.work/question-skill-split-20260928/review.md)
+contains four initial SWE-2 High responses and three repeats after one focused
+revision. Question-only completion, direct ideation and old-format handoffs work
+in these examples. Scientific reasoning remains mixed: unsupported capability
+claims, overattribution and prerequisite-first prioritization still occur. This
+records implementation and its observed limits, not improved research quality.
+The [project implementation record](../../OR/research/plans/2026-09-28-research-question-skill-split.md#implementation-record)
+keeps the scope and completion judgment alongside the original authorization.
+
 ## Related skills outside this migration
 
 The original selection covered 13 private-repository workflows, followed by
@@ -166,8 +200,9 @@ agent-skills-private; their old pack paths are not runtime contracts.
 | `paper-discovery` | one repository-level Zotero collection and `zotero-collection.md`; question-scoped `register.md` following the packaged register template, with publication/affiliation provenance, search coverage, Zotero item keys and verified membership | workflow contract tests plus Zotero re-read after writes |
 | `research-literature` | reading-state updates in `register.md`, plus `notes/<paper-id>.md` tied to the version read and source provenance, with evidence-quality assessment and useful analyst reflection | workflow contract tests |
 | `research-synthesis` | `synthesis.md`, with optional evidence-backed open problems and separately labelled exploratory reflection | workflow contract tests |
-| `research-ideation` | one full unranked `ideas.md` portfolio | packaged `research-idea-evaluation/scripts/validate-handoff.py` (`portfolio`) |
-| `research-idea-evaluation` | one compact `decision.md` with triage, selection basis, independent reviews, investment cases, and investigation briefs; historical staged records remain supported | packaged `research-idea-evaluation/scripts/validate-handoff.py` (`decision`; historical `screening` and `shortlist` stages retained) |
+| `research-question` | question statements in chat or an existing topic record; `questions.md` for new durable development | source/resource checks and scoped use checks; no mandatory question-state validator |
+| `research-ideation` | one unranked `ideas.md` portfolio of approaches, with an inline or referenced parent question | packaged `research-idea-evaluation/scripts/validate-handoff.py` (`portfolio`) |
+| `research-idea-evaluation` | question assessment in its existing record; investigation assessment in compact `decision.md`, with historical staged records retained | solution portfolios use the packaged handoff validator (`decision`, historical `screening`/`shortlist`); question-only assessments do not require those artifacts |
 | `research-rapid-test` | one `rapid-test.md`, minimal runnable code/commands and raw observations; in an rctl-managed project, a linked lightweight native task unless the user chooses note-only tracking | claim-appropriate evidence and bounded PROMOTE / ITERATE ONCE / DROP judgment; managed tasks use existing rctl verification/closure with small declared criteria, without formal experiment prerequisites |
 | `research-experiment` | rctl `contract.md`, runner-owned execution evidence, and native `result.md` | domain structure/lineage validator plus rctl execution checks and evidence-based reviews before guarded closure |
 | `experiment-adapter-builder` | project-local experiment adapter with runner references and reusable run/campaign templates | packaged adapter validator and synthetic fixture; structure only |
@@ -185,8 +220,9 @@ fallback if none exists. Continue existing topic artifacts instead of moving or
 duplicating them to fit a directory example. Computation checks normally remain in
 their calling task or trial rather than creating a separate note.
 
-Ideation develops `C#` questions and contributions from supplied material, separating
-observations from hypotheses and identifying the next consequential uncertainty.
+Question formation develops the inquiry; ideation develops `C#` approaches to a
+clear question, separating observations from hypotheses and identifying the next
+consequential uncertainty.
 Methods, measurements, and explanations are examples, not mandatory portfolio slots.
 Evaluation triages the whole portfolio, records actual human choice or an agent
 recommendation, obtains independent criticism for potential investments, and makes
