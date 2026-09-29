@@ -40,8 +40,8 @@ selection instead of launching on the strength of available cases or low cost.
 
 For a question-origin trial, retain its statement or existing question reference
 and specify the actual observation and allowance here; no solution portfolio or
-invented `C#` is needed. Question formation belongs to `$research-question` if that
-is still the requested work, rather than forcing an experiment to complete it.
+invented `C#` is needed. If question formation is still the requested work,
+continue that discussion before proposing an experiment.
 For an evaluated investigation candidate, retain the original `C#`, `decision.md`
 path and selected brief. A later formal experiment keeps that lineage even when
 the decision's first next owner was `research-rapid-test`.

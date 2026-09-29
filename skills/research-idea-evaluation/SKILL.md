@@ -7,9 +7,9 @@ disable-model-invocation: true
 # Research Idea Evaluation
 
 Own value and investment judgment. Distinguish whether a question is worth answering
-from whether a proposed approach is a good way to answer it. Developing or reframing
-questions belongs to `$research-question`; replacement approaches belong to
-`$research-ideation`. Surviving an attack is evidence about objections, not an
+from whether a proposed approach is a good way to answer it. When the assessment
+reveals a question or approach that needs revision, state that revision in the
+existing discussion. Surviving an attack is evidence about objections, not an
 affirmative reason to invest.
 
 ## Choose the assessment subject
@@ -20,6 +20,13 @@ arrives as `ideas.md`. If both are requested, assess the question and then the
 approaches without adding a second approval ceremony. Preserve any user-reserved
 choice and the existing authority to continue an expressly delegated workflow.
 
+Check the few factual inferences that determine the judgment against the supplied
+passages and comparison conditions; use a targeted source check for a decisive
+gap. If support is missing, make the affected recommendation conditional. Separate
+a contradicted fact or unsupported inference from a judgment about reader value;
+for the latter, explain the reader and consequence that make the question worth
+pursuing or weakly motivated. Revise the conclusion when its support changes.
+
 ### Question assessment
 
 Consider importance to the intended reader, the motivating evidence or need,
@@ -29,13 +36,15 @@ already have a new algorithm, an observed baseline failure or a complete experim
 design. Unknown novelty remains unknown; an exact combination not found or a cheap
 available test is insufficient to establish value.
 
-Judge the prospective knowledge and reader consequence before choosing an order
-of operations. Keep a scientific question separate from a prerequisite needed to
-study it: an inexpensive annotation or feasibility check can come first without
-becoming the preferred research contribution. Give an execution recommendation
-only when requested. Distinguish an application's prerequisites from a question's
-answerability; failure of a quality threshold may itself inform an explanatory
-question rather than rule it out.
+Explain the **question's value**: what answering it could change relative to known
+work, for which reader and under which unresolved premises. When a next step is
+requested, separately explain the **order of work**: which uncertainty that step
+resolves and why it should come first. An inexpensive audit can be a substantive
+empirical contribution or a prerequisite; assess its knowledge claim and evidence
+on the same basis as an algorithm. Cost informs sequencing and expenditure once
+the value case is stated. Distinguish an application's prerequisites from a
+question's answerability; failure of a quality threshold may itself inform an
+explanatory question rather than rule it out.
 
 State which questions merit development, need reframing or lack a current value
 case, and explain why. Distinguish insufficient evidence about a question from
@@ -48,8 +57,8 @@ Keep the assessment in the existing question record or conversation. Use its
 actual references or `Q#` labels; no `ideas.md`, `C#`, investigation brief or
 solution-handoff validator is required. Complete when the value judgment and its
 reason are clear, with the next intellectual step if one is justified. Further
-question development goes to `$research-question`, approach development to
-`$research-ideation`; a clear empirical inquiry can enter the study workflow with
+question or approach development can continue in the existing discussion when
+requested; a clear empirical inquiry can enter the study workflow with
 an actual brief and allowance. A favorable assessment grants no execution budget.
 
 ## Investigation workspace
@@ -62,7 +71,7 @@ distinguishes this record from historical staged evaluations.
 
 ## Investigation assessment
 
-1. **Read the request and evidence.** Validate `ideas.md` with `uv run --no-project python "<evaluation-skill>/scripts/validate-handoff.py" portfolio <idea-root>`, using this skill's actual installed directory. Compare the approaches with the parent question and active user request. If the question was silently replaced, return to `$research-question`; if the approaches fail to address it, return to `$research-ideation` before ranking. Picking the best supplied candidate cannot establish adequate scope. Identify any user-selected candidates or reserved human choice. Existing authority, not a new invocation ceremony, determines whether work can continue.
+1. **Read the request and evidence.** Validate `ideas.md` with `uv run --no-project python "<evaluation-skill>/scripts/validate-handoff.py" portfolio <idea-root>`, using this skill's actual installed directory. Compare the approaches with the parent question and active user request. If the question was silently replaced, restore the requested question; if the approaches fail to address it, explain the mismatch and reconsider them before ranking. Picking the best supplied candidate cannot establish adequate scope. Identify any user-selected candidates or reserved human choice. Existing authority, not a new invocation ceremony, determines whether work can continue.
 2. **Triage every candidate.** Give each a bounded disposition with evidence: what the closest prior establishes, the surviving question, and the main reason to investigate, reframe, or park it. Check decisive prior passages and missing assets only where they could change that judgment. Unknown novelty is not novelty; an exact combination not found is not enough to invest. Established methods can still answer a consequential new question.
 3. **Choose what merits deeper review.** Honor the user's selection; otherwise explain the prospective scientific claim and what even a favorable observation would add beyond the closest prior, then assess the next expenditure. An unknown cause, available failure or cheap contrast alone does not supply this case. A prerequisite probe is worthwhile when its result changes investment in an identified, worthwhile parent question; label that narrower role. Benefit need not be established in advance. Ask for human judgment when reader value, scope, or substantive ambiguity remains consequential. If selection is delegated, make and attribute the recommendation; “continue” advances an agreed stage but grants no new budget.
 4. **Obtain independent criticism.** For candidates that may receive investment, use a clean subagent with the active user request, requested perspective, candidate frame/card, relevant raw evidence/prior paths, and [attack-template.md](attack-template.md), without the generator's preferred verdict. Ask it to check scope fidelity and scientific value as well as the decisive assumption and strongest rival; allow a return to candidate development. Scale depth to the next expenditure. Record reviewer identity/source and scope in `Independent Review: C#`. If independent review is unavailable, report that limit rather than label self-review independent; keep an unreviewed recommendation provisional.

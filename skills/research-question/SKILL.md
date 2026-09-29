@@ -39,14 +39,17 @@ in their paper notes unless further development is requested.
    time scale or explanation when it opens a different question. Explore the
    requested breadth before comparing candidates. Keep observations, interpretations
    and proposals distinguishable; speculative ideas can be useful when labelled.
-   Carry these distinctions into the question's motivation and value argument,
-   rather than qualifying an assumption once and later treating it as established.
-4. **Check decisive premises and refine.** Reuse relevant source evidence. Check a
-   claim or closest-prior passage when it could change the question; route a missing
-   paper to `$paper-discovery`, reading to `$research-literature`, and cross-paper
-   comparison to `$research-synthesis`. Reopen a framing when evidence changes it.
-   A bounded search does not establish novelty, and a missing benchmark failure
-   does not by itself rule out a measurement or explanatory question.
+4. **Check decisive premises and refine.** Before finalizing, inspect the few
+   inferences that carry the question's motivation or value. Match each with the
+   source passage and measured conditions, then identify what must additionally
+   hold for the inference to follow. Verify a decisive missing fact through a
+   targeted source check; otherwise keep the premise conditional. Update the
+   affected question, motivation and any concluding assessment together. This check
+   belongs in the existing reasoning, without a separate checklist or report.
+   Route missing papers to `$paper-discovery`, reading to `$research-literature`,
+   and cross-paper comparison to `$research-synthesis`. Uncertain premises can
+   motivate questions; field-wide novelty and natural prevalence remain open
+   when the available evidence does not establish them.
 5. **State the developed questions.** In concise prose, communicate the research
    object and scope, motivation, precise unknown, possible reader consequence,
    relation to known work, and preliminary answerability. Competing answers are

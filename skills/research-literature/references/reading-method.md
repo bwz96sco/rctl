@@ -77,6 +77,6 @@ proposal might affect the observation and its most consequential unknown.
 Check the meaning of a source claim before using it as a premise. Questions and
 clarified understanding are useful outcomes even when no new method follows.
 
-Develop a research question through research-question when that is requested;
-develop ways to answer a clear question through research-ideation. Reading and
-reflection require neither an idea count nor a separate opportunity-mining artifact.
+Develop questions or ways to answer them in the existing discussion when requested.
+Reading and reflection require neither an idea count nor a separate
+opportunity-mining artifact.

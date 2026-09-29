@@ -74,10 +74,12 @@ or a better-informed decision, with its own appropriate evidence.
 ## New method or technical capability
 
 Keep three things distinct: the capability actually measured, the need inferred
-from the target setting, and what existing alternatives can already do. A relative
-speedup or a small syntax check does not establish a guarantee, a previously
-impossible observation or a new research opportunity. Repeated work by users may
-motivate a question; its cause and cost still need evidence.
+from the target setting, and what existing alternatives can already do. When a
+value argument depends on crossing a feasibility boundary, compare the workload,
+absolute performance and practical requirement for the relevant alternatives.
+If those quantities are unknown, frame the boundary as a question to investigate.
+Repeated work by users may motivate a question; inspect its cause and consequence
+before relying on it as an established bottleneck.
 
 Connect the demonstrated affordance, with its conditions and limits, to an
 important obstacle or a potentially useful observation. Compare simpler existing

@@ -280,6 +280,38 @@ The new skill and five edited existing packages resolve to their source paths;
 evaluation remains explicit-only. No scientific experiment or historical decision
 was changed by the split.
 
+**Follow-up after the user's use-check review:** commit `4f72f6e` preserves the
+initial split before further edits. Replace repeated cautionary wording with a
+bounded check of the inferences carrying the question or recommendation: compare
+the passage and measured conditions with the inference, identify the extra premise,
+then revise all affected conclusions or retain the premise conditionally. Evaluation
+and its review guidance distinguish factual defects from reader-value judgments,
+and a question's importance from the order of work. The earlier criticism of cheap
+audits is a contestable priority judgment, not evidence that an audit cannot make
+a contribution. Document separate workflow, reasoning and paired-version checks;
+the seven existing synthetic responses remain development observations, not an
+old/new comparison. These adjustments draw on the saved outputs and the user's
+subsequent discussion, without new literature or model calls.
+
+## September29 local skill removal and routing cleanup
+
+The user explicitly requested removal of both `research-ideation` and
+`research-question`, while retaining literature, synthesis and idea evaluation.
+Remove their shared discovery links and the two duplicate ideation links under
+Gemini and Claude, and keep the source packages and research records.
+Literature, synthesis, evaluation and rapid-test now describe any needed
+question or approach revision directly, without dispatching to the removed skills.
+The [official skill documentation](https://developers.openai.com/codex/skills),
+re-fetched through smart-search on September29, confirms shared discovery and
+symlink following.
+
+The [OR retrospective](../../OR/note/OR-research/ideas/research-process-retrospective-2026-09-29/failures-and-corrections.md)
+also informed a read-only audit of the retained skills. Most evidence boundaries
+already exist. Remaining recommendations concern artifact prerequisites for
+bounded answers, mandatory review and handoff stages, and keeping comparison
+controls fixed. Those substantive recommendations are not applied by this routing
+cleanup; the existing evaluation templates and validators are unchanged.
+
 ## Limitations
 
 The linked web texts were read through smart-search and the browser; the supplied

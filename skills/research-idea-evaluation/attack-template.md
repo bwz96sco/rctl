@@ -17,6 +17,12 @@ development. Then ask what a favorable observation would teach beyond existing
 knowledge. A bounded probe need not establish a whole paper, but its affordability
 does not supply a scientific reason to pursue its parent question.
 
+Distinguish factual contradictions, unsupported inferences and scientific-value
+judgments. For the first two, identify the claim and the supporting or missing
+evidence. For a value judgment, explain the intended reader and what the answer
+would change. Assess inexpensive audits by their knowledge claim and evidence;
+keep the question's importance distinct from the reason a prerequisite comes first.
+
 ```markdown
 ## Independent Review: <candidate-id>
 
@@ -26,7 +32,7 @@ does not supply a scientific reason to pursue its parent question.
 - Decisive assumption or rival: <strongest method flaw, measurement-validity issue, or competing explanation, with evidence>
 - Positive case and uncertainty: <why the next observation could matter; what is still conjectural>
 - Discriminating observation: <contrast/falsification that could change investment; appropriate control, scale, and information boundary>
-- Assessment: <investigate / reframe / park, with a scoped reason; no execution authorization>
+- Assessment: <investigate / reframe / park; distinguish an evidence defect from a reader-value judgment, and question value from next-step order; no execution authorization>
 ```
 
 Check whether the first observation isolates a pivotal unknown rather than

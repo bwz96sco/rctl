@@ -3,6 +3,12 @@
 rctl owns the 16 research workflow packages listed below under `skills/`, including
 research-task, the migrated domain workflows, and research-rapid-test. Edit these
 sources here.
+As of 2026-09-29, `research-question` and `research-ideation` remain source
+packages but are uninstalled from this user's shared skill directory. Their source
+descriptions and earlier installation records below are retained for reference.
+The duplicate ideation links under `~/.gemini/config/skills/` and
+`~/.claude/skills/` are also removed; Antigravity's directory aliases follow the
+shared removal. Retained skills no longer route to either removed entrypoint.
 The [migration record](RESEARCH-SKILLS-MIGRATION.md) records the source snapshot,
 preserved uncommitted changes, checks, and installed-link cutover.
 The subsequent [review follow-up](RESEARCH-SKILLS-FOLLOWUP.md) records the authorized
@@ -19,8 +25,8 @@ instructions needed to perform their tasks.
 | [paper-discovery](../skills/paper-discovery/SKILL.md) | Question-scoped paper pools and project Zotero collection curation | Automatic or explicit |
 | [research-literature](../skills/research-literature/SKILL.md) | Full-paper reading, anchored notes, criticism and exploratory reflection | Automatic or explicit |
 | [research-synthesis](../skills/research-synthesis/SKILL.md) | Evidence-bounded answers and comparisons across papers | Automatic or explicit |
-| [research-question](../skills/research-question/SKILL.md) | Research-question formation from observations, goals, contradictions and technical capabilities | Automatic or explicit |
-| [research-ideation](../skills/research-ideation/SKILL.md) | Alternative methods and investigations answering a clear research question | Automatic or explicit |
+| [research-question](../skills/research-question/SKILL.md) | Research-question formation from observations, goals, contradictions and technical capabilities | Source retained; uninstalled locally |
+| [research-ideation](../skills/research-ideation/SKILL.md) | Alternative methods and investigations answering a clear research question | Source retained; uninstalled locally |
 | [research-idea-evaluation](../skills/research-idea-evaluation/SKILL.md) | Question-value assessment and investigation investment judgment | Explicit only |
 | [research-rapid-test](../skills/research-rapid-test/SKILL.md) | Bounded observations resolving an empirical investment uncertainty | Automatic or explicit |
 | [research-experiment](../skills/research-experiment/SKILL.md) | Bounded experiment contracts, runner evidence and scientific checks | Automatic or explicit |
@@ -169,6 +175,18 @@ records implementation and its observed limits, not improved research quality.
 The [project implementation record](../../OR/research/plans/2026-09-28-research-question-skill-split.md#implementation-record)
 keeps the scope and completion judgment alongside the original authorization.
 
+Commit `4f72f6e` preserves this first implementation. The subsequent authorized
+adjustment turns premise checking into a final source-to-inference check and
+separates question value from next-step order in evaluation. A preference for an
+inexpensive audit is a judgment to examine, not by itself a factual defect. Source
+contradictions and unsupported inferences remain distinct from disagreements over
+reader value. The installed source links also expose these later working edits.
+Follow-up validation again passes 70 tests and 49 subtests, the documentation
+check (344 local links, 100 JSON files, four schemas) and diff whitespace checks.
+All three adjusted entrypoints resolve through their installed source links.
+No new behavioral comparison was run; the proposed reasoning benefit remains
+untested.
+
 ## Related skills outside this migration
 
 The original selection covered 13 private-repository workflows, followed by
@@ -262,6 +280,26 @@ uv run scripts/check_docs.py
 uv build
 uv run scripts/smoke_package.py dist/rctl-0.5.1-py3-none-any.whl
 ```
+
+### Behavioral checks
+
+Choose the check from the claim being made; a passing result at one level does not
+establish the next. Use the existing change record for requests, material scope,
+outputs, judgments and limits rather than creating a suite-wide scoring system.
+
+| Check | Setup and supported conclusion |
+| --- | --- |
+| Package compatibility | Asset, policy, resource and handoff checks establish structural compatibility. |
+| Workflow use | Give the host a natural request and paths to real, bounded materials; let it select the skill and load relevant resources. Allow the source-reading and verification tools that the workflow actually needs, within the task's side-effect scope. Inspect resource reads and the delivered artifact. A test with skill bodies injected into the prompt establishes supplied-instruction use, not automatic discovery. |
+| Substantive reasoning | Compare the consequential factual claims and inferences with sources. Separately judge whether the questions preserve the requested perspective and explain what answering them would teach beyond known work. Cite concrete defects or reader-value reasons; low cost, an audit design or lack of a new algorithm is not itself a negative result. |
+| Comparative improvement | Compare the declared old and new versions on the same requests, materials, model, tools and resource allowance. Include materials not used to edit the skill and repeats when response variation matters. Review outputs with version labels hidden where practical, preserving reviewer identity, reasons and disagreements. Same-case correction checks alone do not establish a version benefit. |
+
+Keep synthetic scenarios for isolated boundary checks. Real-material checks also
+exercise ambiguity, source retrieval and closest-prior reasoning. Set the call/time
+allowance and what the observations could change before starting. A small comparison
+can reveal a specific improvement or regression; broader reliability and research
+productivity claims need evidence at that scale. Returning plausible questions is
+distinct from establishing their novelty, value or eventual publication outcome.
 
 Historical distillation and model-evaluation campaigns remain in agent-skills-private.
 They are historical evidence, not the authority for the current packaged workflows.
