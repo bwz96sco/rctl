@@ -47,7 +47,7 @@ its original automatic-discovery default for other hosts.
 
 The standalone `research-opportunity-mining` skill was retired on 2026-09-24.
 Reading now includes independent thinking and exploratory reflection in the same
-paper note, guided by the [reading method](../skills/research-literature/references/reading-method.md).
+paper note, whose [template](../skills/research-literature/note-template.md) sections follow the reading order.
 Synthesis can retain tentative connections separately from its evidence-backed
 answer. Reading can serve an exploratory purpose without requiring an already
 precise new research question.

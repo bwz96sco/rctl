@@ -173,8 +173,8 @@ workflow. Runner, experiment, and theory owners keep their existing responsibili
 ## Reading and research candidate development
 
 - **Sources:** the user-supplied `/Users/zhangbowen/Downloads/如何读论文？.md` (Chinese seven-step reading guidance); the user's OR usage retrospective supplied in the conversation on 2026-09-24; and the former `skills/research-opportunity-mining/SKILL.md`, read before its retirement.
-- **Read:** 2026-09-24.
-- **Applied to:** [Reading method](../skills/research-literature/references/reading-method.md), [paper note](../skills/research-literature/note-template.md), [synthesis](../skills/research-synthesis/SKILL.md), and [ideation](../skills/research-ideation/SKILL.md).
+- **Read:** 2026-09-24; reread 2026-09-30.
+- **Applied to:** [literature workflow](../skills/research-literature/SKILL.md), [paper note](../skills/research-literature/note-template.md), [synthesis](../skills/research-synthesis/SKILL.md), and [ideation](../skills/research-ideation/SKILL.md).
 
 **Retained:** overview through the abstract and displays; a precise research
 question; prior approaches and their remaining difficulties; independent thought
@@ -194,6 +194,14 @@ operations, information requirements, and missing capabilities. Historical seeds
 are suggestions whose factual premises need their original sources, not another
 evidence layer. The OR retrospective motivates these changes without making its
 project-specific terminology part of the shared guidance.
+
+On 2026-09-30 the seven steps moved from a separate reading reference into the
+paper note itself: its section order is the reading order, a work-type overview
+opens it, and a leads section records background still to follow. The brief
+preliminary thought before the method stays a prompt; the reader's own design
+and its comparison with the authors' belong to the reflection after reading,
+where the source places most of the thinking. Code inspection and reproduction routing,
+which the paper reader cannot perform from supplied text, stay in the skill.
 
 ## Research questions and investment evaluation
 

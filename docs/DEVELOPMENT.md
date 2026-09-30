@@ -73,6 +73,24 @@ The subsequent shared-skill installation completed from source commit `452ed0e`;
 all 14 user-level skills resolve to it and the two retired workflows' discovery
 links were removed. The installed rctl CLI remains at the released 0.5.1 build.
 
+On 2026-09-30 the seven-step reading guidance moved from research-literature's
+separate reading reference into its skill and paper-note template; the reference
+is removed. The template's section order now carries the reading order, and the
+skill routes code inspection and reproduction. Overlapping note sections were then
+merged (16 to 10 headings) without dropping test-locked or provenance fields.
+A disposable trial with clean readers on three OR-project papers (notes kept outside
+the project) produced 5,500–5,800-word notes; on one paper the previous template
+with the same reader model produced 3,745 words. The template then gained
+concision rules (one-line metadata, theorem statements without proof retracing,
+one-line minor defects) rather than a fixed word budget; a rerun of that paper
+produced 4,655 words and kept five of six previously found material defects.
+`uv run --locked pytest -q
+tests/test_skill_assets.py tests/test_research_skill_contracts.py
+tests/test_research_handoffs.py` (70 passed, 49 subtests), `scripts/check_docs.py`,
+the skill-creator validator, and `git diff --check` passed. These are structural
+checks; the trial is a small single-run use check, not a quality evaluation. The shared installation links to this source
+directory, so it follows the checked-out files without a separate copy step.
+
 ## CI smoke repair
 
 The pushes of `3130531` and `e43442e` failed installed-wheel smoke on all four CI
