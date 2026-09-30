@@ -187,6 +187,20 @@ All three adjusted entrypoints resolve through their installed source links.
 No new behavioral comparison was run; the proposed reasoning benefit remains
 untested.
 
+### September30 Claude link repair
+
+The user authorized repairing `~/.claude/skills/`. Its 17 research-related links
+still pointed to the former agent-skills-private package paths and no longer
+resolved. The 12 skills installed under `~/.agents/skills/` now link to this
+checkout's packages; the five links for retired research-computation,
+research-opportunity-mining, research-project-setup, research-quest and
+research-quest-admin are removed. Research-ideation, research-question,
+research-rapid-test and research-task are not added, preserving the
+installation scope above. All 12 links resolve, their entrypoint names match
+and their local resource links exist; no broken link remains in that directory.
+Before/after link lists and the check output are in
+`.work/claude-skill-links-20260930/`.
+
 ## Related skills outside this migration
 
 The original selection covered 13 private-repository workflows, followed by
