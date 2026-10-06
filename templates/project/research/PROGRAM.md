@@ -4,11 +4,11 @@ This file owns slow-changing scientific intent. Keep active tasks, run status, a
 
 ## Goal
 
-<State the scientific problem and intended contribution.>
+<State the scientific problem and intended contribution. For an applied study, name the target architecture, business task and consequential operating conditions; mark unresolved choices and link the existing scenario brief with its sources and modeled assumptions.>
 
 ## Current guidance
 
-<Keep the current research decision and comparison corrections concise; link their evidence and scope. Use PROBLEM_METHODS.md for unresolved opportunities and guidelines/comparison-design.md for baseline/information boundaries. Retain detailed history outside this section.>
+<Keep the current research decision, setting changes and comparison corrections concise; link their reasons, evidence and scope. Use PROBLEM_METHODS.md for unresolved opportunities and guidelines/comparison-design.md for baseline/information boundaries. Retain detailed history outside this section.>
 
 ## Success Definition
 

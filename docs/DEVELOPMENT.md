@@ -7,6 +7,50 @@ global tool environment. The authorized OR task-skill and guidance merge is also
 complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
 currentness and additional reminder coverage remain separate runtime work.
 
+## Target-setting guidance, 6 October 2026
+
+The user authorized a source change and commit to carry the target setting through
+project/task templates and research-task's planning and review guidance. The
+[source record](DISTILLED-SOURCES.md#target-setting-across-task-planning-and-review)
+links the observed LEO failure and retained results. Substantial scenario selection
+can use an analysis task; its output is a justified architecture/workload choice
+and evaluation route, or the exact unresolved link. Existing alignment fields and
+review criteria carry that relationship into implementation and closeout.
+
+Use M1/A-01 for template compatibility, M5/A-21/A-23 for resource delivery and
+preservation, and M8/A-40 for alignment guidance. Existing M7/M8 checks also cover
+unfinished project guidance and the distinction between task assessment and
+verification. Repair the affected authoring guidance if those checks fail.
+
+The author applied the revised guidance to the retained LEO material:
+
+| Inspected evidence | Review decision and continuation |
+| --- | --- |
+| C5 source loads whole image bands; planning records contain image dimensions and a Pi product specification, but no memory measurement or target data-center mapping. | Retain the source observations. The proposed target bottleneck is unresolved; identify the architecture/workload relationship before choosing a representative memory limit. A bounded feasibility result may report that gap. |
+| The completed comparison reports 5/6 versus 3/6 integrations on development-exposed applications with a modeled resource envelope. | Retain that local result. It does not establish resource-driven adaptation or the target data-center workflow. Scope the claim and investigate the missing relationship without repeating completed integration runs merely to relabel them. |
+
+Validation on 6 October 2026:
+
+- `uv run --locked pytest -q tests/test_m1.py tests/test_init.py tests/test_m7.py
+  tests/test_m8.py 'tests/test_skill_assets.py::test_skill_metadata_resources_and_script_syntax[research-task]'`:
+  112 passed and two legacy Scope-placeholder checks failed. Restored the original
+  contract marker and placed the new guidance beside it. Then
+  `uv run --locked pytest -q tests/test_m1.py::test_v050_scaffold_placeholders_still_reject_acceptance
+  tests/test_m1.py::test_new_draft_preserves_other_files_and_refuses_overwrite`:
+  all five affected checks passed. Tests and parser behavior were unchanged.
+- `uv run --locked python scripts/check_docs.py`: passed, 358 local links. The
+  first run exposed an existing missing OR temporary retrieval file; preserved its
+  historical path and stated its availability in Distilled Sources instead of
+  presenting a broken link as available evidence.
+- `uv build --wheel --out-dir .work/target-setting-20261006/dist`: passed.
+  A `uv run --locked python` ZIP inspection compared each of the seven changed
+  template/skill files with its `rctl/` wheel entry; all matched source bytes.
+- `git diff --check`: passed.
+
+Delivery is limited to the repository; package release and live-project upgrades
+are separate work. See [Readiness](READINESS.md#limitations) for the scope of this
+author walkthrough.
+
 ## Completed release preparation
 
 Prepared v0.5.1 from the training migration (`1c098df`) and

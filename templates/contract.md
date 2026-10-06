@@ -24,6 +24,12 @@ criteria:
 
 <Included work, expected deliverable, starting evidence, and boundaries. For experiments, cite related routes, the substantive difference or reopen condition, and the decision new evidence would change.>
 
+For an applied study, explain which part of the target problem this task answers
+and what the chosen data or testbed represents. When target relevance is part of
+the claim, cite the scenario brief and declare a review criterion for the conditions
+preserved by the case and the supported conclusion. If the setting is unresolved,
+specify the choice this task will inform.
+
 For comparisons, distinguish complete-method benefit from conditional ablation or
 diagnosis; name fixed control versions, generated/shared information and the primary
 endpoint.

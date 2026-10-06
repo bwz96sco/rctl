@@ -80,3 +80,10 @@ remain supported elsewhere. The v0.3 checks ran locally on macOS/Python 3.13.2; 
 [CI jobs](https://github.com/bwz96sco/rctl/actions/runs/34073127344), including tests, lint,
 document checks, build, and installed-wheel smoke. Its two-session handoff test used Codex CLI 0.153.4 with reviewed
 inline hooks and invocation-only trust bypass, without persistent trust changes.
+
+13. The 6 October 2026 target-setting follow-up changes packaged authoring and
+review guidance. Its retained-LEO walkthrough is the editing agent's judgment,
+not a fresh-session adherence test or evidence of improved research outcomes.
+Compatibility and package checks establish structural behavior and delivery only.
+No live project, global CLI installation, host integration or historical research
+task is upgraded by that source change.

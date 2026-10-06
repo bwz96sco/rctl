@@ -8,6 +8,12 @@ preexisting data in command inputs. New remote jobs need their own authority.
 Write the current revision's result with outcome, evidence, deviations, next action,
 and limitations. Distinguish computed observations, parsed evidence, and hypotheses.
 For an aligned task, assess only the declared test and honor its non-claim scope.
+For a declared target-relevance criterion, compare the actual workload, platform
+and operating conditions with the scenario brief; explain what the result
+establishes for that target. A runnable artifact alone does not establish this
+mapping. If the link is unresolved, narrow the conclusion or leave the criterion
+unresolved according to its requirement. A bounded component or feasibility task
+may close with that finding; apply the agreed criteria without adding a new gate.
 Inspect cited content before supplying a review verdict, reviewer source, rationale,
 and all required references. An operator-only criterion needs an operator judgment;
 reviewer labels are declared sources, not authenticated identities.

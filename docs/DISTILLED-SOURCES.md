@@ -257,7 +257,8 @@ scientific trial was launched.
   [Superpowers brainstorming](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md),
   [Scientific Brainstorming routes](https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/skills/scientific-brainstorming/references/brainstorming_methods.md),
   and the [Design Council Double Diamond](https://www.designcouncil.org.uk/resources/the-double-diamond/),
-  fetched through smart-search on September28 with [commands and extracts](../../OR/.work/brainstorm-framing-20260928/retrieval.md).
+  fetched through smart-search on September28; historical capture path:
+  `OR/.work/brainstorm-framing-20260928/retrieval.md`.
 - **Applied to:** research-question, ideation, literature/synthesis routing,
   evaluation's question branch, and direct question entry to rapid-test.
 
@@ -320,6 +321,35 @@ bounded answers, mandatory review and handoff stages, and keeping comparison
 controls fixed. Those substantive recommendations are not applied by this routing
 cleanup; the existing evaluation templates and validators are unchanged.
 
+## Target setting across task planning and review
+
+- **Sources:** the user's 6 October 2026 request; the
+  [playbook goal-drift occurrence](../../research-playbook/failures/process/goal-drift.md)
+  at commit `9831ab1`; the retained LEO
+  [candidate correction](../../LEO/vault/ideas/space-data-centers/direction-candidates-20261005.md),
+  [C5 planning inputs](../../LEO/runs/c5-adaptation-planning-20261005/README.md),
+  and [bounded onboarding result](../../LEO/vault/experiments/six-application-comparison/comparison.md).
+- **Read:** 2026-10-06.
+- **Applied to:** the [project goal template](../templates/project/research/PROGRAM.md),
+  [contract](../templates/contract.md) and [result](../templates/result.md) templates,
+  and research-task's [planning](../skills/research-task/references/planning.md),
+  [task-file](../skills/research-task/references/task-files.md) and
+  [verification](../skills/research-task/references/verification.md) guidance.
+
+**Retained:** available EO code and a small testbed did not establish the requested
+space-data-center architecture or workload. A locally successful task still needs
+an evidence-based account of its relevance to the target. Preserve the earlier
+integration result and distinguish it from the withdrawn memory-pilot proposal.
+
+**Adapted:** make the relationship concrete in existing task prose and review
+criteria: target conditions, what the chosen case represents, and what the result
+supports. Route substantial unresolved scenario selection to a bounded analysis;
+allow data-driven exploration, modeled cases and scoped component evidence.
+Retain the four-field alignment grammar and existing lifecycle. Scientific fit
+remains a review judgment. The [development record](DEVELOPMENT.md#target-setting-guidance-6-october-2026)
+reports the author walkthrough and compatibility checks; their scope is stated in
+[Readiness](READINESS.md#limitations).
+
 ## Limitations
 
 The linked web texts were read through smart-search and the browser; the supplied
@@ -328,4 +358,5 @@ audited, and the example papers' reported results were not independently verifie
 retrospective is user-supplied evidence; its underlying project files and experiments
 were not independently re-audited for this change. These entries record guidance
 provenance and adaptation; they do not establish how reliably an agent will follow
-the resulting instructions.
+the resulting instructions. The September28 brainstorming retrieval capture is
+no longer available at its recorded local path; its provenance above is historical.

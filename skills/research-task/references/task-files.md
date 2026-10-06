@@ -84,6 +84,14 @@ the fragment (for example, `../../research/questions/C15.md` from `tasks/TASK`).
 review must decide whether the result stays within the declared test and non-claim
 boundary.
 
+For an applied task, a review criterion can require: "The case preserves the
+conditions relevant to the claimed outcome, or the result identifies the missing
+mapping and limits its conclusion accordingly." Cite the scenario brief, case
+evidence and result. Use this bounded requirement for a feasibility investigation;
+if establishing the mapping is the deliverable, require evidence for it and leave
+that criterion unresolved when the evidence is missing. Keep the mapping detail
+in Scope and the cited brief; the four alignment fields remain unchanged.
+
 For a task that updates living project guidance, declare a task-local change
 record as evidence: retain the relevant excerpts, changes and their basis, and
 link the research files in the body. This preserves evidence of that update when

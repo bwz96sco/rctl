@@ -17,7 +17,7 @@ Use the relevant reference when entering an operation:
 | Initialize, inspect/update installation, use a vault, or migrate | [Workspace](references/workspace.md) |
 | Track a rapid trial, recover it, or connect an already running pilot | [Lightweight rapid trials](references/rapid-trials.md) |
 | Author contract, result, review input, or handoff | [Task files and examples](references/task-files.md) |
-| Propose an experiment, create its contract, or materially change scientific direction | [Planning and history reuse](references/planning.md) |
+| Select an application setting, propose an experiment or its contract, or change scientific direction | [Planning and history reuse](references/planning.md) |
 | Evaluate evidence, verify, or close | [Verification and closeout](references/verification.md) |
 
 Before experimental planning, cite related history, what remains unanswered, and
