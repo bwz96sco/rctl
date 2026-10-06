@@ -205,8 +205,12 @@ which the paper reader cannot perform from supplied text, stay in the skill.
 
 ## Research questions and investment evaluation
 
-- **Sources:** the user's OR retrospective and requested plan on 2026-09-27; the retained [Pro consultation](../../OR/note/OR-research/ideas/research-ideation-validation-pro-2026-09-27/consultation.md), its exact prompt/response, and the [EoH/BehaveSim interpretation](../../OR/note/OR-research/literature/eoh-behavesim-research-questions-2026-09-27/synthesis.md).
-- **Read:** 2026-09-27. These local source links are provenance, not runtime dependencies.
+- **Sources:** the user's OR retrospective and requested plan on 2026-09-27; the
+  retained Pro consultation at
+  `OR/note/OR-research/ideas/research-ideation-validation-pro-2026-09-27/consultation.md`,
+  its exact prompt/response, and the EoH/BehaveSim interpretation at
+  `OR/note/OR-research/literature/eoh-behavesim-research-questions-2026-09-27/synthesis.md`.
+- **Read:** 2026-09-27. These local source paths record provenance.
 - **Applied to:** ideation, idea evaluation, rapid-test, and their handoff templates/validator.
 
 **Retained:** source checks, honest novelty uncertainty, independent criticism,
@@ -230,8 +234,10 @@ expansion of research objects and measures. The installed packages already point
 to the revised source; this was not a stale-installation incident. The original
 workflow permitted the desired framing but the generated portfolio narrowed it,
 and its independent review ranked only those supplied candidates. Sources are the
-[retained decision](../../OR/note/OR-research/ideas/or-paper-claims-2026-09-27/decision.md)
-and the user's [scope correction](../../OR/research/plans/2026-09-27-ideation-validation-workflow.md#scope-correction-restore-research-object-and-measurement-expansion).
+retained decision at
+`OR/note/OR-research/ideas/or-paper-claims-2026-09-27/decision.md`
+and the user's scope correction at
+`OR/research/plans/2026-09-27-ideation-validation-workflow.md#scope-correction-restore-research-object-and-measurement-expansion`.
 Sharpen the existing framing/handoff and evaluation steps: preserve the active
 request, inspect portfolio scope before ranking, explain what a favorable result
 would teach beyond prior work, and connect an affordable prerequisite to a
@@ -242,10 +248,10 @@ no new schema, lifecycle stage, coverage quota or approval ceremony is introduce
 
 **Application check:** 69 focused skill/contract/handoff tests and 47 subtests pass;
 these validate structure, not research judgment. One clean-context SWE-2 High
-[forward-use response](../.work/ideation-scope-forward-20260927/review.md) returned
+forward-use response (`.work/ideation-scope-forward-20260927/review.md`) returned
 the narrowed portfolio to development and identified the lost perspective. It
 still suggested an optional cheap probe and redundant clarification; these were
-not adopted. The [assessment](../.work/ideation-scope-forward-20260927/audit.json)
+not adopted. The assessment (`.work/ideation-scope-forward-20260927/audit.json`)
 records the residual problems and inference limit. This single clarified-context
 example does not establish a causal improvement or reliable compliance. No new
 scientific trial was launched.
@@ -253,7 +259,8 @@ scientific trial was launched.
 ## Research-question formation and investigation design
 
 - **Sources:** the user's `/Users/zhangbowen/Downloads/问题.md` and September28
-  discussion; the [recorded split plan](../../OR/research/plans/2026-09-28-research-question-skill-split.md);
+  discussion; the recorded split plan at
+  `OR/research/plans/2026-09-28-research-question-skill-split.md`;
   [Superpowers brainstorming](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md),
   [Scientific Brainstorming routes](https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/skills/scientific-brainstorming/references/brainstorming_methods.md),
   and the [Design Council Double Diamond](https://www.designcouncil.org.uk/resources/the-double-diamond/),
@@ -282,7 +289,7 @@ and substitution of cheap prerequisite order for question value. The focused
 revision clarifies compared versus shared operations, measured affordance versus
 inferred need, and scientific value versus sequencing. Three affected cases were
 repeated, for seven calls total; all completed. The
-[observations](../.work/question-skill-split-20260928/review.md) support the intended
+observations (`.work/question-skill-split-20260928/review.md`) support the intended
 routing and old handoff compatibility, but still contain these reasoning errors.
 The 70 passing tests and 49 subtests establish structural compatibility only.
 The new skill and five edited existing packages resolve to their source paths;
@@ -314,7 +321,8 @@ The [official skill documentation](https://developers.openai.com/codex/skills),
 re-fetched through smart-search on September29, confirms shared discovery and
 symlink following.
 
-The [OR retrospective](../../OR/note/OR-research/ideas/research-process-retrospective-2026-09-29/failures-and-corrections.md)
+The OR retrospective
+(`OR/note/OR-research/ideas/research-process-retrospective-2026-09-29/failures-and-corrections.md`)
 also informed a read-only audit of the retained skills. Most evidence boundaries
 already exist. Remaining recommendations concern artifact prerequisites for
 bounded answers, mandatory review and handoff stages, and keeping comparison
@@ -324,11 +332,13 @@ cleanup; the existing evaluation templates and validators are unchanged.
 ## Target setting across task planning and review
 
 - **Sources:** the user's 6 October 2026 request; the
-  [playbook goal-drift occurrence](../../research-playbook/failures/process/goal-drift.md)
+  playbook goal-drift occurrence at `research-playbook/failures/process/goal-drift.md`
   at commit `9831ab1`; the retained LEO
-  [candidate correction](../../LEO/vault/ideas/space-data-centers/direction-candidates-20261005.md),
-  [C5 planning inputs](../../LEO/runs/c5-adaptation-planning-20261005/README.md),
-  and [bounded onboarding result](../../LEO/vault/experiments/six-application-comparison/comparison.md).
+  candidate correction at
+  `LEO/vault/ideas/space-data-centers/direction-candidates-20261005.md`,
+  C5 planning inputs at `LEO/runs/c5-adaptation-planning-20261005/README.md`,
+  and bounded onboarding result at
+  `LEO/vault/experiments/six-application-comparison/comparison.md`.
 - **Read:** 2026-10-06.
 - **Applied to:** the [project goal template](../templates/project/research/PROGRAM.md),
   [contract](../templates/contract.md) and [result](../templates/result.md) templates,
@@ -351,6 +361,11 @@ reports the author walkthrough and compatibility checks; their scope is stated i
 [Readiness](READINESS.md#limitations).
 
 ## Limitations
+
+Local provenance paths beginning with `OR/`, `LEO/` or `research-playbook/` refer
+to sibling projects; `.work/` paths refer to untracked captures in this checkout.
+Those materials are outside the distributed repository and may be unavailable
+in a fresh checkout. Repository-owned references remain clickable local links.
 
 The linked web texts were read through smart-search and the browser; the supplied
 reading and writing guides were read locally. Example images were not individually

@@ -7,12 +7,37 @@ global tool environment. The authorized OR task-skill and guidance merge is also
 complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
 currentness and additional reminder coverage remain separate runtime work.
 
+## Portable provenance references, 6 October 2026
+
+CI runs `36582133682` and `36713873517` passed all tests and lint on all four
+jobs, then failed documentation checks on links to untracked `.work/` captures
+and sibling OR files. The local checkout supplied those files and hid the failure.
+The documentation now retains those sources as labeled provenance paths, including
+the newer LEO/playbook references, and keeps repository-owned links checkable.
+The link checker and workflow are unchanged.
+
+Checks on source `ab4a697` before this documentation-only repair:
+
+- `uv run --locked pytest -q`: 312 passed, 49 subtests passed in 39.48 seconds
+  on local macOS/Python 3.13.2.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv build --out-dir .work/recent-change-check-20261006/dist`: passed.
+- `uv run --locked scripts/smoke_package.py .work/recent-change-check-20261006/dist/rctl-0.5.1-py3-none-any.whl`:
+  passed with 37 CLI invocations and a closed native experiment.
+
+After the repair, `uv run --locked python scripts/check_docs.py` and the same
+checker invoked with the project Python against a `git archive HEAD` extraction
+overlaid with the three edited documentation files both passed: 344 local links,
+100 JSON files, four schemas and 40 acceptance cases. `git diff --check` passed.
+The clean extraction contains no sibling projects or local captures. Local evidence
+is under `.work/recent-change-check-20261006/`. A pushed-commit CI run remains pending.
+
 ## Target-setting guidance, 6 October 2026
 
 The user authorized a source change and commit to carry the target setting through
 project/task templates and research-task's planning and review guidance. The
 [source record](DISTILLED-SOURCES.md#target-setting-across-task-planning-and-review)
-links the observed LEO failure and retained results. Substantial scenario selection
+records the observed LEO failure and retained results. Substantial scenario selection
 can use an analysis task; its output is a justified architecture/workload choice
 and evaluation route, or the exact unresolved link. Existing alignment fields and
 review criteria carry that relationship into implementation and closeout.

@@ -166,14 +166,17 @@ above. Six relevant installed paths, resource links and invocation policies were
 checked. The focused suite passes 70 tests and 49 subtests, and a returned ideation
 portfolio passes the unchanged handoff validator.
 
-The [bounded use-check record](../.work/question-skill-split-20260928/review.md)
+The bounded use-check record (`.work/question-skill-split-20260928/review.md`)
 contains four initial SWE-2 High responses and three repeats after one focused
 revision. Question-only completion, direct ideation and old-format handoffs work
 in these examples. Scientific reasoning remains mixed: unsupported capability
 claims, overattribution and prerequisite-first prioritization still occur. This
 records implementation and its observed limits, not improved research quality.
-The [project implementation record](../../OR/research/plans/2026-09-28-research-question-skill-split.md#implementation-record)
+The project implementation record
+(`OR/research/plans/2026-09-28-research-question-skill-split.md#implementation-record`)
 keeps the scope and completion judgment alongside the original authorization.
+These paths identify an untracked local capture and a sibling project's record;
+their availability is described in [Distilled Sources](DISTILLED-SOURCES.md#limitations).
 
 Commit `4f72f6e` preserves this first implementation. The subsequent authorized
 adjustment turns premise checking into a final source-to-inference check and
