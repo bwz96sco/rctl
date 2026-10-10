@@ -10,7 +10,7 @@ from urllib.parse import urlsplit
 
 from . import __version__
 from .documents import RctlError, local_path, parse_result, parse_reviews, read_text
-from .goals import goal_currentness, record_reviewed_goal
+from .goals import GOAL_SOURCE, goal_currentness, record_reviewed_goal
 from .policy import aggregate
 from .records import now, state_error
 
@@ -182,7 +182,8 @@ def review_check(task, criterion, entry):
     return check
 
 
-def currentness(task, record, readable=False):
+def currentness(task, record, readable=False, paths=None):
+    """Return applicability; ``paths`` limits evidence to those project paths."""
     if not record["verifications"]:
         return "not_checked", []
     report = record["verifications"][-1]
@@ -206,6 +207,8 @@ def currentness(task, record, readable=False):
             else:
                 unknown.append(f"Cannot read verified material: {name}.")
     for previous in report["observed_files"]:
+        if paths is not None and previous["path"] not in paths:
+            continue
         current = observe(task.root, previous["path"], readable)
         if current["observation"] == "unreadable":
             unknown.append(f"Cannot observe evidence: {previous['path']}.")
@@ -219,6 +222,19 @@ def currentness(task, record, readable=False):
     if unknown:
         return "unknown", unknown
     return "current", []
+
+
+def goal_applicability(task, record, check):
+    """Applicability of a retained goal decision: its own evidence and the Goal."""
+    paths = {
+        project_ref(task, ref)
+        for ref in check["evidence_refs"]
+        if not urlsplit(ref).scheme
+    }
+    if "reviewed_goal" in check:
+        # The recorded Goal replaces whole-file observation of PROGRAM.md.
+        paths.discard(GOAL_SOURCE)
+    return currentness(task, record, paths=paths)[0]
 
 
 def verdict_error(task, record, report):

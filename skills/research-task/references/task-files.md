@@ -119,9 +119,9 @@ goal_contribution:
 
 The controller requires this declaration, a review method for the named criterion,
 and citations of `result.md` and primary evidence. Verify records the PROGRAM Goal
-the review was judged against, so only a later Goal change makes it stale. Do not
-cite PROGRAM.md merely for its Goal: a cited file is observed whole, and Current
-guidance edits would then stale the review. The reviewer assesses adequacy. For example, an implementation task can establish
+the review was judged against; citing PROGRAM.md is optional. The retained goal
+decision becomes stale only when its own evidence or the Goal text changes, not on
+Current guidance edits. The reviewer assesses adequacy. For example, an implementation task can establish
 backend operability as an input to a later method comparison, without claiming
 incremental benefit from operability alone.
 

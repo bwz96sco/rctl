@@ -90,7 +90,8 @@ def goal_currentness(root, report):
         goal = project_goal(root)
     except RctlError:
         return [], [f"Cannot read the project Goal: {GOAL_SOURCE}."]
-    if goal != reviewed[0]:
+    # Reflowed lines and indentation are not Goal changes.
+    if goal is None or goal.split() != reviewed[0].split():
         return ["Project Goal changed since the goal review; review it again."], []
     return [], []
 

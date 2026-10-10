@@ -98,9 +98,8 @@ obligation, decisive output and what favorable/unfavorable/inconclusive evidence
 changes. The last names an existing required review criterion. Its task-relative
 evidence references must include `result.md` and primary task evidence;
 `research/PROGRAM.md` does not count as primary evidence. Citing PROGRAM.md is
-optional: verify records the Goal itself, and a cited file is observed as a whole,
-so any edit to it, including Current guidance, makes the review stale. This is
-entry completeness and lineage, not scientific adequacy.
+optional because verify records the Goal itself. This is entry completeness and
+lineage, not scientific adequacy.
 Standalone tasks without a completed project Goal remain supported; explicit
 goal contribution requires that Goal. `task new` scaffolds this declaration and
 an additional review when the Goal is set. The optional Question alignment body
@@ -122,15 +121,21 @@ An honest negative may pass an honest-assessment requirement and close with
 local verification verdict. A criterion requiring positive benefit still fails
 on evidence without that benefit. All cited material, including any cited brief,
 uses the existing observation/currentness rules. A report with `reviewed_goal` is
-also stale when the current Goal text differs, and unknown when PROGRAM.md cannot
-be read; edits outside the Goal section do not affect it. Older accepted contracts
+also stale when the current Goal text differs other than in whitespace, and unknown
+when PROGRAM.md cannot be read. `close` keeps report-wide currentness, so a cited
+PROGRAM.md edited between verify and close still requires verifying again. Older accepted contracts
 are not retroactively required to supply this declaration; `contract check` of an
 unchanged accepted contract retains that agreement, while a changed contract and
 an amendment are new work and follow the current entry rule.
 
 Status exposes `goal_contribution` from the accepted contract and `goal_impact`
 from the latest verification for that same revision, with review verdict,
-verification ID, revision and currentness. Missing/legacy judgments are null.
+verification ID, revision and currentness. That currentness is scoped to the
+retained decision: cycle, revision, version, contract and result text, the goal
+review's own local evidence and the recorded Goal, which replaces observation of
+PROGRAM.md. Other criteria's evidence and PROGRAM edits outside the Goal section
+can make the task stale while the goal decision stays current. Missing/legacy
+judgments are null.
 `task list` rows carry `goal_decision` (`next_decision`, `claim_effect`,
 `currentness`) or null, so planning can find stop/adjust decisions across tasks.
 Bounded reminders show the contribution and investment decision separately from

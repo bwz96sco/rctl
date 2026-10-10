@@ -7,6 +7,33 @@ global tool environment. The authorized OR task-skill and guidance merge is also
 complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
 currentness and additional reminder coverage remain separate runtime work.
 
+## Goal-decision currentness, 10 October 2026
+
+Starting agreement: after the follow-up below, PROGRAM.md could still reach the
+retained goal decision through a reviewer-added citation, an author citation or
+another criterion's evidence, because the decision reused report-wide currentness.
+Any Goal rewrap also marked decisions stale. The user asked to commit the
+follow-up and implement the proposed fix; scope stays source-only.
+
+Changes: `goal_impact.currentness` (and `task list` `goal_decision`) now covers
+cycle, revision, version, contract/result text, the goal review's own local
+evidence and the recorded Goal, which replaces PROGRAM.md observation when present.
+Goal comparison ignores whitespace. `close` keeps report-wide currentness.
+
+Validation on local macOS/Python 3.13.2:
+
+- New cases: a reviewer-cited PROGRAM.md edited before close blocks close until
+  verified again; edited after close leaves the task stale while the goal decision,
+  task-list row and reminder stay current; a reflowed Goal stays current and closes.
+  Both failed against the previous source (`stale` instead of `current`) and pass now.
+- `uv run --locked pytest -q`: **342 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed (356 local links, 100 JSON
+  files, 22 requirements and 43 acceptance cases).
+
+Not rerun: wheel build and packaged smoke; no LEO observation. A typo fix or
+equivalent rewording of the Goal still marks retained decisions stale.
+
 ## Goal-review follow-up, 10 October 2026
 
 Starting agreement: a review of the controller increment below found that the

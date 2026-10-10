@@ -426,7 +426,8 @@ states the compatibility checks and their scope.
   accepted recording the reviewed Goal instead of requiring a whole-file PROGRAM
   citation, listing goal decisions in `task list`, and recommending a fresh-context
   goal review. The fresh-context practice is the reviewer's recommendation, not a
-  distilled external source.
+  distilled external source. A further same-day refinement scopes a retained goal
+  decision's currentness to its own evidence and the whitespace-insensitive Goal.
 - **Implementation reference:** [behavior](SPEC.md#goal-contribution-and-review-unreleased-source-increment)
   and [development record](DEVELOPMENT.md#goal-review-controller-increment-10-october-2026).
   JSON Schema object-field behavior was checked through `smart-search search` and

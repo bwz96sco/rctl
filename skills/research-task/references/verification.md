@@ -36,10 +36,11 @@ increment these fields are mechanically required, and missing review entries
 still produce unknown. Verify field completeness separately from adequacy of the
 judgment. Check status for this reviewed decision and currentness before planning
 continuation; a local pass with `stop` completes the task without authorizing more
-of the stopped investment. A goal review becomes stale when its cited evidence or
-the PROGRAM Goal changes, not when Current guidance changes (unless PROGRAM.md
-itself is cited), so promoting findings to PROGRAM at closeout does not withdraw a
-decision. Old accepted contracts retain
+of the stopped investment. A retained goal decision becomes stale when its own
+cited evidence or the PROGRAM Goal changes, not when Current guidance or other
+criteria's evidence changes, so promoting findings to PROGRAM does not withdraw it.
+Promote after `close`: a cited PROGRAM.md edited between verify and close still
+requires verifying again. Old accepted contracts retain
 their original criteria.
 
 Write `goal_impact` from a fresh context holding only the contract, result, primary

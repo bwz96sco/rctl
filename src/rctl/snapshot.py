@@ -237,7 +237,7 @@ class TaskSnapshot:
 
 def read_snapshot(task):
     from .handoff import read_handoff
-    from .verification import currentness
+    from .verification import currentness, goal_applicability
 
     record = task.read_record()
     warnings = []
@@ -332,7 +332,7 @@ def read_snapshot(task):
                     "review_verdict": check["verdict"],
                     "verification_id": report["id"],
                     "contract_revision": report["contract_revision"],
-                    "currentness": applicability,
+                    "currentness": goal_applicability(task, record, check),
                 }
     return TaskSnapshot(
         task_id=task.task_id,

@@ -65,4 +65,5 @@ when relevant details are absent, ambiguous, or truncated. Keep current correcti
 and their evidence/scope in PROGRAM.md's `## Current guidance`, and link superseding
 route conclusions in ROUTES.md while retaining old evidence. Update established
 corrections when learned, independently of task closeout. Project guidance is
-reported intent, separate from task acceptance.
+reported intent, separate from task acceptance. Edit `## Goal` only for a real goal
+change: any non-whitespace edit marks every retained goal decision stale.

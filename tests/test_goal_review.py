@@ -179,6 +179,37 @@ def test_guidance_edits_keep_goal_review_current(goal_task, cli):
     }
 
 
+def test_cited_program_stales_task_but_not_goal_decision(goal_task, cli):
+    # A reviewer naturally cites the PROGRAM file it read for the Goal.
+    path = goal_task.file("reviews.json")
+    data = json.loads(path.read_text())
+    data["checks"][-1]["evidence_refs"].append("../../research/PROGRAM.md")
+    path.write_text(json.dumps(data))
+    goal_task.begin()
+    cli("verify", TASK, "--reviews", REVIEWS)
+    program = goal_task.root / "research/PROGRAM.md"
+    program.write_text(program.read_text() + "\n## Current guidance\nA new correction.\n")
+    # Closure still follows report-wide observation of cited files.
+    cli("close", TASK, expected=4)
+    cli("verify", TASK, "--reviews", REVIEWS)
+    cli("close", TASK)
+    program.write_text(program.read_text() + "Promoted: stop this candidate.\n")
+    status = cli("status", TASK)["data"]
+    assert status["currentness"] == "stale"
+    assert status["goal_impact"]["currentness"] == "current"
+    assert cli("task", "list")["data"]["tasks"][0]["goal_decision"]["currentness"] == "current"
+    assert "V0002 / current / pass" in context(goal_task, 2000)[0]["context"]
+
+
+def test_reflowed_goal_keeps_review_current(goal_task, cli):
+    goal_task.begin()
+    cli("verify", TASK, "--reviews", REVIEWS)
+    path = goal_task.root / "research/PROGRAM.md"
+    path.write_text(path.read_text().replace("lower comparable", "lower\n  comparable"))
+    assert cli("status", TASK)["data"]["goal_impact"]["currentness"] == "current"
+    cli("close", TASK)
+
+
 def test_unavailable_goal_leaves_goal_review_unknown(goal_task, cli):
     goal_task.begin()
     (goal_task.root / "research/PROGRAM.md").write_text("# Program\n\n## Goal\n<Goal>\n")
