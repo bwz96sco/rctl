@@ -8,6 +8,39 @@ def snapshot(root):
     return {p.relative_to(root): p.read_bytes() for p in root.rglob("*") if p.is_file()}
 
 
+def test_default_init_prepares_codex_but_reports_pending_delivery(project, cli):
+    response = cli("init")
+    assert response["data"]["codex_requested"]
+    hooks = json.loads((project / ".codex/hooks.json").read_text())["hooks"]
+    assert set(hooks) == {"SessionStart", "UserPromptSubmit"}
+    assert all(len(groups[0]["hooks"]) == 1 for groups in hooks.values())
+    assert (project / ".codex/config.toml").read_text() == "[features]\nhooks = true\n"
+    assert "/hooks" in response["data"]["next_action"]
+    assert any("pending host confirmation" in text for text in response["warnings"])
+    instructions = (project / ".rctl/codex/README.md").read_text()
+    assert "SessionStart and UserPromptSubmit" in instructions
+    assert "direct hook invocation is not delivery evidence" in instructions
+    data = cli("doctor")["data"]
+    assert data["codex_inspected"] and not data["review_needed"]
+    assert data["codex_trust"] == data["codex_delivery"] == "not_inspected"
+
+
+def test_terminal_only_setup_is_explicit(project, cli):
+    response = cli("init", "--no-codex")
+    assert not response["data"]["codex_requested"]
+    assert "skipped" in response["data"]["next_action"]
+    assert not (project / ".codex").exists()
+    assert not (project / ".rctl/codex").exists()
+    inspection = cli("doctor", "--no-codex")["data"]
+    assert not inspection["codex_inspected"] and not inspection["review_needed"]
+
+
+@pytest.mark.parametrize("command", ["init", "doctor"])
+def test_conflicting_host_options_do_not_write(project, cli, command):
+    cli(command, "--codex", "--no-codex", expected=2)
+    assert list(project.iterdir()) == []
+
+
 def test_init_repeat_preserves_customized_files_and_links(project, cli):
     first = cli("init", "--vault", "note/main", "--codex")
     assert first["data"]["vault"] == "note/main"
@@ -44,7 +77,7 @@ def test_init_repeat_preserves_customized_files_and_links(project, cli):
     ):
         (project / name).write_text("User customization\n")
     before = snapshot(project)
-    repeat = cli("init", "--codex")
+    repeat = cli("init")
     assert repeat["data"]["created"] == []
     assert snapshot(project) == before
     assert not (project / ".git").exists()
@@ -56,7 +89,7 @@ def test_existing_vault_is_only_associated(project, cli):
     vault.mkdir()
     (vault / "existing.md").write_text("existing note")
     before = snapshot(vault)
-    cli("init", "--vault", "notes")
+    cli("init", "--vault", "notes", "--no-codex")
     assert snapshot(vault) == before
     assert not (project / ".codex").exists()
     assert json.loads((project / ".rctl/project.json").read_text())["vault"] == "notes"
@@ -111,7 +144,7 @@ def test_symlink_escape_is_rejected(project, cli, tmp_path_factory):
 
 
 def test_binding_change_and_unknown_schema_fail_before_new_files(project, cli):
-    cli("init", "--vault", "notes")
+    cli("init", "--vault", "notes", "--no-codex")
     before = snapshot(project)
     cli("init", "--vault", "another-vault", "--codex", expected=2)
     assert snapshot(project) == before

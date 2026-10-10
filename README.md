@@ -23,6 +23,12 @@ Version 0.6.1 packages the [guidance consolidation](docs/DEVELOPMENT.md#guidance
 shorter contract/result templates and research-task skill guidance, with no
 schema, controller or lifecycle change.
 
+The source tree also contains the unreleased
+[Codex first-use repair](docs/DEVELOPMENT.md#codex-first-use-repair-10-october-2026):
+`init` prepares project hooks and `doctor` inspects them by default, with an explicit
+`--no-codex` opt-out. Source behavior below describes this repair; installed 0.6.1
+still requires `--codex` until a separately validated deployment.
+
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
 separate and preserves task-only project initialization.
@@ -34,7 +40,8 @@ Requires Python 3.11+ on macOS or Linux. Windows users can run inside WSL.
 ```sh
 uv sync --locked
 uv run rctl --help
-uv run rctl init --vault note/main --codex
+uv run rctl init --vault note/main
+uv run rctl doctor
 uv run rctl task new tasks/my-analysis --kind analysis --title "Inspect retained evidence"
 # Replace the authoring placeholders in tasks/my-analysis/contract.md.
 uv run rctl contract check tasks/my-analysis
@@ -75,10 +82,12 @@ Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.1
 then run this inside an existing project root:
 
 ```sh
-rctl init --vault note/main --codex
+rctl init --vault note/main
 ```
 
-Omit `--vault` or `--codex` when not needed. The command creates missing `research/`
+Omit `--vault` when not needed. Codex files are prepared by default; use `--no-codex`
+for a terminal-only project. The previous `--codex` form remains supported. The
+command creates missing `research/`
 orientation files, `tasks/`, and `.agents/skills/research-task/`. `.rctl/project.json`
 records the vault binding; it never selects an implicit current task. Existing files are
 preserved and listed. Choose the vault at first init; changing a recorded binding requires
@@ -126,7 +135,7 @@ add Current guidance in place; records and the vault binding need no migration.
 rctl task list
 rctl task list --phase active
 rctl status tasks/my-analysis
-rctl doctor --codex
+rctl doctor
 rctl update export .work/rctl-update --codex
 ```
 
@@ -136,8 +145,9 @@ executes checks. Damaged entries stay visible. Status separates lifecycle advice
 in new handoffs; existing plain/bulleted `Next action:` fields remain supported. Reminders
 prioritize those fields even when they occur late in a long document.
 
-Doctor inspects the project binding and task skill; `--codex` adds project-local host
-configuration checks. Differences mean review needed, not proof that a customization is
+Doctor inspects the project binding, task skill and project-local Codex configuration
+by default; `--no-codex` limits it to core assets. Differences mean review needed,
+not proof that a customization is
 wrong. Update export writes packaged candidates and scoped diffs to a new directory;
 it never applies them. Merge host fragments without replacing unrelated settings.
 Configuration inspection does not establish trust or actual reminder delivery.
@@ -148,9 +158,15 @@ Configuration inspection does not establish trust or actual reminder delivery.
 uv run rctl integration codex export .work/codex-bundle
 ```
 
-`init --codex` prepares missing project files; review `.rctl/codex/README.md`, select
+`init` prepares missing project files; follow the
+[Codex first-use procedure](skills/research-task/references/workspace.md#codex-first-use),
+review `.rctl/codex/README.md`, select
 `RCTL_TASK_PATH`, and trust the exact hooks through Codex `/hooks`. For an exported bundle,
 use a new destination, review the generated files, then follow its README to select `RCTL_TASK_PATH` and launch Codex with the exported inline settings. The bundle includes a project-local `research-task` skill. Codex owns hook review and trust; exporting does not install configuration. Reminders read the selected task at session startup and prompt submission without running checks.
+
+After trust, start a fresh project session and submit a prompt to confirm both
+event reminders. Configuration creation and a passing doctor inspection leave host
+trust and reminder delivery uninspected; they do not complete host acceptance.
 
 Codex CLI 0.153.4 is tested with inline configuration and, in a [follow-up](docs/PROJECT-HOOKS-VERIFICATION.md), project-file loading with normal configuration and invocation-only hook-trust bypass. The isolated `--ignore-user-config` project-file attempt delivered no reminder; persisted installation without bypass remains unestablished. See [limitations](docs/READINESS.md#limitations).
 

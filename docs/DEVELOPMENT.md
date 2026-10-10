@@ -1,5 +1,58 @@
 # Development Plan
 
+## Codex first-use repair, 10 October 2026
+
+Starting agreement: the user found that LEO had used rctl without project hooks
+and requested a durable repair. The previous defaults required `--codex` for
+both initialization and doctor inspection, allowing missing host integration to
+go unnoticed. The local
+configuration was subsequently prepared, but persisted trust and automatic host
+delivery are still unverified.
+
+Scope: source behavior, packaged research-task instructions and documentation,
+with disposable initialization/inspection and installed-wheel checks. Make `init`
+prepare Codex files and `doctor` inspect them by default; retain `--codex` and add
+an explicit `--no-codex` opt-out for terminal-only projects. Report configuration
+separately from uninspected host trust/delivery. First use in Codex must follow the
+workspace integration steps through an observed reminder, or report the pending
+host step. Preserve existing configuration and task records. This source repair
+does not deploy a package, change live research tasks or grant hook trust.
+
+Acceptance selected: A-21/A-23 (default initialization, explicit opt-out,
+preservation and packaged first-use instructions), A-28/A-29 (default diagnostics
+catch missing handlers without executing hooks or modifying configuration) and
+A-13 (terminal-only operation remains available). Decisive regressions cover the
+original omission, both missing events, existing host customization and the
+distinction between static checks and delivery. Run the affected tests, then the
+full suite, lint, documentation check, build and isolated wheel smoke.
+
+Local validation on macOS 26.6.2 / Python 3.13.2:
+
+- `uv run --locked pytest -q tests/test_init.py tests/test_m6.py tests/test_m6_review.py`:
+  **60 passed**.
+- `uv run --locked pytest -q`: **354 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed; 378 local links,
+  100 JSON files, four schemas, 22 requirements and 43 acceptance cases.
+- `git diff --check`: passed.
+- `uv build --out-dir .work/hook-onboarding-20261010/dist`: sdist and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/hook-onboarding-20261010/dist/rctl-0.6.1-py3-none-any.whl`:
+  isolated installed-package smoke passed, including default initialization and
+  inspection with uninspected trust/delivery explicitly reported. The final smoke
+  exercised 37 CLI calls; its output is in
+  `.work/hook-onboarding-20261010/wheel-smoke.log`. The final initialized code and
+  first-use skill files were also compared with the wheel's copies.
+
+End review: source regressions and the isolated package establish that omitting
+`--codex` now prepares hooks and inspects missing ones. Terminal-only opt-out and
+preservation remain available. The packaged first-use procedure also requires
+event evidence and a fresh session identifying injected guidance before source
+reads; receipts alone establish invocation. No new real-host delivery test or
+research experiment was run. Deployment remains separate: installed global rctl
+and LEO's local skill are still from 0.6.1, and this source repair has no remote
+push or CI deployment evidence. Host evidence bounds remain in
+[Limitations](READINESS.md#limitations).
+
 ## Latest deployment
 
 v0.6.1 source `f2f2b2f` is pushed, passed all four CI jobs, and is installed in the

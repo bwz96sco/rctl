@@ -23,7 +23,7 @@ not `rctl status TASK --format json`.
 }
 ```
 
-On success `error` is null. `data` is always an object and `warnings` is an array of strings. Task mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome. Project `init` returns `root`, `vault`, `created`, and `preserved` paths, plus any configuration-review warnings.
+On success `error` is null. `data` is always an object and `warnings` is an array of strings. Task mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome. Project `init` returns `root`, `vault`, `codex_requested`, `next_action`, `created`, and `preserved` paths, plus any configuration-review warnings. Codex is requested by default; its next action requires host trust and observed reminders, not just file creation.
 
 `--help` and `--version` also honor JSON mode, with informational text in `data.message`. In text mode they display ordinary help/version output. Context includes a bounded reminder, governing question, optional question alignment, and compact verification/assessment summary; `status` exposes those projections plus the latest full report.
 
@@ -50,7 +50,7 @@ containment; it applies to the ordinary CLI error boundary.
 
 | Command | Inputs and behavior | Writes |
 |---|---|---|
-| `init [--vault PATH] [--codex]` | Initialize the existing selected root; save an immutable vault binding, create missing research orientation and project-local task skill, and optionally scaffold a new vault and Codex files. Preserve existing text; reject path collisions or changed binding before writes. | Missing project files only |
+| `init [--vault PATH] [--codex \| --no-codex]` | Initialize the existing selected root; save an immutable vault binding, create missing research orientation, project-local task skill and Codex files by default, and optionally scaffold a new vault. `--no-codex` explicitly skips host setup. Preserve existing text; reject path collisions or changed binding before writes. | Missing project files only |
 | `task new TASK --kind exploration|analysis --title TEXT` | Create a new directory and draft contract. The task ID is the directory basename. Refuse existing destination. | Contract template only |
 | `contract check TASK` | Parse frontmatter, unique criterion IDs, required headings, and declared method structure. This is a structural check. | None |
 | `begin TASK` | Require a valid completed draft, save contract revision 1, activate. | Machine record |
@@ -94,10 +94,13 @@ handoffs are historical; missing or ambiguous fields point to `state.md`.
 Code blocks inside explicit handoff fields are preserved. Unavailable evidence paths
 do not prevent reading managed task titles or handoffs; verification path rules still apply.
 
-`doctor [--codex]` returns `root`, `rctl_version`, `codex_inspected`, `review_needed`,
+`doctor [--codex | --no-codex]` returns `root`, `rctl_version`, `codex_inspected`, `review_needed`,
+`codex_trust`, `codex_delivery`,
 and `findings` with path, status, message, and next action. Inspection completion exits
 0 even when findings need attention. Uninspectable roots/invalid CLI arguments use
-existing errors. Without `--codex`, host configuration is explicitly not inspected.
+existing errors. Project-local Codex configuration is inspected by default;
+`--no-codex` explicitly skips it. `codex_trust` and `codex_delivery` are
+`not_inspected` in either mode. The two host options are mutually exclusive.
 Only project-local configuration is covered; static validity does not prove delivery
 or trust. Differences are review candidates, not automatically diagnosed corruption.
 In-root skill symlinks are reported at their logical installation paths; `.DS_Store`

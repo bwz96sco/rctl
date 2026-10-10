@@ -157,7 +157,8 @@ def test_handoff_does_not_smuggle_unbounded_json(task):
 def test_doctor_customizations_and_candidate_export(cli, project):
     cli("init", "--vault", "notes", "--codex")
     assert not cli("doctor", "--codex")["data"]["review_needed"]
-    assert not cli("doctor")["data"]["codex_inspected"]
+    assert cli("doctor")["data"]["codex_inspected"]
+    assert not cli("doctor", "--no-codex")["data"]["codex_inspected"]
     skill = project / ".agents/skills/research-task"
     (skill / "SKILL.md").write_text("Intentional local instructions\n")
     (skill / "local.txt").write_text("Keep me\n")
@@ -229,7 +230,7 @@ def test_doctor_actionable_failures(cli, project, damage, fragment):
     elif damage == "toml":
         (project / ".codex/config.toml").write_text("[")
     before = snapshot(project)
-    data = cli("doctor", "--codex")["data"]
+    data = cli("doctor")["data"]
     assert data["review_needed"]
     assert any(fragment in f["status"] + f["message"] for f in data["findings"])
     assert snapshot(project) == before
@@ -263,7 +264,7 @@ def test_inline_hooks_and_unrelated_configuration(cli, project):
             }
         )
     )
-    data = cli("doctor", "--codex")["data"]
+    data = cli("doctor")["data"]
     assert not data["review_needed"]
     assert any(f["status"] == "inherited" for f in data["findings"])
     before = snapshot(project)
@@ -274,11 +275,25 @@ def test_inline_hooks_and_unrelated_configuration(cli, project):
     assert all((project / p).read_bytes() == v for p, v in before.items())
 
 
-def test_unavailable_binding_and_default_no_host_inspection(cli, project):
-    cli("init", "--vault", "notes")
+def test_default_doctor_detects_hooks_omitted_on_initial_setup(cli, project):
+    cli("init", "--no-codex")
+    before = snapshot(project)
+    data = cli("doctor")["data"]
+    assert data["codex_inspected"] and data["review_needed"]
+    missing = {f["path"] for f in data["findings"] if f["status"] == "missing"}
+    assert missing == {"codex:SessionStart", "codex:UserPromptSubmit"}
+    assert data["codex_trust"] == data["codex_delivery"] == "not_inspected"
+    assert snapshot(project) == before
+    cli("init")
+    assert not cli("doctor")["data"]["review_needed"]
+
+
+def test_unavailable_binding_and_explicit_no_host_inspection(cli, project):
+    cli("init", "--vault", "notes", "--no-codex")
     (project / ".codex").mkdir()
     (project / ".codex/hooks.json").write_text("{")
-    assert not cli("doctor")["data"]["review_needed"]
+    assert cli("doctor")["data"]["review_needed"]
+    assert not cli("doctor", "--no-codex")["data"]["review_needed"]
     (project / ".rctl/project.json").write_text("{")
     assert cli("doctor")["data"]["review_needed"]
     cli("update", "export", "candidate", expected=2)

@@ -5,7 +5,8 @@ Read this reference when initializing a project, associating a vault, or plannin
 ## Initialize
 
 Run `rctl init` from an existing selected project root, or use `rctl --root PATH init`.
-For a new project with notes and Codex reminders, use `rctl init --vault note/main --codex`.
+Codex files are prepared by default; use `--no-codex` for a terminal-only project.
+For a new project with notes, use `rctl init --vault note/main`.
 Choose the vault on first initialization. `.rctl/project.json` records only that static
 binding; changing it later requires an explicit reviewed edit and any necessary note moves.
 The CLI remains usable without initialization.
@@ -16,16 +17,40 @@ project-local skill. It preserves existing files and reports them. An existing v
 associated without editing its contents; a new vault receives note templates and guidance.
 All generated files and vault paths stay inside the selected root. No Git repositories,
 remote services, data moves, task migrations, global configuration, or trust grants occur.
-With `--codex`, inspect `.rctl/codex/README.md` and preserved host files before launch.
+Inspect `.rctl/codex/README.md` and preserved host files before launch.
 An interrupted filesystem write can leave partial scaffolding: inspect it and rerun for
 missing project files; repair a partially created vault explicitly, since existing vaults
 are never populated automatically. Init does not upgrade customized templates or skills.
 
+## Codex first use
+
+1. Run `rctl doctor` on first use in Codex or when reminders disappear. It inspects
+   project hooks by default. Read existing host sources before making changes.
+2. For an uninitialized project or missing host files, run `rctl init` with the
+   established vault choice. Inspect preserved configuration and use reviewed
+   `update export --codex` fragments to reconcile existing sources. Retain one rctl
+   handler per event across JSON and inline TOML. Run doctor again; resolve missing,
+   duplicate, invalid or disabled handlers, and explain intentional customizations.
+3. Have the operator review/trust the definitions in Codex `/hooks`, then start a
+   fresh project session and submit a prompt. Confirm both events through host
+   event output or optional `RCTL_HOOK_LOG` receipts, and have the fresh session
+   identify the injected goal or selected-task guidance before reading its source
+   files. Receipts alone establish invocation, not model-visible delivery.
+   Pass `RCTL_TASK_PATH` at host launch when a selected-task reminder is
+   required; an unset selection legitimately delivers project guidance only.
+
+Report configuration, host trust and observed delivery separately. A passing static
+inspection or direct adapter invocation establishes no automatic host delivery.
+Until the host steps are observed, report Codex setup as pending and read
+`rctl context [TASK]` explicitly for ongoing work. See
+[Codex hook trust](https://developers.openai.com/codex/hooks/#review-and-trust-hooks).
+
 ## Inspect and review updates
 
 Use `rctl doctor` to compare the project-local task skill with the current installed
-package and inspect the vault binding. Add `--codex` for project-local hook/configuration
-inspection. Findings describe static configuration; host trust and actual delivery
+package, inspect the vault binding and check project-local Codex hooks/configuration.
+Use `--no-codex` to limit inspection to core project assets. Findings describe static
+configuration; host trust and actual delivery
 remain separate. Differences require review and do not establish who edited a file.
 
 Use `rctl update export .work/rctl-update --codex` with a new destination to generate

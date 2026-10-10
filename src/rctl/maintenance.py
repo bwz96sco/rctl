@@ -337,8 +337,11 @@ def inspect_command(root, source, event, group, handler, finding):
     )
 
 
-def doctor(root, codex=False):
-    return inspect_installation(root, codex)[0], []
+def doctor(root, codex=True):
+    inspection = inspect_installation(root, codex)[0]
+    inspection["codex_trust"] = "not_inspected"
+    inspection["codex_delivery"] = "not_inspected"
+    return inspection, []
 
 
 def export_update(root, destination, codex=False):

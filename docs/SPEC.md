@@ -309,7 +309,19 @@ The CLI remains usable without initialization.
 
 All intended paths are checked before writing. Existing regular files are preserved and listed, including customized orientation or host files; file/directory collisions and paths outside the selected root reject the operation. Missing files use exclusive creation. A failed filesystem operation may leave an incomplete scaffold; rerunning fills missing project files without replacing earlier content. A partially created vault needs explicit repair because existing vault contents are never populated automatically. Existing files are not certified compatible merely because they are preserved.
 
-`--codex` creates missing `.codex/hooks.json`, `.codex/config.toml`, and project-local loading instructions using the installed entrypoint. Existing host files are preserved and named as needing review; initialization does not merge definitions, grant trust, change global config, start a host, or run a task. Repeated initialization must not change task records or file contents. The local task skill points to packaged workspace guidance for Git/data boundaries, legacy migration, and optional vault use.
+`init` creates missing `.codex/hooks.json`, `.codex/config.toml`, and project-local
+loading instructions using the installed entrypoint by default. `--no-codex`
+explicitly skips host setup; `--codex` retains its previous meaning. These options
+are mutually exclusive. This default was changed on 10 October 2026 after a live
+Codex project omitted hooks and ordinary diagnosis omitted their inspection.
+Existing host files are preserved and named as needing review; initialization does
+not merge definitions, grant trust, change global config, start a host, or run a task.
+The result identifies whether Codex setup was requested and the remaining host
+confirmation step. Warnings and loading instructions require configuration review,
+hook trust and observed SessionStart/UserPromptSubmit delivery before reporting
+integration complete. Repeated initialization must not change task records or file
+contents. The local task skill routes first use and absent reminders to workspace
+guidance, as well as Git/data boundaries, legacy migration, and optional vault use.
 
 ## 11. Discovery, handoff summaries, and installation inspection (v0.3)
 
@@ -338,8 +350,11 @@ reported next action and blockers before long prose, retains warnings and source
 and bounds its added handoff JSON fields too. Neither record nor project schema changes.
 
 `doctor` completes a read-only inspection of project binding, bound vault existence,
-and packaged task-skill differences. `--codex` additionally inspects project JSON and
-inline TOML hooks, executable/root addressing, duplicates, and explicit disabling.
+packaged task-skill differences and, by default, project JSON and inline TOML hooks,
+executable/root addressing, duplicates, and explicit disabling. `--no-codex`
+explicitly skips host inspection; `--codex` remains compatible and mutually exclusive
+with the opt-out. `codex_trust` and `codex_delivery` are always `not_inspected`;
+static inspection never marks host setup as complete.
 Absent feature settings are inherited, not proven broken. Differences mean review
 needed, not proof of local modification or an outdated version. Unknown custom commands
 are never executed. No global layers, hook trust, or actual delivery are inferred.
@@ -355,5 +370,5 @@ entrypoint and rejects before writing when it is unavailable.
 diffs, inspection findings, and merge instructions to a new project-local directory.
 Codex candidates are fragments, not replacements for unrelated configuration. Destinations
 inside live control/knowledge directories are rejected. No snapshot, installation-history
-schema, automatic application, or configuration merge is introduced. Init and existing
-integration export semantics are unchanged.
+schema, automatic application, or configuration merge is introduced. Integration
+export remains explicit and does not install host configuration.

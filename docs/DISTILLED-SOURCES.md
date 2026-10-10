@@ -9,6 +9,30 @@ For each new distillation, retain the source link and read date, the ideas adopt
 the adaptations made, and links to the affected files. Extend this document as
 sources are used.
 
+## Codex first-use omission, 10 October 2026
+
+- **Sources:** the user's LEO first-use retrospective on 10 October 2026 and
+  [Codex hooks](https://developers.openai.com/codex/hooks/#review-and-trust-hooks).
+- **Read:** 2026-10-10. The official page was fetched with
+  `smart-search fetch https://developers.openai.com/codex/hooks/ --format json`;
+  Tavily succeeded with no fallback or provider notices. Raw output and extracted
+  text are under `.work/hook-onboarding-20261010/` in the development checkout.
+- **Applied to:** [workspace first use](../skills/research-task/references/workspace.md#codex-first-use),
+  [task-skill routing](../skills/research-task/SKILL.md),
+  [initialization](../src/rctl/initialize.py), and [diagnostics](../src/rctl/maintenance.py).
+
+**Retained:** LEO's CLI and local skill existed while both project hook handlers
+were absent. Explicit Codex diagnosis detected the omission, but the ordinary
+initialization/inspection path and agent completion criteria did not prevent it.
+Official Codex configuration sources merge, and non-managed hook definitions
+require operator review/trust before execution.
+
+**Adapted:** make Codex scaffolding and diagnosis the default with a terminal-only
+opt-out, retain previous explicit syntax, and route first use or absent reminders
+to one concrete workspace procedure. Require separately reported configuration,
+trust and observed delivery. This repair targets missing host integration; it
+establishes no research-quality or goal-drift improvement.
+
 ## Paper figure and table planning
 
 - **Source:** [Paper Figure Guide (Chinese)](https://dy8q0bnq8y.feishu.cn/wiki/OGpcw6zaRiQ6OwkNxfYcl7IKnBh).

@@ -30,10 +30,25 @@ def parser():
     commands = result.add_subparsers(dest="command", required=True)
     initialize = commands.add_parser("init", help="Create missing project scaffolding.")
     initialize.add_argument("--vault")
-    initialize.add_argument("--codex", action="store_true")
-    commands.add_parser(
+    init_host = initialize.add_mutually_exclusive_group()
+    init_host.add_argument(
+        "--codex", action="store_true", help="Prepare Codex hooks (default)."
+    )
+    init_host.add_argument(
+        "--no-codex", action="store_false", dest="codex", help="Skip Codex setup."
+    )
+    initialize.set_defaults(codex=True)
+    doctor = commands.add_parser(
         "doctor", help="Inspect project assets without changing them."
-    ).add_argument("--codex", action="store_true")
+    )
+    doctor_host = doctor.add_mutually_exclusive_group()
+    doctor_host.add_argument(
+        "--codex", action="store_true", help="Inspect Codex configuration (default)."
+    )
+    doctor_host.add_argument(
+        "--no-codex", action="store_false", dest="codex", help="Skip Codex inspection."
+    )
+    doctor.set_defaults(codex=True)
     update = commands.add_parser("update").add_subparsers(
         dest="update_command", required=True
     )

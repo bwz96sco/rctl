@@ -19,11 +19,22 @@ is retired; its orientation/vault assets and workspace guidance now ship in rctl
 The user-authorized M5 migration changes shared source skills; ordinary init/export commands
 never edit that repository or migrate live tasks.
 
-`init --codex` creates missing `.codex/hooks.json`, `.codex/config.toml`, and
+`init` creates missing `.codex/hooks.json`, `.codex/config.toml`, and
 `.rctl/codex/README.md` plus the project-local skill. Existing host files are preserved for
 manual reconciliation. It does not grant project/hook trust, launch Codex, or claim delivery
 from file creation. The tested project-file loading route and its trust boundary remain as
 recorded in PROJECT-HOOKS-VERIFICATION.
+
+Since the 10 October 2026 first-use repair, Codex preparation and doctor inspection
+are defaults. `--codex` remains compatible; `--no-codex` explicitly opts out on
+these commands. Candidate export still requires `--codex`. The packaged
+[first-use procedure](../skills/research-task/references/workspace.md#codex-first-use)
+requires configuration inspection, operator trust through `/hooks`, and actual
+SessionStart/UserPromptSubmit delivery in a fresh project session. The official
+[trust documentation](https://developers.openai.com/codex/hooks/#review-and-trust-hooks)
+was fetched through smart-search on 10 October 2026 and still requires review of
+the exact definition. Doctor's `codex_trust` and `codex_delivery` remain
+`not_inspected` even when no static findings need review.
 
 ## Bundle contract
 

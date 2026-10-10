@@ -64,7 +64,8 @@ def main():
             )
             return response
 
-        cli("init", "--vault", "note/main", "--codex")
+        initialized = cli("init", "--vault", "note/main")
+        assert initialized["data"]["codex_requested"]
         skill = project / ".agents/skills/research-task/SKILL.md"
         assert skill.is_file()
         assert "references/task-files.md" in skill.read_text()
@@ -82,7 +83,9 @@ def main():
         before = {p: p.read_bytes() for p in project.rglob("*") if p.is_file()}
         assert cli("init", "--codex")["data"]["created"] == []
         assert before == {p: p.read_bytes() for p in project.rglob("*") if p.is_file()}
-        assert not cli("doctor", "--codex")["data"]["review_needed"]
+        inspection = cli("doctor")["data"]
+        assert inspection["codex_inspected"] and not inspection["review_needed"]
+        assert inspection["codex_trust"] == inspection["codex_delivery"] == "not_inspected"
         cli("update", "export", "update-candidates", "--codex")
         assert (
             project

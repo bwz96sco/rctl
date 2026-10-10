@@ -18,7 +18,7 @@ def vault_path(root, value):
     return path
 
 
-def initialize(root, vault=None, codex=False):
+def initialize(root, vault=None, codex=True):
     manifest = local_path(root, ".rctl/project.json")
     binding = {"schema_version": 1, "vault": None}
     if manifest.is_file():
@@ -83,6 +83,13 @@ codex --enable hooks
 ```
 
 Codex owns project and hook trust. Review and trust the exact definitions through `/hooks`.
+Run `rctl doctor` to inspect the project configuration. After reviewing/trusting
+the hooks, start a fresh project session and submit a prompt. Confirm that the
+SessionStart and UserPromptSubmit reminders are delivered, using host event output
+or optional `RCTL_HOOK_LOG` receipts together with the fresh session identifying
+the injected goal or selected-task guidance before reading its source files.
+Receipts alone establish invocation. Report setup as pending until this host
+confirmation; a static doctor check or direct hook invocation is not delivery evidence.
 `rctl init` does not grant trust or start Codex. Existing configuration is preserved;
 merge the two rctl hook handlers manually if `.codex/hooks.json` already existed.
 Do not use `--ignore-user-config` for project-file loading: it suppressed delivery in
@@ -98,7 +105,9 @@ To remove this integration, remove its two handlers and the project-local resear
 skill if no longer wanted. Preserve unrelated host settings and task records.
 """
         warnings.append(
-            "Codex files do not grant project or hook trust; read .rctl/codex/README.md."
+            "Codex setup is pending host confirmation: run rctl doctor, review/trust "
+            "the hooks through /hooks, then confirm reminders in a fresh session. "
+            "Read .rctl/codex/README.md."
         )
 
     # Inspect every destination and ancestor before the first write.
@@ -138,6 +147,13 @@ skill if no longer wanted. Preserve unrelated host settings and task records.
     return {
         "root": str(root),
         "vault": binding["vault"],
+        "codex_requested": codex,
+        "next_action": (
+            "Run rctl doctor; review/trust the hooks through Codex /hooks and "
+            "confirm both event reminders in a fresh project session."
+            if codex
+            else "Codex setup skipped; use rctl init to prepare it when needed."
+        ),
         "created": created,
         "preserved": preserved,
     }, warnings

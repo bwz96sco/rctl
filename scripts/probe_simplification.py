@@ -27,7 +27,7 @@ def write_json(path, value):
 
 
 def prepare(repo, root, executable, cli):
-    cli("init")
+    cli("init", "--no-codex")
     # Give the fixture its own project boundary, excluding development AGENTS.md.
     subprocess.run(["git", "init", "--quiet", str(root)], check=True)
     (root / "research/PROGRAM.md").write_text(
