@@ -463,7 +463,11 @@ are added: contract exclusions apply to the task's own question and are not copi
 from earlier plans, after a selection round's "no simulator" boundary was carried
 into later LEO contracts; and a method task's primary criterion can run a fixed
 evaluator and record its numbers, leaving the win or loss to the goal review.
-No schema, controller or lifecycle behavior changes.
+After the user noted that the goal contribution should be judged when the contract
+is set, planning also asks a goal-linked proposal to lead with the three fields in
+plain language, with a concrete product, thresholds fixed in advance and a number
+on the useful outcome rather than a proxy. No schema, controller or lifecycle
+behavior changes.
 
 ## Limitations
 

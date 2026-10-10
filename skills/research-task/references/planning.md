@@ -23,6 +23,15 @@ contract, run `rctl task list` and read related goal decisions. A task resuming 
 stopped or adjusted obligation names that task and the new evidence or bounded
 reason in Scope.
 
+When proposing a goal-linked task, lead with the three `goal_contribution` fields
+in plain language, before the plan's detail. `expected_output` names the concrete
+product (a number on a named outcome, an artifact that runs, or a choice between
+named options) and what the next task does with it. `decision_use` fixes before
+work starts which result leads to which next action, with a threshold when the
+output is a number. A number needs an evaluator that computes it, and it measures
+the useful outcome itself, not a convenient proxy such as a pass count or a file
+that loads.
+
 Write each contract's exclusions for its own question. Do not copy an earlier
 task's or plan's boundaries into a contract whose question needs that work; for
 example, a selection round's "no simulator or model run" does not bind a later task

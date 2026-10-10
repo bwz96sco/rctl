@@ -26,8 +26,13 @@ and review" and no longer calls the deployed controller a source increment. Two
 operational notes are added: contract exclusions are written for the task's own
 question rather than copied from earlier plans, and a method task's primary
 criterion can run a fixed evaluator and record its numbers, leaving the outcome to
-the goal review. `AGENTS.md` gains the development rule. Net: six template/skill
-files, 49 lines added and 99 removed.
+the goal review. Planning also asks that a goal-linked proposal lead with the three
+`goal_contribution` fields in plain language: a concrete product, thresholds fixed
+before work, and a number computed by an evaluator on the useful outcome rather
+than a proxy. This follows the user's same-day observation that the contribution
+should be judged when the contract is set, while rctl checks only field presence
+then. `AGENTS.md` gains the development rule. Net: six template/skill files,
+58 lines added and 99 removed.
 
 Acceptance selected: M1/A-01 (scaffold placeholders and accepted contract structure),
 M5/A-21/A-23 (initialization and resource delivery), M8/A-40 (packaged alignment
