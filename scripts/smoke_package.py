@@ -66,6 +66,12 @@ def main():
 
         initialized = cli("init", "--vault", "note/main")
         assert initialized["data"]["codex_requested"]
+        assert initialized["data"]["claude_requested"]
+        claude = json.loads((project / ".claude/settings.json").read_text())
+        assert set(claude["hooks"]) == {"SessionStart", "UserPromptSubmit"}
+        assert (project / ".claude/skills/research-task/SKILL.md").read_bytes() == (
+            project / ".agents/skills/research-task/SKILL.md"
+        ).read_bytes()
         skill = project / ".agents/skills/research-task/SKILL.md"
         assert skill.is_file()
         assert "references/task-files.md" in skill.read_text()
@@ -86,7 +92,9 @@ def main():
         inspection = cli("doctor")["data"]
         assert inspection["codex_inspected"] and not inspection["review_needed"]
         assert inspection["codex_trust"] == inspection["codex_delivery"] == "not_inspected"
-        cli("update", "export", "update-candidates", "--codex")
+        assert inspection["claude_inspected"]
+        assert inspection["claude_trust"] == inspection["claude_delivery"] == "not_inspected"
+        cli("update", "export", "update-candidates", "--codex", "--claude")
         assert (
             project
             / "update-candidates/candidates/.agents/skills/research-task/SKILL.md"

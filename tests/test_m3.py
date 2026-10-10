@@ -11,7 +11,9 @@ import yaml
 from rctl.integration import inline_arguments
 
 
-def hook(task, payload, *, root=True, selection=True, logging=None, extra_env=None):
+def hook(
+    task, payload, *, root=True, selection=True, logging=None, extra_env=None, host="codex"
+):
     env = {k: v for k, v in os.environ.items() if not k.startswith("RCTL_")}
     if selection:
         env["RCTL_TASK_PATH"] = "tasks/retained-comparison"
@@ -21,7 +23,7 @@ def hook(task, payload, *, root=True, selection=True, logging=None, extra_env=No
     args = [sys.executable, "-m", "rctl"]
     if root:
         args += ["--root", str(task.root)]
-    args += ["hook", "codex"]
+    args += ["hook", host]
     result = subprocess.run(
         args,
         input=payload if isinstance(payload, str) else json.dumps(payload),
@@ -34,10 +36,13 @@ def hook(task, payload, *, root=True, selection=True, logging=None, extra_env=No
     return json.loads(result.stdout), result.stderr
 
 
+@pytest.mark.parametrize("host", ["codex", "claude"])
 @pytest.mark.parametrize(
     "event,budget", [("SessionStart", 8000), ("UserPromptSubmit", 2000)]
 )
-def test_real_adapter_is_bounded_readonly_and_receipts_optional(task, event, budget):
+def test_real_adapter_is_bounded_readonly_and_receipts_optional(
+    task, event, budget, host
+):
     task.begin()
     task.file("state.md").write_text(
         "Next action: inspect the retained evidence.\n" + "界" * 12000
@@ -49,7 +54,7 @@ def test_real_adapter_is_bounded_readonly_and_receipts_optional(task, event, bud
         "session_id": "fixture",
         "cwd": str(task.root),
     }
-    response, stderr = hook(task, payload)
+    response, stderr = hook(task, payload, host=host)
     assert not stderr
     output = response["hookSpecificOutput"]
     assert output["hookEventName"] == event
@@ -58,11 +63,12 @@ def test_real_adapter_is_bounded_readonly_and_receipts_optional(task, event, bud
     assert "Truncated" in output["additionalContext"]
     assert {p: p.read_bytes() for p in task.path.rglob("*") if p.is_file()} == before
     assert "Does the supplied candidate" in output["additionalContext"]
-    response, stderr = hook(task, payload, logging="receipts.jsonl")
+    response, stderr = hook(task, payload, logging="receipts.jsonl", host=host)
     receipt = json.loads((task.root / "receipts.jsonl").read_text())
     assert receipt["context"] == response["hookSpecificOutput"]["additionalContext"]
     assert receipt["event"] == event and receipt["session_id"] == "fixture"
     assert receipt["task_path"] == "tasks/retained-comparison"
+    assert receipt["host"] == host
 
 
 @pytest.mark.parametrize("payload", ["{", "[]", "null"])

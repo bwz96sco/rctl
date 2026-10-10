@@ -30,7 +30,7 @@ def inline_arguments(hooks):
     return arguments
 
 
-def codex_hooks(root):
+def hook_command(root, host):
     entrypoint = Path(sys.executable).parent / "rctl"
     if not entrypoint.is_file():
         raise RctlError(
@@ -39,7 +39,11 @@ def codex_hooks(root):
             "Install rctl in this Python environment before exporting.",
             3,
         )
-    command = shlex.join([str(entrypoint), "--root", str(root), "hook", "codex"])
+    return shlex.join([str(entrypoint), "--root", str(root), "hook", host]), entrypoint
+
+
+def codex_hooks(root):
+    command, entrypoint = hook_command(root, "codex")
     hooks = {
         "hooks": {
             event: [
@@ -55,6 +59,19 @@ def codex_hooks(root):
                 }
             ]
             for event, budget in (("SessionStart", 8000), ("UserPromptSubmit", 2000))
+        }
+    }
+    return hooks, entrypoint
+
+
+def claude_hooks(root):
+    # Claude Code caps each additionalContext at 10,000 characters and has no
+    # per-handler limit field; the adapter's own budgets stay below it.
+    command, entrypoint = hook_command(root, "claude")
+    hooks = {
+        "hooks": {
+            event: [{"hooks": [{"type": "command", "command": command, "timeout": 10}]}]
+            for event in ("SessionStart", "UserPromptSubmit")
         }
     }
     return hooks, entrypoint

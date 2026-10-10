@@ -23,7 +23,7 @@ not `rctl status TASK --format json`.
 }
 ```
 
-On success `error` is null. `data` is always an object and `warnings` is an array of strings. Task mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome. Project `init` returns `root`, `vault`, `codex_requested`, `next_action`, `created`, and `preserved` paths, plus any configuration-review warnings. Codex is requested by default; its next action requires host trust and observed reminders, not just file creation.
+On success `error` is null. `data` is always an object and `warnings` is an array of strings. Task mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome. Project `init` returns `root`, `vault`, `codex_requested`, `claude_requested`, `next_action`, `created`, and `preserved` paths, plus any configuration-review warnings. Codex and Claude Code are requested by default; the next action requires each host's trust step and observed reminders, not just file creation.
 
 `--help` and `--version` also honor JSON mode, with informational text in `data.message`. In text mode they display ordinary help/version output. Context includes a bounded reminder, governing question, optional question alignment, and compact verification/assessment summary; `status` exposes those projections plus the latest full report.
 
@@ -50,7 +50,7 @@ containment; it applies to the ordinary CLI error boundary.
 
 | Command | Inputs and behavior | Writes |
 |---|---|---|
-| `init [--vault PATH] [--codex \| --no-codex]` | Initialize the existing selected root; save an immutable vault binding, create missing research orientation, project-local task skill and Codex files by default, and optionally scaffold a new vault. `--no-codex` explicitly skips host setup. Preserve existing text; reject path collisions or changed binding before writes. | Missing project files only |
+| `init [--vault PATH] [--codex \| --no-codex] [--claude \| --no-claude]` | Initialize the existing selected root; save an immutable vault binding, create missing research orientation, project-local task skill, Codex files and Claude Code files (`.claude/settings.json` hooks plus a `.claude/skills/research-task/` skill copy) by default, and optionally scaffold a new vault. `--no-codex` and `--no-claude` explicitly skip a host. Preserve existing text; reject path collisions or changed binding before writes. | Missing project files only |
 | `task new TASK --kind exploration|analysis --title TEXT` | Create a new directory and draft contract. The task ID is the directory basename. Refuse existing destination. | Contract template only |
 | `contract check TASK` | Parse frontmatter, unique criterion IDs, required headings, and declared method structure. This is a structural check. | None |
 | `begin TASK` | Require a valid completed draft, save contract revision 1, activate. | Machine record |
@@ -94,30 +94,33 @@ handoffs are historical; missing or ambiguous fields point to `state.md`.
 Code blocks inside explicit handoff fields are preserved. Unavailable evidence paths
 do not prevent reading managed task titles or handoffs; verification path rules still apply.
 
-`doctor [--codex | --no-codex]` returns `root`, `rctl_version`, `codex_inspected`, `review_needed`,
-`codex_trust`, `codex_delivery`,
+`doctor [--codex | --no-codex] [--claude | --no-claude]` returns `root`, `rctl_version`,
+`codex_inspected`, `claude_inspected`, `review_needed`, `codex_trust`, `codex_delivery`,
+`claude_trust`, `claude_delivery`,
 and `findings` with path, status, message, and next action. Inspection completion exits
 0 even when findings need attention. Uninspectable roots/invalid CLI arguments use
 existing errors. Project-local Codex configuration is inspected by default;
-`--no-codex` explicitly skips it. `codex_trust` and `codex_delivery` are
-`not_inspected` in either mode. The two host options are mutually exclusive.
+`--no-codex` explicitly skips it. Claude Code project settings, both
+`.claude/settings.json` and `.claude/settings.local.json`, and its skill copy are
+likewise inspected by default; `--no-claude` skips them. Trust and delivery fields
+are `not_inspected` in every mode. Each host's two options are mutually exclusive.
 Only project-local configuration is covered; static validity does not prove delivery
 or trust. Differences are review candidates, not automatically diagnosed corruption.
 In-root skill symlinks are reported at their logical installation paths; `.DS_Store`
 files do not request review. A missing rctl entrypoint becomes an unavailable finding,
 and the remaining inspection still completes with exit 0.
 
-`update export DIRECTORY [--codex]` refuses an existing or live-asset destination.
+`update export DIRECTORY [--codex] [--claude]` refuses an existing or live-asset destination.
 It returns the directory and written file names. The bundle has `candidates/`, `diffs/`,
 `inspection.json`, and `README.md`. Host candidates are merge fragments; skill candidates
 are individual packaged files. Existing local extras are reported and retained. It
 never applies updates or modifies global installation/configuration. Inspect the bundle,
 then apply only reviewed changes within the separately selected project's scope.
-With `--codex`, an unavailable local entrypoint returns `NOT_FOUND` before any writes.
+With `--codex` or `--claude`, an unavailable local entrypoint returns `NOT_FOUND` before any writes.
 
 ## Internal host command
 
-`rctl [--root PATH] hook codex` reads host JSON from stdin and returns raw Codex hook JSON, independently of `--format`. It does not use the ordinary CLI envelope. Supported events provide bounded additional context; unsupported or malformed input returns `{}`. Adapter failures exit 0, with diagnostics on stderr where applicable. See [INTEGRATION](INTEGRATION.md) for payloads, task selection, receipt logging, and budgets. Global options such as `--root` precede the subcommand.
+`rctl [--root PATH] hook codex|claude` reads host JSON from stdin and returns raw hook JSON, independently of `--format`. Codex and Claude Code use the same event fields and `hookSpecificOutput.additionalContext` output; the host name is recorded in receipts. It does not use the ordinary CLI envelope. Supported events provide bounded additional context; unsupported or malformed input returns `{}`. Adapter failures exit 0, with diagnostics on stderr where applicable. See [INTEGRATION](INTEGRATION.md) for payloads, task selection, receipt logging, and budgets. Global options such as `--root` precede the subcommand.
 
 ## Terminal walkthrough
 

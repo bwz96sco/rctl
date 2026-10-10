@@ -25,19 +25,47 @@ def test_default_init_prepares_codex_but_reports_pending_delivery(project, cli):
     assert data["codex_trust"] == data["codex_delivery"] == "not_inspected"
 
 
+def test_default_init_prepares_claude_code_hooks_and_skill(project, cli):
+    response = cli("init")
+    assert response["data"]["claude_requested"]
+    assert "workspace trust" in response["data"]["next_action"]
+    assert any("Claude Code setup is pending" in text for text in response["warnings"])
+    hooks = json.loads((project / ".claude/settings.json").read_text())["hooks"]
+    assert set(hooks) == {"SessionStart", "UserPromptSubmit"}
+    for groups in hooks.values():
+        (handler,) = groups[0]["hooks"]
+        assert set(handler) == {"type", "command", "timeout"}
+        assert handler["command"].endswith(f"--root {project} hook claude")
+    # Claude Code does not load .agents/skills/.
+    for path in (project / ".agents/skills/research-task").rglob("*"):
+        copy = project / ".claude/skills/research-task" / path.relative_to(
+            project / ".agents/skills/research-task"
+        )
+        assert path.is_dir() or copy.read_bytes() == path.read_bytes()
+    instructions = (project / ".rctl/claude/README.md").read_text()
+    assert "workspace\ntrust dialog" in instructions
+    assert "direct hook invocation is not delivery evidence" in instructions
+    data = cli("doctor")["data"]
+    assert data["claude_inspected"] and not data["review_needed"]
+    assert data["claude_trust"] == data["claude_delivery"] == "not_inspected"
+
+
 def test_terminal_only_setup_is_explicit(project, cli):
-    response = cli("init", "--no-codex")
+    response = cli("init", "--no-codex", "--no-claude")
     assert not response["data"]["codex_requested"]
+    assert not response["data"]["claude_requested"]
     assert "skipped" in response["data"]["next_action"]
-    assert not (project / ".codex").exists()
-    assert not (project / ".rctl/codex").exists()
-    inspection = cli("doctor", "--no-codex")["data"]
-    assert not inspection["codex_inspected"] and not inspection["review_needed"]
+    for path in (".codex", ".rctl/codex", ".claude", ".rctl/claude"):
+        assert not (project / path).exists()
+    inspection = cli("doctor", "--no-codex", "--no-claude")["data"]
+    assert not inspection["codex_inspected"] and not inspection["claude_inspected"]
+    assert not inspection["review_needed"]
 
 
 @pytest.mark.parametrize("command", ["init", "doctor"])
-def test_conflicting_host_options_do_not_write(project, cli, command):
-    cli(command, "--codex", "--no-codex", expected=2)
+@pytest.mark.parametrize("host", ["codex", "claude"])
+def test_conflicting_host_options_do_not_write(project, cli, command, host):
+    cli(command, f"--{host}", f"--no-{host}", expected=2)
     assert list(project.iterdir()) == []
 
 
@@ -74,11 +102,14 @@ def test_init_repeat_preserves_customized_files_and_links(project, cli):
         ".agents/skills/research-task/SKILL.md",
         "note/main/AGENTS.md",
         ".codex/hooks.json",
+        ".claude/settings.json",
+        ".claude/skills/research-task/SKILL.md",
     ):
         (project / name).write_text("User customization\n")
     before = snapshot(project)
     repeat = cli("init")
     assert repeat["data"]["created"] == []
+    assert any(".claude/settings.json" in text for text in repeat["warnings"])
     assert snapshot(project) == before
     assert not (project / ".git").exists()
     assert not (project / ".rctl/record.json").exists()
@@ -101,6 +132,7 @@ def test_existing_vault_is_only_associated(project, cli):
         "research",
         "research/PROGRAM.md",
         ".agents/skills",
+        ".claude/skills",
         ".rctl/project.json",
         "notes",
     ],
@@ -127,6 +159,7 @@ def test_collisions_fail_before_writes(project, cli, collision):
         "research",
         ".rctl/vault",
         ".agents/vault",
+        ".claude/vault",
         ".git",
     ],
 )

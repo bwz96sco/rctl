@@ -323,6 +323,17 @@ integration complete. Repeated initialization must not change task records or fi
 contents. The local task skill routes first use and absent reminders to workspace
 guidance, as well as Git/data boundaries, legacy migration, and optional vault use.
 
+`init` likewise creates missing `.claude/settings.json` with one rctl
+SessionStart and one UserPromptSubmit handler (`rctl --root ROOT hook claude`,
+10-second timeout), `.rctl/claude/README.md`, and a copy of the task skill under
+`.claude/skills/research-task/`, because Claude Code loads project skills only from
+`.claude/skills/`. `--no-claude` skips them; `--claude` is accepted and the two are
+mutually exclusive. This was added on 10 October 2026 after LEO's Claude Code sessions
+received neither reminders nor the task skill. Claude Code runs project settings hooks
+only after its workspace trust dialog is accepted; the result reports
+`claude_requested`, and init grants no trust. An existing `.claude/settings.json` is
+preserved and named for manual merging.
+
 ## 11. Discovery, handoff summaries, and installation inspection (v0.3)
 
 `task list` inspects immediate directories under `tasks/` containing `contract.md` or
@@ -354,7 +365,12 @@ packaged task-skill differences and, by default, project JSON and inline TOML ho
 executable/root addressing, duplicates, and explicit disabling. `--no-codex`
 explicitly skips host inspection; `--codex` remains compatible and mutually exclusive
 with the opt-out. `codex_trust` and `codex_delivery` are always `not_inspected`;
-static inspection never marks host setup as complete.
+static inspection never marks host setup as complete. Doctor also inspects Claude Code
+by default (`--no-claude` skips it): the `.claude/skills/research-task/` copy against
+the package, both `.claude/settings.json` and `.claude/settings.local.json` for exactly
+one rctl handler per event, command addressing, customized fields or matchers, and
+`disableAllHooks`. User-level settings are not read. `claude_trust` and
+`claude_delivery` are likewise always `not_inspected`.
 Absent feature settings are inherited, not proven broken. Differences mean review
 needed, not proof of local modification or an outdated version. Unknown custom commands
 are never executed. No global layers, hook trust, or actual delivery are inferred.
@@ -364,11 +380,11 @@ Symlinked in-root skill directories use their logical installed paths in finding
 Finder `.DS_Store` files are ignored and preserved; other local assets remain visible.
 A missing local console entrypoint adds an unavailable finding without discarding
 skill or host configuration diagnostics. Export with `--codex` still requires that
-entrypoint and rejects before writing when it is unavailable.
+entrypoint and rejects before writing when it is unavailable; `--claude` does the same.
 
-`update export DIRECTORY [--codex]` writes current packaged skill candidates, scoped
+`update export DIRECTORY [--codex] [--claude]` writes current packaged skill candidates, scoped
 diffs, inspection findings, and merge instructions to a new project-local directory.
-Codex candidates are fragments, not replacements for unrelated configuration. Destinations
+Codex and Claude Code candidates are fragments, not replacements for unrelated configuration. Destinations
 inside live control/knowledge directories are rejected. No snapshot, installation-history
 schema, automatic application, or configuration merge is introduced. Integration
 export remains explicit and does not install host configuration.

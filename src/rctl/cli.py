@@ -37,7 +37,14 @@ def parser():
     init_host.add_argument(
         "--no-codex", action="store_false", dest="codex", help="Skip Codex setup."
     )
-    initialize.set_defaults(codex=True)
+    init_claude = initialize.add_mutually_exclusive_group()
+    init_claude.add_argument(
+        "--claude", action="store_true", help="Prepare Claude Code hooks (default)."
+    )
+    init_claude.add_argument(
+        "--no-claude", action="store_false", dest="claude", help="Skip Claude Code setup."
+    )
+    initialize.set_defaults(codex=True, claude=True)
     doctor = commands.add_parser(
         "doctor", help="Inspect project assets without changing them."
     )
@@ -48,7 +55,17 @@ def parser():
     doctor_host.add_argument(
         "--no-codex", action="store_false", dest="codex", help="Skip Codex inspection."
     )
-    doctor.set_defaults(codex=True)
+    doctor_claude = doctor.add_mutually_exclusive_group()
+    doctor_claude.add_argument(
+        "--claude", action="store_true", help="Inspect Claude Code configuration (default)."
+    )
+    doctor_claude.add_argument(
+        "--no-claude",
+        action="store_false",
+        dest="claude",
+        help="Skip Claude Code inspection.",
+    )
+    doctor.set_defaults(codex=True, claude=True)
     update = commands.add_parser("update").add_subparsers(
         dest="update_command", required=True
     )
@@ -57,6 +74,7 @@ def parser():
     )
     candidates.add_argument("directory")
     candidates.add_argument("--codex", action="store_true")
+    candidates.add_argument("--claude", action="store_true")
     integration = commands.add_parser("integration").add_subparsers(
         dest="host", required=True
     )
@@ -64,9 +82,11 @@ def parser():
         dest="integration_command", required=True
     )
     export.add_parser("export").add_argument("directory")
-    commands.add_parser("hook", help="Internal host reminder adapter.").add_subparsers(
-        dest="host", required=True
-    ).add_parser("codex")
+    hosts = commands.add_parser(
+        "hook", help="Internal host reminder adapter."
+    ).add_subparsers(dest="host", required=True)
+    hosts.add_parser("codex")
+    hosts.add_parser("claude")
     task = commands.add_parser("task").add_subparsers(
         dest="task_command", required=True
     )
@@ -119,7 +139,7 @@ def dispatch(args):
     if args.command == "init":
         from .initialize import initialize
 
-        return initialize(root, args.vault, args.codex)
+        return initialize(root, args.vault, args.codex, args.claude)
     if args.command == "integration":
         from .integration import export_codex
 
@@ -127,11 +147,11 @@ def dispatch(args):
     if args.command == "doctor":
         from .maintenance import doctor
 
-        return doctor(root, args.codex)
+        return doctor(root, args.codex, args.claude)
     if args.command == "update":
         from .maintenance import export_update
 
-        return export_update(root, args.directory, args.codex)
+        return export_update(root, args.directory, args.codex, args.claude)
     if args.command == "task" and args.task_command == "list":
         from .discovery import list_tasks
 
@@ -200,7 +220,7 @@ def main(argv=None):
         if args.command == "hook":
             from .hooks.codex import main as hook_main
 
-            return hook_main(args.root)
+            return hook_main(args.root, args.host)
         response["data"], response["warnings"] = dispatch(args)
     except SystemExit as result:
         if result.code:
@@ -275,9 +295,10 @@ def main(argv=None):
     elif "findings" in response["data"]:
         data = response["data"]
         print(f"Project: {data['root']}; rctl {data['rctl_version']}")
-        print(
-            f"Codex: {'project configuration inspected; trust/delivery not inspected' if data['codex_inspected'] else 'not inspected (use --codex)'}"
-        )
+        for host, key in (("Codex", "codex"), ("Claude Code", "claude")):
+            print(
+                f"{host}: {'project configuration inspected; trust/delivery not inspected' if data[f'{key}_inspected'] else f'not inspected (--no-{key})'}"
+            )
         print(f"Review needed: {data['review_needed']}")
         for item in data["findings"]:
             print(

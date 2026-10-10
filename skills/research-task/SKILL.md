@@ -10,8 +10,8 @@ its source paths for criteria, warnings, and missing or truncated details. The
 retained contract owns the accepted agreement; `state.md` reports progress and
 `result.md` interprets evidence. The machine record owns verification and phase.
 
-On first use in Codex, or when reminders are absent, run `rctl doctor` and follow
-[Workspace: Codex first use](references/workspace.md#codex-first-use). Report
+On first use in Codex or Claude Code, or when reminders are absent, run `rctl doctor`
+and follow [Workspace: host first use](references/workspace.md#host-first-use). Report
 uncompleted host steps explicitly.
 
 Use the relevant reference when entering an operation:

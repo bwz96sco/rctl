@@ -28,13 +28,32 @@ recorded in PROJECT-HOOKS-VERIFICATION.
 Since the 10 October 2026 first-use repair, Codex preparation and doctor inspection
 are defaults. `--codex` remains compatible; `--no-codex` explicitly opts out on
 these commands. Candidate export still requires `--codex`. The packaged
-[first-use procedure](../skills/research-task/references/workspace.md#codex-first-use)
+[first-use procedure](../skills/research-task/references/workspace.md#host-first-use)
 requires configuration inspection, operator trust through `/hooks`, and actual
 SessionStart/UserPromptSubmit delivery in a fresh project session. The official
 [trust documentation](https://developers.openai.com/codex/hooks/#review-and-trust-hooks)
 was fetched through smart-search on 10 October 2026 and still requires review of
 the exact definition. Doctor's `codex_trust` and `codex_delivery` remain
 `not_inspected` even when no static findings need review.
+
+Claude Code support was added on 10 October 2026, when LEO's Claude Code sessions
+were found to receive neither rctl reminders nor the task skill. Claude Code sends
+the same `hook_event_name`, `cwd`, `session_id` and `source` fields and accepts the
+same `hookSpecificOutput.additionalContext` output, so `rctl hook claude` shares the
+Codex adapter and its 8000/2000-character budgets, below Claude Code's 10,000-character
+cap. `init` writes the two handlers to `.claude/settings.json`, which has no per-handler
+context limit, and copies the task skill to `.claude/skills/research-task/`, the only
+project skill location Claude Code loads. Claude Code holds back settings-file hooks
+until the folder's workspace trust dialog is accepted; `/hooks` is a read-only list,
+and `claude -p` sessions treat the folder as trusted. Hook runs appear in the session
+transcript. Doctor inspects both project settings files and `disableAllHooks`; user
+settings, trust and delivery are not inspected. Sources:
+[hooks](https://code.claude.com/docs/en/hooks),
+[skills](https://code.claude.com/docs/en/skills) and
+[memory](https://code.claude.com/docs/en/memory), fetched 10 October 2026. One
+`claude -p` probe on Claude Code 2.1.296 observed both reminders and the skill
+listing; the interactive trust path is unobserved (see
+[DEVELOPMENT](DEVELOPMENT.md#claude-code-host-support-10-october-2026)).
 
 ## Bundle contract
 
@@ -86,7 +105,7 @@ Do not install Stop, PreToolUse, PreCompact, or SubagentStart handlers. Task com
 
 ## Delivery evidence
 
-For disposable host tests, `RCTL_HOOK_LOG` may select a local receipt file. No receipts are written when it is unset. Each JSONL receipt records event, source, session ID, task path, timestamp, and delivered context. Keep it in local test output because context can include private material; do not send telemetry.
+For disposable host tests, `RCTL_HOOK_LOG` may select a local receipt file. No receipts are written when it is unset. Each JSONL receipt records host, event, source, session ID, task path, timestamp, and delivered context. Keep it in local test output because context can include private material; do not send telemetry.
 
 Release evidence must include two distinct fresh host sessions, their launch arguments and host version, receipt records, the first session's saved handoff, and proof that the second received it. Also launch without hooks and show the core terminal loop still works. The no-hook run establishes core independence; it is not a comparative model-performance experiment.
 

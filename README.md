@@ -27,7 +27,10 @@ The source tree also contains the unreleased
 [Codex first-use repair](docs/DEVELOPMENT.md#codex-first-use-repair-10-october-2026):
 `init` prepares project hooks and `doctor` inspects them by default, with an explicit
 `--no-codex` opt-out. Source behavior below describes this repair; installed 0.6.1
-still requires `--codex` until a separately validated deployment.
+still requires `--codex` until a separately validated deployment. The source also adds
+[Claude Code host support](docs/DEVELOPMENT.md#claude-code-host-support-10-october-2026): `init` prepares
+`.claude/settings.json` hooks and a `.claude/skills/research-task/` skill copy, and
+`doctor` inspects them, with an explicit `--no-claude` opt-out.
 
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
@@ -85,10 +88,11 @@ then run this inside an existing project root:
 rctl init --vault note/main
 ```
 
-Omit `--vault` when not needed. Codex files are prepared by default; use `--no-codex`
-for a terminal-only project. The previous `--codex` form remains supported. The
-command creates missing `research/`
-orientation files, `tasks/`, and `.agents/skills/research-task/`. `.rctl/project.json`
+Omit `--vault` when not needed. Codex and Claude Code files are prepared by default;
+use `--no-codex` or `--no-claude` to skip a host. The previous `--codex` form remains
+supported. The command creates missing `research/`
+orientation files, `tasks/`, `.agents/skills/research-task/` and its Claude Code copy
+under `.claude/skills/research-task/`. `.rctl/project.json`
 records the vault binding; it never selects an implicit current task. Existing files are
 preserved and listed. Choose the vault at first init; changing a recorded binding requires
 an explicit reviewed edit. Existing vaults are associated without edits. New vaults receive
@@ -159,7 +163,7 @@ uv run rctl integration codex export .work/codex-bundle
 ```
 
 `init` prepares missing project files; follow the
-[Codex first-use procedure](skills/research-task/references/workspace.md#codex-first-use),
+[host first-use procedure](skills/research-task/references/workspace.md#host-first-use),
 review `.rctl/codex/README.md`, select
 `RCTL_TASK_PATH`, and trust the exact hooks through Codex `/hooks`. For an exported bundle,
 use a new destination, review the generated files, then follow its README to select `RCTL_TASK_PATH` and launch Codex with the exported inline settings. The bundle includes a project-local `research-task` skill. Codex owns hook review and trust; exporting does not install configuration. Reminders read the selected task at session startup and prompt submission without running checks.
@@ -169,6 +173,18 @@ event reminders. Configuration creation and a passing doctor inspection leave ho
 trust and reminder delivery uninspected; they do not complete host acceptance.
 
 Codex CLI 0.153.4 is tested with inline configuration and, in a [follow-up](docs/PROJECT-HOOKS-VERIFICATION.md), project-file loading with normal configuration and invocation-only hook-trust bypass. The isolated `--ignore-user-config` project-file attempt delivered no reminder; persisted installation without bypass remains unestablished. See [limitations](docs/READINESS.md#limitations).
+
+## Claude Code reminders
+
+`init` writes the two rctl handlers to `.claude/settings.json` and the task skill to
+`.claude/skills/research-task/`; review `.rctl/claude/README.md`. Claude Code runs
+project settings hooks after the folder's workspace trust dialog is accepted. Launch
+with `RCTL_TASK_PATH=tasks/your-task claude` when a selected-task reminder is needed,
+then confirm both event reminders in a fresh session. An existing
+`.claude/settings.json` is preserved; merge the handlers from
+`rctl update export DIRECTORY --claude`. One non-interactive Claude Code 2.1.296
+session has been observed receiving both reminders; the interactive trust path has
+not. See [limitations](docs/READINESS.md#limitations).
 
 ## Start here
 

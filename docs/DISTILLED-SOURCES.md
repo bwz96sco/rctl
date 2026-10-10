@@ -9,6 +9,36 @@ For each new distillation, retain the source link and read date, the ideas adopt
 the adaptations made, and links to the affected files. Extend this document as
 sources are used.
 
+## Claude Code host support, 10 October 2026
+
+- **Sources:** the user's report that hooks still did not take effect after the Codex
+  repair; LEO's Claude Code session transcript of 10 October 2026; Claude Code
+  [hooks](https://code.claude.com/docs/en/hooks),
+  [skills](https://code.claude.com/docs/en/skills) and
+  [memory](https://code.claude.com/docs/en/memory) documentation.
+- **Read:** 2026-10-10 with `smart-search fetch URL --format json` for each page
+  (and `hooks.md` for the hooks page's prose); Tavily succeeded with no fallback or
+  provider notices. Raw output is under `.work/claude-hooks-20261010/` in the
+  development checkout.
+- **Applied to:** [workspace first use](../skills/research-task/references/workspace.md#host-first-use),
+  [initialization](../src/rctl/initialize.py), [diagnostics](../src/rctl/maintenance.py)
+  and the [hook adapter](../src/rctl/hooks/codex.py).
+
+**Retained:** project hooks live in `.claude/settings.json` or
+`.claude/settings.local.json`; SessionStart and UserPromptSubmit accept
+`hookSpecificOutput.additionalContext` (capped at 10,000 characters, with factual
+rather than imperative text recommended); settings-file hooks wait for the folder's
+workspace trust dialog in interactive sessions, while `-p` treats the folder as
+trusted; `/hooks` is read-only; `disableAllHooks` turns all hooks off. Project skills
+load only from `.claude/skills/<name>/SKILL.md`. `AGENTS.md` is read when no
+`CLAUDE.md` exists in the working directory or above it.
+
+**Adapted:** share the existing adapter rather than add a second one, install a
+skill copy rather than a symlink so doctor inspects it like the primary copy, and
+mirror the Codex defaults and opt-out. Trust instructions name the workspace trust
+dialog instead of Codex's per-definition review. This establishes configuration, not
+observed delivery or any research-quality effect.
+
 ## Codex first-use omission, 10 October 2026
 
 - **Sources:** the user's LEO first-use retrospective on 10 October 2026 and
@@ -17,7 +47,7 @@ sources are used.
   `smart-search fetch https://developers.openai.com/codex/hooks/ --format json`;
   Tavily succeeded with no fallback or provider notices. Raw output and extracted
   text are under `.work/hook-onboarding-20261010/` in the development checkout.
-- **Applied to:** [workspace first use](../skills/research-task/references/workspace.md#codex-first-use),
+- **Applied to:** [workspace first use](../skills/research-task/references/workspace.md#host-first-use),
   [task-skill routing](../skills/research-task/SKILL.md),
   [initialization](../src/rctl/initialize.py), and [diagnostics](../src/rctl/maintenance.py).
 

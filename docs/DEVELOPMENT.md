@@ -1,5 +1,59 @@
 # Development Plan
 
+## Claude Code host support, 10 October 2026
+
+Starting agreement: after the Codex first-use repair, the user reported that hooks
+still did not take effect and asked whether Claude Code was fixed. It was not:
+rctl had no Claude Code integration (a first-release [non-goal](PRD.md#non-goals)).
+LEO's Claude Code session of 10 October fired only an unrelated SessionStart hook,
+and its skill listing did not include `research-task`, because Claude Code loads
+project skills only from `.claude/skills/`, not `.agents/skills/`.
+
+Scope: source behavior, packaged workspace guidance and documentation, with
+disposable fixture and installed-wheel checks. Add `rctl hook claude` on the shared
+adapter; make `init` prepare `.claude/settings.json` handlers, `.rctl/claude/README.md`
+and a `.claude/skills/research-task/` copy by default, with `--no-claude`; make
+`doctor` inspect both project settings files and the skill copy by default; let
+`update export --claude` write merge fragments. Report configuration separately from
+workspace trust and observed delivery. This change does not deploy a package,
+modify LEO, change user-level Claude Code settings or run a real host session.
+
+Acceptance selected: A-21/A-23 (default Claude Code preparation, opt-out,
+preservation and packaged files), A-28/A-29 (diagnosis of missing, duplicate,
+customized and disabled handlers and the missing skill copy; candidate export
+without unrelated settings) and A-13 (terminal-only operation). Decisive regressions
+cover the observed omission, an existing settings file with unrelated permissions and
+hooks, and the shared adapter's output for both hosts.
+
+Local validation on macOS 26.6.2 / Python 3.13.2:
+
+- `uv run --locked pytest -q`: **371 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed; 388 local links,
+  100 JSON files, four schemas, 22 requirements and 43 acceptance cases.
+- `git diff --check`: passed.
+- `uv build --out-dir .work/claude-hooks-20261010/dist`: sdist and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/claude-hooks-20261010/dist/rctl-0.6.1-py3-none-any.whl`:
+  passed with 37 CLI calls, including default Claude Code preparation, the skill
+  copy, inspection and `update export --codex --claude`; output in
+  `.work/claude-hooks-20261010/wheel-smoke.log`.
+- Real host probe, Claude Code 2.1.296: a disposable scratch project initialized with
+  `rctl init --no-codex` and a marker Goal, then
+  `RCTL_HOOK_LOG=receipts.jsonl claude -p PROMPT` asking for the context's goal
+  sentence and whether `research-task` is an available skill, without tools. Both
+  receipts carry `host: claude` (SessionStart `startup` and UserPromptSubmit); the
+  transcript shows `hook_additional_context` for both events, a skill listing with
+  `research-task` and no tool use; the answer quoted the marker Goal and said yes.
+  Evidence is in `.work/claude-hooks-20261010/host-probe/`.
+
+End review: the omission is fixed in source. Default initialization now gives
+Claude Code both reminders and a loadable skill, and default diagnosis reports their
+absence. The real probe establishes model-visible delivery in a `-p` session, which
+treats the folder as trusted; the interactive workspace-trust path, resume and
+compaction were not observed. Deployment remains separate: installed global rctl is
+still 0.6.1, and LEO has no `.claude/` files until `rctl init` runs there with a
+deployed build. See [Limitations](READINESS.md#limitations).
+
 ## Codex first-use repair, 10 October 2026
 
 Starting agreement: the user found that LEO had used rctl without project hooks

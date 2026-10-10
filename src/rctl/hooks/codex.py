@@ -1,4 +1,7 @@
-"""Codex SessionStart and UserPromptSubmit adapter."""
+"""SessionStart and UserPromptSubmit adapter for Codex and Claude Code.
+
+Both hosts send the same event fields and accept the same additionalContext output.
+"""
 
 import json
 import os
@@ -12,9 +15,9 @@ from ..records import now, project_root
 BUDGETS = {"SessionStart": 8000, "UserPromptSubmit": 2000}
 
 
-def handle(payload, root_argument=None):
+def handle(payload, root_argument=None, host="codex"):
     if not isinstance(payload, dict):
-        raise invalid("Codex hook input must be a JSON object.")
+        raise invalid("Hook input must be a JSON object.")
     event = payload.get("hook_event_name")
     if event not in BUDGETS:
         return {}
@@ -45,6 +48,7 @@ def handle(payload, root_argument=None):
                 stream.write(
                     json.dumps(
                         {
+                            "host": host,
                             "event": event,
                             "source": payload.get("source"),
                             "session_id": payload.get("session_id"),
@@ -61,9 +65,9 @@ def handle(payload, root_argument=None):
     return {"hookSpecificOutput": {"hookEventName": event, "additionalContext": text}}
 
 
-def main(root_argument=None):
+def main(root_argument=None, host="codex"):
     try:
-        response = handle(json.load(sys.stdin), root_argument)
+        response = handle(json.load(sys.stdin), root_argument, host)
     except (ValueError, RctlError) as error:
         print(f"rctl hook: invalid event input: {error}", file=sys.stderr)
         response = {}

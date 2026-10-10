@@ -18,7 +18,7 @@ from .documents import (
     validate_schema,
 )
 from .initialize import vault_path
-from .integration import codex_hooks
+from .integration import claude_hooks, codex_hooks
 from .records import state_error
 
 
@@ -26,10 +26,14 @@ def json_text(value):
     return json.dumps(value, indent=2, ensure_ascii=False) + "\n"
 
 
-def inspect_installation(root, codex=False):
+def inspect_installation(root, codex=False, claude=False):
     findings, diffs = [], {}
+    skills = [".agents/skills/research-task"]
+    if claude:
+        skills.append(".claude/skills/research-task")
     candidates = {
-        f".agents/skills/research-task/{name}": value
+        f"{skill}/{name}": value
+        for skill in skills
         for name, value in resource_tree("skills/research-task").items()
     }
 
@@ -101,29 +105,84 @@ def inspect_installation(root, codex=False):
                     "Compare the candidate and preserve intentional local changes.",
                 )
         difference(name, actual, expected)
-    try:
-        skill = local_path(root, ".agents/skills/research-task")
-        if skill.is_dir():
-            for path in sorted(skill.rglob("*")):
-                if path.name == ".DS_Store":
-                    continue
-                name = (
-                    ".agents/skills/research-task/" + path.relative_to(skill).as_posix()
+    for installed in skills:
+        try:
+            skill = local_path(root, installed)
+            if skill.is_dir():
+                for path in sorted(skill.rglob("*")):
+                    if path.name == ".DS_Store":
+                        continue
+                    name = f"{installed}/{path.relative_to(skill).as_posix()}"
+                    if (path.is_symlink() or path.is_file()) and name not in candidates:
+                        finding(
+                            name,
+                            "extra",
+                            "Local-only skill asset; retained.",
+                            "Keep or reconcile this local asset explicitly.",
+                        )
+        except RctlError as error:
+            finding(
+                installed,
+                "unavailable",
+                str(error),
+                "Inspect the skill directory.",
+            )
+
+    def collect(name, hooks, observed, host):
+        if not isinstance(hooks, dict):
+            raise ValueError("Expected a hooks object/table.")
+        for event, groups in hooks.items():
+            if not isinstance(groups, list):
+                raise ValueError(f"Expected a handler-group array for {event}.")
+            for group in groups:
+                if not isinstance(group, dict) or not isinstance(
+                    group.get("hooks"), list
+                ):
+                    raise ValueError(f"Invalid handler group for {event}.")
+                for handler in group["hooks"]:
+                    if not isinstance(handler, dict):
+                        raise ValueError(f"Invalid command handler for {event}.")
+                    command = handler.get("command")
+                    if not isinstance(command, str):
+                        if handler.get("type") in {"prompt", "agent", "http", "mcp_tool"}:
+                            continue
+                        raise ValueError(f"Invalid command handler for {event}.")
+                    if "rctl" not in command:
+                        continue
+                    projection = {"matcher": group.get("matcher"), "handler": handler}
+                    if event in observed:
+                        observed[event].append(projection)
+                    else:
+                        finding(
+                            f"{name}:{event}",
+                            "unexpected",
+                            "rctl command configured for an unsupported event.",
+                            "Review and remove the unintended rctl handler.",
+                        )
+                    inspect_command(root, name, event, group, handler, finding, host)
+
+    def count(host, observed, expected_hooks):
+        expected_projection = {}
+        for event in observed:
+            if expected_hooks is not None:
+                groups = expected_hooks["hooks"][event]
+                expected_projection[event] = [
+                    {"matcher": None, "handler": groups[0]["hooks"][0]}
+                ]
+            total = len(observed[event])
+            if total != 1:
+                finding(
+                    f"{host}:{event}",
+                    "missing" if total == 0 else "duplicate",
+                    f"Found {total} rctl handlers across project hook sources; expected one.",
+                    "Merge exactly one reviewed rctl handler for this event.",
                 )
-                if (path.is_symlink() or path.is_file()) and name not in candidates:
-                    finding(
-                        name,
-                        "extra",
-                        "Local-only skill asset; retained.",
-                        "Keep or reconcile this local asset explicitly.",
-                    )
-    except RctlError as error:
-        finding(
-            ".agents/skills/research-task",
-            "unavailable",
-            str(error),
-            "Inspect the skill directory.",
-        )
+        if expected_hooks is not None:
+            difference(
+                f"{host}-handlers.json",
+                json_text(observed),
+                json_text(expected_projection),
+            )
 
     if codex:
         try:
@@ -156,45 +215,7 @@ def inspect_installation(root, codex=False):
                     raise ValueError("Expected an object/table.")
                 if name.endswith("toml"):
                     config = content
-                hooks = content.get("hooks", {})
-                if not isinstance(hooks, dict):
-                    raise ValueError("Expected a hooks object/table.")
-                for event, groups in hooks.items():
-                    if not isinstance(groups, list):
-                        raise ValueError(f"Expected a handler-group array for {event}.")
-                    for group in groups:
-                        if not isinstance(group, dict) or not isinstance(
-                            group.get("hooks"), list
-                        ):
-                            raise ValueError(f"Invalid handler group for {event}.")
-                        for handler in group["hooks"]:
-                            if not isinstance(handler, dict):
-                                raise ValueError(
-                                    f"Invalid command handler for {event}."
-                                )
-                            command = handler.get("command")
-                            if not isinstance(command, str):
-                                if handler.get("type") in {"prompt", "agent"}:
-                                    continue
-                                raise ValueError(
-                                    f"Invalid command handler for {event}."
-                                )
-                            if "rctl" not in command:
-                                continue
-                            projection = {
-                                "matcher": group.get("matcher"),
-                                "handler": handler,
-                            }
-                            if event in observed:
-                                observed[event].append(projection)
-                            else:
-                                finding(
-                                    f"{name}:{event}",
-                                    "unexpected",
-                                    "rctl command configured for an unsupported event.",
-                                    "Review and remove the unintended rctl handler.",
-                                )
-                            inspect_command(root, name, event, group, handler, finding)
+                collect(name, content.get("hooks", {}), observed, "codex")
             except (RctlError, ValueError) as error:
                 finding(
                     name,
@@ -238,38 +259,67 @@ def inspect_installation(root, codex=False):
                 "Expected a boolean setting.",
                 "Use a boolean hooks feature setting.",
             )
-        expected_projection = {}
-        for event in observed:
-            if expected_hooks is not None:
-                groups = expected_hooks["hooks"][event]
-                expected_projection[event] = [
-                    {"matcher": None, "handler": groups[0]["hooks"][0]}
-                ]
-            count = len(observed[event])
-            if count != 1:
-                finding(
-                    f"codex:{event}",
-                    "missing" if count == 0 else "duplicate",
-                    f"Found {count} rctl handlers across project hook sources; expected one.",
-                    "Merge exactly one reviewed rctl handler for this event.",
-                )
-        if expected_hooks is not None:
-            difference(
-                "codex-handlers.json",
-                json_text(observed),
-                json_text(expected_projection),
-            )
+        count("codex", observed, expected_hooks)
         difference(
             "codex-feature.json",
             json_text({"hooks": enabled}),
             json_text({"hooks": True}),
         )
 
+    if claude:
+        try:
+            expected_hooks, _ = claude_hooks(root)
+        except RctlError as error:
+            expected_hooks = None
+            finding(
+                "claude:entrypoint",
+                "unavailable",
+                error.message,
+                "Install rctl in this Python environment, then inspect and export again.",
+            )
+        else:
+            candidates[".claude/settings.json"] = json_text(expected_hooks)
+        observed = {event: [] for event in ("SessionStart", "UserPromptSubmit")}
+        # Both project settings files are hook sources; user settings are not read.
+        for name in (".claude/settings.json", ".claude/settings.local.json"):
+            try:
+                path = local_path(root, name)
+                if not path.exists():
+                    continue
+                content = json.loads(read_text(path))
+                if not isinstance(content, dict):
+                    raise ValueError("Expected an object.")
+                switch = content.get("disableAllHooks")
+                if switch is True:
+                    finding(
+                        f"{name}:disableAllHooks",
+                        "disabled",
+                        "Project settings disable all hooks, including rctl reminders.",
+                        "Remove the setting when reminders are wanted.",
+                    )
+                elif switch not in (None, False):
+                    finding(
+                        f"{name}:disableAllHooks",
+                        "invalid",
+                        "Expected a boolean setting.",
+                        "Use a boolean disableAllHooks setting.",
+                    )
+                collect(name, content.get("hooks", {}), observed, "claude")
+            except (RctlError, ValueError) as error:
+                finding(
+                    name,
+                    "invalid",
+                    str(error),
+                    "Review the project settings without replacing unrelated settings.",
+                )
+        count("claude", observed, expected_hooks)
+
     return (
         {
             "root": str(root),
             "rctl_version": __version__,
             "codex_inspected": codex,
+            "claude_inspected": claude,
             "review_needed": any(
                 item["status"] not in {"current", "inherited"} for item in findings
             ),
@@ -281,7 +331,7 @@ def inspect_installation(root, codex=False):
     )
 
 
-def inspect_command(root, source, event, group, handler, finding):
+def inspect_command(root, source, event, group, handler, finding, host="codex"):
     name = f"{source}:{event}"
     try:
         argv = shlex.split(handler["command"])
@@ -291,7 +341,7 @@ def inspect_command(root, source, event, group, handler, finding):
         len(argv) != 5
         or Path(argv[0]).name != "rctl"
         or argv[1] != "--root"
-        or argv[3:] != ["hook", "codex"]
+        or argv[3:] != ["hook", host]
     ):
         finding(
             name,
@@ -315,14 +365,15 @@ def inspect_command(root, source, event, group, handler, finding):
         problems.append("command root differs from the selected project")
     if handler.get("type") != "command":
         problems.append("handler is not a command")
-    if set(handler) - {"type", "command", "timeout", "additionalContextLimit"}:
+    # Claude Code has no per-handler context limit; the adapter bounds its output.
+    limit = {"codex": {"additionalContextLimit"}, "claude": set()}[host]
+    if set(handler) - {"type", "command", "timeout"} - limit:
         problems.append("handler includes customized options; compare the candidate")
     if group.get("matcher") not in (None, ""):
         problems.append("custom matcher may limit delivery")
     expected_budget = {"SessionStart": 8000, "UserPromptSubmit": 2000}.get(event)
-    if (
-        handler.get("timeout") != 10
-        or handler.get("additionalContextLimit") != expected_budget
+    if handler.get("timeout") != 10 or (
+        limit and handler.get("additionalContextLimit") != expected_budget
     ):
         problems.append("timeout/context budget differs from the packaged handler")
     finding(
@@ -337,21 +388,24 @@ def inspect_command(root, source, event, group, handler, finding):
     )
 
 
-def doctor(root, codex=True):
-    inspection = inspect_installation(root, codex)[0]
-    inspection["codex_trust"] = "not_inspected"
-    inspection["codex_delivery"] = "not_inspected"
+def doctor(root, codex=True, claude=True):
+    inspection = inspect_installation(root, codex, claude)[0]
+    for host in ("codex", "claude"):
+        inspection[f"{host}_trust"] = "not_inspected"
+        inspection[f"{host}_delivery"] = "not_inspected"
     return inspection, []
 
 
-def export_update(root, destination, codex=False):
+def export_update(root, destination, codex=False, claude=False):
     path = local_path(root, destination)
     if path.exists() or (root / destination).is_symlink():
         raise state_error("Update destination already exists; choose a new directory.")
-    inspection, candidates, diffs, binding = inspect_installation(root, codex)
+    inspection, candidates, diffs, binding = inspect_installation(root, codex, claude)
+    # Diagnostics can finish without an entrypoint; usable host exports cannot.
     if codex and ".codex/hooks.json" not in candidates:
-        # Diagnostics can finish without an entrypoint; usable host exports cannot.
         codex_hooks(root)
+    if claude and ".claude/settings.json" not in candidates:
+        claude_hooks(root)
     protected = {"tasks", "research", ".rctl", ".agents", ".codex", ".claude", ".git"}
     if binding is not None:
         if binding["vault"]:
@@ -381,9 +435,15 @@ and merge the hooks feature setting into the existing features table. Do not rep
 whole project configurations or add duplicate handlers. The host diffs show only rctl
 handlers and the hooks feature; unrelated configuration is deliberately absent.
 
+When included, `candidates/.claude/settings.json` is also a MERGE FRAGMENT: merge the
+two rctl handlers into the `hooks` object of `.claude/settings.json`, keeping one per
+event across that file and `.claude/settings.local.json`, and compare
+`candidates/.claude/skills/research-task/` with the installed Claude Code skill copy.
+
 Candidates name the current project and installed executable. After moving either,
 generate candidates again. Review changed hooks through Codex `/hooks` when applying
-them; this export grants no trust and proves no host delivery. Static inspection does
+them; Claude Code runs project hooks after its workspace trust dialog. This export
+grants no trust and proves no host delivery. Static inspection does
 not read global configuration or launch a host. No apply command is provided.
 """
     path.mkdir(parents=True, exist_ok=False)

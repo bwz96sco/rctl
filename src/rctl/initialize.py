@@ -3,12 +3,12 @@
 import json
 
 from .documents import invalid, local_path, read_text, resource_tree, validate_schema
-from .integration import codex_hooks
+from .integration import claude_hooks, codex_hooks
 
 
 def vault_path(root, value):
     path = local_path(root, value)
-    reserved = {"tasks", "research", ".rctl", ".agents", ".codex", ".git"}
+    reserved = {"tasks", "research", ".rctl", ".agents", ".codex", ".claude", ".git"}
     control_paths = [(root / name).resolve() for name in reserved]
     if path == root or any(
         path.is_relative_to(control) or control.is_relative_to(path)
@@ -18,7 +18,7 @@ def vault_path(root, value):
     return path
 
 
-def initialize(root, vault=None, codex=True):
+def initialize(root, vault=None, codex=True, claude=True):
     manifest = local_path(root, ".rctl/project.json")
     binding = {"schema_version": 1, "vault": None}
     if manifest.is_file():
@@ -109,6 +109,54 @@ skill if no longer wanted. Preserve unrelated host settings and task records.
             "the hooks through /hooks, then confirm reminders in a fresh session. "
             "Read .rctl/codex/README.md."
         )
+    if claude:
+        hooks, entrypoint = claude_hooks(root)
+        files[".claude/settings.json"] = json.dumps(hooks, indent=2) + "\n"
+        # Claude Code loads project skills only from .claude/skills/.
+        files.update(
+            {
+                f".claude/skills/research-task/{name}": content
+                for name, content in resource_tree("skills/research-task").items()
+            }
+        )
+        files[".rctl/claude/README.md"] = f"""# Project Claude Code reminders
+
+Inspect `.claude/settings.json`, then launch Claude Code from this project. Project guidance loads without a task; select one when task context is needed:
+
+```sh
+RCTL_TASK_PATH=tasks/your-task claude
+```
+
+Claude Code runs project settings hooks only after the operator accepts the workspace
+trust dialog for this folder; `/hooks` only lists configured handlers. Non-interactive
+`claude -p` sessions treat the folder as trusted. Run `rctl doctor` to inspect the
+project configuration. After trusting the folder, start a fresh project session and
+submit a prompt. Confirm that the SessionStart and UserPromptSubmit reminders are
+delivered, using the session transcript's hook entries or optional `RCTL_HOOK_LOG`
+receipts together with the fresh session identifying the injected goal or
+selected-task guidance before reading its source files. Receipts alone establish
+invocation. Report setup as pending until this host confirmation; a static doctor
+check or direct hook invocation is not delivery evidence.
+`rctl init` does not trust the folder or start Claude Code. Existing configuration is
+preserved; merge the two rctl hook handlers manually if `.claude/settings.json` already
+existed, keeping one rctl handler per event across `.claude/settings.json` and
+`.claude/settings.local.json`. `"disableAllHooks": true` suppresses the reminders.
+
+The project-local research-task skill is also installed at
+`.claude/skills/research-task/`, because Claude Code does not load `.agents/skills/`.
+The hook uses `{entrypoint}` and fixes project root `{root}`. After moving the project
+or Python environment, review and update the hook command; rerunning init preserves it.
+Hook reminders never execute checks or confer scientific acceptance.
+See https://code.claude.com/docs/en/hooks for host configuration and workspace trust.
+
+To remove this integration, remove its two handlers and `.claude/skills/research-task/`
+if no longer wanted. Preserve unrelated host settings and task records.
+"""
+        warnings.append(
+            "Claude Code setup is pending host confirmation: run rctl doctor, accept "
+            "the workspace trust dialog, then confirm reminders in a fresh session. "
+            "Read .rctl/claude/README.md."
+        )
 
     # Inspect every destination and ancestor before the first write.
     targets = {}
@@ -136,7 +184,7 @@ skill if no longer wanted. Preserve unrelated host settings and task records.
         name = path.relative_to(root).as_posix()
         if path.exists():
             preserved.append(name)
-            if name in {".codex/hooks.json", ".codex/config.toml"}:
+            if name in {".codex/hooks.json", ".codex/config.toml", ".claude/settings.json"}:
                 warnings.append(
                     f"Preserved {name}; review existing configuration before use."
                 )
@@ -144,15 +192,24 @@ skill if no longer wanted. Preserve unrelated host settings and task records.
             with path.open("x", encoding="utf-8") as stream:
                 stream.write(content)
             created.append(name)
+    pending = [
+        step
+        for requested, step in (
+            (codex, "review/trust the hooks through Codex /hooks"),
+            (claude, "accept the Claude Code workspace trust dialog"),
+        )
+        if requested
+    ]
     return {
         "root": str(root),
         "vault": binding["vault"],
         "codex_requested": codex,
+        "claude_requested": claude,
         "next_action": (
-            "Run rctl doctor; review/trust the hooks through Codex /hooks and "
-            "confirm both event reminders in a fresh project session."
-            if codex
-            else "Codex setup skipped; use rctl init to prepare it when needed."
+            f"Run rctl doctor; {' and '.join(pending)}, then confirm both event "
+            "reminders in a fresh project session of each host."
+            if pending
+            else "Host setup skipped; use rctl init to prepare it when needed."
         ),
         "created": created,
         "preserved": preserved,

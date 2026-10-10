@@ -288,6 +288,113 @@ def test_default_doctor_detects_hooks_omitted_on_initial_setup(cli, project):
     assert not cli("doctor")["data"]["review_needed"]
 
 
+@pytest.mark.parametrize(
+    "damage,fragment",
+    [
+        ("missing-skill", "unavailable"),
+        ("json", "invalid"),
+        ("root", "command root"),
+        ("codex-command", "unrecognized"),
+        ("context-limit", "customized options"),
+        ("local-duplicate", "duplicate"),
+        ("missing-hook", "missing"),
+        ("disabled", "disabled"),
+    ],
+)
+def test_doctor_claude_code_failures(cli, project, damage, fragment):
+    cli("init")
+    settings = project / ".claude/settings.json"
+    hooks = json.loads(settings.read_text())
+    handler = hooks["hooks"]["SessionStart"][0]["hooks"][0]
+    local = project / ".claude/settings.local.json"
+    if damage == "missing-skill":
+        (project / ".claude/skills/research-task/SKILL.md").unlink()
+    elif damage == "root":
+        handler["command"] = handler["command"].replace(
+            str(project), str(project.parent)
+        )
+    elif damage == "codex-command":
+        handler["command"] = handler["command"].replace("hook claude", "hook codex")
+    elif damage == "context-limit":
+        handler["additionalContextLimit"] = 8000
+    elif damage == "local-duplicate":
+        local.write_text(json.dumps({"hooks": {"SessionStart": hooks["hooks"]["SessionStart"]}}))
+    elif damage == "missing-hook":
+        del hooks["hooks"]["SessionStart"]
+    elif damage == "disabled":
+        local.write_text('{"disableAllHooks": true}')
+    settings.write_text(json.dumps(hooks))
+    if damage == "json":
+        settings.write_text("{")
+    before = snapshot(project)
+    data = cli("doctor")["data"]
+    assert data["review_needed"]
+    assert any(fragment in f["status"] + f["message"] for f in data["findings"])
+    assert not cli("doctor", "--no-claude")["data"]["review_needed"]
+    assert snapshot(project) == before
+
+
+def test_existing_claude_settings_are_preserved_and_merged_from_candidates(cli, project):
+    settings = project / ".claude/settings.json"
+    settings.parent.mkdir()
+    settings.write_text(
+        json.dumps(
+            {
+                "permissions": {"allow": ["Bash(ls)"]},
+                "hooks": {
+                    "Stop": [
+                        {
+                            "hooks": [
+                                {"type": "command", "command": "echo unrelated-preserved"}
+                            ]
+                        }
+                    ]
+                },
+            }
+        )
+    )
+    original = settings.read_text()
+    response = cli("init")
+    assert ".claude/settings.json" in response["data"]["preserved"]
+    assert settings.read_text() == original
+    data = cli("doctor")["data"]
+    missing = {f["path"] for f in data["findings"] if f["status"] == "missing"}
+    assert missing == {"claude:SessionStart", "claude:UserPromptSubmit"}
+    cli("update", "export", "candidate", "--claude")
+    bundle = project / "candidate"
+    fragment = json.loads((bundle / "candidates/.claude/settings.json").read_text())
+    assert set(fragment["hooks"]) == {"SessionStart", "UserPromptSubmit"}
+    assert (bundle / "candidates/.claude/skills/research-task/SKILL.md").is_file()
+    assert ".claude/settings.json` is also a MERGE FRAGMENT" in (
+        bundle / "README.md"
+    ).read_text()
+    for diff in (bundle / "diffs").rglob("*.diff"):
+        assert "unrelated-preserved" not in diff.read_text()
+        assert "Bash(ls)" not in diff.read_text()
+    merged = json.loads(original)
+    merged["hooks"].update(fragment["hooks"])
+    settings.write_text(json.dumps(merged))
+    assert not cli("doctor")["data"]["review_needed"]
+
+
+def test_default_doctor_detects_claude_code_setup_omitted(cli, project):
+    cli("init", "--no-claude")
+    before = snapshot(project)
+    data = cli("doctor")["data"]
+    assert data["claude_inspected"] and data["review_needed"]
+    missing = {f["path"] for f in data["findings"] if f["status"] == "missing"}
+    assert missing == {"claude:SessionStart", "claude:UserPromptSubmit"}
+    assert any(
+        f["path"] == ".claude/skills/research-task/SKILL.md"
+        and f["status"] == "unavailable"
+        for f in data["findings"]
+    )
+    assert data["claude_trust"] == data["claude_delivery"] == "not_inspected"
+    assert snapshot(project) == before
+    cli("init")
+    assert not cli("doctor")["data"]["review_needed"]
+
+
 def test_unavailable_binding_and_explicit_no_host_inspection(cli, project):
     cli("init", "--vault", "notes", "--no-codex")
     (project / ".codex").mkdir()
@@ -302,12 +409,13 @@ def test_unavailable_binding_and_explicit_no_host_inspection(cli, project):
 
 def test_doctor_does_not_execute_hooks(cli, project):
     cli("init", "--codex")
-    hooks = project / ".codex/hooks.json"
-    data = json.loads(hooks.read_text())
-    data["hooks"]["SessionStart"][0]["hooks"][0]["command"] = (
-        "rctl --version; touch SHOULD_NOT_EXIST"
-    )
-    hooks.write_text(json.dumps(data))
+    for name in (".codex/hooks.json", ".claude/settings.json"):
+        hooks = project / name
+        data = json.loads(hooks.read_text())
+        data["hooks"]["SessionStart"][0]["hooks"][0]["command"] = (
+            "rctl --version; touch SHOULD_NOT_EXIST"
+        )
+        hooks.write_text(json.dumps(data))
     assert doctor(project, True)[0]["review_needed"]
-    export_update(project, "candidate", True)
+    export_update(project, "candidate", True, True)
     assert not (project / "SHOULD_NOT_EXIST").exists()
