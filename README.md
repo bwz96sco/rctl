@@ -13,6 +13,14 @@ task skill, immutable task snapshots, and one concise reminder layout. Historica
 milestone and host evidence is in the [release-evidence index](docs/RELEASE-EVIDENCE.md).
 No live project or installed rctl CLI has been upgraded by this follow-up.
 
+The current checkout also contains an **unreleased goal-review increment**:
+when PROGRAM has a completed Goal, new contracts/amendments must declare their
+goal contribution and a required structured goal-impact review. Status and
+reminders show the reviewed investment decision separately from local pass.
+See [behavior](docs/SPEC.md#goal-contribution-and-review-unreleased-source-increment)
+and [source development](docs/DEVELOPMENT.md#goal-review-controller-increment-10-october-2026).
+The installed v0.5.1 release does not include this enforcement.
+
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
 separate and preserves task-only project initialization.

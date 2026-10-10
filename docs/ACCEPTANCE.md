@@ -67,6 +67,14 @@ The following cases extend the original 20-case v0.1 release matrix.
 | A-39 | R-20, R-05, R-07 | A current verified negative exposes a task-scoped assessment with its verification/revision/currentness and explicit non-claim boundary. Legacy/no-report tasks return null alignment/assessment; a missing accepted source warns without changing phase or closure. Assessment remains distinct from the separately exposed verification verdict. | A local assessment is detached from its question, conflated with check success, or historical meaning changes; fix scoped projection and compatibility. |
 | A-40 | R-20, R-12, R-14 | Packaged template/skill guidance describes alignment and evidence review; SessionStart and UserPromptSubmit fixtures deliver the same bounded content through the unchanged hook shape. | Source behavior works only in checkout or bypasses host delivery; fix packaging or shared renderer use. |
 
+## Goal-review increment (source, not released)
+
+| Case | Requirements | Scenario and observable result | Failure detected; response |
+|---|---|---|---|
+| A-41 | R-21, R-01, R-03 | With a completed PROGRAM Goal, contract check/begin/amend reject missing or incomplete goal contribution, a nonexistent/command goal criterion, and missing goal/result/primary-evidence citations. New drafts scaffold the declaration and required review. Standalone work and retained pre-increment contracts remain readable. | A task silently omits final-goal accountability or invalidates older agreements; repair entry enforcement or compatibility. |
+| A-42 | R-21, R-05, R-06, R-07 | Actual arithmetic checks pass while an omitted goal review leaves verification unknown and blocks closure. Supplied reviews with missing impact fields reject before checks. A complete evidence-grounded negative with a stop decision passes an honest-assessment requirement and closes. A changed parent brief prevents closure. | Local checks bypass the goal judgment, or negative findings are forced into a win; repair review gating and evidence applicability. |
+| A-43 | R-22, R-09, R-20 | Status and both reminder budgets expose the accepted contribution, latest reviewed claim consequence and investment decision, including a local pass with a stop. Amendments cannot display an earlier revision's goal review as current; old records return null without invented judgments. | Goal consequence disappears at recovery or is conflated with local completion; repair retained-source projection and rendering. |
+
 ## Test organization
 
 Pure tests cover parsing, lifecycle, verdict aggregation, and rendering. Integration tests use actual subprocess checks and real temporary files. Do not use only mocked execution for A-04/A-05/A-14/A-15. A-18/A-20 require a real host/task; they cannot be satisfied by scripted payload injection or the old pilot alone.

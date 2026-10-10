@@ -160,6 +160,8 @@ def review_check(task, criterion, entry):
             for key in ("verdict", "rationale", "evidence_refs", "reviewer")
         }
     )
+    if "goal_impact" in entry:
+        check["goal_impact"] = entry["goal_impact"]
     issues = []
     if (
         criterion["method"]["reviewer"] == "operator"

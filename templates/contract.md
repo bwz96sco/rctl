@@ -3,6 +3,13 @@ schema_version: 1
 task_id: replace-task-id
 title: "<Bounded question or deliverable>"
 kind: exploration
+# task new enables the following block when research/PROGRAM.md has a completed Goal.
+# Replace "<Primary task evidence file>" in the generated goal criterion.
+# goal_contribution:
+#   obligation: "<The project goal obligation addressed by this task>"
+#   expected_output: "<The decisive output for that obligation>"
+#   decision_use: "<How favorable, unfavorable or inconclusive findings change the next investment>"
+#   review_criterion: AC-02
 criteria:
   - id: AC-01
     requirement: "<What evidence must establish before this task can close>"
@@ -33,6 +40,13 @@ specify the choice this task will inform.
 For comparisons, distinguish complete-method benefit from conditional ablation or
 diagnosis; name fixed control versions, generated/shared information and the primary
 endpoint.
+
+For paper-directed work, state the publication purpose: the brief's named claim or
+evidence obligation, the decisive output, and how favorable, unfavorable or
+inconclusive findings change the next investment. An enabling task names its
+downstream experiment and observable handoff. Include Question alignment and a
+required review criterion citing the brief, result and primary evidence to judge
+this consequence. Early selection/calibration tasks may leave the claim provisional.
 
 ## Constraints
 

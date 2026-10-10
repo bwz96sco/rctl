@@ -7,6 +7,92 @@ global tool environment. The authorized OR task-skill and guidance merge is also
 complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
 currentness and additional reminder coverage remain separate runtime work.
 
+## Goal-review controller increment, 10 October 2026
+
+Starting agreement: the user asked how to make final-goal checking unavoidable,
+after inspecting the gap between publication-purpose guidance and core validation.
+The useful output is a source implementation that prevents missing goal judgments
+at entry/closeout and exposes their investment consequence at recovery. This
+enables accountable paper-directed task decisions; it does not validate a LEO
+method, novel contribution, paper viability or future judgment quality.
+
+Bounded scope: use existing PROGRAM Goal, contract criteria, review inputs and
+snapshot/reminder projections. No new goal database, project flag, human approval,
+task scheduler, global installation, live-task migration, release or commit.
+Retained old agreements stay readable. New contracts/amendments in a project
+with a completed Goal require contribution and its review. Structured impact is
+retained separately from local pass; negative decision tasks may close.
+
+Acceptance selected: new R-21/R-22 and A-41–A-43, with compatibility coverage from
+M1/M2 (contract, record, actual checks and closure), M7/M8 (bounded retained-source
+reminders) and packaged task guidance. Source tests must observe omitted-review
+rejection, honest negative closure, evidence changes and revision separation.
+Field completeness is mechanical; evidence support remains a reviewer judgment.
+
+Validation on local macOS/Python 3.13.2:
+
+- `uv run --locked pytest -q`: **337 passed, 49 subtests passed** after repairs.
+  The first targeted run exposed mis-indented reviewer YAML and a scaffold
+  comment leaking into enabled frontmatter; repaired both. Older reminder tests
+  now accept their legacy agreement before loading later PROGRAM guidance.
+  Fully authored generated drafts also exposed commented placeholder leakage;
+  the generator now removes instruction comments and positive cases cover both
+  standalone and goal-linked entry.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed (356 local links,
+  100 JSON files, four schemas, 22 requirements and 43 acceptance cases).
+- Built the candidate wheel in `.work/goal-review-increment/dist/` and checked its
+  isolated package compatibility: **37 CLI invocations passed**. Eight changed
+  code/schema/template/skill files matched the final wheel bytes. The smoke log is
+  `.work/goal-review-increment/wheel-smoke-final.log`.
+- Read-only LEO observation: the installed CLI accepts the current
+  `venue-calibrated-contribution-case` draft; `uv run --locked --project` against
+  this checkout rejects it for missing `goal_contribution`. This confirms the
+  omission guard on the real populated Goal, and the fact that global deployment
+  has not occurred. No LEO task or research decision was changed.
+
+End review: local delivery establishes entry/closeout omission checks and visible
+retained goal decisions, including honest negative closure. For the final applied
+paper objective this is enabling accountability only: target contribution, method
+benefit, backend evidence and publication viability remain unchanged and unproven.
+Next investment is a scoped deployment/versioning and live-draft migration, then
+the already bounded contribution case; these source checks do not authorize a
+research campaign or establish future semantic-review quality. Source-only delivery
+must not be reported as installed enforcement in LEO.
+
+## Publication-purpose guidance, 10 October 2026
+
+The user requested goal-linked task contracts and end verification for a paper-directed
+project. Update existing contract/result templates and research-task planning,
+task-file and verification guidance: name the publication evidence obligation at
+entry, and review its consequence for the claim or next investment at closeout.
+The numeric criterion example uses existing Question alignment and review methods.
+No schema, controller, hook shape, acceptance-case count or reviewer authentication
+changes are included. Source provenance is in DISTILLED-SOURCES.md.
+
+Relevant compatibility obligations: M1/A-01 (scaffold rejection and accepted contract
+structure), M5/A-21/A-23 (initialization/resource guidance), and M8/A-40 (packaged
+alignment instructions). This documentation-only change uses targeted source/resource
+checks; installed-wheel rollout and new native-host use are not claimed.
+
+Validation completed on 10 October:
+
+- `uv run --locked python scripts/check_docs.py`: pass for repository-owned links,
+  schemas and retained example inputs.
+- Targeted pytest cases for scaffold placeholders, source/resource agreement,
+  packaged alignment guidance, preserved customized initialization, exported
+  workspace references and skill metadata/scripts: **25 passed**.
+- skill-creator's `quick_validate.py`: the source research-task and the inspected
+  LEO-local copy are valid.
+- The LEO calibration task checks both actual draft contracts and newly added
+  cross-project pointers, and retains its source/change evidence under
+  `LEO/runs/publication-goal-workflow-calibration/`.
+
+The first LEO draft used nonnumeric criterion suffixes and was rejected structurally;
+numeric IDs were corrected before begin. This is an authoring correction, not a
+parser defect. The new requirement is semantic review work: these compatibility
+checks do not establish scientific benefit or future resistance to goal drift.
+
 ## Agent-citable paper records, 10 October 2026
 
 At the user's request, research-literature now writes a short record file per paper

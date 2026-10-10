@@ -1,10 +1,11 @@
 """Structural and lifecycle validation for machine-owned records (SPEC §4–7)."""
 
+import json
 from datetime import datetime
 
 from jsonschema import Draft202012Validator
 
-from .documents import parse_contract, parse_result, parse_reviews
+from .documents import parse_contract, parse_result, parse_reviews, resource_text
 
 
 def obj(**fields):
@@ -52,6 +53,9 @@ REVIEW_CHECK = obj(
     **{**CHECK_BASE, "method": {"const": "review"}},
     reviewer={"enum": ["agent", "operator", None]},
 )
+REVIEW_CHECK["properties"]["goal_impact"] = json.loads(
+    resource_text("schemas", "reviews.schema.json")
+)["properties"]["checks"]["items"]["properties"]["goal_impact"]
 OBSERVATION = obj(
     path=TEXT,
     observation={"enum": ["present", "missing", "unreadable"]},
@@ -204,6 +208,7 @@ def validate_record(record, task_id, source):
                 if (
                     check["reviewer"] != entry["reviewer"]
                     or check["evidence_refs"] != entry["evidence_refs"]
+                    or check.get("goal_impact") != entry.get("goal_impact")
                     or (
                         check["verdict"] != "unknown"
                         and check["verdict"] != entry["verdict"]

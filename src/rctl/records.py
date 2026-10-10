@@ -85,10 +85,10 @@ class Task:
     def file(self, name):
         return local_path(self.root, name, self.path)
 
-    def contract(self):
+    def contract(self, *, check_goal=True):
         path = self.file("contract.md")
         text = read_text(path)
-        return text, parse_contract(
+        data = parse_contract(
             text,
             path,
             self.task_id,
@@ -96,6 +96,11 @@ class Task:
             self.path,
             require_alignment_source=True,
         )
+        if check_goal:
+            from .goals import validate_goal_contribution
+
+            validate_goal_contribution(data, self.root, self.path, required=True)
+        return text, data
 
     def read_record(self):
         path = self.file(".rctl/record.json")
@@ -159,6 +164,9 @@ class Task:
             f"title: {json.dumps(title, ensure_ascii=False)}",
         )
         text = text.replace("kind: exploration", f"kind: {kind}")
+        from .goals import scaffold_goal_contribution
+
+        text = scaffold_goal_contribution(text, self.root, self.path)
         self.path.mkdir(parents=True, exist_ok=False)
         self.file("contract.md").write_text(text, encoding="utf-8")
         return {

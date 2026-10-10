@@ -379,6 +379,57 @@ remains a review judgment. The [development record](DEVELOPMENT.md#target-settin
 reports the author walkthrough and compatibility checks; their scope is stated in
 [Readiness](READINESS.md#limitations).
 
+## Publication purpose across contracts and closeout
+
+- **Sources:** the user's 10 October 2026 publication-objective correction; the
+  resulting playbook section at
+  `research-playbook/story-construction.md#publication-objective-and-task-accountability`;
+  LEO's bounded calibration at
+  `LEO/vault/ideas/space-data-centers/publication-goal-calibration-20261010.md`
+  and `LEO/tasks/publication-goal-workflow-calibration/`.
+- **Read:** 2026-10-10.
+- **Applied to:** the [contract](../templates/contract.md) and
+  [result](../templates/result.md) templates, research-task's
+  [planning](../skills/research-task/references/planning.md),
+  [task-file example](../skills/research-task/references/task-files.md#publication-purpose-review)
+  and [verification](../skills/research-task/references/verification.md) guidance.
+
+**Retained:** locally correct research tasks can leave the final paper contribution
+unresolved. Assessing scope alone does not justify the next research investment.
+Published venue examples can calibrate the intended contribution and evidence.
+
+**Adapted:** paper-directed task authoring names the publication purpose, decisive
+output and outcome consequences, using the existing alignment section and a
+required evidence-based review. The closeout distinguishes local delivery from
+paper consequence. An honest negative can close a local task while its paper
+obligation remains unsupported. This changes guidance, not schemas, lifecycle,
+reviewer authentication or automatic scientific judgment. No global rollout is
+claimed by a source edit; the LEO-local skill is updated within this task's scope.
+The [development record](DEVELOPMENT.md#publication-purpose-guidance-10-october-2026)
+states the compatibility checks and their scope.
+
+## Required goal judgments, 10 October 2026
+
+- **Source:** the user's follow-up asking whether rctl really requires end review
+  against the final paper objective, and how to close the omission gap. The prior
+  publication-purpose guidance above used ordinary review criteria and could be
+  omitted by an author.
+- **Adaptation:** a completed existing PROGRAM Goal triggers mandatory contribution
+  and a designated review for newly accepted work. The review carries a scoped
+  claim effect, remaining gap and justified investment decision. Status/reminders
+  retain this consequence separately from command pass and task assessment.
+- **Preserved:** evidence-based semantic judgment, agent/operator attribution,
+  bounded honest negative closure, accepted-contract authority and older records.
+- **Excluded:** an automatic scientific merit score, a new goal ledger, compulsory
+  user approval, automatic next-task creation, or a guarantee of publication.
+- **Implementation reference:** [behavior](SPEC.md#goal-contribution-and-review-unreleased-source-increment)
+  and [development record](DEVELOPMENT.md#goal-review-controller-increment-10-october-2026).
+  JSON Schema object-field behavior was checked through `smart-search search` and
+  `smart-search fetch` against the
+  [official reference](https://json-schema.org/understanding-json-schema/reference/object).
+  Local raw captures: `.work/goal-review-schema-docs.json` and
+  `.work/goal-review-schema-fetch.json` (not portable retained research evidence).
+
 ## Limitations
 
 Local provenance paths beginning with `OR/`, `LEO/` or `research-playbook/` refer

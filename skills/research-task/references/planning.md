@@ -19,6 +19,19 @@ which conditions it preserves, and the source or modeled basis for that mapping.
 Available assets may suggest candidates; justify their relevance before making
 the target claim. Record setting changes and their reasons before dependent work.
 
+For paper-directed projects, read the existing brief's publication goal, provisional
+venue/comparables, contribution hypothesis and evidence obligations. If venue or
+contribution is unresolved, name the bounded selection/calibration decision rather
+than imply an established claim. Every planned research task states its publication
+purpose in Question/Scope: the specific obligation addressed, decisive output and
+what favorable, unfavorable or inconclusive evidence changes. An enabling task
+names the downstream experiment and observable handoff it makes possible.
+Use Question alignment and a required review criterion citing the brief, result
+and primary evidence, as in [Task files](task-files.md#publication-purpose-review).
+The review assesses support for the proposed claim or next investment; merely
+finishing local work or remaining inside scope is insufficient. Venue examples
+calibrate useful contribution and evidence, not acceptance probability.
+
 When that setting is unresolved, substantial scenario formulation can be a bounded
 analysis task. Its deliverable is a justified architecture/workload choice and an
 evaluation route, or the precise unresolved link. Data inspection and small probes

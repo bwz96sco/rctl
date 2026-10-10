@@ -133,6 +133,14 @@ For interrupted work, write a short handoff and use `checkpoint`; no close is ne
 
 ## Contract errors to make actionable
 
+With a completed `research/PROGRAM.md / Goal`, new `contract check`, `begin` and
+`amend` also require `goal_contribution` and its designated review. `task new`
+scaffolds this declaration automatically. See
+[goal-review behavior](SPEC.md#goal-contribution-and-review-unreleased-source-increment).
+A missing goal review leaves verification unknown; an incomplete supplied
+`goal_impact` rejects the input before checks. Status/context expose the planned
+contribution and reviewed investment decision separately from local pass.
+
 - Malformed record: name the failing field/constraint or lifecycle invariant; preserve the record and restore valid history.
 - Evidence changed during verification: name the path and any executed command criteria declaring it. If a checker generates evidence, run generation before verification and amend the frozen command to a read-only check when necessary.
 - Missing criterion method: identify the criterion and accepted method types.

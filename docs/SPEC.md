@@ -88,6 +88,46 @@ owns valid alignment, so no machine record or frontmatter schema migration is in
 
 ## 4. Machine record
 
+### Goal contribution and review (unreleased source increment)
+
+When `research/PROGRAM.md` contains a completed, non-placeholder `## Goal`,
+`contract check`, `begin` and `amend` require contract frontmatter
+`goal_contribution` with four nonempty fields: `obligation`, `expected_output`,
+`decision_use` and `review_criterion`. The first three declare the specific goal
+obligation, decisive output and what favorable/unfavorable/inconclusive evidence
+changes. The last names an existing required review criterion. Its task-relative
+evidence references must include `research/PROGRAM.md`, `result.md` and primary
+task evidence. This is entry completeness and lineage, not scientific adequacy.
+Standalone tasks without a completed project Goal remain supported; explicit
+goal contribution requires that Goal. `task new` scaffolds this declaration and
+an additional review when the Goal is set. The optional Question alignment body
+remains available to describe the narrower governing mechanism.
+
+The designated review entry must contain `goal_impact`: `claim_effect`
+(`supports`, `narrows`, `unresolved`, `contradicts`), nonempty `claim_reason`,
+`remaining_gap`, `next_decision` (`continue`, `adjust`, `stop`) and nonempty
+`decision_reason`. The reviewer inspects primary evidence and judges goal support
+and next investment; filling fields alone is insufficient scientific review.
+A missing entry produces unknown; a supplied incomplete entry is invalid before
+execution. The complete judgment is retained in the check and exact review input.
+Ordinary reviews cannot carry a detached goal-impact object.
+
+An honest negative may pass an honest-assessment requirement and close with
+`next_decision: stop`; neither claim effect nor investment choice rewrites the
+local verification verdict. A criterion requiring positive benefit still fails
+on evidence without that benefit. All cited material, including the parent brief,
+uses the existing observation/currentness rules. Older accepted contracts are
+not retroactively required to supply this declaration; an amendment is new work
+and follows the current entry rule.
+
+Status exposes `goal_contribution` from the accepted contract and `goal_impact`
+from the latest verification for that same revision, with review verdict,
+verification ID, revision and currentness. Missing/legacy judgments are null.
+Bounded reminders show the contribution and investment decision separately from
+task assessment and local pass. Continuation planning must follow this judgment
+and current project guidance. rctl does not create subsequent tasks or judge the
+truth of prose, update the brief, or enforce a cross-task scheduling graph.
+
 Use `.rctl/record.json`, created at `begin`. Absence means an unmanaged draft; there is no separate draft record. Required top-level fields are:
 
 | Field | Type and meaning |

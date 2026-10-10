@@ -11,6 +11,11 @@ assessment: inconclusive
 
 <Observed finding and the conclusion it supports within the contract. For an applied study, distinguish the local finding from what it establishes about the target setting. For comparisons, state the primary result and whether it concerns a complete method, conditional ablation, diagnosis or single-control screen.>
 
+For paper-directed work, assess local delivery and the publication consequence
+separately: which named claim/evidence obligation this result supports, narrows or
+leaves unresolved, with the inspected evidence. A completed task may leave the
+paper claim unsupported.
+
 ## Evidence
 
 <Source paths, actual computations/checks, and the distinction between recomputed and supplied observations. For an applied study, explain the conditions the case preserves, the basis for that mapping and any unresolved link to the target. For comparisons, name actual control versions and assistance, paired gains/regressions and costs; keep secondary/diagnostic metrics separate.>
@@ -22,6 +27,10 @@ assessment: inconclusive
 ## Next action
 
 <Completion decision, next task, stopping reason, or reopen condition.>
+
+For paper-directed work, justify the next investment against that obligation, or
+name the bounded repair, claim revision or stop. Task closure alone does not
+justify further implementation or validation.
 
 ## Limitations
 

@@ -87,3 +87,12 @@ not a fresh-session adherence test or evidence of improved research outcomes.
 Compatibility and package checks establish structural behavior and delivery only.
 No live project, global CLI installation, host integration or historical research
 task is upgraded by that source change.
+
+14. The 10 October goal-review controller increment is source-only. It requires
+complete declarations/judgments for newly accepted work in a project with a
+completed PROGRAM Goal; standalone work and old accepted agreements retain their
+scope. Structural completeness and retained decisions do not prove the review's
+scientific truth or resistance to future poor planning. rctl does not automatically
+apply a stop decision across a task graph; continuation remains an evidence-based
+planning responsibility visible in the new contract. No global installation,
+live-project migration or fresh-host adherence result is claimed by source checks.

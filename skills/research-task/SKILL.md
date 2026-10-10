@@ -24,11 +24,20 @@ Before experimental planning, cite related history, what remains unanswered, and
 which decision new evidence changes. For a task derived from a broader question,
 use the optional Question alignment fields in the task-file reference and keep
 conclusions within `This task tests` and `This task does not decide`.
+For paper-directed tasks, read Planning before authoring the contract and
+Verification at closeout: publication purpose and its evidence-based consequence
+are required authoring/review work, using the existing alignment and criteria.
+In the goal-review source increment, a completed PROGRAM Goal makes
+`goal_contribution` and a designated structured goal-impact review mandatory for
+new contracts/amendments. Read the task-file example for exact fields; old accepted
+contracts retain their original agreement. Deployment/version matters: do not
+claim controller enforcement from updated instructions alone.
 
 Fill the agreement and acceptance criteria before `begin`. Choose methods and order
 within existing authorization; preparing a contract does not require another approval.
 Use domain skills for scientific methods and evidence, and rctl for this task's
-lifecycle. Advice and bounded mechanical edits may stay inline without a managed task.
+lifecycle. Advice and mechanical edits outside a planned research task may stay
+inline without a managed task.
 
 ## Commands and addressing
 

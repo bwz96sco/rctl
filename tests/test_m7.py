@@ -26,8 +26,9 @@ def guidance(root, current="Coverage does not substitute for lower error."):
 
 
 def test_no_selection_and_bad_selection_preserve_project(cli, project, task):
-    guidance(project)
+    # This retained agreement predates the required goal-review declaration.
     task.begin()
+    guidance(project)
     before = task.file(".rctl/record.json").read_bytes()
     data = cli("context")["data"]
     assert data["available"] and data["project"]["available"]
@@ -46,8 +47,8 @@ def test_no_selection_and_bad_selection_preserve_project(cli, project, task):
 
 
 def test_damaged_record_keeps_guidance_and_original_error(cli, project, task):
-    guidance(project)
     task.begin()
+    guidance(project)
     task.file(".rctl/record.json").write_text("{")
     response = cli("context", "tasks/retained-comparison", expected=3)
     assert response["error"]["code"] == "RECORD_UNAVAILABLE"
@@ -123,10 +124,6 @@ def test_fenced_headings_are_content_and_not_guidance(project):
 
 @pytest.mark.parametrize("budget", [2000, 8000])
 def test_long_reminder_keeps_real_content_and_is_readonly(task, budget):
-    guidance(
-        task.root,
-        "CORRECTION: preserve comparable error as the objective. " + "Detail. " * 100,
-    )
     long_path = task.root / "tasks" / ("research-task-" + "x" * 65)
     task.path.rename(long_path)
     # Keep the task identity consistent in the draft before begin.
@@ -134,6 +131,10 @@ def test_long_reminder_keeps_real_content_and_is_readonly(task, budget):
     path.write_text(path.read_text().replace("retained-comparison", long_path.name))
     task = Task(task.root, long_path)
     task.begin()
+    guidance(
+        task.root,
+        "CORRECTION: preserve comparable error as the objective. " + "Detail. " * 100,
+    )
     task.file("state.md").write_text(
         "## Progress\n"
         + "OLD_PROGRESS " * 2000

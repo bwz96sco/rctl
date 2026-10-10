@@ -242,6 +242,8 @@ def test_explicit_question_field_wins_over_origin_prose(task):
 def test_governing_question_precedes_mutable_guidance_and_survives_drift(
     aligned, budget
 ):
+    # Preserve the older accepted alignment while loading newer project guidance.
+    aligned.begin()
     research = aligned.root / "research"
     (research / "PROGRAM.md").write_text(
         "## Goal\nRetain the actual question.\n\n## Current guidance\n"
@@ -250,7 +252,6 @@ def test_governing_question_precedes_mutable_guidance_and_survives_drift(
     (research / "ROUTES.md").write_text(
         "## Reuse Rule\nRead the governing source before proposing work.\n"
     )
-    aligned.begin()
     aligned.file("state.md").write_text(
         "## Next action\nInspect the scoped result.\n\n## Blockers\nNo blocker.\n"
     )
@@ -310,6 +311,7 @@ def test_compact_reminder_reserves_realistic_alignment_before_guidance(aligned):
             .replace(NON_CLAIM, non_claim)
         ),
     )
+    aligned.begin()
     research = aligned.root / "research"
     (research / "PROGRAM.md").write_text(
         "## Goal\nRetain the actual question.\n\n## Current guidance\n"
@@ -321,7 +323,6 @@ def test_compact_reminder_reserves_realistic_alignment_before_guidance(aligned):
     aligned.file("state.md").write_text(
         "## Next action\nInspect the scoped result.\n\n## Blockers\nNo blocker.\n"
     )
-    aligned.begin()
 
     data, warnings = context(aligned, budget=2000)
     reminder = data["context"]

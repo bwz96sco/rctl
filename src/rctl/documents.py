@@ -340,6 +340,10 @@ def parse_contract(
     ids = [criterion["id"] for criterion in data["criteria"]]
     if len(ids) != len(set(ids)):
         raise invalid(f"{source}: criterion IDs must be unique.")
+    from .goals import validate_goal_contribution
+
+    validate_goal_contribution(data, root, task)
+    data.setdefault("goal_contribution", None)
     if root is not None:
         for criterion in data["criteria"]:
             for ref in criterion["evidence_refs"]:
@@ -414,6 +418,9 @@ def parse_reviews(text, source, task_id, revision, contract, root=None, task=Non
             raise invalid(
                 f"{source}: {key} must include the contract's required evidence references."
             )
+        from .goals import validate_goal_review
+
+        validate_goal_review(check, contract, source)
         if root is not None:
             for ref in check["evidence_refs"]:
                 if not urlsplit(ref).scheme:

@@ -40,8 +40,8 @@ def test_packaged_project_placeholders_are_omitted(project):
 
 @pytest.mark.parametrize("budget", [2000, 8000])
 def test_each_task_warning_has_a_marker(task, budget):
-    guidance(task.root)
     task.begin()
+    guidance(task.root)
     contract = task.file("contract.md")
     contract.write_text(contract.read_text() + "\nChanged scope.\n")
     data, warnings = load_context(task.root, task=task, budget=budget)

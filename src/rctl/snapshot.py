@@ -39,6 +39,8 @@ class TaskSnapshot:
     title: str
     question: str
     question_alignment: Mapping[str, str] | None
+    goal_contribution: Mapping[str, str] | None
+    goal_impact: Mapping[str, str | int] | None
     assessment: Mapping[str, str | int] | None
     phase: str
     contract_revision: int | None
@@ -63,6 +65,7 @@ class TaskSnapshot:
             "contract_revision": self.contract_revision,
             "contract_drift": self.contract_drift,
             "assessment": _plain(self.assessment),
+            "goal_impact": _plain(self.goal_impact),
             "currentness": self.currentness,
             "historical_closure": _plain(self.historical_closure),
             "next_action": self.next_action,
@@ -84,6 +87,7 @@ class TaskSnapshot:
             "title": self.title,
             "question": self.question,
             "question_alignment": _plain(self.question_alignment),
+            "goal_contribution": _plain(self.goal_contribution),
             "verification": _plain(self.verification),
             "handoff": _plain(self.handoff),
         }
@@ -110,6 +114,21 @@ class TaskSnapshot:
                 for key in self.question_alignment
             }
             if self.question_alignment is not None
+            else None,
+            "goal_contribution": {
+                key: values.get(f"goal_{key}") or None
+                for key in self.goal_contribution
+            }
+            if self.goal_contribution is not None
+            else None,
+            "goal_impact": {
+                **_plain(self.goal_impact),
+                **{
+                    key: values.get(f"goal_{key}") or None
+                    for key in ("claim_reason", "remaining_gap", "decision_reason")
+                },
+            }
+            if self.goal_impact is not None
             else None,
             "verification": self.verification_summary(),
             "handoff": {
@@ -164,6 +183,33 @@ class TaskSnapshot:
                     "latest verification result",
                 )
             )
+        if self.goal_contribution is not None:
+            fields.extend(
+                (f"goal_{key}", label, self.goal_contribution[key], "C / goal_contribution")
+                for key, label in (
+                    ("obligation", "Goal obligation"),
+                    ("expected_output", "Decisive output"),
+                    ("decision_use", "Decision use"),
+                    ("review_criterion", "Required goal review"),
+                )
+            )
+        if self.goal_impact is not None:
+            impact = self.goal_impact
+            fields.append((
+                "goal_review",
+                "Goal impact (reviewed)",
+                f"{impact['claim_effect']}; investment: {impact['next_decision']}; "
+                f"{impact['verification_id']} / {impact['currentness']} / {impact['review_verdict']}",
+                "latest verification goal review",
+            ))
+            fields.extend(
+                (f"goal_{key}", label, impact[key], "latest verification goal review")
+                for key, label in (
+                    ("claim_reason", "Goal consequence"),
+                    ("remaining_gap", "Remaining goal gap"),
+                    ("decision_reason", "Investment reason"),
+                )
+            )
         return fields
 
     def handoff_fields(self):
@@ -191,7 +237,7 @@ def read_snapshot(task):
     warnings = []
     report, closure, applicability = None, None, "not_checked"
     if record is None:
-        _, contract = task.contract()
+        _, contract = task.contract(check_goal=False)
         phase, revision, drift = "draft", None, False
     else:
         contract = parse_contract(
@@ -254,6 +300,8 @@ def read_snapshot(task):
                     f"{alignment['source']}. {error.message}"
                 )
     assessment = None
+    contribution = contract["goal_contribution"]
+    goal_impact = None
     if report is not None:
         value = parse_result(
             report["result_text"],
@@ -267,12 +315,27 @@ def read_snapshot(task):
             "contract_revision": report["contract_revision"],
             "currentness": applicability,
         }
+        if contribution is not None and report["contract_revision"] == revision:
+            check = next(
+                c for c in report["checks"]
+                if c["criterion_id"] == contribution["review_criterion"]
+            )
+            if "goal_impact" in check:
+                goal_impact = {
+                    **check["goal_impact"],
+                    "review_verdict": check["verdict"],
+                    "verification_id": report["id"],
+                    "contract_revision": report["contract_revision"],
+                    "currentness": applicability,
+                }
     return TaskSnapshot(
         task_id=task.task_id,
         path=task.path.relative_to(task.root).as_posix(),
         title=contract["title"],
         question=contract["question"],
         question_alignment=_freeze(alignment),
+        goal_contribution=_freeze(contribution),
+        goal_impact=_freeze(goal_impact),
         assessment=_freeze(assessment),
         phase=phase,
         contract_revision=revision,

@@ -99,6 +99,72 @@ the project guidance changes again. If a criterion depends on a live file's
 current content, still declare that file in its evidence or inputs, including
 review evidence; removing a real dependency only to avoid staleness is incorrect.
 
+### Publication-purpose review
+
+For every planned paper-directed task, Question/Scope names the brief's claim or
+evidence obligation, decisive output and outcome-dependent next investment. Use
+the four-field Question alignment section above and a required review criterion.
+Question alignment remains optional in the general schema. Keep publication
+detail in Question/Scope and the brief, not as extra alignment fields.
+In the goal-review source increment, a completed PROGRAM Goal requires the
+following contract frontmatter for new work (choose an actual unused criterion):
+
+```yaml
+goal_contribution:
+  obligation: Establish backend operability needed for the current adaptation claim.
+  expected_output: A retained native-backend consumption episode and scoped consequence.
+  decision_use: Continue only if the useful endpoint works; repair a bounded integration gap or stop unsupported expansion.
+  review_criterion: AC-03
+```
+
+The controller requires this declaration, a review method for the named criterion,
+and citations of PROGRAM, result and primary evidence. The reviewer assesses
+adequacy. For example, an implementation task can establish
+backend operability as an input to a later method comparison, without claiming
+incremental benefit from operability alone.
+
+Add a criterion with an unused numeric ID, such as this illustrative third item:
+
+```yaml
+  - id: AC-03
+    requirement: The result assesses which publication evidence obligation the inspected episode supports or leaves unresolved, and justifies the next investment against the current paper hypothesis.
+    evidence_refs: [../../research/PROGRAM.md, result.md, evidence/episode.json]
+    failure_action: Correct unsupported claim promotion or supply the missing judgment; retain an unsupported obligation with a bounded repair or stop when that is the finding.
+    method:
+      type: review
+      reviewer: either
+```
+
+Replace the example paths with the actual governing brief and primary evidence.
+At closeout, review local delivery and paper consequence separately. An honest
+negative assessment can pass this requirement; absence of reasoning cannot. For
+example: "The backend accepted the package, supporting operability. Only the
+shared known binding correction was exercised, so incremental adaptation remains
+unsupported; this episode does not justify the final comparison campaign."
+The criterion records an inspected judgment, not a prediction of editorial acceptance.
+
+The designated closeout review additionally includes this `goal_impact` object;
+its ordinary `rationale` and `evidence_refs` still cite the inspected evidence:
+
+```json
+{
+  "claim_effect": "unresolved",
+  "claim_reason": "Native acceptance supports operability, but only the shared known binding fix was exercised; incremental adaptation is untested.",
+  "remaining_gap": "Substantive independent adaptation and useful comparative benefit remain unresolved.",
+  "next_decision": "adjust",
+  "decision_reason": "Specify one bounded substantive adaptation case before investing in the final campaign."
+}
+```
+
+Missing required review entries block closure; supplied incomplete impact objects
+reject before checks. Read-only status/context expose this judgment separately
+from local pass. When planning the next task, inspect its currentness, project
+guidance and evidence: a reviewed stop does not authorize automatic continuation.
+An adjustment or later new investment needs an explicit bounded reason in the
+new contract. rctl does not judge that reason's scientific truth or start tasks.
+
+### Command checks
+
 For command checks, `argv` is an argument array executed without a shell, with the
 task directory as cwd. Declare the checker, helper files, and preexisting data in
 `inputs`. A check validates available evidence; generate analysis outputs before

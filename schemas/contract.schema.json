@@ -9,6 +9,17 @@
     "task_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
     "title": {"$ref": "#/$defs/text"},
     "kind": {"enum": ["exploration", "analysis"]},
+    "goal_contribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["obligation", "expected_output", "decision_use", "review_criterion"],
+      "properties": {
+        "obligation": {"$ref": "#/$defs/text"},
+        "expected_output": {"$ref": "#/$defs/text"},
+        "decision_use": {"$ref": "#/$defs/text"},
+        "review_criterion": {"type": "string", "pattern": "^AC-[0-9]{2,}$"}
+      }
+    },
     "criteria": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/criterion"}}
   },
   "$defs": {
