@@ -61,17 +61,20 @@ JSON results are under `data`, beside `ok`, `error`, and `warnings`.
 | Stop without closure | `rctl cancel TASK --reason "Why work stops"` |
 
 Root selection is `--root`, then `RCTL_PROJECT_ROOT`, then the working directory.
-Listing never selects a task. `RCTL_TASK_PATH` supplies an omitted task only for
-context/hooks; lifecycle commands require `TASK`. CLI `--file` and `--reviews`
+Listing never selects a task. For context/hooks, an omitted task comes from
+`RCTL_TASK_PATH`, else the only active task (labeled automatic); lifecycle commands
+require `TASK`. CLI `--file` and `--reviews`
 paths resolve from the project root; document `evidence_refs`, command `inputs`,
 and command execution resolve from the task directory. Use targeted help for
 unfamiliar syntax or version differences; reuse established syntax otherwise.
 
 Creating a task or calling `context TASK` does not persist a session selection.
-When reminders say no task is selected, read `rctl context TASK` explicitly for
-the work at hand. For future host reminders, pass `RCTL_TASK_PATH` when launching
-the host; exporting it in a child shell cannot change an already running host.
-Do not infer a global current task from the most recently listed or active entry.
+When reminders say no task is selected or list several active tasks, read
+`rctl context TASK` explicitly for the work at hand. An automatically selected task
+is the only active one, not a session choice; when it is not the work at hand,
+read the intended task explicitly. `RCTL_TASK_PATH` at host launch overrides it;
+exporting it in a child shell cannot change an already running host. Do not infer a
+current task from the most recently listed entry.
 
 ## Completion and handoff
 

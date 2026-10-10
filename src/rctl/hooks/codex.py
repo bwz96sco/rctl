@@ -21,7 +21,7 @@ def handle(payload, root_argument=None, host="codex"):
     event = payload.get("hook_event_name")
     if event not in BUDGETS:
         return {}
-    root = None
+    root, selection = None, None
     try:
         if root_argument is None and not os.environ.get("RCTL_PROJECT_ROOT"):
             raise invalid("Set RCTL_PROJECT_ROOT or supply --root for the reminder.")
@@ -32,14 +32,16 @@ def handle(payload, root_argument=None, host="codex"):
                 "Hook cwd must be an absolute path inside the selected project."
             )
         local_path(root, cwd)
-        text = load_context(
+        data = load_context(
             root, budget=BUDGETS[event], prompt=event == "UserPromptSubmit"
-        )[0]["context"]
+        )[0]
+        text, selection = data["context"], data["task_selection"]
     except (RctlError, OSError, ValueError) as error:
         text = "rctl context unavailable: " + str(error)
         if isinstance(error, RctlError):
             text += "\n" + error.next_action
             text = error.data.get("context", text)
+            selection = error.data.get("task_selection")
     text = bounded(text, BUDGETS[event], "the selected task files")
     receipt = os.environ.get("RCTL_HOOK_LOG")
     if receipt and root is not None:
@@ -55,6 +57,7 @@ def handle(payload, root_argument=None, host="codex"):
                             "source": payload.get("source"),
                             "session_id": payload.get("session_id"),
                             "task_path": os.environ.get("RCTL_TASK_PATH"),
+                            "task_selection": selection,
                             "timestamp": now(),
                             "context": text,
                         },

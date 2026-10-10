@@ -25,14 +25,30 @@ def guidance(root, current="Coverage does not substitute for lower error."):
     )
 
 
+def begin_copy(project, task, name):
+    other = Task(project, project / f"tasks/{name}")
+    other.new("analysis", "Second comparison")
+    other.file("contract.md").write_text(
+        task.file("contract.md").read_text().replace("retained-comparison", name)
+    )
+    other.begin()
+    return other
+
+
 def test_no_selection_and_bad_selection_preserve_project(cli, project, task):
-    # This retained agreement predates the required goal-review declaration.
+    # These retained agreements predate the required goal-review declaration.
     task.begin()
+    begin_copy(project, task, "other-comparison")
     guidance(project)
     before = task.file(".rctl/record.json").read_bytes()
     data = cli("context")["data"]
     assert data["available"] and data["project"]["available"]
     assert not data["task_selected"] and not data["task_available"]
+    assert data["task_selection"] is None
+    assert (
+        "Active tasks (none selected): tasks/other-comparison, tasks/retained-comparison."
+        in data["context"]
+    )
     assert "phase" not in data
     assert "Reduce comparable error." in data["context"]
     assert "Historical route details" not in data["context"]
@@ -186,3 +202,55 @@ def test_unavailable_task_exception_retains_bounded_context(project):
     assert data["task_available"] is False
     assert len(data["context"]) <= 2000
     assert "Reduce comparable error" in json.dumps(data)
+
+
+AUTOMATIC = "selected automatically as the only active task"
+
+
+def test_only_active_task_is_selected_for_reminders_only(cli, project, task):
+    task.begin()
+    guidance(project)
+    for event in ("SessionStart", "UserPromptSubmit"):
+        response, _ = hook(
+            task, {"hook_event_name": event, "cwd": str(project)}, selection=False
+        )
+        reminder = response["hookSpecificOutput"]["additionalContext"]
+        assert reminder.startswith(
+            "Task: retained-comparison | active" if event == "UserPromptSubmit" else "Task "
+        )
+        assert AUTOMATIC in reminder and "Reduce comparable error." in reminder
+    hook(
+        task,
+        {"hook_event_name": "UserPromptSubmit", "cwd": str(project)},
+        selection=False,
+        logging="receipts.jsonl",
+    )
+    receipt = json.loads((project / "receipts.jsonl").read_text())
+    assert receipt["task_selection"] == "automatic" and receipt["task_path"] is None
+    explicit = cli(
+        "context", env={"RCTL_TASK_PATH": "tasks/retained-comparison"}
+    )["data"]
+    assert explicit["task_selection"] == "explicit"
+    assert AUTOMATIC not in explicit["context"]
+    # Commands that act on a task still require it explicitly.
+    cli("status", expected=2)
+
+
+def test_alias_and_stray_entries_leave_one_active_task(cli, project, task):
+    task.begin()
+    (project / "tasks/alias").symlink_to(task.path, target_is_directory=True)
+    (project / "tasks/.DS_Store").write_bytes(b"\0")
+    (project / "tasks/notes").mkdir()
+    data = cli("context")["data"]
+    assert data["task_selection"] == "automatic"
+    assert data["task_id"] == "retained-comparison"
+
+
+def test_unreadable_record_prevents_automatic_selection(cli, project, task):
+    task.begin()
+    damaged = project / "tasks/damaged/.rctl"
+    damaged.mkdir(parents=True)
+    (damaged / "record.json").write_text("{")
+    data = cli("context")["data"]
+    assert data["task_selection"] is None and not data["task_available"]
+    assert "Automatic task selection unavailable" in data["context"]

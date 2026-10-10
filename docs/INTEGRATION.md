@@ -67,7 +67,7 @@ The exporter does not launch a host, alter global configuration, merge a live pr
 
 ## Adapter interface
 
-The internal command `rctl hook codex` reads one event JSON object from stdin. It requires `RCTL_PROJECT_ROOT` or an explicit global `--root`; it must not infer a different project from the host payload. `RCTL_TASK_PATH` selects the task relative to that root. The payload's `cwd` must resolve inside that root.
+The internal command `rctl hook codex` reads one event JSON object from stdin. It requires `RCTL_PROJECT_ROOT` or an explicit global `--root`; it must not infer a different project from the host payload. `RCTL_TASK_PATH` selects the task relative to that root; without it, the project's only active task is used and labeled as selected automatically (SPEC §2). The payload's `cwd` must resolve inside that root.
 
 Use one initial `SessionStart` handler. Add `UserPromptSubmit` for updated handoffs, contract changes, and selection reminders. Both must render fresh state; prompt events use a compact summary plus source paths rather than reinjecting the entire contract. With a selected task, that summary is one capped line per decision-relevant field (see SPEC's reminder section), so it carries whole sentences rather than fragments. No daemon or continuous polling is involved.
 
@@ -81,7 +81,7 @@ The pilot's retained event and response shape is:
 {"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"Task comparison: active; contract revision 1; verification not checked. Read tasks/comparison/contract.md and the saved handoff."}}
 ```
 
-The same response shape uses `UserPromptSubmit` for that event. Unsupported events return `{}`. Supported events with absent selection return project-only context; unreadable task state retains project guidance and an unavailable task diagnostic. Both exit 0. Malformed JSON also returns `{}` with a concise diagnostic on stderr and exits 0. A broken reminder must not invent a successful task state or prevent ordinary conversation.
+The same response shape uses `UserPromptSubmit` for that event. Unsupported events return `{}`. Supported events with no selection and no single active task return project-only context, listing several active tasks when present; unreadable task state retains project guidance and an unavailable task diagnostic. Both exit 0. Malformed JSON also returns `{}` with a concise diagnostic on stderr and exits 0. A broken reminder must not invent a successful task state or prevent ordinary conversation.
 
 Cap rendered `SessionStart` context at 8,000 Unicode characters and `UserPromptSubmit` at 2,000, preserving warnings and source paths before excerpts. Configure a 10-second host timeout as the initial setting, not a promised latency. Adapter code delegates to the pure context renderer; no checks or state mutations occur.
 
@@ -105,7 +105,7 @@ Do not install Stop, PreToolUse, PreCompact, or SubagentStart handlers. Task com
 
 ## Delivery evidence
 
-For disposable host tests, `RCTL_HOOK_LOG` may select a local receipt file. No receipts are written when it is unset. Each JSONL receipt records host, event, source, session ID, task path, timestamp, and delivered context. Keep it in local test output because context can include private material; do not send telemetry.
+For disposable host tests, `RCTL_HOOK_LOG` may select a local receipt file. No receipts are written when it is unset. Each JSONL receipt records host, event, source, session ID, the `RCTL_TASK_PATH` value, task selection (`explicit`, `automatic` or null), timestamp, and delivered context; an automatically selected task is named in the context. Keep it in local test output because context can include private material; do not send telemetry.
 
 Release evidence must include two distinct fresh host sessions, their launch arguments and host version, receipt records, the first session's saved handoff, and proof that the second received it. Also launch without hooks and show the core terminal loop still works. The no-hook run establishes core independence; it is not a comparative model-performance experiment.
 

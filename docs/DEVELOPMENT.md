@@ -1,5 +1,44 @@
 # Development Plan
 
+## Automatic reminder task selection, 10 October 2026
+
+Starting agreement: after 0.6.3, the user objected to setting `RCTL_TASK_PATH` at
+every host launch ("别搞这么麻烦"). The previous rule (SPEC §2 until now) performed no
+automatic selection, so reminders without the variable carried project guidance only.
+
+Change: `context` and the host adapter, when no task is given and `RCTL_TASK_PATH` is
+unset, use the project's only `active` task and label it "selected automatically as
+the only active task" in both layouts; JSON adds `task_selection`
+(`explicit`/`automatic`/null), which hook receipts also record. Several active tasks are listed and none is selected;
+drafts, closed and cancelled tasks are never chosen. An unreadable record disables
+automatic selection with a diagnostic rather than picking among the readable rest.
+Symlink aliases count once. `RCTL_TASK_PATH` still overrides, and every command that
+acts on a task (`status`, `verify`, `close`, ...) still requires `TASK`. The scan
+reads only each record's `phase`: 7 ms on LEO's 40 records and 18 ms on OR's 119,
+against about 0.9 s for `rctl task list` on OR.
+
+Acceptance selected: A-11 and A-31 (rewritten for the new rule), A-33/A-40
+layouts unchanged otherwise. Regressions: one active task selected automatically in
+SessionStart and UserPromptSubmit; explicit selection labeled explicit; `status`
+without TASK still exits 2; two active tasks listed with none selected; an alias
+counted once; stray files and record-less directories in `tasks/` ignored; an
+unreadable record blocking automatic selection; a draft not selected; the receipt's
+selection field.
+
+Local validation on macOS 26.6.2/Python 3.13.2:
+
+- The three new tests failed on the previous source and pass with the change.
+- LEO and OR, read-only: neither has an active task (LEO 40 closed; OR 115 closed,
+  4 cancelled), so their reminders stay project-only until a task is begun.
+- `uv run --locked pytest -q`: **376 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed.
+
+Not run: wheel build, installed smoke and real-host sessions. Installed 0.6.3 keeps
+the explicit-only rule until a release is deployed. The `.rctl/codex/README.md` and
+`.rctl/claude/README.md` already in LEO and OR are preserved by `init` and keep the
+old launch instructions unless merged.
+
 ## v0.6.3 release preparation, 10 October 2026
 
 The user authorized committing, releasing and installing the

@@ -1,7 +1,34 @@
-"""A derived task list; no index or implicit task selection."""
+"""A derived task list and the active-task scan used for reminder selection."""
 
-from .documents import RctlError, invalid, local_path
+import json
+
+from .documents import RctlError, invalid, local_path, read_text
 from .records import Task
+
+
+def active_tasks(root):
+    """Active task paths read from records; None when any record is unreadable.
+
+    Reminders select the only active task automatically, so an unknown phase must
+    not be treated as inactive: a damaged record could be the task being worked on.
+    """
+    directory = local_path(root, "tasks")
+    if not directory.is_dir():
+        return []
+    found = {}
+    for path in sorted(directory.iterdir(), key=lambda item: item.name):
+        try:
+            task = Task(root, path)
+            record = task.file(".rctl/record.json")
+            if not record.exists():
+                continue
+            phase = json.loads(read_text(record)).get("phase")
+        except (RctlError, OSError, ValueError, AttributeError):
+            return None
+        if phase == "active":
+            # Aliases resolve to one canonical task.
+            found[task.path] = task.path.relative_to(root).as_posix()
+    return sorted(found.values())
 
 
 def list_tasks(root, phase=None):

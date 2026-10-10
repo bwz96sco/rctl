@@ -9,6 +9,7 @@ from .records import Task, select_task
 
 DEFAULT_BUDGET = 8000
 FIELD_VISIBILITY = 96
+AUTOMATIC = "selected automatically as the only active task"
 # Per-prompt caps keep each line a whole sentence instead of a fragment.
 PROMPT_CAPS = {"next_action": 400, "blockers": 200, "warning": 200, "sentence": 300}
 
@@ -48,6 +49,7 @@ def render(
     *,
     task_path=None,
     orientation=False,
+    note="",
 ):
     # Short aliases avoid repeating absolute paths in every truncation marker.
     sources = f"Root: {root}\nP: research/PROGRAM.md; R: research/ROUTES.md\n"
@@ -63,7 +65,7 @@ def render(
         identity = "Task context unavailable.\n"
     elif snapshot is not None:
         identity = snapshot.identity()
-    identity = bounded(identity, min(400, budget // 4), "status TASK")
+    identity = bounded(note + identity, min(400, budget // 4), "status TASK")
     # key, label, value, source; values are budgeted independently of labels.
     fields = snapshot.task_fields() if snapshot is not None else []
     task_context_keys = {field[0] for field in fields}
@@ -166,7 +168,7 @@ def first_sentence(text):
     return text[: match.end()] if match else text
 
 
-def prompt_reminder(snapshot, project, warnings, task_path, budget):
+def prompt_reminder(snapshot, project, warnings, task_path, budget, automatic=False):
     """Selected-task state for every prompt; SessionStart carries the full reminder."""
     report = snapshot.verification
     verification = f"{report['id']} {report['verdict']}" if report else "not verified"
@@ -174,6 +176,8 @@ def prompt_reminder(snapshot, project, warnings, task_path, budget):
         f"Task: {snapshot.task_id} | {snapshot.phase} | {verification} "
         f"({snapshot.currentness})"
     )
+    if automatic:
+        head += f" | {AUTOMATIC}"
     tail = f"Full reminder: rctl context {task_path}"
     sentence = PROMPT_CAPS["sentence"]
     # (display order, label, text, cap, source), listed by priority for space.
@@ -268,6 +272,26 @@ def load_context(
         or selection is not None
         or bool(os.environ.get("RCTL_TASK_PATH"))
     )
+    # Without an explicit task, a reminder uses the only active task; several
+    # active tasks are listed instead of guessed.
+    automatic, note = False, ""
+    if not selected:
+        from .discovery import active_tasks
+
+        try:
+            active = active_tasks(root)
+        except RctlError:
+            active = None
+        if active is None:
+            note = (
+                "Automatic task selection unavailable: a task record is unreadable; "
+                "run rctl task list.\n"
+            )
+        elif len(active) == 1:
+            selection, selected, automatic = active[0], True, True
+            note = f"Task {AUTOMATIC}.\n"
+        elif active:
+            note = f"Active tasks (none selected): {', '.join(active)}.\n"
     snapshot, warnings, error = None, [], None
     if selected:
         try:
@@ -294,6 +318,10 @@ def load_context(
         budget,
         task_path=task.path.relative_to(root).as_posix() if task is not None else None,
         orientation=(root / "research/README.md").is_file(),
+        note=note,
+    )
+    data["task_selection"] = (
+        "automatic" if automatic else "explicit" if selected else None
     )
     if error:
         error.data = {**data, "context_warnings": warnings}
@@ -305,5 +333,6 @@ def load_context(
             warnings,
             task.path.relative_to(root).as_posix(),
             budget,
+            automatic,
         )
     return data, warnings

@@ -75,11 +75,12 @@ def initialize(root, vault=None, codex=True, claude=True):
         files[".codex/config.toml"] = "[features]\nhooks = true\n"
         files[".rctl/codex/README.md"] = f"""# Project Codex reminders
 
-Inspect `.codex/hooks.json`, then launch Codex from this project. Project guidance loads without a task; select one when task context is needed:
+Inspect `.codex/hooks.json`, then launch Codex from this project. Project guidance
+always loads; when exactly one task is active, the reminders select it automatically.
+To choose another task, set it at launch:
 
 ```sh
-export RCTL_TASK_PATH=tasks/your-task
-codex --enable hooks
+RCTL_TASK_PATH=tasks/your-task codex --enable hooks
 ```
 
 Codex owns project and hook trust. Review and trust the exact definitions through `/hooks`.
@@ -121,7 +122,9 @@ skill if no longer wanted. Preserve unrelated host settings and task records.
         )
         files[".rctl/claude/README.md"] = f"""# Project Claude Code reminders
 
-Inspect `.claude/settings.json`, then launch Claude Code from this project. Project guidance loads without a task; select one when task context is needed:
+Inspect `.claude/settings.json`, then launch Claude Code from this project. Project
+guidance always loads; when exactly one task is active, the reminders select it
+automatically. To choose another task, set it at launch:
 
 ```sh
 RCTL_TASK_PATH=tasks/your-task claude

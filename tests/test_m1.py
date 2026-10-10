@@ -206,9 +206,14 @@ def test_checkpoint_fresh_process_and_no_prose_closure(task, cli, project):
 
 
 def test_selection_is_explicit_without_fallback(task, cli, project):
-    task.begin()
+    # A draft is never selected automatically.
     response = cli("context")
     assert response["data"]["available"] is False
+    assert response["data"]["task_selection"] is None
+    task.begin()
+    automatic = cli("context")["data"]
+    assert automatic["task_selection"] == "automatic" and automatic["task_available"]
+    assert "selected automatically as the only active task" in automatic["context"]
     for selected, code in [("missing", 3), ("../outside", 2), (str(project.parent), 2)]:
         response = cli("context", selected, expected=code)
         assert response["data"]["available"] is False

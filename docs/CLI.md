@@ -57,7 +57,7 @@ containment; it applies to the ordinary CLI error boundary.
 | `amend TASK --reason TEXT` | Accept changed valid contract as the next revision. | Machine record |
 | `checkpoint TASK --file FILE` | Read UTF-8 handoff from FILE resolved relative to the project root, then atomically replace task `state.md`. Require an active task. | Handoff only |
 | `status TASK` | Show phase, contract revision/drift, latest report verdict/currentness, and historical closure. | None |
-| `context [TASK]` | Generate the bounded reminder described in SPEC; use session selection when TASK is omitted, or return project-only context if unset. | None |
+| `context [TASK]` | Generate the bounded reminder described in SPEC; when TASK is omitted, use `RCTL_TASK_PATH`, else the only active task (labeled automatic), else project-only context. | None |
 | `verify TASK [--reviews FILE]` | Execute frozen command criteria and record supplied review judgments. FILE is relative to project root. | Check logs and machine record |
 | `close TASK` | Check currentness and latest passing report; append managed closure. | Machine record |
 | `reopen TASK --reason TEXT` | Reopen a closed/cancelled task; require new verification. | Machine record |

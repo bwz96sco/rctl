@@ -68,6 +68,7 @@ def test_real_adapter_is_bounded_readonly_and_receipts_optional(
     assert receipt["context"] == response["hookSpecificOutput"]["additionalContext"]
     assert receipt["event"] == event and receipt["session_id"] == "fixture"
     assert receipt["task_path"] == "tasks/retained-comparison"
+    assert receipt["task_selection"] == "explicit"
     assert receipt["host"] == host
 
 

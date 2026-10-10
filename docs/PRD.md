@@ -33,7 +33,7 @@ Ship a local Python CLI, readable task templates, small machine records, command
 | R-07 | Negative and bounded inconclusive findings can close; missing required verification cannot. | The system does not encourage threshold changes or repeated experiments until a win. |
 | R-08 | An optional handoff records last verified progress and next action; a new session can recover it. | The task survives conversation loss without a transcript dependency. |
 | R-09 | Reminders load the selected contract, handoff, and verification status without executing checks or changing task state. | Context delivery does not become another research controller. |
-| R-10 | Task selection is session-local and explicit; ambiguous or missing selection is visible. | A reminder does not silently route to another task. |
+| R-10 | Task selection is session-local. Reminders use an explicit selection, else the only active task labeled as automatic; several active tasks are listed and none is selected. Commands that act on a task take it explicitly. | A reminder never guesses among tasks or routes silently to another one. |
 | R-11 | Core commands work without a host, skill, framework, network, or LLM. | Research records remain useful from a normal terminal. |
 | R-12 | Host installation is reviewable, preserves unrelated configuration, and has real delivery evidence. | Copied configuration is not mistaken for working integration. |
 | R-13 | Repeatable project initialization creates missing orientation, task-skill, Codex and Claude Code files by default, with explicit per-host opt-out and optional vault selection, while preserving existing content. | A new Codex or Claude Code project cannot omit hooks or its loadable skill merely by omitting an option. |
