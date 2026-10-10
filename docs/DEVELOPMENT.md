@@ -2,12 +2,13 @@
 
 ## Latest deployment
 
-v0.6.0 source `7c5dd75` is pushed, passed all four CI jobs, and is installed in the
+v0.6.1 source `f2f2b2f` is pushed, passed all four CI jobs, and is installed in the
 global tool environment. Installed code/resources match the clean committed tree;
-goal-review entry, closure and reminder checks passed in a disposable project.
-See the [deployment record](V0.6.0-DEPLOYMENT.md). Live task-draft migration is
-separate work. Version-only historical currentness and additional reminder coverage
-remain separate runtime work.
+goal-review entry, closure and reminder checks passed in a disposable project, and
+LEO's synced research-task skill matches the package. See the
+[deployment record](V0.6.1-DEPLOYMENT.md); the previous release is in the
+[v0.6.0 record](V0.6.0-DEPLOYMENT.md). Version-only historical currentness and
+additional reminder coverage remain separate runtime work.
 
 ## v0.6.1 release preparation, 10 October 2026
 
