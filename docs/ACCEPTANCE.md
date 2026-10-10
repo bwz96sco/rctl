@@ -67,7 +67,7 @@ The following cases extend the original 20-case v0.1 release matrix.
 | A-39 | R-20, R-05, R-07 | A current verified negative exposes a task-scoped assessment with its verification/revision/currentness and explicit non-claim boundary. Legacy/no-report tasks return null alignment/assessment; a missing accepted source warns without changing phase or closure. Assessment remains distinct from the separately exposed verification verdict. | A local assessment is detached from its question, conflated with check success, or historical meaning changes; fix scoped projection and compatibility. |
 | A-40 | R-20, R-12, R-14 | Packaged template/skill guidance describes alignment and evidence review; SessionStart and UserPromptSubmit fixtures deliver the same bounded content through the unchanged hook shape. | Source behavior works only in checkout or bypasses host delivery; fix packaging or shared renderer use. |
 
-## Goal-review increment (source, not released)
+## v0.6 goal contribution and review
 
 | Case | Requirements | Scenario and observable result | Failure detected; response |
 |---|---|---|---|

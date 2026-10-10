@@ -2,24 +2,23 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.5.1 pushed, CI-verified and locally installed.**
+**Status: v0.6.0 prepared for release; push, CI and installation pending.**
 
-See the [deployment record](docs/V0.5.1-DEPLOYMENT.md) and
+The previous installed release is recorded in the [v0.5.1 deployment record](docs/V0.5.1-DEPLOYMENT.md) and
 [review and verification record](docs/COMPARISON-REVIEW-FOLLOWUP.md).
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, governing-question alignment, and Codex reminders. The
 [simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed
 task skill, immutable task snapshots, and one concise reminder layout. Historical
 milestone and host evidence is in the [release-evidence index](docs/RELEASE-EVIDENCE.md).
-No live project or installed rctl CLI has been upgraded by this follow-up.
-
-The current checkout also contains an **unreleased goal-review increment**:
+Version 0.6.0 adds **goal-contribution and goal-impact review**:
 when PROGRAM has a completed Goal, new contracts/amendments must declare their
 goal contribution and a required structured goal-impact review. Status and
 reminders show the reviewed investment decision separately from local pass.
-See [behavior](docs/SPEC.md#goal-contribution-and-review-unreleased-source-increment)
+See [behavior](docs/SPEC.md#goal-contribution-and-review-v060)
 and [source development](docs/DEVELOPMENT.md#goal-review-controller-increment-10-october-2026).
-The installed v0.5.1 release does not include this enforcement.
+The installed v0.5.1 release does not include this enforcement; deployment follows
+the exact-commit CI gate in [Development](docs/DEVELOPMENT.md#release-and-deployment-order).
 
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
@@ -58,7 +57,7 @@ uv run pytest
 uv run ruff check src tests scripts
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.5.1-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.6.0-py3-none-any.whl
 ```
 
 The GitHub Actions workflow is configured to run tests, lint, the document check,
@@ -69,7 +68,7 @@ The installed-package smoke uses a temporary project under `.work/`, an isolated
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.5.1-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.0-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh

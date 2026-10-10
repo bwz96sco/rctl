@@ -140,7 +140,7 @@ With a completed `research/PROGRAM.md / Goal`, `begin`, `amend` and
 and its designated review citing `result.md` and primary evidence. An unchanged
 accepted contract still passes `contract check`. `task new` scaffolds this
 declaration automatically. See
-[goal-review behavior](SPEC.md#goal-contribution-and-review-unreleased-source-increment).
+[goal-review behavior](SPEC.md#goal-contribution-and-review-v060).
 A missing goal review leaves verification unknown; an incomplete supplied
 `goal_impact` rejects the input before checks. Verify captures the reviewed Goal
 before command execution; a non-whitespace change or unavailable Goal during

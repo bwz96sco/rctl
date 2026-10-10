@@ -7,6 +7,34 @@ global tool environment. The authorized OR task-skill and guidance merge is also
 complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
 currentness and additional reminder coverage remain separate runtime work.
 
+## v0.6.0 release preparation, 10 October 2026
+
+The user authorized push and update after the goal-review branch was repaired,
+committed and merged into local main. Version 0.6.0 distinguishes the new mandatory
+goal contribution/review behavior and the captured-Goal race repair from installed
+0.5.1. It also includes the intervening paper-reading skill and source fixes.
+
+Acceptance selected: A-41–A-43 for goal entry, review and recovery; A-23/A-29/A-40
+for installed resources and reminder delivery. Release validation covers tests,
+lint, documentation checks, build and isolated wheel smoke. Deployment follows
+the exact-source CI gate below and updates the installed CLI from a clean committed
+tree. Live task drafts and customized project guidance need their own scoped work.
+
+Local macOS 26.6.2/Python 3.13.2 validation:
+
+- `uv lock`: only the project version changed; runtime/development dependency
+  versions are unchanged. An initial `uv lock --offline` could not resolve the
+  available registry metadata, so the normal lock command was used.
+- `uv run --locked pytest -q`: **349 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed.
+- `uv build --out-dir .work/goal-review-audit/release-0.6.0/dist`: sdist and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/goal-review-audit/release-0.6.0/dist/rctl-0.6.0-py3-none-any.whl`:
+  isolated package smoke passed.
+- `uv run --isolated --no-project --offline --with .work/goal-review-audit/release-0.6.0/dist/rctl-0.6.0-py3-none-any.whl python .work/goal-review-audit/verify_goal_race_fix.py`:
+  the arithmetic command passes while the concurrent Goal edit makes the review
+  unknown and retains the original Goal. Logs are under `.work/goal-review-audit/`.
+
 ## Goal-review verification race repair, 10 October 2026
 
 Starting agreement: branch review found that an uncited PROGRAM Goal edited while

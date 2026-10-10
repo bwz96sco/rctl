@@ -88,7 +88,7 @@ owns valid alignment, so no machine record or frontmatter schema migration is in
 
 ## 4. Machine record
 
-### Goal contribution and review (unreleased source increment)
+### Goal contribution and review (v0.6.0)
 
 When `research/PROGRAM.md` contains a completed, non-placeholder `## Goal`,
 `contract check`, `begin` and `amend` require contract frontmatter
