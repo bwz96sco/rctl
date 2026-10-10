@@ -2,10 +2,12 @@
 
 ## Latest deployment
 
-v0.5.1 source `84c4779` is pushed, passed all four CI jobs, and is installed in the
-global tool environment. The authorized OR task-skill and guidance merge is also
-complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
-currentness and additional reminder coverage remain separate runtime work.
+v0.6.0 source `7c5dd75` is pushed, passed all four CI jobs, and is installed in the
+global tool environment. Installed code/resources match the clean committed tree;
+goal-review entry, closure and reminder checks passed in a disposable project.
+See the [deployment record](V0.6.0-DEPLOYMENT.md). Live task-draft migration is
+separate work. Version-only historical currentness and additional reminder coverage
+remain separate runtime work.
 
 ## v0.6.0 release preparation, 10 October 2026
 
@@ -537,6 +539,7 @@ Keep the original's useful semantics: closure needs evidence, successful executi
 ## Historical milestones
 
 The [release-evidence index](RELEASE-EVIDENCE.md) maps completed increments and
-review follow-ups to their original verification records. M1–M7 and the v0.1 release
-remain completed historical work; M8 implementation is recorded with release pending.
+review follow-ups to their original verification records. M1–M8 and the v0.1 release
+remain completed historical work; v0.6.0 deploys the goal-review increment and
+intervening source changes.
 The older development proposal remains historical and does not override this plan.

@@ -2,10 +2,10 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.6.0 prepared for release; push, CI and installation pending.**
+**Status: v0.6.0 pushed, CI-verified and locally installed.**
 
-The previous installed release is recorded in the [v0.5.1 deployment record](docs/V0.5.1-DEPLOYMENT.md) and
-[review and verification record](docs/COMPARISON-REVIEW-FOLLOWUP.md).
+See the [deployment record](docs/V0.6.0-DEPLOYMENT.md) for the released source,
+CI and installed-package checks.
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, governing-question alignment, and Codex reminders. The
 [simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed
@@ -17,8 +17,8 @@ goal contribution and a required structured goal-impact review. Status and
 reminders show the reviewed investment decision separately from local pass.
 See [behavior](docs/SPEC.md#goal-contribution-and-review-v060)
 and [source development](docs/DEVELOPMENT.md#goal-review-controller-increment-10-october-2026).
-The installed v0.5.1 release does not include this enforcement; deployment follows
-the exact-commit CI gate in [Development](docs/DEVELOPMENT.md#release-and-deployment-order).
+The installed CLI includes this enforcement. Retained older agreements remain
+readable; new work and amendments follow the current entry rules.
 
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
