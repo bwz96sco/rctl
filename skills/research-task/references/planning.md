@@ -26,8 +26,12 @@ than imply an established claim. Every planned research task states its publicat
 purpose in Question/Scope: the specific obligation addressed, decisive output and
 what favorable, unfavorable or inconclusive evidence changes. An enabling task
 names the downstream experiment and observable handoff it makes possible.
-Use Question alignment and a required review criterion citing the brief, result
-and primary evidence, as in [Task files](task-files.md#publication-purpose-review).
+Use Question alignment and a required review criterion citing the result, primary
+evidence and any separate paper brief, as in
+[Task files](task-files.md#publication-purpose-review); rctl records the PROGRAM Goal.
+Before authoring the contract, run `rctl task list` and read related goal decisions.
+A task resuming a stopped or adjusted obligation names that task and the new
+evidence or bounded reason in Scope.
 The review assesses support for the proposed claim or next investment; merely
 finishing local work or remaining inside scope is insufficient. Venue examples
 calibrate useful contribution and evidence, not acceptance probability.

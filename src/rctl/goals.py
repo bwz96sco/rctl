@@ -1,10 +1,8 @@
 """Required goal judgments for new work, without a scientific verdict engine."""
 
-import json
-import os
 from urllib.parse import urlsplit
 
-from .documents import invalid, local_path, read_text, sections
+from .documents import RctlError, invalid, local_path, read_text, sections
 
 GOAL_SOURCE = "research/PROGRAM.md"
 
@@ -39,18 +37,18 @@ def validate_goal_contribution(contract, root=None, task=None, *, required=False
     if root is not None:
         if required and not goal:
             raise invalid("Complete research/PROGRAM.md / Goal before declaring goal_contribution.")
+        # verify records the Goal section itself; citing PROGRAM.md is optional.
         refs = {
             local_path(root, ref, task)
             for ref in criterion["evidence_refs"]
             if not urlsplit(ref).scheme
         }
-        required_refs = {local_path(root, GOAL_SOURCE), local_path(root, "result.md", task)}
-        if not required_refs <= refs:
+        result = local_path(root, "result.md", task)
+        if result not in refs:
             raise invalid(
-                f"{key}: goal review must cite research/PROGRAM.md and result.md "
-                "using task-relative evidence paths."
+                f"{key}: goal review must cite result.md using a task-relative evidence path."
             )
-        if not refs - required_refs and not any(
+        if not refs - {result, local_path(root, GOAL_SOURCE)} and not any(
             urlsplit(ref).scheme for ref in criterion["evidence_refs"]
         ):
             raise invalid(f"{key}: goal review must also cite primary task evidence.")
@@ -68,7 +66,36 @@ def validate_goal_review(check, contract, source):
         raise invalid(f"{source}: goal_impact must belong to the declared goal review.")
 
 
-def scaffold_goal_contribution(text, root, task):
+def record_reviewed_goal(root, check):
+    """Retain the Goal a supplied goal review was judged against."""
+    try:
+        goal = project_goal(root)
+    except RctlError as error:
+        goal, reason = None, error.message
+    else:
+        reason = f"{GOAL_SOURCE} / Goal is missing or unfinished."
+    if goal is None:
+        check["verdict"] = "unknown"
+        check["rationale"] += f" Project Goal unavailable: {reason}"
+    else:
+        check["reviewed_goal"] = goal
+
+
+def goal_currentness(root, report):
+    """Return (stale, unknown) issues when the reviewed Goal no longer applies."""
+    reviewed = [c["reviewed_goal"] for c in report["checks"] if "reviewed_goal" in c]
+    if not reviewed:
+        return [], []
+    try:
+        goal = project_goal(root)
+    except RctlError:
+        return [], [f"Cannot read the project Goal: {GOAL_SOURCE}."]
+    if goal != reviewed[0]:
+        return ["Project Goal changed since the goal review; review it again."], []
+    return [], []
+
+
+def scaffold_goal_contribution(text, root):
     guide_start = text.index("# task new enables the following block")
     start = text.index("# goal_contribution:")
     end = text.index("\ncriteria:", start)
@@ -76,11 +103,10 @@ def scaffold_goal_contribution(text, root, task):
         return text[:guide_start] + text[end:]
     declaration = "\n".join(line.removeprefix("# ") for line in text[start:end].splitlines())
     text = text[:guide_start] + declaration + text[end:]
-    source_ref = os.path.relpath(root / GOAL_SOURCE, task)
     criterion = (
         "  - id: AC-02\n"
         "    requirement: Assess the goal obligation against actual evidence and justify the next investment.\n"
-        f"    evidence_refs: [result.md, {json.dumps(source_ref)}, \"<Primary task evidence file>\"]\n"
+        '    evidence_refs: [result.md, "<Primary task evidence file>"]\n'
         "    failure_action: Supply the missing goal judgment or correct unsupported continuation.\n"
         "    method: {type: review, reviewer: either}\n"
     )

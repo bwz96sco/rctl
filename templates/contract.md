@@ -45,8 +45,8 @@ For paper-directed work, state the publication purpose: the brief's named claim 
 evidence obligation, the decisive output, and how favorable, unfavorable or
 inconclusive findings change the next investment. An enabling task names its
 downstream experiment and observable handoff. Include Question alignment and a
-required review criterion citing the brief, result and primary evidence to judge
-this consequence. Early selection/calibration tasks may leave the claim provisional.
+required review criterion citing the result, primary evidence and any separate
+paper brief to judge this consequence. Early selection/calibration tasks may leave the claim provisional.
 
 ## Constraints
 

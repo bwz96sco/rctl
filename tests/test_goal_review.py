@@ -42,7 +42,7 @@ def add_goal(task):
         data["criteria"].append({
             "id": "AC-03",
             "requirement": "Review what the result establishes for the project goal and next investment.",
-            "evidence_refs": ["../../research/PROGRAM.md", "result.md", "evidence/metrics.json"],
+            "evidence_refs": ["result.md", "evidence/metrics.json"],
             "failure_action": "Supply the missing judgment; do not promote a local pass to goal support.",
             "method": {"type": "review", "reviewer": "either"},
         })
@@ -57,7 +57,7 @@ def add_review(task):
         "verdict": "pass",
         "reviewer": "agent",
         "rationale": "Inspected the goal, fixed inputs, arithmetic and scoped result; an honest negative completes this decision task.",
-        "evidence_refs": ["../../research/PROGRAM.md", "result.md", "evidence/metrics.json"],
+        "evidence_refs": ["result.md", "evidence/metrics.json"],
         "goal_impact": IMPACT.copy(),
     })
     path.write_text(json.dumps(data), encoding="utf-8")
@@ -92,7 +92,8 @@ def test_incomplete_entry_rejected(goal_task, cli, field):
 @pytest.mark.parametrize("change", [
     lambda d: d["goal_contribution"].update(review_criterion="AC-99"),
     lambda d: d["goal_contribution"].update(review_criterion="AC-01"),
-    lambda d: d["criteria"][-1].update(evidence_refs=["result.md", "evidence/metrics.json"]),
+    lambda d: d["criteria"][-1].update(evidence_refs=["evidence/metrics.json"]),
+    lambda d: d["criteria"][-1].update(evidence_refs=["result.md"]),
     lambda d: d["criteria"][-1].update(evidence_refs=["../../research/PROGRAM.md", "result.md"]),
 ])
 def test_goal_entry_requires_real_review_and_evidence(goal_task, cli, change):
@@ -134,6 +135,7 @@ def test_negative_goal_decision_closes_without_becoming_goal_support(goal_task, 
     response = cli("verify", TASK, "--reviews", REVIEWS)
     assert response["data"]["verdict"] == "pass"
     assert response["data"]["checks"][-1]["goal_impact"] == IMPACT
+    assert response["data"]["checks"][-1]["reviewed_goal"] == "Establish lower comparable error."
     cli("close", TASK)
     status = cli("status", TASK)["data"]
     assert status["phase"] == "closed" and status["currentness"] == "current"
@@ -150,13 +152,40 @@ def test_negative_goal_decision_closes_without_becoming_goal_support(goal_task, 
         assert "contradicts" in data["context"]
 
 
-def test_changed_parent_goal_prevents_close(goal_task, cli):
+def test_changed_goal_prevents_close(goal_task, cli):
     goal_task.begin()
     cli("verify", TASK, "--reviews", REVIEWS)
     path = goal_task.root / "research/PROGRAM.md"
-    path.write_text(path.read_text() + "\nChanged investment guidance.\n")
+    path.write_text(path.read_text().replace("lower comparable error", "lower cost"))
     assert cli("status", TASK)["data"]["goal_impact"]["currentness"] == "stale"
-    cli("close", TASK, expected=4)
+    response = cli("close", TASK, expected=4)
+    assert "Project Goal changed" in response["error"]["message"]
+
+
+def test_guidance_edits_keep_goal_review_current(goal_task, cli):
+    # Corrections and closeout promotion edit PROGRAM outside its Goal section.
+    goal_task.begin()
+    cli("verify", TASK, "--reviews", REVIEWS)
+    path = goal_task.root / "research/PROGRAM.md"
+    path.write_text(path.read_text() + "\n## Current guidance\nA new correction.\n")
+    cli("close", TASK)
+    path.write_text(path.read_text() + "Promoted: stop this candidate.\n")
+    status = cli("status", TASK)["data"]
+    assert status["currentness"] == "current"
+    assert status["goal_impact"]["currentness"] == "current"
+    row = cli("task", "list")["data"]["tasks"][0]
+    assert row["goal_decision"] == {
+        "next_decision": "stop", "claim_effect": "contradicts", "currentness": "current"
+    }
+
+
+def test_unavailable_goal_leaves_goal_review_unknown(goal_task, cli):
+    goal_task.begin()
+    (goal_task.root / "research/PROGRAM.md").write_text("# Program\n\n## Goal\n<Goal>\n")
+    response = cli("verify", TASK, "--reviews", REVIEWS, expected=5)
+    check = response["data"]["checks"][-1]
+    assert check["verdict"] == "unknown" and "Project Goal unavailable" in check["rationale"]
+    assert "reviewed_goal" not in check
 
 
 def test_missing_goal_evidence_blocks_close(goal_task, cli):
@@ -190,15 +219,18 @@ def test_old_agreement_survives_but_new_amendment_requires_goal(task, cli):
     shutil.copytree(REPO / "examples/retained-comparison", task.path, dirs_exist_ok=True)
     task.begin()
     write_goal(task.root)
+    cli("contract", "check", TASK)
     cli("verify", TASK, "--reviews", REVIEWS)
     cli("close", TASK)
     status = cli("status", TASK)["data"]
     assert status["goal_impact"] is None
     assert status["goal_contribution"] is None
     assert status["historical_closure"]
+    assert cli("task", "list")["data"]["tasks"][0]["goal_decision"] is None
     cli("reopen", TASK, "--reason", "A new planned increment")
     path = task.file("contract.md")
     path.write_text(path.read_text() + "\nNew scoped work.\n")
+    cli("contract", "check", TASK, expected=2)
     cli("amend", TASK, "--reason", "Declare the next work", expected=2)
 
 
@@ -209,6 +241,7 @@ def test_new_project_draft_scaffolds_goal_and_required_review(project, cli):
     data = task.contract()[1]
     assert data["goal_contribution"]["review_criterion"] == "AC-02"
     assert data["criteria"][-1]["method"]["type"] == "review"
+    assert data["criteria"][-1]["evidence_refs"] == ["result.md", "<Primary task evidence file>"]
     with pytest.raises(RctlError, match="authoring placeholders"):
         task.begin()
 

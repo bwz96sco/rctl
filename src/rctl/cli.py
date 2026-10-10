@@ -10,7 +10,7 @@ from contextlib import redirect_stdout
 
 from . import __version__
 from .context import load_context
-from .documents import RctlError, invalid
+from .documents import RctlError, invalid, read_text
 from .records import Task, project_root, select_task
 
 
@@ -125,7 +125,16 @@ def dispatch(args):
     if args.command == "task":
         return task.new(args.kind, args.title), []
     if args.command == "contract":
-        _, data = task.contract()
+        # An unchanged accepted contract keeps its original agreement; edits
+        # are checked as the next amendment.
+        try:
+            record = task.read_record()
+        except RctlError:
+            record = None
+        retained = record is not None and read_text(
+            task.file("contract.md")
+        ) == record["contracts"][-1]["text"]
+        _, data = task.contract(check_goal=not retained)
         return {
             "task_id": task.task_id,
             "check": "structure",
@@ -238,6 +247,11 @@ def main(argv=None):
             print(
                 f"{row['path']} | {title} | {row['phase'] or 'unavailable'} | verification: {verdict} | {row['currentness']}"
             )
+            if row["goal_decision"]:
+                goal = row["goal_decision"]
+                print(
+                    f"  Goal decision: {goal['next_decision']} ({goal['claim_effect']}; {goal['currentness']})"
+                )
             for warning in row["warnings"]:
                 print(f"  Warning: {warning}")
             if row["error"]:

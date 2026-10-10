@@ -56,6 +56,7 @@ REVIEW_CHECK = obj(
 REVIEW_CHECK["properties"]["goal_impact"] = json.loads(
     resource_text("schemas", "reviews.schema.json")
 )["properties"]["checks"]["items"]["properties"]["goal_impact"]
+REVIEW_CHECK["properties"]["reviewed_goal"] = TEXT
 OBSERVATION = obj(
     path=TEXT,
     observation={"enum": ["present", "missing", "unreadable"]},

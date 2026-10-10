@@ -36,7 +36,17 @@ increment these fields are mechanically required, and missing review entries
 still produce unknown. Verify field completeness separately from adequacy of the
 judgment. Check status for this reviewed decision and currentness before planning
 continuation; a local pass with `stop` completes the task without authorizing more
-of the stopped investment. Old accepted contracts retain their original criteria.
+of the stopped investment. A goal review becomes stale when its cited evidence or
+the PROGRAM Goal changes, not when Current guidance changes (unless PROGRAM.md
+itself is cited), so promoting findings to PROGRAM at closeout does not withdraw a
+decision. Old accepted contracts retain
+their original criteria.
+
+Write `goal_impact` from a fresh context holding only the contract, result, primary
+evidence and Goal, for example a new subagent without the working transcript, so
+the judgment does not inherit the work's momentum. For a costly continuation, the
+contract may require `reviewer: operator`. rctl records the declared reviewer; it
+cannot verify who wrote the judgment.
 
 Run `rctl verify TASK --reviews FILE`, omitting reviews for command-only criteria.
 Inspect every criterion and its logs as needed. Nonzero verification can still save

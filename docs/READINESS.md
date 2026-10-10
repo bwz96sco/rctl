@@ -93,6 +93,9 @@ complete declarations/judgments for newly accepted work in a project with a
 completed PROGRAM Goal; standalone work and old accepted agreements retain their
 scope. Structural completeness and retained decisions do not prove the review's
 scientific truth or resistance to future poor planning. rctl does not automatically
-apply a stop decision across a task graph; continuation remains an evidence-based
-planning responsibility visible in the new contract. No global installation,
+apply a stop decision across a task graph; `task list` exposes each goal decision,
+and continuation remains an evidence-based planning responsibility visible in the
+new contract. Goal applicability compares the recorded Goal text, so a reworded
+but equivalent Goal also requires a new review. The recommended fresh-context goal
+review is unenforced; reviewer labels remain unauthenticated. No global installation,
 live-project migration or fresh-host adherence result is claimed by source checks.

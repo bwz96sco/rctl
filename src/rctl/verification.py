@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 
 from . import __version__
 from .documents import RctlError, local_path, parse_result, parse_reviews, read_text
+from .goals import goal_currentness, record_reviewed_goal
 from .policy import aggregate
 from .records import now, state_error
 
@@ -210,6 +211,9 @@ def currentness(task, record, readable=False):
             unknown.append(f"Cannot observe evidence: {previous['path']}.")
         elif current["observation"] == "missing" or current != previous:
             stale.append(f"Evidence missing or changed: {previous['path']}.")
+    goal_stale, goal_unknown = goal_currentness(task.root, report)
+    stale += goal_stale
+    unknown += goal_unknown
     if stale:
         return "stale", stale + unknown
     if unknown:
@@ -300,6 +304,8 @@ def verify(task, reviews_file=None):
             logs.extend(new_logs)
         else:
             check = review_check(task, criterion, reviews.get(criterion["id"]))
+            if "goal_impact" in check:
+                record_reviewed_goal(task.root, check)
         checks.append(check)
     final = {
         ref: observe(task.root, ref, readable=True)

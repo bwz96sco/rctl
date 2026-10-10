@@ -118,8 +118,10 @@ goal_contribution:
 ```
 
 The controller requires this declaration, a review method for the named criterion,
-and citations of PROGRAM, result and primary evidence. The reviewer assesses
-adequacy. For example, an implementation task can establish
+and citations of `result.md` and primary evidence. Verify records the PROGRAM Goal
+the review was judged against, so only a later Goal change makes it stale. Do not
+cite PROGRAM.md merely for its Goal: a cited file is observed whole, and Current
+guidance edits would then stale the review. The reviewer assesses adequacy. For example, an implementation task can establish
 backend operability as an input to a later method comparison, without claiming
 incremental benefit from operability alone.
 
@@ -128,14 +130,15 @@ Add a criterion with an unused numeric ID, such as this illustrative third item:
 ```yaml
   - id: AC-03
     requirement: The result assesses which publication evidence obligation the inspected episode supports or leaves unresolved, and justifies the next investment against the current paper hypothesis.
-    evidence_refs: [../../research/PROGRAM.md, result.md, evidence/episode.json]
+    evidence_refs: [result.md, evidence/episode.json]
     failure_action: Correct unsupported claim promotion or supply the missing judgment; retain an unsupported obligation with a bounded repair or stop when that is the finding.
     method:
       type: review
       reviewer: either
 ```
 
-Replace the example paths with the actual governing brief and primary evidence.
+Replace the example path with the actual primary evidence; add a separate paper
+brief when the judgment depends on it.
 At closeout, review local delivery and paper consequence separately. An honest
 negative assessment can pass this requirement; absence of reasoning cannot. For
 example: "The backend accepted the package, supporting operability. Only the
@@ -158,10 +161,11 @@ its ordinary `rationale` and `evidence_refs` still cite the inspected evidence:
 
 Missing required review entries block closure; supplied incomplete impact objects
 reject before checks. Read-only status/context expose this judgment separately
-from local pass. When planning the next task, inspect its currentness, project
+from local pass, and `rctl task list` shows every task's goal decision. When
+planning the next task, inspect related decisions, their currentness, project
 guidance and evidence: a reviewed stop does not authorize automatic continuation.
-An adjustment or later new investment needs an explicit bounded reason in the
-new contract. rctl does not judge that reason's scientific truth or start tasks.
+A contract resuming a stopped or adjusted obligation names that task and the new
+evidence or bounded reason in Scope. rctl does not judge that reason's scientific truth or start tasks.
 
 ### Command checks
 

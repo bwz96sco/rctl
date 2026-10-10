@@ -101,6 +101,12 @@ class TaskSnapshot:
             "verification": {key: report[key] for key in ("id", "verdict")}
             if report
             else None,
+            "goal_decision": {
+                key: self.goal_impact[key]
+                for key in ("next_decision", "claim_effect", "currentness")
+            }
+            if self.goal_impact is not None
+            else None,
             "warnings": list(self.warnings),
         }
 

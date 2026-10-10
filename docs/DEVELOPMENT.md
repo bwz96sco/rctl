@@ -7,6 +7,47 @@ global tool environment. The authorized OR task-skill and guidance merge is also
 complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
 currentness and additional reminder coverage remain separate runtime work.
 
+## Goal-review follow-up, 10 October 2026
+
+Starting agreement: a review of the controller increment below found that the
+mandatory `research/PROGRAM.md` citation made every goal review depend on the whole
+file. Observation compares size and mtime, so Current guidance edits, closeout
+promotion, or a checkout marked reviewed stop decisions stale in status and
+reminders, which reads as permission to continue. The user asked to commit the
+increment and implement the recommended fixes. Scope stays source-only and
+unreleased; no live task, installation or release changes.
+
+Changes:
+
+- The goal review cites `result.md` and primary evidence; PROGRAM.md is optional
+  and not primary evidence. Verify records the Goal text as `reviewed_goal`;
+  currentness compares it with the current Goal. An unavailable Goal leaves the
+  review unknown. Pre-follow-up reports have no `reviewed_goal` and are unaffected.
+- `contract check` keeps the original agreement for an unchanged accepted contract;
+  a changed contract follows the amendment rule.
+- `task list` rows carry `goal_decision`; planning guidance reads related decisions
+  and requires a resumed stopped/adjusted obligation to name its task and reason.
+- Verification guidance recommends writing `goal_impact` from a fresh context and
+  allows `reviewer: operator` for costly continuation; this is practice, not
+  enforcement.
+
+Acceptance selected: A-41–A-43 wording updated (counts unchanged at 22/43).
+
+Validation on local macOS/Python 3.13.2:
+
+- `uv run --locked pytest -q`: **340 passed, 49 subtests passed**. New or changed
+  cases: Goal change blocks close; Current guidance edits before and after close
+  keep the review and `goal_decision` current; unavailable Goal leaves the review
+  unknown; PROGRAM-only primary evidence rejects; unchanged retained contract passes
+  `contract check` while a changed one rejects.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed (356 local links, 100 JSON
+  files, 22 requirements and 43 acceptance cases).
+- A scratch run of text-mode `task list` printed the indented goal decision line.
+
+Not rerun: candidate wheel build and isolated package smoke; no LEO observation.
+The fresh-context review practice is guidance only and untested in a live host.
+
 ## Goal-review controller increment, 10 October 2026
 
 Starting agreement: the user asked how to make final-goal checking unavoidable,

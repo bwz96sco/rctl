@@ -96,8 +96,11 @@ When `research/PROGRAM.md` contains a completed, non-placeholder `## Goal`,
 `decision_use` and `review_criterion`. The first three declare the specific goal
 obligation, decisive output and what favorable/unfavorable/inconclusive evidence
 changes. The last names an existing required review criterion. Its task-relative
-evidence references must include `research/PROGRAM.md`, `result.md` and primary
-task evidence. This is entry completeness and lineage, not scientific adequacy.
+evidence references must include `result.md` and primary task evidence;
+`research/PROGRAM.md` does not count as primary evidence. Citing PROGRAM.md is
+optional: verify records the Goal itself, and a cited file is observed as a whole,
+so any edit to it, including Current guidance, makes the review stale. This is
+entry completeness and lineage, not scientific adequacy.
 Standalone tasks without a completed project Goal remain supported; explicit
 goal contribution requires that Goal. `task new` scaffolds this declaration and
 an additional review when the Goal is set. The optional Question alignment body
@@ -110,19 +113,26 @@ The designated review entry must contain `goal_impact`: `claim_effect`
 and next investment; filling fields alone is insufficient scientific review.
 A missing entry produces unknown; a supplied incomplete entry is invalid before
 execution. The complete judgment is retained in the check and exact review input.
-Ordinary reviews cannot carry a detached goal-impact object.
+Ordinary reviews cannot carry a detached goal-impact object. For a supplied entry,
+verify also records the current PROGRAM Goal text as the check's `reviewed_goal`;
+when the Goal is missing, unreadable or unfinished, the check is unknown.
 
 An honest negative may pass an honest-assessment requirement and close with
 `next_decision: stop`; neither claim effect nor investment choice rewrites the
 local verification verdict. A criterion requiring positive benefit still fails
-on evidence without that benefit. All cited material, including the parent brief,
-uses the existing observation/currentness rules. Older accepted contracts are
-not retroactively required to supply this declaration; an amendment is new work
-and follows the current entry rule.
+on evidence without that benefit. All cited material, including any cited brief,
+uses the existing observation/currentness rules. A report with `reviewed_goal` is
+also stale when the current Goal text differs, and unknown when PROGRAM.md cannot
+be read; edits outside the Goal section do not affect it. Older accepted contracts
+are not retroactively required to supply this declaration; `contract check` of an
+unchanged accepted contract retains that agreement, while a changed contract and
+an amendment are new work and follow the current entry rule.
 
 Status exposes `goal_contribution` from the accepted contract and `goal_impact`
 from the latest verification for that same revision, with review verdict,
 verification ID, revision and currentness. Missing/legacy judgments are null.
+`task list` rows carry `goal_decision` (`next_decision`, `claim_effect`,
+`currentness`) or null, so planning can find stop/adjust decisions across tasks.
 Bounded reminders show the contribution and investment decision separately from
 task assessment and local pass. Continuation planning must follow this judgment
 and current project guidance. rctl does not create subsequent tasks or judge the
@@ -190,7 +200,7 @@ Review input follows `reviews.schema.json`: task ID, contract revision, and entr
 
 Every report contains `id`, `contract_revision`, `cycle`, `created_at`, `rctl_version`, `result_text`, optional `review_input_text`, `observed_files`, `external_refs`, `subject_issues`, `checks`, and `verdict`. `subject_issues` is an array of explanations for missing, unreadable, or changed subject observations, empty when none occur. `external_refs` is a deduplicated array of URI strings; the review rationale carries any version and observation qualification.
 
-A check contains `criterion_id`, `method` (`command` or `review`), `verdict`, `rationale`, and `evidence_refs`. Command checks additionally contain `execution` with `argv`, project-relative `cwd`, `started_at`, `finished_at`, nullable integer `exit_code`, boolean `timed_out`, nullable string `error`, `stdout_ref`, and `stderr_ref`. If execution never started, `execution` is null and the rationale explains why. Review checks additionally contain nullable `reviewer`; it is null when the required entry is missing. Enumerate all criteria exactly once.
+A check contains `criterion_id`, `method` (`command` or `review`), `verdict`, `rationale`, and `evidence_refs`. Command checks additionally contain `execution` with `argv`, project-relative `cwd`, `started_at`, `finished_at`, nullable integer `exit_code`, boolean `timed_out`, nullable string `error`, `stdout_ref`, and `stderr_ref`. If execution never started, `execution` is null and the rationale explains why. Review checks additionally contain nullable `reviewer`; it is null when the required entry is missing. A supplied declared goal review also contains `goal_impact` and, when the Goal was available, `reviewed_goal`. Enumerate all criteria exactly once.
 
 An `observed_files` entry has project-relative `path`, `observation` (`present`, `missing`, or `unreadable`), nullable `size_bytes`, and nullable `mtime_ns`. Store the final observation; either a missing/unreadable observation or a difference from the starting observation adds a `subject_issues` entry. Observe newly written stdout/stderr logs after execution and include them in `observed_files`, so missing execution evidence also prevents later closure. Their absence from the starting input list is expected and does not itself create an issue.
 
@@ -198,7 +208,7 @@ Report verdict is `fail` if any criterion fails, otherwise `unknown` if any crit
 
 ## 7. Currentness and scope of observations
 
-Compare current contract and result text exactly against the governing contract and report's `result_text`. For each declared local evidence/input file, record project-relative path, byte size, and nanosecond mtime before and after verification. At close, observe these again. Missing or changed metadata makes a report stale; an observation error makes applicability unknown. No background scanning or full data hashing is required.
+Compare current contract and result text exactly against the governing contract and report's `result_text`. For each declared local evidence/input file, record project-relative path, byte size, and nanosecond mtime before and after verification. At close, observe these again. Missing or changed metadata makes a report stale; an observation error makes applicability unknown. A report whose goal review recorded `reviewed_goal` is also compared with the current PROGRAM Goal text (see goal contribution in §4). No background scanning or full data hashing is required.
 
 This is an ordinary-change detector in a cooperating workspace, not content-integrity certification. Store `external_refs` as the URI and reviewer-supplied version/observation description; rctl makes no current remote availability claim. Evidence freshness and reproducibility beyond these observations must be covered by the criterion's check. A report from a different `rctl_version` cannot close a task until verification is rerun.
 

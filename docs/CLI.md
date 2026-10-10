@@ -78,7 +78,9 @@ rctl update export .work/rctl-update --codex
 
 `task list [--phase draft|active|closed|cancelled]` returns `data.tasks` sorted by
 path, with `task_id`, `path`, nullable `title`/`phase`, verification summary,
-`currentness`, warnings, and nullable error. Unavailable entries remain visible through
+`currentness`, nullable `goal_decision` (`next_decision`, `claim_effect`,
+`currentness` of the reviewed goal impact), warnings, and nullable error. Text
+output adds an indented `Goal decision` line when present. Unavailable entries remain visible through
 filters. Missing tasks directory is an empty successful list; custom task paths remain
 usable through explicit per-task commands. No current task is chosen.
 An existing file at `tasks/` returns `INVALID_INPUT` with `Expected directory: tasks`.
@@ -133,13 +135,17 @@ For interrupted work, write a short handoff and use `checkpoint`; no close is ne
 
 ## Contract errors to make actionable
 
-With a completed `research/PROGRAM.md / Goal`, new `contract check`, `begin` and
-`amend` also require `goal_contribution` and its designated review. `task new`
-scaffolds this declaration automatically. See
+With a completed `research/PROGRAM.md / Goal`, `begin`, `amend` and
+`contract check` of a draft or changed contract also require `goal_contribution`
+and its designated review citing `result.md` and primary evidence. An unchanged
+accepted contract still passes `contract check`. `task new` scaffolds this
+declaration automatically. See
 [goal-review behavior](SPEC.md#goal-contribution-and-review-unreleased-source-increment).
 A missing goal review leaves verification unknown; an incomplete supplied
-`goal_impact` rejects the input before checks. Status/context expose the planned
-contribution and reviewed investment decision separately from local pass.
+`goal_impact` rejects the input before checks. Verify records the reviewed Goal;
+a later Goal change makes the report stale, while other PROGRAM edits do not.
+Status/context expose the planned contribution and reviewed investment decision
+separately from local pass; `task list` shows each task's goal decision.
 
 - Malformed record: name the failing field/constraint or lifecycle invariant; preserve the record and restore valid history.
 - Evidence changed during verification: name the path and any executed command criteria declaring it. If a checker generates evidence, run generation before verification and amend the frozen command to a read-only check when necessary.

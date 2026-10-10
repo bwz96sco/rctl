@@ -422,6 +422,11 @@ states the compatibility checks and their scope.
   bounded honest negative closure, accepted-contract authority and older records.
 - **Excluded:** an automatic scientific merit score, a new goal ledger, compulsory
   user approval, automatic next-task creation, or a guarantee of publication.
+- **Follow-up adaptation (same day):** after reviewing the increment, the user
+  accepted recording the reviewed Goal instead of requiring a whole-file PROGRAM
+  citation, listing goal decisions in `task list`, and recommending a fresh-context
+  goal review. The fresh-context practice is the reviewer's recommendation, not a
+  distilled external source.
 - **Implementation reference:** [behavior](SPEC.md#goal-contribution-and-review-unreleased-source-increment)
   and [development record](DEVELOPMENT.md#goal-review-controller-increment-10-october-2026).
   JSON Schema object-field behavior was checked through `smart-search search` and

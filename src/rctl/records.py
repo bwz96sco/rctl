@@ -166,7 +166,7 @@ class Task:
         text = text.replace("kind: exploration", f"kind: {kind}")
         from .goals import scaffold_goal_contribution
 
-        text = scaffold_goal_contribution(text, self.root, self.path)
+        text = scaffold_goal_contribution(text, self.root)
         self.path.mkdir(parents=True, exist_ok=False)
         self.file("contract.md").write_text(text, encoding="utf-8")
         return {

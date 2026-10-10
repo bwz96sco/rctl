@@ -20,6 +20,7 @@ def list_tasks(root, phase=None):
             "phase": None,
             "verification": None,
             "currentness": "unavailable",
+            "goal_decision": None,
             "warnings": [],
             "error": None,
         }
