@@ -69,7 +69,7 @@ The exporter does not launch a host, alter global configuration, merge a live pr
 
 The internal command `rctl hook codex` reads one event JSON object from stdin. It requires `RCTL_PROJECT_ROOT` or an explicit global `--root`; it must not infer a different project from the host payload. `RCTL_TASK_PATH` selects the task relative to that root. The payload's `cwd` must resolve inside that root.
 
-Use one initial `SessionStart` handler. Add `UserPromptSubmit` for updated handoffs, contract changes, and selection reminders. Both must render fresh state; prompt events use a compact summary plus source paths rather than reinjecting the entire contract. No daemon or continuous polling is involved.
+Use one initial `SessionStart` handler. Add `UserPromptSubmit` for updated handoffs, contract changes, and selection reminders. Both must render fresh state; prompt events use a compact summary plus source paths rather than reinjecting the entire contract. With a selected task, that summary is one capped line per decision-relevant field (see SPEC's reminder section), so it carries whole sentences rather than fragments. No daemon or continuous polling is involved.
 
 The pilot's retained event and response shape is:
 

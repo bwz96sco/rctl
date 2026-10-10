@@ -264,7 +264,21 @@ short relative source map, including in project-source diagnostics while retaini
 the failure reason. List the research README only when it exists. Allocate
 unused field space to remaining fields; bound values separately from labels and
 use short truncation references. Both budgets use the same concise layout without
-appended contract/handoff excerpts. Source alias C identifies the accepted contract
+appended contract/handoff excerpts, except that the UserPromptSubmit hook for a
+selected, readable task uses a per-prompt layout: one status line (task, phase,
+verification and currentness), up to three `Warning:` lines (with a count beyond
+that), the first sentence of the governing question and of
+the declared non-claim boundary, the reported next action and blockers for draft or
+active tasks, the lifecycle action, the reviewed goal decision (or the declared
+obligation's first sentence before review), the Goal's first sentence and the
+`rctl context TASK` pointer. Each line is capped separately and space is assigned by
+priority (warnings, goal decision, Goal, next action, question), so the
+2000-character event carries whole sentences instead of fragments of every field and
+always ends with the pointer; mid-session contract drift therefore still appears;
+SessionStart, including after compaction, and `rctl context` keep the full layout.
+Without a selected task, or when the task is unreadable, the prompt event keeps the
+compact project layout. This was changed on 10 October 2026 after LEO's selected-task
+prompt reminder reduced each goal field to a few characters. Source alias C identifies the accepted contract
 text in the record for managed tasks, or contract.md for drafts; source reads must
 preserve that distinction when the working contract has drifted. Bound added
 JSON summaries, including question/alignment fields, too; an insufficient budget yields null text fields rather than

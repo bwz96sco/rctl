@@ -1,5 +1,44 @@
 # Development Plan
 
+## Per-prompt task reminder, 10 October 2026
+
+Starting agreement: asked whether hooks are still necessary, the analysis found that
+with `RCTL_TASK_PATH` set, LEO's 2,000-character UserPromptSubmit reminder split its
+budget across about twenty task, goal and project fields, leaving most as a few
+characters and a truncation marker (the Goal itself became "Produce an applied
+research pap"). The user approved a compact per-prompt layout.
+
+Scope: the hook's UserPromptSubmit text for a selected, readable task. It keeps one
+line each for status, the governing question's and non-claim boundary's first
+sentences, reported next action and blockers, lifecycle action, goal decision or
+declared obligation, and the Goal's first sentence, plus up to three full warnings
+and the `rctl context` pointer, each separately capped and allocated by priority. SessionStart, `rctl context`, the
+project-only and unavailable-task layouts, budgets, hook shape and records are
+unchanged.
+
+Acceptance selected: A-40 (prompt delivery of the governing question and non-claim
+boundary, now as whole sentences with the goal decision) and A-33 (terminal
+2000-character layout unchanged). Regressions: a goal-linked task with a long Goal
+whose old prompt reminder contained truncation markers; working-contract drift shown
+as its warning text; extreme next action, blockers and Goal still within 2000
+characters and ending with the pointer.
+
+Local validation on macOS 26.6.2/Python 3.13.2:
+
+- The new regression failed on the previous renderer (truncation marker present)
+  and passes with the change.
+- LEO, read-only: the prompt reminder for `dlrm-adaptation-headroom` went from 1,998
+  characters with truncated fields to 972 characters with none, including its two
+  warnings; for the draft
+  `orbital-plan-validation`, 908 characters with none. The project-only reminder is
+  byte-identical to installed 0.6.2 output.
+- `uv run --locked pytest -q`: **373 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed.
+
+Not run: wheel build, installed smoke and real-host sessions. The installed 0.6.2
+still sends the previous prompt layout until a release is deployed.
+
 ## Claude Code host support, 10 October 2026
 
 Starting agreement: after the Codex first-use repair, the user reported that hooks

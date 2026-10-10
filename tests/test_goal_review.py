@@ -400,3 +400,76 @@ def test_fully_authored_generated_draft_can_begin(project, cli, has_goal):
     ) + "\n")
     task.begin()
     assert task.read_record()["phase"] == "active"
+
+
+def test_prompt_reminder_keeps_whole_sentences_for_a_selected_task(
+    goal_task, cli, monkeypatch
+):
+    from rctl.hooks.codex import handle
+
+    program = goal_task.root / "research/PROGRAM.md"
+    program.write_text(
+        "# Program\n\n## Goal\nEstablish lower comparable error. "
+        + "Further framing sentence. " * 300
+        + "\n",
+        encoding="utf-8",
+    )
+    goal_task.begin()
+    goal_task.file("state.md").write_text(
+        "## Next action\nRun the fixed comparison.\n\n## Blockers\nNone\n"
+    )
+    monkeypatch.setenv("RCTL_TASK_PATH", TASK)
+    monkeypatch.delenv("RCTL_HOOK_LOG", raising=False)
+
+    def reminder(event):
+        return handle(
+            {"hook_event_name": event, "cwd": str(goal_task.root)},
+            str(goal_task.root),
+            "claude",
+        )["hookSpecificOutput"]["additionalContext"]
+
+    # The full layout splits 2000 characters across every field; the prompt
+    # layout keeps one whole sentence per decision-relevant field instead.
+    prompt = reminder("UserPromptSubmit")
+    assert "[Truncated" not in prompt and len(prompt) <= 2000
+    assert prompt.startswith("Task: retained-comparison | active | not verified")
+    assert f"Goal obligation (declared): {CONTRIBUTION['obligation']}" in prompt
+    assert "Reported handoff — Next action: Run the fixed comparison." in prompt
+    assert "Project goal (reported): Establish lower comparable error.\n" in prompt
+    assert prompt.endswith(f"Full reminder: rctl context {TASK}")
+    assert "Warning: No verification has been recorded" in prompt
+    contract = goal_task.file("contract.md")
+    accepted = contract.read_text()
+    contract.write_text(accepted + "\nWorking edit.\n")
+    assert (
+        "Warning: AMENDMENT_REQUIRED: current contract differs from the governing revision."
+        in reminder("UserPromptSubmit")
+    )
+    contract.write_text(accepted)
+    cli("verify", TASK, "--reviews", REVIEWS)
+    cli("close", TASK)
+    prompt = reminder("UserPromptSubmit")
+    assert "Goal decision (reviewed): contradicts; investment: stop (current)" in prompt
+    assert "Reported handoff" not in prompt
+    full = reminder("SessionStart")
+    assert "Goal consequence" in full and "Remaining goal gap" in full
+
+
+def test_prompt_reminder_fits_extreme_fields_and_keeps_pointer(goal_task, monkeypatch):
+    from rctl.hooks.codex import handle
+
+    program = goal_task.root / "research/PROGRAM.md"
+    program.write_text("# Program\n\n## Goal\n" + "goal " * 2000 + "\n", encoding="utf-8")
+    goal_task.begin()
+    goal_task.file("state.md").write_text(
+        "## Next action\n" + "step " * 3000 + "\n\n## Blockers\n" + "blocker " * 2000 + "\n"
+    )
+    monkeypatch.setenv("RCTL_TASK_PATH", TASK)
+    prompt = handle(
+        {"hook_event_name": "UserPromptSubmit", "cwd": str(goal_task.root)},
+        str(goal_task.root),
+    )["hookSpecificOutput"]["additionalContext"]
+    assert len(prompt) <= 2000
+    assert prompt.endswith(f"Full reminder: rctl context {TASK}")
+    assert "Goal obligation (declared):" in prompt
+    assert "Project goal (reported): goal goal" in prompt

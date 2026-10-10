@@ -1,6 +1,7 @@
 """Read-only project and task reminders shared by terminal and host integration."""
 
 import os
+import re
 
 from .documents import RctlError
 from .project_context import read_project
@@ -8,6 +9,8 @@ from .records import Task, select_task
 
 DEFAULT_BUDGET = 8000
 FIELD_VISIBILITY = 96
+# Per-prompt caps keep each line a whole sentence instead of a fragment.
+PROMPT_CAPS = {"next_action": 400, "blockers": 200, "warning": 200, "sentence": 300}
 
 
 def bounded(text, budget, source):
@@ -157,12 +160,108 @@ def render(
     return data
 
 
+def first_sentence(text):
+    text = " ".join(text.split())
+    match = re.search(r"[.!?。！？](?=\s|$)", text)
+    return text[: match.end()] if match else text
+
+
+def prompt_reminder(snapshot, project, warnings, task_path, budget):
+    """Selected-task state for every prompt; SessionStart carries the full reminder."""
+    report = snapshot.verification
+    verification = f"{report['id']} {report['verdict']}" if report else "not verified"
+    head = (
+        f"Task: {snapshot.task_id} | {snapshot.phase} | {verification} "
+        f"({snapshot.currentness})"
+    )
+    tail = f"Full reminder: rctl context {task_path}"
+    sentence = PROMPT_CAPS["sentence"]
+    # (display order, label, text, cap, source), listed by priority for space.
+    lines = [
+        (1, "Warning", warning, PROMPT_CAPS["warning"], f"rctl status {task_path}")
+        for warning in warnings[:3]
+    ]
+    impact, contribution = snapshot.goal_impact, snapshot.goal_contribution
+    if impact is not None:
+        decision = (
+            f"{impact['claim_effect']}; investment: {impact['next_decision']} "
+            f"({impact['currentness']})"
+        )
+        lines.append((8, "Goal decision (reviewed)", decision, sentence, "status TASK"))
+    elif contribution is not None:
+        lines.append(
+            (
+                8,
+                "Goal obligation (declared)",
+                first_sentence(contribution["obligation"]),
+                sentence,
+                "C / goal_contribution",
+            )
+        )
+    if project["goal"]:
+        lines.append(
+            (9, "Project goal (reported)", first_sentence(project["goal"]), sentence, "P / Goal")
+        )
+    if snapshot.phase in {"draft", "active"}:
+        lines.append(
+            (
+                5,
+                "Reported handoff — Next action",
+                snapshot.handoff["next_action"],
+                PROMPT_CAPS["next_action"],
+                "T/state.md",
+            )
+        )
+    lines.append(
+        (3, "Governing task question", first_sentence(snapshot.question), sentence, "C / Question")
+    )
+    if snapshot.question_alignment is not None:
+        lines.append(
+            (
+                4,
+                "This task does not decide (declared)",
+                first_sentence(snapshot.question_alignment["does_not_decide"]),
+                sentence,
+                "C / Question alignment",
+            )
+        )
+    lines.append((7, "Lifecycle action", snapshot.next_action, sentence, "status TASK"))
+    if snapshot.phase in {"draft", "active"}:
+        lines.append(
+            (
+                6,
+                "Reported handoff — Blockers",
+                snapshot.handoff["blockers"],
+                PROMPT_CAPS["blockers"],
+                "T/state.md",
+            )
+        )
+    if len(warnings) > 3:
+        lines.append(
+            (2, "Warnings", f"{len(warnings) - 3} more; read rctl status {task_path}.", 100, "status TASK")
+        )
+    room = budget - len(head) - len(tail) - 2
+    kept = []
+    for order, label, text, cap, source in lines:
+        space = min(cap, room - len(label) - 3)
+        # Skip a line that would only fit a fragment; the pointer remains.
+        if not text or space < min(len(text), 40):
+            continue
+        line = f"{label}: {bounded(text, space, source)}"
+        kept.append((order, line))
+        room -= len(line) + 1
+    body = [line for _, line in sorted(kept, key=lambda item: item[0])]
+    return "\n".join([head, *body, tail])
+
+
 def context(task, budget=DEFAULT_BUDGET):
     """Read one concise reminder from the selected task."""
     return load_context(task.root, task=task, budget=budget)
 
 
-def load_context(root, selection=None, *, task=None, budget=DEFAULT_BUDGET):
+def load_context(
+    root, selection=None, *, task=None, budget=DEFAULT_BUDGET, prompt=False
+):
     project, project_warnings = read_project(root)
     selected = (
         task is not None
@@ -199,4 +298,12 @@ def load_context(root, selection=None, *, task=None, budget=DEFAULT_BUDGET):
     if error:
         error.data = {**data, "context_warnings": warnings}
         raise error
+    if prompt and snapshot is not None:
+        data["context"] = prompt_reminder(
+            snapshot,
+            project,
+            warnings,
+            task.path.relative_to(root).as_posix(),
+            budget,
+        )
     return data, warnings
