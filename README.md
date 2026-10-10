@@ -2,9 +2,10 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.6.2 prepared for release; push, CI and installation pending.**
+**Status: v0.6.2 pushed, CI-verified and locally installed.**
 
-The previous installed release is recorded in the [v0.6.1 deployment record](docs/V0.6.1-DEPLOYMENT.md).
+See the [deployment record](docs/V0.6.2-DEPLOYMENT.md) for the released source,
+CI, installed-package checks and LEO/OR host reconciliation.
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, governing-question alignment, and Codex and Claude Code reminders. The
 [simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed

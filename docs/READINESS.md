@@ -101,8 +101,9 @@ review. The recommended fresh-context goal
 review is unenforced; reviewer labels remain unauthenticated. No global installation,
 live-project migration or fresh-host adherence result is claimed by source checks.
 
-15. Claude Code support (10 October 2026 source) has one real-host probe: a `claude -p`
-session on Claude Code 2.1.296 received both reminders and listed the copied skill.
+15. Claude Code support (v0.6.2) has real-host probes in a disposable project, LEO and
+OR: `claude -p` sessions on Claude Code 2.1.296 received both reminders and listed the
+research-task skill.
 A `-p` session treats the folder as trusted, so the interactive workspace-trust path,
 resume, compaction and subagents were not observed. Doctor reads only project settings
 files, not user, managed or plugin layers, and cannot see whether the workspace trust
