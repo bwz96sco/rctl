@@ -1,5 +1,31 @@
 # Development Plan
 
+## v0.6.3 release preparation, 10 October 2026
+
+The user authorized committing, releasing and installing the
+[per-prompt task reminder](#per-prompt-task-reminder-10-october-2026) (`132f2de`)
+and checking LEO and OR. It changes only reminder text; schemas, controller,
+lifecycle and packaged skill files are unchanged. Before deployment, both projects'
+`doctor` reported all 22 findings current and every closed task already displayed
+stale (LEO 40, OR 115), so the version bump adds no new version-only staleness.
+
+Acceptance selected: the existing suite plus installed-package smoke (A-23), then
+installed prompt reminders for selected LEO and OR tasks and one real Claude Code
+session with a selected task.
+
+Local macOS 26.6.2/Python 3.13.2 validation of the release commit:
+
+- `uv lock`: only the project version changed.
+- `uv run --locked pytest -q`: **373 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed.
+- `uv build --out-dir .work/release-0.6.3/dist`: sdist and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/release-0.6.3/dist/rctl-0.6.3-py3-none-any.whl`:
+  isolated package smoke passed.
+
+Deployment follows the 0.6.2 procedure: push, all four CI jobs, then installation
+from a clean committed tree.
+
 ## Per-prompt task reminder, 10 October 2026
 
 Starting agreement: asked whether hooks are still necessary, the analysis found that
