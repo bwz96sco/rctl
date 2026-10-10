@@ -25,6 +25,7 @@ Historical passes do not certify a later implementation or host version.
 | v0.6.1 deployment, 2026-10-10; source `f2f2b2f` | Guidance consolidation packaged; four CI jobs and installed CLI/resource checks | [Deployment record](V0.6.1-DEPLOYMENT.md) |
 | v0.6.2 deployment, 2026-10-10; source `c827469` | Codex first-use defaults and Claude Code support; four CI jobs, installed checks, LEO/OR reconciliation and real Claude Code reminders | [Deployment record](V0.6.2-DEPLOYMENT.md) |
 | v0.6.3 deployment, 2026-10-10; source `3aef00a` | Compact selected-task prompt reminders; four CI jobs, installed checks and a real Claude Code prompt reminder in LEO | [Deployment record](V0.6.3-DEPLOYMENT.md) |
+| v0.6.4 deployment, 2026-10-10; source `4e6ede6` | Automatic reminder selection of the only active task; four CI jobs, installed checks, LEO/OR skill and README updates and a real Claude Code reminder in OR without `RCTL_TASK_PATH` | [Deployment record](V0.6.4-DEPLOYMENT.md) |
 
 Current work and release/deployment order belong in [DEVELOPMENT](DEVELOPMENT.md).
 Preparation-stage and cross-cutting limitations remain in [READINESS](READINESS.md#limitations).
