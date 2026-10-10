@@ -13,8 +13,8 @@ quota. Hand the unranked portfolio to explicit `$research-idea-evaluation`.
 
 Use a clear user-supplied question directly. A question record, synthesis or earlier
 evaluation is not a prerequisite. When the work instead concerns what is worth
-studying, use `$research-question`. Ordinary reading reflections stay with their
-paper notes. A material reframing during design returns to question formation;
+studying, use `$research-question`. Ideas noticed while reading stay as `test` or
+`lead` records in the paper's record file. A material reframing during design returns to question formation;
 preserve what changed rather than silently substituting a more convenient question.
 
 ## Workspace

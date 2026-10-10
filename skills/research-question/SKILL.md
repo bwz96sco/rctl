@@ -21,8 +21,9 @@ For a short discussion, answer in chat. For durable question development, contin
 the existing topic record or use `questions.md` in that topic. For a new topic,
 follow the project-relative vault binding in `.rctl/project.json` or the existing
 note convention; otherwise use `artifacts/research-question/<topic>/`. Use `Q1`,
-`Q2`, etc. only when multiple questions need references. Reading reflections stay
-in their paper notes unless further development is requested.
+`Q2`, etc. only when multiple questions need references. Ideas noticed while
+reading stay as `test` or `lead` records in the paper's record file unless further
+development is requested.
 
 ## Develop the question
 

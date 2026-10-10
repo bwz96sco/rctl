@@ -87,9 +87,15 @@ class ResearchSkillContractTest(unittest.TestCase):
             SKILLS / "research-idea-evaluation/decision-template.md"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("Analyst: evidence-backed defects", note_template)
-        self.assertNotIn("Successor work addressing it", note_template)
-        self.assertNotIn("Still open:", note_template)
+        for removed in (
+            "## Overview",
+            "## Field map and gap",
+            "## Method",
+            "## Analyst: reflection",
+            "Zotero key:",
+            "Successor work addressing it",
+        ):
+            self.assertNotIn(removed, note_template)
         for marker in (
             "exactly one Zotero collection",
             "zotero-collection.md",
@@ -107,7 +113,7 @@ class ResearchSkillContractTest(unittest.TestCase):
             self.assertIn(marker, discovery)
         for marker in (
             "$paper-discovery",
-            "one clean subagent per paper",
+            "One clean reader may take one paper or a small batch",
             "full-text read or explicitly blocked",
             "$research-synthesis",
         ):
@@ -115,26 +121,25 @@ class ResearchSkillContractTest(unittest.TestCase):
         self.assertNotIn("paper-search-cli", literature)
         self.assertNotIn("Search coverage", literature)
         for marker in (
-            "## Key results",
-            "Zotero key:",
             "Metadata status: verified | conflicting | unverified",
             "Access: full_pdf | partial_text | abstract_only",
-            "Sample size / seeds / uncertainty",
-            "Evidence basis: text | figure | table | equation",
-            "Confidence / caveat",
+            "the sample size, and the uncertainty",
+            "`limitation` records quote the authors verbatim",
+            "[null]",
+            "[defect: <assumption|evaluation|mechanism|scope>, <observed|inferred>]",
+            "[test] for R5:",
             "closest_candidate",
             "final closest-prior selection belongs to `$research-synthesis`",
         ):
             self.assertIn(marker, note_template)
-        defect_fields = note_template.split("## Analyst: evidence-backed defects", 1)[
-            1
-        ].split("## Analyst: relation to target question", 1)[0]
-        self.assertIn("Evidence basis:", defect_fields)
-        self.assertIn("Confidence / caveat:", defect_fields)
+        defect_record = next(
+            line for line in note_template.splitlines() if line.startswith("R5 [defect")
+        )
+        self.assertIn("<anchor> — <basis>, <confidence>", defect_record)
         for marker in (
             "closest prior work",
             "exact overlap and differentiators",
-            "paper IDs and note anchors",
+            "paper IDs and record IDs",
             "$paper-discovery",
             "$research-literature",
         ):

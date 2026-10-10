@@ -7,6 +7,29 @@ global tool environment. The authorized OR task-skill and guidance merge is also
 complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
 currentness and additional reminder coverage remain separate runtime work.
 
+## Agent-citable paper records, 10 October 2026
+
+At the user's request, research-literature now writes a short record file per paper
+in place of the sectioned note: a provenance header and typed one-line records
+(setting, result, null, verbatim limitation, defect, test, relation, lead), each
+with an anchor, evidence basis and confidence. The overview, field map, method
+narrative, experiments boilerplate and analyst reflection are removed; one clean
+reader may take two to four papers on the same question. Research-synthesis cites
+`<paper-id>#R<n>`, and research-question and research-ideation now say that reading
+ideas stay as `test` or `lead` records. The
+[source record](DISTILLED-SOURCES.md#reading-and-research-candidate-development) gives
+the reason and what was retained.
+
+- `uv run --locked pytest -q tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_research_handoffs.py`:
+  70 passed, 49 subtests passed.
+- `quick_validate.py` on research-literature, research-synthesis, research-question
+  and research-ideation: all valid.
+- `uv run --locked python scripts/check_docs.py`: passed.
+- `uv run --locked ruff check tests/test_research_skill_contracts.py` and
+  `git diff --check`: passed.
+
+These are structural checks; no reader has used the new template yet.
+
 ## Portable provenance references, 6 October 2026
 
 CI runs `36582133682` and `36713873517` passed all tests and lint on all four

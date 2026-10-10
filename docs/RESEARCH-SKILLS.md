@@ -23,7 +23,7 @@ instructions needed to perform their tasks.
 |---|---|---|
 | [research-task](../skills/research-task/SKILL.md) | Task agreements, handoffs, verification and guarded closure | Automatic or explicit; project-local |
 | [paper-discovery](../skills/paper-discovery/SKILL.md) | Question-scoped paper pools and project Zotero collection curation | Automatic or explicit |
-| [research-literature](../skills/research-literature/SKILL.md) | Full-paper reading, anchored notes, criticism and exploratory reflection | Automatic or explicit |
+| [research-literature](../skills/research-literature/SKILL.md) | Full-paper reading into anchored evidence records, including limitations, nulls and testable defects | Automatic or explicit |
 | [research-synthesis](../skills/research-synthesis/SKILL.md) | Evidence-bounded answers and comparisons across papers | Automatic or explicit |
 | [research-question](../skills/research-question/SKILL.md) | Research-question formation from observations, goals, contradictions and technical capabilities | Source retained; uninstalled locally |
 | [research-ideation](../skills/research-ideation/SKILL.md) | Alternative methods and investigations answering a clear research question | Source retained; uninstalled locally |
@@ -46,17 +46,22 @@ its original automatic-discovery default for other hosts.
 ## Reading and candidate development
 
 The standalone `research-opportunity-mining` skill was retired on 2026-09-24.
-Reading now includes independent thinking and exploratory reflection in the same
-paper note, whose [template](../skills/research-literature/note-template.md) sections follow the reading order.
-Synthesis can retain tentative connections separately from its evidence-backed
-answer. Reading can serve an exploratory purpose without requiring an already
-precise new research question.
+Since 2026-10-10, reading produces one compact
+[record file](../skills/research-literature/note-template.md) per paper for agents
+to cite: typed one-line records (setting, result, null, verbatim limitation, defect,
+test, relation, lead), each with an anchor, evidence basis and confidence. It has no
+overview, field-map, method-narrative or reflection prose; field maps belong to
+synthesis, and ideas raised by reading stay as `test` or `lead` records. Synthesis
+can retain tentative connections separately from its evidence-backed answer.
+Reading can serve an exploratory purpose without requiring an already precise new
+research question.
 
 Research-question develops worthwhile, scoped questions through optional routes
 for failures, successes, contradictions, scenario/assumption changes, measurement
 ambiguity and technical capabilities. It can finish with question statements before
 methods or experiment counts exist. It uses an existing record or `questions.md`
-when durable development is requested; ordinary reflections stay in their notes.
+when durable development is requested; ideas noticed while reading stay as `test`
+or `lead` records.
 
 Ideation develops ways to answer a clear supplied or referenced question, including
 algorithms, measurements, empirical designs and theoretical approaches. Direct entry
@@ -233,7 +238,7 @@ agent-skills-private; their old pack paths are not runtime contracts.
 | Local owner | Current durable surface | Mechanical gate |
 |---|---|---|
 | `paper-discovery` | one repository-level Zotero collection and `zotero-collection.md`; question-scoped `register.md` following the packaged register template, with publication/affiliation provenance, search coverage, Zotero item keys and verified membership | workflow contract tests plus Zotero re-read after writes |
-| `research-literature` | reading-state updates in `register.md`, plus `notes/<paper-id>.md` tied to the version read and source provenance, with evidence-quality assessment and useful analyst reflection | workflow contract tests |
+| `research-literature` | reading-state updates in `register.md`, plus `notes/<paper-id>.md` record files tied to the version read, with anchored, typed evidence records cited as `<paper-id>#R<n>` | workflow contract tests |
 | `research-synthesis` | `synthesis.md`, with optional evidence-backed open problems and separately labelled exploratory reflection | workflow contract tests |
 | `research-question` | question statements in chat or an existing topic record; `questions.md` for new durable development | source/resource checks and scoped use checks; no mandatory question-state validator |
 | `research-ideation` | one unranked `ideas.md` portfolio of approaches, with an inline or referenced parent question | packaged `research-idea-evaluation/scripts/validate-handoff.py` (`portfolio`) |

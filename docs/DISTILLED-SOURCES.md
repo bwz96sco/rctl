@@ -173,8 +173,8 @@ workflow. Runner, experiment, and theory owners keep their existing responsibili
 ## Reading and research candidate development
 
 - **Sources:** the user-supplied `/Users/zhangbowen/Downloads/如何读论文？.md` (Chinese seven-step reading guidance); the user's OR usage retrospective supplied in the conversation on 2026-09-24; and the former `skills/research-opportunity-mining/SKILL.md`, read before its retirement.
-- **Read:** 2026-09-24; reread 2026-09-30.
-- **Applied to:** [literature workflow](../skills/research-literature/SKILL.md), [paper note](../skills/research-literature/note-template.md), [synthesis](../skills/research-synthesis/SKILL.md), and [ideation](../skills/research-ideation/SKILL.md).
+- **Read:** 2026-09-24; reread 2026-09-30. Partly superseded on 2026-10-10 (below).
+- **Applied to:** [literature workflow](../skills/research-literature/SKILL.md), [paper record](../skills/research-literature/note-template.md), [synthesis](../skills/research-synthesis/SKILL.md), and [ideation](../skills/research-ideation/SKILL.md).
 
 **Retained:** overview through the abstract and displays; a precise research
 question; prior approaches and their remaining difficulties; independent thought
@@ -202,6 +202,24 @@ preliminary thought before the method stays a prompt; the reader's own design
 and its comparison with the authors' belong to the reflection after reading,
 where the source places most of the thinking. Code inspection and reproduction routing,
 which the paper reader cannot perform from supplied text, stay in the skill.
+
+On 2026-10-10 the user asked that reading produce only what later agents cite, not
+material for human reading, and named the introduction-style field map and the
+reading template as unused. In OR use on 2026-10-09 the skill was not invoked for a
+ten-paper critique; three fresh subagents, briefed with the parent session's
+context, each read three or four papers and wrote a compact critique report instead. Full notes had run 4,655–5,800 words per paper in
+the 2026-09-30 check. The note template therefore became a record file of
+typed one-line records with anchors, evidence basis and confidence. Removed: the
+reading-order sections (overview, field map and gap, method narrative, experiments
+boilerplate) and the analyst reflection; the seven-step guide's preliminary-thought
+prompt and its after-reading reflection no longer appear in the paper output.
+Retained: the separation of author statements, observed results and analyst
+inference; verbatim limitations; null results with sample size and uncertainty;
+evidence-backed defects with a type and an observed/inferred mark; the access and
+absence-claim rules; and the `closest_candidate` handoff to synthesis. A reading idea
+survives only as a `test` record tied to a defect or a `lead` record. One clean
+reader may now take two to four papers on the same question, since the record format
+keeps each paper's output separable. Field maps remain a synthesis output.
 
 ## Research questions and investment evaluation
 
@@ -278,7 +296,8 @@ judgment. These are useful thinking operations, not creativity guarantees.
 routes share a concise statement of object, motivation, unknown, reader consequence,
 prior relation and answerability. Ideation develops ways to answer clear questions;
 evaluation distinguishes a question's value from a particular approach's promise.
-Ordinary reading keeps reflection, and direct problem-origin studies remain valid.
+Ordinary reading keeps ideas as `test` or `lead` records (since 2026-10-10), and
+direct problem-origin studies remain valid.
 Do not restore the retired mining ledger, impose a six-route quota, import numerical
 ranking or approval rituals, or require a new algorithm for explanatory work.
 Existing solution validators and native lifecycle/schema authority remain unchanged.
