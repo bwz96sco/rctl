@@ -391,7 +391,7 @@ reports the author walkthrough and compatibility checks; their scope is stated i
 - **Applied to:** the [contract](../templates/contract.md) and
   [result](../templates/result.md) templates, research-task's
   [planning](../skills/research-task/references/planning.md),
-  [task-file example](../skills/research-task/references/task-files.md#publication-purpose-review)
+  [task-file example](../skills/research-task/references/task-files.md#goal-contribution-and-review)
   and [verification](../skills/research-task/references/verification.md) guidance.
 
 **Retained:** locally correct research tasks can leave the final paper contribution
@@ -435,6 +435,35 @@ states the compatibility checks and their scope.
   [official reference](https://json-schema.org/understanding-json-schema/reference/object).
   Local raw captures: `.work/goal-review-schema-docs.json` and
   `.work/goal-review-schema-fetch.json` (not portable retained research evidence).
+
+## Guidance consolidation, 10 October 2026
+
+- **Sources:** the user's comparison of a peer's agent-paper workflow (SatCraft)
+  with LEO, recorded at
+  `LEO/vault/ideas/space-data-centers/satcraft-workflow-comparison-20261010.md`;
+  the resulting playbook change (`research-playbook` commit `98b1ff7`, including
+  `research-playbook/community/2026-10-10-satcraft-workflow.md` and the
+  2026-10-10 LEO occurrence in
+  `research-playbook/failures/process/rule-beyond-scope.md`).
+- **Read:** 2026-10-10.
+- **Applied to:** the [contract](../templates/contract.md) and
+  [result](../templates/result.md) templates, the research-task
+  [skill](../skills/research-task/SKILL.md),
+  [planning](../skills/research-task/references/planning.md),
+  [task-file example](../skills/research-task/references/task-files.md#goal-contribution-and-review)
+  and [verification](../skills/research-task/references/verification.md) guidance.
+
+**Retained:** the goal-contribution declaration, the structured goal-impact review,
+honest negative closure and the target-setting and comparison prompts.
+
+**Adapted:** research-judgment prose that restated the projects' guidance (target
+mapping, publication purpose, scenario formulation) is reduced to pointers; those
+judgments are owned by each project's research guidance. Two operational notes
+are added: contract exclusions apply to the task's own question and are not copied
+from earlier plans, after a selection round's "no simulator" boundary was carried
+into later LEO contracts; and a method task's primary criterion can run a fixed
+evaluator and record its numbers, leaving the win or loss to the goal review.
+No schema, controller or lifecycle behavior changes.
 
 ## Limitations
 

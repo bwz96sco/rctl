@@ -31,22 +31,13 @@ criteria:
 
 <Included work, expected deliverable, starting evidence, and boundaries. For experiments, cite related routes, the substantive difference or reopen condition, and the decision new evidence would change.>
 
-For an applied study, explain which part of the target problem this task answers
-and what the chosen data or testbed represents. When target relevance is part of
-the claim, cite the scenario brief and declare a review criterion for the conditions
-preserved by the case and the supported conclusion. If the setting is unresolved,
-specify the choice this task will inform.
-
 For comparisons, distinguish complete-method benefit from conditional ablation or
 diagnosis; name fixed control versions, generated/shared information and the primary
 endpoint.
 
-For paper-directed work, state the publication purpose: the brief's named claim or
-evidence obligation, the decisive output, and how favorable, unfavorable or
-inconclusive findings change the next investment. An enabling task names its
-downstream experiment and observable handoff. Include Question alignment and a
-required review criterion citing the result, primary evidence and any separate
-paper brief to judge this consequence. Early selection/calibration tasks may leave the claim provisional.
+The project's research guidance says what Scope must state about the target setting
+and the paper obligation; `goal_contribution` records that obligation when the
+project has a completed Goal.
 
 ## Constraints
 
@@ -54,6 +45,9 @@ paper brief to judge this consequence. Early selection/calibration tasks may lea
 
 For comparisons, distinguish development exposure, test-time feedback and final
 evaluation; preserve total per-arm effort and control versions.
+
+State only the exclusions this task's question needs. An earlier task's or plan's
+boundaries, such as a selection round's "no simulator", do not carry over.
 
 ## Stop conditions
 

@@ -8,33 +8,20 @@ preexisting data in command inputs. New remote jobs need their own authority.
 Write the current revision's result with outcome, evidence, deviations, next action,
 and limitations. Distinguish computed observations, parsed evidence, and hypotheses.
 For an aligned task, assess only the declared test and honor its non-claim scope.
-For a declared target-relevance criterion, compare the actual workload, platform
-and operating conditions with the scenario brief; explain what the result
-establishes for that target. A runnable artifact alone does not establish this
-mapping. If the link is unresolved, narrow the conclusion or leave the criterion
-unresolved according to its requirement. A bounded component or feasibility task
-may close with that finding; apply the agreed criteria without adding a new gate.
+For a declared target-relevance criterion, judge the actual case against the cited
+scenario brief; when the link is missing, narrow the conclusion or leave the
+criterion unresolved according to its requirement, without adding a new gate.
 Inspect cited content before supplying a review verdict, reviewer source, rationale,
 and all required references. An operator-only criterion needs an operator judgment;
 reviewer labels are declared sources, not authenticated identities.
 
-For paper-directed tasks, the required publication-purpose review judges local
-delivery and publication consequence separately. Inspect the cited brief and
-primary evidence: which claim/evidence obligation is supported, narrowed or still
-unresolved, and does this justify the proposed next investment? Put that reasoning
-in Outcome and Next action and in the review rationale. A goal link, successful
-command or completed headings do not satisfy this judgment. A negative result may
-pass an honest-assessment requirement and close locally while the paper obligation
-remains unsupported. Missing reasoning leaves the required review unresolved;
-positive expansion requires a defensible claim or bounded repair. Review the
-existing criteria rather than retroactively requiring a positive scientific win.
-
 For contracts declaring `goal_contribution`, supply `goal_impact` on the named
 review criterion: claim effect and evidence-based reason, remaining gap, next
-investment decision and reason (see Task files). In the goal-review source
-increment these fields are mechanically required, and missing review entries
-still produce unknown. Verify field completeness separately from adequacy of the
-judgment. Check status for this reviewed decision and currentness before planning
+investment decision and reason (see Task files). These fields are mechanically
+required, and a missing review entry produces unknown; their completeness is
+separate from the adequacy of the judgment. A goal link, a successful command or
+completed headings do not make the judgment; an honest negative can pass, and a
+reviewed `stop` does not require a retroactive positive win. Check status for this reviewed decision and currentness before planning
 continuation; a local pass with `stop` completes the task without authorizing more
 of the stopped investment. A retained goal decision becomes stale when its own
 cited evidence or the PROGRAM Goal changes, not when Current guidance or other

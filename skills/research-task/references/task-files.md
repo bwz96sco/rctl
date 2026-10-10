@@ -99,15 +99,11 @@ the project guidance changes again. If a criterion depends on a live file's
 current content, still declare that file in its evidence or inputs, including
 review evidence; removing a real dependency only to avoid staleness is incorrect.
 
-### Publication-purpose review
+### Goal contribution and review
 
-For every planned paper-directed task, Question/Scope names the brief's claim or
-evidence obligation, decisive output and outcome-dependent next investment. Use
-the four-field Question alignment section above and a required review criterion.
-Question alignment remains optional in the general schema. Keep publication
-detail in Question/Scope and the brief, not as extra alignment fields.
-In the goal-review source increment, a completed PROGRAM Goal requires the
-following contract frontmatter for new work (choose an actual unused criterion):
+When PROGRAM has a completed Goal, new contracts and amendments need this
+frontmatter (choose an actual unused criterion ID). Keep any further paper detail
+in Question/Scope and the project's brief, not as extra alignment fields:
 
 ```yaml
 goal_contribution:
@@ -121,9 +117,7 @@ The controller requires this declaration, a review method for the named criterio
 and citations of `result.md` and primary evidence. Verify records the PROGRAM Goal
 the review was judged against; citing PROGRAM.md is optional. The retained goal
 decision becomes stale only when its own evidence or the Goal text changes, not on
-Current guidance edits. The reviewer assesses adequacy. For example, an implementation task can establish
-backend operability as an input to a later method comparison, without claiming
-incremental benefit from operability alone.
+Current guidance edits. The reviewer assesses adequacy.
 
 Add a criterion with an unused numeric ID, such as this illustrative third item:
 
@@ -138,13 +132,8 @@ Add a criterion with an unused numeric ID, such as this illustrative third item:
 ```
 
 Replace the example path with the actual primary evidence; add a separate paper
-brief when the judgment depends on it.
-At closeout, review local delivery and paper consequence separately. An honest
-negative assessment can pass this requirement; absence of reasoning cannot. For
-example: "The backend accepted the package, supporting operability. Only the
-shared known binding correction was exercised, so incremental adaptation remains
-unsupported; this episode does not justify the final comparison campaign."
-The criterion records an inspected judgment, not a prediction of editorial acceptance.
+brief when the judgment depends on it. An honest negative assessment can pass this
+requirement; absence of reasoning cannot.
 
 The designated closeout review additionally includes this `goal_impact` object;
 its ordinary `rationale` and `evidence_refs` still cite the inspected evidence:
@@ -161,11 +150,9 @@ its ordinary `rationale` and `evidence_refs` still cite the inspected evidence:
 
 Missing required review entries block closure; supplied incomplete impact objects
 reject before checks. Read-only status/context expose this judgment separately
-from local pass, and `rctl task list` shows every task's goal decision. When
-planning the next task, inspect related decisions, their currentness, project
-guidance and evidence: a reviewed stop does not authorize automatic continuation.
-A contract resuming a stopped or adjusted obligation names that task and the new
-evidence or bounded reason in Scope. rctl does not judge that reason's scientific truth or start tasks.
+from local pass, and `rctl task list` shows every task's goal decision; see
+[Planning](planning.md) for using it. rctl does not judge a decision's scientific
+truth or start tasks.
 
 ### Command checks
 
@@ -194,6 +181,12 @@ print("Retained counts match the total.")
 
 Command exit zero establishes this arithmetic check only. The second criterion
 requires an evidence-based judgment of the result's claim.
+
+When the project has an executable evaluator, the primary criterion of a method
+task can be a command that runs it on the fixed test split and writes the method's
+and baselines' outcomes to declared evidence. Require that the evaluation ran and
+its numbers were recorded, not that the method won, so an unfavorable result can
+still close; the goal review then judges the recorded numbers.
 
 ## Result: `result.md`
 

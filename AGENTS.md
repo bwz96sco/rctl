@@ -5,6 +5,7 @@
 - Use `uv` for Python setup and runs. Use smart-search for library/API documentation, setup, configuration, and current source-backed claims.
 - Keep generated project documents in English unless the user requests another language.
 - Record sources and adaptations for distilled workflow guidance in `docs/DISTILLED-SOURCES.md`; keep skill references focused on operational instructions.
+- Change rctl in response to a research-process failure only when the failure exposes a structural need that a check can catch and existing fields cannot express. Record other process lessons in the affected project's research guidance, not in templates or skill references.
 - For records or verification, read the relevant `schemas/`. For hooks or skill integration, read `docs/INTEGRATION.md` and recheck the relevant official host documentation.
 - Keep contract, result, handoff, and machine acceptance authority distinct. State whether a check verifies structure, execution, or an evidence-based judgment.
 - Run a check only when its failure would change an in-scope action. Report actual commands, results, and untested behavior; use `docs/READINESS.md#limitations` for preparation-stage caveats.

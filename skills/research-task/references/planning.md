@@ -12,35 +12,21 @@ new result would change. Match mechanisms across names. If no related route is
 found, name the sources checked. Put the reasoning in the proposal and the
 contract's Question/Scope; use domain skills to assess scientific adequacy.
 
-For applied work, carry the target architecture, business task and consequential
-operating conditions from the existing scenario brief into Question/Scope and
-question alignment. Explain what the chosen data, testbed or model represents,
-which conditions it preserves, and the source or modeled basis for that mapping.
-Available assets may suggest candidates; justify their relevance before making
-the target claim. Record setting changes and their reasons before dependent work.
+For applied work, carry the target setting from the project's scenario brief into
+Question/Scope and Question alignment, and record a setting change with its reason
+before dependent work. The project's research guidance says what a good target
+mapping, contribution and evidence obligation are; rctl records them.
 
-For paper-directed projects, read the existing brief's publication goal, provisional
-venue/comparables, contribution hypothesis and evidence obligations. If venue or
-contribution is unresolved, name the bounded selection/calibration decision rather
-than imply an established claim. Every planned research task states its publication
-purpose in Question/Scope: the specific obligation addressed, decisive output and
-what favorable, unfavorable or inconclusive evidence changes. An enabling task
-names the downstream experiment and observable handoff it makes possible.
-Use Question alignment and a required review criterion citing the result, primary
-evidence and any separate paper brief, as in
-[Task files](task-files.md#publication-purpose-review); rctl records the PROGRAM Goal.
-Before authoring the contract, run `rctl task list` and read related goal decisions.
-A task resuming a stopped or adjusted obligation names that task and the new
-evidence or bounded reason in Scope.
-The review assesses support for the proposed claim or next investment; merely
-finishing local work or remaining inside scope is insufficient. Venue examples
-calibrate useful contribution and evidence, not acceptance probability.
+When PROGRAM has a completed Goal, declare `goal_contribution` as in
+[Task files](task-files.md#goal-contribution-and-review). Before authoring the
+contract, run `rctl task list` and read related goal decisions. A task resuming a
+stopped or adjusted obligation names that task and the new evidence or bounded
+reason in Scope.
 
-When that setting is unresolved, substantial scenario formulation can be a bounded
-analysis task. Its deliverable is a justified architecture/workload choice and an
-evaluation route, or the precise unresolved link. Data inspection and small probes
-may inform this choice within the task's scope. Keep ordinary brainstorming inline
-and retain component findings within their supported conditions.
+Write each contract's exclusions for its own question. Do not copy an earlier
+task's or plan's boundaries into a contract whose question needs that work; for
+example, a selection round's "no simulator or model run" does not bind a later task
+that must build or run an evaluator.
 
 A comparison retains named control versions, information boundaries and its
 primary outcome in the contract; use the domain skill and, where present,

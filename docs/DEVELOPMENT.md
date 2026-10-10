@@ -9,6 +9,44 @@ See the [deployment record](V0.6.0-DEPLOYMENT.md). Live task-draft migration is
 separate work. Version-only historical currentness and additional reminder coverage
 remain separate runtime work.
 
+## Guidance consolidation, 10 October 2026
+
+Starting agreement: after comparing a peer's agent-paper workflow with LEO, the
+user approved a three-step plan: playbook first, then rctl, then LEO. For rctl the
+scope is documentation only: reduce research-judgment prose that restated project
+guidance in templates and the research-task skill, add a development rule for
+future process failures, and change no schema, controller or lifecycle behavior.
+Source provenance is in [Distilled sources](DISTILLED-SOURCES.md#guidance-consolidation-10-october-2026).
+
+Changes: the contract and result templates and the skill's SKILL, planning,
+task-file and verification references keep the operational parts of the
+target-setting, publication-purpose and goal-review guidance and point to project
+guidance for the judgments. The task-file section is renamed "Goal contribution
+and review" and no longer calls the deployed controller a source increment. Two
+operational notes are added: contract exclusions are written for the task's own
+question rather than copied from earlier plans, and a method task's primary
+criterion can run a fixed evaluator and record its numbers, leaving the outcome to
+the goal review. `AGENTS.md` gains the development rule. Net: six template/skill
+files, 49 lines added and 99 removed.
+
+Acceptance selected: M1/A-01 (scaffold placeholders and accepted contract structure),
+M5/A-21/A-23 (initialization and resource delivery), M8/A-40 (packaged alignment
+guidance) and A-41–A-43 (goal entry, review and recovery), all covered by the
+existing suite.
+
+Validation on local macOS/Python 3.13.2 in a separate worktree:
+
+- `uv run --locked pytest -q`: **349 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed (364 local links,
+  100 JSON files, four schemas, 22 requirements and 43 acceptance cases).
+- `git diff --check`: passed.
+
+End review: local delivery is a shorter, operational skill and template set with
+unchanged behavior. It does not establish that future contracts will be better
+judged or that goal drift will recur less. Release, global installation and
+live-project skill updates are separate work; the installed CLI remains 0.6.0.
+
 ## v0.6.0 release preparation, 10 October 2026
 
 The user authorized push and update after the goal-review branch was repaired,
