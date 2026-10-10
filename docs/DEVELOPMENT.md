@@ -1,5 +1,32 @@
 # Development Plan
 
+## v0.6.4 release preparation, 10 October 2026
+
+The user authorized committing, releasing and installing
+[automatic reminder task selection](#automatic-reminder-task-selection-10-october-2026)
+(`f270690`) and checking LEO and OR. It changes reminder selection, hook receipts,
+generated host READMEs and the packaged research-task `SKILL.md` and
+`references/workspace.md`; schemas, controller and lifecycle commands are unchanged.
+The two skill files change, so LEO and OR project skill copies become outdated
+until replaced.
+
+Acceptance selected: the existing suite plus installed-package smoke (A-23), then
+installed automatic selection on a fixture, `doctor` and reminders in LEO and OR,
+and one real Claude Code session with an automatically selected task.
+
+Local macOS 26.6.2/Python 3.13.2 validation of the release commit:
+
+- `uv lock`: only the project version changed.
+- `uv run --locked pytest -q`: **376 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed.
+- `uv build --out-dir .work/release-0.6.4/dist`: sdist and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/release-0.6.4/dist/rctl-0.6.4-py3-none-any.whl`:
+  isolated package smoke passed.
+
+Deployment follows the 0.6.2 procedure: push, all four CI jobs, then installation
+from a clean committed tree.
+
 ## Automatic reminder task selection, 10 October 2026
 
 Starting agreement: after 0.6.3, the user objected to setting `RCTL_TASK_PATH` at

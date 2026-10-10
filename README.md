@@ -2,10 +2,9 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.6.3 pushed, CI-verified and locally installed.**
+**Status: v0.6.4 prepared for release; push, CI and installation pending.**
 
-See the [deployment record](docs/V0.6.3-DEPLOYMENT.md) for the released source,
-CI, installed-package and live reminder checks.
+The previous installed release is recorded in the [v0.6.3 deployment record](docs/V0.6.3-DEPLOYMENT.md).
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, governing-question alignment, and Codex and Claude Code reminders. The
 [simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed
@@ -33,6 +32,8 @@ Version 0.6.2 packages the
 Version 0.6.3 gives selected-task
 [prompt reminders](docs/DEVELOPMENT.md#per-prompt-task-reminder-10-october-2026)
 one whole sentence per decision-relevant field instead of fragments of every field.
+Version 0.6.4 adds [automatic reminder selection](docs/DEVELOPMENT.md#automatic-reminder-task-selection-10-october-2026):
+without `RCTL_TASK_PATH`, reminders use the project's only active task.
 
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
@@ -72,7 +73,7 @@ uv run pytest
 uv run ruff check src tests scripts
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.6.3-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.6.4-py3-none-any.whl
 ```
 
 The GitHub Actions workflow is configured to run tests, lint, the document check,
@@ -83,7 +84,7 @@ The installed-package smoke uses a temporary project under `.work/`, an isolated
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.3-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.4-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh
