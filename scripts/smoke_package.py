@@ -1,6 +1,6 @@
 """Run a built wheel in an isolated environment and non-Git project.
 
-Usage: uv run scripts/smoke_package.py dist/rctl-0.6.1-py3-none-any.whl [--skills-root PATH]
+Usage: uv run scripts/smoke_package.py dist/rctl-0.6.2-py3-none-any.whl [--skills-root PATH]
 """
 
 import argparse

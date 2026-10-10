@@ -107,6 +107,35 @@ and LEO's local skill are still from 0.6.1, and this source repair has no remote
 push or CI deployment evidence. Host evidence bounds remain in
 [Limitations](READINESS.md#limitations).
 
+## v0.6.2 release preparation, 10 October 2026
+
+The user authorized pushing, releasing and installing the host-integration repairs
+and applying them to LEO and OR. Version 0.6.2 packages the
+[Codex first-use repair](#codex-first-use-repair-10-october-2026) (`9477f9b`) and
+[Claude Code host support](#claude-code-host-support-10-october-2026) (`d7e4c21`).
+Before deployment, every closed task in LEO (40) and OR (115) already displayed
+stale, so the version bump adds no new version-only staleness. LEO's `doctor` was
+clean; OR's four research-task skill files differed from the package, and every
+line in them occurs in an earlier packaged version, so they are outdated copies,
+not OR-specific guidance.
+
+Acceptance selected: the existing suite plus installed-package smoke (A-23/A-29),
+then scoped LEO/OR initialization, inspection and real Claude Code reminder checks
+after installation.
+
+Local macOS 26.6.2/Python 3.13.2 validation of the release commit:
+
+- `uv lock`: only the project version changed.
+- `uv run --locked pytest -q`: **371 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed.
+- `uv build --out-dir .work/release-0.6.2/dist`: sdist and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/release-0.6.2/dist/rctl-0.6.2-py3-none-any.whl`:
+  isolated package smoke passed.
+
+Deployment follows the 0.6.1 procedure: push, all four CI jobs, then installation
+from a clean committed tree.
+
 ## Latest deployment
 
 v0.6.1 source `f2f2b2f` is pushed, passed all four CI jobs, and is installed in the

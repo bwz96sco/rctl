@@ -2,12 +2,11 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.6.1 pushed, CI-verified and locally installed.**
+**Status: v0.6.2 prepared for release; push, CI and installation pending.**
 
-See the [deployment record](docs/V0.6.1-DEPLOYMENT.md) for the released source,
-CI and installed-package checks.
+The previous installed release is recorded in the [v0.6.1 deployment record](docs/V0.6.1-DEPLOYMENT.md).
 The local package provides contracts, command/review verification, guarded closure,
-handoffs, governing-question alignment, and Codex reminders. The
+handoffs, governing-question alignment, and Codex and Claude Code reminders. The
 [simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed
 task skill, immutable task snapshots, and one concise reminder layout. Historical
 milestone and host evidence is in the [release-evidence index](docs/RELEASE-EVIDENCE.md).
@@ -23,11 +22,10 @@ Version 0.6.1 packages the [guidance consolidation](docs/DEVELOPMENT.md#guidance
 shorter contract/result templates and research-task skill guidance, with no
 schema, controller or lifecycle change.
 
-The source tree also contains the unreleased
+Version 0.6.2 packages the
 [Codex first-use repair](docs/DEVELOPMENT.md#codex-first-use-repair-10-october-2026):
 `init` prepares project hooks and `doctor` inspects them by default, with an explicit
-`--no-codex` opt-out. Source behavior below describes this repair; installed 0.6.1
-still requires `--codex` until a separately validated deployment. The source also adds
+`--no-codex` opt-out. It also adds
 [Claude Code host support](docs/DEVELOPMENT.md#claude-code-host-support-10-october-2026): `init` prepares
 `.claude/settings.json` hooks and a `.claude/skills/research-task/` skill copy, and
 `doctor` inspects them, with an explicit `--no-claude` opt-out.
@@ -70,7 +68,7 @@ uv run pytest
 uv run ruff check src tests scripts
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.6.1-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.6.2-py3-none-any.whl
 ```
 
 The GitHub Actions workflow is configured to run tests, lint, the document check,
@@ -81,7 +79,7 @@ The installed-package smoke uses a temporary project under `.work/`, an isolated
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.1-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.2-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh
