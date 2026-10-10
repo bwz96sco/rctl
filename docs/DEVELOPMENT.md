@@ -203,13 +203,14 @@ from a clean committed tree.
 
 ## Latest deployment
 
-v0.6.2 source `c827469` is pushed, passed all four CI jobs, and is installed in the
+v0.6.3 source `3aef00a` is pushed, passed all four CI jobs, and is installed in the
 global tool environment. Installed code/resources match the clean committed tree.
-LEO and OR now have Claude Code handlers and a loadable research-task skill; their
-`doctor` reports all findings current, and a non-interactive Claude Code session in
-each received both reminders. See the [deployment record](V0.6.2-DEPLOYMENT.md); the
-previous release is in the [v0.6.1 record](V0.6.1-DEPLOYMENT.md). Version-only
-historical currentness and additional reminder coverage remain separate runtime work.
+Selected-task prompt reminders now carry whole sentences; a real Claude Code session
+in LEO received the compact layout. LEO and OR `doctor` report all findings current.
+See the [deployment record](V0.6.3-DEPLOYMENT.md); earlier releases are in the
+[v0.6.2](V0.6.2-DEPLOYMENT.md) and [v0.6.1](V0.6.1-DEPLOYMENT.md) records.
+Version-only historical currentness and the project-only prompt layout remain
+separate runtime work.
 
 ## v0.6.1 release preparation, 10 October 2026
 
