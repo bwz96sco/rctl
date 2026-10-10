@@ -9,6 +9,30 @@ See the [deployment record](V0.6.0-DEPLOYMENT.md). Live task-draft migration is
 separate work. Version-only historical currentness and additional reminder coverage
 remain separate runtime work.
 
+## v0.6.1 release preparation, 10 October 2026
+
+The user authorized a release after LEO's `rctl doctor` reported four synced
+research-task skill files as different from the installed 0.6.0 package. Version
+0.6.1 packages the [guidance consolidation](#guidance-consolidation-10-october-2026)
+(`9ec3207`, `419bfe5`): six template/skill files, no source, schema, controller or
+lifecycle change. The version bump also makes `rctl task new` emit the shorter
+contract template. LEO holds no verification reports from 0.6.0, so the bump adds
+no version-only staleness there.
+
+Acceptance selected: the existing suite plus installed-package smoke (A-23 resource
+delivery). Local macOS/Python 3.13.2 validation in a separate worktree:
+
+- `uv lock`: only the project version changed.
+- `uv run --locked pytest -q`: **349 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed.
+- `uv build --out-dir .work/release-0.6.1/dist`: sdist and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/release-0.6.1/dist/rctl-0.6.1-py3-none-any.whl`:
+  isolated package smoke passed.
+
+Deployment follows the 0.6.0 procedure: push, all four CI jobs, then installation
+from a clean committed tree.
+
 ## Guidance consolidation, 10 October 2026
 
 Starting agreement: after comparing a peer's agent-paper workflow with LEO, the

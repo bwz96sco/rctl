@@ -2,10 +2,9 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.6.0 pushed, CI-verified and locally installed.**
+**Status: v0.6.1 prepared for release; push, CI and installation pending.**
 
-See the [deployment record](docs/V0.6.0-DEPLOYMENT.md) for the released source,
-CI and installed-package checks.
+The previous installed release is recorded in the [v0.6.0 deployment record](docs/V0.6.0-DEPLOYMENT.md).
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, governing-question alignment, and Codex reminders. The
 [simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed
@@ -19,6 +18,9 @@ See [behavior](docs/SPEC.md#goal-contribution-and-review-v060)
 and [source development](docs/DEVELOPMENT.md#goal-review-controller-increment-10-october-2026).
 The installed CLI includes this enforcement. Retained older agreements remain
 readable; new work and amendments follow the current entry rules.
+Version 0.6.1 packages the [guidance consolidation](docs/DEVELOPMENT.md#guidance-consolidation-10-october-2026):
+shorter contract/result templates and research-task skill guidance, with no
+schema, controller or lifecycle change.
 
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
@@ -57,7 +59,7 @@ uv run pytest
 uv run ruff check src tests scripts
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.6.0-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.6.1-py3-none-any.whl
 ```
 
 The GitHub Actions workflow is configured to run tests, lint, the document check,
@@ -68,7 +70,7 @@ The installed-package smoke uses a temporary project under `.work/`, an isolated
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.0-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.1-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh
