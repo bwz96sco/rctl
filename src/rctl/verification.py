@@ -309,6 +309,16 @@ def verify(task, reviews_file=None):
         )
     refs, external = references(task, contract["criteria"], reviews)
     starting = {ref: observe(task.root, ref, readable=True) for ref in refs}
+    # Capture a supplied goal judgment's subject before any command can run.
+    goal_check = None
+    contribution = contract["goal_contribution"]
+    if contribution and contribution["review_criterion"] in reviews:
+        criterion = next(
+            c for c in contract["criteria"]
+            if c["id"] == contribution["review_criterion"]
+        )
+        goal_check = review_check(task, criterion, reviews[criterion["id"]])
+        record_reviewed_goal(task.root, goal_check)
     report_id = f"V{len(record['verifications']) + 1:04d}"
     checks_dir = task.file(".rctl/checks")
     checks_dir.mkdir(parents=True, exist_ok=True)
@@ -318,10 +328,10 @@ def verify(task, reviews_file=None):
         if criterion["method"]["type"] == "command":
             check, new_logs = command_check(task, criterion, log_dir)
             logs.extend(new_logs)
+        elif goal_check is not None and criterion["id"] == goal_check["criterion_id"]:
+            check = goal_check
         else:
             check = review_check(task, criterion, reviews.get(criterion["id"]))
-            if "goal_impact" in check:
-                record_reviewed_goal(task.root, check)
         checks.append(check)
     final = {
         ref: observe(task.root, ref, readable=True)
@@ -357,6 +367,18 @@ def verify(task, reviews_file=None):
                 issues.append(f"{name} changed during verification.")
         except RctlError:
             issues.append(f"{name} became unavailable during verification.")
+    if goal_check is not None:
+        goal_stale, goal_unknown = goal_currentness(task.root, {"checks": [goal_check]})
+        if goal_stale or goal_unknown:
+            reason = (
+                "Project Goal changed during verification."
+                if goal_stale
+                else "Project Goal became unreadable during verification."
+            )
+            reason += f" Review {GOAL_SOURCE} / Goal again."
+            goal_check["verdict"] = "unknown"
+            goal_check["rationale"] += f" {reason}"
+            issues.append(reason)
     report = {
         "id": report_id,
         "contract_revision": revision,

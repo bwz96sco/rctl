@@ -7,6 +7,48 @@ global tool environment. The authorized OR task-skill and guidance merge is also
 complete; see the [deployment record](V0.5.1-DEPLOYMENT.md). Version-only historical
 currentness and additional reminder coverage remain separate runtime work.
 
+## Goal-review verification race repair, 10 October 2026
+
+Starting agreement: branch review found that an uncited PROGRAM Goal edited while
+a read-only command criterion was running could silently bind an existing review
+to the new Goal. Verify read the Goal only when the designated review was reached,
+so the report could pass and close. The user requested repair, commit and merge.
+
+Changes: prepare the supplied goal review and capture its Goal before command
+execution, then compare that retained Goal after all checks. A substantive edit
+or unavailable Goal makes the goal check unknown and adds a subject issue. Retain
+the original Goal and exact review input; restoring the Goal later still requires
+fresh verification. Whitespace-only edits and Current guidance edits follow the
+existing semantic Goal and whole-file citation rules.
+
+Acceptance selected: A-42, with the existing R-21/R-05/R-06/R-07 boundaries. The
+regressions use the public CLI and a real arithmetic subprocess, synchronized with
+a cooperating editor over loopback. They cover both criterion orders, deletion,
+unfinished and malformed Goal content, later restoration, whitespace reflow and
+unrelated guidance edits.
+
+Validation on local macOS 26.6.2/Python 3.13.2:
+
+- Red: `uv run --locked pytest -q tests/test_goal_review.py -k goal_change_during_verify`
+  failed both criterion orders against the reviewed source: expected unknown, got
+  pass; the command-first case recorded the new Goal with the old judgment.
+- Green: `uv run --locked pytest -q tests/test_goal_review.py`: **37 passed**.
+- `uv run --locked pytest -q`: **349 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed.
+- `uv build --out-dir .work/goal-review-audit/dist`: built the sdist and wheel.
+- `uv run --locked python scripts/smoke_package.py .work/goal-review-audit/dist/rctl-0.5.1-py3-none-any.whl`:
+  isolated installed-package smoke passed.
+- `uv run --locked python .work/goal-review-audit/verify_goal_race_fix.py`:
+  the retained original race probe now rejects with `VERIFICATION_UNKNOWN`, keeps
+  the original error Goal and records an unknown goal review while arithmetic
+  passes. The same probe passed with the final wheel through
+  `uv run --isolated --no-project --offline --with .work/goal-review-audit/dist/rctl-0.5.1-py3-none-any.whl python .work/goal-review-audit/verify_goal_race_fix.py`.
+
+Document/schema checks establish structure; CLI and wheel checks establish
+execution and retained subject lineage. Scientific adequacy and deployment
+boundaries remain as described in [Readiness](READINESS.md#limitations).
+
 ## Goal-decision currentness, 10 October 2026
 
 Starting agreement: after the follow-up below, PROGRAM.md could still reach the

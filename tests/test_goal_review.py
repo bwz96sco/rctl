@@ -3,6 +3,9 @@
 import json
 import re
 import shutil
+import socket
+from contextlib import contextmanager
+from threading import Thread
 
 import pytest
 from conftest import REPO
@@ -70,6 +73,50 @@ def goal_task(task):
     add_goal(task)
     add_review(task)
     return task
+
+
+@contextmanager
+def edit_program_during_check(task, replacement):
+    """Synchronize a cooperating editor with a real read-only command check."""
+    with socket.socket() as listener:
+        listener.bind(("127.0.0.1", 0))
+        listener.listen(1)
+        listener.settimeout(10)
+        port = listener.getsockname()[1]
+        checker = task.file("check_arithmetic.py")
+        checker.write_text(
+            "import socket\n"
+            f"with socket.create_connection(('127.0.0.1', {port}), timeout=10) as channel:\n"
+            "    channel.sendall(b'C')\n"
+            "    assert channel.recv(1) == b'1'\n"
+            + checker.read_text()
+        )
+        errors = []
+
+        def edit():
+            try:
+                channel, _ = listener.accept()
+                with channel:
+                    channel.settimeout(10)
+                    assert channel.recv(1) == b"C"
+                    program = task.root / "research/PROGRAM.md"
+                    if replacement is None:
+                        program.unlink()
+                    else:
+                        program.write_text(replacement, encoding="utf-8")
+                    channel.sendall(b"1")
+            except Exception as error:
+                errors.append(error)
+
+        editor = Thread(target=edit)
+        editor.start()
+        try:
+            yield
+        finally:
+            editor.join(timeout=12)
+            assert not editor.is_alive(), "Program editor did not finish."
+            if errors:
+                raise errors[0]
 
 
 def test_new_work_cannot_omit_goal_review(task, cli):
@@ -160,6 +207,62 @@ def test_changed_goal_prevents_close(goal_task, cli):
     assert cli("status", TASK)["data"]["goal_impact"]["currentness"] == "stale"
     response = cli("close", TASK, expected=4)
     assert "Project Goal changed" in response["error"]["message"]
+
+
+@pytest.mark.parametrize("review_first", [False, True])
+def test_goal_change_during_verify_retains_original_goal_and_blocks_close(goal_task, cli, review_first):
+    if review_first:
+        metadata(goal_task, lambda d: d["criteria"].insert(0, d["criteria"].pop()))
+    replacement = "# Program\n\n## Goal\nEstablish lower execution cost.\n"
+    with edit_program_during_check(goal_task, replacement):
+        goal_task.begin()
+        response = cli("verify", TASK, "--reviews", REVIEWS, expected=5)
+    checks = {c["criterion_id"]: c for c in response["data"]["checks"]}
+    assert checks["AC-01"]["verdict"] == "pass"
+    assert checks["AC-03"]["verdict"] == "unknown"
+    assert checks["AC-03"]["reviewed_goal"] == "Establish lower comparable error."
+    assert "during verification" in checks["AC-03"]["rationale"]
+    report = cli("status", TASK)["data"]["verification"]
+    assert report["subject_issues"] and report["verdict"] == "unknown"
+    assert json.loads(report["review_input_text"])["checks"][-1]["goal_impact"] == IMPACT
+    cli("close", TASK, expected=4)
+    assert goal_task.read_record()["phase"] == "active"
+    write_goal(goal_task.root)
+    # Restoring the Goal cannot turn the interrupted judgment into a pass.
+    cli("close", TASK, expected=5)
+
+
+@pytest.mark.parametrize(("replacement", "close_exit"), [
+    (None, 4),
+    ("# Program\n\n## Goal\n<Goal>\n", 4),
+    ("## Goal\nOriginal goal.\n\n## Goal\nDuplicate goal.\n", 5),
+])
+def test_goal_unavailable_during_verify_keeps_original_goal_and_unknown_review(goal_task, cli, replacement, close_exit):
+    with edit_program_during_check(goal_task, replacement):
+        goal_task.begin()
+        response = cli("verify", TASK, "--reviews", REVIEWS, expected=5)
+    check = response["data"]["checks"][-1]
+    assert check["verdict"] == "unknown"
+    assert check["reviewed_goal"] == "Establish lower comparable error."
+    assert "during verification" in check["rationale"]
+    cli("close", TASK, expected=close_exit)
+
+
+@pytest.mark.parametrize("replacement", [
+    "# Program\n\n## Goal\nEstablish lower\n  comparable error.\n",
+    "# Program\n\n## Goal\nEstablish lower comparable error.\n\n## Current guidance\nStop this candidate.\n",
+])
+def test_goal_reflow_or_guidance_edit_during_verify_keeps_review_current(goal_task, cli, replacement):
+    with edit_program_during_check(goal_task, replacement):
+        goal_task.begin()
+        response = cli("verify", TASK, "--reviews", REVIEWS)
+    check = response["data"]["checks"][-1]
+    assert check["verdict"] == "pass"
+    assert check["reviewed_goal"] == "Establish lower comparable error."
+    status = cli("status", TASK)["data"]
+    assert status["goal_impact"]["currentness"] == "current"
+    assert status["verification"]["subject_issues"] == []
+    cli("close", TASK)
 
 
 def test_guidance_edits_keep_goal_review_current(goal_task, cli):

@@ -113,8 +113,15 @@ and next investment; filling fields alone is insufficient scientific review.
 A missing entry produces unknown; a supplied incomplete entry is invalid before
 execution. The complete judgment is retained in the check and exact review input.
 Ordinary reviews cannot carry a detached goal-impact object. For a supplied entry,
-verify also records the current PROGRAM Goal text as the check's `reviewed_goal`;
-when the Goal is missing, unreadable or unfinished, the check is unknown.
+verify captures the current PROGRAM Goal before executing any command criteria
+and records that text as the check's `reviewed_goal`; when the Goal is missing,
+unreadable or unfinished at capture, the check is unknown. After checks, verify
+compares the Goal with that retained text. A non-whitespace change or an unavailable
+Goal makes the goal check unknown and adds a subject issue; the original Goal and
+exact judgment remain retained. Restoring the Goal later does not remove that
+unknown verdict. Whitespace-only Goal edits and edits outside its section do not
+invalidate this comparison; any cited PROGRAM.md still follows whole-file
+observation rules.
 
 An honest negative may pass an honest-assessment requirement and close with
 `next_decision: stop`; neither claim effect nor investment choice rewrites the

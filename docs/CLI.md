@@ -142,8 +142,10 @@ accepted contract still passes `contract check`. `task new` scaffolds this
 declaration automatically. See
 [goal-review behavior](SPEC.md#goal-contribution-and-review-unreleased-source-increment).
 A missing goal review leaves verification unknown; an incomplete supplied
-`goal_impact` rejects the input before checks. Verify records the reviewed Goal;
-a later non-whitespace Goal change makes the report stale. The goal decision's own
+`goal_impact` rejects the input before checks. Verify captures the reviewed Goal
+before command execution; a non-whitespace change or unavailable Goal during
+verification makes the goal review unknown and blocks closure. A later
+non-whitespace Goal change makes the report stale. The goal decision's own
 currentness ignores PROGRAM edits outside the Goal and other criteria's evidence,
 while `close` still requires the whole report to be current.
 Status/context expose the planned contribution and reviewed investment decision
