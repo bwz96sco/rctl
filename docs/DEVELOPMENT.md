@@ -1,5 +1,33 @@
 # Development Plan
 
+## v0.6.6 installed deployment, 12 October 2026
+
+Release source `76f7b3d` passed all four macOS/Linux × Python 3.11/3.13
+[CI jobs](https://github.com/bwz96sco/rctl/actions/runs/38241792518) before
+installation. A clean committed export supplied the wheel and locked runtime
+constraints; the global `rctl` is now 0.6.6. Installed comparisons matched 19
+runtime files, five schemas, 31 templates and 90 skill files. Disposable installed
+checks covered initialization, goal-review closure and both host reminder payloads.
+
+Six dangling retired discovery links were removed; 30 surviving shared paths
+matched the installed domain skills. Three changed references were synchronized
+to LEO's two physical task-skill copies and OR's one; OR's Claude alias is preserved.
+OR's active rapid-test pointers now use research-experiment, with its existing
+scientific rules and historical source records retained.
+
+Both live projects report all 22 `doctor` findings current. Exact byte comparisons
+preserved 252 LEO and 625 OR task/configuration files; task phases and currentness
+also stayed unchanged. The pre-existing catalog edit and unrelated OR dirty work
+remain local. Commands, backups and evidence are recorded in
+[v0.6.6 deployment](V0.6.6-DEPLOYMENT.md); verification scope is recorded in
+[Readiness](READINESS.md#limitations).
+
+Deployment-record checks: `uv run --locked python scripts/check_docs.py` passed
+with 448 local links, 100 JSON files, four schemas and 22 requirements mapped to
+43 acceptance cases. `git diff --check` and the scoped OR migration whitespace
+check passed. The unchanged runtime/skill assets retain the release suite and CI
+results above.
+
 ## v0.6.6 release preparation, 12 October 2026
 
 The user authorized push and update after the consolidation (`7209710`) and

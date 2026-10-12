@@ -2,7 +2,7 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.6.6 release preparation; v0.6.5 remains locally installed.**
+**Status: v0.6.6 pushed, CI-verified and locally installed.**
 
 See the [v0.6.6 deployment record](docs/V0.6.6-DEPLOYMENT.md) for the skill update
 and its installation status. The [v0.6.5 deployment record](docs/V0.6.5-DEPLOYMENT.md)
