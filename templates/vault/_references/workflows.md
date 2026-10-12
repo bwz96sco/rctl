@@ -4,7 +4,7 @@
 
 Start from `literature-index.md`, then the topic's register and specific paper notes.
 Use paper-discovery for the corpus, research-literature for full-paper evidence, and
-research-synthesis for a cross-paper answer. Verify citations and cite note anchors.
+research-literature's synthesis reference for a cross-paper answer. Verify citations and cite note anchors.
 
 ## Managed research work
 

@@ -9,6 +9,89 @@ For each new distillation, retain the source link and read date, the ideas adopt
 the adaptations made, and links to the affected files. Extend this document as
 sources are used.
 
+## Skill necessity and consolidation, 12 October 2026
+
+- **Sources:** the user's necessity review, correction that academic talk planning
+  warrants its own skill, and authorization to execute consolidation; OpenAI's
+  [Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra)
+  and [Codex skill documentation](https://developers.openai.com/codex/skills);
+  the local skill-creator and writing-for-agents authoring guidance; the actual
+  repository skill tree and the installed `presentations:Presentations` contract.
+- **Read:** 2026-10-12. Official pages were fetched through
+  `smart-search fetch URL --format markdown --output PATH`, retained as
+  `astra-guidance.md` and `codex-skills.md` under
+  `.work/skill-boundary-audit-20261012/`. The subsequent
+  `smart-search search 'site:developers.openai.com Codex skills useful workflows' --format json --output PATH`
+  is retained there as `necessity-search.json`; the relevant page content was read.
+  Local contracts were inspected directly, including the presentation plugin's
+  generation/editing/rendering responsibilities.
+- **Applied to:** the [seven-entrypoint catalog](RESEARCH-SKILLS.md#managed-workflows),
+  experiment's [rapid tests](../skills/research-experiment/references/rapid-tests.md),
+  [training](../skills/research-experiment/references/training.md) and
+  [project adapters](../skills/research-experiment/references/project-adapters.md),
+  literature's [synthesis](../skills/research-literature/references/synthesis.md),
+  writing's [mathematical claims](../skills/research-writing/references/theory.md)
+  and [manuscript audits](../skills/research-writing/references/manuscript-audit.md),
+  and the retained [slides](../skills/research-slides/SKILL.md) and
+  [figure](../skills/research-figure/SKILL.md) contracts.
+
+**Retained:** distinct task agreements and domain completion checks; compact paper
+records, anchored evidence, proof status, negative results, budgets, amendments,
+agreed reviews and current verification. Actual project-specific runner adapters
+remain useful. Academic audience, purpose, timing and supported narration remain
+with slides; individual figure provenance and captions remain with figure.
+
+**Adapted:** reduce independently discovered workflows from 13 to seven. Six
+specializations become references loaded by experiment, literature or writing.
+References preserve useful domain knowledge without fixing execution order or
+requiring a new file tree. An available presentation-production skill handles
+the requested deck implementation and visual QA. Optional adapter/training
+helpers establish structure, not successful runs or scientific truth. The obsolete
+external source-catalog audit/controller no longer ships; commit `cdd09a5` retains
+that source history. The demo's temporary validator entrypoint is not registered
+as a real user skill.
+
+This necessity judgment follows the user's scope and inspection of the actual
+contracts. Official guidance supports concise triggers and progressive disclosure;
+it does not prescribe this seven-skill taxonomy or demonstrate a model-performance
+benefit. Installation and behavioral limits are in
+[Readiness](READINESS.md#limitations).
+
+## Skill contract and verification boundaries, 12 October 2026
+
+This records the first draft; the consolidation above supersedes its package layout.
+
+- **Sources:** the user's request to prioritize starting contracts and ending
+  verification over prescribed execution steps; OpenAI's
+  [Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra)
+  and [Codex skill documentation](https://developers.openai.com/codex/skills).
+- **Read:** 2026-10-12 through `smart-search fetch URL --format markdown --output PATH`.
+  The two fetched pages are retained as `astra-guidance.md` and `codex-skills.md`
+  under `.work/skill-boundary-audit-20261012/` in the development checkout.
+- **Applied to:** [training](../skills/research-experiment/references/training.md),
+  [adapter creation](../skills/research-experiment/references/project-adapters.md),
+  [rapid tests](../skills/research-experiment/references/rapid-tests.md),
+  [experiments](../skills/research-experiment/SKILL.md),
+  [discovery](../skills/paper-discovery/SKILL.md),
+  [reading](../skills/research-literature/SKILL.md),
+  [synthesis](../skills/research-literature/references/synthesis.md), their supporting resources,
+  and [verification guidance](../skills/research-task/references/task-files.md#command-checks).
+
+**Retained:** concise invocation scope, progressive disclosure, explicit completion
+and persistence. Contracts still fix scientific comparisons, budgets, evidence
+and required reviews. Source anchors, negative/inconclusive findings, amendments
+and current verification remain necessary for evidence-bound conclusions.
+
+**Adapted:** methods and execution order are chosen for the task. Training packs
+and source maps become optional; adapters can reuse project-owned documents;
+retry and reader configuration follow the agreement. Supplied evidence can support
+reading or synthesis without mandatory intermediate discovery files. The typed
+paper-record format is preserved. Helper validators check structure and declared
+references, leaving execution validity and scientific judgment to their owners.
+The official guidance motivates reducing elaborate recipes; it does not establish
+that every procedural instruction is harmful or that this revision improves
+research outcomes.
+
 ## Claude Code host support, 10 October 2026
 
 - **Sources:** the user's report that hooks still did not take effect after the Codex
@@ -210,7 +293,7 @@ the guide does not assert a single proceedings-name pattern for every conference
 
 - **Source:** the former `skills/research-computation/SKILL.md` at rctl commit `3130531`; its earlier role is recorded in the [source register](SOURCES.md).
 - **Read:** 2026-09-23.
-- **Applied to:** [Shared computation checks](../skills/research-theory/references/computation-checks.md).
+- **Applied to:** [Shared computation checks](../skills/research-experiment/references/computation-checks.md).
 
 **Retained:** bounded execution or inspection; reuse of current evidence; actual
 job state separate from output validation; numerical checks selected for the
@@ -228,7 +311,7 @@ workflow. Runner, experiment, and theory owners keep their existing responsibili
 
 - **Sources:** the user-supplied `/Users/zhangbowen/Downloads/如何读论文？.md` (Chinese seven-step reading guidance); the user's OR usage retrospective supplied in the conversation on 2026-09-24; and the former `skills/research-opportunity-mining/SKILL.md`, read before its retirement.
 - **Read:** 2026-09-24; reread 2026-09-30. Partly superseded on 2026-10-10 (below).
-- **Applied to:** [literature workflow](../skills/research-literature/SKILL.md), [paper record](../skills/research-literature/note-template.md), [synthesis](../skills/research-synthesis/SKILL.md), and ideation (`skills/research-ideation/`, retired on 2026-10-12; last present at `2727853`).
+- **Applied to:** [literature workflow](../skills/research-literature/SKILL.md), [paper record](../skills/research-literature/note-template.md), [synthesis](../skills/research-literature/references/synthesis.md), and ideation (`skills/research-ideation/`, retired on 2026-10-12; last present at `2727853`).
 
 **Retained:** overview through the abstract and displays; a precise research
 question; prior approaches and their remaining difficulties; independent thought

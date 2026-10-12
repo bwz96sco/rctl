@@ -182,11 +182,13 @@ print("Retained counts match the total.")
 Command exit zero establishes this arithmetic check only. The second criterion
 requires an evidence-based judgment of the result's claim.
 
-When the project has an executable evaluator, the primary criterion of a method
-task can be a command that runs it on the fixed test split and writes the method's
-and baselines' outcomes to declared evidence. Require that the evaluation ran and
-its numbers were recorded, not that the method won, so an unfavorable result can
-still close; the goal review then judges the recorded numbers.
+When the project has an executable evaluator, run it on the fixed test split before
+verification and retain the method's and baselines' outcomes as declared evidence.
+The primary criterion can run a read-only check of those prepared outcomes and
+execution records. Require that the evaluation ran and its numbers were recorded,
+not that the method won, so an unfavorable result can still close; the goal review
+then judges the recorded numbers. Rewriting declared evidence inside `verify`
+makes the report unknown even when the command itself succeeds.
 
 ## Result: `result.md`
 

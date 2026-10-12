@@ -1,8 +1,8 @@
 # Research skills
 
-rctl owns the 13 research workflow packages listed below under `skills/`, including
-research-task, the migrated domain workflows, and research-rapid-test. Edit these
-sources here.
+rctl owns the seven research workflow entrypoints listed below under `skills/`.
+Edit these sources here. Specialized guidance, optional templates and helper
+fixtures live with their owning entrypoint rather than registering extra skills.
 On 2026-10-12, `research-question`, `research-ideation` and
 `research-idea-evaluation` were removed from source and from every installed
 skill directory ([record](#october12-ideation-retirement)); the research playbook
@@ -22,21 +22,87 @@ instructions needed to perform their tasks.
 |---|---|---|
 | [research-task](../skills/research-task/SKILL.md) | Task agreements, handoffs, verification and guarded closure | Automatic or explicit; project-local |
 | [paper-discovery](../skills/paper-discovery/SKILL.md) | Question-scoped paper pools and project Zotero collection curation | Automatic or explicit |
-| [research-literature](../skills/research-literature/SKILL.md) | Full-paper reading into anchored evidence records, including limitations, nulls and testable defects | Automatic or explicit |
-| [research-synthesis](../skills/research-synthesis/SKILL.md) | Evidence-bounded answers and comparisons across papers | Automatic or explicit |
-| [research-rapid-test](../skills/research-rapid-test/SKILL.md) | Bounded observations resolving an empirical investment uncertainty | Automatic or explicit |
-| [research-experiment](../skills/research-experiment/SKILL.md) | Bounded experiment contracts, runner evidence and scientific checks | Automatic or explicit |
-| [experiment-adapter-builder](../skills/experiment-adapter-builder/SKILL.md) | Stable project runner commands, queues, monitoring and evidence rules | Explicit only in Codex; native policy preserved |
-| [model-training-workflow](../skills/model-training-workflow/SKILL.md) | Training setup, launch guards, monitoring, diagnosis and experiment handoff | Explicit only in Codex; native policy preserved |
-| [research-theory](../skills/research-theory/SKILL.md) | Formulation, derivation, proofs, counterexamples and proof audits | Automatic or explicit |
+| [research-literature](../skills/research-literature/SKILL.md) | Anchored full-paper records and evidence-bounded cross-paper answers | Automatic or explicit |
+| [research-experiment](../skills/research-experiment/SKILL.md) | Experiments, pilots and training, with project runner documentation | Automatic or explicit |
 | [research-figure](../skills/research-figure/SKILL.md) | Evidence-bearing figures, diagrams and caption audits | Automatic or explicit |
-| [research-slides](../skills/research-slides/SKILL.md) | Academic talk planning, production boundaries and slide audits | Automatic or explicit |
-| [research-writing](../skills/research-writing/SKILL.md) | Author-side manuscripts, revisions, rebuttals and submission checks | Automatic or explicit |
-| [research-review-case](../skills/research-review-case/SKILL.md) | Referee-side evidence audits without paper verdicts | Automatic or explicit |
+| [research-slides](../skills/research-slides/SKILL.md) | Academic talk planning and scientific content verification | Automatic or explicit |
+| [research-writing](../skills/research-writing/SKILL.md) | Manuscripts, rebuttals, submission audits and mathematical claim checks | Automatic or explicit |
 
-Remaining names and invocation policies are preserved. The two training/adapter
-packages retain `allow_implicit_invocation: false` in their Codex metadata; their frontmatter retains
-its original automatic-discovery default for other hosts.
+The seven retained entrypoints keep their names and automatic/explicit invocation
+policies. The two former explicit-only training/adapter entrypoints are retired;
+their references are loaded through the experiment skill when relevant.
+
+## Consolidation, 12 October 2026
+
+After the first boundary revision, the user requested a necessity review before
+further rewriting, then authorized consolidation. Keep an independent entrypoint
+when it supplies a distinct task contract or recurring domain verification; use a
+reference for a specialization that shares its owner's inputs and completion.
+This reduces 13 entrypoints to seven without deleting the useful domain guidance.
+
+| Retired entrypoint | Current owner and guidance |
+| --- | --- |
+| `research-rapid-test` | research-experiment: [rapid tests](../skills/research-experiment/references/rapid-tests.md) |
+| `model-training-workflow` | research-experiment: [training](../skills/research-experiment/references/training.md) |
+| `experiment-adapter-builder` | research-experiment: [project adapters](../skills/research-experiment/references/project-adapters.md) |
+| `research-synthesis` | research-literature: [cross-paper synthesis](../skills/research-literature/references/synthesis.md) |
+| `research-theory` | research-writing: [mathematical claims](../skills/research-writing/references/theory.md) |
+| `research-review-case` | research-writing: [manuscript audits](../skills/research-writing/references/manuscript-audit.md) |
+
+Research-slides remains: audience, talk purpose, timing and evidence-grounded
+academic narration are a useful domain contract. An available
+`presentations:Presentations` skill can produce and render the requested deck;
+its implementation responsibilities do not replace academic talk planning.
+Research-figure retains individual figure/caption provenance and verification;
+paper-wide figure planning stays with writing. Existing project-specific runner
+adapters remain useful and are not retired by this source consolidation.
+
+Optional adapter/training templates, validators and fixtures now ship under
+research-experiment. The fictional demo uses `entrypoint.md`, staged as `SKILL.md`
+only in a temporary validator fixture, so recursive discovery sees only the seven
+real entrypoints. The obsolete external source-catalog audit and its controller
+are removed from the skill payload; commit `cdd09a5` retains their history. The
+preceding uncommitted draft is backed up under
+`.work/skill-consolidation-20261012/` in this checkout.
+
+Contracts retain evidence, budgets and any agreed review requirements. Methods,
+tool selection and iteration order follow the assignment. The paper-record format,
+rctl CLI, schemas and task lifecycle are unchanged. This is a repository source
+revision; global discovery links and copy installations are not migrated. Sources
+are recorded in [Distilled Sources](DISTILLED-SOURCES.md#skill-necessity-and-consolidation-12-october-2026),
+validation in [Development](DEVELOPMENT.md#skill-consolidation-12-october-2026),
+and installation/behavioral limits in [Readiness](READINESS.md#limitations).
+
+## Contract and verification revision, 12 October 2026
+
+The first boundary-focused draft changed seven entrypoints: training, adapter
+creation, rapid-test, experiment, discovery, reading and synthesis. They establish
+the requested input/scope, evidence and completion conditions while leaving
+methods, batching, tool choice and iteration order to the assignment.
+The [source and adaptation record](DISTILLED-SOURCES.md#skill-contract-and-verification-boundaries-12-october-2026)
+records the user request and official guidance behind the revision.
+
+Training no longer requires six pack files or an external source-catalog mapping.
+Tiny/capped runs become prerequisites only through the current agreement.
+Adapters may keep facts inline or link to existing project documents instead of
+creating a fixed reference/template tree. Rapid-test budgets and retries follow
+the bet. Discovery chooses routes for coverage; reading chooses its reader
+configuration; synthesis can use supplied anchored sources. The compact paper
+record format, all 13 names and invocation policies were preserved in that draft.
+The consolidation above supersedes its entrypoint layout.
+
+Optional templates retain domain examples. The training-pack helper checks a
+completed handoff and run references, reusing an execution log when present; the
+adapter helper checks entrypoint metadata and declared local references. These
+checks establish structure, not successful execution or scientific validity.
+Task guidance also places evidence generation before read-only verification;
+required independent/operator review still follows the accepted agreement.
+
+At that stage, source-linked installations saw the edits through existing links.
+No global CLI installation, host configuration or live-project skill copy is
+updated by this revision. Validation is recorded in
+[Development](DEVELOPMENT.md#skill-boundary-revision-12-october-2026), with
+behavioral limits in [Readiness](READINESS.md#limitations).
 
 ## Reading and candidate development
 
@@ -67,7 +133,7 @@ migrated.
 
 The standalone `research-computation` skill was retired on 2026-09-23. Its useful
 execution and numerical-validity guidance now lives in the shared
-[computation checks](../skills/research-theory/references/computation-checks.md)
+[computation checks](../skills/research-experiment/references/computation-checks.md)
 reference. Theory, experiment, rapid-test, and training workflows read it only for
 an unresolved computation question. Reading it does not invoke the theory workflow.
 
@@ -83,24 +149,25 @@ The wheel and source distribution include all these skill packages. Project `ini
 `research-task`; they do not install or overwrite a global research suite. Domain
 skills remain separate from the CLI's lifecycle and acceptance authority.
 
-The source migration redirected 15 shared links to this checkout's `skills/<name>/`.
-The remaining workflows retain their discovery paths under
-`~/.agents/skills/`; Antigravity projections through that shared directory continue
-to use the same sources. Editing the checkout updates these linked packages; a
-wheel installation alone does not update them. New installations can use the host's
-normal skill installer against the individual repository paths. Do not create a
-second global research-task copy alongside the project-local one.
+The original source migration redirected 15 shared links to this checkout's
+`skills/<name>/`. Surviving source-linked packages expose later edits; a wheel
+installation alone does not update global discovery. The consolidation does not
+remove links to retired source directories or migrate copy-based installations.
+New installations can use the host's normal skill installer against the seven
+current repository paths. Do not create a second global research-task copy
+alongside the project-local one.
 
-The shared computation reference is packaged with research-theory. Copy-based
-installations using that reference need research-theory beside the consuming
-package under the same skills root. The local installation below removes the
+The shared computation reference is packaged with research-experiment. Copy-based
+installations using it from writing's mathematical guidance need research-experiment
+beside research-writing under the same skills root. The historical installation
+below removes the
 obsolete research-computation and research-opportunity-mining discovery links;
 source retirement alone does not remove installed links.
 
-Research-rapid-test retains its existing Codex discovery path at
-`~/.codex/skills/research-rapid-test`, now a symlink to this checkout's package.
-This follow-up preserves its Codex-only installation; no duplicate is added under
-`~/.agents/skills` and no other host installation is introduced.
+Before consolidation, research-rapid-test retained its Codex discovery path at
+`~/.codex/skills/research-rapid-test`, linked to this checkout's former package.
+That follow-up preserved its Codex-only installation. Its standalone source
+entrypoint is now retired; this change does not alter host installation paths.
 
 The [official Codex skill documentation](https://developers.openai.com/codex/skills)
 states that user skills are discovered under `~/.agents/skills` and symlinked skill
@@ -226,9 +293,9 @@ Other relevant installed skills are not sourced from that repository:
 - `matt:research` and the host-provided Deep Research skill: separate general
   research/documentation capabilities, not members of this workflow migration.
 
-In particular, research-slides resolves personal-slides through its installed skill
-location before reading `references/research-handoff-contract.md`; the two source
-directories no longer need to be siblings. External CLI availability, credentials,
+Research-slides previously required personal-slides. It now uses project tooling
+or an available presentation-production skill for the requested artifact; its
+academic planning and content checks remain local. External CLI availability, credentials,
 datasets, and model access are not supplied by moving a skill.
 
 ## Durable artifact contracts
@@ -239,15 +306,11 @@ agent-skills-private; their old pack paths are not runtime contracts.
 | Local owner | Current durable surface | Mechanical gate |
 |---|---|---|
 | `paper-discovery` | one repository-level Zotero collection and `zotero-collection.md`; question-scoped `register.md` following the packaged register template, with publication/affiliation provenance, search coverage, Zotero item keys and verified membership | workflow contract tests plus Zotero re-read after writes |
-| `research-literature` | reading-state updates in `register.md`, plus `notes/<paper-id>.md` record files tied to the version read, with anchored, typed evidence records cited as `<paper-id>#R<n>` | workflow contract tests |
-| `research-synthesis` | `synthesis.md`, with optional evidence-backed open problems and separately labelled exploratory reflection | workflow contract tests |
-| `research-rapid-test` | one `rapid-test.md`, minimal runnable code/commands and raw observations; in an rctl-managed project, a linked lightweight native task unless the user chooses note-only tracking | claim-appropriate evidence and bounded PROMOTE / ITERATE ONCE / DROP judgment; managed tasks use existing rctl verification/closure with small declared criteria, without formal experiment prerequisites |
-| `research-experiment` | rctl `contract.md`, runner-owned execution evidence, and native `result.md` | domain structure validator plus rctl execution checks and evidence-based reviews before guarded closure |
-| `experiment-adapter-builder` | project-local experiment adapter with runner references and reusable run/campaign templates | packaged adapter validator and synthetic fixture; structure only |
-| `model-training-workflow` | training plan, source map, preflight, run matrix, execution log, optional diagnosis and handoff | packaged training validator and synthetic fixtures; structure only |
-| `research-theory` | derivations, proofs, counterexamples, and supporting numerical checks in the existing artifact | proof status in the skill; numerical validity checked separately |
-| `research-figure`, `research-slides`, `research-writing` | requested plan, notes, audit, asset, deck, or manuscript surface | render/build checks only for the applicable requested operation |
-| `research-review-case` | anchored case findings plus optional `cases.md` | finding and no-verdict rules in the skill |
+| `research-literature` | version-specific anchored paper records cited as `<paper-id>#R<n>`; cross-paper assignments produce `synthesis.md` or the requested answer, with tentative connections labelled separately | workflow contract tests; source-to-claim inspection |
+| `research-experiment` | requested pilot/training/experiment evidence; native `contract.md` and `result.md` for managed work; optional reusable project adapters | experiment validator and declared rctl checks for managed experiments; adapter/training helpers check structure only; scientific judgment remains separate |
+| `research-writing` | requested manuscript, rebuttal, proof or anchored audit findings; retain proved/refuted/not_proved/blocked proof status | source-to-claim and proof inspection; build checks for affected typeset output; audit findings do not issue an unsolicited paper verdict |
+| `research-figure` | requested evidence-bearing asset, caption or figure audit | inspect rendered output, labels, sources and caption consistency |
+| `research-slides` | requested academic talk plan, notes, deck or content audit | audience/time/evidence checks; actual renders for produced decks |
 | `rctl init` and project-local `research-task` | missing project scaffold, optional vault association, workspace/migration guidance | rctl initializer tests and installed-wheel walkthrough in the rctl repository |
 
 Human-readable state is required. There is no suite-wide requirement for a separate HTML report, provenance hash, manifest, numbered evidence pack, registry, queue, or campaign wrapper; selected runner/training workflows retain their own evidence requirements. Write only the surface requested by the user or needed for durable continuation.
@@ -269,10 +332,10 @@ actual rctl verification and negative closure. Structural checks do not establis
 scientific validity or prove that every workflow has been exercised by a model.
 
 ```sh
-uv run pytest tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_experiment_result.py tests/test_training_skill_assets.py -q
-uv run scripts/check_docs.py
+uv run --locked pytest tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_experiment_result.py tests/test_training_skill_assets.py -q
+uv run --locked python scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.5.1-py3-none-any.whl
+uv run --locked python scripts/smoke_package.py dist/rctl-0.6.5-py3-none-any.whl
 ```
 
 ### Behavioral checks

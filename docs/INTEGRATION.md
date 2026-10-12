@@ -6,14 +6,14 @@ Build the first adapter for Codex. Core commands remain host-neutral. The [new M
 
 Project initialization and host export install one `research-task` skill with these responsibilities: read contract/result/handoff, establish scope within existing authorization, preserve amendments, execute using appropriate domain skills, inspect evidence, invoke verification, and close only after the recorded guard succeeds. It must explicitly separate a chat pause from task closure.
 
-The repository and distributions also contain the 14 domain workflows in the
+The repository and distributions also contain the six domain workflows in the
 [research skill catalog](RESEARCH-SKILLS.md). They are maintained with rctl but are
 not automatically installed into projects by init/export or managed by project doctor.
 Their user-level source links are a separate, explicitly authorized installation boundary.
 
-Scientific methods and evidence requirements remain in the domain skills. As of v0.2,
-research-experiment uses native rctl contract/result files; model-training-workflow and
-experiment-adapter-builder retain runner authority, while research-review-case labels
+Scientific methods and evidence requirements remain in the domain skills. Managed
+research-experiment work uses native rctl contract/result files; its training and
+adapter references retain runner authority. Writing's manuscript-audit findings
 represent evidence coverage. None owns a competing task lifecycle. The shared setup skill
 is retired; its orientation/vault assets and workspace guidance now ship in rctl.
 The user-authorized M5 migration changes shared source skills; ordinary init/export commands

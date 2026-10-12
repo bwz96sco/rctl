@@ -1,21 +1,49 @@
 ---
 name: research-writing
-description: Plan, write, and revise author-side research manuscripts from validated evidence. Use for paper arguments and outlines, paper-wide figure and table planning, section or LaTeX drafting, substantive revision, claim and citation audits, reviewer responses, rebuttals, and submission checks. Referee-side audits belong to research-review-case.
+description: Write or revise research manuscripts and rebuttals, formulate or verify mathematical claims, and audit submissions against evidence.
 ---
 
 # Research Writing
 
-Turn validated literature, experiment, and theory evidence into a coherent paper argument and the requested manuscript surface. Every claim stays inside its evidence; missing evidence narrows the claim, routes back to its owner, or blocks visibly.
+Develop the requested manuscript, rebuttal, proof or audit from traceable evidence.
+Every claim stays inside its evidence; missing support narrows the claim, routes
+back to its owner, or blocks visibly.
 
-## Workflow
+## Starting contract
 
-1. **Lock the surface.** Read the supplied files, the paper repo, and current evidence before asking. Identify the paper type, audience, applicable venue constraints, and exact requested output — outline, draft, build, audit, revision, or rebuttal. Produce only that output.
-2. **Establish the evidence boundary.** Which claims, numbers, equations, citations, figures, and reviewer statements are authoritative — from the literature register and notes, experiment artifacts, and theory proofs.
-3. **Organize the requested work.** For an outline, full draft, or structural revision, use the [paper argument](#paper-argument) and [manuscript modules](#manuscript-modules). Place the main claims and their supporting sources in the relevant outline entries; keep missing support explicit. Read [figure-planning.md](references/figure-planning.md) when selecting or reorganizing the paper's figures and tables, drafting with placeholders, or integrating displays with the surrounding argument. For a local edit, inspect the affected argument and reuse the existing structure. Planning ends at the requested outline; drafting proceeds when requested.
-4. **Draft, revise, or audit.** Preserve claims, numbers, equations, notation, citations, and qualifiers unless the requested revision and evidence support a change; make material changes explicit. For an audit, report findings without modifying manuscript files. For a rebuttal, map each reviewer issue to evidence, manuscript delta, and response delta. Read [academic-phrasebank.md](references/academic-phrasebank.md) when calibrating wording or rewriting Chinese into English.
-5. **Validate the affected surface.** Verify claim strength, numbers, equations, citation support, display references, and logic. Check that the title, abstract, introduction, and conclusion agree with the supported contribution wherever the change affects them. After changing buildable LaTeX source, or when a build/submission check is requested, run the project build and record its actual command, result, and warnings. A read-only claim/prose audit needs no build; a standalone fragment without project context may be delivered as unbuilt.
+Establish the requested surface and role: outline, draft, revision, rebuttal,
+submission check, mathematical formulation/proof or referee-side audit. Use supplied
+files and project evidence to identify applicable paper type, audience, venue
+constraints and authoritative claims,
+numbers, equations, citations and reviewer statements. Reuse existing structure
+for a local edit; a new outline or separate argument document is optional.
 
-Complete when the requested output is delivered or explicitly blocked, affected claims remain evidence-bound, technical content is preserved or deliberately changed, and missing evidence is visible.
+For whole-paper planning, use the [paper argument](#paper-argument) and relevant
+[manuscript modules](#manuscript-modules). Use [figure planning](references/figure-planning.md)
+when selecting/reorganizing displays or working with placeholders. An outline
+request ends with an outline; drafting and deck production follow their own scope.
+
+- A referee-side audit uses [manuscript audit guidance](references/manuscript-audit.md),
+  returns findings and preserves the source. Authoring/repair is a separate request.
+- A load-bearing mathematical claim uses [proof checks](references/theory.md) when
+  formulation, derivation or proof validity is part of the work.
+- Wording calibration or Chinese-to-English revision can use
+  [academic phrasebank](references/academic-phrasebank.md).
+
+## Completion and verification
+
+Check affected claims, numbers, equations, citation support, display references
+and logic against evidence. Preserve technical content and qualifiers unless an
+explicit change is supported; report material changes. Check agreement among the
+title, abstract, introduction and conclusion when the edit affects their contribution.
+For a rebuttal, connect each addressed reviewer issue to evidence and the actual
+manuscript/response changes.
+
+After editing buildable LaTeX or for a requested build/submission check, run the
+project build and report its actual command, result and warnings. Read-only audits
+need no build; a standalone fragment may be delivered as unbuilt. Complete when
+the requested output is delivered or explicitly blocked, affected claims stay
+evidence-bound and missing support is visible. Managed closure uses research-task.
 
 ## Paper argument
 
@@ -55,4 +83,4 @@ Keep detailed section guidance in `references/`, linked from its module row with
 - No workflow state, ports, or prompt text in manuscript prose.
 - Reuse the existing outline and notes. A writing request does not require a separate argument document or a complete set of section files.
 - Writing artifacts: read the project-relative `vault` binding in `.rctl/project.json`, otherwise retain the existing note convention. Reuse existing work; for a new note use `<vault>/writing/<topic-slug>/`, or `artifacts/research-writing/<topic-slug>/` without a note root. LaTeX lives in the paper repo.
-- `paper-search-cli` validates DOIs, arXiv IDs, and BibTeX; `zotero-cli` for library ops; `smart-search-cli` for venue rules and non-paper facts; referee-side audits route to `research-review-case`.
+- Use `paper-search-cli` for identifier/BibTeX checks, `zotero-cli` for library operations, and `smart-search-cli` for venue rules and non-paper facts.

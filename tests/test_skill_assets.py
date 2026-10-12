@@ -5,7 +5,7 @@ import re
 import runpy
 import sys
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 import pytest
 import yaml
@@ -13,15 +13,16 @@ from test_research_skill_contracts import ACTIVE_RESEARCH_SKILLS
 
 from rctl.documents import resource_directory
 
-TRAINING_SKILLS = {"experiment-adapter-builder", "model-training-workflow"}
-PACKAGED_SKILLS = (
-    ACTIVE_RESEARCH_SKILLS | TRAINING_SKILLS | {"paper-discovery", "research-task"}
-)
+PACKAGED_SKILLS = ACTIVE_RESEARCH_SKILLS | {"paper-discovery", "research-task"}
 
 
 def test_exact_packaged_workflow_set():
     root = resource_directory("skills")
     assert {path.name for path in root.iterdir() if path.is_dir()} == PACKAGED_SKILLS
+    # Bundled templates/fixtures must not register extra workflows during discovery.
+    assert set(root.rglob("SKILL.md")) == {
+        root / name / "SKILL.md" for name in PACKAGED_SKILLS
+    }
 
 
 @pytest.mark.parametrize("name", sorted(PACKAGED_SKILLS))
@@ -36,16 +37,17 @@ def test_skill_metadata_resources_and_script_syntax(name):
     allow = projection.get("policy", {}).get("allow_implicit_invocation", True)
     disable = metadata.get("disable-model-invocation", False)
     assert isinstance(allow, bool) and isinstance(disable, bool)
-    if name in TRAINING_SKILLS:
-        # Preserve the source packages' existing host-specific invocation policies.
-        assert allow is False and disable is False
-    else:
-        assert allow is not disable
+    assert allow is not disable
 
-    for target in re.findall(r"\[[^\]]+\]\(([^)]+)\)", text):
-        parts = urlsplit(target)
-        if not parts.scheme and parts.path:
-            assert root.joinpath(parts.path).is_file(), (name, target)
+    documents = [root / "SKILL.md", *root.joinpath("references").rglob("*.md")]
+    for document in documents:
+        for target in re.findall(r"\[[^\]]+\]\(([^)]+)\)", document.read_text()):
+            parts = urlsplit(target.strip("<>"))
+            if not parts.scheme and parts.path:
+                assert (document.parent / unquote(parts.path)).is_file(), (
+                    document,
+                    target,
+                )
     for script in root.rglob("*.py"):
         ast.parse(script.read_text(encoding="utf-8"), filename=str(script))
 

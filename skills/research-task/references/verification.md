@@ -30,11 +30,12 @@ Promote after `close`: a cited PROGRAM.md edited between verify and close still
 requires verifying again. Old accepted contracts retain
 their original criteria.
 
-Write `goal_impact` from a fresh context holding only the contract, result, primary
-evidence and Goal, for example a new subagent without the working transcript, so
-the judgment does not inherit the work's momentum. For a costly continuation, the
-contract may require `reviewer: operator`. rctl records the declared reviewer; it
-cannot verify who wrote the judgment.
+Judge `goal_impact` against the contract, result, primary evidence and Goal. Choose
+a review arrangement appropriate to the decision; a fresh context can help test a
+conclusion that may inherit the work's momentum. Preserve independence or operator
+review when the agreement requires it. For a costly continuation, the contract may
+require `reviewer: operator`. rctl records the declared reviewer; it cannot verify
+who wrote the judgment or how their context was configured.
 
 Run `rctl verify TASK --reviews FILE`, omitting reviews for command-only criteria.
 Inspect every criterion and its logs as needed. Nonzero verification can still save

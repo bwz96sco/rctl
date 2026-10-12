@@ -15,25 +15,16 @@ ACTIVE_RESEARCH_SKILLS = {
     "research-experiment",
     "research-figure",
     "research-literature",
-    "research-rapid-test",
-    "research-review-case",
     "research-slides",
-    "research-synthesis",
-    "research-theory",
     "research-writing",
 }
 
 
 class ResearchSkillContractTest(unittest.TestCase):
-    def test_discovery_literature_synthesis_boundaries(self) -> None:
-        discovery = (SKILLS / "paper-discovery/SKILL.md").read_text(encoding="utf-8")
-        literature = (SKILLS / "research-literature/SKILL.md").read_text(
-            encoding="utf-8"
-        )
+    def test_paper_records_retain_the_citable_evidence_format(self) -> None:
         note_template = (SKILLS / "research-literature/note-template.md").read_text(
             encoding="utf-8"
         )
-        synthesis = (SKILLS / "research-synthesis/SKILL.md").read_text(encoding="utf-8")
         for removed in (
             "## Overview",
             "## Field map and gap",
@@ -44,30 +35,6 @@ class ResearchSkillContractTest(unittest.TestCase):
         ):
             self.assertNotIn(removed, note_template)
         for marker in (
-            "exactly one Zotero collection",
-            "zotero-collection.md",
-            "$zotero-cli",
-            "$paper-search-cli",
-            "$smart-search-cli",
-            "entire Zotero library",
-            "persistent identifiers first",
-            "Search coverage",
-            "zotero_key",
-            "closest_candidate",
-            "metadata_status",
-            "$research-literature",
-        ):
-            self.assertIn(marker, discovery)
-        for marker in (
-            "$paper-discovery",
-            "One clean reader may take one paper or a small batch",
-            "full-text read or explicitly blocked",
-            "$research-synthesis",
-        ):
-            self.assertIn(marker, literature)
-        self.assertNotIn("paper-search-cli", literature)
-        self.assertNotIn("Search coverage", literature)
-        for marker in (
             "Metadata status: verified | conflicting | unverified",
             "Access: full_pdf | partial_text | abstract_only",
             "the sample size, and the uncertainty",
@@ -76,24 +43,30 @@ class ResearchSkillContractTest(unittest.TestCase):
             "[defect: <assumption|evaluation|mechanism|scope>, <observed|inferred>]",
             "[test] for R5:",
             "closest_candidate",
-            "final closest-prior selection belongs to `$research-synthesis`",
         ):
             self.assertIn(marker, note_template)
         defect_record = next(
             line for line in note_template.splitlines() if line.startswith("R5 [defect")
         )
         self.assertIn("<anchor> — <basis>, <confidence>", defect_record)
-        for marker in (
-            "closest prior work",
-            "exact overlap and differentiators",
-            "paper IDs and record IDs",
-            "$paper-discovery",
-            "$research-literature",
-        ):
-            self.assertIn(marker, synthesis)
-        self.assertIn("Evidence-backed open problems", synthesis)
-        self.assertIn("not a novelty verdict", synthesis)
-        self.assertIn("start without synthesis", synthesis)
+
+    def test_consolidated_entrypoints_and_routes_are_retired(self) -> None:
+        retired = (
+            "experiment-adapter-builder",
+            "model-training-workflow",
+            "research-rapid-test",
+            "research-synthesis",
+            "research-theory",
+            "research-review-case",
+        )
+        for name in retired:
+            self.assertFalse((SKILLS / name).exists())
+        names = "(?:" + "|".join(map(re.escape, retired)) + ")"
+        routes = re.compile(rf"\${names}\b|skills/{names}(?:/|\b)|`{names}`")
+        for root in (SKILLS, REPO / "templates"):
+            for path in root.rglob("*"):
+                if path.suffix in {".md", ".yaml"}:
+                    self.assertIsNone(routes.search(path.read_text()), path)
 
     def test_retired_quest_packages_and_references_are_absent(self) -> None:
         retired_pattern = re.compile(
@@ -140,24 +113,6 @@ class ResearchSkillContractTest(unittest.TestCase):
                     .get("policy", {})
                     .get("allow_implicit_invocation", True)
                 )
-
-    def test_experiment_response_contract_is_mode_free(self) -> None:
-        text = (
-            (SKILLS / "research-experiment" / "SKILL.md")
-            .read_text(encoding="utf-8")
-            .lower()
-        )
-        for marker in (
-            "one compact run matrix",
-            "no more than six stop/kill/relaunch/fallback rules",
-            "one bounded claim contract",
-            "fixed-wording mechanical transformation",
-            "adds no experimental judgment",
-            "minimum trust-bearing evidence",
-        ):
-            self.assertIn(marker, text)
-        for heading in ("## direct", "## pack", "## deep", "## campaign"):
-            self.assertNotIn(heading, text)
 
     def test_experiment_resources_are_reachable(self) -> None:
         root = SKILLS / "research-experiment"

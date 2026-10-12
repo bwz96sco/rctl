@@ -109,3 +109,20 @@ resume, compaction and subagents were not observed. Doctor reads only project se
 files, not user, managed or plugin layers, and cannot see whether the workspace trust
 dialog was accepted. The two skill
 copies can drift; doctor compares each with the package, not with each other.
+
+16. The 12 October skill-boundary revision is a first source version. Structural
+fixtures, native verification and package smoke can establish compatible assets,
+reference availability and command behavior; they do not establish fresh-model
+adherence or improved research outcomes. Training summaries and adapters still
+need evidence-based inspection of the actual runs and project commands. Existing
+source-linked skills expose the edits, but the global CLI, host configuration and
+live-project skill copies are not upgraded.
+
+17. The subsequent 12 October skill consolidation retains seven repository
+entrypoints and moves six specializations into their references. Structural,
+link, package and declared-command checks do not establish fresh-model discovery,
+adherence or improved scientific reasoning. Existing project runner adapters are
+untouched. No user-level discovery links or copy-based installations are migrated:
+surviving source links expose the edits, while any link targeting a retired source
+directory needs separate installation maintenance. The global CLI, host
+configuration and live research projects are not updated by this source change.

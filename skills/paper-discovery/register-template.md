@@ -1,6 +1,6 @@
 # Paper register template
 
-Use one register per question. Keep the compact table and put provenance below it, keyed by the same paper ID. Link existing reading notes and reused provenance with their original check dates; refresh facts whose current state matters to this search. Fill unknowns with the missing fact and reason rather than inferring them. `metadata_status` describes paper identity; publication verification is recorded separately.
+Use one register per question. Keep the compact table and applicable provenance below it, keyed by the same paper ID. Link existing reading notes and reused provenance with their original check dates; refresh facts whose current state matters to this search. Fill unknowns with the missing fact and reason rather than inferring them. Affiliation/group fields apply when they bear on the search; otherwise mark them `not collected for this scope`. `metadata_status` describes paper identity; publication verification is recorded separately.
 
 ## Source rules
 
@@ -33,8 +33,8 @@ Reused corpus: <register/note links, or none>
 - Versions: <located preprint ID/version/year; formal DOI/URL/year when verified>
 - Publication: <preprint / submitted / accepted / published / unknown>; <venue, year, track>
 - Publication evidence: <source; checked YYYY-MM-DD; verified / conflicting / unverified; unresolved claims or lookup limitation>
-- Authors and affiliations: <authors or subsets -> institutions; source/page; check date; verification status>
-- Research group: <explicitly sourced group/relationship with source/date, or not established>
+- Authors and affiliations: <when relevant: authors or subsets -> institutions; source/page; check date; verification status; otherwise not collected for this scope>
+- Research group: <when relevant: explicitly sourced relationship with source/date or not established; otherwise not collected for this scope>
 - Zotero membership: <in_project / library_only / not_registered / unchecked>; <collection key, check date/source or blocker>
 - Evidence note: <existing note link and version read, or not yet read — scientific evidence quality not assessed>
 
@@ -47,7 +47,7 @@ Repeat the provenance entry for each retained paper. Exclusions need only enough
 | <YYYY-MM-DD> | <keywords, venue cycle, citation expansion, author/group, or ecosystem> | <reproducible query or source> | <retained IDs, coverage gained, or no useful additions> |
 
 Covered roles: <core, closest candidates, baselines/evaluation, adjacent mechanisms, negative evidence>
-Coverage assessment: <verified venue/publication-status mix; recurring author teams; material gaps>
+Coverage assessment: <material gaps and applicable venue/publication-status or author-team coverage>
 Routes not covered: <relevant venue cycles, author/group sweeps, citation directions, or ecosystems omitted and why>
 Stop reason: <why further searching is unlikely to change this answer, or the scope/budget/access limit reached>
 ```

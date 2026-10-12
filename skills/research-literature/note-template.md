@@ -30,6 +30,8 @@ R7 [relation] <supports | limits | contradicts | direct overlap | closest_candid
 R8 [lead] <unresolved concept, technique, or cited work; why it matters> — <anchor>
 ```
 
-`closest_candidate` marks a plausible neighbor; final closest-prior selection belongs to `$research-synthesis`.
+`closest_candidate` marks a plausible neighbor; final closest-prior selection uses the [synthesis guidance](references/synthesis.md).
 
-Return only the record files, one per paper, with no commentary around them.
+For a paper-record assignment, return only the record files, one per paper.
+For a cross-paper assignment, these records support the separate requested answer;
+keep narrative reasoning out of the record files.

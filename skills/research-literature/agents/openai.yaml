@@ -1,7 +1,7 @@
 interface:
   display_name: "Research Literature"
-  short_description: "Paper reading into anchored evidence records"
-  default_prompt: "Use $research-literature to read the decisive papers in this existing corpus and write anchored evidence records, including limitations, null results, and testable defects."
+  short_description: "Anchored paper records and cross-paper answers"
+  default_prompt: "Use $research-literature to deliver the requested paper records or cross-paper answer from traceable evidence."
 
 policy:
   allow_implicit_invocation: true

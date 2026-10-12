@@ -101,7 +101,7 @@ def walkthrough(cli, project, repo, skills_root, python):
         "<positive, negative and inconclusive outcomes; planned batches/analyses and budget stop; no automatic sample growth>": "The fixed gain threshold decides synthetic promotion only. Unresolved review prevents closure. Stop after the declared local checks; no sample growth.",
         "<supplied total and comparable per-arm generation/execution allowances; mark unresolved allocation>": "Both arms use retained invented values; local arithmetic and structure checks only, no generation or training.",
         "<existing authorization and storage policy>": "Disposable local synthetic fixture, no external writes.",
-        "<Up to six bounded stop, kill, relaunch, or fallback rules; distinguish smoke from scientific runs.>": "Stop after the declared local checks; failures require correction before closure.",
+        "<Bounded stop, retry or fallback conditions for this agreement; distinguish launch checks from scientific runs.>": "Stop after the declared local checks; failures require correction before closure.",
         "<State whether bounded negative or inconclusive results satisfy the criteria.>": "A negative result closes when arithmetic and interpretation pass. Unknown review cannot close.",
         "<run>": "retained-input",
         "<smoke or claim-carrying>": "synthetic smoke",

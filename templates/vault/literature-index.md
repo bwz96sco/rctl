@@ -1,7 +1,7 @@
 # Literature index
 
 Add one row per question-scoped corpus. Use paper-discovery to maintain its register,
-research-literature for `notes/<paper-id>.md`, and research-synthesis for its cross-paper
+research-literature for `notes/<paper-id>.md` and its cross-paper
 answer. Link to source notes behind important claims; an index is navigation, not evidence.
 
 | Topic and question | Register | Paper notes | Synthesis |

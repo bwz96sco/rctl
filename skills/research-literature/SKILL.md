@@ -1,33 +1,58 @@
 ---
 name: research-literature
-description: Question-scoped full-paper reading that produces compact, anchored evidence records for agents to cite, including author-stated limitations, null results, and evidence-backed defects. Use when reading papers, checking claims or methods, or critiquing a paper's assumptions and evaluation. Paper discovery and Zotero curation belong to paper-discovery.
+description: Read papers into anchored evidence records and answer cross-paper questions, including contradictions and closest prior work.
 ---
 
 # Research Literature
 
-Read the papers that matter to a target question and record what their evidence supports, where they break, and how a defect could be tested. Output is for later agents to cite, not for human reading: no overview, field-map, method-walkthrough, or reflection prose. Paper-pool construction belongs to `$paper-discovery`; cross-paper argument, field maps, and closest-prior selection belong to `$research-synthesis`.
+Produce paper-local evidence or a cross-paper answer at the requested scope.
+Paper records use the compact [record format](note-template.md); a comparison or
+field-map request uses [synthesis guidance](references/synthesis.md). Keep the
+record files and argued answer distinct. New discovery/Zotero writes use
+paper-discovery; adequate supplied evidence needs no preliminary paper pool.
 
-## Workspace
+## Paper-reading contract
 
-Read the project-relative `vault` binding in `.rctl/project.json`; when unbound, retain the project's existing note convention. Reuse an existing topic directory; for a new one use `<vault>/literature/<topic-slug>/`, or `artifacts/research-literature/<topic-slug>/` without a note root. Read the repository-level `zotero-collection.md` when present. Keep `register.md` and `notes/<paper-id>.md` (one record file per paper) in the topic directory. PDFs stay in an ignored local archive.
+For paper-local reading/check work, establish the question/reading purpose, papers
+and scope: full reading, a targeted claim check or reuse of earlier evidence. Use supplied texts,
+the existing register or the project collection. Identify the exact version and
+available access; preserve unresolved identity as `conflicting` or `unverified`.
+Reuse adequate records. A local missing/disputed claim can be checked in context
+without rereading every paper; a material version/question change may need more.
 
-## Workflow
+Use the project's note convention or bound vault. New durable work normally uses
+`literature/<topic-slug>/register.md` and `notes/<paper-id>.md`; without a note root,
+use `artifacts/research-literature/<topic-slug>/`. A supplied-paper assignment can
+produce records directly without first constructing a discovery register.
 
-1. **Establish the reading purpose and corpus.** Put the user's target question or reading purpose verbatim at the top of `register.md`, followed by supplied scope constraints. Use the existing register and project collection or the exact papers supplied by the user. Route requests for new papers, citation snowballing, or collection updates to `$paper-discovery`, then resume from its register.
-2. **Select decisive papers.** Select papers capable of changing the answer, the closest-prior comparison, or the evaluation boundary. For a named paper, stay with that paper. For an existing corpus, prioritize retained `core` and `closest_candidate` rows; do not expand the corpus inside the reading pass.
-3. **Establish access.** Resolve each selected row to its Zotero item, supplied file, or stable source, and identify the exact version read. Record access as `full_pdf`, `partial_text`, `abstract_only`, or `unavailable`; preserve the row's `metadata_status` (`verified`, `conflicting`, `unverified`) rather than re-running discovery. Bibliographic, affiliation, and collection provenance stay in the register; the record file carries only the fields in [note-template.md](note-template.md). Send save or refresh requests to `$paper-discovery`.
-4. **Reuse before rereading.** Reuse an existing record file when its version, question coverage, and anchors are adequate. For an isolated missing or disputed claim, check the relevant source sections with their definitions and evaluation context, then add or amend the affected records and the checked scope. Reread only when a material version or question change exceeds a local check, contradictions cannot be resolved locally, or the user requests a fresh independent reading. Template changes alone do not justify rereading.
-5. **Read with clean readers.** Start each reader without conversation history where the host supports it (`fork_turns: "none"`). One clean reader may take one paper or a small batch (about two to four) that bears on the same question. Give it only the paper texts, the target question, the needed register rows, the minimal project facts the question depends on, and [note-template.md](note-template.md). Report a requested reader configuration the host cannot provide rather than silently substituting it. Reuse a page-preserving text extraction and consult PDF pages for unclear equations, figures, or tables. Save each paper's records as `notes/<paper-id>.md`. Partial or abstract-only reading remains `skimmed`, and its records cannot support method, result, defect, or closest-prior conclusions. Escalate a concrete unresolved proof or experimental interpretation, with its source context, to a more capable model; this is not an automatic second reading.
-6. **Close the reading state.** Update access, status, decision, and relevance in `register.md` without changing Zotero identity or search-coverage history. Flag discrepancies between the paper and the supplied provenance for `$paper-discovery` instead of silently replacing verified records. `read` means the full paper was read, including a documented earlier reading; a targeted check alone never promotes `skimmed` to `read`. Otherwise use `skimmed` or `blocked`.
-7. **Route the result.** Send `lead` records that name missing papers to `$paper-discovery`. For a decisive paper whose interpretation depends on implementation details, inspect the released code and record what was inspected. Route reproduction of a result that could change the research decision to `$research-experiment`. When the user asks to compare papers, resolve contradictions, map the field, identify closest prior work, or answer across the corpus, invoke `$research-synthesis` after the decisive record files are ready.
+Choose reading tools, batching and delegation for the assignment. Preserve any
+requested independent-reader configuration and report when the host cannot supply
+it. A fresh reader or stronger model is useful for a concrete unresolved
+interpretation, not a universal extra reading. Consult page renders where text
+extraction leaves equations, tables or figures ambiguous.
 
-For a full-paper assignment, complete when every requested or decisive `core` or `closest_candidate` paper is full-text read or explicitly blocked; adequate existing record files count. For a targeted claim check, complete when the requested claim is supported, corrected, or explicitly unresolved with the checked scope recorded. Every read paper has a record file tied to the version read; every material claim or defect has a record with an anchor, evidence basis, and confidence; and the file contains at least one `relation` record stating what the evidence supports for the question and its main limitation.
+## Verification and completion
 
-## Evidence boundary
+In paper-record files, every material claim/defect has a self-contained record with
+source anchor, evidence basis and confidence. Separate author statements, reported observations
+and analyst inference; `limitation` records quote the authors verbatim. Include a
+`relation` record explaining support for the question and its main limitation.
+Record files contain evidence records, not overview or reflection prose.
 
-- Keep author statements, observed results, and analyst inferences in separate record types; `limitation` records quote the authors verbatim.
-- Abstract or partial access establishes candidate relevance only. Keep unresolved identifiers visibly `conflicting` or `unverified`.
-- An absence claim names the full-text sections checked; otherwise write `not assessable from available access`.
-- Paper-local defects are evidence inputs, not proof that a field-wide problem remains open.
-- Ideas raised by reading appear only as `test` records tied to a defect or as `lead` records; develop questions or approaches elsewhere when requested.
-- Literature and synthesis are optional evidence providers for ideation, never readiness gates.
+For full reading, every assigned or decisive paper is read or explicitly blocked;
+adequate earlier reading counts. `read` means full-paper reading; targeted or
+partial work records its checked scope and remains `skimmed`. Partial passages
+support only the facts they expose, with necessary definitions/context; abstracts
+support candidate relevance and stated claims, not verification of the findings.
+An absence claim names the sections checked. Paper-local defects alone do not
+establish a field-wide open problem.
+
+For a targeted check, resolve the requested claim or state exactly what remains
+unresolved. Update existing reading state without changing Zotero identity/search
+history. Route missing papers or provenance conflicts to paper-discovery and
+cross-paper conclusions to the synthesis guidance. Reading leads stay as `test` or
+`lead` records. Reproduction is separate authorized experimental work.
+
+For a cross-paper assignment, deliver the requested argued answer using the
+synthesis source, coverage and completion checks. Adequate supplied anchored
+evidence can support it directly; paper records alone do not complete a comparison.

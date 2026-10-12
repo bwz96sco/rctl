@@ -127,32 +127,34 @@ def main():
             if path.is_file()
         }
         assert source_files == packaged_files
-        for name, validator, fixture, flags in (
+        root = installed_skills / "research-experiment"
+        for validator, fixture, flags in (
             (
-                "experiment-adapter-builder",
-                "validate_adapter_skill.py",
-                "demo-experiment-workflow",
+                "validate-adapter.py",
+                "project-adapter",
                 [],
             ),
             (
-                "model-training-workflow",
-                "validate_model_training_pack.py",
+                "validate-training.py",
                 "lora-wandb-tiny-overfit",
                 [],
             ),
             (
-                "model-training-workflow",
-                "validate_model_training_pack.py",
+                "validate-training.py",
                 "training-collapse-diagnostic",
                 ["--strict-diagnostics"],
             ),
         ):
-            root = installed_skills / name
+            target = directory / fixture
+            shutil.copytree(root / "fixtures" / fixture, target)
+            entrypoint = target / "entrypoint.md"
+            if entrypoint.is_file():
+                entrypoint.rename(target / "SKILL.md")
             subprocess.run(
                 [
                     str(python),
                     str(root / "scripts" / validator),
-                    str(root / "fixtures" / fixture),
+                    str(target),
                     *flags,
                 ],
                 cwd=project,

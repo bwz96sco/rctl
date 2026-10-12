@@ -1,6 +1,6 @@
 # Lightweight rapid trials
 
-Use this route when `research-rapid-test` or project rules call for task tracking.
+Use this route when a bounded rapid test or project rules call for task tracking.
 It preserves a small experiment's question, limits and continuation without
 requiring the formal `research-experiment` workflow. Existing governed studies
 retain their accepted requirements. Discussion and bounded mechanical edits may
@@ -16,7 +16,7 @@ amendment; a different scientific question belongs in a linked new task.
 Neither operation renews consumed allowances or supplies missing authorization.
 
 Create the task with `task new` and use the native format in
-[Task files](task-files.md). Reuse the trial note's six-line bet:
+[Task files](task-files.md). Reuse the trial note's compact bet:
 
 - **Question:** mechanism, related result, remaining uncertainty and the decision
   this comparison changes. For a derived question, use Question alignment to

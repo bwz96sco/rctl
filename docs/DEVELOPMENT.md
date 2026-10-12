@@ -1,5 +1,105 @@
 # Development Plan
 
+## Skill consolidation, 12 October 2026
+
+The user authorized consolidating the skills after a necessity review. Seven
+entrypoints remain: task, discovery, literature, experiment, writing, figure and
+slides. Rapid tests, training and adapter creation become experiment references;
+synthesis becomes a literature reference; mathematical claims and manuscript
+audits become writing references. Academic talk planning and content verification
+keep their own entrypoint. Existing project runner adapters are not retired.
+The [catalog](RESEARCH-SKILLS.md#consolidation-12-october-2026) and
+[source record](DISTILLED-SOURCES.md#skill-necessity-and-consolidation-12-october-2026)
+explain the responsibility boundaries.
+
+Optional templates, helpers and fixtures move with their owner. The obsolete
+external training source-catalog controller is removed from the skill payload.
+The demo adapter fixture no longer registers a fictional skill: its ordinary
+entrypoint file is staged as `SKILL.md` only during isolated validation. Vault
+templates route reading and cross-paper answers to literature. CLI behavior,
+schemas, task authority and the typed paper-record format are unchanged.
+
+Acceptance selected: A-23 (packaged assets and helpers), A-24 (native experiment
+template/check integration), A-29 (task-only export), and retained A-34/A-40
+history and goal-review guidance. Exact-entrypoint tests detect retired or fixture
+registration; route/link checks detect unavailable resources; helper negatives
+detect missing evidence fields and broken references; installed-wheel smoke
+detects checkout-only resources and changed task/export behavior.
+
+Local validation:
+
+- `uv run --locked pytest -q`: **334 passed, 18 subtests passed**.
+- `uv run --locked pytest -q tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_training_skill_assets.py tests/test_experiment_result.py`:
+  **28 passed, 18 subtests passed**, repeated after the final specialization-routing
+  clarification. Operational-only work uses its relevant reference contract;
+  cross-paper assignments deliver an argued answer, not only reading records.
+- `uv run --locked ruff check src tests scripts skills`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed (438 local links,
+  100 JSON files, four schemas).
+- Skill-creator metadata checks passed for all seven entrypoints, using
+  `uv run --locked python /Users/zhangbowen/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/research-experiment`
+  and the same command for paper-discovery, research-task, research-literature,
+  research-writing, research-figure and research-slides. The three final edited
+  roots were rechecked.
+- `git diff --check`: passed.
+- `uv build --out-dir .work/skill-consolidation-20261012/dist`: unreleased 0.6.5
+  source distribution and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/skill-consolidation-20261012/dist/rctl-0.6.5-py3-none-any.whl`:
+  passed in an isolated installation, including exact source/package assets,
+  migrated helper fixtures, task-only export and native experiment
+  verification/closure. Output is retained in
+  `.work/skill-consolidation-20261012/wheel-smoke.log`.
+
+These checks establish structural compatibility, packaging and declared command
+behavior. Limits are recorded in
+[Readiness](READINESS.md#limitations).
+
+## Skill boundary revision, 12 October 2026
+
+This first draft is superseded by the consolidation above; its checks below are
+retained as the draft's historical record.
+
+The user requested a first implementation after auditing the repository's skills
+for obsolete procedural constraints. Seven entrypoints in that draft emphasize starting
+contracts and ending verification; templates and optional helpers follow the same
+boundaries ([details](RESEARCH-SKILLS.md#contract-and-verification-revision-12-october-2026),
+[sources](DISTILLED-SOURCES.md#skill-contract-and-verification-boundaries-12-october-2026)).
+The revision also corrects evidence-generation ordering in research-task and
+removes a mandatory personal-slide-tool dependency. Scientific comparison,
+evidence, required review and currentness requirements remain. Names, invocation
+policies, paper-record format, CLI behavior and schemas are unchanged.
+
+Acceptance selected: A-23 (packaged assets and helpers), A-24 (native experiment
+template/check integration), A-29 (task-only export), and retained A-34/A-40
+history and goal-review guidance. Negative helper fixtures detect missing handoff
+fields and broken declared references; minimal fixtures prove that project-owned
+documents and existing run records can replace fixed file trees. Existing rich
+fixtures remain accepted. A public-CLI audit reproduced generation during verify
+as an unknown report with command pass and refused closure; a subsequent read-only
+check produced a current pass and allowed closure, so the fix is in guidance.
+
+Local validation:
+
+- `uv run --locked pytest -q`: **339 passed, 30 subtests passed**. The affected
+  suite also passed 133 tests and 30 subtests before the final documentation pass.
+- `uv run --locked ruff check src tests scripts skills/experiment-adapter-builder/scripts/validate_adapter_skill.py skills/model-training-workflow/scripts/validate_model_training_pack.py`:
+  passed.
+- `uv run --locked python scripts/check_docs.py`: passed (422 local links,
+  100 JSON files, four schemas).
+- `git diff --check`: passed.
+- `uv build --out-dir .work/skill-boundary-pass-20261012/dist`: unreleased 0.6.5
+  source distribution and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/skill-boundary-pass-20261012/dist/rctl-0.6.5-py3-none-any.whl`:
+  passed in an isolated installation, including source/package asset equality,
+  the three earlier helper fixtures, task-only export and native experiment
+  verification/closure. Output is retained in
+  `.work/skill-boundary-pass-20261012/wheel-smoke.log`.
+
+These checks establish structure, packaging and declared command behavior. This
+is an unreleased source revision; existing source links follow the edits, while
+installed CLI resources and project copies are not replaced. See
+[Readiness limitations](READINESS.md#limitations).
+
 ## Ideation skill retirement, 12 October 2026
 
 The user chose to retire research-question, research-ideation and
