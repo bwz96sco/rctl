@@ -35,8 +35,8 @@ Version 0.6.3 gives selected-task
 one whole sentence per decision-relevant field instead of fragments of every field.
 Version 0.6.4 adds [automatic reminder selection](docs/DEVELOPMENT.md#automatic-reminder-task-selection-10-october-2026):
 without `RCTL_TASK_PATH`, reminders use the project's only active task.
-Unreleased [per-session selection](docs/DEVELOPMENT.md#per-session-task-selection-10-october-2026)
-keeps the task each Claude Code or Codex session began or chose with `rctl task use`.
+Version 0.6.5 adds [per-session selection](docs/DEVELOPMENT.md#per-session-task-selection-10-october-2026):
+reminders keep the task each Claude Code or Codex session began or chose with `rctl task use`.
 
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools

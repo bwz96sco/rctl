@@ -1,5 +1,39 @@
 # Development Plan
 
+## v0.6.5 release preparation, 12 October 2026
+
+The user authorized releasing and installing
+[per-session task selection](#per-session-task-selection-10-october-2026)
+(`a43e7fe`) and updating LEO and OR ("执行下更新"). It adds `task use`, session
+pointers written by `begin`/`reopen` and cleared by `close`/`cancel`, the `session`
+selection kind, and changes generated host READMEs and the packaged research-task
+`SKILL.md` and `references/workspace.md`; schemas and task records are unchanged.
+The release also packages `937d8a0`, a research-rapid-test skill change committed
+separately. LEO and OR skill copies become outdated until replaced.
+
+Version-only currentness: the latest reports of 4 closed LEO tasks and 8 closed OR
+tasks were written by 0.6.4, so after installation they display stale while their
+historical closures stay intact (SPEC §7). OR's only active task has no report; LEO
+has no active task.
+
+Acceptance selected: the existing suite plus installed-package smoke (A-23), then
+installed session selection on a fixture, `doctor` in LEO and OR, and one real
+Claude Code session in OR that selects a task with `task use` and receives it after
+resuming.
+
+Local macOS 26.6.2/Python 3.13.2 validation of the release commit:
+
+- `uv lock`: only the project version changed.
+- `uv run --locked pytest -q`: **379 passed, 49 subtests passed**.
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed.
+- `uv build --out-dir .work/release-0.6.5/dist`: sdist and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/release-0.6.5/dist/rctl-0.6.5-py3-none-any.whl`:
+  isolated package smoke passed, including `task use` and a session SessionStart.
+
+Deployment follows the 0.6.2 procedure: push, all four CI jobs, then installation
+from a clean committed tree.
+
 ## Per-session task selection, 10 October 2026
 
 Starting agreement: with 0.6.4, a task one session began was selected automatically
