@@ -68,6 +68,12 @@ and announce them before executing:
 | Initial material | Size for the decision; a few favorable cases can test a property, while population claims need broader evidence |
 | Method revisions after the first result | One concrete rescue attempt |
 
+These defaults pace a first observation or a screen of candidates. They do not
+govern a method pilot on a frozen evaluator with fixed controls, such as a
+project's method stage: there a losing method version is diagnosed and revised
+within the stage budget the user or project fixed, and another candidate comes
+only after that budget is spent or the user decides.
+
 Carry consumed time and calls across resumptions. Choose a small call/compute
 allowance within existing authorization before batch work. If the investigation
 cannot fit the default window, isolate a pivotal uncertainty or drop it for now.

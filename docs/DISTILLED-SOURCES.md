@@ -328,6 +328,14 @@ records the residual problems and inference limit. This single clarified-context
 example does not establish a causal improvement or reliable compliance. No new
 scientific trial was launched.
 
+**October12 scope correction:** the default pace (a few hours, one rescue, then the
+next candidate) now states that it paces first observations and screens, not a
+method pilot on a frozen evaluator, where a losing version is revised within the
+stage budget. Source: the OR failure review recorded in
+`research-playbook/usage-log.md#or-failure-review-2026-10-12`, which found the
+default would otherwise govern OR's planned method stage. One sentence; no schema,
+template or lifecycle change.
+
 ## Research-question formation and investigation design
 
 - **Sources:** the user's `/Users/zhangbowen/Downloads/问题.md` and September28
