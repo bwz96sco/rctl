@@ -352,14 +352,15 @@ from a clean committed tree.
 
 ## Latest deployment
 
-v0.6.4 source `4e6ede6` is pushed, passed all four CI jobs, and is installed in the
+v0.6.5 source `e2cca13` is pushed, passed all four CI jobs, and is installed in the
 global tool environment. Installed code/resources match the clean committed tree.
-Without `RCTL_TASK_PATH`, reminders use the project's only active task; a real
-Claude Code session in OR received the automatically selected task. LEO and OR
-`doctor` report all findings current after their skill copies were updated.
-See the [deployment record](V0.6.4-DEPLOYMENT.md); earlier releases are in the
-[v0.6.3](V0.6.3-DEPLOYMENT.md), [v0.6.2](V0.6.2-DEPLOYMENT.md) and
-[v0.6.1](V0.6.1-DEPLOYMENT.md) records.
+Reminders use the task a Claude Code or Codex session began or chose with
+`task use`, else the only active task; a resumed real Claude Code session in OR
+received the task it had selected. LEO and OR `doctor` report all findings current
+after their skill copies and host READMEs were updated.
+See the [deployment record](V0.6.5-DEPLOYMENT.md); earlier releases are in the
+[v0.6.4](V0.6.4-DEPLOYMENT.md), [v0.6.3](V0.6.3-DEPLOYMENT.md),
+[v0.6.2](V0.6.2-DEPLOYMENT.md) and [v0.6.1](V0.6.1-DEPLOYMENT.md) records.
 Version-only historical currentness and the project-only prompt layout remain
 separate runtime work.
 
