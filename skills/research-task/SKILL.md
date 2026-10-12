@@ -53,6 +53,7 @@ JSON results are under `data`, beside `ok`, `error`, and `warnings`.
 | Create draft | `rctl task new TASK --kind analysis --title "Bounded question"` |
 | Check structure | `rctl contract check TASK` |
 | Retain agreement | `rctl begin TASK` |
+| Work on a task in this session | `rctl task use TASK` |
 | Accept changed agreement | `rctl amend TASK --reason "Why it changed"` |
 | Save handoff (active) | `rctl checkpoint TASK --file .work/handoff.md` |
 | Verify | `rctl verify TASK --reviews TASK/reviews.json` (omit reviews for command-only tasks) |
@@ -62,19 +63,21 @@ JSON results are under `data`, beside `ok`, `error`, and `warnings`.
 
 Root selection is `--root`, then `RCTL_PROJECT_ROOT`, then the working directory.
 Listing never selects a task. For context/hooks, an omitted task comes from
-`RCTL_TASK_PATH`, else the only active task (labeled automatic); lifecycle commands
-require `TASK`. CLI `--file` and `--reviews`
+`RCTL_TASK_PATH`, else this session's task, else the only active task (labeled
+automatic); lifecycle commands require `TASK`. CLI `--file` and `--reviews`
 paths resolve from the project root; document `evidence_refs`, command `inputs`,
 and command execution resolve from the task directory. Use targeted help for
 unfamiliar syntax or version differences; reuse established syntax otherwise.
 
-Creating a task or calling `context TASK` does not persist a session selection.
-When reminders say no task is selected or list several active tasks, read
-`rctl context TASK` explicitly for the work at hand. An automatically selected task
-is the only active one, not a session choice; when it is not the work at hand,
-read the intended task explicitly. `RCTL_TASK_PATH` at host launch overrides it;
-exporting it in a child shell cannot change an already running host. Do not infer a
-current task from the most recently listed entry.
+`begin` and `reopen` select the task for this Claude Code or Codex session, and
+`rctl task use TASK` selects an existing task, for example when resuming it in a new
+session. Creating a task or calling `context TASK` selects nothing. When reminders
+say no task is selected, list several active tasks, or automatically select a task
+that is not the work at hand, run `rctl task use TASK` for the task the work
+concerns; do not choose among listed tasks without that. `close` and `cancel` clear
+the selection in every session. `RCTL_TASK_PATH` at host launch overrides all of
+these; exporting it in a child shell cannot change an already running host. Do not
+infer a current task from the most recently listed entry.
 
 ## Completion and handoff
 

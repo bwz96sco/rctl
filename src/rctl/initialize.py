@@ -76,8 +76,9 @@ def initialize(root, vault=None, codex=True, claude=True):
         files[".rctl/codex/README.md"] = f"""# Project Codex reminders
 
 Inspect `.codex/hooks.json`, then launch Codex from this project. Project guidance
-always loads; when exactly one task is active, the reminders select it automatically.
-To choose another task, set it at launch:
+always loads. A task begun, reopened or chosen with `rctl task use TASK` in a session
+stays selected for that session; otherwise, when exactly one task is active, the
+reminders select it automatically. To fix a task for a whole session, set it at launch:
 
 ```sh
 RCTL_TASK_PATH=tasks/your-task codex --enable hooks
@@ -123,8 +124,10 @@ skill if no longer wanted. Preserve unrelated host settings and task records.
         files[".rctl/claude/README.md"] = f"""# Project Claude Code reminders
 
 Inspect `.claude/settings.json`, then launch Claude Code from this project. Project
-guidance always loads; when exactly one task is active, the reminders select it
-automatically. To choose another task, set it at launch:
+guidance always loads. A task begun, reopened or chosen with `rctl task use TASK` in a
+session stays selected for that session; otherwise, when exactly one task is active,
+the reminders select it automatically. To fix a task for a whole session, set it at
+launch:
 
 ```sh
 RCTL_TASK_PATH=tasks/your-task claude

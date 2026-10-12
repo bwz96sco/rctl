@@ -67,7 +67,7 @@ The exporter does not launch a host, alter global configuration, merge a live pr
 
 ## Adapter interface
 
-The internal command `rctl hook codex` reads one event JSON object from stdin. It requires `RCTL_PROJECT_ROOT` or an explicit global `--root`; it must not infer a different project from the host payload. `RCTL_TASK_PATH` selects the task relative to that root; without it, the project's only active task is used and labeled as selected automatically (SPEC §2). The payload's `cwd` must resolve inside that root.
+The internal command `rctl hook codex` reads one event JSON object from stdin. It requires `RCTL_PROJECT_ROOT` or an explicit global `--root`; it must not infer a different project from the host payload. `RCTL_TASK_PATH` selects the task relative to that root; without it, the task this host session began, reopened or chose with `rctl task use` (a pointer keyed by the adapter's host and the payload `session_id`), else the project's only active task labeled as selected automatically (SPEC §2). The payload's `cwd` must resolve inside that root.
 
 Use one initial `SessionStart` handler. Add `UserPromptSubmit` for updated handoffs, contract changes, and selection reminders. Both must render fresh state; prompt events use a compact summary plus source paths rather than reinjecting the entire contract. With a selected task, that summary is one capped line per decision-relevant field (see SPEC's reminder section), so it carries whole sentences rather than fragments. No daemon or continuous polling is involved.
 
@@ -105,7 +105,7 @@ Do not install Stop, PreToolUse, PreCompact, or SubagentStart handlers. Task com
 
 ## Delivery evidence
 
-For disposable host tests, `RCTL_HOOK_LOG` may select a local receipt file. No receipts are written when it is unset. Each JSONL receipt records host, event, source, session ID, the `RCTL_TASK_PATH` value, task selection (`explicit`, `automatic` or null), timestamp, and delivered context; an automatically selected task is named in the context. Keep it in local test output because context can include private material; do not send telemetry.
+For disposable host tests, `RCTL_HOOK_LOG` may select a local receipt file. No receipts are written when it is unset. Each JSONL receipt records host, event, source, session ID, the `RCTL_TASK_PATH` value, task selection (`explicit`, `session`, `automatic` or null), timestamp, and delivered context; an automatically selected task is named in the context. Keep it in local test output because context can include private material; do not send telemetry.
 
 Release evidence must include two distinct fresh host sessions, their launch arguments and host version, receipt records, the first session's saved handoff, and proof that the second received it. Also launch without hooks and show the core terminal loop still works. The no-hook run establishes core independence; it is not a comparative model-performance experiment.
 
@@ -157,3 +157,27 @@ https://developers.openai.com/codex/hooks . It continues to specify that
 to model context, including SessionStart with source `compact`. Fixture coverage is
 sufficient for this content-only change; the M7 real-host evidence retains its original
 protocol and delivery scope.
+
+## Per-session task pointers
+
+On 10 October 2026, after the user asked how other tools handle several tasks, the
+reminder selection gained per-session pointers (SPEC §2), following
+[Trellis](https://github.com/mindfold-ai/Trellis) (`active_task.py` at `f089cb3`).
+Trellis stores each host session's current task in an ignored runtime file, keyed by
+the session ID that the host passes to hooks and exports to shell commands. Neither
+host documents those shell variables; Trellis records observing
+`CLAUDE_CODE_SESSION_ID` in Claude Code 2.1.221 and `CODEX_THREAD_ID` in codex-cli
+0.146.0. rctl drops Trellis's fallback layers (shell tickets, `CLAUDE_ENV_FILE`
+exports, other hosts) and keeps its own only-active-task fallback, which Trellis
+deliberately omits.
+
+Local probes on 10 October 2026 used a disposable project with two active tasks. In
+Claude Code 2.1.296 (`claude -p`) and codex-cli 0.162.1 (`codex exec` with
+invocation-only hook-trust bypass), the agent ran `rctl task use tasks/beta`, and the
+pointer name matched the hook payload `session_id`. After each session was resumed
+(`claude -p --resume`, `codex exec resume`), SessionStart (source `resume`) and
+UserPromptSubmit receipts recorded `task_selection: "session"` for beta, and the model
+reported "Task selected for this session." Codex 0.162.1 also exports
+`CODEX_SESSION_ID` with the same value. A host launched from another host's shell
+inherits the outer variable as well; with both variables present rctl writes no
+pointer. Interactive sessions and Claude Code `/clear` were not observed.

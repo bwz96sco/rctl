@@ -35,6 +35,8 @@ Version 0.6.3 gives selected-task
 one whole sentence per decision-relevant field instead of fragments of every field.
 Version 0.6.4 adds [automatic reminder selection](docs/DEVELOPMENT.md#automatic-reminder-task-selection-10-october-2026):
 without `RCTL_TASK_PATH`, reminders use the project's only active task.
+Unreleased [per-session selection](docs/DEVELOPMENT.md#per-session-task-selection-10-october-2026)
+keeps the task each Claude Code or Codex session began or chose with `rctl task use`.
 
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
@@ -125,8 +127,8 @@ needs verification by the installed version before it can close.
 ## Project guidance before task selection
 
 `rctl context` without a selected task reads `research/PROGRAM.md` (Goal and optional
-Current guidance) and `research/ROUTES.md` (Reuse Rule). Task selection, explicit or
-automatic for the only active task, adds task status and handoff; task errors retain project guidance and the original CLI error.
+Current guidance) and `research/ROUTES.md` (Reuse Rule). Task selection (explicit, this session's
+task, or automatic for the only active task) adds task status and handoff; task errors retain project guidance and the original CLI error.
 Keep current corrections with their evidence and scope in PROGRAM.md. Read related
 route evidence before proposing experiments and explain the unanswered question,
 reopen condition or mechanism difference, and decision a new result would change.
@@ -169,7 +171,7 @@ uv run rctl integration codex export .work/codex-bundle
 `init` prepares missing project files; follow the
 [host first-use procedure](skills/research-task/references/workspace.md#host-first-use),
 review `.rctl/codex/README.md`, and trust the exact hooks through Codex `/hooks`.
-Reminders use the only active task automatically; `RCTL_TASK_PATH` overrides that. For an exported bundle,
+Reminders use the task this session began or chose with `rctl task use`, else the only active task; `RCTL_TASK_PATH` overrides both. For an exported bundle,
 use a new destination, review the generated files, then follow its README to select `RCTL_TASK_PATH` and launch Codex with the exported inline settings. The bundle includes a project-local `research-task` skill. Codex owns hook review and trust; exporting does not install configuration. Reminders read the selected task at session startup and prompt submission without running checks.
 
 After trust, start a fresh project session and submit a prompt to confirm both
@@ -182,7 +184,7 @@ Codex CLI 0.153.4 is tested with inline configuration and, in a [follow-up](docs
 
 `init` writes the two rctl handlers to `.claude/settings.json` and the task skill to
 `.claude/skills/research-task/`; review `.rctl/claude/README.md`. Claude Code runs
-project settings hooks after the folder's workspace trust dialog is accepted. Reminders use the only active task automatically (`RCTL_TASK_PATH=tasks/your-task claude`
+project settings hooks after the folder's workspace trust dialog is accepted. Reminders select tasks as for Codex (`RCTL_TASK_PATH=tasks/your-task claude`
 overrides that); confirm both event reminders in a fresh session. An existing
 `.claude/settings.json` is preserved; merge the handlers from
 `rctl update export DIRECTORY --claude`. One non-interactive Claude Code 2.1.296

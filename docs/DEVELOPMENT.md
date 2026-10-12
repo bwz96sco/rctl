@@ -1,5 +1,54 @@
 # Development Plan
 
+## Per-session task selection, 10 October 2026
+
+Starting agreement: with 0.6.4, a task one session began was selected automatically
+in every session of the project. The user asked whether separate worktrees avoid
+this, then pointed to how [Trellis](https://github.com/mindfold-ai/Trellis) handles
+several tasks. After the comparison
+([INTEGRATION](INTEGRATION.md#per-session-task-pointers)) the user authorized the
+hybrid: a per-session pointer first, the only-active-task fallback kept.
+
+Change: `begin`, `reopen` and the new `task use TASK` write
+`.rctl/sessions/<host>-<session ID>.json` for the calling Claude Code
+(`CLAUDE_CODE_SESSION_ID`) or Codex (`CODEX_THREAD_ID`) session. The directory gets
+its own `.gitignore` (`*`), so no project `.gitignore` edit is needed. Reminders use
+`RCTL_TASK_PATH`, then the pointer for the adapter's host and the payload
+`session_id`, then the only active task. `context` without TASK reads the pointer
+through the same shell variables. `task_selection` gains `session`; SessionStart
+starts "Task selected for this session." and the prompt head carries no label. `close`
+and `cancel` remove every pointer to the task. A pointer that is unreadable or names
+a missing task is skipped with a note, falling back to automatic selection. With
+both variables set (a host launched from another host's shell) no pointer is
+written and `task use` fails. `begin` and `reopen` report `data.session`. The
+no-selection line now points to `rctl task use TASK`. Records, schemas and the
+lifecycle are unchanged.
+
+Acceptance selected: A-11 (rewritten), A-23 package smoke (now also runs `task use`
+and a SessionStart hook with a session ID), existing reminder layouts unchanged.
+Regressions: two sessions on two active tasks each keep their own task; the same ID
+under the other host and an unknown session see the listing; `context` through the
+shell variable; `RCTL_TASK_PATH` overriding a pointer; `cancel` removing only its
+task's pointer and the session falling back; `reopen` restoring it; `task use`
+failing with no, two or a malformed session ID and for a missing task; a plain
+terminal `begin` writing nothing; unreadable and missing-task pointers noted and
+skipped. The test fixture and package smoke remove both host variables, which a
+Claude Code or Codex shell running the suite would otherwise supply.
+
+Real-host probes (local evidence in `.work/session-pointers-20261010/`, not
+committed): Claude Code 2.1.296 and codex-cli 0.162.1, each in a disposable project
+with two active tasks, launched without the outer host's variable. In each, the agent
+ran `rctl task use tasks/beta`; the pointer name matched the hook `session_id`. After
+`claude -p --resume` and `codex exec resume`, both events delivered beta as
+`session`, and the model quoted "Task selected for this session."
+
+Remaining limitations: a session without a pointer still receives the only active
+task automatically (the agreed hybrid; Trellis's strict variant drops that
+fallback). Pointers from sessions that end without `close` remain until the task
+ends. Interactive sessions and Claude Code `/clear` were not observed. The
+generated host READMEs, `SKILL.md` and `references/workspace.md` change, so LEO and
+OR copies become outdated until a release replaces them.
+
 ## v0.6.4 release preparation, 10 October 2026
 
 The user authorized committing, releasing and installing

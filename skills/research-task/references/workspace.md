@@ -44,9 +44,10 @@ are never populated automatically. Init does not upgrade customized templates or
    session transcript) or optional `RCTL_HOOK_LOG` receipts, and have the fresh
    session identify the injected goal or selected-task guidance before reading its
    source files. Receipts alone establish invocation, not model-visible delivery.
-   With one active task the reminders select it automatically; with none or
-   several, they legitimately deliver project guidance only. `RCTL_TASK_PATH` at
-   host launch selects a task explicitly.
+   A session's task comes from `begin`, `reopen` or `rctl task use TASK` in that
+   session; otherwise one active task is selected automatically, and with none or
+   several the reminders legitimately deliver project guidance only.
+   `RCTL_TASK_PATH` at host launch selects a task explicitly.
 
 Report configuration, host trust and observed delivery separately for each host. A
 passing static inspection or direct adapter invocation establishes no automatic host

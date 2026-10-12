@@ -91,7 +91,7 @@ Target and tested release route: Codex CLI 0.153.4, invocation-local inline hook
 
 ## Load and select a task
 
-Inspect `hooks.json` and the generated skill before use. Copy `research-task/` into this project's `.agents/skills/` only when that destination is unused. The skill also works through an explicit path in a prompt. Project guidance loads even without task selection; when exactly one task is active, the reminders select it automatically. To choose another task:
+Inspect `hooks.json` and the generated skill before use. Copy `research-task/` into this project's `.agents/skills/` only when that destination is unused. The skill also works through an explicit path in a prompt. Project guidance loads even without task selection. A task begun, reopened or chosen with `rctl task use TASK` in a session stays selected for that session; otherwise, when exactly one task is active, the reminders select it automatically. To fix a task for a whole session:
 
 ```sh
 export RCTL_TASK_PATH=tasks/your-task

@@ -33,7 +33,10 @@ def handle(payload, root_argument=None, host="codex"):
             )
         local_path(root, cwd)
         data = load_context(
-            root, budget=BUDGETS[event], prompt=event == "UserPromptSubmit"
+            root,
+            budget=BUDGETS[event],
+            prompt=event == "UserPromptSubmit",
+            session=(host, payload.get("session_id")),
         )[0]
         text, selection = data["context"], data["task_selection"]
     except (RctlError, OSError, ValueError) as error:

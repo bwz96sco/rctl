@@ -30,7 +30,9 @@ def main():
         environment = {
             key: value
             for key, value in os.environ.items()
-            if key not in {"PYTHONPATH", "VIRTUAL_ENV"} and not key.startswith("RCTL_")
+            # A host session ID would make begin select the task for that session.
+            if key not in {"PYTHONPATH", "VIRTUAL_ENV", "CLAUDE_CODE_SESSION_ID", "CODEX_THREAD_ID"}
+            and not key.startswith("RCTL_")
         }
         venv = directory / "venv"
         python = venv / "bin/python"
@@ -45,11 +47,11 @@ def main():
         project.mkdir()
         executable = venv / "bin/rctl"
 
-        def cli(*args, expected=0):
+        def cli(*args, expected=0, env=None):
             result = subprocess.run(
                 [str(executable), "--format", "json", *args],
                 cwd=project,
-                env=environment,
+                env={**environment, **(env or {})},
                 capture_output=True,
                 text=True,
             )
@@ -234,6 +236,24 @@ def main():
                 in hook_response["hookSpecificOutput"]["additionalContext"]
             )
             hook_responses[event] = hook_response
+        used = cli(
+            "task", "use", "tasks/retained-comparison", env={"CODEX_THREAD_ID": "smoke"}
+        )
+        assert used["data"]["session"] == "codex-smoke"
+        session_start = subprocess.run(
+            shlex.split(hooks["hooks"]["SessionStart"][0]["hooks"][0]["command"]),
+            input=json.dumps(
+                {"hook_event_name": "SessionStart", "cwd": str(project), "session_id": "smoke"}
+            ),
+            cwd=project,
+            env=environment,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        assert json.loads(session_start.stdout)["hookSpecificOutput"][
+            "additionalContext"
+        ].startswith("Task selected for this session.")
         (task / "contract.md").write_bytes(contract + b"\nBudget clarification.\n")
         assert cli("status", "tasks/retained-comparison")["data"]["contract_drift"]
         cli(

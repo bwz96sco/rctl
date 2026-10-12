@@ -11,6 +11,14 @@ from rctl.records import Task
 REPO = Path(__file__).resolve().parents[1]
 
 
+@pytest.fixture(autouse=True)
+def no_host_session(monkeypatch):
+    # Tests run from Claude Code or Codex shells would otherwise write and read
+    # session pointers for the running host session.
+    for name in ("CLAUDE_CODE_SESSION_ID", "CODEX_THREAD_ID"):
+        monkeypatch.delenv(name, raising=False)
+
+
 @pytest.fixture
 def project(tmp_path):
     return tmp_path

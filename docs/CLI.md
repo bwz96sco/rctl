@@ -52,16 +52,17 @@ containment; it applies to the ordinary CLI error boundary.
 |---|---|---|
 | `init [--vault PATH] [--codex \| --no-codex] [--claude \| --no-claude]` | Initialize the existing selected root; save an immutable vault binding, create missing research orientation, project-local task skill, Codex files and Claude Code files (`.claude/settings.json` hooks plus a `.claude/skills/research-task/` skill copy) by default, and optionally scaffold a new vault. `--no-codex` and `--no-claude` explicitly skip a host. Preserve existing text; reject path collisions or changed binding before writes. | Missing project files only |
 | `task new TASK --kind exploration|analysis --title TEXT` | Create a new directory and draft contract. The task ID is the directory basename. Refuse existing destination. | Contract template only |
+| `task use TASK` | Select an existing task for the reminders of the Claude Code or Codex session running the command (SPEC §2). Fails outside exactly one such session. | Session pointer only |
 | `contract check TASK` | Parse frontmatter, unique criterion IDs, required headings, and declared method structure. This is a structural check. | None |
-| `begin TASK` | Require a valid completed draft, save contract revision 1, activate. | Machine record |
+| `begin TASK` | Require a valid completed draft, save contract revision 1, activate; select it for the calling host session (`data.session`, null outside one). | Machine record; session pointer |
 | `amend TASK --reason TEXT` | Accept changed valid contract as the next revision. | Machine record |
 | `checkpoint TASK --file FILE` | Read UTF-8 handoff from FILE resolved relative to the project root, then atomically replace task `state.md`. Require an active task. | Handoff only |
 | `status TASK` | Show phase, contract revision/drift, latest report verdict/currentness, and historical closure. | None |
-| `context [TASK]` | Generate the bounded reminder described in SPEC; when TASK is omitted, use `RCTL_TASK_PATH`, else the only active task (labeled automatic), else project-only context. | None |
+| `context [TASK]` | Generate the bounded reminder described in SPEC; when TASK is omitted, use `RCTL_TASK_PATH`, else this session's task, else the only active task (labeled automatic), else project-only context. | None |
 | `verify TASK [--reviews FILE]` | Execute frozen command criteria and record supplied review judgments. FILE is relative to project root. | Check logs and machine record |
-| `close TASK` | Check currentness and latest passing report; append managed closure. | Machine record |
-| `reopen TASK --reason TEXT` | Reopen a closed/cancelled task; require new verification. | Machine record |
-| `cancel TASK --reason TEXT` | Stop an active task without claiming verified completion. | Machine record |
+| `close TASK` | Check currentness and latest passing report; append managed closure; remove session pointers to the task. | Machine record; session pointers |
+| `reopen TASK --reason TEXT` | Reopen a closed/cancelled task; require new verification; select it for the calling host session as `begin` does. | Machine record; session pointer |
+| `cancel TASK --reason TEXT` | Stop an active task without claiming verified completion; remove session pointers to the task. | Machine record; session pointers |
 | `integration codex export DIRECTORY` | Write a new integration bundle for the selected project root. Refuse existing destination; do not modify live host configuration. | Bundle files only |
 
 All task arguments are required except the documented `context` case. `--reason` must contain non-whitespace text. There is no unrestricted status setter, force-close, approval command, project database initializer, or remote execution command.

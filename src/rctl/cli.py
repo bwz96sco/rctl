@@ -12,6 +12,7 @@ from . import __version__
 from .context import load_context
 from .documents import RctlError, invalid, read_text
 from .records import Task, project_root, select_task
+from .sessions import forget, remember, shell_session
 
 
 class Parser(argparse.ArgumentParser):
@@ -98,6 +99,9 @@ def parser():
         "list", help="List immediate tasks/ children without selection."
     )
     listing.add_argument("--phase", choices=("draft", "active", "closed", "cancelled"))
+    task.add_parser(
+        "use", help="Select a task for this Claude Code or Codex session's reminders."
+    ).add_argument("task")
     contract = commands.add_parser("contract").add_subparsers(
         dest="contract_command", required=True
     )
@@ -126,6 +130,42 @@ def parser():
     return result
 
 
+def with_session(task, data):
+    """Report the session pointer a lifecycle start wrote, when there was one."""
+    try:
+        session = remember(task)[0]
+    except (RctlError, OSError):
+        # The lifecycle change is saved; only the reminder shortcut is missing.
+        session = None
+    return {**data, "session": session}
+
+
+def use(task):
+    if not task.path.is_dir() or not any(
+        task.file(name).exists() for name in ("contract.md", ".rctl/record.json")
+    ):
+        raise RctlError(
+            "NOT_FOUND",
+            f"No task at {task.path.relative_to(task.root).as_posix()}.",
+            "Select an existing task directory; rctl task list shows them.",
+            3,
+        )
+    session, reason = remember(task)
+    if session is None:
+        raise RctlError(
+            "NOT_FOUND",
+            f"No session to select for: {reason}.",
+            "Run this from a Claude Code or Codex shell, or set RCTL_TASK_PATH "
+            "when launching the host.",
+            3,
+        )
+    return {
+        "task_id": task.task_id,
+        "path": task.path.relative_to(task.root).as_posix(),
+        "session": session,
+    }
+
+
 def dispatch(args):
     if sys.platform not in {"darwin", "linux"}:
         raise RctlError(
@@ -135,7 +175,7 @@ def dispatch(args):
         )
     root = project_root(args.root)
     if args.command == "context":
-        return load_context(root, args.task)
+        return load_context(root, args.task, session=shell_session()[0])
     if args.command == "init":
         from .initialize import initialize
 
@@ -157,6 +197,8 @@ def dispatch(args):
 
         return list_tasks(root, args.phase)
     task = Task(root, select_task(root, args.task))
+    if args.command == "task" and args.task_command == "use":
+        return use(task), []
     if args.command == "task":
         return task.new(args.kind, args.title), []
     if args.command == "contract":
@@ -181,7 +223,7 @@ def dispatch(args):
             "Structural validity does not establish scientific adequacy or verification."
         ]
     if args.command == "begin":
-        return task.begin(), []
+        return with_session(task, task.begin()), []
     if args.command == "amend":
         return task.amend(args.reason), []
     if args.command == "checkpoint":
@@ -191,9 +233,15 @@ def dispatch(args):
     if args.command == "verify":
         return task.verify(args.reviews), []
     if args.command == "close":
-        return task.close(), []
-    if args.command in {"reopen", "cancel"}:
-        return getattr(task, args.command)(args.reason), []
+        data = task.close()
+        forget(task)
+        return data, []
+    if args.command == "cancel":
+        data = task.cancel(args.reason)
+        forget(task)
+        return data, []
+    if args.command == "reopen":
+        return with_session(task, task.reopen(args.reason)), []
 
 
 def main(argv=None):

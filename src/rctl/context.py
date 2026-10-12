@@ -10,6 +10,7 @@ from .records import Task, select_task
 DEFAULT_BUDGET = 8000
 FIELD_VISIBILITY = 96
 AUTOMATIC = "selected automatically as the only active task"
+SESSION = "selected for this session"
 # Per-prompt caps keep each line a whole sentence instead of a fragment.
 PROMPT_CAPS = {"next_action": 400, "blockers": 200, "warning": 200, "sentence": 300}
 
@@ -60,7 +61,7 @@ def render(
     if snapshot is not None:
         sources += f"C: {snapshot.contract_source}\n"
     sources = bounded(sources, min(500, budget // 4), "--root and selected task")
-    identity = "No task selected. Supply TASK or set RCTL_TASK_PATH for task context.\n"
+    identity = "No task selected. Run rctl task use TASK for this session, or supply TASK.\n"
     if error:
         identity = "Task context unavailable.\n"
     elif snapshot is not None:
@@ -264,7 +265,13 @@ def context(task, budget=DEFAULT_BUDGET):
 
 
 def load_context(
-    root, selection=None, *, task=None, budget=DEFAULT_BUDGET, prompt=False
+    root,
+    selection=None,
+    *,
+    task=None,
+    budget=DEFAULT_BUDGET,
+    prompt=False,
+    session=None,
 ):
     project, project_warnings = read_project(root)
     selected = (
@@ -272,9 +279,16 @@ def load_context(
         or selection is not None
         or bool(os.environ.get("RCTL_TASK_PATH"))
     )
-    # Without an explicit task, a reminder uses the only active task; several
-    # active tasks are listed instead of guessed.
+    source = "explicit" if selected else None
     automatic, note = False, ""
+    # Without an explicit task, a reminder uses this session's task, else the
+    # only active task; several active tasks are listed instead of guessed.
+    if not selected and session is not None:
+        from .sessions import session_task
+
+        selection, note = session_task(root, *session)
+        if selection is not None:
+            selected, source, note = True, "session", f"Task {SESSION}.\n"
     if not selected:
         from .discovery import active_tasks
 
@@ -283,15 +297,16 @@ def load_context(
         except RctlError:
             active = None
         if active is None:
-            note = (
+            note += (
                 "Automatic task selection unavailable: a task record is unreadable; "
                 "run rctl task list.\n"
             )
         elif len(active) == 1:
             selection, selected, automatic = active[0], True, True
-            note = f"Task {AUTOMATIC}.\n"
+            source = "automatic"
+            note += f"Task {AUTOMATIC}.\n"
         elif active:
-            note = f"Active tasks (none selected): {', '.join(active)}.\n"
+            note += f"Active tasks (none selected): {', '.join(active)}.\n"
     snapshot, warnings, error = None, [], None
     if selected:
         try:
@@ -320,9 +335,7 @@ def load_context(
         orientation=(root / "research/README.md").is_file(),
         note=note,
     )
-    data["task_selection"] = (
-        "automatic" if automatic else "explicit" if selected else None
-    )
+    data["task_selection"] = source
     if error:
         error.data = {**data, "context_warnings": warnings}
         raise error

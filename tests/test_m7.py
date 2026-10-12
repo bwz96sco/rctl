@@ -254,3 +254,100 @@ def test_unreadable_record_prevents_automatic_selection(cli, project, task):
     data = cli("context")["data"]
     assert data["task_selection"] is None and not data["task_available"]
     assert "Automatic task selection unavailable" in data["context"]
+
+
+SESSION = "selected for this session"
+
+
+def session_hook(task, host, session_id, event="UserPromptSubmit", **options):
+    payload = {"hook_event_name": event, "cwd": str(task.root), "session_id": session_id}
+    response, _ = hook(task, payload, selection=False, host=host, **options)
+    return response["hookSpecificOutput"]["additionalContext"]
+
+
+def test_each_session_keeps_the_task_it_began_or_selected(cli, project, task):
+    began = cli(
+        "begin", "tasks/retained-comparison", env={"CLAUDE_CODE_SESSION_ID": "session-a"}
+    )["data"]
+    assert began["session"] == "claude-session-a"
+    sessions = project / ".rctl/sessions"
+    assert (sessions / ".gitignore").read_text() == "*\n"
+    other = begin_copy(project, task, "other-comparison")
+    used = cli(
+        "task", "use", "tasks/other-comparison", env={"CODEX_THREAD_ID": "thread-b"}
+    )["data"]
+    assert used == {
+        "task_id": "other-comparison",
+        "path": "tasks/other-comparison",
+        "session": "codex-thread-b",
+    }
+    guidance(project)
+    first = session_hook(task, "claude", "session-a", logging="receipts.jsonl")
+    assert first.startswith("Task: retained-comparison | active")
+    assert AUTOMATIC not in first and "Reduce comparable error." in first
+    receipt = json.loads((project / "receipts.jsonl").read_text())
+    assert receipt["task_selection"] == "session"
+    start = session_hook(task, "claude", "session-a", "SessionStart")
+    assert start.startswith(f"Task {SESSION}.")
+    assert session_hook(task, "codex", "thread-b").startswith(
+        "Task: other-comparison | active"
+    )
+    # The same ID under the other host, or an unknown session, has no pointer.
+    for host, session_id in (("codex", "session-a"), ("claude", "unknown")):
+        assert session_hook(task, host, session_id, "SessionStart").startswith(
+            "Active tasks (none selected)"
+        )
+    shell = cli("context", env={"CLAUDE_CODE_SESSION_ID": "session-a"})["data"]
+    assert shell["task_selection"] == "session"
+    assert shell["task_id"] == "retained-comparison"
+    explicit = session_hook(
+        task, "codex", "thread-b", extra_env={"RCTL_TASK_PATH": "tasks/retained-comparison"}
+    )
+    assert explicit.startswith("Task: retained-comparison")
+    # Ending a task clears every pointer to it; the rest fall back.
+    cli("cancel", "tasks/other-comparison", "--reason", "Superseded.")
+    assert not (sessions / "codex-thread-b.json").exists()
+    assert (sessions / "claude-session-a.json").exists()
+    fallback = session_hook(task, "codex", "thread-b")
+    assert fallback.startswith("Task: retained-comparison") and AUTOMATIC in fallback
+    reopened = cli(
+        "reopen", "tasks/other-comparison", "--reason", "Resumed.",
+        env={"CODEX_THREAD_ID": "thread-b"},
+    )["data"]
+    assert reopened["session"] == "codex-thread-b"
+    assert other.read_record()["phase"] == "active"
+
+
+def test_task_use_needs_one_session_and_an_existing_task(cli, project, task):
+    task.begin()
+    for env in ({}, {"CLAUDE_CODE_SESSION_ID": "a", "CODEX_THREAD_ID": "b"}):
+        response = cli("task", "use", "tasks/retained-comparison", env=env, expected=3)
+        assert "No session to select for" in response["error"]["message"]
+    cli("task", "use", "tasks/missing", env={"CODEX_THREAD_ID": "b"}, expected=3)
+    bad = cli(
+        "task", "use", "tasks/retained-comparison", env={"CODEX_THREAD_ID": "../b"},
+        expected=3,
+    )
+    assert "not a plain identifier" in bad["error"]["message"]
+    assert not (project / ".rctl/sessions").exists()
+    # A plain terminal begin writes no pointer.
+    (project / "tasks/plain").mkdir()
+    (project / "tasks/plain/contract.md").write_text(
+        task.file("contract.md").read_text().replace("retained-comparison", "plain")
+    )
+    assert cli("begin", "tasks/plain")["data"]["session"] is None
+    assert not (project / ".rctl/sessions").exists()
+
+
+def test_unusable_session_pointer_falls_back_with_a_note(cli, project, task):
+    task.begin()
+    sessions = project / ".rctl/sessions"
+    sessions.mkdir(parents=True)
+    (sessions / "codex-gone.json").write_text(json.dumps({"task": "tasks/gone"}))
+    (sessions / "codex-broken.json").write_text("{")
+    gone = session_hook(task, "codex", "gone", "SessionStart")
+    assert gone.startswith("This session's task tasks/gone no longer exists.")
+    assert AUTOMATIC in gone
+    broken = session_hook(task, "codex", "broken", "SessionStart")
+    assert "Session task pointer .rctl/sessions/codex-broken.json is unreadable." in broken
+    assert AUTOMATIC in broken
