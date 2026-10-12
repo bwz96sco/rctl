@@ -27,8 +27,8 @@ criteria:
 ## Question
 
 - Question: <bounded question>
-- Origin type: <supplied|problem|candidate>
-- Origin ID: <stable-id-or-C#>
+- Origin type: <supplied|problem>
+- Origin ID: <stable-id>
 - Experiment role: <bounded-role; problem_validation for a problem origin>
 - Null or anti-win condition: <operationalized negative result; distinguish insufficient coverage or precision>
 

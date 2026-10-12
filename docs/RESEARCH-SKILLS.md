@@ -1,14 +1,13 @@
 # Research skills
 
-rctl owns the 16 research workflow packages listed below under `skills/`, including
+rctl owns the 13 research workflow packages listed below under `skills/`, including
 research-task, the migrated domain workflows, and research-rapid-test. Edit these
 sources here.
-As of 2026-09-29, `research-question` and `research-ideation` remain source
-packages but are uninstalled from this user's shared skill directory. Their source
-descriptions and earlier installation records below are retained for reference.
-The duplicate ideation links under `~/.gemini/config/skills/` and
-`~/.claude/skills/` are also removed; Antigravity's directory aliases follow the
-shared removal. Retained skills no longer route to either removed entrypoint.
+On 2026-10-12, `research-question`, `research-ideation` and
+`research-idea-evaluation` were removed from source and from every installed
+skill directory ([record](#october12-ideation-retirement)); the research playbook
+now supplies candidate moves and the Gate 0 review. Earlier installation records
+below that mention them are history.
 The [migration record](RESEARCH-SKILLS-MIGRATION.md) records the source snapshot,
 preserved uncommitted changes, checks, and installed-link cutover.
 The subsequent [review follow-up](RESEARCH-SKILLS-FOLLOWUP.md) records the authorized
@@ -25,9 +24,6 @@ instructions needed to perform their tasks.
 | [paper-discovery](../skills/paper-discovery/SKILL.md) | Question-scoped paper pools and project Zotero collection curation | Automatic or explicit |
 | [research-literature](../skills/research-literature/SKILL.md) | Full-paper reading into anchored evidence records, including limitations, nulls and testable defects | Automatic or explicit |
 | [research-synthesis](../skills/research-synthesis/SKILL.md) | Evidence-bounded answers and comparisons across papers | Automatic or explicit |
-| [research-question](../skills/research-question/SKILL.md) | Research-question formation from observations, goals, contradictions and technical capabilities | Source retained; uninstalled locally |
-| [research-ideation](../skills/research-ideation/SKILL.md) | Alternative methods and investigations answering a clear research question | Source retained; uninstalled locally |
-| [research-idea-evaluation](../skills/research-idea-evaluation/SKILL.md) | Question-value assessment and investigation investment judgment | Explicit only |
 | [research-rapid-test](../skills/research-rapid-test/SKILL.md) | Bounded observations resolving an empirical investment uncertainty | Automatic or explicit |
 | [research-experiment](../skills/research-experiment/SKILL.md) | Bounded experiment contracts, runner evidence and scientific checks | Automatic or explicit |
 | [experiment-adapter-builder](../skills/experiment-adapter-builder/SKILL.md) | Stable project runner commands, queues, monitoring and evidence rules | Explicit only in Codex; native policy preserved |
@@ -38,9 +34,8 @@ instructions needed to perform their tasks.
 | [research-writing](../skills/research-writing/SKILL.md) | Author-side manuscripts, revisions, rebuttals and submission checks | Automatic or explicit |
 | [research-review-case](../skills/research-review-case/SKILL.md) | Referee-side evidence audits without paper verdicts | Automatic or explicit |
 
-Remaining names and invocation policies are preserved. Research-idea-evaluation
-remains explicit-only. The two training/adapter packages also retain
-`allow_implicit_invocation: false` in their Codex metadata; their frontmatter retains
+Remaining names and invocation policies are preserved. The two training/adapter
+packages retain `allow_implicit_invocation: false` in their Codex metadata; their frontmatter retains
 its original automatic-discovery default for other hosts.
 
 ## Reading and candidate development
@@ -56,24 +51,17 @@ can retain tentative connections separately from its evidence-backed answer.
 Reading can serve an exploratory purpose without requiring an already precise new
 research question.
 
-Research-question develops worthwhile, scoped questions through optional routes
-for failures, successes, contradictions, scenario/assumption changes, measurement
-ambiguity and technical capabilities. It can finish with question statements before
-methods or experiment counts exist. It uses an existing record or `questions.md`
-when durable development is requested; ideas noticed while reading stay as `test`
-or `lead` records.
+Question formation, approach development and investment judgment have no
+dedicated skills. The research playbook (`research-playbook/story-construction.md`
+and `checklist.md`) supplies candidate moves, stage decisions and the Gate 0 review;
+rctl tasks govern the resulting work. Ideas noticed while reading stay as `test` or
+`lead` records.
 
-Ideation develops ways to answer a clear supplied or referenced question, including
-algorithms, measurements, empirical designs and theoretical approaches. Direct entry
-does not require an upstream question file, synthesis or evaluation. Evaluation can
-assess a question in its existing record without requiring a solution portfolio;
-investigation decisions retain their existing `C#` format and validator. These are
-separate responsibilities, not mandatory consecutive stages.
-
-There is no default candidate count, lens quota or per-paper coverage table. The
-former mining lenses remain optional prompts; the retired gap/seed-collection
-workflow is not restored. Historical seed files remain suggestions whose factual
-premises need their underlying sources. Live research notes are not migrated.
+There is no default candidate count, lens quota or per-paper coverage table; the
+retired gap/seed-collection workflow is not restored. Historical seed files,
+`ideas.md` portfolios and `decision.md` records remain readable history whose
+factual premises need their underlying sources. Live research notes are not
+migrated.
 
 ## Shared computation checks
 
@@ -131,12 +119,7 @@ checkout's `skills/research-question/`; the five edited existing packages retain
 their source links and invocation policies.
 
 Invoke packaged helpers from the actual installed skill directory, not a fixed
-user-level path. For candidate-origin result validation, install research-experiment
-and research-idea-evaluation as sibling packages under the same skills root; the
-former's validator calls the latter's handoff validator. Supplied/problem-origin
-experiments do not need that peer package. An absent peer produces an actionable
-error, not an automatic installation. The official skill page was re-fetched through
-smart-search on 2026-09-14 for this path-only integration follow-up.
+user-level path. The research-experiment result validator needs no peer package.
 
 ### Local shared installation
 
@@ -209,6 +192,24 @@ and their local resource links exist; no broken link remains in that directory.
 Before/after link lists and the check output are in
 `.work/claude-skill-links-20260930/`.
 
+### October12 ideation retirement
+
+The user asked whether the ideation skills still had a use now that rctl controls
+research state and the research playbook supplies ideas, and chose to retire all
+three. The research-question, research-ideation and research-idea-evaluation source
+packages are removed; the last commit containing them is `e2cca13`. The remaining
+discovery links to research-idea-evaluation under `~/.agents/skills/`,
+`~/.claude/skills/` and `~/.gemini/config/skills/` are removed; no link to the other
+two remained. Research-experiment drops the `candidate` origin and `--decision`
+option, which needed the evaluation package's validator; no rctl-era task contract
+used that origin. Research-rapid-test and research-synthesis no longer route to
+evaluation. The evaluation attack review, the one step without a playbook
+equivalent, became item 9 of the playbook's "Before Gate 0" checklist
+(`research-playbook` commit `36192b2`). Coverage and sources are recorded in
+[Distilled Sources](DISTILLED-SOURCES.md#ideation-retirement-12-october-2026).
+The packaged 0.6.5 wheel still contains the three packages until a later release;
+shared installations follow the source links.
+
 ## Related skills outside this migration
 
 The original selection covered 13 private-repository workflows, followed by
@@ -240,11 +241,8 @@ agent-skills-private; their old pack paths are not runtime contracts.
 | `paper-discovery` | one repository-level Zotero collection and `zotero-collection.md`; question-scoped `register.md` following the packaged register template, with publication/affiliation provenance, search coverage, Zotero item keys and verified membership | workflow contract tests plus Zotero re-read after writes |
 | `research-literature` | reading-state updates in `register.md`, plus `notes/<paper-id>.md` record files tied to the version read, with anchored, typed evidence records cited as `<paper-id>#R<n>` | workflow contract tests |
 | `research-synthesis` | `synthesis.md`, with optional evidence-backed open problems and separately labelled exploratory reflection | workflow contract tests |
-| `research-question` | question statements in chat or an existing topic record; `questions.md` for new durable development | source/resource checks and scoped use checks; no mandatory question-state validator |
-| `research-ideation` | one unranked `ideas.md` portfolio of approaches, with an inline or referenced parent question | packaged `research-idea-evaluation/scripts/validate-handoff.py` (`portfolio`) |
-| `research-idea-evaluation` | question assessment in its existing record; investigation assessment in compact `decision.md`, with historical staged records retained | solution portfolios use the packaged handoff validator (`decision`, historical `screening`/`shortlist`); question-only assessments do not require those artifacts |
 | `research-rapid-test` | one `rapid-test.md`, minimal runnable code/commands and raw observations; in an rctl-managed project, a linked lightweight native task unless the user chooses note-only tracking | claim-appropriate evidence and bounded PROMOTE / ITERATE ONCE / DROP judgment; managed tasks use existing rctl verification/closure with small declared criteria, without formal experiment prerequisites |
-| `research-experiment` | rctl `contract.md`, runner-owned execution evidence, and native `result.md` | domain structure/lineage validator plus rctl execution checks and evidence-based reviews before guarded closure |
+| `research-experiment` | rctl `contract.md`, runner-owned execution evidence, and native `result.md` | domain structure validator plus rctl execution checks and evidence-based reviews before guarded closure |
 | `experiment-adapter-builder` | project-local experiment adapter with runner references and reusable run/campaign templates | packaged adapter validator and synthetic fixture; structure only |
 | `model-training-workflow` | training plan, source map, preflight, run matrix, execution log, optional diagnosis and handoff | packaged training validator and synthetic fixtures; structure only |
 | `research-theory` | derivations, proofs, counterexamples, and supporting numerical checks in the existing artifact | proof status in the skill; numerical validity checked separately |
@@ -260,44 +258,18 @@ fallback if none exists. Continue existing topic artifacts instead of moving or
 duplicating them to fit a directory example. Computation checks normally remain in
 their calling task or trial rather than creating a separate note.
 
-Question formation develops the inquiry; ideation develops `C#` approaches to a
-clear question, separating observations from hypotheses and identifying the next
-consequential uncertainty.
-Methods, measurements, and explanations are examples, not mandatory portfolio slots.
-Evaluation triages the whole portfolio, records actual human choice or an agent
-recommendation, obtains independent criticism for potential investments, and makes
-the affirmative case for at most two next investigations or closes blocked.
-
-Candidate breadth follows the question, material, and user request. If no candidate
-can yet be formulated, record the unresolved premise in the existing work without
-creating an empty evaluation handoff. An unknown closest prior remains explicit
-until evaluation. New evaluations use `decision_format: compact`; selection and
-review provenance live in the decision rather than requiring repeated invocation
-and shortlist documents. Screening-only requests can still use `screening.md`.
-Historical decisions without the format marker retain their staged contract and
-are not silently migrated. The validator checks coverage, nonempty required
-sections, review/selection IDs, and downstream lineage, not scientific quality or
-execution authority.
-
-Selected decisions route to research-rapid-test for a bounded empirical observation,
-research-experiment for formal validation, or research-theory for a derivation/proof.
-Both `Investigation Brief` and historical `Experiment Brief` headings are supported.
-A later formal experiment retains the original candidate selection even when a
-pilot intervened. Evaluation's explicit-only invocation policy is preserved;
-continuing an explicitly delegated workflow needs no repeated ID-selection ceremony.
-
 Existing numbered packs, campaign roots, and HTML reports remain readable historical inputs. Deleted pack validators and report commands are not current interfaces and must not be recommended for new work.
 
 ## Validation and maintenance
 
 Run the affected skill tests with uv. The normal suite covers native invocation
-policy, packaged resources, domain handoffs and result lineage; installed-wheel
+policy, packaged resources and experiment result structure; installed-wheel
 smoke exercises the packaged research-experiment templates and validator through
 actual rctl verification and negative closure. Structural checks do not establish
 scientific validity or prove that every workflow has been exercised by a model.
 
 ```sh
-uv run pytest tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_research_handoffs.py tests/test_training_skill_assets.py -q
+uv run pytest tests/test_skill_assets.py tests/test_research_skill_contracts.py tests/test_experiment_result.py tests/test_training_skill_assets.py -q
 uv run scripts/check_docs.py
 uv build
 uv run scripts/smoke_package.py dist/rctl-0.5.1-py3-none-any.whl

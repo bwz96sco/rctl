@@ -31,7 +31,7 @@ Complete when the target question has a direct evidence-bounded answer; every in
 ## Boundaries
 
 - Treat an open-problem item as a corpus finding, not a novelty verdict, priority, readiness decision, or human selection.
-- Leave `retain`, `hold`, `reject`, selection caps, and smallest-pilot gates to explicit evaluation.
+- Leave `retain`, `hold`, `reject`, selection caps, and smallest-pilot gates to the user and the project's research guidance.
 - A thin corpus stays explicitly thin.
 - Keep useful exploratory connections in a separate reflection within the same document, with their source basis and unverified assumptions. Develop questions or approaches in the existing discussion when requested. A resolved discrepancy can end the inquiry without manufacturing an open problem.
 - Ideation may consume `synthesis.md`, but it can also start without synthesis.

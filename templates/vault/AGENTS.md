@@ -26,8 +26,7 @@ Use the relevant domain skill's current artifacts rather than imposing a second 
 - `literature/<topic>/register.md`, `notes/<paper-id>.md`, and `synthesis.md` for a corpus.
   `literature-index.md` links to topic roots. Zotero owns citation metadata; follow the
   project's PDF storage policy. Keep raw search dumps and temporary PDFs in ignored storage.
-- `ideas/<topic>/` for ideas, screening, shortlists, and explicit selection decisions.
-  Preserve opportunity O# and candidate C# identities and their distinct provenance.
+- `ideas/<topic>/` for ideas and explicit selection decisions, with each idea's provenance.
 - `experiments/<topic>/` for interpretations and compact evidence notes linked to an rctl
   task and runner artifacts. No vault-owned experiment status or campaign queue is required.
 - `computation/`, `theory/`, `figures/`, `slides/`, and `writing/` for their domain evidence

@@ -81,8 +81,8 @@ def walkthrough(cli, project, repo, skills_root, python):
     ]
     replacements = {
         "<bounded question>": "Does the retained candidate meet the +0.01 gain rule?",
-        "<supplied|problem|candidate>": "supplied",
-        "<stable-id-or-C#>": "rctl-synthetic-fixture",
+        "<supplied|problem>": "supplied",
+        "<stable-id>": "rctl-synthetic-fixture",
         "<bounded-role; problem_validation for a problem origin>": "method_comparison",
         "<operationalized negative result; distinguish insufficient coverage or precision>": "Baseline minus candidate below +0.01 declines promotion for this fixture; no population inference.",
         "<complete-method benefit, conditional ablation, diagnosis/problem validation, or control screen>": "Retained synthetic comparison; no complete-method performance claim.",

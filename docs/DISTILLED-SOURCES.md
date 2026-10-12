@@ -228,7 +228,7 @@ workflow. Runner, experiment, and theory owners keep their existing responsibili
 
 - **Sources:** the user-supplied `/Users/zhangbowen/Downloads/如何读论文？.md` (Chinese seven-step reading guidance); the user's OR usage retrospective supplied in the conversation on 2026-09-24; and the former `skills/research-opportunity-mining/SKILL.md`, read before its retirement.
 - **Read:** 2026-09-24; reread 2026-09-30. Partly superseded on 2026-10-10 (below).
-- **Applied to:** [literature workflow](../skills/research-literature/SKILL.md), [paper record](../skills/research-literature/note-template.md), [synthesis](../skills/research-synthesis/SKILL.md), and [ideation](../skills/research-ideation/SKILL.md).
+- **Applied to:** [literature workflow](../skills/research-literature/SKILL.md), [paper record](../skills/research-literature/note-template.md), [synthesis](../skills/research-synthesis/SKILL.md), and ideation (`skills/research-ideation/`, retired on 2026-10-12; last present at `e2cca13`).
 
 **Retained:** overview through the abstract and displays; a precise research
 question; prior approaches and their remaining difficulties; independent thought
@@ -530,6 +530,39 @@ is set, planning also asks a goal-linked proposal to lead with the three fields 
 plain language, with a concrete product, thresholds fixed in advance and a number
 on the useful outcome rather than a proxy. No schema, controller or lifecycle
 behavior changes.
+
+## Ideation retirement, 12 October 2026
+
+- **Sources:** the user's 12 October 2026 question whether the ideation skills
+  still had a use, now that rctl controls research state and the research playbook
+  supplies ideas; the guide they were adapted from,
+  `/Users/zhangbowen/Documents/researchskill/Research-Starter-Kit/如何想Idea？.md`
+  (the September28 `Downloads/问题.md` source above is an earlier excerpt without
+  its fifth route or its section on solving problems); and the playbook at
+  `research-playbook` commit `09cf3cc` (README, `story-construction.md`,
+  `findings-papers.md`, `checklist.md` and `patterns/`).
+- **Read:** 2026-10-12.
+- **Applied to:** removal of research-question, research-ideation and
+  research-idea-evaluation; the playbook's "Before Gate 0" checklist.
+
+**Retained:** the evaluation attack review's independent check before investment:
+a reviewer without the generator's preferred verdict, the strongest material
+objection with evidence or none found, what a favorable result adds beyond the
+closest prior, and surviving the attack not being a reason to invest. It moves to
+the playbook's "Before Gate 0" checklist, which had no reviewer requirement.
+
+**Not adopted:** the remaining guidance. The playbook already carries the guide's
+routes as project-derived patterns and stage rules: position anchors and stage 1
+for problem- and method-driven entry, research-literature defect and test records
+for critical reading, stage 2 and the weakness patterns for failure cases,
+`application-papers.md` for real needs, the direction and Gate 0 checklists for
+worth, and the transplant pattern for transfer. The portfolio-and-screening model
+(`ideas.md`, `C#`, `decision.md`) conflicts with the playbook's evaluator-first
+construct mode. No candidate-origin experiment exists in rctl-era LEO, OR or
+pinyin-vsr-research task contracts, so research-experiment drops that origin.
+Explaining why a method works and resolving contradictions between papers have no
+dedicated playbook pattern; findings-papers and research-synthesis cover them
+implicitly.
 
 ## Limitations
 

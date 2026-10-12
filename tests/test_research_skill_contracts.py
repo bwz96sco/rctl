@@ -14,10 +14,7 @@ SKILLS = REPO / "skills"
 ACTIVE_RESEARCH_SKILLS = {
     "research-experiment",
     "research-figure",
-    "research-idea-evaluation",
-    "research-ideation",
     "research-literature",
-    "research-question",
     "research-rapid-test",
     "research-review-case",
     "research-slides",
@@ -28,40 +25,7 @@ ACTIVE_RESEARCH_SKILLS = {
 
 
 class ResearchSkillContractTest(unittest.TestCase):
-    def test_ideation_evaluation_handoff_preserves_owner_boundary(self) -> None:
-        ideation = (SKILLS / "research-ideation/SKILL.md").read_text(encoding="utf-8")
-        evaluation = (SKILLS / "research-idea-evaluation/SKILL.md").read_text(
-            encoding="utf-8"
-        )
-        evaluation_policy = (
-            SKILLS / "research-idea-evaluation/agents/openai.yaml"
-        ).read_text(encoding="utf-8")
-        self.assertIn("$research-idea-evaluation", ideation)
-        self.assertIn("next_owner: research-idea-evaluation", ideation)
-        self.assertIn("portfolio <idea-root>", ideation)
-        self.assertNotIn("human_shortlist", ideation)
-        self.assertNotIn("shortlist.md", ideation)
-        self.assertIn("screening <idea-root>", evaluation)
-        self.assertIn("attack-template.md", evaluation)
-        self.assertIn("disable-model-invocation: true", evaluation)
-        self.assertIn("allow_implicit_invocation: false", evaluation_policy)
-
-    def test_ideation_evaluation_handoff_fields_match(self) -> None:
-        generation = (
-            (SKILLS / "research-ideation/SKILL.md").read_text(encoding="utf-8").lower()
-        )
-        evaluation = "\n".join(
-            (SKILLS / "research-idea-evaluation" / name)
-            .read_text(encoding="utf-8")
-            .lower()
-            for name in ("SKILL.md", "attack-template.md")
-        )
-        for marker in ("candidate", "falsification", "kill", "major uncertainty"):
-            self.assertIn(marker, generation)
-        for marker in ("candidate", "falsification", "closest prior", "method flaw"):
-            self.assertIn(marker, evaluation)
-
-    def test_discovery_literature_ideation_boundaries(self) -> None:
+    def test_discovery_literature_synthesis_boundaries(self) -> None:
         discovery = (SKILLS / "paper-discovery/SKILL.md").read_text(encoding="utf-8")
         literature = (SKILLS / "research-literature/SKILL.md").read_text(
             encoding="utf-8"
@@ -70,23 +34,6 @@ class ResearchSkillContractTest(unittest.TestCase):
             encoding="utf-8"
         )
         synthesis = (SKILLS / "research-synthesis/SKILL.md").read_text(encoding="utf-8")
-        ideation = (SKILLS / "research-ideation/SKILL.md").read_text(encoding="utf-8")
-        ideas_template = (SKILLS / "research-ideation/ideas-template.md").read_text(
-            encoding="utf-8"
-        )
-        evaluation = (SKILLS / "research-idea-evaluation/SKILL.md").read_text(
-            encoding="utf-8"
-        )
-        screening_template = (
-            SKILLS / "research-idea-evaluation/screening-template.md"
-        ).read_text(encoding="utf-8")
-        shortlist_template = (
-            SKILLS / "research-idea-evaluation/shortlist-template.md"
-        ).read_text(encoding="utf-8")
-        decision_template = (
-            SKILLS / "research-idea-evaluation/decision-template.md"
-        ).read_text(encoding="utf-8")
-
         for removed in (
             "## Overview",
             "## Field map and gap",
@@ -147,26 +94,6 @@ class ResearchSkillContractTest(unittest.TestCase):
         self.assertIn("Evidence-backed open problems", synthesis)
         self.assertIn("not a novelty verdict", synthesis)
         self.assertIn("start without synthesis", synthesis)
-        self.assertIn("stage: expand_complete", ideas_template)
-        self.assertIn("next_owner: research-idea-evaluation", ideas_template)
-        self.assertFalse((SKILLS / "research-ideation/shortlist-template.md").exists())
-        self.assertIn("stage: screening_complete", screening_template)
-        self.assertIn("advance | hold | reject", screening_template)
-        self.assertIn("selected_candidate_ids", shortlist_template)
-        self.assertIn("screening: screening.md", shortlist_template)
-        self.assertIn("decision_recorded_by: human_confirmed", shortlist_template)
-        self.assertIn("decision-template.md", evaluation)
-        self.assertIn("stage: converge_complete", decision_template)
-        self.assertIn("Experiment Brief", decision_template)
-        self.assertIn("Do not invent exact performance targets", ideation)
-        for removed in (
-            "problem-checkpoint",
-            "opportunity-board",
-            "problem-decision",
-            "h1_decision",
-            "h2_decision",
-        ):
-            self.assertNotIn(removed, ideation.lower())
 
     def test_retired_quest_packages_and_references_are_absent(self) -> None:
         retired_pattern = re.compile(
@@ -184,8 +111,19 @@ class ResearchSkillContractTest(unittest.TestCase):
                         text = path.read_text(encoding="utf-8", errors="ignore")
                         self.assertIsNone(retired_pattern.search(text))
 
-    def test_exact_research_invocation_policy_split(self) -> None:
-        explicit = {"research-idea-evaluation"}
+    def test_retired_ideation_packages_and_routes_are_absent(self) -> None:
+        retired = ("research-ideation", "research-question", "research-idea-evaluation")
+        retired_pattern = re.compile("|".join(map(re.escape, retired)))
+        for name in retired:
+            self.assertFalse((SKILLS / name).exists())
+        for skill_name in ACTIVE_RESEARCH_SKILLS | {"research-task"}:
+            with self.subTest(skill=skill_name):
+                for path in (SKILLS / skill_name).rglob("*"):
+                    if path.is_file():
+                        text = path.read_text(encoding="utf-8", errors="ignore")
+                        self.assertIsNone(retired_pattern.search(text), path)
+
+    def test_research_skills_allow_implicit_invocation(self) -> None:
         roots = sorted(
             path.parent
             for path in SKILLS.glob("research-*/SKILL.md")
@@ -196,16 +134,12 @@ class ResearchSkillContractTest(unittest.TestCase):
             with self.subTest(skill=root.name):
                 skill = (root / "SKILL.md").read_text(encoding="utf-8")
                 projection = (root / "agents/openai.yaml").read_text(encoding="utf-8")
-                if root.name in explicit:
-                    self.assertIn("disable-model-invocation: true", skill)
-                    self.assertIn("allow_implicit_invocation: false", projection)
-                else:
-                    self.assertNotIn("disable-model-invocation: true", skill)
-                    self.assertTrue(
-                        yaml.safe_load(projection)
-                        .get("policy", {})
-                        .get("allow_implicit_invocation", True)
-                    )
+                self.assertNotIn("disable-model-invocation: true", skill)
+                self.assertTrue(
+                    yaml.safe_load(projection)
+                    .get("policy", {})
+                    .get("allow_implicit_invocation", True)
+                )
 
     def test_experiment_response_contract_is_mode_free(self) -> None:
         text = (

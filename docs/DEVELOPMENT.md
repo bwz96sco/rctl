@@ -1,5 +1,34 @@
 # Development Plan
 
+## Ideation skill retirement, 12 October 2026
+
+The user chose to retire research-question, research-ideation and
+research-idea-evaluation; the research playbook now supplies candidate moves and
+the Gate 0 review ([record](RESEARCH-SKILLS.md#october12-ideation-retirement)).
+The change removes the three packages, the `candidate` experiment origin and its
+`--decision` option, evaluation routing in research-rapid-test and
+research-synthesis, and the vault template's ideation pointers. The CLI, schemas,
+task records and research-task are unchanged, so LEO and OR copies stay current.
+No release is made with this change.
+
+Acceptance selected: the skill contract tests (retired packages and routes absent,
+all research skills implicitly invocable), the experiment result validator tests
+(the `candidate` origin now fails; supplied and problem origins pass without a
+peer package), the documentation check, and the installed-package smoke (A-23),
+whose shared-skill walkthrough fills the edited experiment contract template.
+
+Local macOS 26.6.2/Python 3.13.2 validation:
+
+- `uv run --locked pytest -q`: **338 passed, 30 subtests passed**. The 41 fewer
+  than 379 are the removed handoff-validator and ideation contract tests (38) and
+  the per-package asset checks of the three removed packages (3).
+- `uv run --locked ruff check src tests scripts`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed (408 local links).
+- `uv build --out-dir .work/ideation-retirement-20261012/dist`, unreleased 0.6.5
+  build: contains none of the three packages.
+- `uv run --locked python scripts/smoke_package.py .work/ideation-retirement-20261012/dist/rctl-0.6.5-py3-none-any.whl`:
+  passed; the walkthrough's experiment validator reports structure only.
+
 ## v0.6.5 release preparation, 12 October 2026
 
 The user authorized releasing and installing

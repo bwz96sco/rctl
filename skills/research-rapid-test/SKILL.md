@@ -22,13 +22,13 @@ to run a pilot. Discussion and read-only inspection do not require a new task.
 
 ## Enter from the question and proposed observation
 
-Read the supplied question, idea/evaluation and directly relevant prior result. Identify the
+Read the supplied question, idea and directly relevant prior result. Identify the
 question, possible contribution, intended reader, strongest prior or rival, and
 the uncertainty most likely to change investment. Reuse an existing affirmative
 investment case. At direct entry, explain why resolving this uncertainty matters,
 what evidence makes the investigation credible, and what observation distinguishes
-the possibilities. Put this in the existing bet; evaluation files are not a
-prerequisite for a user-supplied question or idea. A clear user request to test a weak bet can
+the possibilities. Put this in the existing bet; no separate evaluation record is
+a prerequisite for a user-supplied question or idea. A clear user request to test a weak bet can
 still be honored: state the concern and scope rather than inventing an endorsement.
 
 Carry the active user goal and selected research object into that bet. A smaller
@@ -39,12 +39,9 @@ the question. If the proposed reduction loses the scientific point, return to
 selection instead of launching on the strength of available cases or low cost.
 
 For a question-origin trial, retain its statement or existing question reference
-and specify the actual observation and allowance here; no solution portfolio or
-invented `C#` is needed. If question formation is still the requested work,
-continue that discussion before proposing an experiment.
-For an evaluated investigation candidate, retain the original `C#`, `decision.md`
-path and selected brief. A later formal experiment keeps that lineage even when
-the decision's first next owner was `research-rapid-test`.
+and specify the actual observation and allowance here; no solution portfolio is
+needed. If question formation is still the requested work, continue that
+discussion before proposing an experiment.
 
 Respect a specified candidate. If selection is delegated, choose a worthwhile
 question with a discriminating observation and available evidence. Explain the
