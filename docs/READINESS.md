@@ -126,3 +126,9 @@ untouched. No user-level discovery links or copy-based installations are migrate
 surviving source links expose the edits, while any link targeting a retired source
 directory needs separate installation maintenance. The global CLI, host
 configuration and live research projects are not updated by this source change.
+
+18. The v0.6.6 deployment checks package/source equality, discovery links and
+project-local assets. They do not establish a new actual-host session or fresh-model
+adherence to the revised guidance; the CLI/reminder implementation is unchanged.
+Already-loaded skill text requires a fresh context to pick up edits. A version bump
+can mark prior reports stale without changing their historical closures (SPEC §7).

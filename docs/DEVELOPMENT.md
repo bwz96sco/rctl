@@ -1,5 +1,38 @@
 # Development Plan
 
+## v0.6.6 release preparation, 12 October 2026
+
+The user authorized push and update after the consolidation (`7209710`) and
+Claude review follow-up (`dba20bc`), then explicitly included the LEO and OR
+research-task copies. This release packages seven skill entrypoints, the migrated
+references/helpers and the restored goal-review/rapid-test checks. CLI behavior,
+schemas, task records and host configuration remain unchanged.
+
+Acceptance selected: the full release suite and installed-package smoke (A-23,
+A-24, A-29), then installed/source asset comparison, shared discovery cleanup and
+project `doctor` checks. Reuse unchanged controller/reminder coverage; this is a
+guidance deployment. Package installation follows the CI gate on the exact release
+commit and uses a clean source export. Preserve the pre-existing uncommitted skill
+catalog edit separately. Deployment evidence will be recorded in
+[v0.6.6 deployment](V0.6.6-DEPLOYMENT.md).
+
+Local validation of the versioned release:
+
+- `uv run --locked pytest -q`: **334 passed, 18 subtests passed**.
+- `uv run --locked ruff check src tests scripts skills`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed (444 local links,
+  100 JSON files, four schemas, 22 requirements and 43 acceptance cases).
+- `uv build --offline --out-dir .work/release-0.6.6-20261012/local-dist`:
+  source distribution and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/release-0.6.6-20261012/local-dist/rctl-0.6.6-py3-none-any.whl`:
+  passed, including isolated installation, source/package assets, migrated helpers,
+  task-only export and native experiment verification/closure.
+- `git diff --check`: passed.
+
+Logs are retained under `.work/release-0.6.6-20261012/`. These establish structural,
+packaging and declared-command compatibility; deployment limits remain in
+[Readiness](READINESS.md#limitations).
+
 ## Skill consolidation, 12 October 2026
 
 The user authorized consolidating the skills after a necessity review. Seven

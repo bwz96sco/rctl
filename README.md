@@ -2,10 +2,11 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.6.5 pushed, CI-verified and locally installed.**
+**Status: v0.6.6 release preparation; v0.6.5 remains locally installed.**
 
-See the [deployment record](docs/V0.6.5-DEPLOYMENT.md) for the released source,
-CI, installed-package and live reminder checks.
+See the [v0.6.6 deployment record](docs/V0.6.6-DEPLOYMENT.md) for the skill update
+and its installation status. The [v0.6.5 deployment record](docs/V0.6.5-DEPLOYMENT.md)
+retains the previous release's CI, installed-package and live reminder checks.
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, governing-question alignment, and Codex and Claude Code reminders. The
 [simplification verification](docs/SIMPLIFICATION-VERIFICATION.md) covers the routed
@@ -41,6 +42,10 @@ reminders keep the task each Claude Code or Codex session began or chose with `r
 The repository also manages the [research workflow skills](docs/RESEARCH-SKILLS.md).
 Their [source migration](docs/RESEARCH-SKILLS-MIGRATION.md) keeps auxiliary tools
 separate and preserves task-only project initialization.
+Version 0.6.6 packages the [seven-entrypoint consolidation](docs/DEVELOPMENT.md#skill-consolidation-12-october-2026)
+and its review follow-up. Specialized experimental, literature, mathematical and
+audit guidance is loaded as references; CLI behavior, schemas and task authority
+are unchanged.
 
 ## Run the local CLI
 
@@ -76,7 +81,7 @@ uv run pytest
 uv run ruff check src tests scripts
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.6.4-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.6.6-py3-none-any.whl
 ```
 
 The GitHub Actions workflow is configured to run tests, lint, the document check,
@@ -87,7 +92,7 @@ The installed-package smoke uses a temporary project under `.work/`, an isolated
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.4-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.6-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh
