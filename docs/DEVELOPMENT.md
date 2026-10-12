@@ -54,6 +54,17 @@ These checks establish structural compatibility, packaging and declared command
 behavior. Limits are recorded in
 [Readiness](READINESS.md#limitations).
 
+Review follow-up (user-approved): the research-task goal-review paragraph again
+directs `goal_impact` to a fresh context, restoring the 10 October recommendation
+that the consolidation had weakened. Rapid tests regain four verification checks
+from the former skill that no other repository file retained: a plausible tested
+version, no launch merely because it is cheap, success claims are not observations,
+and an apparent win is checked for a broken control, changed problem or extra
+answer information. Two documentation wording fixes accompany them. Rechecked with
+`uv run --locked pytest -q` (**334 passed, 18 subtests passed**),
+`uv run --locked python scripts/check_docs.py`, `uv run --locked ruff check src tests scripts skills`
+and `git diff --check`; all passed. The wheel was not rebuilt.
+
 ## Skill boundary revision, 12 October 2026
 
 This first draft is superseded by the consolidation above; its checks below are

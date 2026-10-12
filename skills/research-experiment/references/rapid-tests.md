@@ -9,7 +9,10 @@ Use the supplied question/idea and relevant prior evidence. Record a compact bet
 in the existing task or trial note: what uncertainty matters, the observation that
 distinguishes the possibilities, comparison/measurement conditions, decision rule,
 evidence locations and time/call allowance. A smaller test preserves the scientific
-distinction and explains what it decides about the parent claim.
+distinction and explains what it decides about the parent claim. Test a plausible
+version of the idea, not an arbitrary weak implementation. If no bet has a
+discriminating next observation, report that rather than launch a comparison
+because it is cheap.
 
 Fix the relevant control/version, information and feedback boundaries, primary
 endpoint, independent units/repeats and interpretation of positive, negative and
@@ -33,7 +36,9 @@ note suffices. Discussion and read-only inspection need no new managed task.
 
 ## Before reporting completion
 
-Inspect the actual input, operation/contrast, observation and inference. Retain
+Inspect the actual input, operation/contrast, observation and inference. A model's
+or script's success claim is not an observation. Check an apparent win for a broken
+control, a changed problem or extra answer information before reporting it. Retain
 all tried outcomes, assistance, failures and actual spending. Report the primary
 endpoint, relevant regressions/costs and what comparison was actually performed.
 Keep generated method information inside its producing arm for complete-method

@@ -57,6 +57,14 @@ it does not prescribe this seven-skill taxonomy or demonstrate a model-performan
 benefit. Installation and behavioral limits are in
 [Readiness](READINESS.md#limitations).
 
+**Review follow-up:** after reviewing the consolidation, the user approved
+restoring the fresh-context goal review in
+[verification](../skills/research-task/references/verification.md) and four
+generic checks in [rapid tests](../skills/research-experiment/references/rapid-tests.md),
+taken from the former `skills/research-rapid-test/SKILL.md` at `cdd09a5`. Its
+scale arithmetic and single-control limit remain in OR project guidance rather
+than the shared reference.
+
 ## Skill contract and verification boundaries, 12 October 2026
 
 This records the first draft; the consolidation above supersedes its package layout.

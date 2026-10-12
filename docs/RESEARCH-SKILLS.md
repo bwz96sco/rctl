@@ -305,7 +305,7 @@ agent-skills-private; their old pack paths are not runtime contracts.
 
 | Local owner | Current durable surface | Mechanical gate |
 |---|---|---|
-| `paper-discovery` | one repository-level Zotero collection and `zotero-collection.md`; question-scoped `register.md` following the packaged register template, with publication/affiliation provenance, search coverage, Zotero item keys and verified membership | workflow contract tests plus Zotero re-read after writes |
+| `paper-discovery` | one repository-level Zotero collection and `zotero-collection.md`; question-scoped `register.md` following the packaged register template, with publication provenance (affiliations when relevant), search coverage, Zotero item keys and verified membership | workflow contract tests plus Zotero re-read after writes |
 | `research-literature` | version-specific anchored paper records cited as `<paper-id>#R<n>`; cross-paper assignments produce `synthesis.md` or the requested answer, with tentative connections labelled separately | workflow contract tests; source-to-claim inspection |
 | `research-experiment` | requested pilot/training/experiment evidence; native `contract.md` and `result.md` for managed work; optional reusable project adapters | experiment validator and declared rctl checks for managed experiments; adapter/training helpers check structure only; scientific judgment remains separate |
 | `research-writing` | requested manuscript, rebuttal, proof or anchored audit findings; retain proved/refuted/not_proved/blocked proof status | source-to-claim and proof inspection; build checks for affected typeset output; audit findings do not issue an unsolicited paper verdict |
