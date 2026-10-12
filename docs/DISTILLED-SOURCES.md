@@ -228,7 +228,7 @@ workflow. Runner, experiment, and theory owners keep their existing responsibili
 
 - **Sources:** the user-supplied `/Users/zhangbowen/Downloads/如何读论文？.md` (Chinese seven-step reading guidance); the user's OR usage retrospective supplied in the conversation on 2026-09-24; and the former `skills/research-opportunity-mining/SKILL.md`, read before its retirement.
 - **Read:** 2026-09-24; reread 2026-09-30. Partly superseded on 2026-10-10 (below).
-- **Applied to:** [literature workflow](../skills/research-literature/SKILL.md), [paper record](../skills/research-literature/note-template.md), [synthesis](../skills/research-synthesis/SKILL.md), and ideation (`skills/research-ideation/`, retired on 2026-10-12; last present at `e2cca13`).
+- **Applied to:** [literature workflow](../skills/research-literature/SKILL.md), [paper record](../skills/research-literature/note-template.md), [synthesis](../skills/research-synthesis/SKILL.md), and ideation (`skills/research-ideation/`, retired on 2026-10-12; last present at `2727853`).
 
 **Retained:** overview through the abstract and displays; a precise research
 question; prior approaches and their remaining difficulties; independent thought

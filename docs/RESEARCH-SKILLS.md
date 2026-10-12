@@ -197,7 +197,7 @@ Before/after link lists and the check output are in
 The user asked whether the ideation skills still had a use now that rctl controls
 research state and the research playbook supplies ideas, and chose to retire all
 three. The research-question, research-ideation and research-idea-evaluation source
-packages are removed; the last commit containing them is `e2cca13`. The remaining
+packages are removed; the last commit containing them is `2727853`. The remaining
 discovery links to research-idea-evaluation under `~/.agents/skills/`,
 `~/.claude/skills/` and `~/.gemini/config/skills/` are removed; no link to the other
 two remained. Research-experiment drops the `candidate` origin and `--decision`
