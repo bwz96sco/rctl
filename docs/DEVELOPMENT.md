@@ -1,5 +1,87 @@
 # Development Plan
 
+## v0.6.7 release preparation, 14 October 2026
+
+After the Git initialization implementation passed its local checks, the user
+authorized push and global CLI upgrade, explicitly leaving existing projects
+untouched. Release 0.6.7 includes the main repository/vault boundary and repeatable
+named code/paper repository options, with no task schema or host-hook change.
+
+Acceptance selected: release suite, lint, document checks, source/wheel build,
+installed-wheel smoke (A-21/A-22/A-23), and actual installed entrypoint/resource
+comparison plus disposable Git initialization. Require all four macOS/Linux ×
+Python 3.11/3.13 CI jobs on the release commit before global installation. Build
+the deployment wheel and export locked runtime constraints from that clean commit.
+Preserve the unrelated local skill-catalog edit; do not synchronize shared skills,
+project-local copies, host settings or task records in this rollout.
+
+The official [uv tools guide](https://docs.astral.sh/uv/guides/tools/) was fetched
+through smart-search for the isolated tool installation procedure. Release logs,
+clean source and package evidence are retained under `.work/release-0.6.7-20261014/`.
+The implementation's earlier 0.6.6 source checks remain recorded below; versioned
+release and deployed CLI checks will be recorded when complete.
+
+Versioned local release checks:
+
+- `uv run --locked pytest -q`: **368 passed, 18 subtests passed**.
+- `uv run --locked ruff check src tests scripts skills`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed (458 local links,
+  100 JSON files, four schemas, 22 requirements and 43 acceptance cases).
+- `uv build --offline --out-dir .work/release-0.6.7-20261014/local-dist`: source
+  distribution and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/release-0.6.7-20261014/local-dist/rctl-0.6.7-py3-none-any.whl`:
+  passed, including actual repository boundaries and installed asset/task checks.
+- `git diff --check`: passed.
+
+## Project Git initialization, 14 October 2026
+
+The user reported that project initialization had omitted the previously agreed
+Git layout and authorized fixing rctl. The confirmed layout is one main project
+repository including the vault, with `code/` and `paper/` as containers for
+independent named repositories. Live LEO/OR migration and global CLI deployment
+are outside this source change.
+
+Acceptance selected: M5/A-21 (initialization, preservation and preflight), A-22
+(vault binding/ownership), A-23 (installed-wheel assets), and M6/A-28/A-29
+(unchanged inspection/export preservation). New execution checks use actual Git
+repositories: parent staging must include the vault and exclude independent
+sources; existing history/index/remotes and worktree metadata must remain intact;
+reruns must be idempotent; invalid destinations and missing Git must reject before
+scaffold writes. These verify repository structure and execution, not research
+judgment or remote synchronization.
+
+Implementation creates a root repository on `main` when absent, excludes the two
+containers through root ignore rules, and offers repeatable `--code-repo NAME` and
+`--paper-repo NAME` options. Existing source paths are not automatically converted;
+already tracked source paths and separately versioned vaults produce migration
+warnings. No new manifest/task-record fields or host-hook changes are needed.
+The [source record](DISTILLED-SOURCES.md#research-project-git-boundaries-14-october-2026)
+captures the user's layout and Git manual evidence; current qualifications are in
+[Readiness](READINESS.md#limitations).
+
+Validation on macOS arm64, Python 3.13.2 and Git 2.56.0:
+
+- `uv run --locked pytest -q tests/test_init.py tests/test_m6.py tests/test_m6_review.py tests/test_skill_assets.py`:
+  **119 passed**. The first run had 118 passes and one fixture failure: the
+  ancestor-repository test had created Git metadata in the shared temporary parent,
+  affecting the malformed-metadata fixture's error code. The ancestor fixture now
+  uses a nested directory inside its own temporary project; preflight rejected the
+  malformed root before writes in both runs.
+- `uv run --locked pytest -q`: **368 passed, 18 subtests passed**.
+- `uv run --locked ruff check src tests scripts skills`: passed.
+- `uv run --locked python scripts/check_docs.py`: passed (455 local links,
+  100 JSON files, four schemas, 22 requirements and 43 acceptance cases).
+- `uv build --offline --out-dir .work/git-init-20261014/dist`: source distribution
+  and wheel built.
+- `uv run --locked python scripts/smoke_package.py .work/git-init-20261014/dist/rctl-0.6.6-py3-none-any.whl`:
+  passed, including actual root/child repositories, parent ignore behavior,
+  initialization preservation, installed assets, export and task closure.
+- `git diff --check`: passed.
+
+Full-suite and wheel-smoke output are retained as `pytest.log` and
+`wheel-smoke.log` under `.work/git-init-20261014/`. The existing local
+`docs/RESEARCH-SKILLS.md` edit is preserved.
+
 ## v0.6.6 installed deployment, 12 October 2026
 
 Release source `76f7b3d` passed all four macOS/Linux × Python 3.11/3.13

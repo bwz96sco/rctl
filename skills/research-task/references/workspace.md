@@ -7,7 +7,10 @@ Read this reference when initializing a project, associating a vault, or plannin
 Run `rctl init` from an existing selected project root, or use `rctl --root PATH init`.
 Codex and Claude Code files are prepared by default; use `--no-codex` or `--no-claude`
 to skip a host the project does not use.
-For a new project with notes, use `rctl init --vault note/main`.
+For a new project with notes and source repositories, use
+`rctl init --vault note/main --code-repo model --paper-repo submission`.
+Repeat either repository option for additional named repositories. Omitting those
+options creates only the `code/` and `paper/` containers. Git must be on PATH.
 Choose the vault on first initialization. `.rctl/project.json` records only that static
 binding; changing it later requires an explicit reviewed edit and any necessary note moves.
 The CLI remains usable without initialization.
@@ -16,8 +19,9 @@ Initialization creates missing `tasks/`, packaged `research/` orientation and
 comparison-guidance files, and this
 project-local skill. It preserves existing files and reports them. An existing vault is
 associated without editing its contents; a new vault receives note templates and guidance.
-All generated files and vault paths stay inside the selected root. No Git repositories,
-remote services, data moves, task migrations, global configuration, or trust grants occur.
+All generated files and vault paths stay inside the selected root. Init establishes
+the Git boundaries described below. Remote services, data moves, task migrations,
+global configuration and trust grants require separate task scope.
 Inspect `.rctl/codex/README.md`, `.rctl/claude/README.md` and preserved host files
 before launch. Claude Code loads skills only from `.claude/skills/`, so init also
 places a copy of this skill there.
@@ -73,13 +77,23 @@ configurations. Keep one copy of each rctl handler per host's project hook sourc
 The command never applies updates or changes the global installation; rerunning init
 continues to preserve existing files.
 
-## Decide boundaries before restructuring
+## Git boundaries and existing layouts
 
-Inspect existing Git roots, remotes, ignore rules, storage paths, note links, manuscript
-sources, and task records. Preserve existing layout unless a concrete problem warrants a
-change. A single repository works; separate `code/`, `paper/`, and `note/` repositories are
-an option when ownership or publication boundaries differ. Do not create nested Git roots
-or rewrite remotes merely to match a template.
+The main project repository owns research guidance, task records, project
+configuration and the vault. `code/` and `paper/` are containers for independent
+repositories at `code/<name>/` and `paper/<name>/`. The root ignore file excludes
+both containers; the vault stays in the main repository. New repositories use
+branch `main`. Init preserves existing repositories, branches and remotes, and
+appends missing container ignore rules to an existing root ignore file. It creates
+no commits, staging entries or submodules.
+
+For an existing project, inspect Git roots, remotes, ignore rules, tracked files,
+storage paths, note links, manuscript sources and task records before restructuring.
+An already tracked code/paper path remains tracked despite the new ignore rules;
+init warns and preserves the index/history. A vault with its own repository needs
+explicit migration into the main repository. If code/ or paper/ itself is a
+repository, init rejects that layout before writes. Plan those migrations within
+the authorized project scope and retain existing source history and artifacts.
 
 Keep datasets, models, large run outputs, credentials, local app state, and provider logs
 outside tracked source or under appropriate ignore rules. Check actual tracked files before

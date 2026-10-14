@@ -4,11 +4,26 @@ import json
 
 from .documents import invalid, local_path, read_text, resource_tree, validate_schema
 from .integration import claude_hooks, codex_hooks
+from .repositories import (
+    git,
+    initialize_repositories,
+    plan_repositories,
+)
 
 
 def vault_path(root, value):
     path = local_path(root, value)
-    reserved = {"tasks", "research", ".rctl", ".agents", ".codex", ".claude", ".git"}
+    reserved = {
+        "tasks",
+        "research",
+        "code",
+        "paper",
+        ".rctl",
+        ".agents",
+        ".codex",
+        ".claude",
+        ".git",
+    }
     control_paths = [(root / name).resolve() for name in reserved]
     if path == root or any(
         path.is_relative_to(control) or control.is_relative_to(path)
@@ -18,7 +33,9 @@ def vault_path(root, value):
     return path
 
 
-def initialize(root, vault=None, codex=True, claude=True):
+def initialize(
+    root, vault=None, codex=True, claude=True, code_repos=(), paper_repos=()
+):
     manifest = local_path(root, ".rctl/project.json")
     binding = {"schema_version": 1, "vault": None}
     if manifest.is_file():
@@ -56,7 +73,8 @@ def initialize(root, vault=None, codex=True, claude=True):
         }
     )
     files[".rctl/project.json"] = json.dumps(binding, indent=2) + "\n"
-    directories = {root / "tasks"}
+    repositories = plan_repositories(root, code_repos, paper_repos)
+    directories = {root / "tasks", root / "code", root / "paper", *repositories[1:]}
     warnings = []
     if selected is not None:
         directories.add(selected)
@@ -181,6 +199,20 @@ if no longer wanted. Preserve unrelated host settings and task records.
     for path in targets:
         if path in directories or (path.exists() and not path.is_file()):
             raise invalid(f"Expected file: {path.relative_to(root)}")
+    ignore = root / ".gitignore"
+    ignore_update = None
+    if ignore.is_file():
+        existing = read_text(ignore)
+        rules = existing.splitlines()
+        missing = [rule for rule in ("/code/", "/paper/") if rule not in rules]
+        if missing:
+            ignore_update = (
+                existing
+                + ("\n" if existing and not existing.endswith("\n") else "")
+                + "\n# rctl repository boundaries\n"
+                + "\n".join(missing)
+                + "\n"
+            )
     created, preserved = [], []
     for path in sorted(directories, key=lambda path: (len(path.parts), str(path))):
         if not path.exists():
@@ -190,7 +222,11 @@ if no longer wanted. Preserve unrelated host settings and task records.
         name = path.relative_to(root).as_posix()
         if path.exists():
             preserved.append(name)
-            if name in {".codex/hooks.json", ".codex/config.toml", ".claude/settings.json"}:
+            if name in {
+                ".codex/hooks.json",
+                ".codex/config.toml",
+                ".claude/settings.json",
+            }:
                 warnings.append(
                     f"Preserved {name}; review existing configuration before use."
                 )
@@ -198,6 +234,28 @@ if no longer wanted. Preserve unrelated host settings and task records.
             with path.open("x", encoding="utf-8") as stream:
                 stream.write(content)
             created.append(name)
+    modified = []
+    if ignore_update is not None:
+        ignore.write_text(ignore_update, encoding="utf-8")
+        preserved.remove(".gitignore")
+        modified.append(".gitignore")
+    repository_status = initialize_repositories(root, repositories, created, preserved)
+    tracked = git(root, "ls-files", "--", "code/", "paper/")
+    if tracked:
+        warnings.append(
+            "The main repository already tracks paths under code/ or paper/. "
+            "Ignore rules do not untrack them; review their migration explicitly. "
+            "rctl init leaves the index and history unchanged."
+        )
+    if selected is not None and any(
+        (path / ".git").exists()
+        for path in (selected, *selected.parents)
+        if path != root and path.is_relative_to(root)
+    ):
+        warnings.append(
+            "The vault is inside a separate Git repository. Review its migration "
+            "into the main repository; rctl init preserves existing Git metadata."
+        )
     pending = [
         step
         for requested, step in (
@@ -219,4 +277,6 @@ if no longer wanted. Preserve unrelated host settings and task records.
         ),
         "created": created,
         "preserved": preserved,
+        "modified": modified,
+        "repositories": repository_status,
     }, warnings

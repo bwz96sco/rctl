@@ -2,7 +2,7 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.6.6 pushed, CI-verified and locally installed.**
+**Status: v0.6.7 prepared; push, CI and local installation pending.**
 
 See the [v0.6.6 deployment record](docs/V0.6.6-DEPLOYMENT.md) for the skill update
 and its installation status. The [v0.6.5 deployment record](docs/V0.6.5-DEPLOYMENT.md)
@@ -47,6 +47,11 @@ and its review follow-up. Specialized experimental, literature, mathematical and
 audit guidance is loaded as references; CLI behavior, schemas and task authority
 are unchanged.
 
+Version 0.6.7 adds the [agreed Git layout](docs/DEVELOPMENT.md#project-git-initialization-14-october-2026):
+the main project repository includes the vault, while `code/` and `paper/` contain
+independent named repositories. Release preparation and installation status are
+recorded in the [development plan](docs/DEVELOPMENT.md#v067-release-preparation-14-october-2026).
+
 ## Run the local CLI
 
 Requires Python 3.11+ on macOS or Linux. Windows users can run inside WSL.
@@ -81,7 +86,7 @@ uv run pytest
 uv run ruff check src tests scripts
 uv run scripts/check_docs.py
 uv build
-uv run scripts/smoke_package.py dist/rctl-0.6.6-py3-none-any.whl
+uv run scripts/smoke_package.py dist/rctl-0.6.7-py3-none-any.whl
 ```
 
 The GitHub Actions workflow is configured to run tests, lint, the document check,
@@ -92,7 +97,7 @@ The installed-package smoke uses a temporary project under `.work/`, an isolated
 
 ## Initialize a research project
 
-Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.6-py3-none-any.whl`,
+Install the built wheel once with `uv tool install /path/to/rctl/dist/rctl-0.6.7-py3-none-any.whl`,
 then run this inside an existing project root:
 
 ```sh
@@ -114,7 +119,23 @@ The vault holds reading notes, derivations, and interpretation linked to task an
 evidence. Task contract/result/state and machine acceptance remain under `tasks/`.
 `research-project-setup` is retired from the shared-skill repository; workspace and migration
 guidance now ships in [research-task](skills/research-task/references/workspace.md).
-No live project migration, Git setup, or host trust grant occurs during initialization.
+Initialization requires Git and creates a main project repository on branch `main`
+when none exists at the selected root. The main repository owns `research/`,
+`tasks/`, project configuration and the vault. `code/` and `paper/` are containers
+excluded from the main repository; name each independent source repository explicitly:
+
+```sh
+rctl init --vault note/main --code-repo model --code-repo baseline --paper-repo submission
+```
+
+This creates repositories at `code/model/`, `code/baseline/` and
+`paper/submission/`. Without those options, init creates only the two containers.
+Existing repositories, branches and remotes are preserved. Existing root ignore
+rules retain their text, with missing `/code/` and `/paper/` rules appended.
+Already tracked source paths require explicit migration; init warns and leaves
+the index and history unchanged. Init does not stage, commit, set remotes, create
+submodules, migrate live projects or grant host trust. See
+[limitations](docs/READINESS.md#limitations) for existing layouts requiring review.
 
 The source scaffold includes a problem/method overview and comparison guidance.
 PROBLEM_METHODS owns open questions and candidate methods; ROUTES records scoped

@@ -50,6 +50,16 @@ M5 includes authorized shared-source changes. Live research-task migration and r
 
 ## Limitations
 
+The 14 October Git initialization change is packaged for v0.6.7; global deployment
+status belongs in [Development](DEVELOPMENT.md#v067-release-preparation-14-october-2026).
+Existing projects are outside this rollout. Init does not stage, commit, configure remotes,
+or remove existing tracked entries. Existing code/paper entries in the main index
+and vault-owned repositories require explicit migration. Existing user ignore rules
+are preserved and need review if they exclude the vault or override container rules.
+No remote synchronization or scientific acceptance is established by repository
+initialization. Filesystem or Git failure can leave a partial setup; inspect it and
+rerun the same named repository options to finish missing roots.
+
 1. The old pilot reanalyzed retained aggregates. It did not establish fresh training, raw-prediction/bootstrap reproduction, independent health/contact audits, superiority over Trellis/Comet, or quantified hook benefit.
 2. The release host evidence covers invocation-local Codex CLI 0.153.4 configuration, SessionStart startup and UserPromptSubmit. The original isolated project-file probe delivered no reminder. A [follow-up](PROJECT-HOOKS-VERIFICATION.md) succeeded with normal config loading and invocation-only hook-trust bypass; adding `--ignore-user-config` eliminated delivery in a controlled pair. The internal reason remains undiagnosed. Official online retrieval succeeded during M3 after the historical preparation timeout. Real compact/native resume, subagent delivery, and ordinary persisted project installation are not established here.
 3. v0.1 assumes one cooperating writer per task. Atomic replacement protects readers from partial publication during ordinary process interruption. v0.2.1 flushes and syncs the temporary file before replacement, but does not sync the parent directory or establish same-filesystem power-loss durability; the recheck is not a transactional multi-writer lock, a cross-filesystem durability guarantee, or a defense against direct record edits.

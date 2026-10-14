@@ -1,5 +1,6 @@
 import json
 import re
+import subprocess
 
 import pytest
 
@@ -38,8 +39,10 @@ def test_default_init_prepares_claude_code_hooks_and_skill(project, cli):
         assert handler["command"].endswith(f"--root {project} hook claude")
     # Claude Code does not load .agents/skills/.
     for path in (project / ".agents/skills/research-task").rglob("*"):
-        copy = project / ".claude/skills/research-task" / path.relative_to(
-            project / ".agents/skills/research-task"
+        copy = (
+            project
+            / ".claude/skills/research-task"
+            / path.relative_to(project / ".agents/skills/research-task")
         )
         assert path.is_dir() or copy.read_bytes() == path.read_bytes()
     instructions = (project / ".rctl/claude/README.md").read_text()
@@ -111,7 +114,7 @@ def test_init_repeat_preserves_customized_files_and_links(project, cli):
     assert repeat["data"]["created"] == []
     assert any(".claude/settings.json" in text for text in repeat["warnings"])
     assert snapshot(project) == before
-    assert not (project / ".git").exists()
+    assert (project / ".git").is_dir()
     assert not (project / ".rctl/record.json").exists()
 
 
@@ -135,17 +138,25 @@ def test_existing_vault_is_only_associated(project, cli):
         ".claude/skills",
         ".rctl/project.json",
         "notes",
+        "code",
+        "paper",
+        "code/model",
+        ".gitignore",
     ],
 )
 def test_collisions_fail_before_writes(project, cli, collision):
     path = project / collision
     path.parent.mkdir(parents=True, exist_ok=True)
-    if collision.endswith(".md") or collision.endswith(".json"):
+    if (
+        collision.endswith(".md")
+        or collision.endswith(".json")
+        or collision == ".gitignore"
+    ):
         path.mkdir()
     else:
         path.write_text("not a directory")
     before = snapshot(project)
-    cli("init", "--vault", "notes", expected=2)
+    cli("init", "--vault", "notes", "--code-repo", "model", expected=2)
     assert snapshot(project) == before
     assert not (project / "tasks").exists()
 
@@ -161,6 +172,8 @@ def test_collisions_fail_before_writes(project, cli, collision):
         ".agents/vault",
         ".claude/vault",
         ".git",
+        "code/notes",
+        "paper",
     ],
 )
 def test_invalid_vault_is_rejected_before_writes(project, cli, vault):
@@ -174,6 +187,205 @@ def test_symlink_escape_is_rejected(project, cli, tmp_path_factory):
     cli("init", expected=2)
     assert list(outside.iterdir()) == []
     assert not (project / "tasks").exists()
+
+
+def run_git(path, *args):
+    return subprocess.run(
+        ["git", "-C", str(path), *args], check=True, capture_output=True, text=True
+    ).stdout.strip()
+
+
+def test_main_repository_owns_vault_and_excludes_independent_sources(project, cli):
+    response = cli(
+        "init",
+        "--vault",
+        "note/main",
+        "--code-repo",
+        "model",
+        "--code-repo",
+        "baseline",
+        "--paper-repo",
+        "submission",
+    )
+    assert response["data"]["repositories"] == [
+        {"path": path, "status": "initialized"}
+        for path in (".", "code/model", "code/baseline", "paper/submission")
+    ]
+    for relative in (".", "code/model", "code/baseline", "paper/submission"):
+        path = project / relative
+        assert run_git(path, "rev-parse", "--show-toplevel") == str(path.resolve())
+        assert run_git(path, "symbolic-ref", "--short", "HEAD") == "main"
+        assert run_git(path, "ls-files") == ""  # Init never stages or commits.
+    for container in ("code", "paper"):
+        assert not (project / container / ".git").exists()
+    source = project / "code/model/model.py"
+    source.write_text("print('model')\n")
+    paper = project / "paper/submission/main.tex"
+    paper.write_text("Manuscript\n")
+    assert (
+        run_git(project / "code/model", "ls-files", "--others", "--exclude-standard")
+        == "model.py"
+    )
+    run_git(project, "add", ".")
+    tracked = run_git(project, "ls-files").splitlines()
+    assert "note/main/AGENTS.md" in tracked
+    assert "research/PROGRAM.md" in tracked
+    assert not any(path.startswith(("code/", "paper/")) for path in tracked)
+    assert not (project / ".gitmodules").exists()
+
+
+def test_init_without_repository_names_creates_only_containers(project, cli):
+    response = cli("init")
+    assert response["data"]["repositories"] == [{"path": ".", "status": "initialized"}]
+    for container in ("code", "paper"):
+        assert (project / container).is_dir()
+        assert list((project / container).iterdir()) == []
+
+
+def test_existing_git_history_index_and_remotes_are_preserved(project, cli):
+    for path in (project, project / "code/model"):
+        path.mkdir(parents=True, exist_ok=True)
+        run_git(path, "init", "--quiet", "--initial-branch=existing")
+        (path / "README.md").write_text("Existing source\n")
+        run_git(path, "add", "README.md")
+        run_git(
+            path,
+            "-c",
+            "user.name=Test",
+            "-c",
+            "user.email=test@example.invalid",
+            "commit",
+            "--quiet",
+            "-m",
+            "Existing history",
+        )
+        run_git(path, "remote", "add", "origin", "https://example.invalid/existing.git")
+    before = {
+        path: snapshot(path / ".git") for path in (project, project / "code/model")
+    }
+    response = cli("init", "--code-repo", "model", "--code-repo", "model")
+    assert response["data"]["repositories"] == [
+        {"path": ".", "status": "preserved"},
+        {"path": "code/model", "status": "preserved"},
+    ]
+    assert all(snapshot(path / ".git") == files for path, files in before.items())
+    before = snapshot(project)
+    repeat = cli("init", "--code-repo", "model")
+    assert repeat["data"]["created"] == repeat["data"]["modified"] == []
+    assert snapshot(project) == before
+
+
+def test_existing_ignore_rules_are_retained_and_boundaries_appended(project, cli):
+    ignore = project / ".gitignore"
+    ignore.write_text("# Operator rules\n/private/")
+    response = cli("init", "--code-repo", "model")
+    assert response["data"]["modified"] == [".gitignore"]
+    assert ignore.read_text().startswith("# Operator rules\n/private/\n")
+    for path in ("code/model/", "paper/submission/"):
+        assert run_git(project, "check-ignore", "--no-index", path) == path
+    before = snapshot(project)
+    assert cli("init")["data"]["modified"] == []
+    assert snapshot(project) == before
+
+
+def test_already_tracked_code_is_warned_without_changing_index(project, cli):
+    run_git(project, "init", "--quiet")
+    source = project / "code/model/source.py"
+    source.parent.mkdir(parents=True)
+    source.write_text("Existing tracked source\n")
+    run_git(project, "add", "code")
+    before = (project / ".git/index").read_bytes()
+    response = cli("init")
+    assert any("already tracks paths" in warning for warning in response["warnings"])
+    assert (project / ".git/index").read_bytes() == before
+    assert not (source.parent / ".git").exists()
+
+
+@pytest.mark.parametrize(
+    "name", ["", " ", ".", "..", ".git", "../outside", "a/b", "a\\b"]
+)
+@pytest.mark.parametrize("option", ["--code-repo", "--paper-repo"])
+def test_invalid_repository_names_reject_before_writes(project, cli, name, option):
+    cli("init", option, name, expected=2)
+    assert list(project.iterdir()) == []
+
+
+def test_repository_container_requires_explicit_migration(project, cli):
+    container = project / "code"
+    container.mkdir()
+    run_git(container, "init", "--quiet")
+    before = snapshot(project)
+    cli("init", "--code-repo", "model", expected=2)
+    assert snapshot(project) == before
+
+
+def test_missing_git_rejects_before_writes(project, cli, tmp_path_factory):
+    empty = tmp_path_factory.mktemp("empty-path")
+    response = cli("init", env={"PATH": str(empty)}, expected=3)
+    assert response["error"]["code"] == "NOT_FOUND"
+    assert "Git on PATH" in response["error"]["message"]
+    assert list(project.iterdir()) == []
+
+
+@pytest.mark.parametrize("relative", [".", "code/model"])
+def test_existing_worktree_metadata_is_preserved(
+    project, cli, tmp_path_factory, relative
+):
+    seed = tmp_path_factory.mktemp("seed-repository")
+    run_git(seed, "init", "--quiet")
+    run_git(
+        seed,
+        "-c",
+        "user.name=Test",
+        "-c",
+        "user.email=test@example.invalid",
+        "commit",
+        "--quiet",
+        "--allow-empty",
+        "-m",
+        "Seed",
+    )
+    destination = project / relative
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    run_git(seed, "worktree", "add", "--quiet", "-b", "existing", str(destination))
+    marker = (destination / ".git").read_bytes()
+    metadata = snapshot(seed / ".git")
+    response = cli("init", "--code-repo", "model")
+    assert {"path": relative, "status": "preserved"} in response["data"]["repositories"]
+    assert (destination / ".git").read_bytes() == marker
+    assert snapshot(seed / ".git") == metadata
+
+
+def test_selected_root_is_initialized_even_inside_an_ancestor_repository(project, cli):
+    run_git(project, "init", "--quiet")
+    selected = project / "nested-project"
+    selected.mkdir()
+    before = snapshot(project / ".git")
+    cli("--root", str(selected), "init", root=False)
+    assert run_git(selected, "rev-parse", "--show-toplevel") == str(selected)
+    assert snapshot(project / ".git") == before
+
+
+def test_separate_vault_repository_is_preserved_with_migration_warning(project, cli):
+    vault = project / "note/main"
+    vault.mkdir(parents=True)
+    run_git(vault, "init", "--quiet")
+    (vault / "existing.md").write_text("Existing note\n")
+    before = snapshot(vault)
+    response = cli("init", "--vault", "note/main")
+    assert snapshot(vault) == before
+    assert any(
+        "vault is inside a separate Git" in warning for warning in response["warnings"]
+    )
+
+
+def test_invalid_existing_git_metadata_rejects_before_scaffold_writes(project, cli):
+    (project / ".git").mkdir()
+    before = snapshot(project)
+    response = cli("init", expected=3)
+    assert response["error"]["code"] == "GIT_ERROR"
+    assert snapshot(project) == before
+    assert not (project / "research").exists()
 
 
 def test_binding_change_and_unknown_schema_fail_before_new_files(project, cli):

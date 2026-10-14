@@ -321,9 +321,47 @@ problem/method overview as well as program, inventory, baselines and routes.
 This is static configuration, not a task record or implicit current-task selection.
 The CLI remains usable without initialization.
 
-`--vault PATH` selects an in-root directory outside control directories. A new vault receives packaged note templates and ownership instructions; an existing directory is associated without modifying its contents. Omitting the option preserves an existing binding; an explicitly different binding is rejected before writes, with manual reviewed migration required. Unknown manifest fields/versions reject initialization.
+`init` requires Git on PATH. It initializes the explicitly selected root as a main
+repository on branch `main` if no repository exists there, including when an
+ancestor is a repository. Existing root repositories and working-tree `.git` files
+are preserved without reinitialization. The main repository owns research guidance,
+task records, project configuration and the optional vault.
 
-All intended paths are checked before writing. Existing regular files are preserved and listed, including customized orientation or host files; file/directory collisions and paths outside the selected root reject the operation. Missing files use exclusive creation. A failed filesystem operation may leave an incomplete scaffold; rerunning fills missing project files without replacing earlier content. A partially created vault needs explicit repair because existing vault contents are never populated automatically. Existing files are not certified compatible merely because they are preserved.
+`code/` and `paper/` are containers, not repository roots. Repeatable
+`--code-repo NAME` and `--paper-repo NAME` options create independent repositories
+at `code/NAME/` and `paper/NAME/`, respectively, using branch `main` for new
+repositories and preserving existing repositories. Names must be single directory
+names other than `.`, `..` or `.git`. Duplicate names initialize a destination once.
+Without names, init creates only the containers; existing children are not
+automatically converted to repositories. Repository/container directory aliases,
+path collisions, and a container that is itself a repository reject before writes.
+
+A new root `.gitignore` excludes `/code/` and `/paper/` plus local scratch and
+environment files. For an existing root ignore file, append missing `/code/` and
+`/paper/` rules while preserving all existing text. The result lists this file as
+modified when rules were appended. Init reports each root/named repository as
+initialized or preserved. It never stages, commits, sets remotes, creates submodules
+or changes existing indexes/history. Already tracked code/paper paths produce a
+migration warning, because ignore rules cannot untrack them. An existing separate
+repository containing the vault is preserved and produces a migration warning.
+Existing-layout qualifications are in [Readiness](READINESS.md#limitations).
+
+`--vault PATH` selects an in-root directory outside control directories and the
+code/paper containers. A new vault receives packaged note templates and ownership
+instructions; an existing directory is associated without modifying its contents.
+Omitting the option preserves an existing binding; an explicitly different binding
+is rejected before writes, with manual reviewed migration required. Unknown
+manifest fields/versions reject initialization.
+
+All intended paths and existing selected repository roots are checked before
+writing. Existing regular files are preserved and listed, including customized
+orientation or host files, except for the documented root ignore-rule append.
+File/directory collisions and paths outside the selected root reject the operation.
+Missing files use exclusive creation. A failed filesystem or Git operation may
+leave an incomplete scaffold; rerunning fills missing project files and repositories
+without replacing earlier content. A partially created vault needs explicit repair
+because existing vault contents are never populated automatically. Existing files
+are not certified compatible merely because they are preserved.
 
 `init` creates missing `.codex/hooks.json`, `.codex/config.toml`, and project-local
 loading instructions using the installed entrypoint by default. `--no-codex`

@@ -9,6 +9,26 @@ For each new distillation, retain the source link and read date, the ideas adopt
 the adaptations made, and links to the affected files. Extend this document as
 sources are used.
 
+## Research project Git boundaries, 14 October 2026
+
+- **Sources:** the user's agreed layout: one main project repository containing
+  the vault, with `code/` and `paper/` as containers for independent named child
+  repositories; Git's official [git-init](https://git-scm.com/docs/git-init) and
+  [gitignore](https://git-scm.com/docs/gitignore) manuals.
+- **Read:** 2026-10-14 through `smart-search fetch URL --format markdown --output PATH`.
+  Fetched manuals are retained as `git-init.md` and `gitignore.md` under
+  `.work/git-init-20261014/` in the development checkout.
+- **Applied to:** [initialization](SPEC.md#10-project-initialization-v02),
+  [CLI options](CLI.md#commands) and
+  [workspace guidance](../skills/research-task/references/workspace.md#git-boundaries-and-existing-layouts).
+
+**Adapted:** Git initialization creates repository metadata without staging or
+committing. New roots use `main`; existing repositories and remotes retain their
+configuration. Root-anchored directory ignore rules keep independent source
+repositories out of the main repository. Existing tracked entries remain tracked,
+so init warns for explicit migration rather than removing them. The repository
+layout comes from the user, not a recommendation inferred from Git documentation.
+
 ## Skill necessity and consolidation, 12 October 2026
 
 - **Sources:** the user's necessity review, correction that academic talk planning

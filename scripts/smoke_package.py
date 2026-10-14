@@ -1,6 +1,6 @@
-"""Run a built wheel in an isolated environment and non-Git project.
+"""Run a built wheel in an isolated environment and initially non-Git project.
 
-Usage: uv run scripts/smoke_package.py dist/rctl-0.6.6-py3-none-any.whl [--skills-root PATH]
+Usage: uv run scripts/smoke_package.py dist/rctl-0.6.7-py3-none-any.whl [--skills-root PATH]
 """
 
 import argparse
@@ -66,7 +66,23 @@ def main():
             )
             return response
 
-        initialized = cli("init", "--vault", "note/main")
+        initialized = cli(
+            "init", "--vault", "note/main", "--code-repo", "model",
+            "--paper-repo", "submission",
+        )
+        assert initialized["data"]["repositories"] == [
+            {"path": path, "status": "initialized"}
+            for path in (".", "code/model", "paper/submission")
+        ]
+        assert (project / ".git").is_dir()
+        assert (project / "code/model/.git").is_dir()
+        assert (project / "paper/submission/.git").is_dir()
+        ignored = subprocess.check_output(
+            ["git", "-C", str(project), "check-ignore", "--no-index",
+             "code/model/", "paper/submission/"],
+            env=environment, text=True,
+        )
+        assert ignored.splitlines() == ["code/model/", "paper/submission/"]
         assert initialized["data"]["codex_requested"]
         assert initialized["data"]["claude_requested"]
         claude = json.loads((project / ".claude/settings.json").read_text())
@@ -306,7 +322,7 @@ def main():
         )
         cli("close", "tasks/retained-comparison")
         assert cli("context", "tasks/retained-comparison")["data"]["phase"] == "closed"
-        assert not (project / ".git").exists()
+        assert (project / ".git").is_dir()
         cli("integration", "codex", "export", "host-bundle")
         assert (project / "host-bundle/research-task/SKILL.md").is_file()
         resource_check = subprocess.run(

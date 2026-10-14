@@ -31,6 +31,20 @@ def parser():
     commands = result.add_subparsers(dest="command", required=True)
     initialize = commands.add_parser("init", help="Create missing project scaffolding.")
     initialize.add_argument("--vault")
+    initialize.add_argument(
+        "--code-repo",
+        action="append",
+        default=[],
+        metavar="NAME",
+        help="Initialize code/NAME as an independent repository (repeatable).",
+    )
+    initialize.add_argument(
+        "--paper-repo",
+        action="append",
+        default=[],
+        metavar="NAME",
+        help="Initialize paper/NAME as an independent repository (repeatable).",
+    )
     init_host = initialize.add_mutually_exclusive_group()
     init_host.add_argument(
         "--codex", action="store_true", help="Prepare Codex hooks (default)."
@@ -179,7 +193,9 @@ def dispatch(args):
     if args.command == "init":
         from .initialize import initialize
 
-        return initialize(root, args.vault, args.codex, args.claude)
+        return initialize(
+            root, args.vault, args.codex, args.claude, args.code_repo, args.paper_repo
+        )
     if args.command == "integration":
         from .integration import export_codex
 

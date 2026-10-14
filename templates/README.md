@@ -40,7 +40,8 @@ the task directory, plus `result.md`.
 
 ## Project and vault scaffolding
 
-`rctl init` reads `project/research/`; optional `--vault PATH` reads `vault/` only when
+`rctl init` reads `project/`, including the root repository ignore rules;
+optional `--vault PATH` reads `vault/` only when
 creating a new vault. Existing files are preserved. The research files describe
 durable intent, open problems/methods, resources, baseline identities, scoped routes
 and comparison guidance; vault templates hold linked scientific

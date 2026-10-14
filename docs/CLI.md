@@ -23,7 +23,7 @@ not `rctl status TASK --format json`.
 }
 ```
 
-On success `error` is null. `data` is always an object and `warnings` is an array of strings. Task mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome. Project `init` returns `root`, `vault`, `codex_requested`, `claude_requested`, `next_action`, `created`, and `preserved` paths, plus any configuration-review warnings. Codex and Claude Code are requested by default; the next action requires each host's trust step and observed reminders, not just file creation.
+On success `error` is null. `data` is always an object and `warnings` is an array of strings. Task mutations return `task_id` and `phase`; verify also returns report ID, criterion results, and verdict; close returns the closure/report reference. Text mode contains the same substantive outcome. Project `init` returns `root`, `vault`, `codex_requested`, `claude_requested`, `next_action`, `created`, `preserved`, `modified`, and `repositories`, plus any configuration/Git migration warnings. Each repository entry has project-relative `path` (`.` for the main root) and `status` (`initialized` or `preserved`). `modified` names existing files whose missing repository ignore rules were appended. Codex and Claude Code are requested by default; the next action requires each host's trust step and observed reminders, not just file creation.
 
 `--help` and `--version` also honor JSON mode, with informational text in `data.message`. In text mode they display ordinary help/version output. Context includes a bounded reminder, governing question, optional question alignment, and compact verification/assessment summary; `status` exposes those projections plus the latest full report.
 
@@ -31,7 +31,7 @@ On success `error` is null. `data` is always an object and `warnings` is an arra
 |---|---|---|
 | 0 | Operation succeeded; a read may show an active, failed, or stale task. | None |
 | 2 | Invalid arguments, schema, or document structure; unsupported platform. | `INVALID_INPUT`, `UNSUPPORTED_PLATFORM` |
-| 3 | Missing task/root/input or unavailable record. | `NOT_FOUND`, `RECORD_UNAVAILABLE` |
+| 3 | Missing task/root/input/executable, unavailable record, or failed Git operation. | `NOT_FOUND`, `RECORD_UNAVAILABLE`, `GIT_ERROR` |
 | 4 | Invalid phase or closure guard rejected; saved verification failed. | `STATE_REJECTED`, `VERIFICATION_FAILED`, `AMENDMENT_REQUIRED`, `VERIFICATION_STALE` |
 | 5 | Saved verification or required applicability is unknown. | `VERIFICATION_UNKNOWN` |
 | 6 | Detected record change before publication. | `RECORD_CHANGED` |
@@ -50,7 +50,7 @@ containment; it applies to the ordinary CLI error boundary.
 
 | Command | Inputs and behavior | Writes |
 |---|---|---|
-| `init [--vault PATH] [--codex \| --no-codex] [--claude \| --no-claude]` | Initialize the existing selected root; save an immutable vault binding, create missing research orientation, project-local task skill, Codex files and Claude Code files (`.claude/settings.json` hooks plus a `.claude/skills/research-task/` skill copy) by default, and optionally scaffold a new vault. `--no-codex` and `--no-claude` explicitly skip a host. Preserve existing text; reject path collisions or changed binding before writes. | Missing project files only |
+| `init [--vault PATH] [--code-repo NAME]... [--paper-repo NAME]... [--codex \| --no-codex] [--claude \| --no-claude]` | Initialize a main Git repository containing the optional vault, plus code/paper containers and explicitly named independent child repositories. Prepare missing research orientation, project-local task skill and both hosts' files by default. `--no-codex` and `--no-claude` skip a host. Preserve existing repositories and files, append missing root code/paper ignore rules, and warn about already tracked source paths. Reject collisions or changed binding before writes. | Missing project files/repositories; missing root ignore rules |
 | `task new TASK --kind exploration|analysis --title TEXT` | Create a new directory and draft contract. The task ID is the directory basename. Refuse existing destination. | Contract template only |
 | `task use TASK` | Select an existing task for the reminders of the Claude Code or Codex session running the command (SPEC §2). Fails outside exactly one such session. | Session pointer only |
 | `contract check TASK` | Parse frontmatter, unique criterion IDs, required headings, and declared method structure. This is a structural check. | None |
