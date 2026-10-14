@@ -27,6 +27,7 @@ Historical passes do not certify a later implementation or host version.
 | v0.6.3 deployment, 2026-10-10; source `3aef00a` | Compact selected-task prompt reminders; four CI jobs, installed checks and a real Claude Code prompt reminder in LEO | [Deployment record](V0.6.3-DEPLOYMENT.md) |
 | v0.6.4 deployment, 2026-10-10; source `4e6ede6` | Automatic reminder selection of the only active task; four CI jobs, installed checks, LEO/OR skill and README updates and a real Claude Code reminder in OR without `RCTL_TASK_PATH` | [Deployment record](V0.6.4-DEPLOYMENT.md) |
 | v0.6.5 deployment, 2026-10-12; source `e2cca13` | Per-session reminder selection with `task use`; four CI jobs, installed checks, LEO/OR skill and README updates and a resumed real Claude Code session in OR receiving its selected task | [Deployment record](V0.6.5-DEPLOYMENT.md) |
+| v0.6.7 deployment, 2026-10-14; source `7fd2796` | Main repository/vault boundary and named independent code/paper repositories; four CI jobs, clean-source wheel installation and disposable installed Git/resource checks; existing projects untouched | [Deployment record](V0.6.7-DEPLOYMENT.md) |
 
 Current work and release/deployment order belong in [DEVELOPMENT](DEVELOPMENT.md).
 Preparation-stage and cross-cutting limitations remain in [READINESS](READINESS.md#limitations).

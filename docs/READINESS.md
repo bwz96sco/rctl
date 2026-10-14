@@ -50,9 +50,13 @@ M5 includes authorized shared-source changes. Live research-task migration and r
 
 ## Limitations
 
-The 14 October Git initialization change is packaged for v0.6.7; global deployment
-status belongs in [Development](DEVELOPMENT.md#v067-release-preparation-14-october-2026).
-Existing projects are outside this rollout. Init does not stage, commit, configure remotes,
+The 14 October Git initialization change is globally installed as v0.6.7; the
+[deployment record](V0.6.7-DEPLOYMENT.md) establishes four release CI jobs,
+installed asset equality and disposable Git checks. Existing projects were not
+accessed or modified. A version upgrade can make reports from another rctl version
+inapplicable to a new closure without editing stored records or historical closures
+(SPEC §7); this rollout performs no live re-verification.
+Init does not stage, commit, configure remotes,
 or remove existing tracked entries. Existing code/paper entries in the main index
 and vault-owned repositories require explicit migration. Existing user ignore rules
 are preserved and need review if they exclude the vault or override container rules.

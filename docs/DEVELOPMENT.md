@@ -1,5 +1,30 @@
 # Development Plan
 
+## v0.6.7 installed deployment, 14 October 2026
+
+Release source `7fd2796a75f95a9fcf6357fc7b9902de1bddfc06` passed all four
+macOS/Linux × Python 3.11/3.13
+[CI jobs](https://github.com/bwz96sco/rctl/actions/runs/38541982492) before global
+installation. The deployed wheel and locked runtime constraints came from a clean
+export of that commit. The global PATH command is now `rctl 0.6.7`; Python 3.13.2
+and all runtime dependency versions are retained.
+
+Installed comparisons matched 20 runtime files, five schemas, 32 templates and
+90 skill files exactly. Disposable installed CLI checks verified main/named child
+repositories, vault staging in the main index, code/paper exclusion, static doctor
+inspection and repeat initialization without file changes. No existing research
+project was accessed or modified; no shared skill synchronization or host update
+was performed. The pre-existing skill-catalog edit remains local and unstaged.
+
+Commands and evidence are in the [deployment record](V0.6.7-DEPLOYMENT.md).
+Version-currentness and existing-layout qualifications remain in
+[Readiness](READINESS.md#limitations).
+
+Deployment documentation checks: `uv run --locked python scripts/check_docs.py`
+passed (465 local links, 100 JSON files, four schemas, 22 requirements and
+43 acceptance cases); `git diff --check` passed. The runtime and packaged assets
+retain the release CI and installed checks above.
+
 ## v0.6.7 release preparation, 14 October 2026
 
 After the Git initialization implementation passed its local checks, the user

@@ -2,10 +2,11 @@
 
 rctl helps a research task start with an explicit contract, finish with evidence-backed verification, and resume with an accurate reminder of its state.
 
-**Status: v0.6.7 prepared; push, CI and local installation pending.**
+**Status: v0.6.7 pushed, CI-verified and locally installed.**
 
-See the [v0.6.6 deployment record](docs/V0.6.6-DEPLOYMENT.md) for the skill update
-and its installation status. The [v0.6.5 deployment record](docs/V0.6.5-DEPLOYMENT.md)
+See the [v0.6.7 deployment record](docs/V0.6.7-DEPLOYMENT.md) for the Git initialization
+release and CLI-only upgrade. The [v0.6.6 deployment record](docs/V0.6.6-DEPLOYMENT.md)
+retains the skill update. The [v0.6.5 deployment record](docs/V0.6.5-DEPLOYMENT.md)
 retains the previous release's CI, installed-package and live reminder checks.
 The local package provides contracts, command/review verification, guarded closure,
 handoffs, governing-question alignment, and Codex and Claude Code reminders. The
@@ -49,8 +50,8 @@ are unchanged.
 
 Version 0.6.7 adds the [agreed Git layout](docs/DEVELOPMENT.md#project-git-initialization-14-october-2026):
 the main project repository includes the vault, while `code/` and `paper/` contain
-independent named repositories. Release preparation and installation status are
-recorded in the [development plan](docs/DEVELOPMENT.md#v067-release-preparation-14-october-2026).
+independent named repositories. Existing projects were left untouched during the
+[CLI upgrade](docs/V0.6.7-DEPLOYMENT.md).
 
 ## Run the local CLI
 
